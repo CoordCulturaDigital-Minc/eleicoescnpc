@@ -1,0 +1,36 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>
+Created by FontForge 20110222 at Sat Apr 20 00:16:07 2013
+ By root
+Copyright (C) 2012 by original authors @ fontello.com
+</metadata>
+<defs>
+<font id="post2home" horiz-adv-x="959" >
+  <font-face 
+    font-family="post2home"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="1000"
+    panose-1="2 0 6 9 0 0 0 0 0 0"
+    ascent="850"
+    descent="-150"
+    bbox="15 -53 944 832"
+    underline-thickness="50"
+    underline-position="-100"
+    unicode-range="U+2605-2605"
+  />
+<missing-glyph 
+d="M33 0v666h265v-666h-265zM66 33h199v600h-199v-600z" />
+    <glyph glyph-name=".notdef" 
+d="M33 0v666h265v-666h-265zM66 33h199v600h-199v-600z" />
+    <glyph glyph-name=".null" horiz-adv-x="0" 
+ />
+    <glyph glyph-name="nonmarkingreturn" 
+ />
+    <glyph glyph-name="uni2605" unicode="&#x2605;" 
+d="M15 489q0 22 31 26l280 40l126 254q11 23 27 23q17 0 28 -23l125 -254l280 -40q32 -5 32 -26q0 -12 -15 -27l-203 -197l48 -279q0 -1 0.5 -5t0.5 -7q0 -27 -23 -27q-10 0 -22 6l-251 132l-250 -132q-12 -6 -23 -6q-23 0 -23 27q0 7 1 12l48 279l-203 197q-14 16 -14 27z
+" />
+  </font>
+</defs></svg>

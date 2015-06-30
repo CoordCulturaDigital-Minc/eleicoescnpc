@@ -1,0 +1,17 @@
+{
+  "name": "post2home",
+  "glyphs": [
+    {
+      "search": [
+        "star"
+      ],
+      "code": 9733,
+      "from": 9733,
+      "uid": "474656633f79ea2f1dad59ff63f6bf07",
+      "css": "star",
+      "orig_css": "star",
+      "orig_code": 9733,
+      "src": "fontawesome"
+    }
+  ]
+}
