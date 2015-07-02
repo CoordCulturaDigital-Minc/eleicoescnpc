@@ -11,15 +11,17 @@ function historias_setup() {
 	/**
 	 * Handle the custom post types
 	 */
-	require_once( get_template_directory() . '/inc/post_type-historias_filmes.php' );
+	//require_once( get_template_directory() . '/inc/post_type-historias_filmes.php' );
     require_once( get_template_directory() . '/inc/post_type_projetos.php' );
-    require_once( get_template_directory() . '/inc/post_type-consultant.php' );
+    //require_once( get_template_directory() . '/inc/post_type-consultant.php' );
+    require_once( get_template_directory() . '/inc/post_type_foruns.php' );
 
 	/**
 	 * We need these for the inscricoes
 	 */
     require_once( get_template_directory() . '/inc/theme-options.php' );
 	require_once( get_template_directory() . '/inscricoes-functions.php' );
+	require_once( get_template_directory() . '/vote-functions.php' );
 	require_once( get_template_directory() . '/inc/shame.php' );
     require_once( get_template_directory() . '/inc/customizr.php' );
     require_once( get_template_directory() . '/inc/contextual-help.php' );
@@ -131,6 +133,13 @@ function historias_load_scripts() {
 	/* Load the comment reply JavaScript. */
 	if ( is_singular() && get_option( 'thread_comments' ) && comments_open() )
 		wp_enqueue_script( 'comment-reply' );
+		
+	/* Foruns de discussão e votação */
+	if ( is_single() ) {
+		wp_enqueue_script( 'foruns', get_template_directory_uri() . '/js/foruns.js');
+		wp_localize_script('foruns', 'vars', array('ajaxurl' => admin_url('admin-ajax.php')));
+	}
+		
 }
 
 
@@ -502,5 +511,122 @@ add_filter( 'wp_mail_from', 'hqf_mail_sender' );
 function hqf_mail_sender($from_name) {
     return get_option('admin_email');
 }
+
+
+function get_all_states() {
+
+    $states = array(
+        'AC'=>'Acre',                 
+        'AL'=>'Alagoas',
+        'AM'=>'Amazonas',              
+        'AP'=>'Amapá',                  
+        'BA'=>'Bahia',
+        'CE'=>'Ceará',
+        'DF'=>'Distrito Federal',      
+        'ES'=>'Espírito Santo',
+        'GO'=>'Goiás',                  
+        'MA'=>'Maranhão',
+        'MT'=>'Mato Grosso',             
+        'MS'=>'Mato Grosso do Sul',    
+        'MG'=>'Minas Gerais',
+        'PA'=>'Pará',                  
+        'PB'=>'Paraíba',
+        'PR'=>'Paraná',
+        'PE'=>'Pernambuco',
+        'PI'=>'Piauí',
+        'RJ'=>'Rio de Janeiro',
+        'RN'=>'Rio Grande do Norte',
+        'RS'=>'Rio Grande do Sul',
+        'RO'=>'Rondônia',               
+        'RR'=>'Roraima',                
+        'SC'=>'Santa Catarina',
+        'SP'=>'São Paulo',
+        'SE'=>'Sergipe',     
+        'TO'=>'Tocantins'              
+    );
+
+    return $states;
+}
+
+
+function get_setoriais() {
+
+	return array(
+        'artes'                     => 'Artes',
+        'arquitetura-urbanismo'     => 'Aquitetura e Urbanismo',
+        'arquivos'                  => 'Arquivos',
+        'arte-digital'              => 'Arte Digital',
+        'artes-visuais'             => 'Artes Visuais',
+        'artesanato'                => 'Artesanato',
+        'circo'                     => 'Circo',
+        'cultura-indigena'          => 'Cultura dos Povos Indígenas',
+        'afro-brasileiro'           => 'Culturas Afro-Brasileiras',
+        'culturas-populares'        => 'Culturas Populares',
+        'danca'                     => 'Dança',
+        'design'                    => 'Design',
+        'livro-leitura-literatura'  => 'Livro, Leitura e Literatura',
+        'moda'                      => 'Moda',
+        'musica'                    => 'Música',
+        'teatro'                    => 'Teatro',
+        'patrimonio-imaterial'      => 'Patrimônio Imaterial',
+        'patrimonio-material'       => 'Patrimônio Material'
+    );
+
+}
+
+function dropdown_states( $name, $selected, $all = false, $extra = null )
+{
+    $states = get_all_states();
+
+    $output = "<select id='{$name}' name='{$name}' {$extra}>";
+
+    if( $all )
+        $output .= "<option value=''>----------</option>";
+
+    foreach( $states as $acronym => $state )
+    {
+        if( $acronym == $selected )
+            $$acronym = 'selected="selected"';
+
+        $output .= "<option value='{$acronym}' {$$acronym}>{$state}</option>";
+    }
+
+    $output .= "</select>";
+
+    return $output;
+}
+
+
+/**
+ * show a menu dropdown from the setorial
+ *
+ * @name    dropdown_states
+ * @author  Cleber Santos <oclebersantos@gmail.com>
+ * @since   2015-06-26
+ * @updated 2015-06-26
+ * @return  string
+ */
+function dropdown_setoriais( $name, $selected, $all = false, $extra = null )
+{
+    $setoriais = get_setoriais();
+
+    $output = "<select id='{$name}' name='{$name}' {$extra}>";
+
+    if( $all )
+        $output .= "<option value=''>----------</option>";
+
+    foreach( $setoriais as $acronym => $setorial )
+    {
+        if( $acronym == $selected )
+            $$acronym = 'selected="selected"';
+
+        $output .= "<option value='{$acronym}' {$$acronym}>{$setorial}</option>";
+    }
+
+    $output .= "</select>";
+
+    return $output;
+}
+
 
 ?>

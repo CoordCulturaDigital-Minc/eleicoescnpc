@@ -10,6 +10,9 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
     $user_email = $user_login;
     $user_pass = $_POST['user_password'];
     $user_cpf = $_POST['user_cpf'];
+    $user_UF = $_POST['user_UF'];
+    $user_setorial = $_POST['user_setorial'];
+    $user_tipo = $_POST['user_tipo'];
     
     $register_errors = array();
 /*
@@ -53,7 +56,17 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
         if ( ! $user_id ) {
             if ( $errmsg = $user_id->get_error_message('blog_title') )
                 echo $errmsg;
-        }
+        } else {
+		
+			add_user_meta($user_id, 'cpf', $user_cpf);
+			add_user_meta($user_id, 'UF', $user_UF);
+			add_user_meta($user_id, 'setorial', $user_setorial);
+			add_user_meta($user_id, 'uf-setorial', $user_UF . '-' . $user_setorial);
+			
+			if ($user_tipo == 'candidato')
+				add_user_meta($user_id, 'e_candidato', true);
+		
+		}
 
         /*
         $options = get_option('custom_email_notices');
@@ -90,7 +103,11 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
         $user = wp_signon(array('user_login' => $user_login, 'user_password' => $user_pass), $secure_cookie);
 
         if ( !is_wp_error($user) && !$reauth ) {
-            wp_safe_redirect(site_url('inscricoes'));
+            if ($user_tipo == 'candidato') {
+				wp_safe_redirect(site_url('inscricoes'));
+			} else {
+				wp_safe_redirect(site_url('/'));
+			}
             exit();
         }
         

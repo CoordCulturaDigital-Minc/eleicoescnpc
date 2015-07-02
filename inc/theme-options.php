@@ -123,6 +123,14 @@ function theme_options_page_callback_function() {
           <label for="aviso"><strong>Aviso Home</strong></label><br/>
           <textarea id="aviso" name="theme_options[aviso]" rows="5" cols="60"><?php echo htmlspecialchars($options['aviso']); ?></textarea>
           <br/><br/>
+          
+          <h3>Votação</h3>
+
+          <!-- CHECKBOX -->
+          <input type="checkbox" id="votacoes_abertas" class="text" name="theme_options[votacoes_abertas]" value="1" <?php checked(true, get_theme_option('votacoes_abertas'), true); ?>/>
+          <label for="votacoes_abertas"><strong>Votações abertas</strong></label><br/>
+
+          
 
         </div>
       </div>

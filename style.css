@@ -3183,3 +3183,15 @@ img.aligncenter {
         margin-top: -1.5rem;
     }
 }
+
+
+/* Foruns e votação */
+
+.candidate {
+	display: block;
+	padding: 30px;
+	border: 1px solid pink;
+}
+.candidate-details {
+	display: none;
+}

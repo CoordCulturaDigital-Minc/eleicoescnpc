@@ -1,23 +1,58 @@
 <?php
 
 /**
- * Template Name: Capa - Video Vinheta
+ * Template Name: Capa/Inscrições
  *
  */
 
 get_header(); the_post(); ?>
 
         <div class="features  features--subscriptions">
-            <iframe src="//player.vimeo.com/video/121276220?title=0&amp;byline=0&amp;portrait=0" width="699" height="393" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            <?php if ( '' != get_the_post_thumbnail() ) : ?>
+                <div class="featured__image">
+                    <?php if( $featureurl = get_post_meta($post->ID,'_meta_feature-url', true) ) : ?>
+                        <a href="<?php echo $featureurl ?>">
+                            <?php the_post_thumbnail( 'large' ); ?>
+                        </a>
+                    <?php else : ?>
+                        <?php the_post_thumbnail( 'large' ); ?>
+                    <?php endif; ?>
+                </div>
+                <?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
+                    <p class="feature__status"><?php echo $status ?></p>
+                <?php endif; ?>
+            <?php else : ?>
+                <?php if ( is_user_logged_in() && current_user_can( 'level_10' ) ) : ?>
+                    <p class="no-results"><?php _e( 'Please set a Thumbnail Image for this page.', 'historias' ); ?></p>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
 
         <div class="asides">
             <div class="home-box  box--sidebarless  box--howto">
+                asdasdasdasd
                 <?php the_content(); ?>
+                
+                
+                
+                
             </div>
 
             <div class="home-box  box--sidebarless  box--user">
-                <?php if ( is_user_logged_in() ) : ?>
+                <?php if ( is_user_logged_in() ) : global $user_ID; ?>
+                
+					<?php if (get_user_meta($user_ID, 'e_candidato', true)): ?>
+						Você está inscrito como candidato, veja sua ficha...
+						<p>Confira a sua <a href="<?php bloginfo('siteurl'); ?>/inscricoes">ficha de inscrição</a>.
+					<?php else: ?>
+						Você quer se candidatar?
+						<p>Confira a sua <a href="<?php bloginfo('siteurl'); ?>/inscricoes">Cadastre sua candidatura</a>.
+					<?php endif; ?>
+					
+					Link para a discussão do seu estado e setorial:
+					<a href="<?php echo site_url('foruns/' . get_user_meta($user_ID, 'uf-setorial', true)); ?>">Fórum</a>
+                
+                
                     <h2 class="area-title"><?php printf( __('Hello, %s!', 'historias' ), $user_login ); ?></h2>
                     <?php if ( current_user_can( 'level_10' ) ) : ?>
                         <p>Você é um <strong>administrador</strong>. Confira a <a href="<?php bloginfo('siteurl'); ?>/inscricoes">lista de inscritos</a> e veja como andam as <a href="<?php bloginfo('siteurl'); ?>/avaliacoes">avaliações</a>.

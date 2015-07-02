@@ -536,40 +536,6 @@ function get_states_by_region($region) {
     }
 }
 
-function get_all_states() {
-
-    $states = array(
-        'AC'=>'Acre',                 
-        'AL'=>'Alagoas',
-        'AM'=>'Amazonas',              
-        'AP'=>'Amapá',                  
-        'BA'=>'Bahia',
-        'CE'=>'Ceará',
-        'DF'=>'Distrito Federal',      
-        'ES'=>'Espírito Santo',
-        'GO'=>'Goiás',                  
-        'MA'=>'Maranhão',
-        'MT'=>'Mato Grosso',             
-        'MS'=>'Mato Grosso do Sul',    
-        'MG'=>'Minas Gerais',
-        'PA'=>'Pará',                  
-        'PB'=>'Paraíba',
-        'PR'=>'Paraná',
-        'PE'=>'Pernambuco',
-        'PI'=>'Piauí',
-        'RJ'=>'Rio de Janeiro',
-        'RN'=>'Rio Grande do Norte',
-        'RS'=>'Rio Grande do Sul',
-        'RO'=>'Rondônia',               
-        'RR'=>'Roraima',                
-        'SC'=>'Santa Catarina',
-        'SP'=>'São Paulo',
-        'SE'=>'Sergipe',     
-        'TO'=>'Tocantins'              
-    );
-
-    return $states;
-}
 
 
 function get_state_name_by_uf( $uf ) {
@@ -581,27 +547,7 @@ function get_state_name_by_uf( $uf ) {
 }
 
 
-function dropdown_states( $name, $selected, $all = false, $extra = null )
-{
-    $states = get_all_states();
 
-    $output = "<select id='{$name}' name='{$name}' {$extra}>";
-
-    if( $all )
-        $output .= "<option value=''>----------</option>";
-
-    foreach( $states as $acronym => $state )
-    {
-        if( $acronym == $selected )
-            $$acronym = 'selected="selected"';
-
-        $output .= "<option value='{$acronym}' {$$acronym}>{$state}</option>";
-    }
-
-    $output .= "</select>";
-
-    return $output;
-}
 
 
 /** loads cities from a given state */
@@ -739,55 +685,6 @@ function validate_step($n,$hook=null) {
 }
 
 
-/**
- * show a menu dropdown from the setorial
- *
- * @name    dropdown_states
- * @author  Cleber Santos <oclebersantos@gmail.com>
- * @since   2015-06-26
- * @updated 2015-06-26
- * @return  string
- */
-function dropdown_setoriais( $name, $selected, $all = false, $extra = null )
-{
-    $setoriais = array(
-        'artes'                     => 'Artes',
-        'arquitetura-urbanismo'     => 'Aquitetura e Urbanismo',
-        'arquivos'                  => 'Arquivos',
-        'arte-digital'              => 'Arte Digital',
-        'artes-visuais'             => 'Artes Visuais',
-        'artesanato'                => 'Artesanato',
-        'circo'                     => 'Circo',
-        'cultura-indigena'          => 'Cultura dos Povos Indígenas',
-        'afro-brasileiro'           => 'Culturas Afro-Brasileiras',
-        'culturas-populares'        => 'Culturas Populares',
-        'danca'                     => 'Dança',
-        'design'                    => 'Design',
-        'livro-leitura-literatura'  => 'Livro, Leitura e Literatura',
-        'moda'                      => 'Moda',
-        'musica'                    => 'Música',
-        'teatro'                    => 'Teatro',
-        'patrimonio-imaterial'      => 'Patrimônio Imaterial',
-        'patrimonio-material'       => 'Patrimônio Material'
-    );
-
-    $output = "<select id='{$name}' name='{$name}' {$extra}>";
-
-    if( $all )
-        $output .= "<option value=''>----------</option>";
-
-    foreach( $setoriais as $acronym => $setorial )
-    {
-        if( $acronym == $selected )
-            $$acronym = 'selected="selected"';
-
-        $output .= "<option value='{$acronym}' {$$acronym}>{$setorial}</option>";
-    }
-
-    $output .= "</select>";
-
-    return $output;
-}
 
 
 /**
@@ -831,7 +728,6 @@ class Validator {
             'candidate-date-birth' => array('not_empty','is_a_valid_birth'),
             'candidate-cpf' => array('not_empty','is_a_valid_cpf', 'cpf_does_not_exist'),
             'candidate-sniic' => array('not_empty'),
-            'candidate-region' => array('not_empty'),
             'candidate-state' => array('not_empty'),
             'candidate-setorial' => array('not_empty'),
             'candidate-email' => array('not_empty','is_valid_email'),

@@ -135,6 +135,25 @@ if(is_user_logged_in()) {
 						<div class="form-step-content">
 							<div class="grid">
 								<div class="grid__item  one-whole">
+									
+									<input id="tipo_eleitor" type="radio" name="user_tipo" value="eleitor" />
+									<label for="tipo_eleitor">Quero me inscrever como eleitor</label>
+									
+									<input id="tipo_candidato" type="radio" name="user_tipo" value="candidato" />
+									<label for="tipo_candidato">Quero me inscrever como candidato</label>
+								</div>
+								
+								<div class="grid__item  one-half">
+									<label for="user_UF">UF</label>
+									<?php echo dropdown_states('user_UF',''); ?>
+								</div><!--
+
+								--><div class="grid__item  one-half"></br>
+									<label for="user_setorial">Setorial</label>
+									<?php echo dropdown_setoriais('user_setorial',''); ?>
+								</div>
+								
+								<div class="grid__item  one-whole">
 									<label for="user_email">Seu email</label>
 									<input id="user_email" type="email" name="user_email" />
 								</div><!--
@@ -151,7 +170,7 @@ if(is_user_logged_in()) {
 
 								--><div class="grid__item  one-half">
 									<label for="user_cpf">CPF</label>
-									<input id="user_cpf" type="password" name="user_cpf" />
+									<input id="user_cpf" type="text" name="user_cpf" />
 								</div><!--
 
 								--><div class="grid__item  one-half"></br>
@@ -182,11 +201,7 @@ if(is_user_logged_in()) {
 					<a id="print-button" class="button  u-pull-right  print" style="display: none"><?php _e('Print', 'historias'); ?></a>
 				<?php endif; ?>
 
-	            <?php if (!current_user_can('curador') && !current_user_can('administrador')): ?>
-	            	<div class="project-switcher">
-	                	Editando <strong>Projeto <?php echo get_current_project_number(); ?></strong> <!-- <a id="switch-projects" class="button" href="<?php echo site_url('inscricoes/?switch_project=1'); ?>"><?php _e('Switch Project', 'historias'); ?></a> -->
-	            	</div>
-	            <?php endif; ?>
+	            
             </div>
 
 			<form id="application-form" class="form-application  inline" method="post">
