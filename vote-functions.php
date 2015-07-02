@@ -1,4 +1,18 @@
 <?php
+/*
+ * O candidato tem dois registros no banco
+ * 
+ * 1. o usuário dele
+ * 2. o projeto dele
+ * 
+ * O usuário tem os metadados básicos de nome, cpf, uf e setorial
+ * 
+ * O projeto tem a ficha de candidatura dele
+ * 
+ * Os votos são registrados contra o projeto, não contra o usuário
+ * 
+ */ 
+
 
 // verifica se usuario atual pode votar no candidato, batendo com ID do post da inscricao do candidato
 function current_user_can_vote_in_project($project_id) {
@@ -86,4 +100,9 @@ function get_current_user_vote() {
 	$user = wp_get_current_user();
 	return get_user_meta($user->ID, 'vote-project-id', true);
 
+}
+
+function get_number_of_votes_by_project($project_id) {
+	global $wpdb;
+	return $wpdb->get_var("SELECT COUNT(user_id) FROM $wpdb->usermeta WHERE meta_key = 'vote-project-id' AND meta_value = $project_id");
 }

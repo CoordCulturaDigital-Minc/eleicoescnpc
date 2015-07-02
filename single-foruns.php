@@ -55,6 +55,10 @@ get_header(); ?>
 									
 								</a>
 							<?php endif; ?>
+							
+							<?php if (current_user_can('administrator')): ?>
+								Número de votos desse candidato: <?php echo get_number_of_votes_by_project(get_the_ID()); ?>
+							<?php endif; ?>
 						
 						</div>
 					
