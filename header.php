@@ -66,26 +66,25 @@
             <?php if ( wp_is_mobile() ) :
                 wp_nav_menu( array( 'theme_location' => 'mobile', 'container' => false, 'menu_class' => 'menu--mobile  menu', 'fallback_cb' => false ) );
             else : ?>
-                <ul id="menu-user" class="menu--user  menu  cf">
-                    <?php if ( is_user_logged_in() ) : global $user_login; ?>
+                <?php if ( is_user_logged_in() ) : global $user_login; ?>
+                    <ul id="menu-user" class="menu--user  menu  cf">
                         <li class="menu__title"><?php printf( __('Hello, %s!', 'historias' ), $user_login ); ?></li>
-                    <?php if ( current_user_can( 'level_10' ) ) : ?>
-                        <li><a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
-                        <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscrições</a></li>
-                        <li><a href="<?php bloginfo('siteurl'); ?>/avaliacoes">Avaliações</a></li>
-                    <?php elseif ( current_user_can( 'curate' ) ) : ?>
-                        <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscrições</a></li>
-                    <?php elseif ( current_user_can( 'publish_posts' ) ): ?>
-                        <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Ficha</a></li>
-                        <li><a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
-                    <?php elseif ( current_user_can( 'read' ) ) : ?>
-                        <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Ficha</a></li>
-                    <?php endif; ?>
-                    <?php else : ?>
-                        <li class="menu__title"><?php _e( 'Hello, friend!', 'historias' ); ?></li>
-                    <?php endif; ?>
-                    <li><?php wp_loginout( get_permalink() ); ?></li>
-                </ul>
+                        <?php if ( current_user_can( 'level_10' ) ) : ?>
+                            <li><a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
+                            <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscrições</a></li>
+                            <li><a href="<?php bloginfo('siteurl'); ?>/avaliacoes">Avaliações</a></li>
+                        <?php elseif ( current_user_can( 'curate' ) ) : ?>
+                            <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscrições</a></li>
+                        <?php elseif ( current_user_can( 'publish_posts' ) ): ?>
+                            <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Ficha</a></li>
+                            <li><a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
+                        <?php elseif ( current_user_can( 'read' ) ) : ?>
+                            <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Ficha</a></li>
+                        <?php endif; ?>
+                        <li><?php wp_loginout( get_permalink() ); ?></li>
+                    </ul>    
+                <?php endif; ?>
+                
 
                 <?php wp_nav_menu( array( 'theme_location' => 'secondary', 'container' => false, 'menu_class' => 'menu--sub  menu  cf', 'fallback_cb' => false ) ); ?>
 

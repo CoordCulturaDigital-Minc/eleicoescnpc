@@ -29,6 +29,11 @@ function historias_setup() {
 	require_once( get_template_directory() . '/inc/estatisticas-inscricoes.php' );
 	require_once( get_template_directory() . '/inc/admin-cpfs-cnpjs.php' );
 
+	// widgets
+	require_once( get_template_directory() . '/widgets/cnpc-widget-custom-page.php' );
+	require_once( get_template_directory() . '/widgets/cnpc-widget-setoriais-menu.php' );
+	
+
 
 	// torna o tema traduzível
 	load_theme_textdomain( 'historias', get_template_directory() . '/languages' );
@@ -61,7 +66,8 @@ function historias_setup() {
 	// adiciona suporte a imagens destacadas
 	add_theme_support( 'post-thumbnails' );
 
-
+	add_image_size( 'avatar_candidate', 200, 200, true );
+	
 	// registra o menu
 	register_nav_menus( array(
 		'primary' => __( 'Primary Menu', 'historias' ),
@@ -102,6 +108,12 @@ function historias_setup() {
      */
     add_editor_style( array( 'editor-style.css', str_replace( ',', '%2C', 'http://fonts.googleapis.com/css?family=Sanchez:400italic,400' ) ) );
 }
+
+
+function custom_excerpt_length( $length ) {
+    return 100;
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
 /**
  * Enqueue custom JS using wp_enqueue_script()
@@ -276,6 +288,18 @@ function historias_register_sidebars() {
   		'before_title' => '<h3 class="widget__title">',
   		'after_title' => '</h3>',
   	) );
+
+  	register_sidebar( array (
+  		'name' => __( 'Front Page Widget Area','historias' ),
+  		'description' => __( 'Front page.','historias' ),
+  		'id' => 'front-page-widget-area',
+  		'before_widget' => '<aside id="%1$s" class="widget widget--negative %2$s">',
+  		'after_widget' => "</aside>",
+  		'before_title' => '<h3 class="widget__title">',
+  		'after_title' => '</h3>',
+  	) );
+
+  	
 
 }
 
@@ -515,7 +539,7 @@ function hqf_mail_sender($from_name) {
 
 function get_all_states() {
 
-    $states = array(
+    return array(
         'AC'=>'Acre',                 
         'AL'=>'Alagoas',
         'AM'=>'Amazonas',              
@@ -545,39 +569,13 @@ function get_all_states() {
         'TO'=>'Tocantins'              
     );
 
-    return $states;
 }
 
 
-function get_setoriais() {
-
-	return array(
-        'artes'                     => 'Artes',
-        'arquitetura-urbanismo'     => 'Aquitetura e Urbanismo',
-        'arquivos'                  => 'Arquivos',
-        'arte-digital'              => 'Arte Digital',
-        'artes-visuais'             => 'Artes Visuais',
-        'artesanato'                => 'Artesanato',
-        'circo'                     => 'Circo',
-        'cultura-indigena'          => 'Cultura dos Povos Indígenas',
-        'afro-brasileiro'           => 'Culturas Afro-Brasileiras',
-        'culturas-populares'        => 'Culturas Populares',
-        'danca'                     => 'Dança',
-        'design'                    => 'Design',
-        'livro-leitura-literatura'  => 'Livro, Leitura e Literatura',
-        'moda'                      => 'Moda',
-        'musica'                    => 'Música',
-        'teatro'                    => 'Teatro',
-        'patrimonio-imaterial'      => 'Patrimônio Imaterial',
-        'patrimonio-material'       => 'Patrimônio Material'
-    );
-
-}
-
-function dropdown_states( $name, $selected, $all = false, $extra = null )
+function dropdown_states( $name, $selected = null, $all = false, $extra = null )
 {
     $states = get_all_states();
-
+    
     $output = "<select id='{$name}' name='{$name}' {$extra}>";
 
     if( $all )
@@ -585,10 +583,12 @@ function dropdown_states( $name, $selected, $all = false, $extra = null )
 
     foreach( $states as $acronym => $state )
     {
+    	$att = '';
+        
         if( $acronym == $selected )
-            $$acronym = 'selected="selected"';
+            $att = 'selected="selected"';
 
-        $output .= "<option value='{$acronym}' {$$acronym}>{$state}</option>";
+        $output .= "<option value='{$acronym}' {$att}>{$state}</option>";
     }
 
     $output .= "</select>";
@@ -596,17 +596,54 @@ function dropdown_states( $name, $selected, $all = false, $extra = null )
     return $output;
 }
 
+function get_state_name_by_uf( $uf ) {
+
+    $states = get_all_states();
+
+    if( isset( $states[$uf] ) )
+        return $states[$uf];
+}
+
+
+function get_setoriais() {
+
+	return array(
+        'arquitetura-urbanismo'     => 'Aquitetura e Urbanismo',
+        'arquivos'                  => 'Arquivos',
+        'arte-digital'              => 'Arte Digital',
+        'artes-visuais'             => 'Artes Visuais',
+        'artesanato'                => 'Artesanato',
+        'audiovisual'               => 'Audiovisual',
+        'circo'                     => 'Circo',
+        'afro-brasileiro'           => 'Culturas Afro-Brasileiras',
+        'culturas-populares'        => 'Culturas Populares',
+        'danca'                     => 'Dança',
+        'design'                    => 'Design',
+        'literatura-livro-leitura'  => 'Literatura, Livro e Leitura',
+        'moda'                      => 'Moda',
+        'musica'                    => 'Música',
+        'patrimonio-imaterial'      => 'Patrimônio Imaterial',
+        'patrimonio-material'       => 'Patrimônio Material',
+        'teatro'                    => 'Teatro'
+    );
+}
+
+function get_label_setorial_by_slug( $slug ) {
+
+    $states = get_setoriais();
+
+    if( isset( $states[$slug] ) )
+        return $states[$slug];
+}
+
 
 /**
  * show a menu dropdown from the setorial
  *
  * @name    dropdown_states
- * @author  Cleber Santos <oclebersantos@gmail.com>
- * @since   2015-06-26
- * @updated 2015-06-26
  * @return  string
  */
-function dropdown_setoriais( $name, $selected, $all = false, $extra = null )
+function dropdown_setoriais( $name, $selected = null, $all = false, $extra = null )
 {
     $setoriais = get_setoriais();
 
@@ -617,16 +654,17 @@ function dropdown_setoriais( $name, $selected, $all = false, $extra = null )
 
     foreach( $setoriais as $acronym => $setorial )
     {
-        if( $acronym == $selected )
-            $$acronym = 'selected="selected"';
+    	$att = '';
 
-        $output .= "<option value='{$acronym}' {$$acronym}>{$setorial}</option>";
+        if( $acronym == $selected )
+            $att= 'selected="selected"';
+
+        $output .= "<option value='{$acronym}' {$att}>{$setorial}</option>";
     }
 
     $output .= "</select>";
 
     return $output;
 }
-
 
 ?>

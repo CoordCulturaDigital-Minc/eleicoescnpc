@@ -71,8 +71,8 @@ $subscriptions = list_subscriptions(
                     <th>#</th>
                     <th>Candidato</th>
                     <th>Setorial</th>
-                    <th>Projeto</th>
                     <th>Estado</th>
+                    <th>CPF</th>
                     <th>Número</th>
                     <?php if(!current_user_can('administrator')): ?>
                         <th>Minha nota</th>
@@ -86,12 +86,16 @@ $subscriptions = list_subscriptions(
             </thead>
             <tbody>
             <?php $i=1;foreach($subscriptions as $s): $subscription_number=substr($s['subscription_number'],0,8); ?>
+                
+                <?php $userID = get_post_field( 'post_author', $s['pid'] ); ?>
+                <?php $user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $userID ) ); ?>
+                <?php $uf_setorial = $user_meta['uf-setorial']; ?>
                 <tr>
                     <td class="subscription__order"><?php echo $i++;?></td>
-                    <td class="subscription__candidate"><a href="<?php echo site_url("inscricoes/$subscription_number");?>"><?php echo $s['candidate-name']; ?></a></td>
-                    <td class="subscription__setorial"><?php echo $s['candidate-setorial']; ?></td>
-                    <td class="subscription__company"><?php echo $s['company-name']; ?></td>
-                    <td class="subscription__state"><?php echo get_state_name_by_id($s['candidate-state']); ?></td>
+                    <td class="subscription__candidate"><a href="<?php echo site_url("inscricoes/$subscription_number");?>" title="Ver a ficha do candidato"><?php echo $user_meta['user_name']; ?></a></td>
+                    <td class="subscription__setorial"><a href='<?php echo site_url("foruns/$uf_setorial");?>' title="Ver fórum deste candidato"><?php echo get_label_setorial_by_slug($user_meta['setorial']); ?></a></td>
+                    <td class="subscription__state"><?php echo $user_meta['UF']; ?></td>
+                    <td class="subscription__cpf"><?php echo $user_meta['cpf']; ?></td>
                     <td class="subscription__id"><span class="subscription_number"><?php echo $subscription_number;?></span></td>
                     <?php if(!current_user_can('administrator')): ?>
                         <td><?php $e = load_evaluation($s['pid'], $current_user->ID);

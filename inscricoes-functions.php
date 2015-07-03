@@ -24,7 +24,7 @@ function get_project_id_by_user_id($user_id) {
                                          ." ORDER BY ID ASC LIMIT 1 OFFSET %d", $user_id, $project_index));
     if (!$project_id) {
         $p = array(
-            'post_title' => $user_id . ' - ' . 'Projeto ' . $project_index,
+            'post_title' => $user_id . ' - ' . 'Candidato ' . $project_index,
             'post_type' => 'projetos',
             'post_status' => 'publish',
             'post_author' => $user_id
@@ -91,6 +91,26 @@ function get_project_id_from_subscription_number($n) {
     return $wpdb->get_var($wpdb->prepare("SELECT post_id FROM {$wpdb->postmeta} WHERE"
                                          ." meta_key = 'subscription_number'"
                                          ." AND meta_value LIKE %s", $n.'%'));
+}
+
+function get_user_by_cpf($c) {
+    global $wpdb;
+    $user_id = $wpdb->get_var($wpdb->prepare("SELECT user_id FROM {$wpdb->usermeta} WHERE"
+                                         ." meta_key='cpf' AND meta_value=%d", $c));
+    return get_userdata($user_id);
+}
+
+
+function user_cpf_does_not_exist($c) {
+    global $wpdb;
+
+    $result = $wpdb->get_var($wpdb->prepare("SELECT count(1) FROM {$wpdb->usermeta} WHERE"
+                                        ." meta_key='cpf' and meta_value='%s';",$c));
+    
+    if($result > 0) {
+        return true;
+    }
+    return false;
 }
 
 /************************ Ajax Functions *************************************/
@@ -391,7 +411,7 @@ add_action('wp_ajax_inscricoes_file_upload', 'inscricoes_handle_ajax_upload');
 function inscricoes_get_uploaded_template($attachment_id) {
 
     $url = wp_get_attachment_url($attachment_id);
-    return '<a href="' . $url . '">Download</a>';
+    return '<a href="' . $url . '">Baixar arquivo</a>';
 
 }
 
@@ -536,20 +556,6 @@ function get_states_by_region($region) {
     }
 }
 
-
-
-function get_state_name_by_uf( $uf ) {
-
-    $states = get_all_states();
-
-    if( isset( $states[$uf] ) )
-        return $states[$uf];
-}
-
-
-
-
-
 /** loads cities from a given state */
 function get_cities_by_state_id($state_id, $except=null) {
     global $wpdb;
@@ -685,7 +691,59 @@ function validate_step($n,$hook=null) {
 }
 
 
+function user_is_a_valid_cpf($cpf) {
+    $error = false;
+    $cpf = preg_replace('/[^0-9]/','',$cpf);
 
+    if(strlen($cpf) !=  11 || preg_match('/^([0-9])\1+$/', $cpf)) {
+        return $error;
+    }
+
+    // 9 primeiros digitos do cpf
+    $digit = substr($cpf, 0, 9);
+
+    // calculo dos 2 digitos verificadores
+    for($j=10; $j <= 11; $j++){
+        $sum = 0;
+        for($i=0; $i< $j-1; $i++) {
+            $sum += ($j-$i) * ((int) $digit[$i]);
+        }
+
+        $summod11 = $sum % 11;
+        $digit[$j-1] = $summod11 < 2 ? 0 : 11 - $summod11;
+    }
+
+    if($digit[9] == ((int)$cpf[9]) && $digit[10] == ((int)$cpf[10])) {
+        return true;
+    } else {
+        return $error;
+    }
+}
+
+function is_a_valid_birth($d) {
+
+    $format = "d/m/Y";
+
+    $dateTime = DateTime::createFromFormat($format, $d);
+    
+    $errors = DateTime::getLastErrors();
+    if (!empty($errors['warning_count'])) {
+        return false;
+    }
+    return true;
+}
+
+function convert_format_date( $d ) {
+    $format = "d/m/Y";
+    $dateTime = DateTime::createFromFormat($format, $d);
+    return $dateTime->format("Y-m-d");  
+}
+
+function restore_format_date( $d ) {
+    $format = "Y-m-d";
+    $dateTime = DateTime::createFromFormat($format, $d);
+    return $dateTime->format("d/m/Y");  
+}
 
 /**
  * Instead valitade, this class should apply a chain of filters over
@@ -723,21 +781,22 @@ class Filter {
 class Validator {
     public $fields_rules = array(
         'step1' => array(
-            'candidate-name' => array('not_empty'),
+            // 'candidate-name' => array('not_empty'),
             'candidate-display-name' => array(),
-            'candidate-date-birth' => array('not_empty','is_a_valid_birth'),
-            'candidate-cpf' => array('not_empty','is_a_valid_cpf', 'cpf_does_not_exist'),
-            'candidate-sniic' => array('not_empty'),
-            'candidate-state' => array('not_empty'),
-            'candidate-setorial' => array('not_empty'),
-            'candidate-email' => array('not_empty','is_valid_email'),
+            // 'candidate-date-birth' => array('not_empty','is_a_valid_birth'),
+            // 'candidate-cpf' => array('not_empty','is_a_valid_cpf', 'cpf_does_not_exist'),
+            // 'candidate-state' => array('not_empty'),
+            // 'candidate-setorial' => array('not_empty'),
+            // 'candidate-email' => array('not_empty','is_valid_email'),
             'candidate-phone-1' => array('not_empty','is_a_valid_phone'),
+            'candidate-avatar' => array('not_empty'),
             'candidate-portfolio' => array('not_empty'),
             'candidate-activity-history' => array('not_empty'),
             'candidate-diploma' => array('not_empty'),
             'candidate-profissional-register' => array('not_empty'),
             'candidate-participation-statement' => array('not_empty'),
-            'candidate-experience' => array('not_empty')
+            'candidate-experience' => array('not_empty'),
+            'candidate-explanatory' => array('not_empty')
         )
     );
 
@@ -823,7 +882,7 @@ class Validator {
         global $wpdb;
         $result = $wpdb->get_var($wpdb->prepare("select count(1) from {$wpdb->postmeta} where meta_key='candidate-cpf' and post_id<>%d and meta_value='%s';",$pid,$c));
         if($result > 0) {
-            return __('Já existe um projeto cadastrado com este CPF.');
+            return __('Já existe um candidato cadastrado com este CPF.');
         }
         return $result == 0; // $result provavelmente é String
     }
@@ -923,18 +982,14 @@ class Validator {
 
     static function is_a_valid_birth($d) {
 
-        //formato da data
-        if( !preg_match( '/(0?[1-9]|[1-2][0-9]|3[0-1])\/(0?[1-9]|1[0-2])\/(19|20)?[0-9][0-9]/', $d ) )
-            return __('Formato de data inválido. Por favor apague e tente novamente.');
+        $format = "d/m/Y";
 
-        $today = gmdate( 'Y-m-d', ( time() + ( get_option( 'gmt_offset' ) * 3600 ) ));
-        $birth = preg_replace( '/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/', '$3-$2-$1', $d );
-
-        $interval = date_diff( date_create($birth), date_create($today) );
-
-        if($interval->format("%a") < 6574 )
-            return __( 'Inscrição permitida apenas para maiores de 18 anos.');
-
+        $dateTime = DateTime::createFromFormat($format, $d);
+        
+        $errors = DateTime::getLastErrors();
+        if (!empty($errors['warning_count'])) {
+            return __( 'Formato de data inválido. Por favor apague e tente novamente.');
+        }
         return true;
     }
    
@@ -989,9 +1044,9 @@ class Validator {
         }
     }
 
-    static function str_length_less_than_500($v) {
-        if(strlen(utf8_decode($v)) > 500) { // php não sabe contar utf8
-            return __('O texto não deve exceder 500 caracteres.');
+    static function str_length_less_than_600($v) {
+        if(strlen(utf8_decode($v)) > 600) { // php não sabe contar utf8
+            return __('O texto não deve exceder 600 caracteres.');
         }
         return true;
     }

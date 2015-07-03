@@ -42,7 +42,8 @@ class Historias_Customize {
 
       $wp_customize->add_setting( 'site_logo',
           array(
-              'default' => '',
+              'type'           => 'theme_mod',
+              'default' => get_template_directory_uri() . '/images/setoriais_logo.png',
           )
       );
       $wp_customize->add_control( new WP_Customize_Image_Control(
@@ -58,7 +59,7 @@ class Historias_Customize {
 
       $wp_customize->add_setting( 'site_tagline',
           array(
-              'default' => 'Fóruns Setoriais Nacionais Setoriais',
+              'default' => 'Eleição 2015',
               'type' => 'option'
           )
       );

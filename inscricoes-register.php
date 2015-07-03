@@ -4,15 +4,15 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
     
     require_once( ABSPATH . WPINC . '/registration.php' );
     
-    
-
     $user_login = sanitize_user($_POST['user_email']);
     $user_email = $user_login;
     $user_pass = $_POST['user_password'];
-    $user_cpf = $_POST['user_cpf'];
+    $user_cpf = $_POST['user_cpf']; //falta validar
     $user_UF = $_POST['user_UF'];
     $user_setorial = $_POST['user_setorial'];
-    $user_tipo = $_POST['user_tipo'];
+    $user_tipo = $_POST['user_tipo']; 
+    $user_name = $_POST['user_name'];
+    $user_birth = $_POST['user_birth']; //falta validar
     
     $register_errors = array();
 /*
@@ -32,6 +32,9 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
         $register_errors['pass_confirm'] =  'As senhas informadas não são iguais.<br/>';
     }
     
+    if( strlen($user_name)==0 )
+        $register_errors['user_name'] = __('O nome é obrigatório para o cadastro no site.<br/>', 'tnb');
+
     if(strlen($user_email)==0)
         $register_errors['email'] =  __('O e-mail é obrigatório para o cadastro no site.<br/>', 'tnb');
 
@@ -40,7 +43,17 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
 
     if( strlen($user_cpf)==0 )
         $register_errors['cpf'] = __('O cpf é obrigatório para o cadastro no site.<br/>', 'tnb');
+    else if( !user_is_a_valid_cpf($user_cpf) )
+        $register_errors['cpf'] = __('O cpf informado é inválido.<br/>', 'tnb');
+    else if( user_cpf_does_not_exist( $user_cpf ) )
+        $register_errors['cpf'] = __('O cpf informado já está cadastrado.<br/>', 'tnb');
 
+    if( strlen($user_birth)==0 )
+        $register_errors['user_birth'] = __('A data de nascimento é obrigatório para o cadastro no site.<br/>', 'tnb');
+
+    if( !is_a_valid_birth($user_birth) )
+        $register_errors['user_birth'] = __('A data de nascimento é inválida.<br/>', 'tnb');
+    
     
     if(!sizeof($register_errors)>0){
         
@@ -49,6 +62,8 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
         $data['user_login'] = $user_login;
         $data['user_pass'] = $user_pass;
         $data['user_email'] =  $user_email;
+        $data['first_name'] = $user_name;
+        $data['display_name'] = $user_name; 
         
         $data['role'] = 'subscriber' ;
         $user_id = wp_insert_user($data);
@@ -60,8 +75,10 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
 		
 			add_user_meta($user_id, 'cpf', $user_cpf);
 			add_user_meta($user_id, 'UF', $user_UF);
-			add_user_meta($user_id, 'setorial', $user_setorial);
-			add_user_meta($user_id, 'uf-setorial', $user_UF . '-' . $user_setorial);
+            add_user_meta($user_id, 'user_name', $user_name); // checar se precisa salvar como meta e firt_name
+            add_user_meta($user_id, 'date_birth', convert_format_date($user_birth)); 
+            add_user_meta($user_id, 'setorial', $user_setorial);
+            add_user_meta($user_id, 'uf-setorial', $user_UF . '-' . $user_setorial);
 			
 			if ($user_tipo == 'candidato')
 				add_user_meta($user_id, 'e_candidato', true);

@@ -16,7 +16,7 @@ function theme_options_init() {
 function theme_options_menu() {
 
 
-    $topLevelMenuLabel = 'Histórias que Ficam';
+    $topLevelMenuLabel = 'Eleições CNPC';
     $page_title = 'Opções';
     $menu_title = 'Opções';
 

@@ -1,16 +1,27 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<header class="entry-header">
+		<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( __('Read, comment and share &ldquo;%s&rdquo;', 'historias'), the_title_attribute('echo=0') ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 		<?php historias_the_time(); ?>
 		<?php historias_the_format(); ?>
 		<?php edit_post_link( sprintf( __( '%s Edit', 'historias' ), '<i class="fa fa-pencil"></i>' ) ); ?>
-		<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( __('Read, comment and share &ldquo;%s&rdquo;', 'historias'), the_title_attribute('echo=0') ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 	</header><!-- /entry-header -->
 
-	<?php if( is_search() ) : ?>
+	<?php if( is_search() || is_home() || is_front_page() ) : ?>
+		<?php if ( has_post_thumbnail() ) : ?>
 
+			<div class="featured-media">
+
+				<a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title(); ?>">
+					<?php the_post_thumbnail('thumbnail'); ?>
+				</a>
+						
+			</div> <!-- /featured-media -->
+			
+		<?php endif; ?>
 		<div class="entry-summary">
 			<?php the_excerpt(); ?>
+			<p><a class="read-more alignright" href="<?php the_permalink(); ?>">Leia mais ></a></p>
 		</div><!-- /entry-summary -->
 
 	<?php else : ?>

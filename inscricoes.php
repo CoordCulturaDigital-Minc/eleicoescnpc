@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Esta é a página de inscrições do história que ficam e tem os seguintes
+ * Esta é a página de inscrições dos candidatos e eleitores e tem os seguintes
  * comportamentos:
  *
  * - Ela é um formulário editável quando o usuário logado tem função de 'subscriber'.
@@ -91,6 +91,7 @@ if(is_user_logged_in()) {
 	exit;
 
 } else {
+	wp_enqueue_script('jquery-maskedinput', get_setoriaiscnpc_baseurl().'js/jquery.maskedinput-1.3.min.js', array('jquery'));  // funciona
 	wp_enqueue_script('cadastro', get_setoriaiscnpc_baseurl().'js/cadastro.js', array('jquery'));
 }
 
@@ -134,47 +135,66 @@ if(is_user_logged_in()) {
 						<?php endif; ?>
 						<div class="form-step-content">
 							<div class="grid">
-								<div class="grid__item  one-whole">
-									
-									<input id="tipo_eleitor" type="radio" name="user_tipo" value="eleitor" />
-									<label for="tipo_eleitor">Quero me inscrever como eleitor</label>
-									
-									<input id="tipo_candidato" type="radio" name="user_tipo" value="candidato" />
-									<label for="tipo_candidato">Quero me inscrever como candidato</label>
+								<div id="step-1-register">
+									<div class="grid__item  one-whole">
+										<h2>Quero me inscrever como</h2>
+										<input id="tipo_eleitor" class="user_type hidden" type="radio" name="user_tipo" value="eleitor" />
+										<label for="tipo_eleitor">Eleitor/a</label>
+										
+										<input id="tipo_candidato" class="user_type hidden" type="radio" name="user_tipo" value="candidato" />
+										<label for="tipo_candidato">Candidato/a</label>
+
+									</div>
 								</div>
 								
-								<div class="grid__item  one-half">
-									<label for="user_UF">UF</label>
-									<?php echo dropdown_states('user_UF',''); ?>
-								</div><!--
+								<div id="step-2-register">
 
-								--><div class="grid__item  one-half"></br>
-									<label for="user_setorial">Setorial</label>
-									<?php echo dropdown_setoriais('user_setorial',''); ?>
+									<?php // include('mapa.php'); ?>
+									
+									<div id="step-2-dropdown">
+										<div class="grid__item  one-half">
+											<label for="user_UF">UF</label>
+											<?php echo dropdown_states('user_UF','', true); ?>
+										</div><!--
+
+										--><div class="grid__item  one-half">
+											<label for="user_setorial">Setorial</label>
+											<?php echo dropdown_setoriais('user_setorial','', true); ?>
+										</div>
+									</div>	
 								</div>
+
 								
-								<div class="grid__item  one-whole">
-									<label for="user_email">Seu email</label>
-									<input id="user_email" type="email" name="user_email" />
-								</div><!--
+								<div id="step-3-register">
+									<div class="grid__item  one-whole">
+										<label for="user_name">Nome</label>
+										<input id="user_name" type="text" name="user_name" />
+									</div><!--
 
-								--><div class="grid__item  one-half">
-									<label for="user_password">Senha</label>
-									<input id="user_password" type="password" name="user_password" />
-								</div><!--
+									--><div class="grid__item  one-whole">
+										<label for="user_email">Seu email</label>
+										<input id="user_email" type="email" name="user_email" />
+									</div><!--
 
-								--><div class="grid__item  one-half">
-									<label for="user_password_confirm">Confirme a senha</label>
-									<input id="user_password_confirm" type="password" name="user_password_confirm" />
-								</div><!--
+									--><div class="grid__item  one-half">
+										<label for="user_password">Senha</label>
+										<input id="user_password" type="password" name="user_password" />
+									</div><!--
 
-								--><div class="grid__item  one-half">
-									<label for="user_cpf">CPF</label>
-									<input id="user_cpf" type="text" name="user_cpf" />
-								</div><!--
+									--><div class="grid__item  one-half">
+										<label for="user_password_confirm">Confirme a senha</label>
+										<input id="user_password_confirm" type="password" name="user_password_confirm" />
+									</div><!--
 
-								--><div class="grid__item  one-half"></br>
-									<input type="checkbox" name="user_not_cpf" value="not_cpf"> Não tenho CPF, pretendo comprovar minha identidade de outra forma.<br>
+									--><div class="grid__item  one-half">
+										<label for="user_birth">Data Nascimento</label>
+										<input id="user_birth" type="text" name="user_birth" />
+									</div><!--
+
+									--><div class="grid__item  one-half">
+										<label for="user_cpf">CPF</label>
+										<input id="user_cpf" type="text" name="user_cpf" />
+									</div>
 								</div>
 							</div>
 							<input type="submit" id="submit" class="button" value="Cadastrar" />
@@ -218,44 +238,59 @@ if(is_user_logged_in()) {
 						<div class="step-status <?php print $step1['complete']?' completo':'';?>"></div>
 					</header>
 
+					<?php if( empty( $subscription_number ) )
+						 $userID = $current_user->ID; 
+					else 
+						$userID = get_post_field( 'post_author', $pid );
+					 ?>
+
+					<?php $user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $userID ) ); ?>
+
 					<div class="form-step-content">
+						<fieldset>
+							<legend>Informações básicas</legend>
+							
+							<div class="grid">
+								<div class="grid__item  one-whole">
+									<label for="candidate-name">Nome Completo</label>
+									<?php echo isset($user_meta['first_name'])?$user_meta['first_name']:'';?>
+								</div><!--
+
+								--><div class="grid__item  one-half">
+									<label for="candidate-date-birth">Data Nascimento</label>
+									<?php echo isset($user_meta['date_birth'])?restore_format_date( $user_meta['date_birth'] ):'';?>
+								</div><!--
+
+								--><div class="grid__item  one-half">
+									<label for="candidate-cpf">CPF</label>
+									<?php echo isset($user_meta['cpf'])?$user_meta['cpf']:'';?>
+								</div><!--
+
+								--><div class="grid__item one-half">
+									<label for="candidate-setorial">Setorial</label>
+									<?php echo isset($user_meta['setorial'])?get_label_setorial_by_slug( $user_meta['setorial'] ):'';?>
+								</div><!--
+
+								--><div class="grid__item  one-third">
+									<label for="candidate-state">Estado</label>
+									<?php echo isset($user_meta['UF'])?$user_meta['UF']:'';?>
+								</div><!--
+
+								--><div class="grid__item  one-whole">
+									<label for="candidate-email">E-mail</label>
+									<?php echo isset($user_meta['nickname'])?$user_meta['nickname']:'';?>
+								</div>
+							</div>
+						</fieldset>
 
                         <fieldset>
 							<legend>Sobre o Pré-candidato</legend>
 
 							<div class="grid">
 								<div class="grid__item  one-whole">
-									<label for="candidate-name">Nome Completo</label>
-									<input<?php echo $form_disabled?' disabled':'';?> id="candidate-name" class="required" type="text" name="step1-candidate-name" value="<?php echo isset($f['candidate-name'])?$f['candidate-name']:'';?>" />
-									<div class="field-status <?php print isset($f['candidate-name'])?'completo':'invalido'?>"></div>
-									<div id="candidate-name-error" class="field__error"></div>
-								</div><!--
-
-								--><div class="grid__item  one-whole">
 									<label for="candidate-display-name">Nome Artístico</label>
 									<input<?php echo $form_disabled?' disabled':'';?> id="candidate-display-name" type="text" name="step1-candidate-display-name" value="<?php echo isset($f['candidate-display-name'])?$f['candidate-display-name']:'';?>" />
 									<div class="field-status"></div>
-								</div><!--
-
-								--><div class="grid__item  one-half">
-									<label for="candidate-date-birth">Data Nascimento</label>
-									<input<?php echo $form_disabled?' disabled':'';?> id="candidate-date-birth" class="required" type="text" name="step1-candidate-date-birth" value="<?php echo isset($f['candidate-date-birth'])?$f['candidate-date-birth']:'';?>" />
-									<div class="field-status <?php print isset($f['candidate-date-birth'])?'completo':'invalido'?>"></div>
-									<div id="candidate-date-birth-error" class="field__error"></div>
-								</div><!--
-
-								--><div class="grid__item  one-half">
-									<label for="candidate-cpf">CPF</label>
-									<input<?php echo $form_disabled?' disabled':'';?> id="candidate-cpf" class="required" type="text" name="step1-candidate-cpf" value="<?php echo isset($f['candidate-cpf'])?$f['candidate-cpf']:'';?>" />
-									<div class="field-status <?php print isset($f['candidate-cpf'])?'completo':'invalido'?>"></div>
-									<div id="candidate-cpf-error" class="field__error"></div>
-								</div><!--
-
-								--><div class="grid__item  one-half">
-									<label for="candidate-sniic">Nº SNIIC</label>
-									<input<?php echo $form_disabled?' disabled':'';?> id="candidate-sniic" class="required" type="text" name="step1-candidate-sniic" value="<?php echo isset($f['candidate-sniic'])?$f['candidate-sniic']:'';?>" />
-									<div class="field-status <?php print isset($f['candidate-sniic'])?'completo':'invalido'?>"></div>
-									<div id="candidate-sniic-error" class="field__error"></div>
 								</div><!--
 
 								--><div class="grid__item  one-half">
@@ -265,42 +300,29 @@ if(is_user_logged_in()) {
 									<div id="candidate-phone-1-error" class="field__error"></div>
 								</div><!--
 
-								--><div class="grid__item one-half">
-									<label for="candidate-setorial">Setorial</label>
-									<?php echo dropdown_setoriais( 'step1-candidate-setorial', $f['candidate-setorial'], true, 'id="candidate-setorial" class="required" ' . $disabled ); ?>
-									<div class="field-status <?php print isset($f['candidate-setorial'])?'completo':'invalido'?>"></div>
-									<div id="candidate-setorial-error" class="field__error"></div>
-                                    <div class="field__note">Escolha o seu setorial de interesse/atuação</div>
-								</div><!--
-
-								--><div class="grid__item  one-third">
-									<label for="candidate-state">Estado</label>
-									<?php echo dropdown_states( 'step1-candidate-state', $f['candidate-state'], true, 'id="candidate-state" class="required" ' . $disabled ); ?>
-									<div class="field-status <?php print isset($f['candidate-state'])?'completo':'invalido'?>"></div>
-									<div id="candidate-state-error" class="field__error"></div>
-								</div><!--
-
 								--><div class="grid__item  one-whole">
-									<label for="candidate-email">E-mail</label>
-									<input<?php echo $form_disabled?' disabled':'';?> id="candidate-email" class="required" type="text" name="step1-candidate-email" value="<?php echo isset($f['candidate-email'])?$f['candidate-email']:'';?>" />
-									<div class="field-status <?php print isset($f['candidate-email'])?'completo':'invalido'?>"></div>
-									<div id="candidate-email-error" class="field__error"></div>
-								</div>
-
-								<div class="grid__item  one-whole">
-									<label for="candidate-experience">Breve experiência no setor e exposição de motivos para a candidatura</label>
+									<label for="candidate-experience">Breve experiência no setor</label>
 									<textarea <?php echo $form_disabled?' disabled':'';?> id="candidate-experience" name="step1-candidate-experience" cols="50" rows="5" maxlength="600" class="limit-chars"><?php echo isset($f['candidate-experience'])?$f['candidate-experience']:'';?></textarea>
 									<div class="field-status <?php print isset($f['candidate-experience'])?'completo':'invalido'?>"></div>
 									<div id="candidate-experience-error" class="field__error"></div>
-									<div class="field__note">Até 600 caracteres. Deve-se elencar, ....</div>
+									<div class="field__note">Até 600 caracteres.</div>
+								</div><!--
+
+								--><div class="grid__item  one-whole">
+									<label for="candidate-explanatory">Exposição de motivos para a candidatura</label>
+									<textarea <?php echo $form_disabled?' disabled':'';?> id="candidate-explanatory" name="step1-candidate-explanatory" cols="50" rows="5" maxlength="600" class="limit-chars"><?php echo isset($f['candidate-explanatory'])?$f['candidate-explanatory']:'';?></textarea>
+									<div class="field-status <?php print isset($f['candidate-explanatory'])?'completo':'invalido'?>"></div>
+									<div id="candidate-explanatory-error" class="field__error"></div>
+									<div class="field__note">Até 600 caracteres.</div>
 								</div>
 
+								<?php inscricoes_file_upload_field_template($f, 1, 'Foto do candidato', 'candidate-avatar', 'Faça Upload de uma imagem em formato .jpg ou .png'); ?>
 								<?php inscricoes_file_upload_field_template($f, 1, 'Currículo e/ou Portfólio', 'candidate-portfolio', 'Faça Upload, em um único PDF, do currículo e/ou portfólio'); ?>
                                 <?php inscricoes_file_upload_field_template($f, 1, 'Histórico de atividades', 'candidate-activity-history', 'Faça Upload, em um único PDF, do histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma'); ?>
                                 <?php inscricoes_file_upload_field_template($f, 1, 'Diploma Profissional', 'candidate-diploma', 'Faça Upload, em um único PDF, do diploma profissional ou certificado de profissionalização'); ?>
                                 <?php inscricoes_file_upload_field_template($f, 1, 'Registro Profissional', 'candidate-profissional-register', 'Faça Upload, em um único PDF, do registro profissional no Ministério do Trabalho (DRT).'); ?>
                                 <?php inscricoes_file_upload_field_template($f, 1, 'Declaração de participação', 'candidate-participation-statement', 'Faça Upload, em um único PDF, da declaração de participação ou reconhecimento de atuação emitida por entidade/comunidade representativa da área ou segmento.'); ?>
-
+                               
 							</div>
 						</fieldset>
 						<?php if ( !$step1['complete'] ) : ?>

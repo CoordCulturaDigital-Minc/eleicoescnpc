@@ -8,12 +8,11 @@
 
 get_header(); ?>
 
-		<div class="content">
+	<div class="content-full">
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
-			
-				<?php the_title(); ?>
+				<h2 class="entry-title"><?php the_title(); ?></h2>
 				
 				<?php // Lista de candidatos ?>
 				<?php 
@@ -25,22 +24,26 @@ get_header(); ?>
 				
 				$original_post = $post;
 				?>
-				
+				<div class="candidates">
 					<?php if ($candidates->have_posts()):  ?>
 					<?php while ( $candidates->have_posts() ) : $candidates->the_post(); ?>
 					
 						<div class="candidate" id="<?php the_ID(); ?>">
-						
-							<?php echo get_post_meta(get_the_ID(), 'candidate-name', true); ?>
+							<div class="candidate-avatar">
+								<?php $avatar_file_id = get_post_meta(get_the_ID(), 'candidate-avatar', true); ?>
+								<?php echo wp_get_attachment_image($avatar_file_id, 'avatar_candidate'); ?>
+							</div>
+
+							<div class="candidate-text">					
+								<div class="candidate-name"><?php echo get_post_meta(get_the_ID(), 'candidate-display-name', true); ?></div>
+								<div class="candidate-resume"></div>
 							
-							<?php // mais detalhes do candidato aqui ?>
-							
-							<a class="show-candidate-details" data-candidate-id="<?php the_ID(); ?>">Ver mais detalhes</a>
-							
+								<?php // mais detalhes do candidato aqui ?>
+								<a class="show-candidate-details" data-candidate-id="<?php the_ID(); ?>">Ler mais</a>
+							</div>
 							<div class="candidate-details" id="candidate-details-<?php the_ID(); ?>">
-							
-								Outros detalhes do candidato 
-								
+								<p>Experiência:<?php echo get_post_meta(get_the_ID(), 'candidate-experience', true); ?></p>
+								<p>Defesa do candidato:<?php echo get_post_meta(get_the_ID(), 'candidate-explanatory', true); ?></p>
 							</div>
 							
 							<br />
@@ -68,7 +71,8 @@ get_header(); ?>
 					<?php endif; ?>
 					
 					<?php $post = $original_post; ?>
-				
+				</div>
+				<div class="clearfix"></div>
 				<?php // Discussão ?>
 				<h2>Debate</h2>
 				
@@ -83,7 +87,6 @@ get_header(); ?>
 
 		
 
-		</div><!-- #content .site-content --><!-- #primary .content-area -->
+</div><!-- #content .site-content --><!-- #primary .content-area -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
