@@ -255,6 +255,7 @@ add_action('wp_ajax_setoriaiscnpc_register_verify_field', 'setoriaiscnpc_registe
 add_action('wp_ajax_nopriv_setoriaiscnpc_register_verify_field', 'setoriaiscnpc_register_verify_field');
 
 
+/**  */
 function setoriaiscnpc_get_data_receita_by_cpf() {
 
     if(!isset($_POST['cpf'])) {
@@ -271,14 +272,13 @@ function setoriaiscnpc_get_data_receita_by_cpf() {
     if( $result === true ) {
 
         $cpf = preg_replace("/\D+/", "", $_POST['cpf']); // remove qualquer caracter não numérico
-        
-        // url
-        $json_url = "http://desenvweb.cultura.gov.br/pessoa-ws/servicos/pessoa_fisica/consultar/{$cpf}";
 
         //jSON URL which should be requested
-        $username = 'xxxx';  // authentication
-        $password = 'xxxx';  // authentication
+        $username = 'xxxxx';  // authentication
+        $password = 'xxxxx';  // authentication
 
+        // url
+        $json_url = "http://desenvweb.cultura.gov.br/pessoa-ws/servicos/pessoa_fisica/consultar/{$cpf}";
 
         // Initializing curl
         $ch = curl_init( $json_url );
@@ -292,15 +292,26 @@ function setoriaiscnpc_get_data_receita_by_cpf() {
         // Setting curl options
         curl_setopt_array( $ch, $options );
 
-        // Getting results
-        $result =  curl_exec($ch); // Getting jSON result string
+        $result = json_decode( curl_exec($ch) ); // Getting jSON result string
+
+        // passa somente os dados abaixo
+        $str = json_encode( array( 
+            "nmPessoaFisica" => trim($result->nmPessoaFisica)
+        ));        
     
     }
 
-    if($result) {
-        wp_send_json( $result );
+    if( $result ) {
+        wp_send_json( $str  );
+        die;
+    }else {
+        wp_send_json(curl_error($ch));
+        die;
     }
-    die;
+
+    curl_close($ch);
+       
+    
 }   
 add_action('wp_ajax_setoriaiscnpc_get_data_receita_by_cpf', 'setoriaiscnpc_get_data_receita_by_cpf');
 add_action( 'wp_ajax_nopriv_setoriaiscnpc_get_data_receita_by_cpf', 'setoriaiscnpc_get_data_receita_by_cpf' );
