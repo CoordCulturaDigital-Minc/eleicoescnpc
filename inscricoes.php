@@ -93,6 +93,7 @@ if(is_user_logged_in()) {
 } else {
 	wp_enqueue_script('jquery-maskedinput', get_setoriaiscnpc_baseurl().'js/jquery.maskedinput-1.3.min.js', array('jquery'));  // funciona
 	wp_enqueue_script('cadastro', get_setoriaiscnpc_baseurl().'js/cadastro.js', array('jquery'));
+	wp_localize_script('cadastro', 'cadastro', array('ajaxurl' => admin_url('admin-ajax.php'), 'today' => date('Y-m-d') ));
 }
 
 ?>
@@ -100,18 +101,17 @@ if(is_user_logged_in()) {
 <?php get_header(); ?>
 
 <div class="content  content--sidebarless">
-
-	<div class="hentry">
-		<?php if (current_user_can('subscriber')): ?>
-			<?php echo nl2br(get_theme_option('txt_candidato')); ?>
-		<?php elseif (current_user_can('curador')): ?>
-			<?php echo nl2br(get_theme_option('txt_curador')); ?>
-		<?php elseif (current_user_can('administrator')): ?>
-			<?php echo nl2br(get_theme_option('txt_admin')); ?>
-		<?php else: ?>
-			<?php echo nl2br(get_theme_option('txt_visitante')); ?>
-		<?php endif; ?>
-	</div>
+	<?php if(is_user_logged_in()) : ?>
+		<div class="hentry">
+			<?php if (current_user_can('subscriber')): ?>
+				<?php echo nl2br(get_theme_option('txt_candidato')); ?>
+			<?php elseif (current_user_can('curador')): ?>
+				<?php echo nl2br(get_theme_option('txt_curador')); ?>
+			<?php elseif (current_user_can('administrator')): ?>
+				<?php echo nl2br(get_theme_option('txt_admin')); ?>w
+			<?php endif; ?>
+		</div>
+	<?php endif; ?>
 
 	<section id="form-area">
 		<?php if(!is_user_logged_in()) : ?>
@@ -119,9 +119,9 @@ if(is_user_logged_in()) {
 			<?php if(get_theme_option('inscricoes_abertas')) : ?>
 				<div id="cadastro" class="form-step">
 					<header class="step__head">
-						<h3 class="step__title">Cadastro</h3>
+						<h3 class="step__title">Inscrições</h3>
 						<div class="step__about">
-							<?php echo nl2br(get_theme_option('txt_candidato_step1')); ?> Se você já fez o cadastro, basta <a href="<?php echo wp_login_url( site_url( '/inscricoes/' )); ?>" title="Fazer login">fazer o login.</a>
+							<?php echo nl2br(get_theme_option('txt_visitante')); ?> Se você já se inscreveu, basta <a href="<?php echo wp_login_url( site_url( '/inscricoes/' )); ?>" title="Fazer login">fazer o login.</a>
 						</div>
 					</header>
 					<form id="user-register" class="inline  form-application" method="post">
@@ -149,7 +149,7 @@ if(is_user_logged_in()) {
 								
 								<div id="step-2-register">
 
-									<?php // include('mapa.php'); ?>
+									<?php include('mapa.php'); ?>
 									
 									<div id="step-2-dropdown">
 										<div class="grid__item  one-half">
@@ -166,7 +166,13 @@ if(is_user_logged_in()) {
 
 								
 								<div id="step-3-register">
-									<div class="grid__item  one-whole">
+									<div class="grid__item  one-half">
+										<label for="user_cpf">CPF</label>
+										<input id="user_cpf" type="text" name="user_cpf" />
+										<div id="user_cpf-error" class="field__error"></div>
+									</div><!--
+
+									--><div class="grid__item  one-whole">
 										<label for="user_name">Nome</label>
 										<input id="user_name" type="text" name="user_name" />
 									</div><!--
@@ -174,26 +180,25 @@ if(is_user_logged_in()) {
 									--><div class="grid__item  one-whole">
 										<label for="user_email">Seu email</label>
 										<input id="user_email" type="email" name="user_email" />
+										<div id="user_email-error" class="field__error"></div>
 									</div><!--
 
 									--><div class="grid__item  one-half">
 										<label for="user_password">Senha</label>
 										<input id="user_password" type="password" name="user_password" />
+										<div id="user_password-error" class="field__error"></div>
 									</div><!--
 
 									--><div class="grid__item  one-half">
 										<label for="user_password_confirm">Confirme a senha</label>
 										<input id="user_password_confirm" type="password" name="user_password_confirm" />
+										<div id="user_password_confirm-error" class="field__error"></div>
 									</div><!--
 
 									--><div class="grid__item  one-half">
 										<label for="user_birth">Data Nascimento</label>
 										<input id="user_birth" type="text" name="user_birth" />
-									</div><!--
-
-									--><div class="grid__item  one-half">
-										<label for="user_cpf">CPF</label>
-										<input id="user_cpf" type="text" name="user_cpf" />
+										<div id="user_birth-error" class="field__error"></div>
 									</div>
 								</div>
 							</div>
@@ -202,13 +207,6 @@ if(is_user_logged_in()) {
 					</form>
 				</div>
 			<?php endif; ?>
-
-			<!-- <div class="form-not-yet">	
-				<h3 class="step__title">Etapa 2/3: Candidato</h3>
-			</div>
-			<div class="form-not-yet">
-				<h3 class="step__title">Etapa 3/3: Conferir Dados e Inscrever</h3>
-			</div> -->
 
 		<?php else: // } user logged in { ?>
 		<?php
@@ -220,8 +218,6 @@ if(is_user_logged_in()) {
 				<?php else: ?>
 					<a id="print-button" class="button  u-pull-right  print" style="display: none"><?php _e('Print', 'historias'); ?></a>
 				<?php endif; ?>
-
-	            
             </div>
 
 			<form id="application-form" class="form-application  inline" method="post">
@@ -290,7 +286,8 @@ if(is_user_logged_in()) {
 								<div class="grid__item  one-whole">
 									<label for="candidate-display-name">Nome Artístico</label>
 									<input<?php echo $form_disabled?' disabled':'';?> id="candidate-display-name" type="text" name="step1-candidate-display-name" value="<?php echo isset($f['candidate-display-name'])?$f['candidate-display-name']:'';?>" />
-									<div class="field-status"></div>
+									<div class="field-status <?php print isset($f['candidate-display-name'])?'completo':'invalido'?>"></div>
+									<div id="candidate-display-name-error" class="field__error"></div>
 								</div><!--
 
 								--><div class="grid__item  one-half">

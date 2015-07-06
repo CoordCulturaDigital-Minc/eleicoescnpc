@@ -1,3 +1,6 @@
+<?php 
+	/* Template Name: Mapa setoriais */
+?>
 <?php get_header(); the_post(); ?>
 
 	<div class="content  content--sidebarless">

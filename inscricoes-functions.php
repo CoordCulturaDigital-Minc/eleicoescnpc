@@ -100,7 +100,7 @@ function get_user_by_cpf($c) {
     return get_userdata($user_id);
 }
 
-
+// retirar
 function user_cpf_does_not_exist($c) {
     global $wpdb;
 
@@ -225,6 +225,85 @@ function setoriaiscnpc_save_field() {
 }
 add_action('wp_ajax_setoriaiscnpc_save_field', 'setoriaiscnpc_save_field');
 
+
+/** save field in database, if field is valid */
+function setoriaiscnpc_register_verify_field() {
+
+    $reponse = array();
+
+    $filter = new Filter();
+    $validator = new Validator();
+    $type_user = isset($_POST['user_type']) ? $_POST['user_type'] : "";
+
+    foreach($_POST as $stepfield => $value) {
+      
+        if( $stepfield != 'action' && $stepfield != 'user_type') {
+        
+            $field = $stepfield;
+        
+            $filter->apply('register', $field, $value);
+
+            $result = $validator->validate_field('register', $field, $value, $type_user );
+
+            $response[$field] = $result;
+        }
+    }
+    print json_encode($response);
+    die; // or wordpress will print 0
+}
+add_action('wp_ajax_setoriaiscnpc_register_verify_field', 'setoriaiscnpc_register_verify_field');
+add_action('wp_ajax_nopriv_setoriaiscnpc_register_verify_field', 'setoriaiscnpc_register_verify_field');
+
+
+function setoriaiscnpc_get_data_receita_by_cpf() {
+
+    if(!isset($_POST['cpf'])) {
+         header("HTTP/1.1 403 Forbidden");
+         print __('CPF vazio.');
+         die;
+    }
+
+    // validar antes de fazer a consulta
+    $validator = new Validator();
+    
+    $result = $validator->validate_field('register', 'user_cpf', $_POST['cpf']);
+
+    if( $result === true ) {
+
+        $cpf = preg_replace("/\D+/", "", $_POST['cpf']); // remove qualquer caracter não numérico
+        
+        // url
+        $json_url = "http://desenvweb.cultura.gov.br/pessoa-ws/servicos/pessoa_fisica/consultar/{$cpf}";
+
+        //jSON URL which should be requested
+        $username = 'xxxx';  // authentication
+        $password = 'xxxx';  // authentication
+
+
+        // Initializing curl
+        $ch = curl_init( $json_url );
+
+        // Configuring curl options
+        $options = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_USERPWD => $username . ":" . $password,   // authentication
+        );
+
+        // Setting curl options
+        curl_setopt_array( $ch, $options );
+
+        // Getting results
+        $result =  curl_exec($ch); // Getting jSON result string
+    
+    }
+
+    if($result) {
+        wp_send_json( $result );
+    }
+    die;
+}   
+add_action('wp_ajax_setoriaiscnpc_get_data_receita_by_cpf', 'setoriaiscnpc_get_data_receita_by_cpf');
+add_action( 'wp_ajax_nopriv_setoriaiscnpc_get_data_receita_by_cpf', 'setoriaiscnpc_get_data_receita_by_cpf' );
 
 /**
  * The store_data_to_hash() will concat strings from
@@ -753,6 +832,10 @@ class Filter {
     public $fields_rules = array(
         'step1' => array(
             'candidate-phone-1' => array('remove_empty_mask','trim_spaces_and_undescore')
+        ),
+        'register' => array(
+            'user_birth' => array('remove_empty_mask','trim_spaces_and_undescore'),
+            'user_cpf' => array('remove_empty_mask','trim_spaces_and_undescore')
         )
     );
 
@@ -781,13 +864,7 @@ class Filter {
 class Validator {
     public $fields_rules = array(
         'step1' => array(
-            // 'candidate-name' => array('not_empty'),
             'candidate-display-name' => array(),
-            // 'candidate-date-birth' => array('not_empty','is_a_valid_birth'),
-            // 'candidate-cpf' => array('not_empty','is_a_valid_cpf', 'cpf_does_not_exist'),
-            // 'candidate-state' => array('not_empty'),
-            // 'candidate-setorial' => array('not_empty'),
-            // 'candidate-email' => array('not_empty','is_valid_email'),
             'candidate-phone-1' => array('not_empty','is_a_valid_phone'),
             'candidate-avatar' => array('not_empty'),
             'candidate-portfolio' => array('not_empty'),
@@ -797,6 +874,13 @@ class Validator {
             'candidate-participation-statement' => array('not_empty'),
             'candidate-experience' => array('not_empty'),
             'candidate-explanatory' => array('not_empty')
+        ),
+        'register' => array(
+            'user_cpf' => array('not_empty','is_a_valid_cpf', 'user_cpf_does_not_exist'),
+            'user_name' => array('not_empty'),
+            'user_email' => array('not_empty','is_valid_email','is_email_does_not_exist'),
+            'user_password' => array('not_empty'),
+            'user_birth' => array('not_empty','is_a_valid_date','is_a_valid_birth')
         )
     );
 
@@ -847,6 +931,15 @@ class Validator {
         return __('O email não tem um formato válido');
     }
 
+    /** Return true if supplied email is valid or give an error message otherwise */
+    static function is_email_does_not_exist($e) {
+
+        if( email_exists( $e ) ) {
+            return __('Já existe um usuário com o email informado'); 
+        }
+        return true;
+       
+    }
 
     /** Return true if supplied cpf is valid or give an error message otherwise */
     static function is_a_valid_cpf($cpf) {
@@ -883,6 +976,18 @@ class Validator {
         $result = $wpdb->get_var($wpdb->prepare("select count(1) from {$wpdb->postmeta} where meta_key='candidate-cpf' and post_id<>%d and meta_value='%s';",$pid,$c));
         if($result > 0) {
             return __('Já existe um candidato cadastrado com este CPF.');
+        }
+        return $result == 0; // $result provavelmente é String
+    }
+
+    function user_cpf_does_not_exist($c) {
+        global $wpdb;
+
+        $result = $wpdb->get_var($wpdb->prepare("SELECT count(1) FROM {$wpdb->usermeta} WHERE"
+                                            ." meta_key='cpf' and meta_value='%s';",$c));
+        
+        if($result > 0) {
+            return __('Já existe um usuário cadastrado com este CPF.');
         }
         return $result == 0; // $result provavelmente é String
     }
@@ -980,7 +1085,7 @@ class Validator {
         return true;
     }
 
-    static function is_a_valid_birth($d) {
+    static function is_a_valid_date($d) {
 
         $format = "d/m/Y";
 
@@ -990,6 +1095,21 @@ class Validator {
         if (!empty($errors['warning_count'])) {
             return __( 'Formato de data inválido. Por favor apague e tente novamente.');
         }
+        return true;
+    }
+
+    static function is_a_valid_birth( $d, $user_type=null) {
+
+        $today = gmdate( 'Y-m-d', ( time() + ( get_option( 'gmt_offset' ) * 3600 ) ));
+        $birth = preg_replace( '/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/', '$3-$2-$1', $d );
+
+        $interval = date_diff( date_create($birth), date_create($today) );
+
+        if($interval->format("%a") < 6574 && $user_type == 'candidato' )
+            return __( 'A idade mínima para candidado é de 18 anos.');
+        else if($interval->format("%a") < 5844 && $user_type == 'eleitor')
+            return __( 'A idade mínima para eleitor é de 16 anos.');
+
         return true;
     }
    

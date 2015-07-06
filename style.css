@@ -550,7 +550,7 @@ a.post-edit-link:hover {
 
     display: inline-block;
 
-    padding: .5em;
+    padding: .4em;
 
     cursor: pointer;
     -webkit-transition: background-color .3s ease-in-out;
@@ -560,8 +560,8 @@ a.post-edit-link:hover {
     border: none;
     border-radius: 2px;
     background-color: #5daa33;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
-    0 4px 0 #488327;
+    /*box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
+    0 4px 0 #488327;*/
 }
 
 .button:hover {
@@ -571,7 +571,7 @@ a.post-edit-link:hover {
 .button:active {
     top: 2px;
 
-    box-shadow: 0 2px 0 #488327;
+    /*box-shadow: 0 2px 0 #488327;*/
 }
 
 a.highlight {
@@ -1180,7 +1180,7 @@ img.aligncenter {
     margin-bottom: 1.5rem;
     padding-bottom: 1.5rem;
 
-    border-bottom: 1px dotted #888;
+    /*border-bottom: 1px dotted #888;*/
 }
 
 .hentry:last-child,
@@ -1879,7 +1879,7 @@ img.aligncenter {
 
 .widget {
     color: #fff;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     padding: 1.5rem 1.5rem 2em 1.5rem;
 
     border-radius: 5px;
@@ -1929,6 +1929,10 @@ img.aligncenter {
     line-height: 1.71;
 
     list-style: none;
+}
+
+.widget .post-entry.entry {
+    line-height: 1.2;
 }
 
 .widget .more {
@@ -1986,6 +1990,10 @@ img.aligncenter {
     line-height: 2;
     margin-left: 10px;
     font-size: 15px;
+    background-image: url(images/next.png);
+    background-repeat: no-repeat;
+    background-position: 0px 10px; 
+    padding-left: 0px;
 }
 
 
@@ -2319,11 +2327,9 @@ img.aligncenter {
 }
 
 .box--user {
-    padding: 1rem 1.5rem;
-    margin-bottom: 1.5em;
-
-    /*border: 1px solid #ededed;*/
-    /*background: #efede6;*/
+    padding: 0.3rem 1rem;
+    margin-bottom: 2em;
+    background-color: #efede6;
 }
 
 .box--user a {
@@ -2339,11 +2345,15 @@ img.aligncenter {
     color: #888;
 }
 
+#loginform p {
+    margin-top: 0.3em;
+}
+
 #loginform .input {
     font-size: .88rem;
 
     width: 100%;
-    padding: 1em;
+    padding: 0.8em;
 
     border: 1px solid #ededed;
     background: #fff;
@@ -2365,9 +2375,9 @@ img.aligncenter {
     color: #fff;
     border: none;
     border-radius: 2px;
-    background: #5daa33;
+    background: #5daa33;/*
     box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
-    0 4px 0 #488327;
+    0 4px 0 #488327;*/
 }
 
 #loginform .button-primary:hover {
@@ -2377,7 +2387,7 @@ img.aligncenter {
 #loginform .button-primary:active {
     top: 2px;
 
-    box-shadow: 0 2px 0 #488327;
+    /*box-shadow: 0 2px 0 #488327;*/
 }
 
 .box--user .lost-password {
@@ -2397,7 +2407,7 @@ img.aligncenter {
 
 .box--user .not-registered {
     border-bottom: none;
-    margin: 1.5rem auto 0 auto;
+    margin: 0.8rem auto 0 auto;
 }
 
 .features {
@@ -2625,7 +2635,7 @@ img.aligncenter {
     position: relative;
     z-index: 9;
 
-    padding: 0.8rem;
+    padding: 0.4em 0.8rem;
 
     color: #fff;
     background-color: #125b26;
@@ -2845,9 +2855,8 @@ img.aligncenter {
 }
 
 .form-application #step-1-register label {
-    width: 49%;
+    width: 45%;
     padding: 40px;
-    /*height: 130px;*/
     float: left;
     display: table-cell;
     vertical-align: middle;
@@ -2855,8 +2864,14 @@ img.aligncenter {
     background-color: #175823;
     color: #fff;
     font-size: 1.4em;
-    margin-right: 2%;
+    margin-right: 10%;
 }
+
+.form-application #step-1-register {
+    width: 600px;
+    margin: 0 auto;
+}
+
 .form-application #step-1-register label:last-child {
     margin-right: 0px;
 }
@@ -2865,6 +2880,10 @@ img.aligncenter {
     background-color: #ffcb05;
     color: #175823;  
     cursor: pointer;
+}
+
+.form-application #step-2-register #step-2-dropdown {
+    display: none;
 }
 
 .form-application label a {
@@ -2883,7 +2902,8 @@ img.aligncenter {
     padding: 1em;
 
     border: 1px solid #ededed;
-    background: #f5f5f5;
+    /*background: #f5f5f5;*/
+    background: #fff; 
 }
 
 .form-application input[type='text']:focus,
@@ -2892,6 +2912,13 @@ img.aligncenter {
 .form-application textarea:focus {
     border-color: #888;
     outline: none;
+}
+
+.form-application input[type='text']:disabled,
+.form-application input[type='email']:disabled,
+.form-application input[type='password']:disabled,
+.form-application textarea:disabled {
+    background: #dddddd;
 }
 
 .form-application textarea {
@@ -2905,18 +2932,18 @@ img.aligncenter {
 }
 
 .form-step {
-    margin-bottom: 1.5rem;
+    margin-bottom: 3    rem;
     padding: 1.5rem;
 
-    background: #fff;
-    box-shadow: 0 0 6px rgba(0,0,0,.2);
+    /*background: #fff;*/
+    /*box-shadow: 0 0 6px rgba(0,0,0,.2);*/
 }
 
 .step__head {
     margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
+    /*padding-bottom: 1.5rem;*/
 
-    border-bottom: 2px dashed #ededed;
+    /*border-bottom: 2px dashed #ededed;*/
 }
 
 .step__title {
@@ -3438,13 +3465,12 @@ img.aligncenter {
 #mapa svg path {
     stroke:#c1c89f; /*cor da borda do estado*/
     fill:#f4f4f4; /*cor do estado*/
-    cursor:pointer;
 }
 
 #mapa svg path:hover {
-    fill:#ffdb2d;;
+    fill:#ffdb2d;
     stroke:#ffdb2d;
-
+    cursor:pointer;
 }
 
 #mapa svg text {
@@ -3457,11 +3483,12 @@ img.aligncenter {
 .menu-setoriais-container {
     display: none;
     width: 200px;
-    background-color: rgba(244, 244, 244, 0.75);
+    background-color: rgba(244, 244, 244, 0.92);
     border: 1px solid #DBDBDB;
     padding: 15px;
     font-size: 12px;
     color: #22733e;
+    z-index: 1;
 }
 
 .menu-setoriais-container a {

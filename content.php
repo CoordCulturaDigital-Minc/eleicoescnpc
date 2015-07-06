@@ -46,11 +46,13 @@
 			<?php endif; // End if categories ?>
 
 			<?php if( get_the_tag_list() )
-				echo get_the_tag_list('<span class="entry-tags">',' ','</span><!-- /entry-tags -->');
+				echo get_the_tag_list('<span class="entry-tags"><i class="fa fa-tag"> ',', ','</i></span><!-- /entry-tags -->');
 			?>
 		<?php endif; // End if 'post' == get_post_type() ?>
 
-		<?php historias_share(); ?>
+		<?php if( !is_search() && !is_home() && !is_front_page() ) : ?>
+			<?php historias_share(); ?>
+		<?php endif; ?>
 	</footer><!-- /entry-footer -->
 
 </article><!-- /post-<?php the_ID(); ?> -->

@@ -4,7 +4,7 @@
          width="7.47778in" height="7.58889in"
          viewBox="0 0 673 683">
 
-        <path id="AC" data-name="Acre"
+        <path id="AC" state="AC" data-name="Acre"
             fill="none" stroke="black" stroke-width="1"
             d="M 32.00,228.08
                C 32.00,228.08 68.00,236.95 68.00,236.95
@@ -25,9 +25,9 @@
                  15.10,237.43 9.41,225.47 9.00,223.00
                  9.00,223.00 13.00,220.00 13.00,220.00
                  13.00,220.00 32.00,228.08 32.00,228.08 Z" />
-                 <text x="50" y="254">AC</text>
+                 <text x="50" y="254" state="AC">AC</text>
 
-        <path id="AL" data-name="Alagoas"
+        <path id="AL" state="AL" data-name="Alagoas"
             fill="none" stroke="black" stroke-width="1"
             d="M 657.00,249.00
                C 655.45,256.33 643.89,267.94 639.00,275.00
@@ -36,9 +36,9 @@
                  620.43,247.81 618.91,253.28 626.09,256.18
                  629.06,257.38 630.72,256.40 635.00,258.00
                  642.79,250.98 646.50,249.23 657.00,249.00 Z" />
-                 <text x="649" y="274">AL</text>
+                 <text x="649" y="274" state="AL">AL</text>
 
-        <path id="AM" data-name="Amazonas"
+        <path id="AM" state="AM" data-name="Amazonas"
             fill="none" stroke="black" stroke-width="1"
             d="M 122.41,67.09
                C 122.41,67.09 123.00,76.00 123.00,76.00
@@ -114,9 +114,9 @@
                  104.00,62.00 110.00,64.00 110.00,64.00
                  110.00,64.00 117.00,57.00 117.00,57.00
                  117.00,57.00 122.41,67.09 122.41,67.09 Z" />
-                 <text x="50" y="254">AM</text>
+                 <text x="160" y="179" state="AM">AM</text>
 
-         <path id="AP"
+         <path id="AP" state="AP"
         fill="none" stroke="black" stroke-width="1"
         d="M 392.43,42.00
            C 393.78,47.84 396.38,52.98 397.00,58.83
@@ -141,9 +141,9 @@
              364.86,53.94 376.34,33.00 376.34,33.00
              380.02,26.85 383.15,26.51 384.00,19.00
              392.44,25.54 390.30,32.76 392.43,42.00 Z" />
-             <text x="50" y="254">AP</text>
+             <text x="370" y="81" state="AP">AP</text>
 
-        <path id="BA"
+        <path id="BA" state="BA"
         fill="none" stroke="black" stroke-width="1"
         d="M 569.87,258.47
            C 569.87,258.47 589.00,244.00 589.00,244.00
@@ -198,9 +198,9 @@
              549.77,253.11 552.28,248.55 556.08,247.71
              560.79,246.68 565.65,252.04 563.00,260.00
              563.00,260.00 569.87,258.47 569.87,258.47 Z" />
-             <text x="50" y="254">BA</text>
+             <text x="541" y="323" state="BA">BA</text>
 
-        <path id="CE"
+        <path id="CE" state="CE"
         fill="none" stroke="black" stroke-width="1"
         d="M 570.00,144.33
            C 577.07,143.74 582.20,147.05 588.00,150.50
@@ -219,18 +219,11 @@
              559.41,168.00 555.75,154.99 555.75,154.99
              555.23,151.70 556.83,149.19 557.00,146.00
              557.00,146.00 570.00,144.33 570.00,144.33 Z" />
-             <text x="572" y="193">CE</text>
+             <text x="572" y="193" state="CE">CE</text>
 
-         <path id="DF"
-        fill="none" stroke="black" stroke-width="1"
-        d="M 441.26,365.54
-           C 442.98,363.41 451.34,363.33 452.94,365.54
-             453.89,367.07 453.20,370.29 452.94,372.00
-             452.94,372.00 440.00,372.00 440.00,372.00
-             440.10,370.27 440.13,366.85 441.26,365.54 Z" />
-             <text x="50" y="254">DF</text>
+         
 
-         <path id="ES"
+         <path id="ES" state="ES"
         fill="none" stroke="black" stroke-width="1"
         d="M 564.59,408.76
            C 569.29,406.15 570.87,405.16 576.00,408.11
@@ -247,9 +240,9 @@
              562.39,429.99 561.61,418.04 561.61,418.04
              561.61,418.04 559.00,414.00 559.00,414.00
              560.58,410.03 561.09,410.71 564.59,408.76 Z" />
-             <text x="50" y="254">ES</text>
+             <text x="570" y="448" state="ES">ES</text>
 
-        <path id="GO"
+        <path id="GO" state="GO"
         fill="none" stroke="black" stroke-width="1"
         d="M 422.00,325.00
            C 422.00,325.00 423.00,318.00 423.00,318.00
@@ -295,9 +288,18 @@
              396.41,333.99 400.40,324.00 400.40,324.00
              400.40,324.00 403.00,315.00 403.00,315.00
              406.62,318.99 416.75,323.50 422.00,325.00 Z" />
-             <text x="50" y="254">GO</text>
+            <text x="390" y="394" state="GO">GO</text>
+        
+        <path id="DF" state="DF"
+        fill="none" stroke="black" stroke-width="1"
+        d="M 441.26,365.54
+           C 442.98,363.41 451.34,363.33 452.94,365.54
+             453.89,367.07 453.20,370.29 452.94,372.00
+             452.94,372.00 440.00,372.00 440.00,372.00
+             440.10,370.27 440.13,366.85 441.26,365.54 Z" />
+             <text x="441" y="365" state="DF">DF</text>
 
-        <path id="MA"
+        <path id="MA" state="MA"
         fill="none" stroke="black" stroke-width="1"
         d="M 488.00,126.00
            C 488.00,126.00 490.00,122.00 490.00,122.00
@@ -338,9 +340,9 @@
              468.08,142.17 470.48,137.83 470.48,137.83
              473.36,131.16 474.87,124.15 476.00,117.00
              481.94,118.98 485.11,120.29 488.00,126.00 Z" />
-             <text x="50" y="254">MA</text>
+             <text x="480" y="189" state="MA">MA</text>
 
-        <path id="MG"
+        <path id="MG" state="MG"
         fill="none" stroke="black" stroke-width="1"
         d="M 493.09,349.96
            C 493.09,349.96 504.00,343.42 504.00,343.42
@@ -394,9 +396,9 @@
              477.00,354.00 474.00,359.00 474.00,359.00
              474.00,359.00 475.00,360.00 475.00,360.00
              475.00,360.00 493.09,349.96 493.09,349.96 Z" />
-             <text x="50" y="254">MG</text>
+             <text x="490" y="432" state="MG">MG</text>
 
-        <path id="MS"
+        <path id="MS" state="MS"
         fill="none" stroke="black" stroke-width="1"
         d="M 296.09,397.58
            C 297.89,396.34 303.78,394.60 306.00,394.25
@@ -431,9 +433,9 @@
              282.24,418.84 280.22,414.62 286.00,411.00
              286.00,411.00 282.00,404.00 282.00,404.00
              290.71,405.63 290.61,401.37 296.09,397.58 Z" />
-             <text x="50" y="254">MS</text>
+            <text x="313" y="455" state="MS">MS</text>
 
-        <path id="MT"
+        <path id="MT" state="MT"
         fill="none" stroke="black" stroke-width="1"
         d="M 282.09,244.83
            C 284.11,248.04 290.89,251.25 296.00,259.00
@@ -478,9 +480,9 @@
              271.01,236.42 271.01,230.99 271.01,230.99
              271.01,230.99 273.00,223.00 273.00,223.00
              279.54,230.30 280.17,241.77 282.09,244.83 Z" />
-             <text x="50" y="254">MT</text>
+             <text x="299" y="338" state="MT">MT</text>
 
-        <path id="PA" data-name="Pará"
+        <path id="PA" state="PA" data-name="Pará"
             fill="none" stroke="black" stroke-width="1"
             d="M 326.00,51.00
                C 329.73,58.10 327.88,60.71 330.56,63.44
@@ -548,9 +550,9 @@
                  309.00,63.50 312.00,63.00 312.00,63.00
                  310.00,58.09 309.41,57.34 310.00,52.00
                  317.91,54.96 318.26,53.41 326.00,51.00 Z" />
-                 <text x="50" y="254">PA</text>
+                 <text x="346" y="182" state="PA">PA</text>
 
-        <path id="PB"
+        <path id="PB" state="PB"
         fill="none" stroke="black" stroke-width="1"
         d="M 610.00,207.20
            C 610.00,207.20 624.00,201.00 624.00,201.00
@@ -573,9 +575,9 @@
              609.60,228.90 603.81,227.94 601.00,228.13
              601.00,228.13 602.00,207.20 602.00,207.20
              602.00,207.20 610.00,207.20 610.00,207.20 Z" />
-             <text x="651" y="222">PB</text>
+             <text x="651" y="222" state="PB">PB</text>
 
-        <path id="PE"
+        <path id="PE" state="PE"
         fill="none" stroke="black" stroke-width="1"
         d="M 572.00,224.00
            C 578.57,223.92 582.88,220.84 588.27,226.20
@@ -606,9 +608,9 @@
              558.00,245.00 568.15,233.96 568.15,233.96
              568.15,233.96 567.00,224.00 567.00,224.00
              567.00,224.00 572.00,224.00 572.00,224.00 Z" />
-             <text x="655" y="245">PE</text>
+             <text x="655" y="245" state="PE">PE</text>
 
-        <path id="PI"
+        <path id="PI" state="PI"
         fill="none" stroke="black" stroke-width="1"
         d="M 554.99,146.00
            C 554.47,151.88 553.63,153.76 554.99,160.00
@@ -641,9 +643,9 @@
              533.19,163.14 532.82,160.10 535.49,157.56
              538.90,154.31 546.96,153.40 547.00,144.00
              547.00,144.00 554.99,146.00 554.99,146.00 Z" />
-             <text x="50" y="254">PI</text>
+             <text x="527" y="234" state="PI">PI</text>
 
-        <path id="PR"
+        <path id="PR" state="PR"
         fill="none" stroke="black" stroke-width="1"
         d="M 337.27,523.00
            C 337.27,523.00 338.71,513.17 338.71,513.17
@@ -675,9 +677,9 @@
              346.96,546.59 347.74,542.29 345.28,539.28
              342.00,535.27 338.16,536.96 334.00,538.00
              333.97,534.42 336.28,526.97 337.27,523.00 Z" />
-             <text x="50" y="254">PR</text>
+            <text x="370" y="526" state="PR">PR</text>
 
-        <path id="RJ"
+        <path id="RJ" state="RJ"
         fill="none" stroke="black" stroke-width="1"
         d="M 561.00,464.00
            C 558.65,470.90 561.25,472.78 559.23,475.57
@@ -695,9 +697,9 @@
              526.00,476.92 540.00,472.00 540.00,472.00
              540.16,465.10 541.19,461.12 546.00,456.00
              553.61,464.81 549.90,461.38 561.00,464.00 Z" />
-             <text x="50" y="254">RJ</text>
+             <text x="540" y="490" state="RJ">RJ</text>
 
-        <path id="RN"
+        <path id="RN" state="RN"
         fill="none" stroke="black" stroke-width="1"
         d="M 609.93,195.98
            C 612.11,192.51 615.90,182.97 619.14,181.19
@@ -713,9 +715,9 @@
              615.06,200.13 613.41,205.04 609.04,205.84
              606.48,206.32 605.37,204.52 603.00,204.00
              605.11,200.49 607.78,199.42 609.93,195.98 Z" />
-             <text x="633" y="200">RN</text>
+             <text x="633" y="200" state="RN">RN</text>
 
-        <path id="RO"
+        <path id="RO" state="RO"
         fill="none" stroke="black" stroke-width="1"
         d="M 182.37,235.02
            C 184.21,233.91 186.91,233.96 189.00,234.02
@@ -751,11 +753,11 @@
              157.51,260.08 159.02,256.53 160.00,252.00
              160.00,252.00 173.00,251.00 173.00,251.00
              173.96,247.15 178.98,237.07 182.37,235.02 Z" />
-             <text x="50" y="254">RO</text>
+             <text x="180" y="300" state="RO">RO</text>
 
 
 
-        <path id="RR" data-name="Roraima"
+        <path id="RR" state="RR" data-name="Roraima"
             fill="none" stroke="black" stroke-width="1"
             d="M 240.00,5.00
                C 241.55,11.38 240.88,11.95 239.00,18.00
@@ -793,9 +795,9 @@
                  206.67,23.81 215.14,24.77 217.00,19.00
                  224.72,18.34 231.71,14.54 232.00,6.00
                  232.00,6.00 240.00,5.00 240.00,5.00 Z" />
-                 <text x="50" y="254">RR</text>
+                 <text x="210" y="70" state="RR">RR</text>
 
-            <path id="RS"
+            <path id="RS" state="RS"
         fill="none" stroke="black" stroke-width="1"
         d="M 315.99,583.59
            C 317.98,580.55 331.22,572.71 335.00,571.08
@@ -830,9 +832,9 @@
              294.95,605.98 304.00,595.87 304.00,595.87
              307.44,591.79 309.21,588.06 315.00,588.00
              315.13,586.35 315.03,585.07 315.99,583.59 Z" />
-             <text x="50" y="254">RS</text>
+             <text x="346" y="616" state="RS">RS</text>    
 
-          <path id="SC"
+          <path id="SC" state="SC"
         fill="none" stroke="black" stroke-width="1"
         d="M 411.00,546.65
            C 413.48,547.21 415.31,549.08 418.00,548.86
@@ -854,9 +856,9 @@
              391.49,551.08 397.09,549.11 397.09,549.11
              397.09,549.11 402.00,546.00 402.00,546.00
              406.85,547.47 407.52,545.86 411.00,546.65 Z" />
-            <text x="50" y="254">SC</text>
+            <text x="396" y="576" state="SC">SC</text>
 
-        <path id="SE"
+        <path id="SE" state="SE"
         fill="none" stroke="black" stroke-width="1"
         d="M 637.00,277.00
            C 632.15,278.90 629.91,280.83 626.76,285.00
@@ -867,9 +869,9 @@
              615.51,274.35 615.66,272.66 615.20,271.04
              613.79,266.26 611.43,267.93 612.00,261.00
              620.78,264.28 630.89,269.80 637.00,277.00 Z" />
-             <text x="625" y="295">SE</text>
+             <text x="625" y="295" state="SE">SE</text>
 
-         <path id="SP"
+         <path id="SP" state="SP"
         fill="none" stroke="black" stroke-width="1"
         d="M 378.29,465.28
            C 378.29,465.28 385.86,450.14 385.86,450.14
@@ -910,9 +912,9 @@
              381.00,486.12 376.09,484.98 376.09,484.98
              373.02,484.67 367.57,487.48 361.00,484.00
              369.67,479.33 373.80,473.99 378.29,465.28 Z" />
-             <text x="420" y="484">SP</text>
+             <text x="420" y="484" state="SP">SP</text>
 
-          <path id="TO"
+          <path id="TO" state="TO"
         fill="none" stroke="black" stroke-width="1"
         d="M 436.22,186.37
            C 439.54,185.26 447.96,188.52 449.91,191.41
@@ -952,34 +954,24 @@
              439.38,199.09 439.29,198.71 439.00,195.00
              442.55,190.48 437.96,188.99 434.00,188.00
              434.66,187.45 434.73,186.86 436.22,186.37 Z" />
-            <text x="424" y="287">TO</text>
+            <text x="424" y="287" state="TO">TO</text>
 
     </svg>
 
-    <div class="menu-setoriais-container">
-        <div class="menu-head">
-            <h2 class="menu-title">Setoriais</h2>
+    <?php if( function_exists('get_setoriais')) : $setoriais = get_setoriais(); ?>
+
+    <?php // var_dump($setoriais); ?>
+
+        <div class="menu-setoriais-container">
+            <div class="menu-head">
+                <h2 class="menu-title">Setoriais</h2>
+            </div>
+            <ul id="menu-setoriais" class="menu">
+                <?php foreach ($setoriais as $key => $setorial) : ?>
+                    <li><a id="<?php echo $key; ?>" href="#<?php echo $key ?>"><?php echo $setorial ?></a></li>
+                <?php endforeach; ?>
+        
+            </ul>
         </div>
-
-        <ul id="menu-setoriais" class="menu">
-            <li><a href="#teatro/">Teatro</a></li>
-            <li><a href="#arquiteturaeurbanismo">Arquitetura e Urbanismo</a></li>
-            <li><a href="#arquivos">Arquivos</a></li>
-            <li><a href="#artedigital">Arte Digital</a></li>
-            <li><a href="#artesvisuais">Artes Visuais</a></li>
-            <li><a href="#artesanato">Artesanato</a></li>
-            <li><a href="#circo">Circo</a></li>
-            <li><a href="#indigenas">Cultura dos Povos Indígenas</a></li>
-            <li><a href="#afro">Culturas Afro-Brasileiras</a></li>
-            <li><a href="#populares">Culturas Populares</a></li>
-            <li><a href="#danca">Dança</a></li>
-            <li><a href="#design">Design</a></li>
-            <li><a href="#livro">Livro, Leitura e Literatura</a></li>
-            <li><a href="#moda">Moda</a></li>
-            <li><a href="#musica">Música</a></li>
-            <li><a href="#patrimonioimaterial">Patrimônio Imaterial</a></li>
-            <li><a href="#patrimoniomaterial">Patrimônio Material</a></li>
-        </ul>
-    </div>
-
+    <?php endif ?>
 </div>

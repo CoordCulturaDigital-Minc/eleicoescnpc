@@ -34,22 +34,20 @@ class MetaBoxFeatureURL {
      */
     static function add_meta_box() {
 
-        global $post;
+        global $post_ID;
 
-        if(!empty($post)) {
+        $front_page_id = get_option( 'page_on_front' );
 
-            $pageTemplate = get_post_meta($post->ID, '_wp_page_template', true);
-
-            if($pageTemplate == 'page-templates/home-inscricoes.php' ) {
-                add_meta_box(
-                    'feature-url',
-                    __( 'Feature URL', 'historias' ),
-                    array( __CLASS__,'meta_box_cb' ),
-                    'page',
-                    'side'
-                );
-            }
+        if( $post_ID == $front_page_id ) {
+            add_meta_box(
+                'feature-url',
+                __( 'Feature URL', 'historias' ),
+                array( __CLASS__,'meta_box_cb' ),
+                'page',
+                'side'
+            );
         }
+        
     }
 
 

@@ -21,10 +21,10 @@ get_header(); the_post(); ?>
                 <?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
                     <p class="feature__status"><?php echo $status ?></p>
                 <?php endif; ?>
-            <?php else : ?>
-                <?php if ( is_user_logged_in() && current_user_can( 'level_10' ) ) : ?>
-                    <p class="no-results"><?php _e( 'Please set a Thumbnail Image for this page.', 'historias' ); ?></p>
-                <?php endif; ?>
+            <?php //else : ?>
+                <?php //if ( is_user_logged_in() && current_user_can( 'level_10' ) ) : ?>
+                    <!-- <p class="no-results"><?php _e( 'Please set a Thumbnail Image for this page.', 'historias' ); ?></p> -->
+                <?php //endif; ?>
             <?php endif; ?>
         </div>
 

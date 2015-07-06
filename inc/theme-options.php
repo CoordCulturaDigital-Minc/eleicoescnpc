@@ -54,7 +54,7 @@ function theme_options_page_callback_function() {
         <div class="span-6 last">
 
           <!-- TEXTAREA -->
-          <label for="txt_visitante"><strong>Para usuários não cadastrados, na lateral</strong></label><br/>
+          <label for="txt_visitante"><strong>Para usuários não cadastrados, formulário inicial</strong></label><br/>
           <textarea id="txt_visitante" name="theme_options[txt_visitante]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_visitante']); ?></textarea>
           <br/><br/>
 
