@@ -21,7 +21,7 @@
 				</div>
 
 				<p class="creditos">
-					<span class="textleft">2015 &#169; Conselho Nacional de Política Cultural. Todos os direitos reservados.</br>
+					<span class="textleft">2015 &#169; Conselho Nacional de Política Cultural. Alguns direitos reservados.</br>
 					Endereço: Esplanada dos Ministérios, Bloco B, 3º andar, CEP 70068-900, Brasília - Distrito Federal, Telefone: (61) 2024-2361/2302</a></span>
 				</p>
 			</div>

@@ -29,6 +29,17 @@
 			);
 			
 		});
+
+		// slide
+		// $('.candidates').flexslider({
+		// 	animation: "slide",
+		// 	controlsContainer: ".section-cycle .navigation",
+		// 	selector: ".candidate",
+		// 	useCSS: false,
+		// 	minItems: 1,
+		// 	maxItems: 1,
+		// 	namespace: ""
+		// });
         
     });
 })(jQuery);

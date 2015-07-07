@@ -35,7 +35,7 @@ get_header(); the_post(); ?>
                     <?php $user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $user_ID ) ); ?>
                     <h2 class="area-title"><?php printf( __('Hello, %s!', 'historias' ), $user_meta['nickname']); ?></h2>
                 <?php else : ?>
-                    <h2 class="area-title">Login/Cadastro</h2>
+                    <h2 class="area-title">Login/Inscrição</h2>
                 <?php endif; ?>
             </div>
 

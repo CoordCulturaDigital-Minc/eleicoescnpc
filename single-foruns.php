@@ -39,7 +39,7 @@ get_header(); ?>
 								<div class="candidate-resume"></div>
 							
 								<?php // mais detalhes do candidato aqui ?>
-								<a class="show-candidate-details" data-candidate-id="<?php the_ID(); ?>">Ler mais</a>
+								<a class="show-candidate-details" data-candidate-id="<?php the_ID(); ?>">Saiba +</a>
 							</div>
 							<div class="candidate-details" id="candidate-details-<?php the_ID(); ?>">
 								<p>Experiência:<?php echo get_post_meta(get_the_ID(), 'candidate-experience', true); ?></p>
@@ -66,8 +66,10 @@ get_header(); ?>
 						</div>
 					
 					<?php endwhile; ?>
-					<?php else: ?>
+					<?php else: // colocar botão para cadastro ?>
 						Nenhum candidato nesta setorial e neste estado
+
+
 					<?php endif; ?>
 					
 					<?php $post = $original_post; ?>

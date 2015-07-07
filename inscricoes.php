@@ -76,8 +76,8 @@ if(is_user_logged_in()) {
 		if(get_theme_option('inscricoes_abertas') && empty($subscription_number)) {
 			$form_disabled = false;
 			$disabled = '';
-
-			wp_enqueue_script('jquery-maskMoney', get_setoriaiscnpc_baseurl().'js/jquery.maskMoney.js', array('jquery'));              // só
+			
+			// wp_enqueue_script('jquery-maskMoney', get_setoriaiscnpc_baseurl().'js/jquery.maskMoney.js', array('jquery'));              // só
 			wp_enqueue_script('jquery-maskedinput', get_setoriaiscnpc_baseurl().'js/jquery.maskedinput-1.3.min.js', array('jquery'));  // funciona
 			wp_enqueue_script('jquery-ui-custom', get_setoriaiscnpc_baseurl().'js/jquery-ui-1.8.14.custom.min.js', array('jquery'));   // nesta
 			wp_enqueue_script('inscricoes', get_setoriaiscnpc_baseurl().'js/inscricoes.js', array('jquery','jquery-ui-custom'));       // ordem
@@ -118,38 +118,49 @@ if(is_user_logged_in()) {
 
 			<?php if(get_theme_option('inscricoes_abertas')) : ?>
 				<div id="cadastro" class="form-step">
-					<header class="step__head">
-						<h3 class="step__title">Inscrições</h3>
+					<div class="step__head">
+						<h2 class="step__title">Inscrições</h2>
 						<div class="step__about">
-							<?php echo nl2br(get_theme_option('txt_visitante')); ?> Se você já se inscreveu, basta <a href="<?php echo wp_login_url( site_url( '/inscricoes/' )); ?>" title="Fazer login">fazer o login.</a>
+							<?php echo nl2br(get_theme_option('txt_visitante')); ?>
 						</div>
-					</header>
+						<div class="step__count">
+							<span class='step_1 active'>Etapa 1</span>
+							<span class='step_2'>Etapa 2</span>
+							<span class='step_3'>Etapa 3</span>
+							<span class='step_4'>Etapa 4</span>
+						</div>
+					</div>
+
 					<form id="user-register" class="inline  form-application" method="post">
 						<input type="hidden" name="register" value="1" />
 						<?php if (is_array($register_errors) && sizeof($register_errors) > 0): ?>
-							<div class='error'>
+							<div class='errors'>
+								<p class="aligncenter">Ops! Alguns erros na sua inscrição</p>
 								<?php foreach ($register_errors as $e): ?>
-									<?php echo $e; ?>
+									<div class="error"><?php echo $e; ?></div>
 								<?php endforeach; ?>
 							</div>
 						<?php endif; ?>
 						<div class="form-step-content">
 							<div class="grid">
+								<span id="register-error" class="form-error hidden"></span>
 								<div id="step-1-register">
 									<div class="grid__item  one-whole">
-										<h2>Quero me inscrever como</h2>
+
 										<input id="tipo_eleitor" class="user_type hidden" type="radio" name="user_tipo" value="eleitor" />
-										<label for="tipo_eleitor">Eleitor/a</label>
+										<label for="tipo_eleitor">Sou Eleitor/a</label>
 										
 										<input id="tipo_candidato" class="user_type hidden" type="radio" name="user_tipo" value="candidato" />
-										<label for="tipo_candidato">Candidato/a</label>
+										<label for="tipo_candidato">Sou Candidato/a</label>
 
 									</div>
+									<p class="step__footer">Se você já se inscreveu, basta <a href="<?php echo wp_login_url( site_url( '/inscricoes/' )); ?>" title="Fazer login">fazer o login.</a></p>
 								</div>
 								
 								<div id="step-2-register">
-
-									<?php include('mapa.php'); ?>
+									<div class="grid__item  one-half">
+										<?php include('mapa.php'); ?>
+									</div>
 									
 									<div id="step-2-dropdown">
 										<div class="grid__item  one-half">
@@ -164,7 +175,6 @@ if(is_user_logged_in()) {
 									</div>	
 								</div>
 
-								
 								<div id="step-3-register">
 									<div class="grid__item  one-half">
 										<label for="user_cpf">CPF</label>
@@ -203,6 +213,7 @@ if(is_user_logged_in()) {
 								</div>
 							</div>
 							<input type="submit" id="submit" class="button" value="Cadastrar" />
+
 						</div>
 					</form>
 				</div>

@@ -20,21 +20,21 @@
         var return_false = function(){return false};
 
         // callback to calculate values for budget inputs
-        var calculate_total = function(e) {
-            var values = [$('#budget-pre-production').val()||'',
-                          $('#budget-production').val()||'',
-                          $('#budget-post-production').val()||''];
-            var total = 0;
-            for(var i = 0; i < values.length; i++) {
-                var m = values[i].match(/\d+(\.\d\d\d)*,\d\d$/);
-                if(m) {
-                    total += parseFloat( m[0].replace(/\./g,'').replace(/,/,'.') );
-                }
-            }
-            total = (total+'.').split('.');
-            total = total[0] + '.' + (total[1]+"00").slice(0,2);
-            $("#budget-total").val(total).trigger('mask');
-        };
+        // var calculate_total = function(e) {
+        //     var values = [$('#budget-pre-production').val()||'',
+        //                   $('#budget-production').val()||'',
+        //                   $('#budget-post-production').val()||''];
+        //     var total = 0;
+        //     for(var i = 0; i < values.length; i++) {
+        //         var m = values[i].match(/\d+(\.\d\d\d)*,\d\d$/);
+        //         if(m) {
+        //             total += parseFloat( m[0].replace(/\./g,'').replace(/,/,'.') );
+        //         }
+        //     }
+        //     total = (total+'.').split('.');
+        //     total = total[0] + '.' + (total[1]+"00").slice(0,2);
+        //     $("#budget-total").val(total).trigger('mask');
+        // };
 
         // callback to verify and save field through
         var verify_and_save_field = function(e) {
@@ -121,16 +121,16 @@
         // *** the order of assignment events is important *** //
 
         // attach calculate_total to budget fields, except total field
-        $('input.budget[id!=budget-total]').blur(function(e) {
-                calculate_total.call(this,e);
-                $('#budget-total').each(function(){
-                    verify_and_save_field.call(this, e);
-                })
-        });
+        // $('input.budget[id!=budget-total]').blur(function(e) {
+        //         calculate_total.call(this,e);
+        //         $('#budget-total').each(function(){
+        //             verify_and_save_field.call(this, e);
+        //         })
+        // });
         // this disable the #budget-total input
-        $('#budget-total').bind('keydown keyup', function(e){
-            return e.keyCode === 9;
-        }).focus(function(e){$(this).blur();});
+        // $('#budget-total').bind('keydown keyup', function(e){
+        //     return e.keyCode === 9;
+        // }).focus(function(e){$(this).blur();});
 
         $form.find(':input').blur(verify_and_save_field)
                             .keydown(function(e){ if(e.keyCode===13){ //enter
@@ -186,38 +186,38 @@
         // *** this assignments does <em>NOT</em> affect fields loaded throught ajax ** //
 
         // load states from when user selects a region
-        $form.find('#candidate-region').change(function(e) {
-            $.post(inscricoes.ajaxurl,{'action':'get_states','region':$(this).val()},
-                function(data) {
-                    if(data) {
-                        // reset
-                        $('#candidate-state,#company-state').html('<option value="">------</option>').trigger('blur');
-                        $('#candidate-city,#company-city').html('<option value="">------</option>').trigger('blur');
-                        // load states to fill #candidate-state and #company-state together
-                        for(var i=0; i < data.length; i++) {
-                            $('<option>').val(data[i].id).html(data[i].nome)
-                                .appendTo('#candidate-state');
-                        }
-                    }
-                },'json');
-            // $(this).trigger('blur');
-            // $('#candidate-region').val($(this).val()).trigger('blur'); // bind #company-region
-        });
+        // $form.find('#candidate-region').change(function(e) {
+        //     $.post(inscricoes.ajaxurl,{'action':'get_states','region':$(this).val()},
+        //         function(data) {
+        //             if(data) {
+        //                 // reset
+        //                 $('#candidate-state,#company-state').html('<option value="">------</option>').trigger('blur');
+        //                 $('#candidate-city,#company-city').html('<option value="">------</option>').trigger('blur');
+        //                 // load states to fill #candidate-state and #company-state together
+        //                 for(var i=0; i < data.length; i++) {
+        //                     $('<option>').val(data[i].id).html(data[i].nome)
+        //                         .appendTo('#candidate-state');
+        //                 }
+        //             }
+        //         },'json');
+        //     // $(this).trigger('blur');
+        //     // $('#candidate-region').val($(this).val()).trigger('blur'); // bind #company-region
+        // });
 
         // load cities from selected state to fill $candidate-city and #company-city individually
-        $form.find('#candidate-state,#company-state').change(function(e) {
-            var section = this.id.replace(/-state$/,'');
-            $.post(inscricoes.ajaxurl,{'action':'get_cities','state':$(this).val()},
-                function(data) {
-                    if(data) {
-                        $('#'+section+'-city').html('<option value="">------</option>');
-                        for(var i=0; i < data.length; i++) {
-                            $('<option>').val(data[i].id).html(data[i].nome)
-                                .appendTo('#'+section+'-city');
-                        }
-                    }
-                },'json');
-        });
+        // $form.find('#candidate-state,#company-state').change(function(e) {
+        //     var section = this.id.replace(/-state$/,'');
+        //     $.post(inscricoes.ajaxurl,{'action':'get_cities','state':$(this).val()},
+        //         function(data) {
+        //             if(data) {
+        //                 $('#'+section+'-city').html('<option value="">------</option>');
+        //                 for(var i=0; i < data.length; i++) {
+        //                     $('<option>').val(data[i].id).html(data[i].nome)
+        //                         .appendTo('#'+section+'-city');
+        //                 }
+        //             }
+        //         },'json');
+        // });
 
         // lock company region dropdown
         // $form.find('#candidate-region').change(function(){
@@ -257,13 +257,10 @@
 
 
         /**** Masks ****/
-        $form.find('#candidate-cpf').mask('999.999.999-99');
-        $form.find('#candidate-date-birth').mask('99/99/9999');
-        $form.find('input.cep').mask('99999-999');
+        // $form.find('#candidate-cpf').mask('999.999.999-99');
+        // $form.find('#candidate-date-birth').mask('99/99/9999');
+        // $form.find('input.cep').mask('99999-999');
         $form.find('input.phone').mask('(99) 999999?999');
         // $form.find('#company-cnpj').mask('99.999.999/9999-99');
-
-        // mask for money
-        $form.find('input.budget').maskMoney({symbol:'R$ ', showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
     });
 })(jQuery);

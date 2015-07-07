@@ -2854,35 +2854,66 @@ img.aligncenter {
     display: inline;
 }
 
-.form-application #step-1-register label {
+/* Cadastro */
+#cadastro.form-step {
+    padding-top: 0px;
+    position: relative;
+}
+
+#cadastro.form-step .step__title,
+#cadastro.form-step .step__about {
+    /*float: left;*/
+}
+
+#cadastro.form-step .step__footer {
+    color: #aaa;
+    text-align: right;
+    margin-top: 4em;
+    margin-bottom: 4em;
+}
+
+#cadastro.form-step .step__footer a {
+    color: #414141;
+}
+
+#step-1-register {
+    width: 460px;
+    margin: 0 auto ;
+    padding-top: 30px;
+}
+
+#step-1-register label {
     width: 45%;
     padding: 40px;
+    margin-right: 10%;
+
     float: left;
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+
     background-color: #175823;
-    color: #fff;
+    color: #ffcb05;
+    
     font-size: 1.4em;
-    margin-right: 10%;
 }
 
-.form-application #step-1-register {
-    width: 600px;
-    margin: 0 auto;
-}
-
-.form-application #step-1-register label:last-child {
+#step-1-register label:last-child {
     margin-right: 0px;
 }
 
-.form-application #step-1-register label:hover {
+#step-1-register label:hover {
     background-color: #ffcb05;
     color: #175823;  
     cursor: pointer;
 }
 
-.form-application #step-2-register #step-2-dropdown {
+#step-2-register .step__title {
+    text-align: left;
+    font-size: 32px;
+}
+
+#step-2-register #step-2-dropdown {
     display: none;
 }
 
@@ -2900,9 +2931,7 @@ img.aligncenter {
 .form-application input[type='password'],
 .form-application textarea {
     padding: 1em;
-
     border: 1px solid #ededed;
-    /*background: #f5f5f5;*/
     background: #fff; 
 }
 
@@ -2914,6 +2943,10 @@ img.aligncenter {
     outline: none;
 }
 
+.form-application input[type='text']:read-only,
+.form-application input[type='email']:read-only,
+.form-application input[type='password']:read-only,
+.form-application textarea:read-only,
 .form-application input[type='text']:disabled,
 .form-application input[type='email']:disabled,
 .form-application input[type='password']:disabled,
@@ -2934,20 +2967,17 @@ img.aligncenter {
 .form-step {
     margin-bottom: 3    rem;
     padding: 1.5rem;
-
-    /*background: #fff;*/
-    /*box-shadow: 0 0 6px rgba(0,0,0,.2);*/
 }
 
 .step__head {
     margin-bottom: 1.5rem;
-    /*padding-bottom: 1.5rem;*/
+    padding-bottom: 1.5rem;
 
-    /*border-bottom: 2px dashed #ededed;*/
+    min-height: 50px;
 }
 
 .step__title {
-    font-size: 2.25rem;
+    font-size: 2.60rem;
     line-height: 1.33;
 
     margin-bottom: 0;
@@ -2961,6 +2991,36 @@ img.aligncenter {
     margin-bottom: 1.5rem;
 
     color: #888;
+}
+
+.step__count {
+    display: none;
+    float: right;
+    margin: 10px 0px 30px 0px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.step__count span {
+    background-color: #dadada;
+    color: #fff;
+
+    font-weight: bold;
+
+    padding: 8px 8px 5px 8px; 
+    margin: 0px;
+    margin-left: -4px;
+
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
+    0 4px 0 #b9b7b8;
+    border-radius: 3px;
+}
+
+.step__count span.active {
+    background-color: #3F7F51;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
+    0 4px 0 #125B26;
 }
 
 .field__note {
@@ -2990,6 +3050,18 @@ img.aligncenter {
     background: #ed4747;
 }
 
+.errors .error {
+    font-size: .88rem;
+    line-height: 1.71;
+
+    padding: 0 .5em;
+
+    color: #fff;
+    background: rgba(237, 71, 71, 0.71);
+
+    margin-bottom: 2px;
+}
+
 .step__advance {
     margin: 0;
 
@@ -3017,6 +3089,7 @@ img.aligncenter {
 
 .file-upload input[type='file'] {
     cursor: pointer;
+    height: 50px !important;
 }
 
 #protocol-number {
@@ -3467,17 +3540,18 @@ img.aligncenter {
     fill:#f4f4f4; /*cor do estado*/
 }
 
-#mapa svg path:hover {
+#mapa svg a:hover path {
     fill:#ffdb2d;
     stroke:#ffdb2d;
     cursor:pointer;
 }
 
 #mapa svg text {
+    cursor:pointer; 
     fill:#bdc59c;
     font-weight: bold;
     font-size: 16px;
-    text-shadow: 0px 1px 1px #333333; 
+    text-shadow: 0px 1px 1px #888888;
 }
 
 .menu-setoriais-container {
@@ -3497,6 +3571,10 @@ img.aligncenter {
 
 .menu-setoriais-container a:hover {
     text-decoration: underline;
+}
+
+.menu-setoriais-container .menu-title {
+    margin-bottom: 5px;
 }
 
 .menu-setoriais-container ul li {

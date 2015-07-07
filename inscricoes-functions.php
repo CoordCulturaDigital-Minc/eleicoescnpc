@@ -255,6 +255,60 @@ add_action('wp_ajax_setoriaiscnpc_register_verify_field', 'setoriaiscnpc_registe
 add_action('wp_ajax_nopriv_setoriaiscnpc_register_verify_field', 'setoriaiscnpc_register_verify_field');
 
 
+
+function get_cpf_data_in_receita( $cpf, $fields='' ) {
+
+    if( empty($cpf) )
+        return false;
+
+    if( empty( $fields ) )
+        $fields = array("nmPessoaFisica");
+
+    $cpf = preg_replace("/\D+/", "", $cpf); // remove qualquer caracter não numérico
+
+    //jSON URL which should be requested
+    $username = 'xxxxxx';  // authentication
+    $password = 'xxxxxx';  // authentication
+
+    // url
+    $json_url = "http://desenvweb.cultura.gov.br/pessoa-ws/servicos/pessoa_fisica/consultar/{$cpf}";
+
+    // Initializing curl
+    $ch = curl_init( $json_url );
+
+    // Configuring curl options
+    $options = array(
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_USERPWD => $username . ":" . $password,   // authentication
+    );
+
+    // Setting curl options
+    curl_setopt_array( $ch, $options );
+
+    $output = json_decode( curl_exec($ch) ); // Getting jSON result string
+    
+    $curlError = curl_error($ch);
+
+    curl_close($ch);
+
+    if( $output ) {
+
+        if( isset( $output->errors ) ) {
+           $new_result = $output;
+        } else {
+
+            foreach ($fields as $field) {
+                if( isset($output->$field ) )
+                    $new_result[$field] = trim($output->$field);
+            }
+        }        
+
+        return $new_result;
+    }
+
+    return false;
+}
+
 /**  */
 function setoriaiscnpc_get_data_receita_by_cpf() {
 
@@ -264,53 +318,16 @@ function setoriaiscnpc_get_data_receita_by_cpf() {
          die;
     }
 
-    // validar antes de fazer a consulta
-    $validator = new Validator();
-    
-    $result = $validator->validate_field('register', 'user_cpf', $_POST['cpf']);
-
-    if( $result === true ) {
-
-        $cpf = preg_replace("/\D+/", "", $_POST['cpf']); // remove qualquer caracter não numérico
-
-        //jSON URL which should be requested
-        $username = 'xxxxx';  // authentication
-        $password = 'xxxxx';  // authentication
-
-        // url
-        $json_url = "http://desenvweb.cultura.gov.br/pessoa-ws/servicos/pessoa_fisica/consultar/{$cpf}";
-
-        // Initializing curl
-        $ch = curl_init( $json_url );
-
-        // Configuring curl options
-        $options = array(
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_USERPWD => $username . ":" . $password,   // authentication
-        );
-
-        // Setting curl options
-        curl_setopt_array( $ch, $options );
-
-        $result = json_decode( curl_exec($ch) ); // Getting jSON result string
-
-        // passa somente os dados abaixo
-        $str = json_encode( array( 
-            "nmPessoaFisica" => trim($result->nmPessoaFisica)
-        ));        
-    
-    }
+    $result = get_cpf_data_in_receita( $_POST['cpf'] );
 
     if( $result ) {
-        wp_send_json( $str  );
+        wp_send_json(  json_encode($result)  );
         die;
     }else {
-        wp_send_json(curl_error($ch));
+        header("HTTP/1.1 403 Forbidden");
+        print __('CPF não existe ou o serviço não está disponível.');;
         die;
-    }
-
-    curl_close($ch);
-       
+    }    
     
 }   
 add_action('wp_ajax_setoriaiscnpc_get_data_receita_by_cpf', 'setoriaiscnpc_get_data_receita_by_cpf');
@@ -780,7 +797,6 @@ function validate_step($n,$hook=null) {
     return $valid;
 }
 
-
 function user_is_a_valid_cpf($cpf) {
     $error = false;
     $cpf = preg_replace('/[^0-9]/','',$cpf);
@@ -887,7 +903,7 @@ class Validator {
             'candidate-explanatory' => array('not_empty')
         ),
         'register' => array(
-            'user_cpf' => array('not_empty','is_a_valid_cpf', 'user_cpf_does_not_exist'),
+            'user_cpf' => array('not_empty','is_a_valid_cpf', 'user_cpf_does_not_exist', 'cpf_does_not_exist_in_receita'),
             'user_name' => array('not_empty'),
             'user_email' => array('not_empty','is_valid_email','is_email_does_not_exist'),
             'user_password' => array('not_empty'),
@@ -991,7 +1007,7 @@ class Validator {
         return $result == 0; // $result provavelmente é String
     }
 
-    function user_cpf_does_not_exist($c) {
+    static function user_cpf_does_not_exist($c) {
         global $wpdb;
 
         $result = $wpdb->get_var($wpdb->prepare("SELECT count(1) FROM {$wpdb->usermeta} WHERE"
@@ -1001,6 +1017,23 @@ class Validator {
             return __('Já existe um usuário cadastrado com este CPF.');
         }
         return $result == 0; // $result provavelmente é String
+    }
+
+    static function cpf_does_not_exist_in_receita($c) {
+
+        if( empty( $c ) )
+            return __('CPF não informado.');
+
+        $result = get_cpf_data_in_receita($c);
+
+        if (isset( $result->errors)) {
+            if ( strcmp( $result->errors, "Transaction rolled back") == 0 ) {
+                return __('Este cpf não está cadastrado na base da receita federal.');
+            }else
+                return $result->errors;
+        }
+
+        return true;
     }
 
     /** Return true if supplied cpf is valid or give an error message otherwise */

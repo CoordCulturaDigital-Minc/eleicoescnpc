@@ -137,10 +137,10 @@ function historias_load_scripts() {
         wp_enqueue_script( 'swiper', get_template_directory_uri() . '/js/idangerous.swiper-2.1.min.js', array( 'jquery' ), '2.1', true );
 
 	/* Maps */
-	if ( is_page_template( 'page-templates/map.php' ) ) {
-		wp_enqueue_script( 'maps', 'http://maps.google.com/maps/api/js?sensor=true', true );
-		wp_enqueue_script( 'map', get_template_directory_uri() . '/js/map.js', true );
-	}
+	// if ( is_page_template( 'page-templates/map.php' ) ) {
+	// 	wp_enqueue_script( 'maps', 'http://maps.google.com/maps/api/js?sensor=true', true );
+	// 	wp_enqueue_script( 'map', get_template_directory_uri() . '/js/map.js', true );
+	// }
 
 	/* Load the comment reply JavaScript. */
 	if ( is_singular() && get_option( 'thread_comments' ) && comments_open() )
@@ -148,6 +148,7 @@ function historias_load_scripts() {
 		
 	/* Foruns de discussão e votação */
 	if ( is_single() ) {
+		wp_enqueue_script('jquery-flexslider', get_template_directory_uri().'/js/flexslider-min.js', array('jquery'));
 		wp_enqueue_script( 'foruns', get_template_directory_uri() . '/js/foruns.js');
 		wp_localize_script('foruns', 'vars', array('ajaxurl' => admin_url('admin-ajax.php')));
 	}
@@ -298,9 +299,6 @@ function historias_register_sidebars() {
   		'before_title' => '<h3 class="widget__title">',
   		'after_title' => '</h3>',
   	) );
-
-  	
-
 }
 
 
