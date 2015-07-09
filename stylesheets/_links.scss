@@ -1,0 +1,24 @@
+/* Links */
+
+a,
+a:visited {
+    text-decoration: none;
+    color: #111;
+    
+	&:hover,
+	&:focus,
+	&:active {
+		-webkit-transition: color .1s ease-in-out;
+	        	transition: color .1s ease-in-out;
+	
+		color: #125b26;
+		border: 0;
+	}
+	&:focus {
+	    outline: thin dotted;
+	}
+	&:hover,
+	&:active {
+	    outline: 0;
+	}
+}

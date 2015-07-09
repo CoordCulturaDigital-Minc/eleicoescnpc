@@ -1,0 +1,68 @@
+/*
+text {
+    font-family: $fonte-principal-bold, sans-serif;
+}
+a.regiao {
+	path {
+	    stroke: rgb(113, 148, 22);
+	    fill: 	rgb(113, 148, 22);	<!-- VERDE CLARO -->
+	}
+	&:hover path {
+	    stroke: rgb(18, 91, 38);
+	    fill: rgb(18, 91, 38);		<!-- VERDE -->
+	}
+}
+a.estado:hover path {
+    stroke: rgb(255, 203, 5);
+    fill: rgb(255, 203, 5);		<!-- AMARELO -->
+}
+*/
+
+#mapa {
+    position: relative;
+    
+    svg  {
+	    path {
+	    	stroke:#c1c89f; /*cor da borda do estado*/
+			fill:#f4f4f4; /*cor do estado*/
+		}
+		a:hover path {
+		    fill:#ffdb2d;
+		    stroke:#ffdb2d;
+		    cursor:pointer;
+		}
+		text {
+		    cursor:pointer; 
+		    fill:#bdc59c;
+		    font-weight: bold;
+		    font-size: 16px;
+		    text-shadow: 0px 1px 1px #888888;
+		}
+	}
+}
+
+.menu-setoriais-container {
+    display: none;
+    width: 200px;
+    background-color: rgba(244, 244, 244, 0.92);
+    border: 1px solid #DBDBDB;
+    padding: 15px;
+    font-size: 12px;
+    color: #22733e;
+    z-index: 1;
+    
+    a {
+	    color: #22733e;
+	    &:hover {
+		    text-decoration: underline;
+		}   
+	}
+	
+	.menu-title {
+	    margin-bottom: 5px;
+	}
+	ul li {
+	    display: block;
+	    line-height: 1.8;
+	}
+}

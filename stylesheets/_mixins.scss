@@ -1,0 +1,24 @@
+@mixin font-face ($name, $path) {
+	@font-face {
+	font-family: $name;
+	src: url($path);
+	src: url($path) format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	}
+}
+
+@function headings($from:1, $to:6) {
+    @if $from == $to {
+        @return 'h#{$from}';
+    } @else {
+        @return 'h#{$from},' + headings($from+1, $to);
+    }
+}
+
+@mixin hyphen ($argument) {
+	-webkit-hyphens: $argument;
+       -moz-hyphens: $argument;
+        -ms-hyphens: $argument;
+            hyphens: $argument;
+}
