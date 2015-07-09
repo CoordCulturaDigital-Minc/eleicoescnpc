@@ -1045,7 +1045,7 @@ class Validator {
         $blacklist = get_theme_option('candidatos_blacklist');
 
         if( in_array($c, $blacklist))
-            return 'Candidatura bloqueada'; //TODO melhorar mensagem
+            return 'Você já é delegado nato na etapa nacional';
 		
         return true; 
 	}
