@@ -1,6 +1,6 @@
 <div id="mapa">
 	
-	<?php include '../assets/mapa_do_brasil.svg'; ?>
+	<?php include ( get_template_directory() . '/assets/mapa_do_brasil.svg'); ?>
 
     <?php if( function_exists('get_setoriais') ) : $setoriais = get_setoriais(); ?>
 

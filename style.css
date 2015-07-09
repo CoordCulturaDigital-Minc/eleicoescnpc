@@ -2528,42 +2528,31 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
   .box--news {
     width: 34%;
     margin-top: -1.5rem; } }
-/*
-text {
-    font-family: $fonte-principal-bold, sans-serif;
-}
-a.regiao {
-	path {
-	    stroke: rgb(113, 148, 22);
-	    fill: 	rgb(113, 148, 22);	<!-- VERDE CLARO -->
-	}
-	&:hover path {
-	    stroke: rgb(18, 91, 38);
-	    fill: rgb(18, 91, 38);		<!-- VERDE -->
-	}
-}
-a.estado:hover path {
-    stroke: rgb(255, 203, 5);
-    fill: rgb(255, 203, 5);		<!-- AMARELO -->
-}
-*/
 #mapa {
   position: relative; }
-  #mapa svg path {
-    stroke: #c1c89f;
-    /*cor da borda do estado*/
-    fill: #f4f4f4;
-    /*cor do estado*/ }
-  #mapa svg a:hover path {
-    fill: #ffdb2d;
-    stroke: #ffdb2d;
-    cursor: pointer; }
+  #mapa svg g#all_map path {
+    fill: #719416; }
   #mapa svg text {
     cursor: pointer;
-    fill: #bdc59c;
     font-weight: bold;
-    font-size: 16px;
-    text-shadow: 0px 1px 1px #888888; }
+    text-shadow: 0px 2px 1px #878787;
+    font-family: "TheSans B7 Bold", sans-serif;
+    font-size: 20px;
+    fill: #bdc59c; }
+  #mapa svg path {
+    stroke: #93c01d;
+    stroke-width: 1px;
+    fill: transparent; }
+  #mapa svg a.regiao:hover path {
+    fill: #125b26;
+    stroke: #1a8638;
+    cursor: pointer; }
+  #mapa svg a.estado:hover text {
+    fill: #bdc59c; }
+  #mapa svg a.estado:hover path {
+    fill: #ffcb05;
+    stroke: #ffcb05;
+    cursor: pointer; }
 
 .menu-setoriais-container {
   display: none;
