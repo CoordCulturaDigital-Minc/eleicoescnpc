@@ -1,0 +1,97 @@
+.candidates {
+    display: block;
+    clear: both;
+    width: 100%;
+    float: left;
+}
+.candidate {
+	display: block;
+    float: left;
+	padding: 30px;
+	/*border: 1px solid pink;*/
+    width: 30%;
+    margin: 20px 0px;
+    position: relative;
+}
+
+.candidate-details {
+	display: none;
+    /*position: absolute;*/
+    /*top: 150px;*/
+    /*left: 20px;*/
+    width: 100%;
+    margin-top: 10px;
+    background-color: #F4F4F4;
+    border: 1px solid #aaa;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+.candidate-avatar {
+	margin: 0 auto;
+	width: 200px;
+	height: 200px;
+	display: block;
+	padding: 5px;
+	background: #EFEDE6;
+	border: 1px solid #DEDEDE;
+	border-radius: 5px;
+	
+	.candidate-avatar img {
+	    width: 100%;
+	    height: 100%;
+	}
+}
+
+.candidate-text {
+    display: block;
+    clear: both;
+    text-align: center;
+}
+
+.candidate-name {
+    color: #51660B;
+    text-shadow: 1px 1px 1px #FFFFFF;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.show-candidate-details {
+    /*float: right;*/
+    display: inline-block;
+    margin: 10px 0 0 0;
+    padding: 3px 10px;
+    background-color: rgba(93, 170, 51, 0.54);
+    border-radius: 5px;
+    color: #fff;
+    clear: both;
+    
+    &:hover {
+	    color: #fff;
+	    background-color: rgba(93, 170, 51, 0.87);
+	    cursor: pointer;
+	}
+}
+
+.vote {
+    margin-top: 5px;
+    /*margin-left: 30px;*/
+    text-align: center;
+    display: block;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #9D800C;
+    text-transform: uppercase;
+    background-color: #FBC80F;
+    border-radius: 5px; 
+    cursor: pointer;
+    /*width: 120px;*/
+    /*height: 50px;*/
+    
+    &:hover {
+	    background-color: #E2C662;
+    }
+}

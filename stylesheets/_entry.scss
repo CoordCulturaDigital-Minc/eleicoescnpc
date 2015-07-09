@@ -1,0 +1,271 @@
+.entry-content,
+.entry-summary,
+.comment-content {
+	p {
+	    line-height: 1.5;
+	
+	    margin: 0 0 24px;
+	    margin: 0 0 1rem;
+	
+		@include hyphen (auto);
+    }
+}
+
+.entry-content,
+.comment-content {
+	
+	#{headings()} {// #{headings(1,6)} {
+		margin: 24px 0;
+		margin: 1.5rem 0;
+		
+		color: #00b1dd;
+	}
+	
+	h1 {
+		font-size: 21px;
+		font-size: 1.31rem;
+		line-height: 1.14;
+	}
+	h2 {
+		font-size: 18px;
+		font-size: 1.33rem;
+	}
+	h3 {
+		font-size: 16px;
+	    font-size: 1rem;
+	    line-height: 1.5;
+	}
+	h4 {
+		font-size: 14px;
+		font-size: .88rem;
+		line-height: 1.71;
+	}
+	h5 {
+		font-size: 13px;
+	    font-size: .81rem;
+	    line-height: 1.85;
+	}
+	h6 {
+	    font-size: 12px;
+	    font-size: .75rem;
+	    line-height: 2;
+	}
+	
+	ol, ul {
+	    line-height: 1.5;
+	
+	    margin: 0 0 24px;
+	    margin: 0 0 1.5rem;
+	}
+	
+	ul {
+		list-style: disc outside;
+	}
+	ol {
+	    list-style: decimal outside;
+	}
+	
+	ol ol, ol ul, ul ol, ul ul {
+		margin-bottom: 0;
+	}
+	
+	li {
+	    margin: 0 0 0 36px;
+		margin: 0 0 0 2.25rem;
+	}
+	
+	table {
+	    font-size: 14px;
+	    font-size: .88rem;
+	    line-height: 1.71;
+	
+	    width: 100%;
+	    margin: 0 0 24px;
+	    margin: 0 0 1.5rem;
+	
+	    color: #777;
+	    border-bottom: 1px solid #ededed;
+	    
+	    caption {
+		    margin: 24px 0;
+		    margin: 1.5rem 0;
+		}
+		td {
+		    padding: 6px 10px 6px 0;
+		
+		    border-top: 1px solid #ededed;
+		}
+	}
+	
+	address {
+	    line-height: 1.5;
+	
+	    display: block;
+	
+	    margin: 0 0 24px;
+	    margin: 0 0 1.5rem;
+	}
+
+}
+
+.entry-content {
+	ul, ol {
+	    margin: 0 0 0 1.5em;
+	    padding: 0;
+    }
+    img {
+	    max-width: 100%;
+	    height: auto;
+	}
+	blockquote {
+	    font-size: 14px;
+	    font-size: .88rem;
+	    line-height: 1.71;
+	
+	    position: relative;
+	
+	    overflow: hidden;
+	
+	    margin-bottom: 24px;
+	    margin-bottom: 1.5rem;
+	    padding: 24px;
+	    padding: 1.5rem;
+	
+	    background: #f5f5f5;
+	    
+	    p:last-child {
+		    margin-bottom: 0;
+		}
+	}
+	
+	a {
+	    -webkit-transition: all .1s ease-in-out;
+	            transition: all .1s ease-in-out;
+	
+	    color: #125b26;
+	    background: #ededed;
+	    
+	    &:hover {
+		    color: #444;
+		}
+	}
+} 
+
+.comment-content blockquote {
+    font-style: italic;
+
+    padding: 24px;
+    padding: 1.5rem;
+}
+
+.gallery {
+    margin: 1.5rem auto;
+    
+    a {
+	    background-color: transparent;
+	    
+	    &:hover .attachment-thumbnail {
+		    top: -2px;
+		    box-shadow: 0 0 8px rgba(192,192,192,.8);
+		}
+	}
+	
+	.attachment-thumbnail {
+	    display: inline-block;
+	    height: auto;
+	    margin: 0 auto;
+	    padding: 2px;
+	
+	    background: #fff;
+	    box-shadow: 0 0 6px rgba(192,192,192,.5);
+	    position: relative;
+	}
+}
+
+.gallery-item {
+    float: left;
+    margin: 0;
+    padding: 4px;
+    text-align: center;
+}
+
+.gallery-columns-0 .gallery-item {
+    width: 100%;
+}
+
+.gallery-columns-1 .gallery-item {
+    width: 100%;
+}
+
+.gallery-columns-2 .gallery-item {
+    width: 50%;
+}
+
+.gallery-columns-3 .gallery-item {
+    width: 33.3333%;
+}
+
+.gallery-columns-4 .gallery-item {
+    width: 25%;
+}
+
+.gallery-columns-5 .gallery-item {
+    width: 20%;
+}
+
+.gallery-columns-6 .gallery-item {
+    width: 16.67%;
+}
+
+.gallery-columns-7 .gallery-item {
+    width: 14.29%;
+}
+
+.gallery-columns-8 .gallery-item {
+    width: 12.5%;
+}
+
+.gallery-columns-9 .gallery-item {
+    width: 11.11%;
+}
+
+.gallery-caption {
+    color: #999;
+    font-size: .75rem;
+    line-height: 2;
+}
+
+.entry-footer {
+    font-size: .88rem;
+
+    color: #888;
+}
+
+.related {
+    padding: 1.5rem;
+
+    border: 1px solid #ededed;
+    background-color: #f5f5f5;
+    
+    .entry-title {
+	    font-size: 1.13rem;
+	    line-height: 1.33;
+	    
+	    a {
+		    color: #125b26;
+		}
+	}
+}
+
+.entry-share {
+	.comments-link {
+    	float: left;
+    }
+    .share-shortlink {
+	    display: none;
+	    float: right;
+	    position: relative;
+	    text-align: right;
+	    width: 40%;
+	}
+}

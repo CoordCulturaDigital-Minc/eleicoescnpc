@@ -1,0 +1,77 @@
+.u-pull-left {
+    float: left;
+}
+
+.u-pull-right {
+    float: right;
+}
+
+.hidden {
+    display: none;
+}
+
+
+@media only screen and (min-width: 40em) {
+    .site-wrap {
+        overflow: visible;
+
+        margin: 0px auto;
+    }
+
+    .content {
+        float: left;
+
+        width: 65.63%;
+    }
+
+    .content--full {
+        float: none;
+
+        width: 100%;
+        padding: 0 1.5rem;
+    }
+
+    .content--sidebarless {
+        float: none;
+        width: 90%;
+    }
+
+    .asides {
+        float: right;
+        width: 31.05%;
+        /*width: 28%;*/
+    }
+
+    .site-footer .site-title {
+        text-align: left;
+    }
+
+    .site-footer .site-description {
+        text-align: left;
+    }
+
+    .social {
+        float: right;
+    }
+
+    .logos {
+        display: block;
+    }
+
+    .feature__info {
+        top: 50%;
+
+        margin: -1.5rem 72px 0 0;
+    }
+
+    .box {
+        float: left;
+
+        width: 33%;
+    }
+
+    .box--news {
+        width: 34%;
+        margin-top: -1.5rem;
+    }
+}

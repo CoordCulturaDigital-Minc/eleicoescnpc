@@ -1,0 +1,56 @@
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+    display: block;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+img {
+    border: 0;
+}
+
+::-moz-selection, ::selection {
+    color: #000;
+    background: #fe6;
+    text-shadow: none;
+}
+
+html {
+    overflow-y: scroll;
+
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+}
+
+body {
+    /*font: 400 100%/1.5 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;*/
+
+    font: 16px/24px "TheSans B5 Plain", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+
+    background: rgb(216,135,19); /* Old browsers */
+    background: -moz-linear-gradient(left,  rgba(216,135,19,1) 0%, rgba(254,193,12,1) 23%, rgba(252,232,179,1) 50%, rgba(254,193,12,1) 77%, rgba(216,135,19,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(216,135,19,1)), color-stop(23%,rgba(254,193,12,1)), color-stop(50%,rgba(252,232,179,1)), color-stop(77%,rgba(254,193,12,1)), color-stop(100%,rgba(216,135,19,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  rgba(216,135,19,1) 0%,rgba(254,193,12,1) 23%,rgba(252,232,179,1) 50%,rgba(254,193,12,1) 77%,rgba(216,135,19,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  rgba(216,135,19,1) 0%,rgba(254,193,12,1) 23%,rgba(252,232,179,1) 50%,rgba(254,193,12,1) 77%,rgba(216,135,19,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  rgba(216,135,19,1) 0%,rgba(254,193,12,1) 23%,rgba(252,232,179,1) 50%,rgba(254,193,12,1) 77%,rgba(216,135,19,1) 100%); /* IE10+ */
+    background: linear-gradient(to right,  rgba(216,135,19,1) 0%,rgba(254,193,12,1) 23%,rgba(252,232,179,1) 50%,rgba(254,193,12,1) 77%,rgba(216,135,19,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d88713', endColorstr='#d88713',GradientType=1 ); /* IE6-9 */
+
+    margin: 0 auto;
+
+    /*color: #444;*/
+}
