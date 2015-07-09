@@ -1041,8 +1041,13 @@ class Validator {
     }
     
     static function cpf_not_in_blacklist($c) {
-		//return 'Candidatura bloqueada';
-		return true; //TODO verificar se cpf está na blacklist
+        
+        $blacklist = get_theme_option('candidatos_blacklist');
+
+        if( in_array($c, $blacklist))
+            return 'Candidatura bloqueada'; //TODO melhorar mensagem
+		
+        return true; 
 	}
 
     /** Return true if supplied cpf is valid or give an error message otherwise */

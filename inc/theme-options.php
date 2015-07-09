@@ -30,7 +30,8 @@ function theme_options_menu() {
 function theme_options_validate_callback_function($input) {
 
     //$input['slug_updates'] = sanitize_title($input['slug_updates']);
-    $input['limite_orcamento'] = preg_replace('/\D/', '', $input['limite_orcamento']);
+    $input['candidatos_blacklist'] = explode(',', $input['candidatos_blacklist']);
+    // $input['limite_orcamento'] = preg_replace('/\D/', '', $input['limite_orcamento']);
     return $input;
 
 }
@@ -97,15 +98,11 @@ function theme_options_page_callback_function() {
           <label for="txt_admin"><strong>Para administrador, na lateral</strong></label><br/>
           <textarea id="txt_admin" name="theme_options[txt_admin]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_admin']); ?></textarea>
           <br/><br/>
-          
-          <label for="link_modelo_orcamento"><strong>Link para modelo de orçamento</strong></label><br/>
-          <input type="text" id="link_modelo_orcamento" name="theme_options[link_modelo_orcamento]" value="<?php echo htmlspecialchars($options['link_modelo_orcamento']); ?>">
-          <br/><br/>
 
-        <h3>Orçamento</h3>
+        <h3>Delegados Natos</h3>
         
-          <label for="limite_orcamento"><strong>Valor máximo para os orçamentos (somente números)</strong></label><br/>
-          <input type="text" id="limite_orcamento" name="theme_options[limite_orcamento]" value="<?php echo htmlspecialchars($options['limite_orcamento']); ?>">
+          <label for="candidatos_blacklist"><strong>Informe o CPF dos delegados natos, separados por vírgula. Exemplo: (999.9999.999-99, 888.888.888-88)</strong></label><br/>
+          <textarea id="candidatos_blacklist" name="theme_options[candidatos_blacklist]" rows="5" cols="60" ><?php echo htmlspecialchars(implode(",", $options['candidatos_blacklist'])); ?></textarea>
           <br/><br/>
         
         <h3>Inscrições</h3>
