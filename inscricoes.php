@@ -159,7 +159,7 @@ if(is_user_logged_in()) {
 								
 								<div id="step-2-register">
 									<div class="grid__item  one-half">
-										<?php include('mapa.php'); ?>
+										<?php include('includes/mapa.php'); ?>
 									</div>
 									
 									<div id="step-2-dropdown">
