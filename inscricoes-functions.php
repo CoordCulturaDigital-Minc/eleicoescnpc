@@ -258,6 +258,9 @@ add_action('wp_ajax_nopriv_setoriaiscnpc_register_verify_field', 'setoriaiscnpc_
 
 function get_cpf_data_in_receita( $cpf, $fields='' ) {
 
+	if (!is_defined(VERIFICA_CPF_RECEITA) || VERIFICA_CPF_RECEITA !== true)
+		return true;
+
     if( empty($cpf) )
         return false;
 
@@ -903,7 +906,7 @@ class Validator {
             'candidate-explanatory' => array('not_empty')
         ),
         'register' => array(
-            'user_cpf' => array('not_empty','is_a_valid_cpf', 'user_cpf_does_not_exist', 'cpf_does_not_exist_in_receita'),
+            'user_cpf' => array('not_empty','is_a_valid_cpf', 'user_cpf_does_not_exist', 'cpf_exists_in_receita'),
             'user_name' => array('not_empty'),
             'user_email' => array('not_empty','is_valid_email','is_email_does_not_exist'),
             'user_password' => array('not_empty'),
@@ -1019,7 +1022,7 @@ class Validator {
         return $result == 0; // $result provavelmente é String
     }
 
-    static function cpf_does_not_exist_in_receita($c) {
+    static function cpf_exists_in_receita($c) {
 
         if( empty( $c ) )
             return __('CPF não informado.');
