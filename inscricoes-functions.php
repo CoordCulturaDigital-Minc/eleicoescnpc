@@ -258,7 +258,7 @@ add_action('wp_ajax_nopriv_setoriaiscnpc_register_verify_field', 'setoriaiscnpc_
 
 function get_cpf_data_in_receita( $cpf, $fields='' ) {
 
-	if (!is_defined(VERIFICA_CPF_RECEITA) || VERIFICA_CPF_RECEITA !== true)
+	if (!defined(VERIFICA_CPF_RECEITA) || VERIFICA_CPF_RECEITA !== true)
 		return true;
 
     if( empty($cpf) )
@@ -895,6 +895,7 @@ class Validator {
     public $fields_rules = array(
         'step1' => array(
             'candidate-display-name' => array(),
+            'candidate-cpf' => array('not_empty', 'cpf_not_in_blacklist'),
             'candidate-phone-1' => array('not_empty','is_a_valid_phone'),
             'candidate-avatar' => array('not_empty'),
             'candidate-portfolio' => array('not_empty'),
@@ -1038,6 +1039,11 @@ class Validator {
 
         return true;
     }
+    
+    static function cpf_not_in_blacklist($c) {
+		//return 'Candidatura bloqueada';
+		return true; //TODO verificar se cpf está na blacklist
+	}
 
     /** Return true if supplied cpf is valid or give an error message otherwise */
     static function is_a_valid_cnpj($cnpj) {

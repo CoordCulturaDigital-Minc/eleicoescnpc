@@ -136,7 +136,10 @@
                             .keydown(function(e){ if(e.keyCode===13){ //enter
                                 $(this).trigger('blur').focus();
                             }});
-
+		
+		// Hook pra salvar e verificar o CPF quando carregar o formulário
+		$('#candidate-cpf').blur();
+		
         // load next form step when user click in 'Preencher'
         $('div.form-step a.toggle').click(function(e) {
             var $div = $(this).parents('div.form-step');

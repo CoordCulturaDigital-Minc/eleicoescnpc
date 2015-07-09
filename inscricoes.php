@@ -301,6 +301,13 @@ if(is_user_logged_in()) {
 									<div id="candidate-display-name-error" class="field__error"></div>
 								</div><!--
 
+								--><div class="grid__item  one-whole">
+									<label for="candidate-display-name">CPF</label>
+									<input disabled id="candidate-cpf" type="text" name="step1-candidate-cpf" value="<?php echo isset($f['candidate-cpf'])?$f['candidate-cpf']:$user_meta['cpf'];?>" />
+									<div class="field-status <?php print isset($f['candidate-cpf'])?'completo':'invalido'?>"></div>
+									<div id="candidate-cpf-error" class="field__error"></div>
+								</div><!--
+
 								--><div class="grid__item  one-half">
 									<label for="candidate-phone-1">Telefone</label>
 									<input<?php echo $form_disabled?' disabled':'';?> id="candidate-phone-1" class="phone required" type="text" name="step1-candidate-phone-1" value="<?php echo isset($f['candidate-phone-1'])?$f['candidate-phone-1']:'';?>" />
