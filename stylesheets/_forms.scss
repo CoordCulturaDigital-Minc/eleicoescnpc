@@ -1,0 +1,79 @@
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: 100%;
+
+    margin: 0;
+
+    vertical-align: baseline;
+
+    *vertical-align: middle;
+}
+
+button,
+input {
+    line-height: normal;
+
+    *overflow: visible;
+}
+
+button,
+html input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+    line-height: 1;
+
+    cursor: pointer;
+
+    -webkit-appearance: button;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+input[type='search'] {
+    box-sizing: content-box;
+
+    -webkit-appearance: textfield;
+}
+
+input[type='search']::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    padding: 0;
+
+    border: 0;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+textarea {
+    width: 100%;
+}
+
+fieldset {
+    padding: 0;
+
+    border: none;
+}
+
+textarea {
+    overflow: auto;
+
+    vertical-align: top;
+}
+
+embed,
+iframe,
+object {
+    max-width: 100%;
+}

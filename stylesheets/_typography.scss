@@ -1,0 +1,137 @@
+abbr[title] {
+    border-bottom: 1px dotted;
+}
+
+abbr,
+dfn,
+acronym {
+    cursor: help;
+
+    border-bottom: 1px dotted #666;
+}
+
+b,
+strong {
+    font-weight: bold;
+}
+
+dfn {
+    font-style: italic;
+}
+
+mark {
+    font-weight: bold;
+
+    color: #000;
+    background-color: #fe6;
+}
+
+ins {
+    text-decoration: none;
+}
+
+q {
+    quotes: none;
+    
+    &:before,
+	&:after {
+	    content: '';
+	    content: none;
+	}
+}
+
+small {
+    font-size: .875em;
+}
+
+sub,
+sup {
+    font-size: .75em;
+    line-height: 0;
+
+    position: relative;
+
+    vertical-align: baseline;
+    letter-spacing: .08em;
+}
+
+sup {
+    top: -.5em;
+}
+
+sub {
+    bottom: -.25em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'TheSans B5 Plain', serif;
+    font-weight: 400;
+
+    margin: 0;
+
+    word-wrap: break-word;
+}
+
+h2 {
+    font-size: 24px;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+h4,
+h5,
+h6 {
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+p {
+    margin: 0;
+}
+
+* + p {
+    margin-top: 1em;
+}
+
+blockquote {
+    font-style: italic;
+
+    margin: 0;
+    padding: 0;
+    
+    blockquote {
+	    border: 0;
+    }
+}
+
+ul {
+    list-style: square;
+}
+ul,
+ol {
+    margin: 0 0 1.5em;
+    padding: 0;
+}
+ul li,
+ol li {
+    margin: 0 0 .5em;
+    padding: 0;
+}
+nav ul,
+nav ol {
+    list-style: none;
+}
+
+dd {
+    margin: 0;
+}

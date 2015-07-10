@@ -1,0 +1,42 @@
+/*
+Theme Name: Eleições do CNPC
+Theme URI: http://culturadigital.br
+Description: Tema do Fóruns Setoriais do CNPC 2015.
+Author: Cultura Digital Team
+Author URI: http://culturadigital.br
+License: GNU General Public License
+License URI: http://www.gnu.org/licenses/gpl.html
+Version: 2.0
+Tags: one-column, two-columns, right-sidebar, custom-menu, editor-style, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
+*/
+
+
+@import 'mixins';
+
+@include font-face ('TheSans B7 Bold', 	'fonts/thesansb7bold.ttf');
+@include font-face ('TheSans B5 Plain', 'fonts/thesansb5plain.ttf');
+
+$fonte-principal:		'TheSans B5 Plain';
+$fonte-principal-bold:	'TheSans B7 Bold';
+
+$cor-verde-claro: 		rgb(113, 148, 22);
+$cor-verde: 			rgb(18, 91, 38);
+$cor-amarelo:			rgb(255, 203, 5);
+
+$cor-cinza-claro:		#bdc59c;
+
+@import 'base';
+@import 'links';
+@import 'typography';
+@import 'code';
+@import 'forms';
+@import 'grid';
+@import 'entry';
+@import 'comments';
+@import 'registration';
+@import 'evaluation_area';
+@import 'consultants';
+@import 'utility_classes';
+
+@import 'mapa';
+@import 'forum';
