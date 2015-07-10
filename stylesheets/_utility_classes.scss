@@ -42,12 +42,13 @@
         /*width: 28%;*/
     }
 
-    .site-footer .site-title {
-        text-align: left;
-    }
-
-    .site-footer .site-description {
-        text-align: left;
+    .site-footer {
+	    .site-title {
+        	text-align: left;
+        }
+        .site-description {
+	        text-align: left;
+	    }
     }
 
     .social {

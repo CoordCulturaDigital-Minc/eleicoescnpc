@@ -63,18 +63,19 @@ sub {
     bottom: -.25em;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: 'TheSans B5 Plain', serif;
+#{headings()} {
+	font-family: $fonte-principal, serif;
     font-weight: 400;
 
     margin: 0;
 
     word-wrap: break-word;
+}
+
+#{headings(4,6)} {
+	font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
 h2 {
@@ -85,14 +86,6 @@ h2 {
 
 h3 {
     font-size: 20px;
-}
-
-h4,
-h5,
-h6 {
-    font-size: 16px;
-    font-size: 1rem;
-    line-height: 1.5;
 }
 
 p {
@@ -117,19 +110,21 @@ blockquote {
 ul {
     list-style: square;
 }
-ul,
-ol {
+
+ul, ol {
     margin: 0 0 1.5em;
     padding: 0;
+    
+	li {
+		margin: 0 0 .5em;
+		padding: 0;
+	}
 }
-ul li,
-ol li {
-    margin: 0 0 .5em;
-    padding: 0;
-}
-nav ul,
-nav ol {
-    list-style: none;
+
+nav {
+	ul, ol {
+		list-style: none;
+	}
 }
 
 dd {
