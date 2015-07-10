@@ -471,16 +471,6 @@ img.aligncenter {
   position: relative;
   /*background-color: rgba(41,39,36,.9);*/ }
 
-.area-title {
-  font-size: 1.25rem;
-  line-height: 1.2;
-  margin-bottom: 1.5rem; }
-  .area-title a {
-    color: #222;
-    border-bottom: 1px dotted; }
-    .area-title a:hover {
-      color: #125b26; }
-
 .access {
   /*font-family: 'Sanchez', serif;*/
   font-weight: normal;
@@ -1306,97 +1296,6 @@ img.aligncenter {
   color: #fff;
   border: none; }
 
-.widget {
-  color: #fff;
-  margin-bottom: 2rem;
-  padding: 1.5rem 1.5rem 2em 1.5rem;
-  border-radius: 5px;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1f6f3a+0,0c451a+100 */
-  background: #1f6f3a;
-  /* Old browsers */
-  background: -moz-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1f6f3a), color-stop(100%, #0c451a));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
-  /* IE10+ */
-  background: linear-gradient(to bottom, #1f6f3a 0%, #0c451a 100%);
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f6f3a', endColorstr='#0c451a',GradientType=0 );
-  /* IE6-9 */
-  -webkit-box-shadow: 0px 0px 5px 0px #858585;
-  -moz-box-shadow: 0px 0px 5px 0px #858585;
-  box-shadow: 0px 0px 5px 0px #858585; }
-  .widget a {
-    color: #fff; }
-    .widget a:hover {
-      /*color: #125b26;*/
-      color: #ffcb05; }
-  .widget ul {
-    font-size: .88rem;
-    line-height: 1.71;
-    list-style: none; }
-  .widget .post-entry.entry {
-    line-height: 1.2; }
-  .widget .more {
-    float: right;
-    display: inline-block;
-    margin: 10px 0 0 0;
-    padding: 3px 10px;
-    background-color: #f4f4f4;
-    border-radius: 5px;
-    color: #50650a;
-    clear: both; }
-
-.widget__title {
-  /*font-size: 1rem;*/
-  font-size: 24px;
-  font-weight: normal;
-  /*display: inline-block;*/
-  margin: 0 0 1rem 0;
-  padding-bottom: 0.3em;
-  /*padding: 0 .5em;*/
-  color: #ffcb05;
-  /*background: #444;*/
-  border-bottom: 1px solid #719416; }
-
-.widget.widget_setoriais_menu {
-  background: #efede6;
-  box-shadow: none;
-  padding: 0 0 10px 0; }
-
-.widget_setoriais_menu .widget__title {
-  position: relative;
-  background: #125b26;
-  padding: .5em;
-  border-radius: 10px; }
-  .widget_setoriais_menu .widget__title:before {
-    position: absolute;
-    bottom: -10px;
-    left: 12px;
-    z-index: 1;
-    display: block;
-    width: 0;
-    content: '';
-    border-width: 11px 11px 0px 11px;
-    border-style: solid;
-    border-color: #125b26 transparent; }
-.widget_setoriais_menu a {
-  color: #836806; }
-.widget_setoriais_menu li {
-  display: block;
-  line-height: 2;
-  margin-left: 10px;
-  font-size: 15px;
-  background-image: url(images/next.png);
-  background-repeat: no-repeat;
-  background-position: 0px 10px;
-  padding-left: 0px; }
-
 .site-footer .site-title {
   font-size: 1.13rem;
   line-height: 1.33;
@@ -1594,10 +1493,6 @@ img.aligncenter {
   color: #fff;
   background-color: #125b26;
   border-color: #125b26; }
-
-.box--about .area-title a,
-.box--about .area-title a:hover {
-  color: #fff; }
 
 @media screen and (min-width: 40em) {
   .box--about {
@@ -1873,11 +1768,6 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   text-align: center; }
-
-.box--howto .area-title {
-  padding: 0px;
-  margin: 0px;
-  font-size: 1.1em; }
 
 .box--howto a {
   color: inherit;
@@ -2227,26 +2117,22 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
   left: 1.5rem;
   right: 1.5rem;
   bottom: 0; }
-
-#evaluation-area.closed {
-  height: 5px; }
+  #evaluation-area.closed {
+    height: 5px; }
 
 .evaluation__comments {
   float: left;
   width: 55%; }
-
-.evaluation__comments label {
-  display: block; }
-
-.evaluation__comments textarea {
-  border: 1px solid #ccc;
-  height: 4.5rem;
-  outline: none;
-  padding: .75rem;
-  width: 100%; }
-
-.evaluation__comments textarea:focus {
-  border-color: #125b26; }
+  .evaluation__comments label {
+    display: block; }
+  .evaluation__comments textarea {
+    border: 1px solid #ccc;
+    height: 4.5rem;
+    outline: none;
+    padding: .75rem;
+    width: 100%; }
+    .evaluation__comments textarea:focus {
+      border-color: #125b26; }
 
 .evaluation__score {
   float: right;
@@ -2263,37 +2149,29 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
   width: 20%;
   vertical-align: middle;
   text-align: center; }
-
-.score-box:nth-child(3) {
-  background-color: #e5e5e5; }
-
-.score-box:nth-child(4) {
-  background-color: #dcdcdc; }
-
-.score-box:nth-child(5) {
-  background-color: #d4d4d4; }
-
-.score-box:nth-child(6) {
-  background-color: #cbcbcb; }
-
-.score-box label {
-  display: block;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  overflow: hidden;
-  transition: background-color .2s ease-in-out, color .2s linear, box-shadow .2s linear, box-shadow .2s linear, box-shadow .2s linear; }
-
-.score-box label:hover {
-  box-shadow: inset 0 0 0 2px #125b26;
-  color: #444; }
-
-.score-box.checked label {
-  background-color: #125b26;
-  color: #fff; }
-
-.score-box input {
-  display: none; }
+  .score-box:nth-child(3) {
+    background-color: #e5e5e5; }
+  .score-box:nth-child(4) {
+    background-color: #dcdcdc; }
+  .score-box:nth-child(5) {
+    background-color: #d4d4d4; }
+  .score-box:nth-child(6) {
+    background-color: #cbcbcb; }
+  .score-box.checked label {
+    background-color: #125b26;
+    color: #fff; }
+  .score-box label {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    overflow: hidden;
+    transition: background-color .2s ease-in-out, color .2s linear, box-shadow .2s linear, box-shadow .2s linear, box-shadow .2s linear; }
+    .score-box label:hover {
+      box-shadow: inset 0 0 0 2px #125b26;
+      color: #444; }
+  .score-box input {
+    display: none; }
 
 .evaluation__toggle {
   background-color: #125b26;
@@ -2304,11 +2182,10 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
   position: absolute;
   top: -3rem;
   padding: 0 1em; }
-
-.evaluation__toggle:before {
-  content: '\e802';
-  font-family: 'FontAwesome';
-  margin-right: .5em; }
+  .evaluation__toggle:before {
+    content: '\e802';
+    font-family: 'FontAwesome';
+    margin-right: .5em; }
 
 #evaluation-area.minimized .evaluation__toggle:before {
   content: '\e803'; }
@@ -2351,17 +2228,14 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
   position: relative;
   padding: 0;
   white-space: nowrap; }
-
 .ui-tabs-nav .ui-tabs-selected {
   background-color: #444; }
 
 .ui-tabs .ui-tabs-nav a {
   display: block;
   padding: 0 1em; }
-
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a {
   color: #fff; }
-
 .ui-tabs .ui-tabs-panel {
   display: block;
   float: left;
@@ -2371,7 +2245,6 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
   height: 10rem;
   border-width: 0;
   padding: 1.5rem; }
-
 .ui-tabs .ui-tabs-hide {
   display: none; }
 
@@ -2449,6 +2322,91 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
   .box--news {
     width: 34%;
     margin-top: -1.5rem; } }
+.widget {
+  color: #826815;
+  margin-bottom: 2rem;
+  padding-bottom: 1px;
+  border-radius: 5px;
+  background-color: #eeece6; }
+  .widget ul {
+    margin: 1.5rem 1rem 2em 1.5rem;
+    font-size: .88rem;
+    line-height: 1.71;
+    list-style: none; }
+  .widget h3 {
+    margin: 0;
+    padding: 0.8rem 0rem 0.4em 1rem;
+    border-radius: 5px;
+    width: 100%;
+    color: #ffce00;
+    border-bottom: none;
+    font-family: "TheSans B7 Bold";
+    font-size: 24px;
+    color: #ffce00;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1f6f3a+0,0c451a+100 */
+    background: #1f6f3a;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1f6f3a), color-stop(100%, #0c451a));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #1f6f3a 0%, #0c451a 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f6f3a', endColorstr='#0c451a',GradientType=0 );
+    /* IE6-9 */ }
+  .widget a {
+    color: #826815; }
+    .widget a:hover {
+      color: #e2bf4e; }
+  .widget .post-entry.entry {
+    line-height: 1.2; }
+  .widget .more {
+    float: right;
+    display: inline-block;
+    margin: 10px 0 0 0;
+    padding: 3px 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    color: #50650a;
+    clear: both; }
+  .widget.widget_setoriais_menu {
+    background: #efede6;
+    box-shadow: none;
+    padding: 0 0 10px 0; }
+    .widget.widget_setoriais_menu .widget__title {
+      position: relative;
+      background: #125b26;
+      padding: .5em;
+      border-radius: 10px; }
+      .widget.widget_setoriais_menu .widget__title:before {
+        position: absolute;
+        bottom: -10px;
+        left: 12px;
+        z-index: 1;
+        display: block;
+        width: 0;
+        content: '';
+        border-width: 11px 11px 0px 11px;
+        border-style: solid;
+        border-color: #125b26 transparent; }
+    .widget.widget_setoriais_menu a {
+      color: #836806; }
+    .widget.widget_setoriais_menu li {
+      display: block;
+      line-height: 2;
+      margin-left: 10px;
+      font-size: 15px;
+      background-image: url(images/next.png);
+      background-repeat: no-repeat;
+      background-position: 0px 10px;
+      padding-left: 0px; }
+
 #mapa {
   position: relative; }
   #mapa svg {
@@ -2460,9 +2418,9 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
       cursor: pointer;
       font-family: "TheSans B7 Bold", sans-serif;
       font-size: 20px;
-      fill: #bdc59c; }
+      fill: #f4f4f4; }
     #mapa svg text.completo {
-      fill: #bdc59c;
+      fill: #f4f4f4;
       text-anchor: end;
       text-transform: uppercase;
       font-size: 24px;
@@ -2477,13 +2435,13 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
       stroke: #1a8638;
       cursor: pointer; }
     #mapa svg a.estado:hover text.etiqueta {
-      fill: #bdc59c; }
+      fill: #f4f4f4; }
     #mapa svg a.estado:hover text.completo {
       fill: #125b26;
       display: block; }
     #mapa svg a.estado:hover path {
-      fill: #ffcb05;
-      stroke: #ffcb05;
+      fill: #ffce00;
+      stroke: #ffce00;
       cursor: pointer; }
 
 .menu-setoriais-container {
