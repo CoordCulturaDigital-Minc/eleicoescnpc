@@ -10,6 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl.html
 Version: 2.0
 Tags: one-column, two-columns, right-sidebar, custom-menu, editor-style, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
 */
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1f6f3a+0,0c451a+100 */
 @font-face {
   font-family: "TheSans B7 Bold";
   src: url("fonts/thesansb7bold.ttf");
@@ -2343,7 +2344,6 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
     font-family: "TheSans B7 Bold";
     font-size: 24px;
     color: #ffce00;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1f6f3a+0,0c451a+100 */
     background: #1f6f3a;
     /* Old browsers */
     background: -moz-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
@@ -2364,48 +2364,6 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
     color: #826815; }
     .widget a:hover {
       color: #e2bf4e; }
-  .widget .post-entry.entry {
-    line-height: 1.2; }
-  .widget .more {
-    float: right;
-    display: inline-block;
-    margin: 10px 0 0 0;
-    padding: 3px 10px;
-    background-color: #f4f4f4;
-    border-radius: 5px;
-    color: #50650a;
-    clear: both; }
-  .widget.widget_setoriais_menu {
-    background: #efede6;
-    box-shadow: none;
-    padding: 0 0 10px 0; }
-    .widget.widget_setoriais_menu .widget__title {
-      position: relative;
-      background: #125b26;
-      padding: .5em;
-      border-radius: 10px; }
-      .widget.widget_setoriais_menu .widget__title:before {
-        position: absolute;
-        bottom: -10px;
-        left: 12px;
-        z-index: 1;
-        display: block;
-        width: 0;
-        content: '';
-        border-width: 11px 11px 0px 11px;
-        border-style: solid;
-        border-color: #125b26 transparent; }
-    .widget.widget_setoriais_menu a {
-      color: #836806; }
-    .widget.widget_setoriais_menu li {
-      display: block;
-      line-height: 2;
-      margin-left: 10px;
-      font-size: 15px;
-      background-image: url(images/next.png);
-      background-repeat: no-repeat;
-      background-position: 0px 10px;
-      padding-left: 0px; }
 
 #mapa {
   position: relative; }
