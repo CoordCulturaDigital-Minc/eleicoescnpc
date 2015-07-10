@@ -40,37 +40,12 @@
             stepsCount('.step_2');
 		});
 
-        function getPosition(element) {
-            var xPosition = 0;
-            var yPosition = 0;
-              
-            while (element) {
-                xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
-                yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
-                element = element.offsetParent;
-            }
-            return { x: xPosition, y: yPosition };
-        }
-
         // mapa página do cadastro
         $("#mapa svg a").click(function(e){
 
-            var parentPosition = getPosition(e.currentTarget);
-            var posX = e.clientX - parentPosition.x;
-            var posY = e.clientY - parentPosition.y;
-            var state = $(this).children().attr('state');
-
-            $('.menu-setoriais-container').hide();       
+            $('.menu-setoriais-container').hide(); 
           
-            if( posY < 400) {
-                $(".menu-setoriais-container").css({top:(posY), bottom: 'auto', left:(posX), position: 'absolute'}).slideDown();
-
-                $('html, body').animate({
-                    scrollTop: $(this).offset().top
-                }, 500);                
-            }
-            else
-                $(".menu-setoriais-container").css({top: 'auto', bottom:0, left:(posX), position: 'absolute'}).slideDown();
+            $(".menu-setoriais-container").css({top:'10%', left:'10%', position: 'fixed'}).slideDown();
 
             $form.find('#user_UF').val( state );
 
