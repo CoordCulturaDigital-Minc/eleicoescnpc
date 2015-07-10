@@ -379,25 +379,45 @@ a.post-edit-link {
   font-style: italic;
   color: rgba(0, 0, 0, 0.3); }
 
-.button {
-  font-family: 'Sanchez', serif;
+.button, aside form input.button-primary {
   position: relative;
   display: inline-block;
-  padding: .4em;
+  margin: 5px 0;
+  padding: .5em;
+  padding-bottom: .4em;
   cursor: pointer;
-  -webkit-transition: background-color .3s ease-in-out;
-  transition: background-color .3s ease-in-out;
-  color: #fff !important;
+  -webkit-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+  color: #ffce00;
   border: none;
   border-radius: 2px;
-  background-color: #5daa33;
-  /*box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
-  0 4px 0 #488327;*/ }
-  .button:hover {
-    background-color: #4f902b; }
-  .button:active {
-    top: 2px;
-    /*box-shadow: 0 2px 0 #488327;*/ }
+  background: -moz-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1f6f3a), color-stop(100%, #0c451a));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #1f6f3a 0%, #0c451a 100%);
+  /* W3C */ }
+  .button:hover, aside form input.button-primary:hover {
+    background: -moz-linear-gradient(top, #0c451a 0%, #1f6f3a 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #0c451a), color-stop(100%, #1f6f3a));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #0c451a 0%, #1f6f3a 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #0c451a 0%, #1f6f3a 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #0c451a 0%, #1f6f3a 100%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #0c451a 0%, #1f6f3a 100%);
+    /* W3C */ }
+  .button:active, aside form input.button-primary:active {
+    top: 2px; }
 
 a.highlight {
   line-height: 3;
@@ -1534,44 +1554,6 @@ img.aligncenter {
 .box--user a {
   border-bottom: 1px dotted; }
 
-#loginform label {
-  font-size: .88rem;
-  line-height: 1.71;
-  display: block;
-  color: #888; }
-
-#loginform p {
-  margin-top: 0.3em; }
-
-#loginform .input {
-  font-size: .88rem;
-  width: 100%;
-  padding: 0.8em;
-  border: 1px solid #ededed;
-  background: #fff; }
-
-#loginform .button-primary {
-  font-family: 'Sanchez', serif;
-  position: relative;
-  display: inline-block;
-  padding: .5em;
-  -webkit-transition: all 1s ease-in-out;
-  transition: all 1s ease-in-out;
-  color: #fff;
-  border: none;
-  border-radius: 2px;
-  background: #5daa33;
-                    /*
-box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
-0 4px 0 #488327;*/ }
-
-#loginform .button-primary:hover {
-  background: #4f902b; }
-
-#loginform .button-primary:active {
-  top: 2px;
-  /*box-shadow: 0 2px 0 #488327;*/ }
-
 .box--user .lost-password {
   font-size: .88rem;
   line-height: 1.71;
@@ -2063,7 +2045,7 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
   .form-not-yet .step__title {
     color: #ccc; }
 
-.file-upload .button {
+.file-upload .button, .file-upload aside form input.button-primary, aside form .file-upload input.button-primary {
   margin: .75rem 0;
   position: relative; }
 .file-upload input[type='file'] {
@@ -2323,18 +2305,25 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
   .box--news {
     width: 34%;
     margin-top: -1.5rem; } }
-.widget {
+aside {
   color: #826815;
   margin-bottom: 2rem;
-  padding-bottom: 1px;
+  padding-bottom: 18px;
   border-radius: 5px;
   background-color: #eeece6; }
-  .widget ul {
-    margin: 1.5rem 1rem 2em 1.5rem;
+  aside p {
+    margin-left: 1rem;
+    margin-right: 1rem; }
+  aside a {
+    color: #826815; }
+    aside a:hover {
+      color: #e2bf4e; }
+  aside ul {
+    margin: 1.5rem 1rem 0em 1.5rem;
     font-size: .88rem;
     line-height: 1.71;
     list-style: none; }
-  .widget h3 {
+  aside h3 {
     margin: 0;
     padding: 0.8rem 0rem 0.4em 1rem;
     border-radius: 5px;
@@ -2360,10 +2349,19 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
     /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f6f3a', endColorstr='#0c451a',GradientType=0 );
     /* IE6-9 */ }
-  .widget a {
-    color: #826815; }
-    .widget a:hover {
-      color: #e2bf4e; }
+  aside form label {
+    font-size: .88rem;
+    line-height: 1.71;
+    display: block;
+    color: #888; }
+  aside form p {
+    margin-top: 0.3em; }
+  aside form .input {
+    font-size: .88rem;
+    width: 100%;
+    padding: 0.8em;
+    border: 1px solid #ededed;
+    background: #fff; }
 
 #mapa {
   position: relative; }

@@ -628,60 +628,6 @@
     border-bottom: 1px dotted;
 }
 
-#loginform label {
-    font-size: .88rem;
-    line-height: 1.71;
-
-    display: block;
-
-    color: #888;
-}
-
-#loginform p {
-    margin-top: 0.3em;
-}
-
-#loginform .input {
-    font-size: .88rem;
-
-    width: 100%;
-    padding: 0.8em;
-
-    border: 1px solid #ededed;
-    background: #fff;
-}
-
-#loginform .button-primary {
-    font-family: 'Sanchez', serif;
-
-    position: relative;
-
-    display: inline-block;
-
-    padding: .5em;
-
-    -webkit-transition: all 1s ease-in-out;
-
-            transition: all 1s ease-in-out;
-
-    color: #fff;
-    border: none;
-    border-radius: 2px;
-    background: #5daa33;/*
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.5),
-    0 4px 0 #488327;*/
-}
-
-#loginform .button-primary:hover {
-    background: #4f902b;
-}
-
-#loginform .button-primary:active {
-    top: 2px;
-
-    /*box-shadow: 0 2px 0 #488327;*/
-}
-
 .box--user .lost-password {
     font-size: .88rem;
     line-height: 1.71;

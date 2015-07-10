@@ -1,30 +1,30 @@
 <div class="asides">
-<!-- widget widget--negative widget_categories -->
 
 <aside class="widget">
+	
 	<?php if ( is_user_logged_in() ) : global $user_ID; ?>
         <?php $user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $user_ID ) ); ?>
-        <h3 class="widget__title"><?php printf( __('Hello, %s!', 'historias' ), $user_meta['nickname']); ?></h2>
+        <h3 class="widget__title"><?php printf( __('Olá, %s!', 'historias' ), $user_meta['nickname']); ?></h3>
     <?php else : ?>
-        <h3 class="widget__title">Login/Inscrição</h2>
+        <h3 class="widget__title">Entrar</h2>
     <?php endif; ?>
 	
     <?php if ( is_user_logged_in() ) : ?>
 
 		<?php if (get_user_meta($user_ID, 'e_candidato', true)): ?>
-           	Você está inscrito como candidato!<br>
-			<p>Confira a sua <a href="<?php bloginfo('siteurl'); ?>/inscricoes">ficha de inscrição</a>.
+		
+           	<p>Você está inscrito como candidato!</p>
+			<p>Confira a sua <a href="<?php bloginfo('siteurl'); ?>/inscricoes">ficha de inscrição</a>.</p>
 		
         <?php elseif( !current_user_can( 'level_10' ) ): ?>
-            <p><?php printf( __('O debate do setorial de %s do %s está com %s comentários', 'historias' ), $user_meta['setorial'], $user_meta['UF'], 'xx' ); ?><br>
-
-            <a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">Confira</a></p>
-            <p>Você quer se candidatar?<br>
-			<a href="<?php bloginfo('siteurl'); ?>/inscricoes">Cadastre sua candidatura</a>.
-
-            <p>Link para a discussão do seu estado e setorial:
-            <a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">Fórum</a></p>
-
+            
+            <p><?php printf( __('O debate do setorial de %s do %s está com %s comentários', 'historias' ), $user_meta['setorial'], $user_meta['UF'], 'xx' ); ?></p>
+            <p><a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">Confira</a></p>
+            <p>Você quer se candidatar?</p>
+			<p><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Cadastre sua candidatura</a>.</p>
+            <p>Link para a discussão do seu estado e setorial:</p>
+            <p><a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">Fórum</a></p>
+            
 		<?php endif; ?>
 		
         <?php if ( current_user_can( 'level_10' ) ) : ?>
@@ -39,9 +39,18 @@
         <?php endif; ?>
         <p>Para sair, <a href="<?php echo wp_logout_url( get_permalink() ); ?>" title="Logout">clique aqui</a>.</p>
     <?php else : ?>
-        <?php wp_login_form( array( 'label_username' => __( 'Login / Email' ), 'remember' => false ) ); ?>
-        <a href="<?php echo wp_lostpassword_url( get_permalink() ); ?>" class="lost-password"><?php _e( 'Lost Password', 'historias' ); ?></a>
-        <a href="<?php bloginfo('siteurl'); ?>/inscricoes" class="button  not-registered"><?php _e( 'I am not registered yet', 'historias' ); ?></a>
+        
+        <?php wp_login_form(
+	        array( 		'label_username' => __( 'Usuário ou email' ),
+	        			'label_password' => ('Senha'),
+	        			'label_log_in' => ('Entrar'),
+	        			'remember' => false ) );
+	    ?>
+	    
+        <a href="<?php echo wp_lostpassword_url( get_permalink() ); ?>" class="lost-password"><?php _e( 'Esqueci a senha', 'historias' ); ?></a>
+        
+        <a href="<?php bloginfo('siteurl'); ?>/inscricoes" class="button"><?php _e( 'Inscrever-me', 'historias' ); ?></a>
+        
     <?php endif; ?>
 </aside>
 
