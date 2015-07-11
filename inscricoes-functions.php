@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 function get_current_user_project() {
 
@@ -904,6 +904,7 @@ class Validator {
             'candidate-display-name' => array(),
             'candidate-cpf' => array('not_empty', 'cpf_not_in_blacklist'),
             'candidate-phone-1' => array('not_empty','is_a_valid_phone'),
+            'candidate-birth' => array('not_empty', 'is_a_valid_birth'),
             'candidate-race' => array('not_empty'),
             'candidate-genre' => array('not_empty'),
             'candidate-avatar' => array('not_empty'),
@@ -1162,6 +1163,9 @@ class Validator {
     }
 
     static function is_a_valid_birth( $d, $user_type=null) {
+
+        if( $user_type !== 'candidato' && $user_type !== 'eleitor')
+            $user_type = 'candidato';
 
         $today = gmdate( 'Y-m-d', ( time() + ( get_option( 'gmt_offset' ) * 3600 ) ));
         $birth = preg_replace( '/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/', '$3-$2-$1', $d );

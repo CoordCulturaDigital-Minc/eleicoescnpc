@@ -140,8 +140,9 @@
                                 $(this).trigger('blur').focus();
                             }});
 		
-		// Hook pra salvar e verificar o CPF quando carregar o formulário
+		// Hook pra salvar e verificar quando carregar o formulário
 		$('#candidate-cpf').blur();
+        $('#candidate-birth').blur();
 		
         // load next form step when user click in 'Preencher'
         $('div.form-step a.toggle').click(function(e) {
