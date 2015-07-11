@@ -665,4 +665,96 @@ function dropdown_setoriais( $name, $selected = null, $all = false, $extra = nul
     return $output;
 }
 
+/**
+ * return races
+ *
+ * @name    get_races
+ * @return  array
+ */
+function get_races() {
+
+	return array(
+        'branco' => 'Branco',
+        'preto'  => 'Preto',
+        'pardo'	 => 'Pardo',
+        'amarelo' => 'Amarelo',
+        'indigena' => 'Indigena',
+        'sem-declaracao' => 'Sem declaração'
+    );
+}
+
+/**
+ * show a menu dropdown from the setorial
+ *
+ * @name    dropdown_states
+ * @return  select
+ */
+function dropdown_races( $name, $selected = null, $all = false, $extra = null ) {
+    $races = get_races();
+
+    $output = "<select id='{$name}' name='{$name}' {$extra}>";
+
+    if( $all )
+        $output .= "<option value=''>----------</option>";
+
+    foreach( $races as $acronym => $race )
+    {
+    	$att = '';
+
+        if( $acronym == $selected )
+            $att= 'selected="selected"';
+
+        $output .= "<option value='{$acronym}' {$att}>{$race}</option>";
+    }
+
+    $output .= "</select>";
+
+    return $output;
+}
+
+
+/**
+ * return genres
+ *
+ * @name    get_generos
+ * @return  array
+ */
+function get_genres() {
+
+	return array(
+        'masculino' => 'Masculino',
+        'feminino'  => 'Feminino'
+    );
+}
+
+/**
+ * show a menu dropdown of genre
+ *
+ * @name    dropdown_genres
+ * @return  select
+ */
+function dropdown_genres( $name, $selected = null, $all = false, $extra = null )
+{
+    $genres = get_genres();
+
+    $output = "<select id='{$name}' name='{$name}' {$extra}>";
+
+    if( $all )
+        $output .= "<option value=''>----------</option>";
+
+    foreach( $genres as $acronym => $genre )
+    {
+    	$att = '';
+
+        if( $acronym == $selected )
+            $att= 'selected="selected"';
+
+        $output .= "<option value='{$acronym}' {$att}>{$genre}</option>";
+    }
+
+    $output .= "</select>";
+
+    return $output;
+
+}
 ?>

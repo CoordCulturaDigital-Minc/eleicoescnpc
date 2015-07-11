@@ -268,11 +268,6 @@ if(is_user_logged_in()) {
 									<?php echo isset($user_meta['date_birth'])?restore_format_date( $user_meta['date_birth'] ):'';?>
 								</div><!--
 
-								--><div class="grid__item  one-half">
-									<label for="candidate-cpf">CPF</label>
-									<?php echo isset($user_meta['cpf'])?$user_meta['cpf']:'';?>
-								</div><!--
-
 								--><div class="grid__item one-half">
 									<label for="candidate-setorial">Setorial</label>
 									<?php echo isset($user_meta['setorial'])?get_label_setorial_by_slug( $user_meta['setorial'] ):'';?>
@@ -301,7 +296,7 @@ if(is_user_logged_in()) {
 									<div id="candidate-display-name-error" class="field__error"></div>
 								</div><!--
 
-								--><div class="grid__item  one-whole">
+								--><div class="grid__item  one-half">
 									<label for="candidate-display-name">CPF</label>
 									<input disabled id="candidate-cpf" type="text" name="step1-candidate-cpf" value="<?php echo isset($f['candidate-cpf'])?$f['candidate-cpf']:$user_meta['cpf'];?>" />
 									<div class="field-status <?php print isset($f['candidate-cpf'])?'completo':'invalido'?>"></div>
@@ -315,20 +310,20 @@ if(is_user_logged_in()) {
 									<div id="candidate-phone-1-error" class="field__error"></div>
 								</div><!--
 
-								--><div class="grid__item  one-whole">
-									<label for="candidate-experience">Breve experiência no setor</label>
-									<textarea <?php echo $form_disabled?' disabled':'';?> id="candidate-experience" name="step1-candidate-experience" cols="50" rows="5" maxlength="600" class="limit-chars"><?php echo isset($f['candidate-experience'])?$f['candidate-experience']:'';?></textarea>
-									<div class="field-status <?php print isset($f['candidate-experience'])?'completo':'invalido'?>"></div>
-									<div id="candidate-experience-error" class="field__error"></div>
-									<div class="field__note">Até 600 caracteres.</div>
+								--><div class="grid__item  one-half">
+									<label for="candidate-genre">Gênero</label>
+									<?php $selected = isset($f['candidate-genre'])?$f['candidate-genre']:''; ?>
+									<?php echo dropdown_genres( 'step1-candidate-genre', $selected, true, 'id="candidate-genre" class="required" $disabled' ); ?>
+									<div class="field-status <?php print isset($f['candiate-genre'])?'completo':'invalido'?>"></div>
+									<div id="candidate-genre-error" class="field__error"></div>
 								</div><!--
 
-								--><div class="grid__item  one-whole">
-									<label for="candidate-explanatory">Exposição de motivos para a candidatura</label>
-									<textarea <?php echo $form_disabled?' disabled':'';?> id="candidate-explanatory" name="step1-candidate-explanatory" cols="50" rows="5" maxlength="600" class="limit-chars"><?php echo isset($f['candidate-explanatory'])?$f['candidate-explanatory']:'';?></textarea>
-									<div class="field-status <?php print isset($f['candidate-explanatory'])?'completo':'invalido'?>"></div>
-									<div id="candidate-explanatory-error" class="field__error"></div>
-									<div class="field__note">Até 600 caracteres.</div>
+								--><div class="grid__item  one-half">
+									<label for="candidate-race">Raça</label>
+									<?php $selected =  isset($f['candidate-race'])?$f['candidate-race']:''; ?>
+									<?php echo dropdown_races( 'step1-candidate-race', $selected, true, 'id="candidate-race" class="required" $disabled' ); ?>
+									<div class="field-status <?php print isset($f['candidate-race'])?'completo':'invalido'?>"></div>
+									<div id="candidate-race-error" class="field__error"></div>
 								</div>
 
 								<?php inscricoes_file_upload_field_template($f, 1, 'Foto do candidato', 'candidate-avatar', 'Faça Upload de uma imagem em formato .jpg ou .png'); ?>
@@ -347,11 +342,35 @@ if(is_user_logged_in()) {
 						<?php endif; ?>
 					</div>
 				</div>
+				<!-- #formstep-1 -->
 
 				<?php if( $step1['complete'] ) : ?>
+					<?php $step2 = load_step(2,$pid); $f = $step2['fields']; ?>
+
+					<div id="formstep-2" class="form-step">
+						<header class="step__head">
+							<h3 class="step__title">Etapa 2/3: Candidatura <?php if ($step2['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+							<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
+							<div <?php echo ($step1['complete'] )?' style="display:none"':''; ?> class="step__about">
+								<?php echo nl2br(get_theme_option('txt_candidato_step2')); ?>
+							</div>
+							<span id="formstep-2-error" class="form-error"></span>
+						</header>
+						<?php include( 'inscricoes-step2.php' ); ?>
+					</div>
+				<?php else : ?>
+					<div class="form-not-yet">
+						<h3 class="step__title">Etapa 2/3: Candidatura</h3>
+					</div>
+				<?php endif; ?>
+
+                <!-- #formstep-2 -->
+
+				<?php if( $step1['complete']  && $step2['complete']) : ?>
+					
 					<div id="formstep-3" class="form-step">
 						<header class="step__head">
-							<h3 class="step__title">Etapa 2/2: Conferir Dados e Inscrever <?php if ($step3['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+							<h3 class="step__title">Etapa 3/3: Conferir Dados e Inscrever <?php if ($step3['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
 							<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
 							<div <?php echo ($step1['complete'] )?' style="display:none"':''; ?> class="step__about">
 								<?php echo nl2br(get_theme_option('txt_candidato_step3a')); ?>
@@ -365,6 +384,8 @@ if(is_user_logged_in()) {
 						<h3 class="step__title">Etapa 3/3: Conferir Dados e Inscrever</h3>
 					</div>
 				<?php endif; ?>
+
+				<!-- #formstep-3 -->
 			</form>
 		<?php endif; ?>
 	</section>

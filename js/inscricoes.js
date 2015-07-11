@@ -41,7 +41,10 @@
             var $me = $(this);
             var $step_status = $me.parents('div.form-step')
                                   .find('div.step-status');
-
+            
+            if( $me.is('input[type="checkbox"]'))
+                $me.prop("checked") ? '' : $me.val("0");
+            
             var values = {'action': 'setoriaiscnpc_save_field'};
             values[this.name] = $me.val();
 

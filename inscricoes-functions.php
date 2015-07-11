@@ -893,25 +893,30 @@ class Filter {
 
 class Validator {
     public $fields_rules = array(
-        'step1' => array(
-            'candidate-display-name' => array(),
-            'candidate-cpf' => array('not_empty', 'cpf_not_in_blacklist'),
-            'candidate-phone-1' => array('not_empty','is_a_valid_phone'),
-            'candidate-avatar' => array('not_empty'),
-            'candidate-portfolio' => array('not_empty'),
-            'candidate-activity-history' => array('not_empty'),
-            'candidate-diploma' => array('not_empty'),
-            'candidate-profissional-register' => array('not_empty'),
-            'candidate-participation-statement' => array('not_empty'),
-            'candidate-experience' => array('not_empty'),
-            'candidate-explanatory' => array('not_empty')
-        ),
         'register' => array(
             'user_cpf' => array('not_empty','is_a_valid_cpf', 'user_cpf_does_not_exist', 'cpf_exists_in_receita'),
             'user_name' => array('not_empty'),
             'user_email' => array('not_empty','is_valid_email','is_email_does_not_exist'),
             'user_password' => array('not_empty'),
             'user_birth' => array('not_empty','is_a_valid_date','is_a_valid_birth')
+        ),
+        'step1' => array(
+            'candidate-display-name' => array(),
+            'candidate-cpf' => array('not_empty', 'cpf_not_in_blacklist'),
+            'candidate-phone-1' => array('not_empty','is_a_valid_phone'),
+            'candidate-race' => array('not_empty'),
+            'candidate-genre' => array('not_empty'),
+            'candidate-avatar' => array('not_empty'),
+            'candidate-portfolio' => array('not_empty'),
+            'candidate-activity-history' => array('not_empty'),
+            'candidate-diploma' => array('not_empty'),
+            'candidate-profissional-register' => array('not_empty'),
+            'candidate-participation-statement' => array('not_empty')
+        ),
+        'step2' => array(
+            'candidate-experience' => array('not_empty','str_length_less_than_400'),
+            'candidate-explanatory' => array('not_empty','str_length_less_than_400'),
+            'candidate-confirm-data' => array('not_empty')
         )
     );
 
@@ -1222,9 +1227,9 @@ class Validator {
         }
     }
 
-    static function str_length_less_than_600($v) {
-        if(strlen(utf8_decode($v)) > 600) { // php não sabe contar utf8
-            return __('O texto não deve exceder 600 caracteres.');
+    static function str_length_less_than_400($v) {
+        if(strlen(utf8_decode($v)) > 400) { // php não sabe contar utf8
+            return __('O texto não deve exceder 400 caracteres.');
         }
         return true;
     }
