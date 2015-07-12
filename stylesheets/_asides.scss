@@ -1,0 +1,83 @@
+$cor-verde-inicio:	rgba(31,111,58,1);
+$cor-verde-fim:		rgba(12,69,26,1);
+
+aside {
+    color: $cor-marrom;
+    margin-bottom: 2rem;
+    padding-bottom: 18px;
+
+    border-radius: 5px;
+    background-color: $cor-beige-claro;
+    
+    p {
+	    margin-left: 1rem;
+	    margin-right: 1rem;
+    }
+    
+    a {
+	    color: $cor-marrom;
+	    &:hover {
+		    color: $cor-beige;
+		}
+	}
+    
+    ul {
+	    margin: 1.5rem 1rem 0em 1.5rem;
+	    
+	    font-size: .88rem;
+	    line-height: 1.71;
+	
+	    list-style: none;
+    }
+
+	h3 {
+		margin: 0;
+		padding: 0.8rem 0rem 0.4em 1rem;
+		
+		border-radius: 5px;
+		width: 100%;
+		
+		color: $cor-amarelo;
+		border-bottom: none;
+		
+		font-family: $fonte-principal-bold;
+	    font-size: 24px;
+	
+	    color: $cor-amarelo;
+	    
+	    background: rgb(31,111,58); /* Old browsers */
+	    
+	    @include linear-vertical-gradient($cor-verde-inicio, $cor-verde-fim);
+	    
+	    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f6f3a', endColorstr='#0c451a',GradientType=0 ); /* IE6-9 */
+	}
+	
+	form {
+		label {
+		    font-size: .88rem;
+		    line-height: 1.71;
+		
+		    display: block;
+		
+		    color: #888;
+		}
+		
+		p {
+		    margin-top: 0.3em;
+		}
+		
+		.input {
+		    font-size: .88rem;
+		
+		    width: 100%;
+		    padding: 0.8em;
+		
+		    border: 1px solid #ededed;
+		    background: #fff;
+		}
+		
+		input.button-primary {
+			@extend .button;
+		}
+	}
+}

@@ -20,10 +20,15 @@ $fonte-principal:		'TheSans B5 Plain';
 $fonte-principal-bold:	'TheSans B7 Bold';
 
 $cor-verde-claro: 		rgb(113, 148, 22);
+$cor-verde-musgo:		#52660b;			// H1 da lista de postagem
 $cor-verde: 			rgb(18, 91, 38);
-$cor-amarelo:			rgb(255, 203, 5);
 
-$cor-cinza-claro:		#bdc59c;
+$cor-amarelo:			rgb(255, 206, 0);	// H# do banner
+$cor-marrom:			#826815;
+$cor-beige:				lighten($cor-marrom, 30%);
+$cor-beige-claro:		#eeece6;
+
+$cor-cinza-claro:		#f4f4f4;
 
 @import 'base';
 @import 'links';
@@ -37,6 +42,7 @@ $cor-cinza-claro:		#bdc59c;
 @import 'evaluation_area';
 @import 'consultants';
 @import 'utility_classes';
+@import 'asides';
 
 @import 'mapa';
 @import 'forum';
