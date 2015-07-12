@@ -255,11 +255,25 @@ add_action('wp_ajax_setoriaiscnpc_register_verify_field', 'setoriaiscnpc_registe
 add_action('wp_ajax_nopriv_setoriaiscnpc_register_verify_field', 'setoriaiscnpc_register_verify_field');
 
 
-
+/**
+* get_cpf_data_in_receita
+*
+* Definir as seguintes variáveis para que a consulta funcione
+* define('VERIFICA_CPF_RECEITA', '');
+* define('RECEITA_LOGIN' , '');
+* define('RECEITA_SECURE', '');
+* define('RECEITA URL', '');
+* @param $cpf, $fields
+* @return mixed
+*
+**/
 function get_cpf_data_in_receita( $cpf, $fields='' ) {
 
 	if (!defined(VERIFICA_CPF_RECEITA) || VERIFICA_CPF_RECEITA !== true)
 		return true;
+
+    if( !defined(RECEITA_LOGIN) || !defined(RECEITA_SECURE) || !defined(RECEITA_URL) )
+        return false; 
 
     if( empty($cpf) )
         return false;
@@ -270,11 +284,10 @@ function get_cpf_data_in_receita( $cpf, $fields='' ) {
     $cpf = preg_replace("/\D+/", "", $cpf); // remove qualquer caracter não numérico
 
     //jSON URL which should be requested
-    $username = 'xxxxxx';  // authentication
-    $password = 'xxxxxx';  // authentication
-
-    // url
-    $json_url = "http://desenvweb.cultura.gov.br/pessoa-ws/servicos/pessoa_fisica/consultar/{$cpf}";
+    
+    $username = RECEITA_LOGIN;  // authentication
+    $password = RECEITA_SECURE;  // authentication
+    $json_url = RECEITA_URL + $cpf;
 
     // Initializing curl
     $ch = curl_init( $json_url );
