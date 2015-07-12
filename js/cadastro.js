@@ -41,7 +41,9 @@
 		});
 
         // mapa página do cadastro
-        $("#mapa svg a").click(function(e){
+        $("#mapa .estado").click(function(e){
+           
+            var state = $(this).find('path').attr('id');
 
             $('.menu-setoriais-container').hide(); 
           
