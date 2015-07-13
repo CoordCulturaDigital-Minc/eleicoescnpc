@@ -28,7 +28,7 @@ get_header(); the_post(); ?>
             <?php endif; ?>
         </div>
 
-        <?php include ( get_template_directory() . '/includes/frontpage-sidebar.php'); ?>
+        <?php include ( get_template_directory() . '/sidebar.php'); ?>
 
         <?php 
 
