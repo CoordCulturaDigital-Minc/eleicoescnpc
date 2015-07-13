@@ -281,10 +281,9 @@ function get_cpf_data_in_receita( $cpf, $fields='' ) {
     $cpf = preg_replace("/\D+/", "", $cpf); // remove qualquer caracter não numérico
 
     //jSON URL which should be requested
-    
     $username = RECEITA_LOGIN;  // authentication
     $password = RECEITA_SECURE;  // authentication
-    $json_url = RECEITA_URL + $cpf;
+    $json_url = RECEITA_URL . $cpf;
 
     // Initializing curl
     $ch = curl_init( $json_url );
