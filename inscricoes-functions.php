@@ -262,17 +262,14 @@ add_action('wp_ajax_nopriv_setoriaiscnpc_register_verify_field', 'setoriaiscnpc_
 * define('VERIFICA_CPF_RECEITA', '');
 * define('RECEITA_LOGIN' , '');
 * define('RECEITA_SECURE', '');
-* define('RECEITA URL', '');
+* define('RECEITA_URL', '');
 * @param $cpf, $fields
 * @return mixed
 *
 **/
 function get_cpf_data_in_receita( $cpf, $fields='' ) {
 
-	if (!defined(VERIFICA_CPF_RECEITA) || VERIFICA_CPF_RECEITA !== true)
-		return true;
-
-    if( !defined(RECEITA_LOGIN) || !defined(RECEITA_SECURE) || !defined(RECEITA_URL) )
+    if( !defined('RECEITA_LOGIN') || !defined('RECEITA_SECURE') || !defined('RECEITA_URL') )
         return false; 
 
     if( empty($cpf) )
@@ -327,6 +324,11 @@ function get_cpf_data_in_receita( $cpf, $fields='' ) {
 
 /**  */
 function setoriaiscnpc_get_data_receita_by_cpf() {
+
+    if (!defined('VERIFICA_CPF_RECEITA') || VERIFICA_CPF_RECEITA !== true) {
+        print __('Serviço desativado');
+        die;
+    }
 
     if(!isset($_POST['cpf'])) {
          header("HTTP/1.1 403 Forbidden");
@@ -1043,6 +1045,9 @@ class Validator {
     }
 
     static function cpf_exists_in_receita($c) {
+
+        if (!defined('VERIFICA_CPF_RECEITA') || VERIFICA_CPF_RECEITA !== true)
+            return true;
 
         if( empty( $c ) )
             return __('CPF não informado.');
