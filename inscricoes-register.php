@@ -147,7 +147,9 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
         if ( !is_wp_error($user) && !$reauth ) {
             if ($user_tipo == 'candidato') {
 				wp_safe_redirect(site_url('inscricoes'));
-			} else {
+			} elseif( !empty($user_UF) && !empty($user_setorial)) {
+                wp_safe_redirect(site_url('/foruns/' . $user_UF . '-' . $user_setorial));
+            } else {
 				wp_safe_redirect(site_url('/'));
 			}
             exit();
