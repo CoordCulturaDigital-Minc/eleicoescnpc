@@ -5,7 +5,7 @@
  *
  */
     
-get_header(); the_post();/* ?>
+get_header(); the_post(); ?>
 
         <div class="features  features--subscriptions">
             <?php if ( '' != get_the_post_thumbnail() ) : ?>
@@ -28,7 +28,7 @@ get_header(); the_post();/* ?>
             <?php endif; ?>
         </div>
 
-        <?php */ get_sidebar(); ?>
+        <?php get_sidebar(); ?>
 
         <?php 
 	        

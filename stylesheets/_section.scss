@@ -1,60 +1,59 @@
 section {
-	header {
-		@include clearfix ();
-	}
-	header, .entry-summary {
-		margin-right: 190px;
-	}
+	float: left;
+	width: 65.63%;
+	
 	article {
-		span.entry-date {
+		margin-top: 0 !important;
+		margin-bottom: 0 !important;
+		
+		padding: 20px 0 0;
+		
+		@include separation-border ();
+		
+		@include clearfix ();
+		
+		&:first-child {
+			border-top: none;
+		}
+		&:last-child {
+			border-bottom: none !important;
+		}
+		
+		&.has-post-thumbnail {
+			header {
+				margin-right: 170px;
+			}
+		}
+		
+		header {
+ 			@include clearfix ();
+			
+			margin-bottom: 10px;
+		
+			h2 {
+				float: left;
+			}
+			span.entry-date {
+				float: right;
+			}
+		}
+		
+		.featured-media {
+			margin-top: -30px;
 			float: right;
+			margin-left: 20px;
+		}
+		
+		position: relative;
+		
+		p {
+			margin-bottom: 20px;
+			
+			&.read-more {
+				position: absolute;
+				bottom: 10px;
+				margin-bottom: 0;
+			}
 		}
 	}
-	.featured-media {
-		position: relative;
-	    display: block;
-	    float: left;
-	    margin: 20px 20px 10px 0px;
-		
-		margin-top: -40px;
-		float: right;
-		
-	}
-}
-
-.content--full {
-    float: none;
-
-    width: 100%;
-    padding: 0 1.5rem;
-}
-
-.content--sidebarless {
-    float: none;
-}
-
-.featured-media a, .featured-media img {
-  display: block;
-}
-
-@media only screen and (min-width: 40em) {
-	.content {
-        float: left;
-        
-        @include clearfix ();
-
-        width: 65.63%;
-    }
-
-    .content--full {
-        float: none;
-
-        width: 100%;
-        padding: 0 1.5rem;
-    }
-
-    .content--sidebarless {
-        float: none;
-        width: 90%;
-    }
 }

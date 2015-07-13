@@ -2266,55 +2266,51 @@ header.site_header {
     .menu .current_page_item > .sub-menu li,
     .menu .current-menu-ancestor > .sub-menu li {
       float: left; } }
-section header {
-  *zoom: 1; }
-  section header:before, section header:after {
-    display: table;
-    content: " "; }
-  section header:after {
-    clear: both; }
-section header, section .entry-summary {
-  margin-right: 190px; }
-section article span.entry-date {
-  float: right; }
-section .featured-media {
-  position: relative;
-  display: block;
+section {
   float: left;
-  margin: 20px 20px 10px 0px;
-  margin-top: -40px;
-  float: right; }
-
-.content--full {
-  float: none;
-  width: 100%;
-  padding: 0 1.5rem; }
-
-.content--sidebarless {
-  float: none; }
-
-.featured-media a, .featured-media img {
-  display: block; }
-
-@media only screen and (min-width: 40em) {
-  .content {
-    float: left;
+  width: 65.63%; }
+  section article {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 20px 0 0;
+    border-bottom: 1px solid #dedede;
+    border-top: 1px solid #fff;
     *zoom: 1;
-    width: 65.63%; }
-    .content:before, .content:after {
+    position: relative; }
+    section article:before, section article:after {
       display: table;
       content: " "; }
-    .content:after {
+    section article:after {
       clear: both; }
+    section article:first-child {
+      border-top: none; }
+    section article:last-child {
+      border-bottom: none !important; }
+    section article.has-post-thumbnail header {
+      margin-right: 170px; }
+    section article header {
+      *zoom: 1;
+      margin-bottom: 10px; }
+      section article header:before, section article header:after {
+        display: table;
+        content: " "; }
+      section article header:after {
+        clear: both; }
+      section article header h2 {
+        float: left; }
+      section article header span.entry-date {
+        float: right; }
+    section article .featured-media {
+      margin-top: -30px;
+      float: right;
+      margin-left: 20px; }
+    section article p {
+      margin-bottom: 20px; }
+      section article p.read-more {
+        position: absolute;
+        bottom: 10px;
+        margin-bottom: 0; }
 
-  .content--full {
-    float: none;
-    width: 100%;
-    padding: 0 1.5rem; }
-
-  .content--sidebarless {
-    float: none;
-    width: 90%; } }
 #mapa {
   position: relative; }
   #mapa svg {
