@@ -153,6 +153,9 @@ function historias_load_scripts() {
 		wp_enqueue_script( 'foruns', get_template_directory_uri() . '/js/foruns.js');
 		wp_localize_script('foruns', 'vars', array('ajaxurl' => admin_url('admin-ajax.php')));
 	}
+
+	/* Para todo o tema */
+	wp_enqueue_script( 'setoriaiscnpc', get_template_directory_uri() . '/js/setoriaiscnpc.js');
 		
 }
 
