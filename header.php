@@ -22,7 +22,7 @@
 	<?php wp_head(); ?>
 </head>
 
-    <body <?php body_class(); if( is_page_template( 'page-templates/map.php' ) ) echo 'onLoad="initialize()"'; ?>>
+<body <?php body_class(); if( is_page_template( 'page-templates/map.php' ) ) echo 'onLoad="initialize()"'; ?>>
 
     <!-- barra do governo -->
     <div id="barra-brasil" style="background:#7F7F7F; height: 20px; padding:0 0 0 10px;display:block;"> 
@@ -37,10 +37,8 @@
 
 	<div class="site-wrap">
 
-	<header class="site-header" class="wrap cf">
+	<header class="site_header">
 		<a href="#main" title="<?php esc_attr_e( 'Skip to content', 'historias' ); ?>" class="assistive-text"><?php _e( 'Skip to content', 'historias' ); ?></a>
-
-		<div id="branding">
 
 			<a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
                 <?php
@@ -49,18 +47,19 @@
                         <img src="<?php echo esc_url($logo); ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />
                  <?php endif; ?>
 
-                <h1 class="site-title"><?php bloginfo('name'); ?></h1>
+				<?php include ( get_template_directory() . '/assets/cabecalho.svg'); ?>
+
+                <h1 class="site-title"><?php bloginfo('name'); ?></h1>			
 
                 <div class="quote">
                     <p><?php echo get_option( 'site_tagline' ) ?></p>
                 </div>
             </a>
 
-            <form id="search" role="search" method="get" action="<?php echo home_url( '/' ); ?>">
-                <input id="s" type="search" value="Procurar por" name="s" onfocus="if (this.value == 'Procurar por') this.value = '';" onblur="if (this.value == '') {this.value = 'Procurar por';}" />        
-                <input type="submit" value="Buscar" />
-            </form>
-        </div>
+		<form id="search" role="search" method="get" action="<?php echo home_url( '/' ); ?>">
+            <input id="s" type="search" value="Procurar por" name="s" onfocus="if (this.value == 'Procurar por') this.value = '';" onblur="if (this.value == '') {this.value = 'Procurar por';}" />        
+            <input type="submit" value="Buscar" />
+        </form>
 
         <nav class="access cf js-access" role="navigation">
             <?php if ( wp_is_mobile() ) :

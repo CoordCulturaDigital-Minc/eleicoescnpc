@@ -1,0 +1,71 @@
+// Inside header.site_header scope
+
+nav {
+	font-weight: normal;
+    clear: both;
+    font-size: 20px;
+    margin-top: -3rem;
+    
+    &.opened {
+	    max-height: 9999px;
+	}
+	
+	ul, ol {
+		list-style: none;
+	}
+	
+	ul {
+	    clear: both;
+	
+		& > li {
+		    margin: 0;
+		    text-align: right;
+		}
+		
+		a {
+		    position: relative;
+		    display: block;
+		    margin-left: 1.3em;
+		    color: $cor-laranja;
+		}
+		
+		.current-cat,
+		.current_page_item,
+		.current-menu-item {
+			& > a:after {
+			    content: " ";
+			
+			    border-bottom: 4px solid $cor-laranja;
+			    width: 100%;
+			
+			    display: block;
+			
+			    position: absolute;
+			    bottom: -4px;
+			    left: 0px;
+		    }
+		}
+		
+		.menu-item-has-children {
+		    position: relative;
+		}
+		
+		.current_page_item,
+		.current-menu-ancestor {
+		    position: static;
+		}
+		
+		.current_page_item,
+		.current-page-ancestor,
+		.current-menu-ancestor {
+			& > a {
+			}
+		}
+		
+		.menu__title {
+		    padding: 0 1.3em;
+		
+		    color: #175823;
+		}
+	}
+}
