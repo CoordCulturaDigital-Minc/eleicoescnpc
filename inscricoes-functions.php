@@ -912,7 +912,8 @@ class Validator {
             'user_name' => array('not_empty'),
             'user_email' => array('not_empty','is_valid_email','is_email_does_not_exist'),
             'user_password' => array('not_empty'),
-            'user_birth' => array('not_empty','is_a_valid_date','is_a_valid_birth')
+            'user_birth' => array('not_empty','is_a_valid_date','is_a_valid_birth'),
+            'user_confirm_informations' => array('not_empty')
         ),
         'step1' => array(
             'candidate-display-name' => array(),

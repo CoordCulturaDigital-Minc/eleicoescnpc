@@ -209,6 +209,12 @@ if(is_user_logged_in()) {
 										<label for="user_birth">Data Nascimento</label>
 										<input id="user_birth" type="text" name="user_birth" />
 										<div id="user_birth-error" class="field__error"></div>
+									</div><!--
+
+									--><div class="grid__item  one-half"><br>
+										<input id="user_confirm_informations" type="checkbox" name="user_confirm_informations" />
+										<label for="user_confirm_informations">Afirmo que todos os dados citados acima são verdadeiros.</label>
+										<div id="user_confirm_informations-error" class="field__error"></div>
 									</div>
 								</div>
 							</div>

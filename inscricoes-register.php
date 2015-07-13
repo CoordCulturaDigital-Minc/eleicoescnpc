@@ -8,12 +8,13 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
     $user_login = sanitize_user($_POST['user_email']);
     $user_email = $user_login;
     $user_pass = $_POST['user_password'];
-    $user_cpf = $_POST['user_cpf']; //falta validar
+    $user_cpf = $_POST['user_cpf']; 
     $user_UF = $_POST['user_UF'];
     $user_setorial = $_POST['user_setorial'];
     $user_tipo = $_POST['user_tipo']; 
     $user_name = $_POST['user_name'];
-    $user_birth = $_POST['user_birth']; //falta validar
+    $user_birth = $_POST['user_birth'];
+    $user_confirm_informations = $_POST['user_confirm_informations'];
     
     $register_errors = array();
     $form = 'register';
@@ -73,6 +74,10 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
             if( $valid_birth !== true )
                 $register_errors['birth'] = $valid_birth . "<br/>";     
         }
+
+        /* declaração de veracidade */
+        if( strlen( $user_confirm_informations )==0)
+            $register_errors['user_birth'] = __('Você precisa afirmar que os dados são verdadeiros.<br/>', 'tnb');
         
         
         if(!sizeof($register_errors)>0){
@@ -97,6 +102,7 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
                 add_user_meta($user_id, 'date_birth', convert_format_date($user_birth)); 
                 add_user_meta($user_id, 'setorial', $user_setorial);
                 add_user_meta($user_id, 'uf-setorial', $user_UF . '-' . $user_setorial);
+                add_user_meta($user_id, 'user_confirm_informations', $user_confirm_informations);
     			
     			if ($user_tipo == 'candidato')
     				add_user_meta($user_id, 'e_candidato', true);

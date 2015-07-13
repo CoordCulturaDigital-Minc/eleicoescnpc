@@ -97,6 +97,9 @@
 
             var $me = $(this);
 
+            if( $me.is('input[type="checkbox"]'))
+                $me.prop("checked") ? '' : $me.val("0");
+
             var values = {'action': 'setoriaiscnpc_register_verify_field'};
             values['user_type'] = $('input[name="user_tipo"]:checked').val();
             values[this.name] = $me.val();
