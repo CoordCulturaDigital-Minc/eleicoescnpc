@@ -26,7 +26,7 @@
 
 	<?php else : ?>
 
-		<div class="entry-content cf">
+		<div class="entry-content">
 			<?php the_content( __( 'To be continued&hellip;', 'historias' ) ); ?>
 			<?php wp_link_pages( 'before=<div class="page-link">' . __( 'Pages:', 'historias' ) . '&after=</div>' ) ?>
 		</div><!-- /entry-content -->

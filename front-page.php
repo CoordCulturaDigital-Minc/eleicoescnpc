@@ -5,7 +5,7 @@
  *
  */
     
-get_header(); the_post(); ?>
+get_header(); the_post();/* ?>
 
         <div class="features  features--subscriptions">
             <?php if ( '' != get_the_post_thumbnail() ) : ?>
@@ -28,10 +28,10 @@ get_header(); the_post(); ?>
             <?php endif; ?>
         </div>
 
-        <?php include ( get_template_directory() . '/sidebar.php'); ?>
+        <?php */ get_sidebar(); ?>
 
         <?php 
-
+	        
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
             $args = array(
@@ -44,21 +44,22 @@ get_header(); the_post(); ?>
             
             $query = new WP_Query( $args ); ?>
 
-            <div class="content">
+            <section class="content">
 
                 <?php if ( $query->have_posts() ) : ?>
 
                     <?php while ( $query->have_posts() ) : $query->the_post(); ?>
 
-                        <?php get_template_part( 'content', 'loop' ); ?>
+                        <?php get_template_part( 'content', false ); ?>
 
                     <?php endwhile; ?>
 
                     <?php wp_reset_postdata(); ?>
+                    
                 <?php endif; ?>
 
                 <?php historias_content_nav( 'nav-below' ); ?>
-            </div><!-- /content -->
+            </section>
 
 
 <?php get_footer(); ?>

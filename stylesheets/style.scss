@@ -30,6 +30,7 @@ $cor-beige:				lighten($cor-marrom, 30%);
 $cor-beige-claro:		#eeece6;
 
 $cor-cinza-claro:		#f4f4f4;
+$cor-cinza-escuro:		darken(#f4f4f4, 30%);
 
 @import 'base';
 @import 'links';
@@ -45,6 +46,7 @@ $cor-cinza-claro:		#f4f4f4;
 @import 'utility_classes';
 @import 'asides';
 @import 'header';
+@import 'section';
 
 @import 'mapa';
 @import 'forum';

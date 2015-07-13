@@ -1,0 +1,60 @@
+section {
+	header {
+		@include clearfix ();
+	}
+	header, .entry-summary {
+		margin-right: 190px;
+	}
+	article {
+		span.entry-date {
+			float: right;
+		}
+	}
+	.featured-media {
+		position: relative;
+	    display: block;
+	    float: left;
+	    margin: 20px 20px 10px 0px;
+		
+		margin-top: -40px;
+		float: right;
+		
+	}
+}
+
+.content--full {
+    float: none;
+
+    width: 100%;
+    padding: 0 1.5rem;
+}
+
+.content--sidebarless {
+    float: none;
+}
+
+.featured-media a, .featured-media img {
+  display: block;
+}
+
+@media only screen and (min-width: 40em) {
+	.content {
+        float: left;
+        
+        @include clearfix ();
+
+        width: 65.63%;
+    }
+
+    .content--full {
+        float: none;
+
+        width: 100%;
+        padding: 0 1.5rem;
+    }
+
+    .content--sidebarless {
+        float: none;
+        width: 90%;
+    }
+}

@@ -1,9 +1,11 @@
-<?php if ( is_active_sidebar( 'primary-widget-area' ) ) : ?>
+<?php
 
-	<div class="asides widget-area">
-		<?php if ( is_active_sidebar( 'primary-widget-area' ) )
-			dynamic_sidebar( 'primary-widget-area' );
-		?>
-	</div><!-- /asides -->
+if ( is_active_sidebar( 'primary-widget-area' ) ) :
 
-<?php endif; ?>
+	?><div class="asides widget-area"><?php
+	
+	if ( is_active_sidebar( 'primary-widget-area' ) ) dynamic_sidebar( 'primary-widget-area' );
+	
+	?></div><?php
+
+endif; ?>
