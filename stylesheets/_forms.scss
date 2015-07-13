@@ -4,18 +4,14 @@ select,
 textarea {
     font-family: inherit;
     font-size: 100%;
-
     margin: 0;
-
     vertical-align: baseline;
-
     *vertical-align: middle;
 }
 
 button,
 input {
     line-height: normal;
-
     *overflow: visible;
 }
 
@@ -24,9 +20,7 @@ html input[type='button'],
 input[type='reset'],
 input[type='submit'] {
     line-height: 1;
-
     cursor: pointer;
-
     -webkit-appearance: button;
 }
 
@@ -38,7 +32,6 @@ input[type='radio'] {
 
 input[type='search'] {
     box-sizing: content-box;
-
     -webkit-appearance: textfield;
 }
 
@@ -49,7 +42,6 @@ input[type='search']::-webkit-search-decoration {
 button::-moz-focus-inner,
 input::-moz-focus-inner {
     padding: 0;
-
     border: 0;
 }
 
@@ -62,13 +54,11 @@ textarea {
 
 fieldset {
     padding: 0;
-
     border: none;
 }
 
 textarea {
     overflow: auto;
-
     vertical-align: top;
 }
 

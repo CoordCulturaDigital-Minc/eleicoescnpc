@@ -1,8 +1,48 @@
-<div class="asides">
+<?php
 
-<aside class="widget">
+/**
+ * Copyright (c) 2015 Tiago Mergulhão
+ *
+ * Written by Tiago Mergulhão <me@tmergulhao.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the
+ * Free Software Foundation, Inc.,
+ * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ *
+ * Public License can be found at http://www.gnu.org/copyleft/gpl.html
+ *
+ * Plugin Name: CNPC Login widget
+ * Plugin URI: http://homologvotacnpc.cultura.gov.br/
+ * Description: Just a simple login widget for wordpress
+ * Author: Tiago Mergulhão
+ * Version: 2015.07.10
+ * Author URI: http://tmergulhao.com/
+ * License: GPL2
+ */
+
+class CNPC_Widget_Login extends WP_Widget
+{
+	function form ( $instance ) {}
 	
-	<?php if ( is_user_logged_in() ) : global $user_ID; ?>
+	function update ( $new_instance, $old_instance ) {}
+	
+	function widget ( $args, $instance ) {
+		extract( $args );
+		
+		echo $before_widget;
+		
+		if ( is_user_logged_in() ) : global $user_ID; ?>
         <?php $user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $user_ID ) ); ?>
         <h3 class="widget__title"><?php printf( __('Olá, %s!', 'historias' ), $user_meta['nickname']); ?></h3>
     <?php else : ?>
@@ -39,7 +79,8 @@
         <?php endif; ?>
         <p>Para sair, <a href="<?php echo wp_logout_url( get_permalink() ); ?>" title="Logout">clique aqui</a>.</p>
     <?php else : ?>
-        
+    	
+        <div class="login-form">
         <?php wp_login_form(
 	        array( 		'label_username' => __( 'Usuário ou email' ),
 	        			'label_password' => ('Senha'),
@@ -50,12 +91,17 @@
         <a href="<?php echo wp_lostpassword_url( get_permalink() ); ?>" class="lost-password"><?php _e( 'Esqueci a senha', 'historias' ); ?></a>
         
         <a href="<?php bloginfo('siteurl'); ?>/inscricoes" class="button"><?php _e( 'Inscrever-me', 'historias' ); ?></a>
-        
-    <?php endif; ?>
-</aside>
+        </div>
+    <?php endif;
+		
+		echo $after_widget;
+	}
+	
+	function CNPC_Widget_Login () {
+		parent::WP_Widget(false, $name = __('CNCP Widget Login', 'CNPC_Widget_Login'));
+	}
+}
 
-<?php if ( is_active_sidebar( 'primary-widget-area' ) )
-	dynamic_sidebar( 'primary-widget-area' );
+add_action ('widgets_init', create_function('', 'return register_widget("CNPC_Widget_Login");'));
+
 ?>
-
-</div>

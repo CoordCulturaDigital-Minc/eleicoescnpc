@@ -33,3 +33,13 @@
     background: 	-ms-linear-gradient(top, $start 0%,$stop 100%); /* IE10+ */
     background: 		linear-gradient(to bottom, $start 0%,$stop 100%); /* W3C */
 }
+
+@mixin clearfix () {
+	&:after {
+		content: ".";
+		display: block;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+    }
+}

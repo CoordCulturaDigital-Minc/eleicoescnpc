@@ -32,6 +32,7 @@ function historias_setup() {
 	// widgets
 	require_once( get_template_directory() . '/widgets/cnpc-widget-custom-page.php' );
 	require_once( get_template_directory() . '/widgets/cnpc-widget-setoriais-menu.php' );
+	require_once( get_template_directory() . '/widgets/cnpc-widget-login.php' );
 	
 
 
