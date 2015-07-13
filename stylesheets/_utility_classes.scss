@@ -10,7 +10,6 @@
     display: none;
 }
 
-
 @media only screen and (min-width: 40em) {
     .site-wrap {
         overflow: visible;
@@ -18,28 +17,9 @@
         margin: 0px auto;
     }
 
-    .content {
-        float: left;
-
-        width: 65.63%;
-    }
-
-    .content--full {
-        float: none;
-
-        width: 100%;
-        padding: 0 1.5rem;
-    }
-
-    .content--sidebarless {
-        float: none;
-        width: 90%;
-    }
-
     .asides {
         float: right;
         width: 31.05%;
-        /*width: 28%;*/
     }
 
     .site-footer {

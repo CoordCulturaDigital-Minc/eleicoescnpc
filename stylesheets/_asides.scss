@@ -8,6 +8,14 @@ aside {
     border-radius: 5px;
     background-color: $cor-beige-claro;
     
+    & > a,
+    & > ul,
+    & > p,
+    & > ol,
+    & > div {
+	    margin-left: 16px;
+    }
+    
 	&:after {
 		content: ".";
 		display: block;
@@ -16,22 +24,39 @@ aside {
 		visibility: hidden;
     }
     
-    p {
-	    margin-left: 1rem;
+    p { 
 	    margin-right: 1rem;
     }
     
-    a {
-	    margin-left: 1rem;
-	    
+    a { 
 	    color: $cor-marrom;
 	    &:hover {
 		    color: $cor-beige;
 		}
+		
+		&.button {
+			float: right;
+			margin-right: 16px;
+			margin-bottom: 16px;
+			
+			@include clearfix ();
+		}
+		
+		&.lost-password {
+			font-size: .88rem;
+		    line-height: 1.71;
+		
+		    display: block;
+		    
+		    margin-top: -40px;
+		    margin-bottom: 17px;
+		}
 	}
     
     ul {
-	    margin: 1.5rem 1rem 1em 1.5rem;
+	    margin-top: 1.5rem;
+	    margin-bottom: 1em;
+	    margin-right: 1em;
 	    
 	    font-size: .88rem;
 	    line-height: 1.71;
@@ -93,27 +118,6 @@ aside {
 			@extend .button;
 		}
 		
-		@include clearfix ();
-	}
-	
-	a.button {
-		float: right;
-		margin-right: 16px;
-		margin-bottom: 16px;
-	}
-	
-	a.lost-password {
-		font-size: .88rem;
-	    line-height: 1.71;
-	
-	    display: block;
-	    
-	    margin-top: -40px;
-	    margin-bottom: 17px;
-	    margin-left: 16px;
-	}
-	
-	a.button {
 		@include clearfix ();
 	}
 }

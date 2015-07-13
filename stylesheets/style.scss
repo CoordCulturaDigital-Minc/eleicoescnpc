@@ -23,12 +23,14 @@ $cor-verde-claro: 		rgb(113, 148, 22);
 $cor-verde-musgo:		#52660b;			// H1 da lista de postagem
 $cor-verde: 			rgb(18, 91, 38);
 
-$cor-amarelo:			rgb(255, 206, 0);	// H# do banner
+$cor-amarelo:			rgb(255, 206, 0);
+$cor-laranja:			#ffae16;
 $cor-marrom:			#826815;
 $cor-beige:				lighten($cor-marrom, 30%);
 $cor-beige-claro:		#eeece6;
 
 $cor-cinza-claro:		#f4f4f4;
+$cor-cinza-escuro:		darken(#f4f4f4, 30%);
 
 @import 'base';
 @import 'links';
@@ -43,6 +45,8 @@ $cor-cinza-claro:		#f4f4f4;
 @import 'consultants';
 @import 'utility_classes';
 @import 'asides';
+@import 'header';
+@import 'section';
 
 @import 'mapa';
 @import 'forum';
