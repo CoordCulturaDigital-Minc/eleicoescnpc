@@ -2308,18 +2308,24 @@ img.aligncenter {
 aside {
   color: #826815;
   margin-bottom: 2rem;
-  padding-bottom: 18px;
   border-radius: 5px;
   background-color: #eeece6; }
+  aside:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
   aside p {
     margin-left: 1rem;
     margin-right: 1rem; }
   aside a {
+    margin-left: 1rem;
     color: #826815; }
     aside a:hover {
       color: #e2bf4e; }
   aside ul {
-    margin: 1.5rem 1rem 0em 1.5rem;
+    margin: 1.5rem 1rem 1em 1.5rem;
     font-size: .88rem;
     line-height: 1.71;
     list-style: none; }
@@ -2356,12 +2362,37 @@ aside {
     color: #888; }
   aside form p {
     margin-top: 0.3em; }
+    aside form p.login-submit {
+      float: right; }
   aside form .input {
     font-size: .88rem;
     width: 100%;
     padding: 0.8em;
     border: 1px solid #ededed;
     background: #fff; }
+  aside form:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+  aside a.button {
+    float: right;
+    margin-right: 16px;
+    margin-bottom: 16px; }
+  aside a.lost-password {
+    font-size: .88rem;
+    line-height: 1.71;
+    display: block;
+    margin-top: -40px;
+    margin-bottom: 17px;
+    margin-left: 16px; }
+  aside a.button:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
 
 #mapa {
   position: relative; }

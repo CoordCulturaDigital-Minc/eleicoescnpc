@@ -4,10 +4,17 @@ $cor-verde-fim:		rgba(12,69,26,1);
 aside {
     color: $cor-marrom;
     margin-bottom: 2rem;
-    padding-bottom: 18px;
 
     border-radius: 5px;
     background-color: $cor-beige-claro;
+    
+	&:after {
+		content: ".";
+		display: block;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+    }
     
     p {
 	    margin-left: 1rem;
@@ -15,6 +22,8 @@ aside {
     }
     
     a {
+	    margin-left: 1rem;
+	    
 	    color: $cor-marrom;
 	    &:hover {
 		    color: $cor-beige;
@@ -22,7 +31,7 @@ aside {
 	}
     
     ul {
-	    margin: 1.5rem 1rem 0em 1.5rem;
+	    margin: 1.5rem 1rem 1em 1.5rem;
 	    
 	    font-size: .88rem;
 	    line-height: 1.71;
@@ -64,6 +73,10 @@ aside {
 		
 		p {
 		    margin-top: 0.3em;
+		    
+		    &.login-submit {
+			    float: right;
+		    }
 		}
 		
 		.input {
@@ -79,5 +92,28 @@ aside {
 		input.button-primary {
 			@extend .button;
 		}
+		
+		@include clearfix ();
+	}
+	
+	a.button {
+		float: right;
+		margin-right: 16px;
+		margin-bottom: 16px;
+	}
+	
+	a.lost-password {
+		font-size: .88rem;
+	    line-height: 1.71;
+	
+	    display: block;
+	    
+	    margin-top: -40px;
+	    margin-bottom: 17px;
+	    margin-left: 16px;
+	}
+	
+	a.button {
+		@include clearfix ();
 	}
 }

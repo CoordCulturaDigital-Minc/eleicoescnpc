@@ -79,7 +79,8 @@ class CNPC_Widget_Login extends WP_Widget
         <?php endif; ?>
         <p>Para sair, <a href="<?php echo wp_logout_url( get_permalink() ); ?>" title="Logout">clique aqui</a>.</p>
     <?php else : ?>
-        
+    	
+        <div class="login-form">
         <?php wp_login_form(
 	        array( 		'label_username' => __( 'Usuário ou email' ),
 	        			'label_password' => ('Senha'),
@@ -90,7 +91,7 @@ class CNPC_Widget_Login extends WP_Widget
         <a href="<?php echo wp_lostpassword_url( get_permalink() ); ?>" class="lost-password"><?php _e( 'Esqueci a senha', 'historias' ); ?></a>
         
         <a href="<?php bloginfo('siteurl'); ?>/inscricoes" class="button"><?php _e( 'Inscrever-me', 'historias' ); ?></a>
-        
+        </div>
     <?php endif;
 		
 		echo $after_widget;
