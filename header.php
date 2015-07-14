@@ -14,13 +14,13 @@
     <title><?php wp_title( '&mdash;', true, 'right' ); ?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<meta name="viewport" content="width=device-width">
-
-	<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>?ver=2">
-
-	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	
 	<?php require_once 'includes/jquery.php';?>
 	<?php require_once 'includes/twitter_bootstrap.php'; ?>
+	<?php require_once 'includes/font_awesome.php'; ?>
+
+	<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>?ver=2">
+	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
 	<?php wp_head(); ?>
 </head>
