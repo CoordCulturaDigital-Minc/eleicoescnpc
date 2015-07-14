@@ -2171,21 +2171,21 @@ footer.site-footer div {
       text-align: center; }
   .features--subscriptions .feature__title {
     position: absolute;
-    top: 20px;
+    top: 24px;
     left: 0;
     color: #ffce00;
     font-size: 64px;
     font-weight: bold;
     text-align: right;
     text-transform: uppercase;
-    padding: 0px 10% 10px 0px;
+    padding: 10px 10% 10px 0px;
     margin: 0px;
     line-height: 1;
     border-top: 2px solid #596c18;
     width: 100%; }
   .features--subscriptions .feature__status {
     position: absolute;
-    top: 90px;
+    top: 110px;
     right: 0;
     padding: 0px 10% 10px 0px;
     margin: 0px;

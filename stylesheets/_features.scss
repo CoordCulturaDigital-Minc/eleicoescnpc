@@ -236,7 +236,7 @@
 
     .feature__title {
         position: absolute;
-        top: 20px;
+        top: 24px;
         left: 0;
         
         color: $cor-amarelo;
@@ -246,7 +246,7 @@
         text-align: right;
         text-transform: uppercase;
 
-        padding: 0px 10% 10px 0px;
+        padding: 10px 10% 10px 0px;
         margin: 0px; 
         line-height: 1;
 
@@ -258,10 +258,9 @@
     .feature__status {
 
         position: absolute;
-        top: 90px;
+        top: 110px;
         right: 0;
 
-        // padding: 1em;
         padding: 0px 10% 10px 0px;
         margin: 0px;
         width: 100%;
