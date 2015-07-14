@@ -1,47 +1,12 @@
-.menu--main {
-	float: left;
-	text-align: right;
-}
-.menu--user {
-	float: right;
-	text-align: left;
-}
-
-.menu--user {
-	a {
-	    font-size: 14px;
-	
-	    color: #175823;
-	    text-shadow: none;
-	
-	    padding: 0px 5px;
-	    
-	    &:hover {
-		    color: #175823;
-		    text-decoration: none;
-		}
-	}
-	
-	.menu__title {
-	    font-size: 14px;
-	    padding: 0px 0.3em;
-	
-	}
-}
-
 nav {
-	border-bottom: 1px solid #dedede;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-family: $fonte-principal-bold;
 	
-	font-weight: normal;
-    font-size: 20px;
     margin-top: 7rem;
     
     &.opened {
 	    max-height: 9999px;
-	}
-	
-	ul, ol {
-		list-style: none;
 	}
 	
 	ul {
@@ -57,8 +22,7 @@ nav {
 		a {
 		    position: relative;
 		    display: block;
-		    margin-left: 1.3em;
-		    color: $cor-laranja;
+		    
 		}
 		
 		.current-cat,
@@ -86,11 +50,35 @@ nav {
 		.current-menu-ancestor {
 		    position: static;
 		}
+	}
+	
+	.menu--main {
+		float: left;
+		text-align: right;
 		
+		a {
+			margin-right: 1.3em;
+			
+			color: $cor-laranja;
+			&:hover {
+			    color: $cor-laranja-escuro;
+			}
+		}
+	}
+	.menu--user {
+		float: right;
+		text-align: left;
+		
+		a {
+			margin-left: 1.3em;
+			
+			color: $cor-verde;
+			&:hover {
+			    color: $cor-verde-musgo;
+			}
+		}
 		.menu__title {
-		    padding: 0 1.3em;
-		
-		    color: #175823;
+		    color: $cor-verde-musgo;
 		}
 	}
 }
