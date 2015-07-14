@@ -1,12 +1,8 @@
 header.site_header {
-	@include clearfix ();
-	
-	position: relative;
-	
 	margin-bottom: 3rem;
     
     background-repeat: no-repeat;
-    height: 202px;
+    height: 250px;
     
     padding-top: 55px;
     
@@ -44,7 +40,7 @@ header.site_header {
         
         form#search {
             float: right;
-            margin-top: 10px;
+            margin-top: 30px;
 
             a {
                 min-width: 500px;
@@ -159,15 +155,6 @@ header.site_header {
 	}
 }
 
-.menu--main {
-    font-size: 1.25rem;
-    line-height: 2.4;
-    margin: 0;
-    position: relative;
-	border-bottom: 1px solid #dedede;
-    text-align: right;
-}
-
 .menu--sub {
     font-size: 1rem;
     line-height: 1.44;
@@ -183,44 +170,6 @@ header.site_header {
 
 @media screen and (min-width: 40em) {
 	.menu--sub {
-        float: right;
-    }
-
-}
-
-.menu--user {
-    position: absolute;
-    top: 10px;
-    right: 0px;
-
-    font-size: 1rem;
-    line-height: 1.44;
-
-    background-color: none;
-
-	a {
-	    font-size: 14px;
-	
-	    color: #175823;
-	    text-shadow: none;
-	
-	    padding: 0px 5px;
-	    
-	    &:hover {
-		    color: #175823;
-		    text-decoration: underline;
-		}
-	}
-	
-	.menu__title {
-	    font-size: 14px;
-	    padding: 0px 0.3em;
-	
-	}
-}
-
-@media screen and (min-width: 40em) {
-	.menu--user {
         float: right;
     }
 
@@ -282,44 +231,4 @@ header.site_header {
 	    	background: #ededed;
 	    }
 	}
-}
-
-.menu {
-	.current_page_item,
-	.current-menu-ancestor {
-		& > .sub-menu {
-			position: static;
-		    z-index: 8888;
-		
-		    background-color: #ededed;
-		    box-shadow: none;
-		    clip: inherit;
-		    overflow: inherit;
-		    height: inherit;
-		    width: inherit;
-		}
-	}
-}
-
-@media screen and (min-width: 40em) {
-    .menu-item:hover > .sub-menu {
-        clip: inherit;
-        overflow: inherit;
-        height: inherit;
-        width: inherit;
-    }
-
-    .menu {
-	    .current_page_item > .sub-menu,
-		.current-menu-ancestor > .sub-menu {
-	        position: absolute;
-	        top: 100%;
-	        left: 0;
-	        right: 0;
- 	        border-bottom: 1px solid #ccc;
-	        li {
-		        float: left;
-	        }
-	    }
-    }
 }

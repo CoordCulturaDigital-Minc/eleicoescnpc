@@ -1,8 +1,40 @@
+.menu--main {
+	float: left;
+	text-align: right;
+}
+.menu--user {
+	float: right;
+	text-align: left;
+}
+
+.menu--user {
+	a {
+	    font-size: 14px;
+	
+	    color: #175823;
+	    text-shadow: none;
+	
+	    padding: 0px 5px;
+	    
+	    &:hover {
+		    color: #175823;
+		    text-decoration: none;
+		}
+	}
+	
+	.menu__title {
+	    font-size: 14px;
+	    padding: 0px 0.3em;
+	
+	}
+}
+
 nav {
+	border-bottom: 1px solid #dedede;
+	
 	font-weight: normal;
-    clear: both;
     font-size: 20px;
-    margin-top: -3rem;
+    margin-top: 7rem;
     
     &.opened {
 	    max-height: 9999px;
@@ -13,8 +45,10 @@ nav {
 	}
 	
 	ul {
-	    clear: both;
-	
+		font-size: 1.25rem;
+		line-height: 2.4;
+		margin: 0;
+		
 		& > li {
 		    margin: 0;
 		    text-align: right;
@@ -59,4 +93,44 @@ nav {
 		    color: #175823;
 		}
 	}
+}
+
+.menu {
+	.current_page_item,
+	.current-menu-ancestor {
+		& > .sub-menu {
+			position: static;
+		    z-index: 8888;
+		
+		    background-color: #ededed;
+		    box-shadow: none;
+		    clip: inherit;
+		    overflow: inherit;
+		    height: inherit;
+		    width: inherit;
+		}
+	}
+}
+
+@media screen and (min-width: 40em) {
+    .menu-item:hover > .sub-menu {
+        clip: inherit;
+        overflow: inherit;
+        height: inherit;
+        width: inherit;
+    }
+
+    .menu {
+	    .current_page_item > .sub-menu,
+		.current-menu-ancestor > .sub-menu {
+	        position: absolute;
+	        top: 100%;
+	        left: 0;
+	        right: 0;
+ 	        border-bottom: 1px solid #ccc;
+	        li {
+		        float: left;
+	        }
+	    }
+    }
 }

@@ -40,10 +40,10 @@
 
 	<div class="site-wrap">
 
-	<header class="site_header">
+	<header class="site_header clearfix">
 		<a href="#main" title="<?php esc_attr_e( 'Skip to content', 'historias' ); ?>" class="assistive-text"><?php _e( 'Skip to content', 'historias' ); ?></a>
 
-		<div class="branding">
+		<div class="branding clearfix">
 			<a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
                 <?php
                     $logo = get_theme_mod('site_logo');
@@ -65,12 +65,12 @@
 	        </form>
 		</div>
 		
-        <nav class="access cf js-access" role="navigation">
+        <nav class="access clearfix js-access" role="navigation">
             <?php if ( wp_is_mobile() ) :
                 wp_nav_menu( array( 'theme_location' => 'mobile', 'container' => false, 'menu_class' => 'menu--mobile  menu', 'fallback_cb' => false ) );
             else : ?>
                 <?php if ( is_user_logged_in() ) : global $user_login; ?>
-                    <ul id="menu-user" class="menu--user  menu  cf">
+                    <ul id="menu-user" class="menu--user  menu">
                         <li class="menu__title"><?php printf( __('Hello, %s!', 'historias' ), $user_login ); ?></li>
                         <?php if ( current_user_can( 'level_10' ) ) : ?>
                             <li><a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
@@ -89,9 +89,9 @@
                 <?php endif; ?>
                 
 
-                <?php wp_nav_menu( array( 'theme_location' => 'secondary', 'container' => false, 'menu_class' => 'menu--sub  menu  cf', 'fallback_cb' => false ) ); ?>
+                <?php wp_nav_menu( array( 'theme_location' => 'secondary', 'container' => false, 'menu_class' => 'menu--sub  menu', 'fallback_cb' => false ) ); ?>
 
-                <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu--main  menu  cf', 'fallback_cb' => 'default_menu' ) ); ?>
+                <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu--main  menu', 'fallback_cb' => 'default_menu' ) ); ?>
             <?php endif; ?>
         </nav>
     </header><!-- /site-header -->
