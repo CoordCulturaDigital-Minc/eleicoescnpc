@@ -1966,7 +1966,7 @@ aside {
       margin-top: -40px;
       margin-bottom: 17px; }
   aside ul {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     margin-bottom: 1em;
     margin-right: 1em;
     font-size: .88rem;
@@ -1998,6 +1998,9 @@ aside {
     /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f6f3a', endColorstr='#0c451a',GradientType=0 );
     /* IE6-9 */ }
+  aside .widget-body {
+    margin-top: 14px;
+    margin-bottom: 14px; }
   aside form {
     *zoom: 1; }
     aside form label {

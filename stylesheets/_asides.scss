@@ -54,7 +54,7 @@ aside {
 	}
     
     ul {
-	    margin-top: 1.5rem;
+	    margin-top: 1rem;
 	    margin-bottom: 1em;
 	    margin-right: 1em;
 	    
@@ -85,6 +85,11 @@ aside {
 	    
 	    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f6f3a', endColorstr='#0c451a',GradientType=0 ); /* IE6-9 */
 	}
+    
+    .widget-body {
+        margin-top: 14px;
+        margin-bottom: 14px;
+    }
 	
 	form {
 		label {
