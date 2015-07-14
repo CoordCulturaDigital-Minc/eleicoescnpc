@@ -335,21 +335,24 @@ function historias_comment( $comment, $args, $depth ) {
     ?>
     <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
         <article id="comment-<?php comment_ID(); ?>" class="comment-container">
-            <div class="comment-content">
-            	<?php comment_text(); ?>
-            </div><!-- /comment-content -->
-
-            <footer class="comment-meta vcard">
-            	<div class="comment-author-avatar">
-            		<?php echo get_avatar( $comment, 96 ); ?>
-            	</div>
+            <div class="vcard">
+				<div class="comment-author-avatar">
+					<?php echo get_avatar( $comment, 96 ); ?>
+				</div>
+			</div>
+			
+			<header class="comment-meta">
             	<cite class="fn">
 	            	<?php echo get_comment_author_link(); ?>
             	</cite>
             	<?php comment_reply_link( array_merge( $args, array( 'reply_text' => '<i class="fa fa-reply"></i>', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
             	<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>" title="<?php printf( __( '%1$s at %2$s', 'historias' ), get_comment_date(), get_comment_time() ); ?>" class="comment-permalink"><i class="fa fa-check"></i><span class="assistive-text"><? _e('Permalink', 'historias'); ?></span></a>
             	<?php edit_comment_link( sprintf( __( '%s Edit', 'historias' ), '<i class="fa fa-pencil"></i>' ) ); ?>
-            </footer>
+            </header>
+			
+			<div class="comment-content">
+            	<?php comment_text(); ?>
+            </div><!-- /comment-content -->
 
             <?php if ( $comment->comment_approved == '0' ) : ?>
             	<em class="comment-on-hold"><?php _e( 'Your comment is awaiting moderation.', 'historias' ); ?></em>

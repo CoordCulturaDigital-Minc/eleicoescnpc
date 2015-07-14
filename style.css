@@ -877,10 +877,11 @@ img.aligncenter {
 .comment-content {
   line-height: 1.5;
   position: relative;
+  float: right;
+  width: 85%;
   margin-bottom: 16px;
   margin-bottom: 1rem;
-  padding: 24px;
-  padding: 1.5rem;
+  padding: 0px;
   border-radius: 1rem;
   background: #f5f5f5; }
   .comment-content:after {
@@ -912,12 +913,15 @@ img.aligncenter {
   padding: 0 1.5rem;
   color: #999; }
 
-.comment-author-avatar {
+.vcard {
   float: left;
-  margin-right: .75em; }
-  .comment-author-avatar, .comment-author-avatar img {
-    width: 48px;
-    height: 48px; }
+  width: 15%; }
+  .vcard .comment-author-avatar {
+    float: left;
+    margin-right: .75em; }
+    .vcard .comment-author-avatar, .vcard .comment-author-avatar img {
+      width: 87px;
+      height: 86px; }
 
 .comment-meta .fn {
   font-style: normal;
@@ -939,7 +943,11 @@ img.aligncenter {
   display: inline-block;
   display: -moz-inline-stack;
   zoom: 1;
+  float: right;
   *display: inline; }
+
+.comment-permalink {
+  float: right; }
 
 .comments-list .byuser .comment-content, .comments-list .bypostauthor .comment-content {
   color: #333; }
