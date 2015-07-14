@@ -18,6 +18,9 @@
 	<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>?ver=2">
 
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+	
+	<?php require_once 'includes/jquery.php';?>
+	<?php require_once 'includes/twitter_bootstrap.php'; ?>
 
 	<?php wp_head(); ?>
 </head>
