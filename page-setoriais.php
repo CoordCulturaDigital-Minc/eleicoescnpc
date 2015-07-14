@@ -14,7 +14,6 @@
 			</div>
 		</article><!-- /page-<?php the_ID(); ?> -->
 
-		<?php comments_template('', true); ?>
 	</div><!-- /content -->
 
 <?php get_footer(); ?>
