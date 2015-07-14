@@ -1938,10 +1938,8 @@ section {
         content: " "; }
       section article header:after {
         clear: both; }
-      section article header h2 {
-        max-width: 70%; }
-        section article header h2 a {
-          font-size: 32px; }
+      section article header h2 a {
+        font-size: 32px; }
       section article header span.entry-date {
         font-size: 14px; }
     section article .featured-media {
