@@ -1,22 +1,14 @@
 <?php get_header(); ?>
-
 	<div class="content">
-
-	    <?php if ( have_posts() ) : ?>
-
-	        <?php while ( have_posts() ) : the_post(); ?>
-
-	        	<h2 class="entry-title">
-					<a href="<?php the_permalink(); ?>" title="<?php printf( __('Read, comment and share &ldquo;%s&rdquo;', 'historias'), the_title_attribute('echo=0') ); ?>" rel="bookmark">
-						<?php the_title(); ?>
-					</a>
-				</h2>
-
-	        <?php endwhile; ?>
-
-	    <?php endif; ?>
-
-		<?php historias_content_nav( 'nav-below' ); ?>
+		<article id="<?php echo get_query_var('term'); ?>">
+			<div class="hentry-wrap">
+				<h1 class="entry-title"><?php single_term_title('Selecione o estado da Setorial de '); ?></h1>
+				<div class="entry-content">
+					<?php include( get_template_directory() . '/includes/mapa.php' ) ?>
+				</div><!-- /entry-content -->
+				<a href="<?php echo site_url(); ?>" id="term_link" class="hidden"></a>
+			</div>
+		</article><!-- /page-<?php the_ID(); ?> -->
 	</div><!-- /content -->
 
 <?php get_sidebar(); ?>

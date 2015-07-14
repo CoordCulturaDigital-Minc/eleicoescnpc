@@ -6,7 +6,7 @@
 		
 		// mapa nas páginas
 	    $(".page #mapa .estado").click(function(e){
-	       
+
 	        var state = $(this).find('path').attr('id');
 	       
 	        $('.menu-setoriais-container').hide(); 
@@ -32,6 +32,13 @@
 	    	$('.widget_cnpc_login .widget-body').slideToggle();
 	    });
 
+	   $('#mapa a.estado').each(function(){
+	   		var term_link	= $('#term_link').attr('href');
+	   		var estado 		= $(this).find('path').attr('id');
+		 	var setorial 	= $('.content article').attr('id');
+			 
+			$(this).attr('xlink:href', term_link + '/foruns/' + estado + '-' + setorial );
+		});
 	
 	});
 })(jQuery);
