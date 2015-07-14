@@ -8,7 +8,7 @@
 
 get_header(); ?>
 
-	<section class="content content-full">
+	<section class="content content--full">
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
