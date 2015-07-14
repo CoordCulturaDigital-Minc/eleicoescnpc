@@ -33,7 +33,7 @@ $subscriptions = list_subscriptions(
 
 <?php get_header(); ?>
 
-    <div class="content  content--full">
+    <section class="content content--full">
         <?php if(count($errors->errors) > 0): ?>
             <ul class="error">
             <?php foreach($errors->get_error_messages() as $message): ?>
@@ -120,6 +120,6 @@ $subscriptions = list_subscriptions(
             <?php endforeach;?>
             </tbody>
         </table>
-    </div>
+    </section>
 
 <?php get_footer(); ?>

@@ -1,7 +1,14 @@
+
 section {
 	float: right;
 	width: 65.63%;
 	
+	&.content--full,
+	&.content--sidebarless {
+		float: none;
+		width: 100%;
+	}
+
 	article {
 		margin-top: 0 !important;
 		margin-bottom: 0 !important;

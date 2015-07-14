@@ -1,6 +1,6 @@
 <?php get_header(); the_post(); ?>
 
-	<div class="content  content--sidebarless">
+	<section class="content">
 
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<div class="hentry-wrap">
@@ -13,6 +13,6 @@
 		</article><!-- /page-<?php the_ID(); ?> -->
 
 		<?php comments_template('', true); ?>
-	</div><!-- /content -->
+	</section><!-- /content -->
 
 <?php get_footer(); ?>

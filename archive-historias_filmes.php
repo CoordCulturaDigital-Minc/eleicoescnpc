@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<div class="content  content--sidebarless  media-container">
+<section class="content  content--sidebarless  media-container">
 	<?php if ( have_posts() ) : ?>
 	<?php while ( have_posts() ) : the_post(); ?>
 	<article id="post-<?php the_ID(); ?>" <?php post_class( 'media cf' ); ?>>
@@ -42,5 +42,5 @@
 	<?php endwhile; ?>
 	<?php endif; ?>
 
-</div><!-- /content -->
+</section><!-- /content -->
 <?php get_footer(); ?>

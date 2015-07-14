@@ -3,7 +3,7 @@
 ?>
 <?php get_header(); the_post(); ?>
 
-	<div class="content  content--sidebarless">
+	<section class="content content--sidebarless">
 
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<div class="hentry-wrap">
@@ -14,6 +14,6 @@
 			</div>
 		</article><!-- /page-<?php the_ID(); ?> -->
 
-	</div><!-- /content -->
+	</section><!-- /content -->
 
 <?php get_footer(); ?>

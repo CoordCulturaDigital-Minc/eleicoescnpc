@@ -8,7 +8,7 @@
 
 get_header(); ?>
 
-	<div class="content  content--sidebarless">
+	<section class="content  content--sidebarless">
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
@@ -80,6 +80,6 @@ get_header(); ?>
 			</div>
 		<?php endif; ?>
 		<?php wp_reset_postdata(); ?>
-	</div><!-- /content -->
+	</section><!-- /content -->
 
 <?php get_footer(); ?>

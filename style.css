@@ -1908,6 +1908,9 @@ header.site_header {
 section {
   float: right;
   width: 65.63%; }
+  section.content--full, section.content--sidebarless {
+    float: none;
+    width: 100%; }
   section article {
     margin-top: 0 !important;
     margin-bottom: 0 !important;

@@ -8,7 +8,7 @@
 
 get_header(); ?>
 
-	<div class="content-full">
+	<section class="content content-full">
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
@@ -85,10 +85,7 @@ get_header(); ?>
 				?>
 			
 			
-		<?php endwhile; // end of the loop. ?>
-
-		
-
-</div><!-- #content .site-content --><!-- #primary .content-area -->
+		<?php endwhile; // end of the loop. ?>	
+	</section><!-- #content .site-content --><!-- #primary .content-area -->
 
 <?php get_footer(); ?>

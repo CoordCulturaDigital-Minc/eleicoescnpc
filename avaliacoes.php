@@ -18,7 +18,7 @@
 
 <?php get_header(); ?>
 
-<div class="content  content--full">
+<section class="content  content--full">
 	<h2 class="page__title">Incrições avaliadas</h2>
 
 	<table class="js-sortable-table  inscritos--lista">
@@ -83,5 +83,5 @@
 		</tbody>
 	</table>
 
-</div>
+</section>
 <?php get_footer(); ?>
