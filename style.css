@@ -1917,6 +1917,8 @@ section {
     border-top: 1px solid #fff;
     *zoom: 1;
     position: relative; }
+    section article:first-child {
+      padding: 0px; }
     section article:before, section article:after {
       display: table;
       content: " "; }
@@ -1937,23 +1939,19 @@ section {
       section article header:after {
         clear: both; }
       section article header h2 {
-        float: left;
         max-width: 70%; }
         section article header h2 a {
-          font-size: 24px; }
+          font-size: 32px; }
       section article header span.entry-date {
-        font-size: 14px;
-        float: right; }
+        font-size: 14px; }
     section article .featured-media {
       margin-top: -30px;
       float: right;
       margin-left: 20px; }
     section article p {
-      margin-bottom: 20px; }
+      margin-bottom: 5px; }
       section article p.read-more {
-        position: absolute;
-        bottom: 10px;
-        margin-bottom: 0; }
+        margin-bottom: 10px; }
 
 footer.site-footer div {
   padding: 20px 0; }

@@ -15,6 +15,10 @@ section {
 		
 		padding: 20px 0 0;
 		
+		&:first-child {
+			padding: 0px;
+		}
+
 		@include separation-border ();
 		
 		@include clearfix ();
@@ -39,14 +43,12 @@ section {
 		
 			h2 {
 				a {
-					font-size: 24px;
+					font-size: 32px;
 				}
-				float: left;
                 max-width: 70%;
 			}
 			span.entry-date {
 				font-size: 14px;
-				float: right;
 			}
 		}
 		
@@ -59,12 +61,10 @@ section {
 		position: relative;
 		
 		p {
-			margin-bottom: 20px;
+			margin-bottom: 5px;
 			
 			&.read-more {
-				position: absolute;
-				bottom: 10px;
-				margin-bottom: 0;
+				margin-bottom: 10px;
 			}
 		}
 	}
