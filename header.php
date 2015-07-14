@@ -55,7 +55,7 @@
 		                    <p><?php echo get_option( 'site_tagline' ) ?></p>
 		                </div>
                     <?php else : ?>
-                    	<img class="template-preset" src="<?php echo get_template_directory_uri() . '/assets/cabecalho.svg'; ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />
+                    	<img class="template-preset" src="<?php echo get_template_directory_uri() . '/images/template_header.png'; ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />
                 <?php endif; ?>
             </a>
 
