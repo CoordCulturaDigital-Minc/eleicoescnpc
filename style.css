@@ -1569,10 +1569,6 @@ img.aligncenter {
     overflow: visible;
     margin: 0px auto; }
 
-  .asides {
-    float: right;
-    width: 31.05%; }
-
   .feature__info {
     top: 50%;
     margin: -1.5rem 72px 0 0; }
@@ -1584,6 +1580,10 @@ img.aligncenter {
   .box--news {
     width: 34%;
     margin-top: -1.5rem; } }
+div.asides {
+  float: left;
+  width: 31.05%; }
+
 aside {
   color: #826815;
   margin-bottom: 2rem;
@@ -1926,7 +1926,7 @@ header.site_header {
     .menu .current-menu-ancestor > .sub-menu li {
       float: left; } }
 section {
-  float: left;
+  float: right;
   width: 65.63%; }
   section article {
     margin-top: 0 !important;

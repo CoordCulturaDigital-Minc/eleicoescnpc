@@ -1,6 +1,11 @@
 $cor-verde-inicio:	rgba(31,111,58,1);
 $cor-verde-fim:		rgba(12,69,26,1);
 
+div.asides {
+	float: left;
+    width: 31.05%;
+}
+
 aside {
     color: $cor-marrom;
     margin-bottom: 2rem;
