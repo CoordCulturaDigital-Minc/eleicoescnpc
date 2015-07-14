@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-	<section class="content">
+	<section class="content content--sidebarless">
 		<article id="<?php echo get_query_var('term'); ?>">
 			<div class="hentry-wrap">
 				<h1 class="entry-title"><?php single_term_title('Selecione o estado da Setorial de '); ?></h1>
@@ -11,5 +11,4 @@
 		</article><!-- /page-<?php the_ID(); ?> -->
 	</section><!-- /content -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
