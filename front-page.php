@@ -7,31 +7,33 @@
     
 get_header(); the_post(); ?>
 
-        <div class="features features--subscriptions">
+        <div class="features  features--subscriptions">
+             
             <?php if ( '' != get_the_post_thumbnail() ) : ?>
-                <div class="featured__image">
-                    <?php if( $featureurl = get_post_meta($post->ID,'_meta_feature-url', true) ) : ?>
-                        <a href="<?php echo $featureurl ?>">
-                            <?php the_post_thumbnail( 'large' ); ?>
-                        </a>
-                    <?php else : ?>
-                        <?php the_post_thumbnail( 'large' ); ?>
-                    <?php endif; ?>
-                </div>
-                <?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
-                    <p class="feature__status"><?php echo $status ?></p>
+                <?php if( $featureurl = get_post_meta($post->ID,'_meta_feature-url', true) ) : ?>
+                    <a href="<?php echo $featureurl ?>">
                 <?php endif; ?>
-            <?php //else : ?>
-                <?php //if ( is_user_logged_in() && current_user_can( 'level_10' ) ) : ?>
-                    <!-- <p class="no-results"><?php _e( 'Please set a Thumbnail Image for this page.', 'historias' ); ?></p> -->
-                <?php //endif; ?>
+
+                    <div class="featured__image">
+                        <?php the_post_thumbnail( 'large' ); ?>
+                    </div>
+                    <?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
+                        <h1 class="feature__title"><?php the_title(); ?></h1>
+                    <?php endif; ?>
+                    <?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
+                        <p class="feature__status"><?php echo $status ?></p>
+                    <?php endif; ?>
+            
+                <?php if( $featureurl = get_post_meta($post->ID,'_meta_feature-url', true) ) : ?>
+                    </a>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
 
         <?php get_sidebar(); ?>
 
         <?php 
-	        
+            
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
             $args = array(
