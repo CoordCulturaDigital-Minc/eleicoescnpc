@@ -55,7 +55,6 @@ html {
   text-size-adjust: 100%; }
 
 body {
-  /*font: 400 100%/1.5 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;*/
   font: 16px/24px "TheSans B5 Plain", Helvetica, Arial, sans-serif;
   font-weight: normal;
   background: #d88713;
@@ -74,8 +73,7 @@ body {
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d88713', endColorstr='#d88713',GradientType=1 );
   /* IE6-9 */
-  margin: 0 auto;
-  /*color: #444;*/ }
+  margin: 0 auto; }
 
 /* Links */
 a,
@@ -999,112 +997,6 @@ img.aligncenter {
   color: #fff;
   border: none; }
 
-.site-footer .site-title {
-  font-size: 1.13rem;
-  line-height: 1.33;
-  text-align: center; }
-  .site-footer .site-title a {
-    color: #fff; }
-    .site-footer .site-title a:hover {
-      color: #125b26; }
-.site-footer .site-description {
-  font-size: .88rem;
-  line-height: 1.71;
-  text-align: center;
-  color: #ccc; }
-
-.social {
-  display: block;
-  width: 100%;
-  margin-bottom: 20px; }
-
-.social-links {
-  margin: 10px 0 0 0;
-  list-style: none;
-  /*text-align: left;*/
-  float: right; }
-  .social-links > li {
-    font-size: 1.33rem;
-    line-height: 48px;
-    display: inline-block;
-    list-style: none;
-    margin-left: .8em;
-    float: left; }
-  .social-links a {
-    width: 35px;
-    height: 35px;
-    position: relative;
-    color: #fff;
-    background-color: #1d1d1b;
-    float: left;
-    vertical-align: center;
-    text-align: center;
-    line-height: 2; }
-    .social-links a:hover {
-      bottom: 2px;
-      -webkit-transition: all .1s linear;
-      transition: all .1s linear; }
-
-.twitter a:hover {
-  color: #55acee; }
-
-.facebook a:hover {
-  color: #3b5998; }
-
-.flickr a:hover {
-  color: #ff0084; }
-
-.instagram a:hover {
-  color: #624335; }
-
-.tumblr a:hover {
-  color: #35465D; }
-
-.youtube a:hover {
-  color: #CF3427; }
-
-.logos {
-  display: none;
-  clear: right;
-  float: right; }
-  .logos .minc {
-    width: 260px; }
-    .logos .minc img {
-      width: 100%; }
-  .logos .gallery-caption {
-    display: none; }
-  .logos .gallery-item {
-    display: inline-block;
-    margin: 0;
-    padding: 0 1.5rem 0 0; }
-  .logos .gallery-icon {
-    position: relative; }
-    .logos .gallery-icon:hover {
-      bottom: 2px;
-      -webkit-transition: all .1s linear;
-      transition: all .1s linear; }
-    .logos .gallery-icon img {
-      display: block;
-      width: 75px; }
-
-.logos__group {
-  position: relative;
-  display: inline-block;
-  margin: 0 1.5rem 1.5rem 0;
-  padding-top: 1.5rem; }
-
-.creditos {
-  text-align: left;
-  max-width: 700px;
-  display: inline-block;
-  font-size: 11px;
-  color: #4a4a4a;
-  line-height: 1.3; }
-  .creditos:after {
-    content: "";
-    display: block;
-    clear: both; }
-
 .page .entry-summary {
     /*font-size: 1.13rem;
     font-style: italic;
@@ -1390,13 +1282,11 @@ img.aligncenter {
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   text-align: center; }
-
-.box--howto a {
-  color: inherit;
-  border-bottom: 1px dotted; }
-
-.box--howto a:hover {
-  color: #125b26; }
+  .box--howto a {
+    color: inherit;
+    border-bottom: 1px dotted; }
+    .box--howto a:hover {
+      color: #125b26; }
 
 @media screen and (min-width: 40em) {
   .box--howto {
@@ -1908,17 +1798,6 @@ img.aligncenter {
     float: right;
     width: 31.05%; }
 
-  .site-footer .site-title {
-    text-align: left; }
-  .site-footer .site-description {
-    text-align: left; }
-
-  .social {
-    float: right; }
-
-  .logos {
-    display: block; }
-
   .feature__info {
     top: 50%;
     margin: -1.5rem 72px 0 0; }
@@ -2325,6 +2204,38 @@ section {
         position: absolute;
         bottom: 10px;
         margin-bottom: 0; }
+
+footer.site-footer div {
+  padding: 20px 0; }
+  footer.site-footer div.social a {
+    color: #125b26;
+    vertical-align: center;
+    text-align: center;
+    line-height: 2;
+    font-size: 34px !important; }
+    footer.site-footer div.social a:hover {
+      bottom: 2px;
+      text-decoration: none;
+      -webkit-transition: all .1s linear;
+      transition: all .1s linear; }
+    footer.site-footer div.social a.twitter:hover {
+      color: #55acee; }
+    footer.site-footer div.social a.facebook:hover {
+      color: #3b5998; }
+    footer.site-footer div.social a.flickr:hover {
+      color: #ff0084; }
+    footer.site-footer div.social a.instagram:hover {
+      color: #624335; }
+    footer.site-footer div.social a.tumblr:hover {
+      color: #35465D; }
+    footer.site-footer div.social a.youtube:hover {
+      color: #CF3427; }
+  footer.site-footer div.logos #MinC_logo {
+    margin-top: 10px; }
+  footer.site-footer div.creditos {
+    font-size: 11px;
+    color: #a8a8a8;
+    line-height: 1.3; }
 
 #mapa {
   position: relative; }
