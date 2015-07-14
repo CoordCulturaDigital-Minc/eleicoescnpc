@@ -1,5 +1,15 @@
+@include font-face ('TheSans B7 Bold', 	'fonts/thesansb7bold.ttf');
+@include font-face ('TheSans B5 Plain', 'fonts/thesansb5plain.ttf');
+
+$fonte-principal:		'TheSans B5 Plain';
+$fonte-principal-bold:	'TheSans B7 Bold';
+
 abbr[title] {
     border-bottom: 1px dotted;
+}
+
+a:hover {
+	text-decoration: none;
 }
 
 abbr,
@@ -114,6 +124,8 @@ ul {
 ul, ol {
     margin: 0 0 1.5em;
     padding: 0;
+    
+    list-style: none;
     
 	li {
 		margin: 0 0 .5em;

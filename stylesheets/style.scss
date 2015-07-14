@@ -12,25 +12,8 @@ Tags: one-column, two-columns, right-sidebar, custom-menu, editor-style, microfo
 
 
 @import 'mixins';
-
-@include font-face ('TheSans B7 Bold', 	'fonts/thesansb7bold.ttf');
-@include font-face ('TheSans B5 Plain', 'fonts/thesansb5plain.ttf');
-
-$fonte-principal:		'TheSans B5 Plain';
-$fonte-principal-bold:	'TheSans B7 Bold';
-
-$cor-verde-claro: 		rgb(113, 148, 22);
-$cor-verde-musgo:		#52660b;			// H1 da lista de postagem
-$cor-verde: 			rgb(18, 91, 38);
-
-$cor-amarelo:			rgb(255, 206, 0);
-$cor-laranja:			#ffae16;
-$cor-marrom:			#826815;
-$cor-beige:				lighten($cor-marrom, 30%);
-$cor-beige-claro:		#eeece6;
-
-$cor-cinza-claro:		#f4f4f4;
-$cor-cinza-escuro:		darken(#f4f4f4, 30%);
+@import 'color';
+@import 'typography';
 
 $borda-separar:			1px solid #dedede;
 
@@ -88,7 +71,6 @@ body {
 }
 
 @import 'links';
-@import 'typography';
 @import 'code';
 @import 'forms';
 @import 'grid';
