@@ -2311,7 +2311,8 @@ section {
       section article header:after {
         clear: both; }
       section article header h2 {
-        float: left; }
+        float: left;
+        max-width: 70%; }
       section article header span.entry-date {
         float: right; }
     section article .featured-media {
