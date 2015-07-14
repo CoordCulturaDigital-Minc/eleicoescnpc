@@ -1848,7 +1848,6 @@ aside {
     margin-top: 1rem;
     margin-bottom: 1em;
     margin-right: 1em;
-    font-size: .88rem;
     line-height: 1.71;
     list-style: none; }
   aside h3 {
@@ -2192,7 +2191,10 @@ section {
       section article header h2 {
         float: left;
         max-width: 70%; }
+        section article header h2 a {
+          font-size: 24px; }
       section article header span.entry-date {
+        font-size: 14px;
         float: right; }
     section article .featured-media {
       margin-top: -30px;

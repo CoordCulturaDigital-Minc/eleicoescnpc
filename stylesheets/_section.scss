@@ -31,10 +31,14 @@ section {
 			margin-bottom: 10px;
 		
 			h2 {
+				a {
+					font-size: 24px;
+				}
 				float: left;
                 max-width: 70%;
 			}
 			span.entry-date {
+				font-size: 14px;
 				float: right;
 			}
 		}

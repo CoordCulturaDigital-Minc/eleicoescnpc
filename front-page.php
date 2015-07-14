@@ -7,7 +7,7 @@
     
 get_header(); the_post(); ?>
 
-        <div class="features  features--subscriptions">
+        <div class="features features--subscriptions">
             <?php if ( '' != get_the_post_thumbnail() ) : ?>
                 <div class="featured__image">
                     <?php if( $featureurl = get_post_meta($post->ID,'_meta_feature-url', true) ) : ?>
