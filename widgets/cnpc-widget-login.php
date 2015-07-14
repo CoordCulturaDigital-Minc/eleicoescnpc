@@ -96,10 +96,8 @@ class CNPC_Widget_Login extends WP_Widget
         	        			'label_log_in' => ('Entrar'),
         	        			'remember' => false ) );
         	    ?>
-        	    
-                <a href="<?php echo wp_lostpassword_url( get_permalink() ); ?>" class="lost-password"><?php _e( 'Esqueci a senha', 'historias' ); ?></a>
-                
-                <a href="<?php bloginfo('siteurl'); ?>/inscricoes" class="button"><?php _e( 'Inscrever-me', 'historias' ); ?></a>
+                <a href="<?php echo wp_lostpassword_url( get_permalink() ); ?>" id="lost-password"><?php _e( 'Esqueci a senha', 'historias' ); ?></a>
+                <a href="<?php bloginfo('siteurl'); ?>/inscricoes" id="registrar" class="button"><?php _e( 'Inscrever-me', 'historias' ); ?></a>
                 </div>
             <?php endif;
         echo '</div>';

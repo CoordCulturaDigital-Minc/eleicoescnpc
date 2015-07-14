@@ -148,18 +148,17 @@ a.post-edit-link {
 	-webkit-transition: all 1s ease-in-out;
 	        transition: all 1s ease-in-out;
 	
-	color: $cor-amarelo;
+	color: $cor-amarelo !important;
 	border: none;
 	border-radius: 2px;
+	
+	font-size: 16px;
+	line-height: 1;
 	
 	@include linear-vertical-gradient($cor-verde-inicio, $cor-verde-fim);
 	
 	&:hover {
 	    @include linear-vertical-gradient($cor-verde-fim, $cor-verde-inicio);
-	}
-	
-	&:active {
-	    top: 2px;
 	}
 }
 

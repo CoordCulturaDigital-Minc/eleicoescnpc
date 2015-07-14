@@ -12,21 +12,13 @@ aside {
     & > ul,
     & > p,
     & > ol,
-    & > div {
+    & > div,
+    & > form {
 	    margin-left: 16px;
+	    margin-right: 16px;
     }
     
-	&:after {
-		content: ".";
-		display: block;
-		height: 0;
-		clear: both;
-		visibility: hidden;
-    }
-    
-    p {
-	    margin-right: 1rem;
-    }
+	@include clearfix ();
     
     a { 
 	    color: $cor-marrom;
@@ -36,10 +28,7 @@ aside {
 		
 		&.button {
 			float: right;
-			margin-right: 16px;
 			margin-bottom: 16px;
-			
-			@include clearfix ();
 		}
 		
 		&.lost-password {
@@ -66,7 +55,7 @@ aside {
 
 	h3 {
 		margin: 0;
-		padding: 0.8rem 0rem 0.4em 1rem;
+		padding: 1.2rem 0rem 0.4em 1rem;
 		
 		border-radius: 5px;
 		width: 100%;
@@ -91,21 +80,18 @@ aside {
         margin-bottom: 14px;
     }
 	
-	form {
-		label {
-		    font-size: .88rem;
-		    line-height: 1.71;
-		
-		    display: block;
-		
-		    color: #888;
-		}
-		
+	form#loginform {
+		@include clearfix ();
 		p {
-		    margin-top: 0.3em;
+		    font-size: 1.2rem;
+		    
+		    line-height: 1;
+		
+		    color: $cor-cinza-escuro;
 		    
 		    &.login-submit {
 			    float: right;
+			    margin-top: 0;
 		    }
 		}
 		
@@ -119,10 +105,12 @@ aside {
 		    background: #fff;
 		}
 		
-		input.button-primary {
+		input#wp-submit {
 			@extend .button;
 		}
-		
-		@include clearfix ();
+	}
+	
+	a#lost-password {
+		font-size: 1.2rem;
 	}
 }

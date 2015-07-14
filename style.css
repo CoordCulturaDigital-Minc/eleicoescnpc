@@ -374,7 +374,7 @@ a.post-edit-link {
   font-style: italic;
   color: rgba(0, 0, 0, 0.3); }
 
-.button, aside form input.button-primary {
+.button, aside form#loginform input#wp-submit {
   position: relative;
   display: inline-block;
   margin: 5px 0;
@@ -383,9 +383,11 @@ a.post-edit-link {
   cursor: pointer;
   -webkit-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
-  color: #ffce00;
+  color: #ffce00 !important;
   border: none;
   border-radius: 2px;
+  font-size: 16px;
+  line-height: 1;
   background: -moz-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
   /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1f6f3a), color-stop(100%, #0c451a));
@@ -398,7 +400,7 @@ a.post-edit-link {
   /* IE10+ */
   background: linear-gradient(to bottom, #1f6f3a 0%, #0c451a 100%);
   /* W3C */ }
-  .button:hover, aside form input.button-primary:hover {
+  .button:hover, aside form#loginform input#wp-submit:hover {
     background: -moz-linear-gradient(top, #0c451a 0%, #1f6f3a 100%);
     /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #0c451a), color-stop(100%, #1f6f3a));
@@ -411,8 +413,6 @@ a.post-edit-link {
     /* IE10+ */
     background: linear-gradient(to bottom, #0c451a 0%, #1f6f3a 100%);
     /* W3C */ }
-  .button:active, aside form input.button-primary:active {
-    top: 2px; }
 
 a.highlight {
   line-height: 3;
@@ -1349,7 +1349,7 @@ img.aligncenter {
   .form-not-yet .step__title {
     color: #ccc; }
 
-.file-upload .button, .file-upload aside form input.button-primary, aside form .file-upload input.button-primary {
+.file-upload .button, .file-upload aside form#loginform input#wp-submit, aside form#loginform .file-upload input#wp-submit {
   margin: .75rem 0;
   position: relative; }
 .file-upload input[type='file'] {
@@ -1588,31 +1588,23 @@ aside {
   color: #826815;
   margin-bottom: 2rem;
   border-radius: 5px;
-  background-color: #eeece6; }
-  aside > a, aside > ul, aside > p, aside > ol, aside > div {
-    margin-left: 16px; }
+  background-color: #eeece6;
+  *zoom: 1; }
+  aside > a, aside > ul, aside > p, aside > ol, aside > div, aside > form {
+    margin-left: 16px;
+    margin-right: 16px; }
+  aside:before, aside:after {
+    display: table;
+    content: " "; }
   aside:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden; }
-  aside p {
-    margin-right: 1rem; }
+    clear: both; }
   aside a {
     color: #826815; }
     aside a:hover {
       color: #e2bf4e; }
     aside a.button {
       float: right;
-      margin-right: 16px;
-      margin-bottom: 16px;
-      *zoom: 1; }
-      aside a.button:before, aside a.button:after {
-        display: table;
-        content: " "; }
-      aside a.button:after {
-        clear: both; }
+      margin-bottom: 16px; }
     aside a.lost-password {
       font-size: .88rem;
       line-height: 1.71;
@@ -1627,7 +1619,7 @@ aside {
     list-style: none; }
   aside h3 {
     margin: 0;
-    padding: 0.8rem 0rem 0.4em 1rem;
+    padding: 1.2rem 0rem 0.4em 1rem;
     border-radius: 5px;
     width: 100%;
     color: #ffce00;
@@ -1654,28 +1646,28 @@ aside {
   aside .widget-body {
     margin-top: 14px;
     margin-bottom: 14px; }
-  aside form {
+  aside form#loginform {
     *zoom: 1; }
-    aside form label {
-      font-size: .88rem;
-      line-height: 1.71;
-      display: block;
-      color: #888; }
-    aside form p {
-      margin-top: 0.3em; }
-      aside form p.login-submit {
-        float: right; }
-    aside form .input {
+    aside form#loginform:before, aside form#loginform:after {
+      display: table;
+      content: " "; }
+    aside form#loginform:after {
+      clear: both; }
+    aside form#loginform p {
+      font-size: 1.2rem;
+      line-height: 1;
+      color: #a8a8a8; }
+      aside form#loginform p.login-submit {
+        float: right;
+        margin-top: 0; }
+    aside form#loginform .input {
       font-size: .88rem;
       width: 100%;
       padding: 0.8em;
       border: 1px solid #ededed;
       background: #fff; }
-    aside form:before, aside form:after {
-      display: table;
-      content: " "; }
-    aside form:after {
-      clear: both; }
+  aside a#lost-password {
+    font-size: 1.2rem; }
 
 header.site_header {
   *zoom: 1;
