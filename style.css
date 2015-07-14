@@ -2039,7 +2039,8 @@ header.site_header {
     position: relative; }
     header.site_header .branding a h1 {
       float: left;
-      color: #ffae16; }
+      color: #ffae16;
+      padding-top: 10px; }
     header.site_header .branding a img {
       float: left;
       margin-right: 33px; }

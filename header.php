@@ -44,7 +44,7 @@
 			<a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
                 <?php
                     $logo = get_theme_mod('site_logo');
-                    if (false) : // ($logo != ''): ?>
+                    if ($logo != ''): ?>
                         <img class="custom" src="<?php echo esc_url($logo); ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />
                         <h1 class="site-title"><?php bloginfo('name'); ?></h1>			
 
