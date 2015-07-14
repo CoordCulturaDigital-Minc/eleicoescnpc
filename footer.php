@@ -10,7 +10,7 @@
 					<a class="col-xs-2 text-center fa fa-flickr flickr" href="https://www.flickr.com/photos/ministeriodacultura" target="_blank" title="Flickr Cultura"></a>
 				</div>
 
-				<div class="logos col-xs-12">
+				<div class="logos col-xs-10 col-xs-offset-1">
 					<a id="PNC_logo" class="col-xs-4" href="http://www.cultura.gov.br" title="Ministério da Cultura - Governo Federal"><img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/pnc_logo.png'/></a>
 					<a id="CNPC_logo" class="col-xs-4" href="http://www.cultura.gov.br" title="Ministério da Cultura - Governo Federal"><img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/CNPC_logo.png'/></a>
 					<a id="MinC_logo" class="col-xs-4" href="http://www.cultura.gov.br" title="Ministério da Cultura - Governo Federal"><img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/MINC_logo.png'/></a>
