@@ -2026,27 +2026,42 @@ header.site_header {
   position: relative;
   margin-bottom: 3rem;
   background-repeat: no-repeat;
-  height: 202px; }
+  height: 202px;
+  padding-top: 55px; }
   header.site_header:before, header.site_header:after {
     display: table;
     content: " "; }
   header.site_header:after {
     clear: both; }
+  header.site_header .branding a {
+    float: left;
+    min-height: 100px;
+    position: relative; }
+    header.site_header .branding a h1 {
+      float: left;
+      color: #ffae16; }
+    header.site_header .branding a img {
+      float: left;
+      margin-right: 33px; }
+      header.site_header .branding a img.custom {
+        max-height: 70px;
+        max-width: 140px; }
+      header.site_header .branding a img.template-preset {
+        position: absolute;
+        top: -60px;
+        left: -48px;
+        width: 611px;
+        height: 212px; }
+  header.site_header .branding form#search {
+    float: right;
+    margin-top: 10px; }
+    header.site_header .branding form#search a {
+      min-width: 500px;
+      display: inline-block; }
   header.site_header svg {
     margin-left: -48px; }
     header.site_header svg #g1 path {
       display: none; }
-  header.site_header .site-title,
-  header.site_header .quote {
-    display: none; }
-  header.site_header img {
-    float: left;
-    margin-right: 33px; }
-  header.site_header form#search {
-    margin-top: 70px; }
-    header.site_header form#search a {
-      min-width: 500px;
-      display: inline-block; }
   header.site_header nav {
     font-weight: normal;
     clear: both;
@@ -2093,9 +2108,8 @@ header.site_header {
 @media screen and (min-width: 40em) {
   .js .access {
     position: relative; }
-
-  .js .access.closed {
-    max-height: none; }
+    .js .access.closed {
+      max-height: none; }
 
   .nav-toggle {
     display: none; } }
@@ -2143,12 +2157,8 @@ header.site_header {
       text-indent: 0;
       speak: none;
       width: 1em; }
-
-  .nav-toggle.nav-toggle {
-    color: #fff; }
-
-  .nav-toggle.active::before {
-    content: '\f0d8'; } }
+    .nav-toggle::before {
+      content: '\f0d8'; } }
 @media screen and (min-width: 40em) {
   header ul .menu-item-has-children > a:after {
     font-family: 'FontAwesome';
