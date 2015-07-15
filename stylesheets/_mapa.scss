@@ -4,6 +4,7 @@
     svg {
 	    margin: 0 auto;
 	    display: block;
+	    width: 100%;
 	    
 	    g#all_map path {
 		    fill: $cor-verde-claro;
@@ -57,22 +58,33 @@ a.estado:hover {
     background-color: rgba(244, 244, 244, 0.92);
     border: 1px solid #DBDBDB;
     padding: 15px;
-    font-size: 12px;
-    color: #22733e;
+    font-size: 14px;
+    color: $cor-verde;
     z-index: 1;
     
-    a {
-	    color: #22733e;
-	    &:hover {
-		    text-decoration: underline;
-		}   
-	}
-	
 	.menu-title {
 	    margin-bottom: 5px;
+	    font-size: 18px;
+	    font-weight: bold;
+	    color: $cor-verde;
 	}
-	ul li {
-	    display: block;
-	    line-height: 1.8;
+	ul { margin: 0px;
+		li {
+		    display: block;
+		    line-height: 1.6;
+		    margin: 0px;
+		   	
+		   	i{
+		    	color: #c9bf9b;
+		    	margin-right: 5px;
+		    }
+
+		    a {
+			    color: #22733e;
+			    &:hover {
+				    text-decoration: underline;
+				}   
+			}
+		}
 	}
 }

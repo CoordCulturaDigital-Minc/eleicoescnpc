@@ -2270,7 +2270,8 @@ footer.site-footer div {
   position: relative; }
   #mapa svg {
     margin: 0 auto;
-    display: block; }
+    display: block;
+    width: 100%; }
     #mapa svg g#all_map path {
       fill: #719416; }
     #mapa svg text.etiqueta {
@@ -2309,18 +2310,27 @@ footer.site-footer div {
   background-color: rgba(244, 244, 244, 0.92);
   border: 1px solid #DBDBDB;
   padding: 15px;
-  font-size: 12px;
-  color: #22733e;
+  font-size: 14px;
+  color: #125b26;
   z-index: 1; }
-  .menu-setoriais-container a {
-    color: #22733e; }
-    .menu-setoriais-container a:hover {
-      text-decoration: underline; }
   .menu-setoriais-container .menu-title {
-    margin-bottom: 5px; }
-  .menu-setoriais-container ul li {
-    display: block;
-    line-height: 1.8; }
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #125b26; }
+  .menu-setoriais-container ul {
+    margin: 0px; }
+    .menu-setoriais-container ul li {
+      display: block;
+      line-height: 1.6;
+      margin: 0px; }
+      .menu-setoriais-container ul li i {
+        color: #c9bf9b;
+        margin-right: 5px; }
+      .menu-setoriais-container ul li a {
+        color: #22733e; }
+        .menu-setoriais-container ul li a:hover {
+          text-decoration: underline; }
 
 .single-foruns .entry-title,
 .single-foruns .entry-title-candidate {

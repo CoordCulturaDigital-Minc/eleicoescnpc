@@ -158,7 +158,7 @@ if(is_user_logged_in()) {
 							</div>
 							
 							<div id="step-2-register">
-								<div class="grid__item  one-half">
+								<div class="grid__item  one-whole">
 									<?php include('includes/mapa.php'); ?>
 								</div>
 								

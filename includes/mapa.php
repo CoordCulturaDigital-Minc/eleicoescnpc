@@ -10,7 +10,7 @@
             </div>
             <ul id="menu-setoriais" class="menu">
                 <?php foreach ($setoriais as $key => $setorial) : ?>
-                    <li><a id="<?php echo $key; ?>" href="<?php echo site_url(); ?>/foruns/uf-<?php echo $key; ?>"><?php echo $setorial ?></a></li>
+                    <li><i class="fa fa-angle-right"></i><a id="<?php echo $key; ?>" href="<?php echo site_url(); ?>/foruns/uf-<?php echo $key; ?>"><?php echo $setorial ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>
