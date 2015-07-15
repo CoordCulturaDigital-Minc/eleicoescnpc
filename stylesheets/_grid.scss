@@ -1,3 +1,5 @@
+// TODO: Deprecate all grid elements in favor of bootstrap
+
 .grid {
     margin-left: -1.5rem;
 }
@@ -30,8 +32,6 @@
 .two-thirds {
     width: 66.666%;
 }
-
-// TODO: Deprecate class cf — aka Clearfix
 
 .cf {
 	&:before, &:after {

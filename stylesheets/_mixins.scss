@@ -34,6 +34,8 @@
     background: 		linear-gradient(to bottom, $start 0%,$stop 100%); /* W3C */
 }
 
+// TODO: Deprecate clearfix mixin in favor of bootstraping
+
 @mixin clearfix () {
 	&:before, &:after {
 		display: table;
@@ -44,6 +46,8 @@
 	}
 	*zoom: 1;
 }
+
+// TODO: Apply borders in transitions between header, section and footer after bootstraping
 
 @mixin separation-border () {
 	border-bottom: 1px solid #dedede;
