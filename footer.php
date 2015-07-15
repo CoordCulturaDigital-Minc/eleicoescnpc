@@ -15,18 +15,24 @@
 					<a class="col-xs-2 text-center fa fa-flickr flickr"
 						href="https://www.flickr.com/photos/ministeriodacultura/" target="_blank" title="Flickr Cultura"></a>
 				</div>
-
+				
 				<div class="logos col-xs-10 col-xs-offset-1">
 <!--
 					<a class="col-xs-2" id="PNC" href="#" title="PNC - Plano Nacional de Cultura">
 						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/pnc_logo.png'/></a>
 -->
-					<a class="col-xs-3 col-xs-offset-1" id="CNPC" href="#" title="Conselho Nacional de Política Cultural">
-						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/CNPC_logo.png'/></a>
-					<a class="col-xs-4" id="MinC" href="http://www.cultura.gov.br" title="Ministério da Cultura - Governo Federal">
-						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/MINC_logo.png'/></a>
-					<a class="col-xs-4" id="Cultura_digital" href="http://culturadigital.br" title="Cultura digital">
+					<div class="col-xs-4">
+						<div class="col-xs-12"><p>Desenvolvimento</p></div>
+						<a class="col-xs-12" id="Cultura_digital" href="http://culturadigital.br" title="Cultura digital">
 						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/culturadigital_logo.png'/></a>
+					</div>
+					<div class="col-xs-8">
+						<div class="col-xs-12"><p>Realização</p></div>
+						<a class="col-xs-6" id="MinC" href="http://www.cultura.gov.br" title="Ministério da Cultura - Governo Federal">
+						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/MINC_logo.png'/></a>
+						<a class="col-xs-4 col-xs-offset-1" id="CNPC" href="#" title="Conselho Nacional de Política Cultural">
+						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/CNPC_logo.png'/></a>
+					</div>
 				</div>
 
 				<div class="creditos col-xs-6 col-xs-offset-3">
