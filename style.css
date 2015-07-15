@@ -2278,13 +2278,12 @@ footer.site-footer div {
     display: block;
     line-height: 1.8; }
 
-.entry-title,
-.entry-title-candidate {
+.single-foruns .entry-title,
+.single-foruns .entry-title-candidate {
   text-align: center;
   padding-bottom: 15px;
   color: #125b26; }
-
-.entry-title {
+.single-foruns .entry-title {
   font-size: 20px; }
 
 .candidates-content {
@@ -2312,7 +2311,7 @@ footer.site-footer div {
         top: 50%;
         left: 50%;
         width: 650px;
-        height: 415px;
+        min-height: 415px;
         margin-left: -350px;
         margin-top: -215px;
         z-index: 1;
@@ -2324,11 +2323,27 @@ footer.site-footer div {
         border: 26px solid #0F4E21; }
         .candidates-content .candidates .candidate .candidate-details i {
           position: absolute;
-          top: -18px;
+          top: -22px;
           right: -18px;
-          color: #ffae16; }
-        .candidates-content .candidates .candidate .candidate-details .candidate-name {
+          color: #ffae16;
+          opacity: 1;
           font-size: 20px; }
+        .candidates-content .candidates .candidate .candidate-details h3 {
+          font-weight: bold;
+          color: #125b26; }
+        .candidates-content .candidates .candidate .candidate-details .candidate-avatar {
+          border: none;
+          width: 150px;
+          height: 150px;
+          float: left;
+          margin-right: 10px;
+          margin-bottom: 10px; }
+          .candidates-content .candidates .candidate .candidate-details .candidate-avatar img {
+            border-radius: 5px; }
+        .candidates-content .candidates .candidate .candidate-details .candidate-name {
+          font-size: 20px;
+          color: #125b26;
+          font-weight: bold; }
       .candidates-content .candidates .candidate .candidate-text {
         display: block;
         clear: both;
@@ -2367,6 +2382,31 @@ footer.site-footer div {
         cursor: pointer; }
         .candidates-content .candidates .candidate .vote:hover {
           background-color: #DEB90E; }
+  .candidates-content .flex-direction-nav li {
+    list-style: none; }
+    .candidates-content .flex-direction-nav li .flex-prev,
+    .candidates-content .flex-direction-nav li .flex-next {
+      position: absolute;
+      top: 75px;
+      width: 40px;
+      height: 83px;
+      cursor: pointer;
+      background-image: url(images/image-carousel.png);
+      background-repeat: no-repeat;
+      z-index: 1; }
+    .candidates-content .flex-direction-nav li .flex-prev {
+      left: -40px;
+      background-position: 0px 0px; }
+    .candidates-content .flex-direction-nav li .flex-next {
+      right: -40px;
+      background-position: -45px 0px; }
+  .candidates-content .flex-control-paging {
+    display: none; }
+
+.forum-title {
+  text-align: center;
+  font-size: 34px;
+  margin-top: 30px; }
 
 .candidate-not-found {
   margin: 40px auto;
@@ -2403,32 +2443,5 @@ footer.site-footer div {
     display: block;
     width: 100px;
     margin-left: 400px; }
-
-.flex-direction-nav li {
-  list-style: none; }
-  .flex-direction-nav li .flex-prev,
-  .flex-direction-nav li .flex-next {
-    position: absolute;
-    top: 75px;
-    width: 40px;
-    height: 83px;
-    cursor: pointer;
-    background-image: url(images/image-carousel.png);
-    background-repeat: no-repeat;
-    z-index: 1; }
-  .flex-direction-nav li .flex-prev {
-    left: -40px;
-    background-position: 0px 0px; }
-  .flex-direction-nav li .flex-next {
-    right: -40px;
-    background-position: -45px 0px; }
-
-.flex-control-paging {
-  display: none; }
-
-.forum-title {
-  text-align: center;
-  font-size: 34px;
-  margin-top: 30px; }
 
 /*# sourceMappingURL=style.css.map */

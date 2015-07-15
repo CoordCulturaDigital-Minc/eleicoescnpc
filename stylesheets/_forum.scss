@@ -1,14 +1,16 @@
+.single-foruns {
+    .entry-title,
+    .entry-title-candidate {
+        text-align: center;
+        padding-bottom: 15px;
+        color: $cor-verde;
+    }
 
-.entry-title,
-.entry-title-candidate {
-    text-align: center;
-    padding-bottom: 15px;
-    color: $cor-verde;
+    .entry-title {
+        font-size: 20px;
+    }
 }
 
-.entry-title {
-    font-size: 20px;
-}
 
 .candidates-content {
     position: relative;
@@ -44,7 +46,7 @@
                 top: 50%;
                 left: 50%;
                 width: 650px;
-                height: 415px;
+                min-height: 415px;
                 margin-left: -350px;
                 margin-top: -215px;
                 z-index: 1; 
@@ -57,13 +59,37 @@
 
                i {
                 position: absolute;
-                top: -18px;
+                top: -22px;
                 right: -18px;
                 color: $cor-laranja;
+                opacity: 1;
+                font-size: 20px;
                }
 
+               h3 {
+                    font-weight: bold;
+                    color: $cor-verde;
+               }
+
+               .candidate-avatar {
+                    border: none;
+                    
+                    width: 150px;
+                    height: 150px;
+                    
+                    float: left;
+
+                    margin-right: 10px;
+                    margin-bottom: 10px;
+                   img {
+                        border-radius: 5px;
+
+                   }
+               }
                .candidate-name {
                     font-size: 20px;
+                    color: $cor-verde;
+                    font-weight: bold;
                }
             }
 
@@ -123,6 +149,40 @@
         }
     }
 
+    .flex-direction-nav  li{
+        list-style: none;
+        .flex-prev, 
+        .flex-next {
+            position: absolute;
+            top: 75px;
+            width: 40px;
+            height: 83px;
+            cursor: pointer;
+            background-image: url(images/image-carousel.png);
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        .flex-prev {
+            left: -40px;
+            background-position: 0px 0px;
+        }
+
+        .flex-next {
+            right: -40px;
+            background-position: -45px 0px 
+        }
+    }
+    .flex-control-paging {
+        display:none;
+
+    }
+}
+
+.forum-title {
+    text-align: center;
+    font-size: 34px;
+    margin-top: 30px;
 }
 
 .candidate-not-found {
@@ -133,6 +193,7 @@
     padding: 15px 0px;
     height: 160px;
     position: relative;
+
     i {
         position: absolute;
         top: 15px;
@@ -164,40 +225,4 @@
         margin-left: 400px;
     }
 }
-
-.flex-direction-nav  li{
-    list-style: none;
-    .flex-prev, 
-    .flex-next {
-        position: absolute;
-        top: 75px;
-        width: 40px;
-        height: 83px;
-        cursor: pointer;
-        background-image: url(images/image-carousel.png);
-        background-repeat: no-repeat;
-        z-index: 1;
-    }
-
-    .flex-prev {
-        left: -40px;
-        background-position: 0px 0px;
-    }
-
-    .flex-next {
-        right: -40px;
-        background-position: -45px 0px 
-    }
-}
-.flex-control-paging {
-    display:none;
-
-}
-
-.forum-title {
-    text-align: center;
-    font-size: 34px;
-    margin-top: 30px;
-}
-
 

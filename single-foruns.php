@@ -32,25 +32,38 @@ get_header(); ?>
 							<?php while ( $candidates->have_posts() ) : $candidates->the_post(); ?>
 
 								<div class="candidate" id="<?php the_ID(); ?>">
-									<div class="candidate-avatar" align="center">
+									<div class="candidate-avatar">
 										<?php $avatar_file_id = get_post_meta(get_the_ID(), 'candidate-avatar', true); ?>
 										<?php echo wp_get_attachment_image($avatar_file_id, 'avatar_candidate'); ?>
 									</div>
 
 									<div class="candidate-text">
+										
 										<div class="candidate-name"><?php echo get_post_meta(get_the_ID(), 'candidate-display-name', true); ?></div>
 										<div class="candidate-resume"></div>
 
 										<?php // mais detalhes do candidato aqui ?>
 										<a class="show-candidate-details" data-candidate-id="<?php the_ID(); ?>">Saiba +</a>
+									
 									</div>
 
 									<div class="candidate-details" id="candidate-details-<?php the_ID(); ?>">
+										
 										<i class="fa fa-times close"></i>
+
+										<div class="candidate-avatar" align="center">
+											<?php $avatar_file_id = get_post_meta(get_the_ID(), 'candidate-avatar', true); ?>
+											<?php echo wp_get_attachment_image($avatar_file_id, 'avatar_candidate'); ?>
+										</div>
+
 										<h2 class="candidate-name"><?php echo get_post_meta(get_the_ID(), 'candidate-display-name', true); ?></h2>
-										<?php echo wp_get_attachment_image($avatar_file_id, 'avatar_candidate'); ?>
-										<p><h2>Experiência:</h2><?php echo get_post_meta(get_the_ID(), 'candidate-experience', true); ?></p>
-										<p><h2>Defesa do candidato:</h2><?php echo get_post_meta(get_the_ID(), 'candidate-explanatory', true); ?></p>
+										<p><h3>Defesa do candidato:</h3><?php echo get_post_meta(get_the_ID(), 'candidate-explanatory', true); ?></p>
+										<p><h3>Experiência:</h3><?php echo get_post_meta(get_the_ID(), 'candidate-experience', true); ?></p>
+
+										<?php $portfolio_file_id = get_post_meta(get_the_ID(), 'candidate-portfolio', true); ?>
+										
+										<p><h3>Portfólio:</h3><?php echo wp_get_attachment_link($portfolio_file_id); ?></p>
+									
 									</div>
 
 									<br />

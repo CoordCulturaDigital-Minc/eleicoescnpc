@@ -160,7 +160,8 @@ class Foruns
 		
 		return new WP_Query(array(
 			'post__in' => $ids,
-			'post_type' => 'projetos'
+			'post_type' => 'projetos',
+			'orderby'   => 'rand'
 		));
 		
 	
