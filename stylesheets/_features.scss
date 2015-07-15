@@ -13,23 +13,23 @@
     text-align: left;
 
     color: #fff;
-}
-
-.feature-title a {
-    display: inline-block;
-
-    padding: 0 1.5rem;
-
-    color: inherit;
-    background-color: rgba(41,39,36,.9);
-
-	&:hover {
-	    padding: 0 2rem;
+    
+	a {
+	    display: inline-block;
 	
-	    -webkit-transition: padding .2s ease-in-out;
-	            transition: padding .2s ease-in-out;
+	    padding: 0 1.5rem;
 	
 	    color: inherit;
+	    background-color: rgba(41,39,36,.9);
+	
+		&:hover {
+		    padding: 0 2rem;
+		
+		    -webkit-transition: padding .2s ease-in-out;
+		            transition: padding .2s ease-in-out;
+		
+		    color: inherit;
+		}
 	}
 }
 
@@ -71,24 +71,24 @@
 @media screen and (min-width: 40em) {
     .box--about {
         margin-top: -3rem;
-    }
 
-    .box--about:before {
-        position: absolute;
-        top: -1.5rem;
-        left: 1.5rem;
-
-        display: block;
-
-        width: 0;
-        height: 0;
-
-        content: ' ';
-
-        border-bottom: 1.5rem solid #125b26;
-        border-bottom-color: inherit;
-        border-left: 1.5rem solid transparent;
-        border-right: 1.5rem solid transparent;
+	    &:before {
+	        position: absolute;
+	        top: -1.5rem;
+	        left: 1.5rem;
+	
+	        display: block;
+	
+	        width: 0;
+	        height: 0;
+	
+	        content: ' ';
+	
+	        border-bottom: 1.5rem solid #125b26;
+	        border-bottom-color: inherit;
+	        border-left: 1.5rem solid transparent;
+	        border-right: 1.5rem solid transparent;
+	    }
     }
 }
 
@@ -190,31 +190,31 @@
 .feature__title {
     font-size: 1.33rem;
     line-height: 2.13;
-}
 
-.feature__title a {
-    font-weight: normal;
-
-    display: inline-block;
-
-    padding: 0 1em;
-
-    color: #444;
-    background: #fff;
-    
-    &:hover {
-        color: #125b26;
-    }
-    
-    span {
-        display: inline-block;
-    
-        margin-right: 1px;
-        padding: 0 .5em;
-    
-        color: #fff;
-        background: #444;
-    }
+	a {
+	    font-weight: normal;
+	
+	    display: inline-block;
+	
+	    padding: 0 1em;
+	
+	    color: #444;
+	    background: #fff;
+	    
+	    &:hover {
+	        color: #125b26;
+	    }
+	    
+	    span {
+	        display: inline-block;
+	    
+	        margin-right: 1px;
+	        padding: 0 .5em;
+	    
+	        color: #fff;
+	        background: #444;
+	    }
+	}
 }
 
 
