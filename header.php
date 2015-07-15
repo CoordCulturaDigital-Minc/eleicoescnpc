@@ -85,9 +85,12 @@
                             <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Ficha</a></li>
                         <?php endif; ?>
                         <li><?php wp_loginout( get_permalink() ); ?></li>
-                    </ul>    
+                    </ul>
+                <?php else: ?>
+                	<ul id="menu-user" class="menu--user  menu">
+                        <li><a href="<?php bloginfo( 'url' ); ?>/wp-login/">Entrar</a></li>
+                    </ul>
                 <?php endif; ?>
-                
 
                 <?php wp_nav_menu( array( 'theme_location' => 'secondary', 'container' => false, 'menu_class' => 'menu--sub  menu', 'fallback_cb' => false ) ); ?>
 
