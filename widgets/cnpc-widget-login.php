@@ -57,37 +57,41 @@ class CNPC_Widget_Login extends WP_Widget
             }
         }
         echo '<div class="widget-body">';
-        
-            if ( is_user_logged_in() ) : 
 
-                if (get_user_meta($user_ID, 'e_candidato', true)): ?>
-        		
-                   	<p>Você está inscrito como candidato!</p>
-        			<p>Confira a sua <a href="<?php echo bloginfo('siteurl'); ?>/inscricoes">ficha de inscrição</a>.</p>
-    		
-                <?php elseif( !current_user_can( 'level_10' ) ): ?>
+           if ( is_user_logged_in() ) : global $user_login; ?>
 
-                    <p><?php printf( __('O debate do setorial de %s do %s está com %s comentários', 'historias' ), $user_meta['setorial'], $user_meta['UF'], 'xx' ); ?></p>
-                    <p><a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">Confira</a></p>
-                    <p>Você quer se candidatar?</p>
-        			<p><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Cadastre sua candidatura</a>.</p>
-                    <p>Link para a discussão do seu estado e setorial:</p>
-                    <p><a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">Fórum</a></p>
-                
-                <?php endif; ?>
-    		
-                <?php if ( current_user_can( 'level_10' ) ) : ?>
-                    <p>Você é um <strong>administrador</strong>. Confira a <a href="<?php bloginfo('siteurl'); ?>/inscricoes">lista de inscritos</a> e veja como andam as <a href="<?php bloginfo('siteurl'); ?>/avaliacoes">avaliações</a>.
-                    Se quiser mais opções, acesse o <a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a>.
-                <?php elseif ( current_user_can( 'curate' ) ) : ?>
-                    <p>Você é um <strong>curador</strong>. Acesse a <a href="<?php bloginfo('siteurl'); ?>/inscricoes">lista de inscritos</a> para fazer suas avaliações. Obrigado pela colaboração!
-                <?php elseif ( current_user_can( 'publish_posts' ) ) : ?>
-                    <p>Confira a sua <a href="<?php bloginfo('siteurl'); ?>/inscricoes">ficha de inscrição</a> ou acesse o <a href="<?php bloginfo( 'url' ); ?>/wp-admin/">painel</a> para publicar conteúdo.
-                <?php elseif ( current_user_can( 'read' ) ) : ?>
-                    <!-- <p>Confira a sua <a href="<?php bloginfo('siteurl'); ?>/inscricoes">ficha de inscrição</a>. -->
-                <?php endif; ?>
-                    <p>Para sair, <a href="<?php echo wp_logout_url( get_permalink() ); ?>" title="Logout">clique aqui</a>.</p>
-                <?php else : ?>
+                <ul id="menu-user" class="menu--user menu">
+
+
+                    <?php if ( current_user_can( 'level_10' ) ) : //admin ?>
+                       
+                        <li><i class="fa fa-cog"></i> <a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
+                        <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscrições</a></li>
+                        <li><i class="fa fa-check-square-o"></i> <a href="<?php bloginfo('siteurl'); ?>/avaliacoes">Avaliações</a></li>
+                    
+                    <?php elseif ( current_user_can( 'curate' ) ) : //curador ou avaliador ?>
+                        
+                        <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscrições</a></li>
+                    
+                    <?php elseif ( current_user_can( 'publish_posts' ) ): //editor do site ?>
+                        
+                        <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Ficha</a></li>
+                        <li><i class="fa fa-cog"></i> <a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
+                    
+                    <?php elseif ( current_user_can( 'read' ) ) : //eleitor ?>
+                        <!-- <li><i class="fa fa-users"></i> <a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">Meus candidatos</a></li> -->
+                        <li><i class="fa fa-comments"></i> <a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">Meu fórum</a></li>
+                      
+                        <?php if (get_user_meta($user_ID, 'e_candidato', true)): ?> 
+                            <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha ficha de inscrição</a></li>
+                        <?php else: ?>
+                              <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('siteurl'); ?>/inscricoes">Quero me candidatar!</a></li>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <li><i class="fa fa-sign-out"></i> <?php wp_loginout( get_permalink() ); ?></li>
+                </ul>
+
+            <?php else : ?>
             	
                 <div class="login-form">
                 <?php wp_login_form(

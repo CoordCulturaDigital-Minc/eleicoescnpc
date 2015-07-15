@@ -51,11 +51,20 @@ aside {
 	    margin-top: 1rem;
 	    margin-bottom: 1em;
 	    margin-right: 1em;
-	    
-	    
+
 	    line-height: 1.71;
 	
 	    list-style: none;
+	    &.menu--user {
+	    	li { 
+	    		color: $cor-verde;
+	    		font-weight: bold;
+	    		a {
+	    			color: $cor-verde;
+	    		}
+	    	}
+
+	    }
     }
 
 	h3 {

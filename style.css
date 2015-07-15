@@ -1662,6 +1662,11 @@ aside {
     margin-right: 1em;
     line-height: 1.71;
     list-style: none; }
+    aside ul.menu--user li {
+      color: #125b26;
+      font-weight: bold; }
+      aside ul.menu--user li a {
+        color: #125b26; }
   aside h3 {
     margin: 0 0 10px 0;
     padding: 1.2rem 0rem 0.4em 1rem;
