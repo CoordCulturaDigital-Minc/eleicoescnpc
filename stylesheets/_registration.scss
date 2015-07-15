@@ -10,6 +10,7 @@
 
 	td {
 	    font-size: .88rem;
+	    font-size: 14px;
 	    line-height: 1.7;
 	
 	    padding: 1.5rem 1rem;
@@ -26,6 +27,7 @@
 	thead {
 	    font-family: 'Sanchez', serif;
 	    font-size: 1.13rem;
+	    font-size: 18px;
 	    line-height: 1.33;
 	
 	    color: #fff;
@@ -69,6 +71,7 @@
 	.subscription__title {
 	    font-family: 'Sanchez', serif;
 	    font-size: 1.13rem;
+	    font-size: 18px;
 	    line-height: 1.33;
 	    
 	    small {
@@ -79,6 +82,7 @@
 	
 	.subscription__status {
 	    font-size: 1.13rem;
+	    font-size: 18px;
 	    line-height: 1.33;
 	
 	    text-align: center;
@@ -127,6 +131,8 @@
 #cadastro.form-step {
     padding-top: 0px;
     position: relative;
+    background-color: transparent;
+    border: none;
 
 	.step__title,
 	.step__about {
@@ -164,6 +170,7 @@
 	    color: #ffcb05;
 	    
 	    font-size: 1.4em;
+	    font-size: 22px;
 	    
 	    &:last-child {
 		    margin-right: 0px;
@@ -259,6 +266,7 @@
 
 .step__title {
     font-size: 2.60rem;
+    font-size: 36px;
     line-height: 1.33;
 
     margin-bottom: 0;
@@ -333,6 +341,7 @@
 
 .errors .error {
     font-size: .88rem;
+    font-size: 14px;
     line-height: 1.71;
 
     padding: 0 .5em;
@@ -398,6 +407,7 @@
     background: #5daa33;
     
 	strong {
+	    font-size: 36px;
 	    font-size: 3rem;
 	    font-weight: normal;
 	    line-height: 1;

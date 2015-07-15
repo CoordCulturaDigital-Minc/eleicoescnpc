@@ -1154,6 +1154,7 @@ img.aligncenter {
 
 .inscritos--lista td {
   font-size: .88rem;
+  font-size: 14px;
   line-height: 1.7;
   padding: 1.5rem 1rem;
   vertical-align: top;
@@ -1163,6 +1164,7 @@ img.aligncenter {
 .inscritos--lista thead {
   font-family: 'Sanchez', serif;
   font-size: 1.13rem;
+  font-size: 18px;
   line-height: 1.33;
   color: #fff;
   border-bottom: 1px solid #666;
@@ -1187,12 +1189,14 @@ img.aligncenter {
 .inscritos--lista .subscription__title {
   font-family: 'Sanchez', serif;
   font-size: 1.13rem;
+  font-size: 18px;
   line-height: 1.33; }
   .inscritos--lista .subscription__title small {
     font-size: .88rem;
     line-height: 1.71; }
 .inscritos--lista .subscription__status {
   font-size: 1.13rem;
+  font-size: 18px;
   line-height: 1.33;
   text-align: center; }
 .inscritos--lista a:hover {
@@ -1222,7 +1226,9 @@ img.aligncenter {
 
 #cadastro.form-step {
   padding-top: 0px;
-  position: relative; }
+  position: relative;
+  background-color: transparent;
+  border: none; }
   #cadastro.form-step .step__title,
   #cadastro.form-step .step__about {
     /*float: left;*/ }
@@ -1248,7 +1254,8 @@ img.aligncenter {
     text-align: center;
     background-color: #175823;
     color: #ffcb05;
-    font-size: 1.4em; }
+    font-size: 1.4em;
+    font-size: 22px; }
     #step-1-register label:last-child {
       margin-right: 0px; }
     #step-1-register label:hover {
@@ -1322,6 +1329,7 @@ img.aligncenter {
 
 .step__title {
   font-size: 2.60rem;
+  font-size: 36px;
   line-height: 1.33;
   margin-bottom: 0;
   color: #125b26; }
@@ -1372,6 +1380,7 @@ img.aligncenter {
 
 .errors .error {
   font-size: .88rem;
+  font-size: 14px;
   line-height: 1.71;
   padding: 0 .5em;
   color: #fff;
@@ -1416,6 +1425,7 @@ img.aligncenter {
   color: #fff;
   background: #5daa33; }
   #protocol-number strong {
+    font-size: 36px;
     font-size: 3rem;
     font-weight: normal;
     line-height: 1;
