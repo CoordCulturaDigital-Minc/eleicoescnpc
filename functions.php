@@ -343,10 +343,10 @@ function historias_comment( $comment, $args, $depth ) {
 			
 			<header class="comment-meta">
             	<cite class="fn">
-	            	<?php echo get_comment_author_link(); ?>
+	            	<span class="entry-author"><?php echo get_comment_author_link(); ?></span>
+	            	<span class="entry-date"><?php echo get_the_date(); ?></span>
             	</cite>
-            	<?php comment_reply_link( array_merge( $args, array( 'reply_text' => '<i class="fa fa-reply"></i>', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-            	<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>" title="<?php printf( __( '%1$s at %2$s', 'historias' ), get_comment_date(), get_comment_time() ); ?>" class="comment-permalink"><i class="fa fa-check"></i><span class="assistive-text"><? _e('Permalink', 'historias'); ?></span></a>
+            	<?php comment_reply_link( array_merge( $args, array( 'reply_text' => 'Responder', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
             	<?php edit_comment_link( sprintf( __( '%s Edit', 'historias' ), '<i class="fa fa-pencil"></i>' ) ); ?>
             </header>
 			

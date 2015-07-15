@@ -9,7 +9,7 @@
     <?php if ( have_comments() ) : ?>
 
         <h3 class="comments-title">
-            <?php printf( _n( 'One reaction', '%1$s reactions', get_comments_number(), 'historias' ), number_format_i18n( get_comments_number() ) ); ?>
+            <?php printf( _n( 'Um comentário', '%1$s comentários', get_comments_number(), 'historias' ), number_format_i18n( get_comments_number() ) ); ?>
             <?php if ( comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
                 <a href="#respond"><?php printf( __('%s Leave a reply', 'historias' ), '<i class="fa fa-comment"></i>' ); ?></a>
         	<?php endif; ?>

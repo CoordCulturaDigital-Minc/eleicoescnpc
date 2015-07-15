@@ -6,6 +6,12 @@
 			$('#candidate-details-'+cid).toggle();
 		});
 
+		// fechar a lista ao clicar fora da área do mapa
+        $(document).click(function(event) { 
+            if(!$(event.target).closest('.show-candidate-details').length )
+                $('.candidate-details').hide();
+        }); 
+
 		$('.vote').click(function() {
 
 			var pid = $(this).data('project_id');
@@ -30,29 +36,18 @@
 
 		});
 		
-		// fechar a lista ao clicar fora da área do mapa
-        $(document).click(function(event) { 
-            if(!$(event.target).closest('.show-candidate-details').length )
-                $('.candidate-details').hide();
-        }); 
-
-
 		//slide
-		 $('.candidates-content').flexslider({
-			 
+	    $('.candidates-content').flexslider({
+				 
 		 	animation: "slide",
 		 	controlsContainer: ".candidates-content .navigation",
 		 	selector: ".candidates > .candidate",
 		 	prevText: "",
 		 	nextText: "",
-		 	direction:"horizontal",
-			itemWidth: "250",
-		 	randomize: true,
-		 	 useCSS: false,
+			itemWidth: "200",
+		 	useCSS: false,
 		 	minItems: 4,
-		 	maxItems: 1,
-		 	// namespace: ""
+		 	maxItems: 5
 		 });
-
     });
 })(jQuery);

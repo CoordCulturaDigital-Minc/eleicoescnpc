@@ -828,12 +828,13 @@ img.aligncenter {
   width: 40%; }
 
 #comments {
-  margin-bottom: 24px;
-  margin-bottom: 1.5rem; }
+  padding: 5% 10%;
+  border: 1px solid #eaeaea;
+  border-radius: 5px; }
 
 .comments-title,
 #reply-title {
-  font-size: 1.5rem;
+  font-size: 25px;
   font-weight: normal;
   line-height: 1;
   margin-bottom: 1.5rem;
@@ -856,16 +857,20 @@ img.aligncenter {
 
 .comments-list {
   list-style: none; }
-  .comments-list li {
-    margin: 0;
-    padding: 0; }
+  .comments-list li.comment {
+    margin: 0 0 10px 0;
+    padding: 10px;
+    background-color: #EAEAEA;
+    border-radius: 5px;
+    border: 1px solid #D8D7D7; }
   .comments-list .children {
     margin: 0 0 0 48px;
-    margin: 0 0 0 3rem; }
+    margin: 10px 0 0 3rem; }
 
 .comment-container {
   margin-bottom: 24px;
-  margin-bottom: 1.5rem; }
+  margin-bottom: 1.5rem;
+  position: relative; }
 
 .comment,
 .pingback {
@@ -882,23 +887,10 @@ img.aligncenter {
   margin-bottom: 16px;
   margin-bottom: 1rem;
   padding: 0px;
-  border-radius: 1rem;
-  background: #f5f5f5; }
-  .comment-content:after {
-    position: absolute;
-    bottom: -8px;
-    bottom: -.5rem;
-    left: 40px;
-    left: 2.5rem;
-    display: block;
-    width: 0;
-    content: '';
-    border-width: 8px 8px 0;
-    border-width: .5rem .5rem 0;
-    border-style: solid;
-    border-color: #f5f5f5 transparent; }
+  border-radius: 1rem; }
   .comment-content p {
-    margin: 0; }
+    margin: 0;
+    color: #676767; }
 
 .comment-content p + * {
   margin-bottom: 1.5rem; }
@@ -907,11 +899,16 @@ img.aligncenter {
   line-height: 1.5;
   position: relative;
   z-index: 1;
+  float: right;
+  width: 85%;
   overflow: hidden;
   margin: 0;
-  padding: 0 24px;
-  padding: 0 1.5rem;
-  color: #999; }
+  color: #636466; }
+  .comment-meta span {
+    display: block; }
+    .comment-meta span.entry-date {
+      margin-top: -5px;
+      color: #b0b0b0; }
 
 .vcard {
   float: left;
@@ -934,17 +931,22 @@ img.aligncenter {
     color: #125b26; }
 
 .comment-on-hold {
-  position: absolute;
-  top: 0;
-  left: 100px;
+  float: left;
   background: yellow; }
 
 .comment-reply-link {
-  display: inline-block;
-  display: -moz-inline-stack;
-  zoom: 1;
-  float: right;
-  *display: inline; }
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  background-color: #dadada;
+  color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 2px 0 #b9b7b8;
+  border-radius: 3px; }
+  .comment-reply-link:hover {
+    background-color: #39b39c;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 2px 0 #2d9481;
+    color: #fff; }
 
 .comment-permalink {
   float: right; }
@@ -972,19 +974,18 @@ img.aligncenter {
   overflow: hidden;
   padding: 24px;
   padding: 1.5rem;
+  margin-top: 10px;
   color: #666;
   border-top: 1px solid #ededed;
   background: #f5f5f5; }
   #respond p {
-    font-size: 12px;
-    font-size: .75rem;
+    font-size: 15px;
     line-height: 2;
     margin-bottom: 24px;
     margin-bottom: 1.5rem; }
 
 #cancel-comment-reply-link {
   font-size: 14px;
-  font-size: .88rem;
   line-height: 1.71;
   color: #666; }
 
@@ -994,7 +995,6 @@ img.aligncenter {
 
 #commentform label {
   font-size: 16px;
-  font-size: 1rem;
   line-height: 1.5;
   display: inline-block;
   display: -moz-inline-stack;
@@ -1010,7 +1010,7 @@ img.aligncenter {
 
 #commentform input[type='text'], #commentform textarea {
   padding: 1em;
-  border: 1px solid #ededed;
+  border: 1px solid #A0A0A0;
   outline: none; }
   #commentform input[type='text']:focus, #commentform textarea:focus {
     -webkit-transition: border-color .2s linear;
@@ -1023,26 +1023,23 @@ img.aligncenter {
   line-height: 2;
   margin: 0;
   padding-top: 24px;
-  padding-top: 1.5rem; }
+  padding-top: 1.5rem;
+  display: none; }
   .form-allowed-tags code {
     color: #999; }
 
 #submit {
   font-size: 16px;
-  font-size: 1rem;
   padding: .5em 1em;
   color: #fff;
-  border: none; }
+  color: #DEB90E;
+  background-color: #125A26;
+  border: none;
+  float: right; }
 
 .page .entry-summary {
-    /*font-size: 1.13rem;
-    font-style: italic;
-    line-height: 1.33;
-
-    color: #888;
-*/
   margin-top: 20px;
-  font-size: 1rem;
+  font-size: 14px;
   line-height: 1;
   color: #151e19; }
 
@@ -1353,8 +1350,8 @@ img.aligncenter {
   color: #888; }
 
 .field__error {
-  font-size: .88rem;
-  line-height: 1.71;
+  font-size: 14px;
+  line-height: 1.21;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -1610,14 +1607,14 @@ aside {
     content: " "; }
   aside:after {
     clear: both; }
-  aside a {
+  aside a, aside a:visited {
     color: #826815; }
-    aside a:hover {
+    aside a:hover, aside a:visited:hover {
       color: #e2bf4e; }
-    aside a.button {
+    aside a.button, aside a:visited.button {
       float: right;
       margin-bottom: 16px; }
-    aside a.lost-password {
+    aside a.lost-password, aside a:visited.lost-password {
       font-size: .88rem;
       line-height: 1.71;
       display: block;
@@ -1630,14 +1627,14 @@ aside {
     line-height: 1.71;
     list-style: none; }
   aside h3 {
-    margin: 0;
+    margin: 0 0 10px 0;
     padding: 1.2rem 0rem 0.4em 1rem;
     border-radius: 5px;
     width: 100%;
     color: #ffce00;
     border-bottom: none;
     font-family: "TheSans B7 Bold";
-    font-size: 24px;
+    font-size: 20px;
     color: #ffce00;
     background: #1f6f3a;
     /* Old browsers */
@@ -1654,7 +1651,18 @@ aside {
     background: linear-gradient(to bottom, #1f6f3a 0%, #0c451a 100%);
     /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f6f3a', endColorstr='#0c451a',GradientType=0 );
-    /* IE6-9 */ }
+    /* IE6-9 */
+    position: relative; }
+    aside h3:after {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: -9px;
+      left: 10px;
+      width: 0;
+      border-width: 9px 9px 0px 9px;
+      border-style: solid;
+      border-color: #0c451a transparent; }
   aside .widget-body {
     margin-top: 14px;
     margin-bottom: 14px; }
@@ -1666,20 +1674,20 @@ aside {
     aside form#loginform:after {
       clear: both; }
     aside form#loginform p {
-      font-size: 1.2rem;
+      font-size: 16px;
       line-height: 1;
       color: #a8a8a8; }
       aside form#loginform p.login-submit {
         float: right;
         margin-top: 0; }
     aside form#loginform .input {
-      font-size: .88rem;
+      font-size: 14px;
       width: 100%;
       padding: 0.8em;
       border: 1px solid #ededed;
       background: #fff; }
   aside a#lost-password {
-    font-size: 1.2rem; }
+    font-size: 16px; }
 
 header.site_header {
   margin-bottom: 3rem;
@@ -2280,89 +2288,157 @@ footer.site-footer div {
     display: block;
     line-height: 1.8; }
 
-.candidates {
-  display: block;
-  clear: both;
-  width: 100%;
-  float: left; }
-
-.candidate {
-  display: block;
-  float: left;
-  padding: 30px;
-  /*border: 1px solid pink;*/
-  width: 30%;
-  margin: 20px 0px;
-  position: relative; }
-
-.candidate-details {
-  display: none;
-  /*position: absolute;*/
-  /*top: 150px;*/
-  /*left: 20px;*/
-  width: 100%;
-  margin-top: 10px;
-  background-color: #F4F4F4;
-  border: 1px solid #aaa;
-  padding: 15px;
-  font-size: 14px;
-  line-height: 1.3; }
-
-.candidate-avatar {
-  margin: 0 auto;
-  width: 200px;
-  height: 200px;
-  display: block;
-  padding: 5px;
-  background: #EFEDE6;
-  border: 1px solid #DEDEDE;
-  border-radius: 5px; }
-  .candidate-avatar .candidate-avatar img {
-    width: 100%;
-    height: 100%; }
-
-.candidate-text {
-  display: block;
-  clear: both;
-  text-align: center; }
-
-.candidate-name {
-  color: #51660B;
-  text-shadow: 1px 1px 1px #FFFFFF;
-  font-size: 22px;
-  font-weight: bold;
-  margin-top: 10px;
-  text-align: center; }
-
-.show-candidate-details {
-  /*float: right;*/
-  display: inline-block;
-  margin: 10px 0 0 0;
-  padding: 3px 10px;
-  background-color: rgba(93, 170, 51, 0.54);
-  border-radius: 5px;
-  color: #fff;
-  clear: both; }
-  .show-candidate-details:hover {
-    color: #fff;
-    background-color: rgba(93, 170, 51, 0.87);
-    cursor: pointer; }
-
-.vote {
-  margin-top: 5px;
-  /*margin-left: 30px;*/
+.entry-title,
+.entry-title-candidate {
   text-align: center;
-  display: block;
-  padding: 10px 20px;
-  font-size: 18px;
-  color: #9D800C;
-  text-transform: uppercase;
-  background-color: #FBC80F;
-  border-radius: 5px;
-  cursor: pointer;
-  /*width: 120px;*/
-  /*height: 50px;*/ }
-  .vote:hover {
-    background-color: #E2C662; }
+  padding-bottom: 15px;
+  color: #125b26; }
+
+.entry-title {
+  font-size: 20px; }
+
+.candidates-content {
+  position: relative; }
+  .candidates-content .candidates {
+    float: left;
+    position: relative; }
+    .candidates-content .candidates .candidate {
+      display: block;
+      position: relative; }
+      .candidates-content .candidates .candidate .candidate-avatar {
+        margin: 0 auto;
+        width: 200px;
+        height: 200px;
+        display: block;
+        border-radius: 5px;
+        background: #FFFFFF;
+        border: 5px solid #959595; }
+        .candidates-content .candidates .candidate .candidate-avatar img {
+          width: 100%;
+          height: 100%; }
+      .candidates-content .candidates .candidate .candidate-details {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 650px;
+        height: 415px;
+        margin-left: -350px;
+        margin-top: -215px;
+        z-index: 1;
+        background-color: #F4F4F4;
+        border: 1px solid #aaa;
+        padding: 15px;
+        font-size: 14px;
+        line-height: 1.3;
+        border: 26px solid #0F4E21; }
+        .candidates-content .candidates .candidate .candidate-details i {
+          position: absolute;
+          top: -18px;
+          right: -18px;
+          color: #ffae16; }
+        .candidates-content .candidates .candidate .candidate-details .candidate-name {
+          font-size: 20px; }
+      .candidates-content .candidates .candidate .candidate-text {
+        display: block;
+        clear: both;
+        text-align: center; }
+        .candidates-content .candidates .candidate .candidate-text .candidate-name {
+          color: #0E4D1F;
+          text-shadow: 1px 1px 1px #FFFFFF;
+          font-size: 22px;
+          font-weight: bold;
+          margin-top: 10px;
+          text-align: center; }
+        .candidates-content .candidates .candidate .candidate-text .show-candidate-details {
+          display: inline-block;
+          margin: 10px 0 0 0;
+          padding: 3px 10px;
+          background-color: rgba(93, 170, 51, 0.54);
+          border-radius: 5px;
+          color: #fff;
+          clear: both; }
+          .candidates-content .candidates .candidate .candidate-text .show-candidate-details:hover {
+            color: #fff;
+            background-color: rgba(93, 170, 51, 0.87);
+            cursor: pointer; }
+      .candidates-content .candidates .candidate .vote {
+        margin: 0 auto;
+        padding: 10px 5px;
+        width: 165px;
+        display: block;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 18px;
+        color: #DEB90E;
+        background-color: #125A26;
+        background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
+        border-radius: 5px;
+        cursor: pointer; }
+        .candidates-content .candidates .candidate .vote:hover {
+          background-color: #DEB90E; }
+
+.candidate-not-found {
+  margin: 40px auto;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+  width: 70%;
+  padding: 15px 0px;
+  height: 160px;
+  position: relative; }
+  .candidate-not-found i {
+    position: absolute;
+    top: 15px;
+    left: 0px;
+    font-size: 100px;
+    color: #125b26;
+    border: 2px solid #aaa;
+    padding: 10px 40px;
+    display: inline-block; }
+  .candidate-not-found p {
+    position: absolute;
+    top: 30px;
+    left: 150px;
+    font-size: 22px;
+    display: inline-block;
+    margin: 0px;
+    line-height: 1;
+    margin-left: 10px;
+    font-weight: bold;
+    color: #125b26; }
+  .candidate-not-found .button, .candidate-not-found aside form#loginform input#wp-submit, aside form#loginform .candidate-not-found input#wp-submit {
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    display: block;
+    width: 100px;
+    margin-left: 400px; }
+
+.flex-direction-nav li {
+  list-style: none; }
+  .flex-direction-nav li .flex-prev,
+  .flex-direction-nav li .flex-next {
+    position: absolute;
+    top: 75px;
+    width: 40px;
+    height: 83px;
+    cursor: pointer;
+    background-image: url(images/image-carousel.png);
+    background-repeat: no-repeat;
+    z-index: 1; }
+  .flex-direction-nav li .flex-prev {
+    left: -40px;
+    background-position: 0px 0px; }
+  .flex-direction-nav li .flex-next {
+    right: -40px;
+    background-position: -45px 0px; }
+
+.flex-control-paging {
+  display: none; }
+
+.forum-title {
+  text-align: center;
+  font-size: 34px;
+  margin-top: 30px; }
 
 /*# sourceMappingURL=style.css.map */
