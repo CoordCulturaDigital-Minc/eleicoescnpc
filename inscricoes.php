@@ -108,7 +108,7 @@ if(is_user_logged_in()) {
 			<?php elseif (current_user_can('curador')): ?>
 				<?php echo nl2br(get_theme_option('txt_curador')); ?>
 			<?php elseif (current_user_can('administrator')): ?>
-				<?php echo nl2br(get_theme_option('txt_admin')); ?>w
+				<?php echo nl2br(get_theme_option('txt_admin')); ?>
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>
@@ -127,7 +127,7 @@ if(is_user_logged_in()) {
 						<span class='step_1 active'>Etapa 1</span>
 						<span class='step_2'>Etapa 2</span>
 						<span class='step_3'>Etapa 3</span>
-						<span class='step_4'>Etapa 4</span>
+						<!-- <span class='step_4'>Etapa 4</span> -->
 					</div>
 				</div>
 
@@ -244,7 +244,7 @@ if(is_user_logged_in()) {
 			<?php endif;?>
 			<div id="formstep-1" class="form-step">
 				<header class="step__head">
-					<h3 class="step__title">Etapa 1/2: Candidato <?php if ($step1['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+					<h3 class="step__title">Etapa 1/3: Candidato <?php if ($step1['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
 					<div class="step__about">
 						<?php echo nl2br( get_theme_option( 'txt_candidato_topo' ) ); ?>
 					</div>
@@ -261,17 +261,20 @@ if(is_user_logged_in()) {
 
 				<div class="form-step-content">
 					<fieldset>
-						<legend>Informações básicas</legend>
+						<legend>Sobre o Pré-candidato</legend>
 						
 						<div class="grid">
 							<div class="grid__item  one-whole">
 								<label for="candidate-name">Nome Completo</label>
-								<?php echo isset($user_meta['first_name'])?$user_meta['first_name']:'';?>
+								<input disabled id="candidate-name" type="text" name="candidate-name" value="<?php echo isset($user_meta['first_name'])?$user_meta['first_name']:'';?>" />
 							</div><!--
 
-							--><div class="grid__item  one-half">
-								<label for="candidate-date-birth">Data Nascimento</label>
-								<?php echo isset($user_meta['date_birth'])?restore_format_date( $user_meta['date_birth'] ):'';?>
+							-->
+							<div class="grid__item  one-whole">
+								<label for="candidate-display-name">Nome Artístico</label>
+								<input<?php echo $form_disabled?' disabled':'';?> id="candidate-display-name" type="text" name="step1-candidate-display-name" value="<?php echo isset($f['candidate-display-name'])?$f['candidate-display-name']:'';?>" />
+								<div class="field-status <?php print isset($f['candidate-display-name'])?'completo':'invalido'?>"></div>
+								<div id="candidate-display-name-error" class="field__error"></div>
 							</div><!--
 
 							--><div class="grid__item one-half">
@@ -286,34 +289,18 @@ if(is_user_logged_in()) {
 
 							--><div class="grid__item  one-whole">
 								<label for="candidate-email">E-mail</label>
-								<?php echo isset($user_meta['nickname'])?$user_meta['nickname']:'';?>
+								<input disabled id="candidate-email" type="text" name="candidate-email" value="<?php echo isset($user_meta['nickname'])?$user_meta['nickname']:'';?>" />
 							</div>
 						</div>
 					</fieldset>
 
                     <fieldset>
-						<legend>Sobre o Pré-candidato</legend>
-
 						<div class="grid">
-							<div class="grid__item  one-whole">
-								<label for="candidate-display-name">Nome Artístico</label>
-								<input<?php echo $form_disabled?' disabled':'';?> id="candidate-display-name" type="text" name="step1-candidate-display-name" value="<?php echo isset($f['candidate-display-name'])?$f['candidate-display-name']:'';?>" />
-								<div class="field-status <?php print isset($f['candidate-display-name'])?'completo':'invalido'?>"></div>
-								<div id="candidate-display-name-error" class="field__error"></div>
-							</div><!--
-
-							--><div class="grid__item  one-half">
+							<div class="grid__item  one-half">
 								<label for="candidate-cpf">CPF</label>
 								<input disabled id="candidate-cpf" type="text" name="step1-candidate-cpf" value="<?php echo isset($f['candidate-cpf'])?$f['candidate-cpf']:$user_meta['cpf'];?>" />
 								<div class="field-status <?php print isset($f['candidate-cpf'])?'completo':'invalido'?>"></div>
 								<div id="candidate-cpf-error" class="field__error"></div>
-							</div><!--
-
-							--><div class="grid__item  one-half">
-								<label for="candidate-phone-1">Telefone</label>
-								<input<?php echo $form_disabled?' disabled':'';?> id="candidate-phone-1" class="phone required" type="text" name="step1-candidate-phone-1" value="<?php echo isset($f['candidate-phone-1'])?$f['candidate-phone-1']:'';?>" />
-								<div class="field-status <?php print isset($f['candidate-phone-1'])?'completo':'invalido'?>"></div>
-								<div id="candidate-phone-1-error" class="field__error"></div>
 							</div><!--
 
 							--><div class="grid__item  one-half">
@@ -324,17 +311,30 @@ if(is_user_logged_in()) {
 							</div><!--
 
 							--><div class="grid__item  one-half">
-								<label for="candidate-genre">Gênero</label>
+								<label for="candidate-phone-1">Telefone</label>
+								<input<?php echo $form_disabled?' disabled':'';?> id="candidate-phone-1" class="phone required" type="text" name="step1-candidate-phone-1" value="<?php echo isset($f['candidate-phone-1'])?$f['candidate-phone-1']:'';?>" />
+								<div class="field-status <?php print isset($f['candidate-phone-1'])?'completo':'invalido'?>"></div>
+								<div id="candidate-phone-1-error" class="field__error"></div>
+							</div><!--
+
+							--><div class="grid__item  one-half">
+								<label for="candidate-genre">Sexo</label>
 								<?php $selected = isset($f['candidate-genre'])?$f['candidate-genre']:''; ?>
-								<?php echo dropdown_genres( 'step1-candidate-genre', $selected, true, 'id="candidate-genre" class="required" $disabled' ); ?>
+								<?php echo dropdown_genres( 'step1-candidate-genre', $selected, true, "id='candidate-genre' class='required' {$disabled}" ); ?>
 								<div class="field-status <?php print isset($f['candiate-genre'])?'completo':'invalido'?>"></div>
 								<div id="candidate-genre-error" class="field__error"></div>
 							</div><!--
 
-							--><div class="grid__item  one-half">
-								<label for="candidate-race">Raça</label>
-								<?php $selected =  isset($f['candidate-race'])?$f['candidate-race']:''; ?>
-								<?php echo dropdown_races( 'step1-candidate-race', $selected, true, 'id="candidate-race" class="required" $disabled' ); ?>
+							--><div class="grid__item  one-whole">
+								<label>Etnia:</label>
+								<label for="tipo_eleitor">
+									<input <?php echo $form_disabled?' disabled':'';?> id="tipo_eleitor" type="radio" name="step1-candidate-race" value="preto-pardo-indigena" <?php checked( $f['candidate-race'], 'preto-pardo-indigena' ); ?>  />
+								Sou preto ou pardo ou indígena</label>
+								
+								<label for="tipo_candidato">
+									<input <?php echo $form_disabled?' disabled':'';?> id="tipo_candidato" type="radio" name="step1-candidate-race" value="outro" <?php checked( $f['candidate-race'], 'outro' ); ?>  />
+								Branco</label>
+								
 								<div class="field-status <?php print isset($f['candidate-race'])?'completo':'invalido'?>"></div>
 								<div id="candidate-race-error" class="field__error"></div>
 							</div>
