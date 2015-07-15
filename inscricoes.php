@@ -329,11 +329,11 @@ if(is_user_logged_in()) {
 								<label>Você é afrodescente?</label>
 								<label for="tipo_eleitor">
 									<input <?php echo $form_disabled?' disabled':'';?> id="tipo_eleitor" type="radio" name="step1-candidate-race" value="true" <?php checked( $f['candidate-race'], 'true' ); ?>  />
-								Sou preto ou pardo ou indígena</label>
+								Sim</label>
 								
 								<label for="tipo_candidato">
 									<input <?php echo $form_disabled?' disabled':'';?> id="tipo_candidato" type="radio" name="step1-candidate-race" value="false" <?php checked( $f['candidate-race'], 'false' ); ?>  />
-								Branco</label>
+								Não</label>
 								
 								<div class="field-status <?php print isset($f['candidate-race'])?'completo':'invalido'?>"></div>
 								<div id="candidate-race-error" class="field__error"></div>
