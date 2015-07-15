@@ -2,18 +2,29 @@
 
 		<footer id="site-footer" class="site-footer row">
 				<div class="social col-xs-8 col-xs-offset-2">
-					<a class="col-xs-2 text-center fa fa-twitter twitter" href="https://twitter.com/culturagovbr" target="_blank" title="Twitter Cultura"></a>
-					<a class="col-xs-2 text-center fa fa-facebook facebook" href="https://www.facebook.com/MinisterioDaCultura" target="_blank" title="Facebook Cultura"></a>
-					<a class="col-xs-2 text-center fa fa-instagram instagram" href="https://instagram.com/culturagovbr/" target="_blank" title="Instagram Cultura"></a>
-					<a class="col-xs-2 text-center fa fa-youtube-square youtube" href="https://www.youtube.com/user/ministeriodacultura" target="_blank" title="Youtube Cultura"></i></a>
-					<a class="col-xs-2 text-center fa fa-tumblr tumblr" href="http://culturagovbr.tumblr.com/" target="_blank" title="Tumblr Cultura"></a>
-					<a class="col-xs-2 text-center fa fa-flickr flickr" href="https://www.flickr.com/photos/ministeriodacultura" target="_blank" title="Flickr Cultura"></a>
+					<a 	class="col-xs-2 text-center fa fa-twitter twitter"
+						href="https://twitter.com/culturagovbr/" target="_blank" title="Twitter Cultura"></a>
+					<a class="col-xs-2 text-center fa fa-facebook facebook"
+						href="https://www.facebook.com/MinisterioDaCultura" target="_blank" title="Facebook Cultura"></a>
+					<a class="col-xs-2 text-center fa fa-instagram instagram"
+						href="https://instagram.com/culturagovbr/" target="_blank" title="Instagram Cultura"></a>
+					<a class="col-xs-2 text-center fa fa-youtube-square youtube"
+						href="https://www.youtube.com/user/ministeriodacultura/" target="_blank" title="Youtube Cultura"></i></a>
+					<a class="col-xs-2 text-center fa fa-tumblr tumblr"
+						href="http://culturagovbr.tumblr.com/" target="_blank" title="Tumblr Cultura"></a>
+					<a class="col-xs-2 text-center fa fa-flickr flickr"
+						href="https://www.flickr.com/photos/ministeriodacultura/" target="_blank" title="Flickr Cultura"></a>
 				</div>
 
 				<div class="logos col-xs-10 col-xs-offset-1">
-					<a id="PNC_logo" class="col-xs-4" href="http://www.cultura.gov.br" title="Ministério da Cultura - Governo Federal"><img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/pnc_logo.png'/></a>
-					<a id="CNPC_logo" class="col-xs-4" href="http://www.cultura.gov.br" title="Ministério da Cultura - Governo Federal"><img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/CNPC_logo.png'/></a>
-					<a id="MinC_logo" class="col-xs-4" href="http://www.cultura.gov.br" title="Ministério da Cultura - Governo Federal"><img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/MINC_logo.png'/></a>
+					<a class="col-xs-2" id="PNC" href="#" title="PNC - Plano Nacional de Cultura">
+						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/pnc_logo.png'/></a>
+					<a class="col-xs-4" id="MinC" href="http://www.cultura.gov.br" title="Ministério da Cultura - Governo Federal">
+						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/MINC_logo.png'/></a>
+					<a class="col-xs-3" id="CNPC" href="#" title="Conselho Nacional de Política Cultural">
+						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/CNPC_logo.png'/></a>
+					<a class="col-xs-3" id="Cultura_digital" href="http://culturadigital.br" title="Cultura digital">
+						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/culturadigital_logo.png'/></a>
 				</div>
 
 				<div class="creditos col-xs-6 col-xs-offset-3">
