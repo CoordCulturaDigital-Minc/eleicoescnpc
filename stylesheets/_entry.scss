@@ -22,32 +22,32 @@
 	}
 	
 	h1 {
-		font-size: 21px;
 		font-size: 1.31rem;
+		font-size: 21px;
 		line-height: 1.14;
 	}
 	h2 {
-		font-size: 18px;
 		font-size: 1.33rem;
+		font-size: 18px;
 	}
 	h3 {
-		font-size: 16px;
 	    font-size: 1rem;
+		font-size: 16px;
 	    line-height: 1.5;
 	}
 	h4 {
-		font-size: 14px;
 		font-size: .88rem;
+		font-size: 14px;
 		line-height: 1.71;
 	}
 	h5 {
-		font-size: 13px;
 	    font-size: .81rem;
+		font-size: 13px;
 	    line-height: 1.85;
 	}
 	h6 {
-	    font-size: 12px;
 	    font-size: .75rem;
+	    font-size: 12px;
 	    line-height: 2;
 	}
 	
@@ -75,8 +75,8 @@
 	}
 	
 	table {
-	    font-size: 14px;
 	    font-size: .88rem;
+	    font-size: 14px;
 	    line-height: 1.71;
 	
 	    width: 100%;
@@ -118,8 +118,8 @@
 	    height: auto;
 	}
 	blockquote {
-	    font-size: 14px;
 	    font-size: .88rem;
+	    font-size: 14px;
 	    line-height: 1.71;
 	
 	    position: relative;
@@ -232,11 +232,13 @@
 .gallery-caption {
     color: #999;
     font-size: .75rem;
+    font-size: 14px;
     line-height: 2;
 }
 
 .entry-footer {
     font-size: .88rem;
+    font-size: 16px;
 
     color: #888;
 }
@@ -249,6 +251,7 @@
     
     .entry-title {
 	    font-size: 1.13rem;
+	    font-size: 18px;
 	    line-height: 1.33;
 	    
 	    a {

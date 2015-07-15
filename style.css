@@ -353,6 +353,7 @@ a.post-edit-link {
   color: #fff;
   display: inline-block;
   font-size: .88rem;
+  font-size: 14px;
   line-height: 1.71;
   padding: 0 .5em;
   float: right; }
@@ -476,6 +477,7 @@ img.aligncenter {
   border: 1px dotted #ccc;
   clear: both;
   font-size: 1.25rem;
+  font-size: 20px;
   line-height: 2.4;
   padding: 0 1.3em; }
 
@@ -536,6 +538,7 @@ img.aligncenter {
 
 .entry-title {
   font-size: 1.5rem;
+  font-size: 35px;
   line-height: 1;
   margin-bottom: 0px; }
   .entry-title a {
@@ -634,32 +637,32 @@ img.aligncenter {
   color: #00b1dd; }
 .entry-content h1,
 .comment-content h1 {
-  font-size: 21px;
   font-size: 1.31rem;
+  font-size: 21px;
   line-height: 1.14; }
 .entry-content h2,
 .comment-content h2 {
-  font-size: 18px;
-  font-size: 1.33rem; }
+  font-size: 1.33rem;
+  font-size: 18px; }
 .entry-content h3,
 .comment-content h3 {
-  font-size: 16px;
   font-size: 1rem;
+  font-size: 16px;
   line-height: 1.5; }
 .entry-content h4,
 .comment-content h4 {
-  font-size: 14px;
   font-size: .88rem;
+  font-size: 14px;
   line-height: 1.71; }
 .entry-content h5,
 .comment-content h5 {
-  font-size: 13px;
   font-size: .81rem;
+  font-size: 13px;
   line-height: 1.85; }
 .entry-content h6,
 .comment-content h6 {
-  font-size: 12px;
   font-size: .75rem;
+  font-size: 12px;
   line-height: 2; }
 .entry-content ol, .entry-content ul,
 .comment-content ol,
@@ -685,8 +688,8 @@ img.aligncenter {
   margin: 0 0 0 2.25rem; }
 .entry-content table,
 .comment-content table {
-  font-size: 14px;
   font-size: .88rem;
+  font-size: 14px;
   line-height: 1.71;
   width: 100%;
   margin: 0 0 24px;
@@ -715,8 +718,8 @@ img.aligncenter {
   max-width: 100%;
   height: auto; }
 .entry-content blockquote {
-  font-size: 14px;
   font-size: .88rem;
+  font-size: 14px;
   line-height: 1.71;
   position: relative;
   overflow: hidden;
@@ -795,10 +798,12 @@ img.aligncenter {
 .gallery-caption {
   color: #999;
   font-size: .75rem;
+  font-size: 14px;
   line-height: 2; }
 
 .entry-footer {
   font-size: .88rem;
+  font-size: 16px;
   color: #888; }
 
 .related {
@@ -807,6 +812,7 @@ img.aligncenter {
   background-color: #f5f5f5; }
   .related .entry-title {
     font-size: 1.13rem;
+    font-size: 18px;
     line-height: 1.33; }
     .related .entry-title a {
       color: #125b26; }
@@ -820,7 +826,8 @@ img.aligncenter {
   text-align: right;
   width: 40%; }
 
-#comments {
+.content--full #comments,
+.content--sidebarless #comments {
   padding: 5% 10%;
   border: 1px solid #eaeaea;
   border-radius: 5px; }
@@ -937,7 +944,8 @@ img.aligncenter {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 2px 0 #b9b7b8;
   border-radius: 3px; }
   .comment-reply-link:hover {
-    background-color: #39b39c;
+    color: #DEB90E;
+    background-color: #125A26;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 2px 0 #2d9481;
     color: #fff; }
 
@@ -1952,7 +1960,8 @@ section {
   width: 65.63%; }
   section.content--full, section.content--sidebarless {
     float: none;
-    width: 100%; }
+    width: 100%;
+    margin-top: 30px; }
   section article {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
