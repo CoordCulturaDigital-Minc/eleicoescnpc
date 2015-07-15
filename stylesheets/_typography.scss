@@ -4,12 +4,37 @@
 $fonte-principal:		'TheSans B5 Plain';
 $fonte-principal-bold:	'TheSans B7 Bold';
 
-abbr[title] {
-    border-bottom: 1px dotted;
+a {
+    text-decoration: none;
+    color: #111;
+    
+    &:visited {
+	    color: #111;
+    }
+    &:hover {
+	    text-decoration: none;
+    }
+    
+	&:hover,
+	&:focus,
+	&:active {
+		-webkit-transition: color .1s ease-in-out;
+	        	transition: color .1s ease-in-out;
+	
+		color: #125b26;
+		border: 0;
+	}
+	&:focus {
+	    outline: thin dotted;
+	}
+	&:hover,
+	&:active {
+	    outline: 0;
+	}
 }
 
-a:hover {
-	text-decoration: none;
+abbr[title] {
+    border-bottom: 1px dotted;
 }
 
 abbr,
