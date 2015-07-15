@@ -326,13 +326,13 @@ if(is_user_logged_in()) {
 							</div><!--
 
 							--><div class="grid__item  one-whole">
-								<label>Etnia:</label>
+								<label>Você é afrodescente?</label>
 								<label for="tipo_eleitor">
-									<input <?php echo $form_disabled?' disabled':'';?> id="tipo_eleitor" type="radio" name="step1-candidate-race" value="preto-pardo-indigena" <?php checked( $f['candidate-race'], 'preto-pardo-indigena' ); ?>  />
+									<input <?php echo $form_disabled?' disabled':'';?> id="tipo_eleitor" type="radio" name="step1-candidate-race" value="true" <?php checked( $f['candidate-race'], 'true' ); ?>  />
 								Sou preto ou pardo ou indígena</label>
 								
 								<label for="tipo_candidato">
-									<input <?php echo $form_disabled?' disabled':'';?> id="tipo_candidato" type="radio" name="step1-candidate-race" value="outro" <?php checked( $f['candidate-race'], 'outro' ); ?>  />
+									<input <?php echo $form_disabled?' disabled':'';?> id="tipo_candidato" type="radio" name="step1-candidate-race" value="false" <?php checked( $f['candidate-race'], 'false' ); ?>  />
 								Branco</label>
 								
 								<div class="field-status <?php print isset($f['candidate-race'])?'completo':'invalido'?>"></div>
