@@ -8,14 +8,17 @@
 	    $(".page #mapa .estado").click(function(e){
 
 	        var state = $(this).find('path').attr('id');
-	       
-	        $('.menu-setoriais-container').hide(); 
+	       	var $setoriais = $('.menu-setoriais-container');
+	       	var s_height = $setoriais.height();
+	       	var s_width = $setoriais.width();
+
+	        $setoriais.hide(); 
 
 	        $('#menu-setoriais li a').each(function(){
 			   $(this).attr('href', $(this).attr('href').replace(/\/[\w]{2}-/, '/'+state+'-'));
 			});
 
-	        $(".menu-setoriais-container").css({top:'10%', left:'45%', position: 'fixed'}).slideDown();
+	        $setoriais.css({top:'50%', left:'50%', position: 'fixed', 'margin-top': -(s_height/2), 'margin-left': -(s_width/2) }).slideDown();
 
 	        return false;
 	    });

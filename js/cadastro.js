@@ -44,10 +44,13 @@
         $("#mapa .estado").click(function(e){
            
             var state = $(this).find('path').attr('id');
+            var $setoriais = $('.menu-setoriais-container');
+            var s_height = $setoriais.height();
+            var s_width = $setoriais.width();
 
-            $('.menu-setoriais-container').hide(); 
+            $setoriais.hide(); 
           
-            $(".menu-setoriais-container").css({top:'10%', left:'10%', position: 'fixed'}).slideDown();
+            $setoriais.css({top:'50%', left:'50%', position: 'fixed', 'margin-top': -(s_height/2), 'margin-left': -(s_width/2) }).slideDown();
 
             $form.find('#user_UF').val( state );
 
