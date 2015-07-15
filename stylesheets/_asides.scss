@@ -25,7 +25,7 @@ aside {
     
 	@include clearfix ();
     
-    a { 
+    a, a:visited 	{ 
 	    color: $cor-marrom;
 	    &:hover {
 		    color: $cor-beige;
@@ -59,7 +59,7 @@ aside {
     }
 
 	h3 {
-		margin: 0;
+		margin: 0 0 10px 0;
 		padding: 1.2rem 0rem 0.4em 1rem;
 		
 		border-radius: 5px;
@@ -69,7 +69,7 @@ aside {
 		border-bottom: none;
 		
 		font-family: $fonte-principal-bold;
-	    font-size: 24px;
+	    font-size: 20px;
 	
 	    color: $cor-amarelo;
 	    
@@ -78,6 +78,20 @@ aside {
 	    @include linear-vertical-gradient($cor-verde-inicio, $cor-verde-fim);
 	    
 	    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f6f3a', endColorstr='#0c451a',GradientType=0 ); /* IE6-9 */
+		
+		position: relative;
+	
+		&:after {
+			content: "";
+			display: block;
+			position: absolute;
+			bottom: -9px;
+			left: 10px;
+			width: 0;
+			border-width: 9px 9px 0px 9px;
+			border-style: solid;
+			border-color: $cor-verde-fim transparent;
+		}
 	}
     
     .widget-body {
@@ -88,7 +102,7 @@ aside {
 	form#loginform {
 		@include clearfix ();
 		p {
-		    font-size: 1.2rem;
+		    font-size: 16px;
 		    
 		    line-height: 1;
 		
@@ -101,7 +115,7 @@ aside {
 		}
 		
 		.input {
-		    font-size: .88rem;
+		    font-size: 14px;
 		
 		    width: 100%;
 		    padding: 0.8em;
@@ -116,6 +130,6 @@ aside {
 	}
 	
 	a#lost-password {
-		font-size: 1.2rem;
+		font-size: 16px;
 	}
 }
