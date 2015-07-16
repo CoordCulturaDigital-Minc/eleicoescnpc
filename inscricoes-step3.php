@@ -2,10 +2,10 @@
 	<div class="grid__item one-whole">
 
 		<?php if( $subscription_number ) : ?>
-			<p id="protocol-number">
+			<!-- <p id="protocol-number">
 				&mdash; Inscrição Número &mdash;
 				<strong id="js-protocol-number"><?php echo substr($subscription_number, 0, 8);?></strong>
-			</p>
+			</p> -->
 
 			<div class="step__about">
 				<?php echo nl2br( get_theme_option( 'txt_candidato_step4' ) ); ?>
@@ -22,11 +22,11 @@
 				<?php echo nl2br(get_theme_option('txt_candidato_step3')); ?>
 			</p>
 
-			<p id="submit-button" class="enabled  button">Inscrever meu projeto</p>
+			<p id="submit-button" class="enabled  button">Inscrever candidatura</p>
 		<?php else: ?>
 			<div class="form__item--inline">
 
-				<p id="submit-button" class="button">Inscrever meu projeto</p>
+				<p id="submit-button" class="button">Inscrever candidatura</p>
 				
 			</div>
 		<?php endif; ?>

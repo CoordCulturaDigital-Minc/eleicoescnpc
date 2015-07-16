@@ -102,32 +102,6 @@
     font-family: 'Sanchez', serif;
 }
 
-.form-application {
-	h2 {
-	    text-align: center;
-	    margin-bottom: 30px;
-	}
-	
-	legend {
-	    font-family: 'Sanchez', serif;
-	    font-size: 1.13rem;
-	    font-size: 18px;
-	    font-weight: bold;
-	    line-height: 1.33;
-	
-	    padding-bottom: 1.5rem;
-	}
-	
-	label {
-	    display: block;
-	    color: 888;
-	}
-	
-	.form__item--inline label {
-	    display: inline;
-	}
-}
-
 #cadastro.form-step {
     padding-top: 0px;
     position: relative;
@@ -194,7 +168,45 @@
 }
 
 .form-application {
+
+	
+}
+
+.form-application {
+	h2 {
+	    text-align: center;
+	    margin-bottom: 30px;
+	    // font-weight: bold;
+	    font-size: 20px;
+	}
+
+	legend {
+	    font-family: 'Sanchez', serif;
+	    font-size: 1.13rem;
+	    font-size: 18px;
+	    font-weight: bold;
+	    line-height: 1.33;
+	
+	    padding-top: 1.5rem;
+	    padding-bottom: 0.5rem;
+	}
+
+	.avatar {
+		text-align: center;
+	}
+
+	.js-upload-button {
+		float: none;
+	}
+
+
+	
+	.form__item--inline label {
+	    display: inline;
+	}
+
 	label {
+		color: 888;
 		a {
 			background: #125b26;
 			border-radius: 2px;
@@ -204,6 +216,7 @@
 			padding: 4px 8px;
 			margin-left: 5px;
 			opacity: 0.5;
+			float: right;
 
 			&:hover {
 				opacity: 1;
@@ -237,13 +250,17 @@
 	}
 	
 	textarea {
-	    height: 7rem;
+	    // height: 7rem;
 	}
 	
 	input[type='submit'],
 	#step-2-register,
 	#step-3-register {
 	    display: none;   
+	}
+
+	.js-upload-button {
+		margin: 0px !important;
 	}
 
 }
@@ -371,7 +388,9 @@
 	    color: #ccc;
 	}
 }
+
 .file-upload {
+	cursor: pointer;
 	.button {
 	    margin: .75rem 0;
 	    position: relative;
@@ -383,8 +402,13 @@
 		}
 	}
 	input[type='file'] {
-
-	    height: 50px !important;
+		height: 50px !important;
+		cursor: pointer;
+		margin-top: -20px;
+		
+	}
+	form {
+		cursor: pointer;
 	}
 	.js-feedback {
 		display: none;
@@ -459,5 +483,39 @@
 	
 	.wp-post-image {
 	    display: block;
+	}
+}
+
+
+.steps__content { 
+
+	text-align: center;
+	li {
+		margin: 0 2px;
+	  	display: inline-block;
+	  	zoom: 1;
+	  	*display: inline;
+
+		a {
+			width: 13px;
+			height: 13px;
+			display: block;
+			background: $cor-amarelo;
+			cursor: pointer;
+			text-indent: -9999px;
+			-webkit-border-radius: 20px;
+			-moz-border-radius: 20px;
+			border-radius: 20px;
+
+			&:hover {
+			  background: $cor-verde;
+			}
+
+			&.current {
+			  cursor: default;
+			  position: relative;
+			  background: $cor-verde;
+			}
+		}
 	}
 }

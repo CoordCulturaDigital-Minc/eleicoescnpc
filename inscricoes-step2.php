@@ -1,35 +1,55 @@
 <div class="form-step-content">
 	<fieldset>
-		<div class="grid">
-			<div class="grid__item  one-whole">
-				<label for="candidate-experience">Breve experiência no setor <span class="form-tip">(400 caracteres restantes)</span></label>
-				<textarea <?php echo $form_disabled?' disabled':'';?> id="candidate-experience" name="step2-candidate-experience" cols="50" rows="5" maxlength="400" class="required"><?php echo isset($f['candidate-experience'])?$f['candidate-experience']:'';?></textarea>
-				<div class="field-status <?php print isset($f['candidate-experience'])?'completo':'invalido'?>"></div>
-				<div id="candidate-experience-error" class="field__error"></div>
-				<div class="field__note">Até 400 caracteres.</div>
-			</div><!--
-
-			--><div class="grid__item  one-whole">
-				<label for="candidate-explanatory">Exposição de motivos para a candidatura <span class="form-tip">(400 caracteres restantes)</span></label>
-				<textarea <?php echo $form_disabled?' disabled':'';?> id="candidate-explanatory" name="step2-candidate-explanatory" cols="50" rows="5" maxlength="400" class="required"><?php echo isset($f['candidate-explanatory'])?$f['candidate-explanatory']:'';?></textarea>
-				<div class="field-status <?php print isset($f['candidate-explanatory'])?'completo':'invalido'?>"></div>
-				<div id="candidate-explanatory-error" class="field__error"></div>
-				<div class="field__note">Até 400 caracteres.</div>
+		<div class="row">
+			<div class="grid__item col-xs-12">
+				<legend>Anexos</legend>
 			</div>
 
-			<div class="grid__item  one-whole">
-				<label for="candidate-confirm-data"> 
+			<div class="grid__item col-xs-12">
+				<?php inscricoes_file_upload_field_template($f, 2, 'Currículo e/ou Portfólio (obrigatório)', 'candidate-portfolio', 'Faça Upload, em um único PDF, do currículo e/ou portfólio'); ?>
+            </div><!--
+
+			--><div class="grid__item col-xs-12">
+            	<?php inscricoes_file_upload_field_template($f, 2, 'Histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma', 'candidate-activity-history', 'Faça Upload, em um único PDF, do histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma'); ?>
+            </div><!--
+
+			--><div class="grid__item col-xs-12">
+            	 <?php inscricoes_file_upload_field_template($f, 2, 'Diploma Profissional e/ou Registro profissional', 'candidate-diploma', 'Faça Upload, em um único PDF, do diploma profissional ou certificado de profissionalização'); ?>
+            </div>
+
+
+			<div class="grid__item col-xs-12">
+				<legend>Declaração</legend>
+			</div>
+
+			<div class="col-xs-12">
+            	<label for="candidate-confirm-data"> 
 					<input<?php echo $form_disabled?' disabled':'';?> id="candidate-confirm-data" type="checkbox" name="step2-candidate-confirm-data" value="true" <?php if( isset($f['candidate-confirm-data']) ) echo 'checked="checked"';?>/>
 					Não ocupo cargo comissionado nos poderes executivo, legislativo ou judiciário na administração pública federal, estadual, municipal ou distrital.</label>
 				<div class="field-status <?php print isset($f['candidate-confirm-data'])?'completo':'invalido'?>"></div>
 				<div id="candidate-confirm-data-error" class="field__error"></div>
-			</div>	
-		</div>
-	</fieldset>
-	<?php if ( !$step2['complete'] ) : ?>
-		<p class="step__advance">
-			Depois de preencher todos os dados, você pode <a class="button" href="">Avançar para a próxima etapa</a>
+            </div>
+        </div> <!-- row -->
+
+        <br><br>
+
+        <?php //if ( !$step2['complete'] ) : ?>
+		<p class="step__advance alignleft">
+			<a class="button" href="<?php print "?step=step-1"; ?>">Voltar para etapa anterior</a>
 		</p>
-	<?php endif; ?>
+		<p class="step__advance alignright">
+			Depois de preencher os campos obrigatórios, você pode <a class="button" href="<?php print "?step=step-3"; ?>">Avançar para a próxima etapa</a>
+		</p>
+		<div class="prepend-1 form-error"></div>
+
+		<div class="form__item--inline">
+
+				<p id="submit-button" class="button">Inscrever candidatura</p>
+				
+			</div>
+	<?php //endif; ?>
+
+	</fieldset>
+	
 </div>
 <!-- .form-step-content -->

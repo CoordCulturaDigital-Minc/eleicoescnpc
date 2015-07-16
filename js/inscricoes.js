@@ -143,9 +143,10 @@
 		// Hook pra salvar e verificar quando carregar o formulário
 		$('#candidate-cpf').blur();
         $('#candidate-birth').blur();
-		
+
         // load next form step when user click in 'Preencher'
         $('div.form-step a.toggle').click(function(e) {
+
             var $div = $(this).parents('div.form-step');
             var step = $div.attr('id').replace(/^[^-]+-/,'');
 
@@ -158,24 +159,24 @@
                     // *** this assignments affects fields loaded throught ajax *** //
 
                     // reassign calculate_total to budget fields
-                    $div.find('input.budget[id!=budget-total]').blur(function(e) {
-                            calculate_total.call(this,e);
-                            $('#budget-total').each(function(){
-                                verify_and_save_field.call(this, e);
-                            })
-                    });
+                    // $div.find('input.budget[id!=budget-total]').blur(function(e) {
+                    //         calculate_total.call(this,e);
+                    //         $('#budget-total').each(function(){
+                    //             verify_and_save_field.call(this, e);
+                    //         })
+                    // });
                     // this disable the #budget-total input, again
-                    $div.find('#budget-total').bind('keydown keyup', function(e){
-                        return e.keyCode === 9;
-                    }).focus(function(e){$(this).blur();});
+                    // $div.find('#budget-total').bind('keydown keyup', function(e){
+                    //     return e.keyCode === 9;
+                    // }).focus(function(e){$(this).blur();});
 
                     // reassign verify_and_save_field to inputs
-                    $div.find(':input').blur(verify_and_save_field)
-                                       .keydown(function(e){ if(e.keyCode===13){ //enter
-                                            $(this).trigger('blur').focus();
-                                        }});
-                    // mask for money
-                    $div.find('input.budget').maskMoney({symbol:'R$ ', showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
+                    // $div.find(':input').blur(verify_and_save_field)
+                    //                    .keydown(function(e){ if(e.keyCode===13){ //enter
+                    //                         $(this).trigger('blur').focus();
+                    //                     }});
+                    // // mask for money
+                    // $div.find('input.budget').maskMoney({symbol:'R$ ', showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
                     // character counter for textarea
                     $div.find('label .form-tip').each(display_text_length);
                     // the submit

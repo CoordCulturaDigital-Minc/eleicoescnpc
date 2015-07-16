@@ -113,6 +113,112 @@ function user_cpf_does_not_exist($c) {
     return false;
 }
 
+
+/**
+ * define em qual passo o usuário está
+ *
+ */
+function set_step()
+{
+
+
+}
+
+/**
+ * define os passos
+ *
+ */
+function get_steps()
+{
+    $steps = array(
+        'step-1' => 'Etapa 1', //
+        'step-2' => 'Etapa 2', // 
+        'step-3' => 'Etapa 3'
+    );
+
+    return $steps;
+}
+
+/**
+ * mostrar em que etapa do cadastro o usuário está
+ */
+function show_steps( $step )
+{
+    $steps = get_steps();
+
+    if( empty( $step ) )
+        $step = 'step1';
+    ?>
+
+        <?php if( is_array( $steps ) ) : ?>
+            <div class="steps__content">
+                <ol class="steps">
+                    <?php foreach( $steps as $key => $titulo ) : ?>
+                        <li>
+                            <a href="<?php print "?step={$key}"; ?>" title="<?php print $titulo; if( $key == $step ) print ' você está aqui'; ?>" class="<?php if( $key == $step ) print 'current'; ?>"><?php print $titulo; ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+            </div>
+        <?php endif; ?>
+    <?php
+}
+
+
+/**
+ * redirecionar para a próxima etapa
+ */
+function next_step( $step )
+{
+    // pegar apenas as chaves do array
+    $steps = array_keys( get_steps() );
+    $current_step = array_search( $step, $steps );
+    if( ( count( $steps ) - 1 ) !== $current_step )
+        return $steps[ $current_step + 1 ];
+    return $step;
+}
+
+/**
+ * redirecionar para a etapa anterior
+ */
+function prev_step( $step )
+{
+    // pegar apenas as chaves do array
+    $steps = array_keys( get_steps() );
+    $current_step = array_search( $step, $steps );
+    if( 0 !== $current_step )
+        return $steps[ $current_steps - 1 ];
+    return $step;
+}
+
+/**
+ * botões de navegação
+ *
+ */
+function steps_navigation( $step )
+{
+    // pegar apenas as chaves do array
+    $passos = array_keys( get_steps() );
+    ?>
+        <div class="postbox">
+            <div class="inside">
+                <table width="100%" cellspacing="15px">
+                    <tr valign="top">
+                        <td align="right">
+                            <?php if( 0 !== array_search( $passo, $passos ) and ( count( $passos ) - 1 ) !== array_search( $passo, $passos ) ) : ?>
+                                <button type="submit" name="prev" id="prev" value="1" class="button-secondary" tabindex="1000">&laquo; Anterior</button>
+                            <?php endif; ?>
+                            <?php if( ( count( $passos ) - 1 ) !== array_search( $passo, $passos ) ) : ?>
+                                <button type="submit" name="next" id="next" value="1" class="button-secondary" tabindex="1000">Próximo &raquo;</button>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    <?php
+}
+
 /************************ Ajax Functions *************************************/
 
 /** loads state from a given region */
@@ -534,21 +640,29 @@ add_action('wp_ajax_inscricoes_file_upload', 'inscricoes_handle_ajax_upload');
 
 function inscricoes_get_uploaded_template($attachment_id) {
 
-    $url = wp_get_attachment_url($attachment_id);
-    return '<a href="' . $url . '">Baixar arquivo</a>';
+    if( wp_attachment_is_image( $attachment_id ) ){
+
+       return wp_get_attachment_image($attachment_id );
+    }
+    else {
+        $url = wp_get_attachment_url($attachment_id);
+
+        return '<a href="' . $url . '">Baixar arquivo</a>';
+    }
+    
 
 }
 
-function inscricoes_file_upload_field_template($f, $step, $label, $field, $description = '') {
+function inscricoes_file_upload_field_template($f, $step, $label, $field, $description = '', $button_label = '') {
 
     ?>
-    <div class="grid__item  one-whole">
+    <div class="">
         <label><?php echo $label; ?> <span class="js-current"><?php if (isset($f[$field])) echo inscricoes_get_uploaded_template($f[$field]); ?></span></label>
         <input id="<?php echo $field; ?>" class="" type="hidden" name="step<?php echo $step; ?>-<?php echo $field; ?>" value="<?php echo isset($f[$field])?$f[$field]:'';?>" />
         <div class="field-status <?php print isset($f[$field])?'completo':''?>"></div>
 
         <div id="<?php echo $field; ?>-upload" class="file-upload" data-field="<?php echo $field; ?>">
-            <div class="js-upload-button  u-pull-left  button"><?php _e('Select File', 'historias'); ?></div>
+            <div class="js-upload-button  u-pull-left  button"><?php echo( empty( $button_label ) ) ? __('Select File', 'historias') : $button_label; ?></div>
             <div class="js-feedback  feedback  u-pull-right"></div>
         </div>
         <!-- <div id="<?php echo $field; ?>-error" class="field__error"></div> -->
@@ -582,7 +696,7 @@ function mail_new_subscription($subscription_number, $pid) {
     $header = "From: $from\r\n";
     $header .= "Content-Type: text/html\r\n";
 
-    wp_mail($to, 'Confirmação de inscrição', $mail_content, $header);
+    //wp_mail($to, 'Confirmação de inscrição', $mail_content, $header); // TODO verificar envio de email
 }
 add_action('setoriaiscnpc_subscription_done', 'mail_new_subscription', 10, 2);
 
@@ -916,22 +1030,21 @@ class Validator {
             'user_confirm_informations' => array('not_empty')
         ),
         'step1' => array(
+            'candidate-confirm-infos' => array('not_empty'),
             'candidate-display-name' => array(),
-            'candidate-cpf' => array('not_empty', 'cpf_not_in_blacklist'),
+            // 'candidate-cpf' => array('not_empty', 'cpf_not_in_blacklist'),
             'candidate-phone-1' => array('not_empty','is_a_valid_phone'),
-            'candidate-birth' => array('not_empty', 'is_a_valid_birth'),
+            // 'candidate-birth' => array('not_empty', 'is_a_valid_birth'),
             'candidate-race' => array('not_empty'),
             'candidate-genre' => array('not_empty'),
             'candidate-avatar' => array('not_empty'),
-            'candidate-portfolio' => array('not_empty'),
-            'candidate-activity-history' => array('not_empty'),
-            'candidate-diploma' => array('not_empty'),
-            'candidate-profissional-register' => array('not_empty'),
-            'candidate-participation-statement' => array('not_empty')
+            'candidate-experience' => array('not_empty','str_length_less_than_400'),
+            'candidate-explanatory' => array('not_empty','str_length_less_than_400')
         ),
         'step2' => array(
-            'candidate-experience' => array('not_empty','str_length_less_than_400'),
-            'candidate-explanatory' => array('not_empty','str_length_less_than_400'),
+            'candidate-portfolio' => array('not_empty'),
+            'candidate-activity-history' => array(),
+            'candidate-diploma' => array(),
             'candidate-confirm-data' => array('not_empty')
         )
     );
