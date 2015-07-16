@@ -2010,7 +2010,7 @@ section {
         margin-bottom: 10px; }
 
 footer.site-footer div {
-  padding: 20px 0; }
+  margin-bottom: 20px; }
   footer.site-footer div.social a {
     color: #125b26;
     vertical-align: center;
@@ -2034,8 +2034,11 @@ footer.site-footer div {
       color: #35465D; }
     footer.site-footer div.social a.youtube:hover {
       color: #CF3427; }
-  footer.site-footer div.logos #CNPC {
-    padding-left: 0; }
+  footer.site-footer div.logos {
+    color: #a8a8a8;
+    font-size: 11px; }
+    footer.site-footer div.logos #CNPC {
+      padding-left: 0; }
   footer.site-footer div.creditos {
     font-size: 11px;
     color: #a8a8a8;

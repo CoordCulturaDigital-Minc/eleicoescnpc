@@ -1,7 +1,5 @@
 footer.site-footer {
 	div {
-		padding: 20px 0;
-		
 		&.social {
 			a {
 			    color: $cor-verde;
@@ -35,6 +33,9 @@ footer.site-footer {
 		}
 		
 		&.logos {
+			color: $cor-cinza-escuro;
+			font-size: 11px;
+			
 			#CNPC {
 				padding-left: 0;
 			}
@@ -45,5 +46,7 @@ footer.site-footer {
 		    color: $cor-cinza-escuro;
 		    line-height: 1.3;
 		}
+		
+		margin-bottom: 20px;
 	}
 }
