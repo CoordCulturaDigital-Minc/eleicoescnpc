@@ -84,7 +84,7 @@
                         <?php elseif ( current_user_can( 'read' ) ) : ?>
                             <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Ficha</a></li>
                         <?php endif; ?>
-                        <li><?php wp_loginout( get_permalink() ); ?></li>
+                        <li><?php wp_loginout(); ?></li>
                     </ul>
                 <?php else: ?>
                 	<ul id="menu-user" class="menu--user  menu">
