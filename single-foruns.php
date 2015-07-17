@@ -69,18 +69,22 @@ get_header(); ?>
 									<br />
 
 									<?php if (is_votacoes_abertas() && current_user_can_vote_in_project(get_the_ID())): ?>
-										<a class="vote" id="vote-for-<?php the_ID(); ?>" data-project_id="<?php the_ID(); ?>">
+										
 											<?php if (get_current_user_vote() == get_the_ID()): ?>
+												<a class="vote voted" id="vote-for-<?php the_ID(); ?>" data-project_id="<?php the_ID(); ?>">
 												Voto registrado
+												</a>
 											<?php else: ?>
+												<a class="vote" id="vote-for-<?php the_ID(); ?>" data-project_id="<?php the_ID(); ?>">
 												Votar
+												</a>
 											<?php endif; ?>
 
-										</a>
+										
 									<?php endif; ?>
 
 									<?php if (current_user_can('administrator')): ?>
-										Número de votos desse candidato: <?php echo get_number_of_votes_by_project(get_the_ID()); ?>
+										<span class="number_votes">Votos: <?php echo get_number_of_votes_by_project(get_the_ID()); ?></span>
 									<?php endif; ?>
 
 								</div>
