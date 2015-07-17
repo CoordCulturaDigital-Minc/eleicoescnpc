@@ -1147,8 +1147,11 @@ class Validator {
         return true;
     }
     
-    static function cpf_not_in_blacklist($c) {
-        
+    static function cpf_not_in_blacklist($c, $user_type=null) {
+     
+        if( $user_type == 'eleitor')
+            return true;
+
         if( empty($c) )
             return 'Cpf não informado';
 
