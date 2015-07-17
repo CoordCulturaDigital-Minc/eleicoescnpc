@@ -286,6 +286,8 @@ if(is_user_logged_in()) {
 							<input id="subscription-valid" type="checkbox" name="subscription-valid" id="subscription-valid" value="<?php echo $subscription_number;?>"<?php if(get_post_meta($pid, 'subscription-valid', true)) echo ' checked="checked"';?>/>
 							<label for="subscription-valid">Admins: Marcar como Válida <a href="<?php bloginfo('siteurl'); ?>/inscricoes">(e voltar para lista de inscritos)</a></label>
 						</div>
+						<input type="hidden" id="js-protocol-number" value="<?php echo substr($subscription_number, 0, 8);?>" />
+						
 					<?php endif; ?>
 				<?php else: ?>
 					<a id="print-button" class="button  u-pull-right  print" style="display: none"><?php _e('Print', 'historias'); ?></a>
