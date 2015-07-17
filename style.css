@@ -860,12 +860,16 @@ img.aligncenter {
   .comments-list li.comment {
     margin: 0 0 10px 0;
     padding: 10px;
-    background-color: #EAEAEA;
-    border-radius: 5px;
-    border: 1px solid #D8D7D7; }
+    border: 1px solid #EAEAEA; }
+  .comments-list article {
+    border: none; }
   .comments-list .children {
     margin: 0 0 0 48px;
-    margin: 10px 0 0 3rem; }
+    margin: 10px 0 0 4rem; }
+    .comments-list .children .vcard .comment-author-avatar img,
+    .comments-list .children .vcard .comment-author-avatar {
+      width: 70px;
+      height: 70px; }
 
 .comment-container {
   margin-bottom: 24px;
@@ -927,8 +931,6 @@ img.aligncenter {
     border-bottom: 1px dotted; }
 .comment-meta a {
   color: #999; }
-  .comment-meta a:hover {
-    color: #125b26; }
 
 .comment-on-hold {
   float: left;
@@ -941,6 +943,7 @@ img.aligncenter {
   background-color: #dadada;
   color: #fff;
   padding: 3px 5px;
+  z-index: 2;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 2px 0 #b9b7b8;
   border-radius: 3px; }
   .comment-reply-link:hover {
@@ -2438,13 +2441,14 @@ footer.site-footer div {
         min-height: 415px;
         margin-left: -350px;
         margin-top: -215px;
-        z-index: 1;
         background-color: #F4F4F4;
         border: 1px solid #aaa;
         padding: 15px;
         font-size: 14px;
         line-height: 1.3;
-        border: 26px solid #0F4E21; }
+        border: 26px solid #0F4E21;
+        overflow: hidden;
+        z-index: 2; }
         .candidates-content .candidates .candidate .candidate-details i {
           position: absolute;
           top: -22px;
@@ -2508,8 +2512,7 @@ footer.site-footer div {
           background-color: #DEB90E; }
   .candidates-content .flex-direction-nav li {
     list-style: none; }
-    .candidates-content .flex-direction-nav li .flex-prev,
-    .candidates-content .flex-direction-nav li .flex-next {
+    .candidates-content .flex-direction-nav li a {
       position: absolute;
       top: 75px;
       width: 40px;
@@ -2518,12 +2521,15 @@ footer.site-footer div {
       background-image: url(images/image-carousel.png);
       background-repeat: no-repeat;
       z-index: 1; }
-    .candidates-content .flex-direction-nav li .flex-prev {
-      left: -40px;
-      background-position: 0px 0px; }
-    .candidates-content .flex-direction-nav li .flex-next {
-      right: -40px;
-      background-position: -45px 0px; }
+      .candidates-content .flex-direction-nav li a.flex-disabled {
+        opacity: 0.05;
+        cursor: default; }
+      .candidates-content .flex-direction-nav li a.flex-prev {
+        left: -40px;
+        background-position: 0px 0px; }
+      .candidates-content .flex-direction-nav li a.flex-next {
+        right: -40px;
+        background-position: -45px 0px; }
   .candidates-content .flex-control-paging {
     display: none; }
 
