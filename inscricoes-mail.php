@@ -6,82 +6,63 @@
 	<link rel="stylesheet" media="all" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/print.css" />
 </head>
 <body>
-	<h1>Histórias Que Ficam - Fundação CSN</h1>
+	<h1>Eleições CNPC - 2015</h1>
 	<h2>O seu número de inscrição é <span><?php echo $subscription_number;?></span></h2>
 
 	<?php if(get_theme_option('txt_mail_candidato')): ?>
 	<p><?php echo get_theme_option('txt_mail_candidato');?></p>
 <?php endif;?>
 
-<h3>Diretor</h3>
-<ul>
-	<li><strong>Nome</strong>: <?php echo $f['director-name'];?></li>
+<?php
 
-	<?php if(isset($f['director-display-name'])): ?>
-	<li><strong>Nome Artístico</strong>: <?php echo $f['director-display-name'];?></li>
-<?php endif;?>
-<li><strong>RG</strong>: <?php echo $f['director-rg'];?></li>
-<li><strong>CPF</strong>: <?php echo $f['director-cpf'];?></li>
-<li><strong>Região</strong>: <?php echo $f['director-region'];?></li>
-<li><strong>Estado</strong>: <?php echo get_state_name_by_id($f['director-state']); ?></li>
-<li><strong>Cidade</strong>: <?php echo get_city_name_by_id($f['director-city']); ?></li>
-<li><strong>CEP</strong>: <?php echo $f['director-cep'];?></li>
-<li><strong>Endereço</strong>: <?php echo $f['director-address'];?></li>
-<li><strong>Número</strong>: <?php echo $f['director-number'];?></li>
+$subscription_number = get_query_var('subscription_number');
+$pid = get_project_id_from_subscription_number($subscription_number);
 
-<?php if(isset($f['director-complement'])): ?>
-	<li><strong>Complemento</strong>: <?php echo $f['director-complement'];?></li>
-<?php endif;?>
-<li><strong>Bairro</strong>: <?php echo $f['director-neighborhood'];?></li>
-<li><strong>E-mail</strong>: <?php echo $f['director-email'];?></li>
-<li><strong>Telefone 1</strong>: <?php echo $f['director-phone-1'];?></li>
 
-<?php if(isset($f['director-phone-2'])): ?>
-	<li><strong>Telefone 2</strong>: <?php echo $f['director-phone-2'];?></li>
-<?php endif;?>
-</ul>
+if($pid) {
+	
 
-<h3>Produtora Proponente</h3>
-<ul>
-	<li><strong>Razão Social</strong>: <?php echo $f['company-name']; ?></li>
+	$step1 = load_step(1, $pid);
+	$step2 = load_step(2, $pid);
 
-	<?php if(isset($f['company-display-name'])): ?>
-	<li><strong>Nome fantasia</strong>: <?php echo $f['company-display-name']; ?></li>
-<?php endif;?>
-<li><strong>CNPJ</strong>: <?php echo $f['company-cnpj']; ?></li>
-<li><strong>Região</strong>: <?php echo $f['company-region']; ?></li>
-<li><strong>Estado</strong>: <?php echo get_state_name_by_id($f['company-state']); ?></li>
-<li><strong>Cidade</strong>: <?php echo get_city_name_by_id($f['company-city']); ?></li>
-<li><strong>CEP</strong>: <?php echo $f['company-cep']; ?></li>
-<li><strong>Endereço</strong>: <?php echo $f['company-address']; ?></li>
-<li><strong>Número</strong>: <?php echo $f['company-number']; ?></li>
-<?php if(isset($f['company-complement'])): ?>
-	<li><strong>Complemento</strong>: <?php echo $f['company-complement']; ?></li>
-<?php endif;?>
-<li><strong>Bairro</strong>: <?php echo $f['company-neighborhood']; ?></li>
-<li><strong>Nome do produtor</strong>: <?php echo $f['company-productor-name']; ?></li>
-<li><strong>E-mail</strong>: <?php echo $f['company-email']; ?></li>
-<li><strong>Telefone 1</strong>: <?php echo $f['company-phone-1']; ?></li>
+	$userID = get_post_field( 'post_author', $pid );
+	$user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $userID ) );
+	$user = get_user_by( 'id', $userID);
 
-<?php if(isset($f['company-phone-2'])): ?>
-	<li><strong>Telefone 2</strong>: <?php echo $f['company-phone-2']; ?></li>
-<?php endif;?>
-</ul>
+	$avatar_file_id 	= get_post_meta($pid, 'candidate-avatar', true);
+	$portfolio_file_id 	= get_post_meta($pid, 'candidate-portfolio', true);
+	$activity_file_id 	= get_post_meta($pid, 'candidate-activity-history', true);
+	$diploma_file_id 	= get_post_meta($pid, 'candidate-diploma', true);
 
-<h3>Projeto</h3>
-<ul>
-	<li><strong>Título do Projeto</strong>: <?php echo $f['project-title']; ?></li>
-	<li><strong>Sinopse do Projeto</strong>: <p><?php echo $f['project-synopsis']; ?></p></li>
-	<li><strong>Notas de intenção do diretor</strong>: <p><?php echo $f['project-director-notes']; ?></p></li>
-	<li><strong>Argumento resumido</strong>: <p><?php echo $f['project-argument']; ?></p></li>
-</ul>
+	$f = array_merge($step1['fields'], $step2['fields']);
+} ?>
+	<h1>Fóruns Setorias - CNPC</h1>
+	<h2>O número da inscrição é <span><?php echo $subscription_number;?></span></h2>
+	<h3>Avatar</h3>
+		<?php echo wp_get_attachment_image($avatar_file_id, 'avatar_candidate'); ?>
+	<h3>Pré-Candidato</h3>
+	<ul>
+		<li><strong>Nome</strong>: <?php echo $user_meta['user_name'];?></li>
+		<?php if(isset($f['candidate-display-name'])): ?>
+			<li><strong>Nome Artístico</strong>: <?php echo $f['candidate-display-name'];?></li>
+		<?php endif;?>
+		<li><strong>Nascimento</strong>: <?php echo restore_format_date( $user_meta['date_birth'] );?></li>
+		<li><strong>CPF</strong>: <?php echo $user_meta['cpf'];?></li>
+		<li><strong>Setorial</strong>: <?php echo $user_meta['setorial']; ?></li>
+		<li><strong>Estado</strong>: <?php echo $user_meta['UF']; ?></li>
+		<li><strong>E-mail</strong>: <?php echo $user->user_email;?></li>
+		<li><strong>Telefone 1</strong>: <?php echo $f['candidate-phone-1'];?></li>
+		<li><strong>Etnia</strong>: <?php echo $f['candidate-race'];?></li>
+		<li><strong>Sexo</strong>: <?php echo $f['candidate-genre'];?></li>
+		<li><strong>Breve experiência no setor</strong>: <?php echo $f['candidate-experience'];?></li>
+		<li><strong>Exposição de motivos para a candidatura</strong>: <?php echo $f['candidate-explanatory'];?></li>
+	</ul>
 
-<h3>Orçamento Resumido</h3>
-<ul>
-	<li><strong>Pré-produção</strong>: <?php echo $f['budget-pre-production']; ?></li>
-	<li><strong>Produção</strong>: <?php echo $f['budget-production']; ?></li>
-	<li><strong>Pós-produção</strong>: <?php echo $f['budget-post-production']; ?></li>
-	<li><strong>Total</strong>: <?php echo $f['budget-total']; ?></li>
-</ul>
+	<h3>Anexos</h3>
+	<ul>
+		<li><strong>Currículo e/ou Portfólio</strong>: <?php echo wp_get_attachment_link($portfolio_file_id 	);?></li>
+		<li><strong>Histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma</strong>: <?php echo wp_get_attachment_link($activity_file_id );?></li>
+		<li><strong>Diploma Profissional e/ou Registro profissional</strong>: <?php echo wp_get_attachment_link($diploma_file_id );?></li>
+	</ul>
 </body>
 </html>

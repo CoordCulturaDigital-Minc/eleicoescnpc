@@ -113,6 +113,47 @@ function user_cpf_does_not_exist($c) {
     return false;
 }
 
+
+/**
+ * define os passos
+ *
+ */
+function get_steps()
+{
+    $steps = array(
+        'step-1' => 'Etapa 1', //
+        'step-2' => 'Etapa 2', // 
+        'step-3' => 'Etapa 3'
+    );
+
+    return $steps;
+}
+
+/**
+ * mostrar em que etapa do cadastro o usuário está
+ */
+function show_steps( $step )
+{
+    $steps = get_steps();
+
+    if( empty( $step ) )
+        $step = 'step1';
+    ?>
+
+        <?php if( is_array( $steps ) ) : ?>
+            <div class="steps__content">
+                <ol class="steps">
+                    <?php foreach( $steps as $key => $titulo ) : ?>
+                        <li>
+                            <span title="<?php print $titulo; if( $key == $step ) print ' você está aqui'; ?>" class="<?php if( $key == $step ) print 'current'; ?>"><?php print $titulo; ?></span>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+            </div>
+        <?php endif; ?>
+    <?php
+}
+
 /************************ Ajax Functions *************************************/
 
 /** loads state from a given region */
@@ -143,10 +184,11 @@ function load_step_html() {
 
     $valid = isset($_POST['step']);
     if($valid) {
+        
         $step_number = intval($_POST['step']);
         $validator = new Validator();
 
-        $valid = $step_number > 1 && $step_number <= 1+count($validator->fields_rules);
+        $valid = $step_number >= 1 && $step_number <= 1+count($validator->fields_rules);
         if($valid) {
 
             for($i=1; $valid && $i<$step_number; $i++) {
@@ -367,6 +409,8 @@ function subscribe_project() {
     global $hashhqf;
     $pid = get_current_user_project();
     $response = array();
+    $current_user = wp_get_current_user();
+    
     $response['subscription_number'] = get_post_meta($pid, 'subscription_number', true);
 
     if($response['subscription_number']) {
@@ -384,6 +428,7 @@ function subscribe_project() {
             $response['status'] = 'success';
             $response['message'] = nl2br(get_theme_option('txt_candidato_step4'));
 
+            add_user_meta($current_user->ID, 'e_candidato', true);
 
             do_action('setoriaiscnpc_subscription_done', $subscription_number, $pid);
         } else {
@@ -534,24 +579,34 @@ add_action('wp_ajax_inscricoes_file_upload', 'inscricoes_handle_ajax_upload');
 
 function inscricoes_get_uploaded_template($attachment_id) {
 
-    $url = wp_get_attachment_url($attachment_id);
-    return '<a href="' . $url . '">Baixar arquivo</a>';
+    if( wp_attachment_is_image( $attachment_id ) ){
+
+       return wp_get_attachment_image($attachment_id );
+    }
+    else {
+        $url = wp_get_attachment_url($attachment_id);
+
+        return '<a href="' . $url . '">Baixar arquivo</a>';
+    }
+    
 
 }
 
-function inscricoes_file_upload_field_template($f, $step, $label, $field, $description = '') {
+function inscricoes_file_upload_field_template($f, $step, $label, $field, $description = '', $button_label = '', $required = false) {
 
+    if( $required )
+        $required = 'required';
     ?>
-    <div class="grid__item  one-whole">
+    <div class="">
         <label><?php echo $label; ?> <span class="js-current"><?php if (isset($f[$field])) echo inscricoes_get_uploaded_template($f[$field]); ?></span></label>
-        <input id="<?php echo $field; ?>" class="" type="hidden" name="step<?php echo $step; ?>-<?php echo $field; ?>" value="<?php echo isset($f[$field])?$f[$field]:'';?>" />
-        <div class="field-status <?php print isset($f[$field])?'completo':''?>"></div>
+        <input id="<?php echo $field; ?>" class="<?php echo $required ?>" type="hidden" name="step<?php echo $step; ?>-<?php echo $field; ?>" value="<?php echo isset($f[$field])?$f[$field]:'';?>" />
+        <div class="field-status <?php print isset($f[$field])?'completo':'invalido'?>"></div>
 
         <div id="<?php echo $field; ?>-upload" class="file-upload" data-field="<?php echo $field; ?>">
-            <div class="js-upload-button  u-pull-left  button"><?php _e('Select File', 'historias'); ?></div>
+            <div class="js-upload-button  u-pull-left  button"><?php echo( empty( $button_label ) ) ? __('Select File', 'historias') : $button_label; ?></div>
             <div class="js-feedback  feedback  u-pull-right"></div>
         </div>
-        <!-- <div id="<?php echo $field; ?>-error" class="field__error"></div> -->
+        <div id="<?php echo $field; ?>-error" class="field__error"></div>
         <div class="field__note"><?php echo $description; ?></div>
     </div>
     <?php
@@ -582,7 +637,7 @@ function mail_new_subscription($subscription_number, $pid) {
     $header = "From: $from\r\n";
     $header .= "Content-Type: text/html\r\n";
 
-    wp_mail($to, 'Confirmação de inscrição', $mail_content, $header);
+    //wp_mail($to, 'Confirmação de inscrição', $mail_content, $header); // TODO verificar envio de email
 }
 add_action('setoriaiscnpc_subscription_done', 'mail_new_subscription', 10, 2);
 
@@ -908,7 +963,7 @@ class Filter {
 class Validator {
     public $fields_rules = array(
         'register' => array(
-            'user_cpf' => array('not_empty','is_a_valid_cpf', 'user_cpf_does_not_exist', 'cpf_exists_in_receita'),
+            'user_cpf' => array('not_empty','is_a_valid_cpf', 'user_cpf_does_not_exist', 'cpf_not_in_blacklist', 'cpf_exists_in_receita'),
             'user_name' => array('not_empty'),
             'user_email' => array('not_empty','is_valid_email','is_email_does_not_exist'),
             'user_password' => array('not_empty'),
@@ -916,23 +971,26 @@ class Validator {
             'user_confirm_informations' => array('not_empty')
         ),
         'step1' => array(
+            'candidate-confirm-infos' => array('not_empty'),
             'candidate-display-name' => array(),
-            'candidate-cpf' => array('not_empty', 'cpf_not_in_blacklist'),
+            // 'candidate-cpf' => array('not_empty', 'cpf_not_in_blacklist'),
             'candidate-phone-1' => array('not_empty','is_a_valid_phone'),
-            'candidate-birth' => array('not_empty', 'is_a_valid_birth'),
+            // 'candidate-birth' => array('not_empty', 'is_a_valid_birth'),
             'candidate-race' => array('not_empty'),
             'candidate-genre' => array('not_empty'),
             'candidate-avatar' => array('not_empty'),
-            'candidate-portfolio' => array('not_empty'),
-            'candidate-activity-history' => array('not_empty'),
-            'candidate-diploma' => array('not_empty'),
-            'candidate-profissional-register' => array('not_empty'),
-            'candidate-participation-statement' => array('not_empty')
+            'candidate-experience' => array('not_empty','str_length_less_than_400'),
+            'candidate-explanatory' => array('not_empty','str_length_less_than_400')
         ),
         'step2' => array(
-            'candidate-experience' => array('not_empty','str_length_less_than_400'),
-            'candidate-explanatory' => array('not_empty','str_length_less_than_400'),
+            'candidate-portfolio' => array('not_empty'),
+            'candidate-activity-history' => array(),
+            'candidate-diploma' => array(),
             'candidate-confirm-data' => array('not_empty')
+        ),
+        'extra' => array(
+            'user_cpf' => array('cpf_not_in_blacklist'),
+            'user_birth' => array('is_a_valid_date','is_a_valid_birth')
         )
     );
 

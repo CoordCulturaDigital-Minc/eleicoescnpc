@@ -27,6 +27,8 @@ $reviewer = user_can($reviewer, 'curate') ? $reviewer : 0;
 if(is_user_logged_in()) {
 	global $current_user;
 
+	$step = isset( $_REQUEST[ 'step' ] ) ? $_REQUEST[ 'step' ] : 'step-1';
+
     if ($_GET['switch_project'] == 1) {
         switch_project_to_edit();
         wp_redirect(site_url('inscricoes'));
@@ -124,9 +126,9 @@ if(is_user_logged_in()) {
 						<?php echo nl2br(get_theme_option('txt_visitante')); ?>
 					</div>
 					<div class="step__count">
-						<span class='step_1 active'>Etapa 1</span>
+						<!-- <span class='step_1 active'>Etapa 1</span>
 						<span class='step_2'>Etapa 2</span>
-						<span class='step_3'>Etapa 3</span>
+						<span class='step_3'>Etapa 3</span> -->
 						<!-- <span class='step_4'>Etapa 4</span> -->
 					</div>
 				</div>
@@ -226,180 +228,139 @@ if(is_user_logged_in()) {
 		<?php endif; ?>
 
 	<?php else: // } user logged in { ?>
-	<?php
-			$step1 = load_step(1,$pid); $f = $step1['fields']; ?>
+		<?php 
 
-		<div class="form-controls  cf">
-			<?php if($subscription_number): ?>
-				<a href="<?php echo site_url("inscricoes/".substr($subscription_number,0,8)."/imprimir");?>" class="button  u-pull-right  print"><?php _e('Print', 'historias'); ?></a>
-			<?php else: ?>
-				<a id="print-button" class="button  u-pull-right  print" style="display: none"><?php _e('Print', 'historias'); ?></a>
-			<?php endif; ?>
-        </div>
+		if( empty( $subscription_number ) )
+	 		$userID = $current_user->ID; 
+		else 
+			$userID = get_post_field( 'post_author', $pid );
 
-		<form id="application-form" class="form-application  inline" method="post">
+		$user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $userID ) );
 
-            <?php if(get_theme_option('inscricoes_abertas') == false): ?>
-				<div class="error">Inscrições encerradas!</div>
-			<?php endif;?>
-			<div id="formstep-1" class="form-step">
-				<header class="step__head">
-					<h3 class="step__title">Etapa 1/3: Candidato <?php if ($step1['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
-					<div class="step__about">
-						<?php echo nl2br( get_theme_option( 'txt_candidato_topo' ) ); ?>
-					</div>
-					<div class="step-status <?php print $step1['complete']?' completo':'';?>"></div>
-				</header>
+		$valida_user = new Validator();
 
-				<?php if( empty( $subscription_number ) )
-					 $userID = $current_user->ID; 
-				else 
-					$userID = get_post_field( 'post_author', $pid );
-				 ?>
+		$user_birth = restore_format_date( $user_meta['date_birth'] );
+		$user_cpf = $user_meta['cpf'];
 
-				<?php $user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $userID ) ); ?>
+        if( !empty( $user_birth ) ) {
 
-				<div class="form-step-content">
-					<fieldset>
-						<legend>Sobre o Pré-candidato</legend>
-						
-						<div class="grid">
-							<div class="grid__item  one-whole">
-								<label for="candidate-name">Nome Completo</label>
-								<input disabled id="candidate-name" type="text" name="candidate-name" value="<?php echo isset($user_meta['first_name'])?$user_meta['first_name']:'';?>" />
-							</div><!--
+			$valid_birth = $valida_user->validate_field( 'extra', 'user_birth', $user_birth, 'candidato');
+            
+            if( $valid_birth !== true ) {
+            	$register_errors['birth'] = $valid_birth;
+            }
+		} 
 
-							-->
-							<div class="grid__item  one-whole">
-								<label for="candidate-display-name">Nome Artístico</label>
-								<input<?php echo $form_disabled?' disabled':'';?> id="candidate-display-name" type="text" name="step1-candidate-display-name" value="<?php echo isset($f['candidate-display-name'])?$f['candidate-display-name']:'';?>" />
-								<div class="field-status <?php print isset($f['candidate-display-name'])?'completo':'invalido'?>"></div>
-								<div id="candidate-display-name-error" class="field__error"></div>
-							</div><!--
+		if( !empty( $user_cpf ) ) {
+			$valid_cpf = $valida_user->validate_field( 'extra', 'user_cpf', $user_cpf);
 
-							--><div class="grid__item one-half">
-								<label for="candidate-setorial">Setorial</label>
-								<?php echo isset($user_meta['setorial'])?get_label_setorial_by_slug( $user_meta['setorial'] ):'';?>
-							</div><!--
+			 if( $valid_cpf !== true ) {
+            	$register_errors['cpf'] = $valid_cpf; 
+            }
+		}
 
-							--><div class="grid__item  one-third">
-								<label for="candidate-state">Estado</label>
-								<?php echo isset($user_meta['UF'])?$user_meta['UF']:'';?>
-							</div><!--
+		if( $valid_cpf !== true || $valid_birth !== true ) : ?>
+		<?php
+			echo "<div class='error'>Atenção! Você não pode se canidatar!<br/>";
 
-							--><div class="grid__item  one-whole">
-								<label for="candidate-email">E-mail</label>
-								<input disabled id="candidate-email" type="text" name="candidate-email" value="<?php echo isset($user_meta['nickname'])?$user_meta['nickname']:'';?>" />
-							</div>
+			if( isset( $register_errors['birth'] ) )
+				echo $register_errors['birth'] . "<br/>";
+
+			if( isset( $register_errors['cpf'] ) )
+				echo $register_errors['cpf'] . "<br/>"; ?>
+			<?php echo "</div>" ?>
+		<?php else : // Data nascimento válida e não é delegado ?>
+
+			<?php $step1 = load_step(1,$pid); $f = $step1['fields']; ?>
+
+			<div class="form-controls  cf">
+				<?php if($subscription_number): ?>
+					<a href="<?php echo site_url("inscricoes/".substr($subscription_number,0,8)."/imprimir");?>" target="_blank" class="button  u-pull-right  print"><?php _e('Print', 'historias'); ?></a>
+				
+					<?php if( current_user_can( 'administrator' ) ): ?>
+						<div class="form__item--inline">
+							<input id="subscription-valid" type="checkbox" name="subscription-valid" id="subscription-valid" value="<?php echo $subscription_number;?>"<?php if(get_post_meta($pid, 'subscription-valid', true)) echo ' checked="checked"';?>/>
+							<label for="subscription-valid">Admins: Marcar como Válida <a href="<?php bloginfo('siteurl'); ?>/inscricoes">(e voltar para lista de inscritos)</a></label>
 						</div>
-					</fieldset>
-
-                    <fieldset>
-						<div class="grid">
-							<div class="grid__item  one-half">
-								<label for="candidate-cpf">CPF</label>
-								<input disabled id="candidate-cpf" type="text" name="step1-candidate-cpf" value="<?php echo isset($f['candidate-cpf'])?$f['candidate-cpf']:$user_meta['cpf'];?>" />
-								<div class="field-status <?php print isset($f['candidate-cpf'])?'completo':'invalido'?>"></div>
-								<div id="candidate-cpf-error" class="field__error"></div>
-							</div><!--
-
-							--><div class="grid__item  one-half">
-								<label for="candidate-birth">Data de Nascimento</label>
-								<input disabled id="candidate-birth" type="text" name="step1-candidate-birth" value="<?php echo isset($user_meta['date_birth'])?restore_format_date( $user_meta['date_birth'] ):'';?>" />
-								<div class="field-status <?php print isset($f['candidate-birth'])?'completo':'invalido'?>"></div>
-								<div id="candidate-birth-error" class="field__error"></div>
-							</div><!--
-
-							--><div class="grid__item  one-half">
-								<label for="candidate-phone-1">Telefone</label>
-								<input<?php echo $form_disabled?' disabled':'';?> id="candidate-phone-1" class="phone required" type="text" name="step1-candidate-phone-1" value="<?php echo isset($f['candidate-phone-1'])?$f['candidate-phone-1']:'';?>" />
-								<div class="field-status <?php print isset($f['candidate-phone-1'])?'completo':'invalido'?>"></div>
-								<div id="candidate-phone-1-error" class="field__error"></div>
-							</div><!--
-
-							--><div class="grid__item  one-half">
-								<label for="candidate-genre">Sexo</label>
-								<?php $selected = isset($f['candidate-genre'])?$f['candidate-genre']:''; ?>
-								<?php echo dropdown_genres( 'step1-candidate-genre', $selected, true, "id='candidate-genre' class='required' {$disabled}" ); ?>
-								<div class="field-status <?php print isset($f['candiate-genre'])?'completo':'invalido'?>"></div>
-								<div id="candidate-genre-error" class="field__error"></div>
-							</div><!--
-
-							--><div class="grid__item  one-whole">
-								<label>Você é afrodescente?</label>
-								<label for="tipo_eleitor">
-									<input <?php echo $form_disabled?' disabled':'';?> id="tipo_eleitor" type="radio" name="step1-candidate-race" value="true" <?php checked( $f['candidate-race'], 'true' ); ?>  />
-								Sim</label>
-								
-								<label for="tipo_candidato">
-									<input <?php echo $form_disabled?' disabled':'';?> id="tipo_candidato" type="radio" name="step1-candidate-race" value="false" <?php checked( $f['candidate-race'], 'false' ); ?>  />
-								Não</label>
-								
-								<div class="field-status <?php print isset($f['candidate-race'])?'completo':'invalido'?>"></div>
-								<div id="candidate-race-error" class="field__error"></div>
-							</div>
-
-							<?php inscricoes_file_upload_field_template($f, 1, 'Foto do candidato', 'candidate-avatar', 'Faça Upload de uma imagem em formato .jpg ou .png'); ?>
-							<?php inscricoes_file_upload_field_template($f, 1, 'Currículo e/ou Portfólio', 'candidate-portfolio', 'Faça Upload, em um único PDF, do currículo e/ou portfólio'); ?>
-                            <?php inscricoes_file_upload_field_template($f, 1, 'Histórico de atividades', 'candidate-activity-history', 'Faça Upload, em um único PDF, do histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma'); ?>
-                            <?php inscricoes_file_upload_field_template($f, 1, 'Diploma Profissional', 'candidate-diploma', 'Faça Upload, em um único PDF, do diploma profissional ou certificado de profissionalização'); ?>
-                            <?php inscricoes_file_upload_field_template($f, 1, 'Registro Profissional', 'candidate-profissional-register', 'Faça Upload, em um único PDF, do registro profissional no Ministério do Trabalho (DRT).'); ?>
-                            <?php inscricoes_file_upload_field_template($f, 1, 'Declaração de participação', 'candidate-participation-statement', 'Faça Upload, em um único PDF, da declaração de participação ou reconhecimento de atuação emitida por entidade/comunidade representativa da área ou segmento.'); ?>
-                           
-						</div>
-					</fieldset>
-					<?php if ( !$step1['complete'] ) : ?>
-						<p class="step__advance">
-							Depois de preencher todos os dados, você pode <a class="button" href="">Avançar para a próxima etapa</a>
-						</p>
 					<?php endif; ?>
-				</div>
-			</div>
-			<!-- #formstep-1 -->
+				<?php else: ?>
+					<a id="print-button" class="button  u-pull-right  print" style="display: none"><?php _e('Print', 'historias'); ?></a>
+				<?php endif; ?>
+	        </div>
 
-			<?php if( $step1['complete'] ) : ?>
+			<form id="application-form" class="form-application  inline" method="post">
+
+	            <?php if(get_theme_option('inscricoes_abertas') == false): ?>
+					<div class="error">Inscrições encerradas!</div>
+				<?php endif;?>
+
+				<?php if( $step == 'step-1' || $step == '' ) : ?>
+					<div id="formstep-1" class="form-step">
+						<header class="step__head">
+							<h3 class="step__title">Candidato <?php if ($step1['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+							<div class="step__about">
+								<?php echo nl2br( get_theme_option( 'txt_candidato_topo' ) ); ?>
+							</div>
+							<div class="step-status <?php print $step1['complete']?' completo':'';?>"></div>
+						</header>
+						<?php include( 'inscricoes-step1.php' ); ?>
+					</div><!-- #formstep-1 -->
+				<?php endif; ?>
+
 				<?php $step2 = load_step(2,$pid); $f = $step2['fields']; ?>
 
-				<div id="formstep-2" class="form-step">
-					<header class="step__head">
-						<h3 class="step__title">Etapa 2/3: Candidatura <?php if ($step2['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
-						<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
-						<div <?php echo ($step1['complete'] )?' style="display:none"':''; ?> class="step__about">
-							<?php echo nl2br(get_theme_option('txt_candidato_step2')); ?>
-						</div>
-						<span id="formstep-2-error" class="form-error"></span>
-					</header>
-					<?php include( 'inscricoes-step2.php' ); ?>
-				</div>
-			<?php else : ?>
-				<div class="form-not-yet">
-					<h3 class="step__title">Etapa 2/3: Candidatura</h3>
-				</div>
-			<?php endif; ?>
+				<?php if( $step1['complete'] && $step == 'step-2') : ?>
 
-            <!-- #formstep-2 -->
+					<div id="formstep-2" class="form-step">
+						<header class="step__head">
+							<h3 class="step__title">Candidato <?php if ($step2['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+							<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
+							<div <?php echo ($step1['complete'] )?' style="display:none"':''; ?> class="step__about">
+								<?php echo nl2br(get_theme_option('txt_candidato_step2')); ?>
+							</div>
+							<span id="formstep-2-error" class="form-error"></span>
+						</header>
 
-			<?php if( $step1['complete']  && $step2['complete']) : ?>
+						<?php include( 'inscricoes-step2.php' ); ?>
+
+					</div><!-- #formstep-2 -->
+				<?php endif; ?>
+
+
+				<?php if( $step1['complete'] && $step2['complete'] && $step == 'step-3' ) : ?>
+					
+					<div id="formstep-3" class="form-step">
+						<header class="step__head">
+							<h3 class="step__title">Conferir Dados e Finalizar Inscrição <?php if ( $subscription_number ) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+							<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
+							<div <?php echo ($step1['complete'] )?' style="display:none"':''; ?> class="step__about">
+								<?php echo nl2br(get_theme_option('txt_candidato_step3a')); ?>
+							</div>
+							<span id="formstep-3-error" class="form-error"></span>
+						</header>
+						<?php include( 'inscricoes-step3.php' ); ?>
+					</div><!-- #formstep-3 -->
+
+				<?php endif; ?>
+
+				<?php show_steps( $step ); ?>
+			</form>
+
+			<div class="form-controls  cf">
+				<?php if($subscription_number): ?>
+					<a href="<?php echo site_url("inscricoes/".substr($subscription_number,0,8)."/imprimir");?>" target="_blank" class="button  u-pull-right  print"><?php _e('Print', 'historias'); ?></a>
 				
-				<div id="formstep-3" class="form-step">
-					<header class="step__head">
-						<h3 class="step__title">Etapa 3/3: Conferir Dados e Inscrever <?php if ($step3['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
-						<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
-						<div <?php echo ($step1['complete'] )?' style="display:none"':''; ?> class="step__about">
-							<?php echo nl2br(get_theme_option('txt_candidato_step3a')); ?>
+					<?php if( current_user_can( 'administrator' ) ): ?>
+						<div class="form__item--inline">
+							<input id="subscription-valid" type="checkbox" name="subscription-valid" id="subscription-valid" value="<?php echo $subscription_number;?>"<?php if(get_post_meta($pid, 'subscription-valid', true)) echo ' checked="checked"';?>/>
+							<label for="subscription-valid">Admins: Marcar como Válida <a href="<?php bloginfo('siteurl'); ?>/inscricoes">(e voltar para lista de inscritos)</a></label>
 						</div>
-						<span id="formstep-3-error" class="form-error"></span>
-					</header>
-					<?php include( 'inscricoes-step3.php' ); ?>
-				</div>
-			<?php else : ?>
-				<div class="form-not-yet">
-					<h3 class="step__title">Etapa 3/3: Conferir Dados e Inscrever</h3>
-				</div>
-			<?php endif; ?>
-
-			<!-- #formstep-3 -->
-		</form>
+					<?php endif; ?>
+				<?php else: ?>
+					<a id="print-button" class="button  u-pull-right  print" style="display: none"><?php _e('Print', 'historias'); ?></a>
+				<?php endif; ?>
+	        </div>
+	    <?php endif; ?>
 	<?php endif; ?>
 </section>
 

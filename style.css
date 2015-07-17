@@ -1216,22 +1216,6 @@ img.aligncenter {
 .project-switcher {
   font-family: 'Sanchez', serif; }
 
-.form-application h2 {
-  text-align: center;
-  margin-bottom: 30px; }
-.form-application legend {
-  font-family: 'Sanchez', serif;
-  font-size: 1.13rem;
-  font-size: 18px;
-  font-weight: bold;
-  line-height: 1.33;
-  padding-bottom: 1.5rem; }
-.form-application label {
-  display: block;
-  color: 888; }
-.form-application .form__item--inline label {
-  display: inline; }
-
 #cadastro.form-step {
   padding-top: 0px;
   position: relative;
@@ -1277,17 +1261,48 @@ img.aligncenter {
 #step-2-register #step-2-dropdown {
   display: none; }
 
-.form-application label a {
-  background: #125b26;
-  border-radius: 2px;
-  color: #fff;
-  font-size: 16px;
-  line-height: 1;
-  padding: 4px 8px;
-  margin-left: 5px;
-  opacity: 0.5; }
-  .form-application label a:hover {
-    opacity: 1; }
+.form-application h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 20px; }
+.form-application legend {
+  font-family: 'Sanchez', serif;
+  font-size: 1.13rem;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.33;
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem; }
+.form-application .avatar {
+  text-align: center; }
+  .form-application .avatar label {
+    min-height: 150px;
+    min-width: 150px;
+    max-height: 200px;
+    max-width: 200px;
+    border: 2px solid #eaeaea;
+    overflow: hidden; }
+  .form-application .avatar img {
+    width: 100%;
+    height: auto; }
+.form-application .js-upload-button {
+  float: none; }
+.form-application .form__item--inline label {
+  display: inline; }
+.form-application label {
+  color: 888; }
+  .form-application label a {
+    background: #125b26;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 16px;
+    line-height: 1;
+    padding: 4px 8px;
+    margin-left: 5px;
+    opacity: 0.5;
+    float: right; }
+    .form-application label a:hover {
+      opacity: 1; }
 .form-application input[type='text'],
 .form-application input[type='email'],
 .form-application input[type='password'],
@@ -1315,12 +1330,12 @@ img.aligncenter {
   font-size: 20px;
   min-width: 200px;
   background: transparent; }
-.form-application textarea {
-  height: 7rem; }
 .form-application input[type='submit'],
 .form-application #step-2-register,
 .form-application #step-3-register {
   display: none; }
+.form-application .js-upload-button {
+  margin: 0px !important; }
 
 .form-step {
   background-color: #fff;
@@ -1329,6 +1344,17 @@ img.aligncenter {
   padding: 20px;
   margin-bottom: 3rem;
   padding: 1.5rem; }
+
+#formstep-3 .textcenter {
+  margin-top: 30px;
+  margin-bottom: 30px; }
+
+#formstep-3 .textcenter {
+  color: #125b26;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  font-style: normal; }
 
 .step__head {
   margin-bottom: 1.5rem;
@@ -1367,6 +1393,12 @@ img.aligncenter {
       background-color: #3F7F51;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 4px 0 #125B26; }
 
+.step__box {
+  border: 1px solid #dbc633;
+  background-color: #f7ffb3;
+  padding: 2%;
+  margin: 20px 10%; }
+
 .field__note {
   clear: both;
   font-size: 14px;
@@ -1386,14 +1418,17 @@ img.aligncenter {
   color: #fff;
   background: #ed4747; }
 
-.errors .error {
+.error {
   font-size: .88rem;
   font-size: 14px;
   line-height: 1.71;
   padding: 0 .5em;
   color: #fff;
-  background: rgba(237, 71, 71, 0.71);
+  background-color: #ed4747;
   margin-bottom: 2px; }
+
+.form-error {
+  display: none; }
 
 .step__advance {
   margin: 0;
@@ -1408,22 +1443,28 @@ img.aligncenter {
   .form-not-yet .step__title {
     color: #ccc; }
 
-.file-upload .button, .file-upload aside form#loginform input#wp-submit, aside form#loginform .file-upload input#wp-submit {
-  margin: .75rem 0;
-  position: relative;
-  opacity: 0.8;
-  cursor: pointer;
-  transition: none; }
-  .file-upload .button:hover, .file-upload aside form#loginform input#wp-submit:hover, aside form#loginform .file-upload input#wp-submit:hover {
-    opacity: 1; }
-.file-upload input[type='file'] {
-  height: 50px !important; }
-.file-upload .js-feedback {
-  display: none;
-  background-color: #f1ad0e;
-  color: #fff;
-  padding: 3px 5px;
-  border: 1px solid #D98813; }
+.file-upload {
+  cursor: pointer; }
+  .file-upload .button, .file-upload aside form#loginform input#wp-submit, aside form#loginform .file-upload input#wp-submit {
+    margin: .75rem 0;
+    position: relative;
+    opacity: 0.8;
+    cursor: pointer;
+    transition: none; }
+    .file-upload .button:hover, .file-upload aside form#loginform input#wp-submit:hover, aside form#loginform .file-upload input#wp-submit:hover {
+      opacity: 1; }
+  .file-upload input[type='file'] {
+    height: 50px !important;
+    cursor: pointer;
+    margin-top: -20px; }
+  .file-upload form {
+    cursor: pointer; }
+  .file-upload .js-feedback {
+    display: none;
+    background-color: #f1ad0e;
+    color: #fff;
+    padding: 3px 5px;
+    border: 1px solid #D98813; }
 
 #protocol-number {
   width: 40%;
@@ -1467,6 +1508,27 @@ img.aligncenter {
         color: #125b26; }
   .featured-posts .wp-post-image {
     display: block; }
+
+.steps__content {
+  text-align: center; }
+  .steps__content li {
+    margin: 0 2px;
+    display: inline-block;
+    zoom: 1;
+    *display: inline; }
+    .steps__content li span {
+      width: 13px;
+      height: 13px;
+      display: block;
+      background: #ffce00;
+      text-indent: -9999px;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      border-radius: 20px; }
+      .steps__content li span.current {
+        cursor: default;
+        position: relative;
+        background: #125b26; }
 
 #evaluation-area {
   background-color: #fff;
