@@ -161,6 +161,7 @@ if(is_user_logged_in()) {
 							</div>
 							
 							<div id="step-2-register">
+								<h2>Selecione seu estado e setorial</h2>
 								<div class="grid__item  one-whole">
 									<?php include('includes/mapa.php'); ?>
 								</div>
