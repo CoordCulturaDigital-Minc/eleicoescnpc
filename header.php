@@ -15,9 +15,9 @@
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<meta name="viewport" content="width=device-width">
 	
-	<?php require_once 'includes/jquery.php';?>
-	<?php require_once 'includes/twitter_bootstrap.php'; ?>
-	<?php require_once 'includes/font_awesome.php'; ?>
+	<?php require_once 'dependencies/jquery.php';?>
+	<?php require_once 'dependencies/twitter_bootstrap.php'; ?>
+	<?php require_once 'dependencies/font_awesome.php'; ?>
 
 	<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>?ver=2">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
@@ -55,7 +55,7 @@
 		                    <p><?php echo get_option( 'site_tagline' ) ?></p>
 		                </div>
                     <?php else : ?>
-                    	<img class="template-preset" src="<?php echo get_template_directory_uri() . '/images/template_header.png'; ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />
+                    	<img class="template-preset" src="<?php echo get_template_directory_uri() . '/images/template_header.svg'; ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />
                 <?php endif; ?>
             </a>
 
@@ -65,38 +65,7 @@
 	        </form>
 		</div>
 		
-        <nav class="access clearfix js-access" role="navigation">
-            <?php if ( wp_is_mobile() ) :
-                wp_nav_menu( array( 'theme_location' => 'mobile', 'container' => false, 'menu_class' => 'menu--mobile  menu', 'fallback_cb' => false ) );
-            else : ?>
-                <?php if ( is_user_logged_in() ) : global $user_login; ?>
-                    <ul id="menu-user" class="menu--user  menu">
-                        <li class="menu__title"><?php printf( __('Hello, %s!', 'historias' ), $user_login ); ?></li>
-                        <?php if ( current_user_can( 'level_10' ) ) : ?>
-                            <li><a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
-                            <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscrições</a></li>
-                            <li><a href="<?php bloginfo('siteurl'); ?>/avaliacoes">Avaliações</a></li>
-                        <?php elseif ( current_user_can( 'curate' ) ) : ?>
-                            <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscrições</a></li>
-                        <?php elseif ( current_user_can( 'publish_posts' ) ): ?>
-                            <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Ficha</a></li>
-                            <li><a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
-                        <?php elseif ( current_user_can( 'read' ) ) : ?>
-                            <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Ficha</a></li>
-                        <?php endif; ?>
-                        <li><?php wp_loginout(); ?></li>
-                    </ul>
-                <?php else: ?>
-                	<ul id="menu-user" class="menu--user  menu">
-                        <li><a href="<?php bloginfo( 'url' ); ?>/wp-login/">Entrar</a></li>
-                    </ul>
-                <?php endif; ?>
-
-                <?php wp_nav_menu( array( 'theme_location' => 'secondary', 'container' => false, 'menu_class' => 'menu--sub  menu', 'fallback_cb' => false ) ); ?>
-
-                <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu--main  menu', 'fallback_cb' => 'default_menu' ) ); ?>
-            <?php endif; ?>
-        </nav>
+		<?php require_once 'includes/navigator.php'; ?>
     </header><!-- /site-header -->
 
 	<div id="main" class="wrap cf">
