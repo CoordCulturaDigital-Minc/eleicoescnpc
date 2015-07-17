@@ -148,11 +148,12 @@ if(is_user_logged_in()) {
 							<span id="register-error" class="form-error hidden"></span>
 							<div id="step-1-register">
 								<div class="grid__item  one-whole">
+									<?php $user_tipo = isset($_POST['user_tipo']) ? $_POST['user_tipo'] : '' ?>
 
-									<input id="tipo_eleitor" class="user_type hidden" type="radio" name="user_tipo" value="eleitor" />
+									<input id="tipo_eleitor" class="user_type hidden" type="radio" name="user_tipo" value="eleitor" <?php checked( $user_tipo, 'eleitor' ); ?> />
 									<label for="tipo_eleitor">Sou Eleitor/a</label>
 									
-									<input id="tipo_candidato" class="user_type hidden" type="radio" name="user_tipo" value="candidato" />
+									<input id="tipo_candidato" class="user_type hidden" type="radio" name="user_tipo" value="candidato" <?php checked( $user_tipo, 'candidato' ); ?>/>
 									<label for="tipo_candidato">Sou Candidato/a</label>
 
 								</div>
@@ -167,12 +168,14 @@ if(is_user_logged_in()) {
 								<div id="step-2-dropdown">
 									<div class="grid__item  one-half">
 										<label for="user_UF">UF</label>
-										<?php echo dropdown_states('user_UF','', true); ?>
+										<?php $user_UF = isset($_POST['user_UF']) ? $_POST['user_UF'] : '' ?>
+										<?php echo dropdown_states('user_UF', $user_UF, true); ?>
 									</div><!--
 
 									--><div class="grid__item  one-half">
 										<label for="user_setorial">Setorial</label>
-										<?php echo dropdown_setoriais('user_setorial','', true); ?>
+										<?php $user_setorial = isset($_POST['user_setorial']) ?  $_POST['user_setorial'] : '' ?>
+										<?php echo dropdown_setoriais('user_setorial', $user_setorial, true); ?>
 									</div>
 								</div>	
 							</div>
@@ -180,18 +183,18 @@ if(is_user_logged_in()) {
 							<div id="step-3-register">
 								<div class="grid__item  one-half">
 									<label for="user_cpf">CPF</label>
-									<input id="user_cpf" type="text" name="user_cpf" />
+									<input id="user_cpf" type="text" name="user_cpf" value="<?php echo isset($_POST['user_cpf']) ?  $_POST['user_cpf'] : '' ?>" />
 									<div id="user_cpf-error" class="field__error"></div>
 								</div><!--
 
 								--><div class="grid__item  one-whole">
 									<label for="user_name">Nome</label>
-									<input id="user_name" type="text" name="user_name" />
+									<input id="user_name" type="text" name="user_name" value="<?php echo isset($_POST['user_name']) ?  $_POST['user_name'] : '' ?>"/>
 								</div><!--
 
 								--><div class="grid__item  one-whole">
 									<label for="user_email">Seu email</label>
-									<input id="user_email" type="email" name="user_email" />
+									<input id="user_email" type="email" name="user_email" value="<?php echo isset($_POST['user_email']) ?  $_POST['user_email'] : '' ?>" />
 									<div id="user_email-error" class="field__error"></div>
 								</div><!--
 
@@ -209,7 +212,7 @@ if(is_user_logged_in()) {
 
 								--><div class="grid__item  one-half">
 									<label for="user_birth">Data Nascimento</label>
-									<input id="user_birth" type="text" name="user_birth" />
+									<input id="user_birth" type="text" name="user_birth" value="<?php echo isset($_POST['user_birth']) ?  $_POST['user_birth'] : '' ?>" />
 									<div id="user_birth-error" class="field__error"></div>
 								</div><!--
 

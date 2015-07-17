@@ -2,6 +2,7 @@
     $(document).ready(function(e) {
         $form = $("#user-register");
 
+
         function scrollCadastro(e) {
             $('html, body').animate({
                 scrollTop: $(e).offset().top - 50
@@ -12,12 +13,25 @@
             $('#cadastro .step__count').show().find('.active').removeClass('active');
             $('#cadastro .step__count').children(c).addClass('active');
         }
+
         
         $('#loginform').hide();
         $('#cadastro-toggle').click(function(){
             $('#cadastro').hide();
             $('#loginform').show();
         });
+
+        // se carregar a página mostrar o lugar correto
+        if ( $( ".user_type" ).attr( "checked" ) == "checked") {
+            $('#step-1-register').hide();
+            $('#step-2-register').show();
+        }
+
+        if($('#user_UF').val()!="" && $('#user_setorial').val()!="" ){ 
+            $('#step-2-register').hide();
+            $('#step-3-register').show();
+            $(".form-application input[type='submit']").show();
+        }
 
         // etapa 1 -> etapa 2
         $('#step-1-register .user_type').click(function(){
