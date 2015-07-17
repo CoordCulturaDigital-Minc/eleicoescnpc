@@ -37,36 +37,42 @@
     <!-- fim barra do governo -->
 
 	<?php do_action( 'before' ); ?>
-
-	<div class="site-wrap">
-
-	<header class="site_header clearfix">
+	<div class="header-wrap">
+	<header class="clearfix row">
 		<a href="#main" title="<?php esc_attr_e( 'Skip to content', 'historias' ); ?>" class="assistive-text"><?php _e( 'Skip to content', 'historias' ); ?></a>
-
-		<div class="branding clearfix">
-			<a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
-                <?php
-                    $logo = get_theme_mod('site_logo');
-                    if ($logo != ''): ?>
-                        <img class="custom" src="<?php echo esc_url($logo); ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />
-                        <h1 class="site-title"><?php bloginfo('name'); ?></h1>			
-
-		                <div class="quote">
-		                    <p><?php echo get_option( 'site_tagline' ) ?></p>
-		                </div>
-                    <?php else : ?>
-                    	<img class="template-preset" src="<?php echo get_template_directory_uri() . '/images/template_header.svg'; ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />
-                <?php endif; ?>
-            </a>
-
-			<form id="search" role="search" method="get" action="<?php echo home_url( '/' ); ?>">
-	            <input id="s" type="search" value="Procurar por" name="s" onfocus="if (this.value == 'Procurar por') this.value = '';" onblur="if (this.value == '') {this.value = 'Procurar por';}" />        
-	            <input type="submit" value="Buscar" />
-	        </form>
-		</div>
 		
-		<?php require_once 'includes/navigator.php'; ?>
+		<a class="col-xs-2" href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
+            <img src="<?php
+                $logo = get_theme_mod('site_logo');
+                
+                if ($logo != ''):
+                	echo esc_url($logo);
+                else :
+                	echo get_template_directory_uri() . '/images/clear_cnpc_logo.svg';
+                endif;
+            ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />	
+		</a>
+		
+	    <a class="col-xs-6" href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
+                <h1 class="site-title"><?php bloginfo('name'); ?><br>
+                <small>Conselho Nacional de Política Cultural<?php echo get_option( 'site_tagline' ) ?></small></h1>
+        </a>
+        
+		<div class="col-xs-4">
+		<form id="search" role="search" method="get" action="<?php echo home_url( '/' ); ?>">
+            <input id="s" type="search" value="Procurar por" name="s" onfocus="if (this.value == 'Procurar por') this.value = '';" onblur="if (this.value == '') {this.value = 'Procurar por';}" />        
+            <button type="submit" value="Buscar" class="btn btn-success">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+		</div>
     </header><!-- /site-header -->
+    
+    <?php require_once 'includes/navigator.php'; ?>
+    
+    </div>
+    
+    <div class="site-wrap">
 
 	<div id="main" class="wrap cf">
 		<?php if( !is_page() ) : ?>

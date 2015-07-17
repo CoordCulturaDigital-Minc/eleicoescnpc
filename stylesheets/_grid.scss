@@ -269,48 +269,6 @@ img.aligncenter {
     }
 }
 
-#search {
-    float: right;
-    margin-top: 10px;
-    position: relative;
-    width: 100%;
-    max-width: 300px;
-    border: 1px solid #bababa;
-    border-radius: 3px;
-	
-	#s {
-	    font-family: 'Sanchez', serif;
-	    width: 71%;
-	    padding: 12px;
-	    background-color: #fff;
-	    margin: 0px;
-	    color: #bab8b8;
-	    font-weight: normal;
-	    font-size: 13px;
-	    border: none;
-	}
-
-	input[type="submit"] {
-	    position: absolute;
-	    top: 0px;
-	    right: 0px;
-	    border: none;
-	    background: transparent;
-	    width: 60px;
-	    height: 41px;
-	    background: #175823 url(images/lupa.png) no-repeat center center;
-	    float: right;
-	    text-indent: -5000px;
-	    border-top-right-radius: 3px;
-	    border-bottom-right-radius: 3px;
-	}
-
-	input[type="submit"]:hover {
-	    background-color: #ffc20c;
-	    cursor: pointer;
-	}
-}
-
 .page__title {
     margin-bottom: 1.5rem;
 }

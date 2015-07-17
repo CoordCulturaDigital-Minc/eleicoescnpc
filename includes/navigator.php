@@ -1,4 +1,4 @@
-<nav class="access clearfix js-access" role="navigation">
+<nav class="access row clearfix js-access" role="navigation"><div class="col-xs-12">
     <?php if ( wp_is_mobile() ) :
         wp_nav_menu( array( 'theme_location' => 'mobile', 'container' => false, 'menu_class' => 'menu--mobile  menu', 'fallback_cb' => false ) );
     else : ?>
@@ -29,4 +29,4 @@
 
         <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu--main  menu', 'fallback_cb' => 'default_menu' ) ); ?>
     <?php endif; ?>
-</nav>
+</div></nav>

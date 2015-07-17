@@ -1,63 +1,71 @@
-header.site_header {
-	margin-bottom: 3rem;
-    
-    background-repeat: no-repeat;
-    height: 250px;
-    
-    padding-top: 55px;
-    
-    .branding {
-	    a {
-		    float: left;
-            min-height: 100px;
-            position: relative;
+.header-wrap {
+	background-color: $cor_verde;
+	width: 100%;
+	
+header, nav {
+	padding: 20px 54px;
+	max-width: 1080px;
+	overflow: hidden;
+    width: 98%;
+    margin: 0px auto;
+}
+
+header {
+	h1 {
+		margin-top: 20px;
+		color: $cor-cinza-claro;
+		font-family: Helvetica, sans-serif;
+		font-weight: bold;
+		
+		text-transform: uppercase;
+		
+		small {
+			color: $cor-cinza-claro;
+			text-transform: none;
+		}
+	}
+	form {
+		height: 39px;
+	    margin-top: 40px;
+	    position: relative;
+	    width: 100%;
+	    max-width: 300px;
+	    border: 1px solid #bababa;
+	    border-radius: 3px;
+		
+		input[type="search"] {
+			float: left;
+		    width: 70%;
+		    padding: 12px;
+		    background-color: #fff;
+		    margin: 0px;
+		    color: #bab8b8;
+		    font-weight: normal;
+		    font-size: 13px;
+		    border: none;
+		}
+		button {
+			float: right;
 			
-			h1 {
-                float: left;
-                
-                color: $cor-laranja;
-                padding-top: 10px;
-            }
-			img {
-                float: left;
-                margin-right: 33px;
-                
-                &.custom {
-                    max-height: 70px;
-                    max-width: 140px;
-                }
-                &.template-preset {
-                    position: absolute;
-                    top: -60px;
-                    left: -48px;
+			&, &:hover {
+				background: none;
+				border: none;
+			}
+			
+			color: $cor-cinza-claro;
+			margin-left: 5px;
+			font-size: 19px;
+			
+			&:hover {
+			    background-color: #1c7133;
+			    cursor: pointer;
+			}
+		}
+	}
+}
 
-                    width: 611px;
-                    height: 212px;
-                }
-            }
-            
-	    }
-        
-        form#search {
-            float: right;
-            margin-top: 30px;
+@import 'nav';
 
-            a {
-                min-width: 500px;
-                display: inline-block;
-            }
-        }
-    }
-    
-    svg {
-	    margin-left: -48px;
-	    
-	    #g1 path {
-		    display: none;
-	    }
-    }
-    
-	@import 'nav';
 }
 
 @media only screen and (min-width: 48em) {
