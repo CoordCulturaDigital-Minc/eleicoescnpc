@@ -7,6 +7,33 @@
 <div id="comments" class="comments-area">
 
     <?php if ( have_comments() ) : ?>
+    <?php 
+
+    $args = array(
+        'comment_field' =>  '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment', 'noun' ) .
+        '</label><textarea id="comment" name="comment" cols="45" rows="4" aria-required="true">' .
+        '</textarea></p>',
+        'must_log_in' => '<p class="must-log-in">' .
+        sprintf(
+          __( 'Você precisa se <a href="%s">cadastrar</a> e/ou fazer <a href="%s">login</a> para comentar no fórum, participe!' ),
+          site_url('/inscricoes/'),  wp_login_url( apply_filters( 'the_permalink', get_permalink() ) )
+        ) . '</p>',
+        
+        'comment_notes_before' => '<p class="comment-notes">' .
+        __( 'Your email address will not be published.' ) . ( $req ? $required_text : '' ) .
+        '</p>',
+
+        'comment_notes_after' => '<p class="form-allowed-tags">' .
+        sprintf(
+          __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s' ),
+          ' <code>' . allowed_tags() . '</code>'
+        ) . '</p>',
+
+        'fields' => apply_filters( 'comment_form_default_fields', $fields ),
+    );
+     ?>
+
+         <?php comment_form($args); ?>
 
         <h3 class="comments-title">
             <?php printf( _n( 'Um comentário', '%1$s comentários', get_comments_number(), 'historias' ), number_format_i18n( get_comments_number() ) ); ?>
@@ -36,7 +63,8 @@
         <p class="nocomments"><?php _e( 'Comments are closed.', 'historias' ); ?></p>
     <?php endif; ?>
 
-    <?php comment_form(); ?>
 
+
+   
 </div><!-- /comments -->
 <?php endif; ?>
