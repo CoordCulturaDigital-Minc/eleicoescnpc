@@ -150,15 +150,15 @@
                             }});
 
     
-        $form.find("#user_password_confirm").keyup( function checkPasswordMatch() {
-            var password = $form.find('#user_password').val();
-            var confirmPassword = $form.find("#user_password_confirm").val();
+        // $form.find("#user_password_confirm").keyup( function checkPasswordMatch() {
+        //     var password = $form.find('#user_password').val();
+        //     var confirmPassword = $form.find("#user_password_confirm").val();
 
-            if (password != confirmPassword)
-                $form.find("#user_password_confirm-error").html("As senhas não são iguais").show();
-            else
-                $form.find("#user_password_confirm-error").hide().html('');
-        });
+        //     if (password != confirmPassword)
+        //         $form.find("#user_password_confirm-error").html("As senhas não são iguais").show();
+        //     else
+        //         $form.find("#user_password_confirm-error").hide().html('');
+        // });
 
         $(document).find('#user_cpf').mask('999.999.999-99');
         $(document).find('#user_birth').mask('99/99/9999');
