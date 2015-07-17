@@ -220,7 +220,7 @@ if(is_user_logged_in()) {
 								</div>
 							</div>
 						</div>
-						<input type="submit" id="submit" class="button" value="Cadastrar" />
+						<input type="submit" id="submit" class="button" value="Inscrever" />
 
 					</div>
 				</form>
