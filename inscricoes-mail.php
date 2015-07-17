@@ -26,7 +26,7 @@ $diploma_file_id 	= get_post_meta($pid, 'candidate-diploma', true);
 
  ?>
 	<h3>Avatar</h3>
-		<?php echo wp_get_attachment_link(($avatar_file_id); ?>
+		<?php echo wp_get_attachment_link($avatar_file_id); ?>
 	<h3>Pré-Candidato</h3>
 	<ul>
 		<li><strong>Nome</strong>: <?php echo $user_meta['user_name'];?></li>
