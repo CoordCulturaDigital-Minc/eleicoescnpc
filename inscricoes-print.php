@@ -38,7 +38,6 @@ if($pid) {
 </head>
 <body>
 	<h1>Fóruns Setorias - CNPC</h1>
-	<h2>O número da inscrição é <span><?php echo $subscription_number;?></span></h2>
 	<h3>Avatar</h3>
 		<?php echo wp_get_attachment_image($avatar_file_id, 'avatar_candidate'); ?>
 	<h3>Pré-Candidato</h3>

@@ -7,7 +7,6 @@
 </head>
 <body>
 	<h1>Eleições CNPC - 2015</h1>
-	<h2>O seu número de inscrição é <span><?php echo $subscription_number;?></span></h2>
 
 	<?php if(get_theme_option('txt_mail_candidato')): ?>
 	<p><?php echo get_theme_option('txt_mail_candidato');?></p>
@@ -25,8 +24,6 @@ $activity_file_id 	= get_post_meta($pid, 'candidate-activity-history', true);
 $diploma_file_id 	= get_post_meta($pid, 'candidate-diploma', true);
 
  ?>
-	<h3>Avatar</h3>
-		<?php echo wp_get_attachment_link($avatar_file_id); ?>
 	<h3>Pré-Candidato</h3>
 	<ul>
 		<li><strong>Nome</strong>: <?php echo $user_meta['user_name'];?></li>

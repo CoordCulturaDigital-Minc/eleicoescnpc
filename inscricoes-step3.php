@@ -5,10 +5,6 @@
 			<p class="textcenter">
 				<?php echo nl2br( get_theme_option( 'txt_candidato_step4' ) ); ?>
 			</p>
-			<p id="protocol-number">
-				&mdash; Inscrição Número &mdash;
-				<strong id="js-protocol-number"><?php echo substr($subscription_number, 0, 8);?></strong>
-			</p>
 			<p class="step__advance alignleft">
 				<a class="button" href="<?php print "?step=step-2"; ?>">Voltar para etapa anterior</a>
 			</p>
