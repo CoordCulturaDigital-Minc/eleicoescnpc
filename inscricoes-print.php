@@ -33,7 +33,7 @@ if($pid) {
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<title>Inscrição efetuada com sucesso</title>
-	<link rel="stylesheet" media="all" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/print.css" />
+	<link rel="stylesheet" media="all" href="<?php bloginfo( 'stylesheet_directory' ); ?>/stylesheets/print.css" />
 	<script type="text/javascript">window.onload=function(){window.print();};</script>
 </head>
 <body>

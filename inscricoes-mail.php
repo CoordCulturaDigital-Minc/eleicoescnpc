@@ -3,7 +3,7 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<title>Inscrição efetuada com sucesso</title>
-	<link rel="stylesheet" media="all" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/print.css" />
+	<link rel="stylesheet" media="all" href="<?php bloginfo( 'stylesheet_directory' ); ?>/stylesheets/print.css" />
 </head>
 <body>
 	<h1>Eleições CNPC - 2015</h1>
@@ -15,27 +15,16 @@
 
 <?php
 
-$subscription_number = get_query_var('subscription_number');
-$pid = get_project_id_from_subscription_number($subscription_number);
+$userID = get_post_field( 'post_author', $pid );
+$user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $userID ) );
+$user = get_user_by( 'id', $userID);
 
+$avatar_file_id 	= get_post_meta($pid, 'candidate-avatar', true);
+$portfolio_file_id 	= get_post_meta($pid, 'candidate-portfolio', true);
+$activity_file_id 	= get_post_meta($pid, 'candidate-activity-history', true);
+$diploma_file_id 	= get_post_meta($pid, 'candidate-diploma', true);
 
-if($pid) {
-	
-
-	$step1 = load_step(1, $pid);
-	$step2 = load_step(2, $pid);
-
-	$userID = get_post_field( 'post_author', $pid );
-	$user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $userID ) );
-	$user = get_user_by( 'id', $userID);
-
-	$avatar_file_id 	= get_post_meta($pid, 'candidate-avatar', true);
-	$portfolio_file_id 	= get_post_meta($pid, 'candidate-portfolio', true);
-	$activity_file_id 	= get_post_meta($pid, 'candidate-activity-history', true);
-	$diploma_file_id 	= get_post_meta($pid, 'candidate-diploma', true);
-
-	$f = array_merge($step1['fields'], $step2['fields']);
-} ?>
+ ?>
 	<h1>Fóruns Setorias - CNPC</h1>
 	<h2>O número da inscrição é <span><?php echo $subscription_number;?></span></h2>
 	<h3>Avatar</h3>

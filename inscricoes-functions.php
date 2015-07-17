@@ -637,7 +637,7 @@ function mail_new_subscription($subscription_number, $pid) {
     $header = "From: $from\r\n";
     $header .= "Content-Type: text/html\r\n";
 
-    //wp_mail($to, 'Confirmação de inscrição', $mail_content, $header); // TODO verificar envio de email
+    wp_mail($to, 'Confirmação de inscrição', $mail_content, $header); // TODO verificar envio de email
 }
 add_action('setoriaiscnpc_subscription_done', 'mail_new_subscription', 10, 2);
 
