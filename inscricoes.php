@@ -29,11 +29,11 @@ if(is_user_logged_in()) {
 
 	$step = isset( $_REQUEST[ 'step' ] ) ? $_REQUEST[ 'step' ] : 'step-1';
 
-    if ($_GET['switch_project'] == 1) {
-        switch_project_to_edit();
-        wp_redirect(site_url('inscricoes'));
-		exit;
-    }
+  //   if ($_GET['switch_project'] == 1) {
+  //       switch_project_to_edit();
+  //       wp_redirect(site_url('inscricoes'));
+		// exit;
+  //   }
 
 	if(current_user_can('curate')) {
 		if($subscription_number) {
@@ -350,20 +350,7 @@ if(is_user_logged_in()) {
 				<?php show_steps( $step ); ?>
 			</form>
 
-			<div class="form-controls  cf">
-				<?php if($subscription_number): ?>
-					<a href="<?php echo site_url("inscricoes/".substr($subscription_number,0,8)."/imprimir");?>" target="_blank" class="button  u-pull-right  print"><?php _e('Print', 'historias'); ?></a>
-				
-					<?php if( current_user_can( 'administrator' ) ): ?>
-						<div class="form__item--inline">
-							<input id="subscription-valid" type="checkbox" name="subscription-valid" id="subscription-valid" value="<?php echo $subscription_number;?>"<?php if(get_post_meta($pid, 'subscription-valid', true)) echo ' checked="checked"';?>/>
-							<label for="subscription-valid">Admins: Marcar como Válida <a href="<?php bloginfo('siteurl'); ?>/inscricoes">(e voltar para lista de inscritos)</a></label>
-						</div>
-					<?php endif; ?>
-				<?php else: ?>
-					<a id="print-button" class="button  u-pull-right  print" style="display: none"><?php _e('Print', 'historias'); ?></a>
-				<?php endif; ?>
-	        </div>
+			
 	    <?php endif; ?>
 	<?php endif; ?>
 </section>

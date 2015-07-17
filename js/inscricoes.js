@@ -170,9 +170,13 @@
 
             var $self = $(this);
 
+            var field = $self.attr('data-field');
+
             $self.find('.js-upload-button').ajaxUpload({
+                allowExt:['pdf', 'png', 'gif', 'jpg', 'JPG'],
                 url: inscricoes.ajaxurl + '?action=inscricoes_file_upload',
                 name: 'file-upload',
+                data:{'data-field':field},
                 onSubmit: function(a) {
                     $self.find('.js-feedback').html('Fazendo Upload').fadeIn();
                 }, onComplete: function(result) {

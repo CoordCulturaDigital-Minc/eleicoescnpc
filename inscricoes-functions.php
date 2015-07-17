@@ -547,13 +547,33 @@ add_action('wp_ajax_mark_as_read', 'mark_as_read');
 
 function inscricoes_handle_ajax_upload() {
 
-    $pid = get_current_user_project();
+    $pid    = get_current_user_project();
+    $field  = $_POST['data-field']; // TODO ver outro jeito depois
+    $name   = $_FILES['file-upload'][ 'name' ];
+    $type   = $_FILES[ 'file-upload' ][ 'type' ];
 
     require_once( ABSPATH . 'wp-admin/includes/image.php' );
 	require_once( ABSPATH . 'wp-admin/includes/file.php' );
 	require_once( ABSPATH . 'wp-admin/includes/media.php' );
 
-	// VALIDATE UPLOAD
+
+    if( 'candidate-avatar' == $field ) {
+
+        if( 'image/png' !== $type && 'image/jpeg' !== $type && 'image/gif' !== $type ) {
+            $return['error'] = "O arquivo deve ser no formato de imagem (jpg, png, gif)";
+            echo json_encode($return);
+            die;
+        }
+
+    } else if(  'application/pdf' !== $type  )
+    {
+        $return['error'] = "O arquivo deve ser no formato portable document file (.pdf)";
+        echo json_encode($return);
+        die;
+    }
+
+	/// evitar que outros usuários acessem arquivos de outros candidatos
+    $_FILES[ 'file-upload' ][ 'name' ] = wp_generate_password( 7, false ) . '_' . $name;
 
 	$attachment_id = media_handle_upload( 'file-upload', $pid );
 
@@ -918,9 +938,14 @@ function convert_format_date( $d ) {
 }
 
 function restore_format_date( $d ) {
-    $format = "Y-m-d";
-    $dateTime = DateTime::createFromFormat($format, $d);
-    return $dateTime->format("d/m/Y");  
+
+    if( !empty( $d ) ) {
+        $format = "Y-m-d";
+        $dateTime = DateTime::createFromFormat($format, $d);
+        return $dateTime->format("d/m/Y");  
+    }
+
+    return false;
 }
 
 /**
@@ -1124,10 +1149,16 @@ class Validator {
     
     static function cpf_not_in_blacklist($c) {
         
+        if( empty($c) )
+            return 'Cpf não informado';
+
         $blacklist = get_theme_option('candidatos_blacklist');
 
-        if( in_array($c, $blacklist))
-            return 'Você já é delegado nato na etapa nacional';
+        if( !empty( $blacklist) ) {
+
+            if( in_array($c, $blacklist) )
+                return 'Você já é delegado nato na etapa nacional';
+        }
 		
         return true; 
 	}
