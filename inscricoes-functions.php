@@ -115,16 +115,6 @@ function user_cpf_does_not_exist($c) {
 
 
 /**
- * define em qual passo o usuário está
- *
- */
-function set_step()
-{
-
-
-}
-
-/**
  * define os passos
  *
  */
@@ -155,67 +145,12 @@ function show_steps( $step )
                 <ol class="steps">
                     <?php foreach( $steps as $key => $titulo ) : ?>
                         <li>
-                            <a href="<?php print "?step={$key}"; ?>" title="<?php print $titulo; if( $key == $step ) print ' você está aqui'; ?>" class="<?php if( $key == $step ) print 'current'; ?>"><?php print $titulo; ?></a>
+                            <span title="<?php print $titulo; if( $key == $step ) print ' você está aqui'; ?>" class="<?php if( $key == $step ) print 'current'; ?>"><?php print $titulo; ?></span>
                         </li>
                     <?php endforeach; ?>
                 </ol>
             </div>
         <?php endif; ?>
-    <?php
-}
-
-
-/**
- * redirecionar para a próxima etapa
- */
-function next_step( $step )
-{
-    // pegar apenas as chaves do array
-    $steps = array_keys( get_steps() );
-    $current_step = array_search( $step, $steps );
-    if( ( count( $steps ) - 1 ) !== $current_step )
-        return $steps[ $current_step + 1 ];
-    return $step;
-}
-
-/**
- * redirecionar para a etapa anterior
- */
-function prev_step( $step )
-{
-    // pegar apenas as chaves do array
-    $steps = array_keys( get_steps() );
-    $current_step = array_search( $step, $steps );
-    if( 0 !== $current_step )
-        return $steps[ $current_steps - 1 ];
-    return $step;
-}
-
-/**
- * botões de navegação
- *
- */
-function steps_navigation( $step )
-{
-    // pegar apenas as chaves do array
-    $passos = array_keys( get_steps() );
-    ?>
-        <div class="postbox">
-            <div class="inside">
-                <table width="100%" cellspacing="15px">
-                    <tr valign="top">
-                        <td align="right">
-                            <?php if( 0 !== array_search( $passo, $passos ) and ( count( $passos ) - 1 ) !== array_search( $passo, $passos ) ) : ?>
-                                <button type="submit" name="prev" id="prev" value="1" class="button-secondary" tabindex="1000">&laquo; Anterior</button>
-                            <?php endif; ?>
-                            <?php if( ( count( $passos ) - 1 ) !== array_search( $passo, $passos ) ) : ?>
-                                <button type="submit" name="next" id="next" value="1" class="button-secondary" tabindex="1000">Próximo &raquo;</button>
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
     <?php
 }
 
@@ -249,10 +184,11 @@ function load_step_html() {
 
     $valid = isset($_POST['step']);
     if($valid) {
+        
         $step_number = intval($_POST['step']);
         $validator = new Validator();
 
-        $valid = $step_number > 1 && $step_number <= 1+count($validator->fields_rules);
+        $valid = $step_number >= 1 && $step_number <= 1+count($validator->fields_rules);
         if($valid) {
 
             for($i=1; $valid && $i<$step_number; $i++) {
@@ -473,6 +409,8 @@ function subscribe_project() {
     global $hashhqf;
     $pid = get_current_user_project();
     $response = array();
+    $current_user = wp_get_current_user();
+    
     $response['subscription_number'] = get_post_meta($pid, 'subscription_number', true);
 
     if($response['subscription_number']) {
@@ -490,6 +428,7 @@ function subscribe_project() {
             $response['status'] = 'success';
             $response['message'] = nl2br(get_theme_option('txt_candidato_step4'));
 
+            add_user_meta($current_user->ID, 'e_candidato', true);
 
             do_action('setoriaiscnpc_subscription_done', $subscription_number, $pid);
         } else {
@@ -653,19 +592,21 @@ function inscricoes_get_uploaded_template($attachment_id) {
 
 }
 
-function inscricoes_file_upload_field_template($f, $step, $label, $field, $description = '', $button_label = '') {
+function inscricoes_file_upload_field_template($f, $step, $label, $field, $description = '', $button_label = '', $required = false) {
 
+    if( $required )
+        $required = 'required';
     ?>
     <div class="">
         <label><?php echo $label; ?> <span class="js-current"><?php if (isset($f[$field])) echo inscricoes_get_uploaded_template($f[$field]); ?></span></label>
-        <input id="<?php echo $field; ?>" class="" type="hidden" name="step<?php echo $step; ?>-<?php echo $field; ?>" value="<?php echo isset($f[$field])?$f[$field]:'';?>" />
-        <div class="field-status <?php print isset($f[$field])?'completo':''?>"></div>
+        <input id="<?php echo $field; ?>" class="<?php echo $required ?>" type="hidden" name="step<?php echo $step; ?>-<?php echo $field; ?>" value="<?php echo isset($f[$field])?$f[$field]:'';?>" />
+        <div class="field-status <?php print isset($f[$field])?'completo':'invalido'?>"></div>
 
         <div id="<?php echo $field; ?>-upload" class="file-upload" data-field="<?php echo $field; ?>">
             <div class="js-upload-button  u-pull-left  button"><?php echo( empty( $button_label ) ) ? __('Select File', 'historias') : $button_label; ?></div>
             <div class="js-feedback  feedback  u-pull-right"></div>
         </div>
-        <!-- <div id="<?php echo $field; ?>-error" class="field__error"></div> -->
+        <div id="<?php echo $field; ?>-error" class="field__error"></div>
         <div class="field__note"><?php echo $description; ?></div>
     </div>
     <?php
@@ -1022,7 +963,7 @@ class Filter {
 class Validator {
     public $fields_rules = array(
         'register' => array(
-            'user_cpf' => array('not_empty','is_a_valid_cpf', 'user_cpf_does_not_exist', 'cpf_exists_in_receita'),
+            'user_cpf' => array('not_empty','is_a_valid_cpf', 'user_cpf_does_not_exist', 'cpf_not_in_blacklist', 'cpf_exists_in_receita'),
             'user_name' => array('not_empty'),
             'user_email' => array('not_empty','is_valid_email','is_email_does_not_exist'),
             'user_password' => array('not_empty'),
@@ -1046,6 +987,10 @@ class Validator {
             'candidate-activity-history' => array(),
             'candidate-diploma' => array(),
             'candidate-confirm-data' => array('not_empty')
+        ),
+        'extra' => array(
+            'user_cpf' => array('cpf_not_in_blacklist'),
+            'user_birth' => array('is_a_valid_date','is_a_valid_birth')
         )
     );
 

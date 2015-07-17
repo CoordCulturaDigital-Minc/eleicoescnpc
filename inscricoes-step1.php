@@ -1,10 +1,3 @@
-<?php if( empty( $subscription_number ) )
-	 $userID = $current_user->ID; 
-else 
-	$userID = get_post_field( 'post_author', $pid );
- ?>
-
-<?php $user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $userID ) ); ?>
 
 <div class="form-step-content">
 	<fieldset>
@@ -19,11 +12,12 @@ else
 			</div>
 
 			<div class="col-xs-9">
-				<div class="col-xs-12 grid__item">
-	            	<label for="candidate-confirm-infos"> 
-						<input<?php echo $form_disabled?' disabled':'';?> id="candidate-confirm-infos" type="checkbox" name="step1-candidate-confirm-infos" value="true" <?php if( isset($f['candidate-confirm-infos']) ) echo 'checked="checked"';?>/>
-						Declaro que todas as informações são verdadeiras</label>
+				<div class="col-xs-12 grid__item form__item--inline">
+	            	
+	            	<input<?php echo $form_disabled?' disabled':'';?> id="candidate-confirm-infos" type="checkbox" class="required" name="step1-candidate-confirm-infos" value="true" <?php if( isset($f['candidate-confirm-infos']) ) echo 'checked="checked"';?>/>
+					<label for="candidate-confirm-infos">Declaro que todas as informações são verdadeiras</label>
 					<div class="field-status <?php print isset($f['candidate-confirm-infos'])?'completo':'invalido'?>"></div>
+
 					<div id="candidate-confirm-infos-error" class="field__error"></div>
 	            </div><!--
 
@@ -46,7 +40,7 @@ else
 				</div>
 				<div class="col-xs-7 grid__item">
 						
-					<label for="genre_f"><input <?php echo $form_disabled?' disabled':'';?> id="genre_f" type="radio" name="step1-candidate-genre" value="feminino" <?php checked( $f['candidate-genre'], 'feminino' ); ?>  />Feminino
+					<label for="genre_f"><input <?php echo $form_disabled?' disabled':'';?> id="genre_f" type="radio" class="required" name="step1-candidate-genre" value="feminino" <?php checked( $f['candidate-genre'], 'feminino' ); ?>  />Feminino
 					</label>
 					<label class="col-sm-offset-2" for="genre_m"><input <?php echo $form_disabled?' disabled':'';?> id="genre_m" type="radio" name="step1-candidate-genre" value="masculino" <?php checked( $f['candidate-genre'], 'masculino' ); ?>  />Masculino
 					</label>
@@ -59,10 +53,12 @@ else
 					<label>Afrodescente?</label>
 				</div>
 				<div class="col-xs-7 grid__item">
-					<label for="tipo_eleitor"><input <?php echo $form_disabled?' disabled':'';?> id="tipo_eleitor" type="radio" name="step1-candidate-race" value="true" <?php checked( $f['candidate-race'], 'true' ); ?>  />Sim
-					</label>
-					<label class="col-sm-offset-3" for="tipo_candidato"><input <?php echo $form_disabled?' disabled':'';?> id="tipo_candidato" type="radio" name="step1-candidate-race" value="false" <?php checked( $f['candidate-race'], 'false' ); ?>  />Não
-					</label>
+					
+					<input <?php echo $form_disabled?' disabled':'';?> id="race-true" type="radio" name="step1-candidate-race" value="true" <?php checked( $f['candidate-race'], 'true' ); ?>  />
+					<label for="race-true">Sim</label>
+					<span class="col-sm-offset-3">
+					<input <?php echo $form_disabled?' disabled':'';?> id="race-false" type="radio" name="step1-candidate-race" value="false" <?php checked( $f['candidate-race'], 'false' ); ?>  />
+					<label for="race-false">Não</label>
 					<div class="field-status <?php print isset($f['candidate-race'])?'completo':'invalido'?>"></div>
 					<div id="candidate-race-error" class="field__error"></div>
 				</div>
@@ -86,12 +82,13 @@ else
 		</div>		
 
 	</fieldset>
+	<span class="prepend-1 form-error error"></span>
 
 	<?php// if ( !$step1['complete'] ) : ?>
 		<p class="step__advance">
 			Depois de preencher os campos obrigatórios, você pode <a class="button toggle" href="?step=step-2">Avançar para a próxima etapa</a>
 		</p>
-		<span class="prepend-1 form-error"></span>
+		
 	<?php //endif; ?>
 
 </div>

@@ -2,34 +2,36 @@
 	<div class="grid__item one-whole">
 
 		<?php if( $subscription_number ) : ?>
-			<!-- <p id="protocol-number">
+			<p class="textcenter">
+				<?php echo nl2br( get_theme_option( 'txt_candidato_step4' ) ); ?>
+			</p>
+			<p id="protocol-number">
 				&mdash; Inscrição Número &mdash;
 				<strong id="js-protocol-number"><?php echo substr($subscription_number, 0, 8);?></strong>
-			</p> -->
-
-			<div class="step__about">
-				<?php echo nl2br( get_theme_option( 'txt_candidato_step4' ) ); ?>
-			</div>
-
-			<?php if( current_user_can( 'administrator' ) ): ?>
-				<div class="form__item--inline">
-					<input id="subscription-valid" type="checkbox" name="subscription-valid" id="subscription-valid" value="<?php echo $subscription_number;?>"<?php if(get_post_meta($pid, 'subscription-valid', true)) echo ' checked="checked"';?>/>
-					<label for="subscription-valid">Admins: Marcar como Válida <a href="<?php bloginfo('siteurl'); ?>/inscricoes">(e voltar para lista de inscritos)</a></label>
-				</div>
-			<?php endif; ?>
+			</p>
+			<p class="step__advance alignleft">
+				<a class="button" href="<?php print "?step=step-2"; ?>">Voltar para etapa anterior</a>
+			</p>
 		<?php elseif(get_theme_option('inscricoes_abertas')): ?>
-			<p class="step-text  notice">
+
+			<p class="step-text step__box">
 				<?php echo nl2br(get_theme_option('txt_candidato_step3')); ?>
 			</p>
 
-			<p id="submit-button" class="enabled  button">Inscrever candidatura</p>
+			<p class="step__advance alignleft">
+				<a class="button" href="<?php print "?step=step-2"; ?>">Voltar para etapa anterior</a>
+			</p>
+			
+			<p id="submit-button" class="enabled button alignright">Inscrever candidatura</p>
 		<?php else: ?>
-			<div class="form__item--inline">
+			
+
+			<div class="form__item--inline alignright">
 
 				<p id="submit-button" class="button">Inscrever candidatura</p>
 				
 			</div>
-		<?php endif; ?>
+		<?php endif; ?>	
 
 	</div>
 </div>

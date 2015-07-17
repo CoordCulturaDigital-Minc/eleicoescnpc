@@ -193,6 +193,18 @@
 
 	.avatar {
 		text-align: center;
+		label {
+			min-height: 150px;
+			min-width: 150px;
+			max-height: 200px;
+			max-width: 200px;
+			border: 2px solid #eaeaea;
+			overflow: hidden;
+		}
+		img {
+			width: 100%;
+			height: auto;
+		}
 	}
 
 	.js-upload-button {
@@ -267,12 +279,26 @@
 
 .form-step {
 	background-color: #fff;
-	  margin-bottom: 20px;
-	  border: 1px solid #ededed;
-	  padding: 20px;
+	margin-bottom: 20px;
+	border: 1px solid #ededed;
+	padding: 20px;
     margin-bottom: 3rem;
     padding: 1.5rem;
 }
+
+#formstep-3 .textcenter {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#formstep-3 .textcenter{
+	color: #125b26;
+	font-size: 22px;
+	font-weight: bold;
+	text-align: center;
+	font-style: normal;
+}
+
 
 .step__head {
     margin-bottom: 1.5rem;
@@ -329,6 +355,12 @@
     }
 }
 
+.step__box {
+   border: 1px solid rgb(219, 198, 51);
+  background-color: rgb(247, 255, 179);
+  padding: 2%;
+  margin: 20px 10%;
+}
 
 .field__note {
     clear: both;
@@ -356,7 +388,7 @@
     background: #ed4747;
 }
 
-.errors .error {
+.error {
     font-size: .88rem;
     font-size: 14px;
     line-height: 1.71;
@@ -364,9 +396,13 @@
     padding: 0 .5em;
 
     color: #fff;
-    background: rgba(237, 71, 71, 0.71);
+    background-color: #ed4747;
 
     margin-bottom: 2px;
+}
+
+.form-error {
+	display: none;
 }
 
 .step__advance {
@@ -496,20 +532,19 @@
 	  	zoom: 1;
 	  	*display: inline;
 
-		a {
+		span {
 			width: 13px;
 			height: 13px;
 			display: block;
 			background: $cor-amarelo;
-			cursor: pointer;
 			text-indent: -9999px;
 			-webkit-border-radius: 20px;
 			-moz-border-radius: 20px;
 			border-radius: 20px;
 
-			&:hover {
-			  background: $cor-verde;
-			}
+			// &:hover {
+			//   background: $cor-verde;
+			// }
 
 			&.current {
 			  cursor: default;

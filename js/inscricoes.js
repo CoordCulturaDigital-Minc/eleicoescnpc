@@ -5,36 +5,19 @@
         // a little helper to toggle classes
         $form.set_status = function(f, s) {
             if(s === 'valid') {
-                $form.find("#"+f+" + div .field-status").removeClass("espera invalido").addClass("completo");
+                $form.find("#"+f+" ~ div.field-status").removeClass("espera invalido").addClass("completo");
             } else if(s === 'invalid') {
-                $form.find("#"+f+" + div .field-status").removeClass("espera completo").addClass("invalido");
+                $form.find("#"+f+" ~ div.field-status").removeClass("espera completo").addClass("invalido");
             } else if(s === 'wait'){
-                $form.find("#"+f+" + div .field-status").removeClass("completo invalido").addClass("espera");
+                $form.find("#"+f+" ~ div.field-status").removeClass("completo invalido").addClass("espera");
             } else {
-                $form.find("#"+f+" + div .field-status").removeClass("completo invalido espera");
+                $form.find("#"+f+" ~ div.field-status").removeClass("completo invalido espera");
             }
         }
 
 //callbacks {
         // callback to cancel events
         var return_false = function(){return false};
-
-        // callback to calculate values for budget inputs
-        // var calculate_total = function(e) {
-        //     var values = [$('#budget-pre-production').val()||'',
-        //                   $('#budget-production').val()||'',
-        //                   $('#budget-post-production').val()||''];
-        //     var total = 0;
-        //     for(var i = 0; i < values.length; i++) {
-        //         var m = values[i].match(/\d+(\.\d\d\d)*,\d\d$/);
-        //         if(m) {
-        //             total += parseFloat( m[0].replace(/\./g,'').replace(/,/,'.') );
-        //         }
-        //     }
-        //     total = (total+'.').split('.');
-        //     total = total[0] + '.' + (total[1]+"00").slice(0,2);
-        //     $("#budget-total").val(total).trigger('mask');
-        // };
 
         // callback to verify and save field through
         var verify_and_save_field = function(e) {
@@ -55,7 +38,7 @@
                         if(data[field] === true && $me.val().length > 0) {
                             $form.set_status(field, 'valid');
                             $form.find('#'+field+'-error').hide().html('');
-                            if($me.parents('div.form-step').find('.required + div .invalido').length == 0) {
+                            if($me.parents('div.form-step').find('.required ~ div.invalido').length == 0) {
                                 $step_status.addClass('completo');
                             }
                         } else {
@@ -91,6 +74,7 @@
                     $parent.find('p').remove();
                     $('<p class="textcenter">').html(data['message']).appendTo($parent);
                     $('<p id="protocol-number">').html('&mdash; Inscrição Número &mdash;<strong>' + data['subscription_number'].substring(0,8) + '</strong>').appendTo($parent);
+                    $('<p class="step__advance alignleft">').html("<a class='button' href='?step=step-2'>Voltar para etapa anterior</a>").appendTo($parent);
                     $('#application-form :input').unbind().attr('disabled',true);
                     $('#print-button').attr('href',data['subscription_number'].substring(0,8)+"/imprimir/").show();
                 }, 'json')
@@ -123,114 +107,57 @@
 
         // *** the order of assignment events is important *** //
 
-        // attach calculate_total to budget fields, except total field
-        // $('input.budget[id!=budget-total]').blur(function(e) {
-        //         calculate_total.call(this,e);
-        //         $('#budget-total').each(function(){
-        //             verify_and_save_field.call(this, e);
-        //         })
-        // });
-        // this disable the #budget-total input
-        // $('#budget-total').bind('keydown keyup', function(e){
-        //     return e.keyCode === 9;
-        // }).focus(function(e){$(this).blur();});
-
         $form.find(':input').blur(verify_and_save_field)
                             .keydown(function(e){ if(e.keyCode===13){ //enter
                                 $(this).trigger('blur').focus();
                             }});
 		
 		// Hook pra salvar e verificar quando carregar o formulário
-		$('#candidate-cpf').blur();
-        $('#candidate-birth').blur();
+		// $('#candidate-cpf').blur();
+        // $('#candidate-birth').blur();
 
         // load next form step when user click in 'Preencher'
         $('div.form-step a.toggle').click(function(e) {
 
             var $div = $(this).parents('div.form-step');
-            var step = $div.attr('id').replace(/^[^-]+-/,'');
 
-            $.post(inscricoes.ajaxurl, {'action': 'load_step_html', 'step': step},
-                function(html) {
-                    $div.find('div.form-step-content').remove();
-                    $div.find('p').hide();
-                    $div.append(html);
+            if($div.find('.required ~ div.invalido').length > 0) {
 
-                    // *** this assignments affects fields loaded throught ajax *** //
+                $div.find('.required ~ div.invalido').parent().find('.required').blur();
+                
+                $div.find('span.form-error').html('Os campos destacados são obrigatórios para continuar').show();
+                
+                return false;
+            }
 
-                    // reassign calculate_total to budget fields
-                    // $div.find('input.budget[id!=budget-total]').blur(function(e) {
-                    //         calculate_total.call(this,e);
-                    //         $('#budget-total').each(function(){
-                    //             verify_and_save_field.call(this, e);
-                    //         })
-                    // });
-                    // this disable the #budget-total input, again
-                    // $div.find('#budget-total').bind('keydown keyup', function(e){
-                    //     return e.keyCode === 9;
-                    // }).focus(function(e){$(this).blur();});
+            $div.find('span.form-error').html('').hide();
 
-                    // reassign verify_and_save_field to inputs
-                    // $div.find(':input').blur(verify_and_save_field)
-                    //                    .keydown(function(e){ if(e.keyCode===13){ //enter
-                    //                         $(this).trigger('blur').focus();
-                    //                     }});
-                    // // mask for money
-                    // $div.find('input.budget').maskMoney({symbol:'R$ ', showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
-                    // character counter for textarea
-                    $div.find('label .form-tip').each(display_text_length);
-                    // the submit
-                    $div.find('#submit-button').click(submit_subscription);
+            return true;
 
-                    $div.find('span.form-error').html('');
-                }, 'html'
-            ).error(function(e){
-                // some messages come from 403. use e.responseText to see them
-                $div.find('span.form-error').html(e.responseText);
-            });
-            return false;
+            // var $div = $(this).parents('div.form-step');
+            // var step = $div.attr('id').replace(/^[^-]+-/,'');
+
+            // $.post(inscricoes.ajaxurl, {'action': 'load_step_html', 'step': step},
+            //     function(html) {
+            //         $div.find('div.form-step-content').remove();
+            //         $div.find('p').hide();
+            //         $div.append(html);
+
+            //         // character counter for textarea
+            //         $div.find('label .form-tip').each(display_text_length);
+            //         // the submit
+            //         $div.find('#submit-button').click(submit_subscription);
+
+            //         $div.find('span.form-error').html('');
+            //     }, 'html'
+            // ).error(function(e){
+            //     // some messages come from 403. use e.responseText to see them
+            //     $div.find('span.form-error').html(e.responseText).show();
+            // });
+            // return false;
         });
 
         // *** this assignments does <em>NOT</em> affect fields loaded throught ajax ** //
-
-        // load states from when user selects a region
-        // $form.find('#candidate-region').change(function(e) {
-        //     $.post(inscricoes.ajaxurl,{'action':'get_states','region':$(this).val()},
-        //         function(data) {
-        //             if(data) {
-        //                 // reset
-        //                 $('#candidate-state,#company-state').html('<option value="">------</option>').trigger('blur');
-        //                 $('#candidate-city,#company-city').html('<option value="">------</option>').trigger('blur');
-        //                 // load states to fill #candidate-state and #company-state together
-        //                 for(var i=0; i < data.length; i++) {
-        //                     $('<option>').val(data[i].id).html(data[i].nome)
-        //                         .appendTo('#candidate-state');
-        //                 }
-        //             }
-        //         },'json');
-        //     // $(this).trigger('blur');
-        //     // $('#candidate-region').val($(this).val()).trigger('blur'); // bind #company-region
-        // });
-
-        // load cities from selected state to fill $candidate-city and #company-city individually
-        // $form.find('#candidate-state,#company-state').change(function(e) {
-        //     var section = this.id.replace(/-state$/,'');
-        //     $.post(inscricoes.ajaxurl,{'action':'get_cities','state':$(this).val()},
-        //         function(data) {
-        //             if(data) {
-        //                 $('#'+section+'-city').html('<option value="">------</option>');
-        //                 for(var i=0; i < data.length; i++) {
-        //                     $('<option>').val(data[i].id).html(data[i].nome)
-        //                         .appendTo('#'+section+'-city');
-        //                 }
-        //             }
-        //         },'json');
-        // });
-
-        // lock company region dropdown
-        // $form.find('#candidate-region').change(function(){
-        //     $(this).val($('#company-region').val());
-        // });
 
         // character counter for textareas
         $('label .form-tip').each(display_text_length);
@@ -269,6 +196,5 @@
         // $form.find('#candidate-date-birth').mask('99/99/9999');
         // $form.find('input.cep').mask('99999-999');
         $form.find('input.phone').mask('(99) 999999?999');
-        // $form.find('#company-cnpj').mask('99.999.999/9999-99');
     });
 })(jQuery);
