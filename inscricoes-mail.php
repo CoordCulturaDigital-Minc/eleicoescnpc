@@ -25,10 +25,8 @@ $activity_file_id 	= get_post_meta($pid, 'candidate-activity-history', true);
 $diploma_file_id 	= get_post_meta($pid, 'candidate-diploma', true);
 
  ?>
-	<h1>Fóruns Setorias - CNPC</h1>
-	<h2>O número da inscrição é <span><?php echo $subscription_number;?></span></h2>
 	<h3>Avatar</h3>
-		<?php echo wp_get_attachment_image($avatar_file_id, 'avatar_candidate'); ?>
+		<?php echo wp_get_attachment_link(($avatar_file_id); ?>
 	<h3>Pré-Candidato</h3>
 	<ul>
 		<li><strong>Nome</strong>: <?php echo $user_meta['user_name'];?></li>
