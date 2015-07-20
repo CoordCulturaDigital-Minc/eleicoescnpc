@@ -15,9 +15,9 @@
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<meta name="viewport" content="width=device-width">
 	
-	<?php require_once 'includes/jquery.php';?>
-	<?php require_once 'includes/twitter_bootstrap.php'; ?>
-	<?php require_once 'includes/font_awesome.php'; ?>
+	<?php require_once 'dependencies/jquery.php';?>
+	<?php require_once 'dependencies/twitter_bootstrap.php'; ?>
+	<?php require_once 'dependencies/font_awesome.php'; ?>
 
 	<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>?ver=2">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
@@ -37,67 +37,42 @@
     <!-- fim barra do governo -->
 
 	<?php do_action( 'before' ); ?>
-
-	<div class="site-wrap">
-
-	<header class="site_header clearfix">
+	<div class="header-wrap">
+	<header class="clearfix row">
 		<a href="#main" title="<?php esc_attr_e( 'Skip to content', 'historias' ); ?>" class="assistive-text"><?php _e( 'Skip to content', 'historias' ); ?></a>
-
-		<div class="branding clearfix">
-			<a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
-                <?php
-                    $logo = get_theme_mod('site_logo');
-                    if ($logo != ''): ?>
-                        <img class="custom" src="<?php echo esc_url($logo); ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />
-                        <h1 class="site-title"><?php bloginfo('name'); ?></h1>			
-
-		                <div class="quote">
-		                    <p><?php echo get_option( 'site_tagline' ) ?></p>
-		                </div>
-                    <?php else : ?>
-                    	<img class="template-preset" src="<?php echo get_template_directory_uri() . '/images/template_header.png'; ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />
-                <?php endif; ?>
-            </a>
-
-			<form id="search" role="search" method="get" action="<?php echo home_url( '/' ); ?>">
-	            <input id="s" type="search" value="Procurar por" name="s" onfocus="if (this.value == 'Procurar por') this.value = '';" onblur="if (this.value == '') {this.value = 'Procurar por';}" />        
-	            <input type="submit" value="Buscar" />
-	        </form>
-		</div>
 		
-        <nav class="access clearfix js-access" role="navigation">
-            <?php if ( wp_is_mobile() ) :
-                wp_nav_menu( array( 'theme_location' => 'mobile', 'container' => false, 'menu_class' => 'menu--mobile  menu', 'fallback_cb' => false ) );
-            else : ?>
-                <?php if ( is_user_logged_in() ) : global $user_login; ?>
-                    <ul id="menu-user" class="menu--user  menu">
-                        <li class="menu__title"><?php printf( __('Hello, %s!', 'historias' ), $user_login ); ?></li>
-                        <?php if ( current_user_can( 'level_10' ) ) : ?>
-                            <li><a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
-                            <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscrições</a></li>
-                            <li><a href="<?php bloginfo('siteurl'); ?>/avaliacoes">Avaliações</a></li>
-                        <?php elseif ( current_user_can( 'curate' ) ) : ?>
-                            <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscrições</a></li>
-                        <?php elseif ( current_user_can( 'publish_posts' ) ): ?>
-                            <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Ficha</a></li>
-                            <li><a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
-                        <?php elseif ( current_user_can( 'read' ) ) : ?>
-                            <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Ficha</a></li>
-                        <?php endif; ?>
-                        <li><?php wp_loginout(); ?></li>
-                    </ul>
-                <?php else: ?>
-                	<ul id="menu-user" class="menu--user  menu">
-                        <li><a href="<?php bloginfo( 'url' ); ?>/wp-login/">Entrar</a></li>
-                    </ul>
-                <?php endif; ?>
-
-                <?php wp_nav_menu( array( 'theme_location' => 'secondary', 'container' => false, 'menu_class' => 'menu--sub  menu', 'fallback_cb' => false ) ); ?>
-
-                <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu--main  menu', 'fallback_cb' => 'default_menu' ) ); ?>
-            <?php endif; ?>
-        </nav>
+		<a class="col-xs-2" href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
+            <img src="<?php
+                $logo = get_theme_mod('site_logo');
+                
+                if ($logo != ''):
+                	echo esc_url($logo);
+                else :
+                	echo get_template_directory_uri() . '/images/clear_cnpc_logo.svg';
+                endif;
+            ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />	
+		</a>
+		
+	    <a class="col-xs-6" href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
+                <h1 class="site-title"><?php bloginfo('name'); ?><br>
+                <small>Conselho Nacional de Política Cultural<?php echo get_option( 'site_tagline' ) ?></small></h1>
+        </a>
+        
+		<div class="col-xs-4">
+		<form id="search" role="search" method="get" action="<?php echo home_url( '/' ); ?>">
+            <input id="s" type="search" value="Procurar por" name="s" onfocus="if (this.value == 'Procurar por') this.value = '';" onblur="if (this.value == '') {this.value = 'Procurar por';}" />        
+            <button type="submit" value="Buscar" class="btn btn-success">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+		</div>
     </header><!-- /site-header -->
+    
+    <?php require_once 'includes/navigator.php'; ?>
+    
+    </div>
+    
+    <div class="site-wrap">
 
 	<div id="main" class="wrap cf">
 		<?php if( !is_page() ) : ?>

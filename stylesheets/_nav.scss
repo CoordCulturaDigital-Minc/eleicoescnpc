@@ -1,16 +1,14 @@
 nav {
-	font-size: 12px;
 	text-transform: uppercase;
 	font-family: $fonte-principal-bold;
-	
-    margin-top: 7rem;
+	background-color: #1C7033;
     
     &.opened {
 	    max-height: 9999px;
 	}
 	
 	ul {
-		font-size: 1.25rem;
+		font-size: 1.5rem;
 		line-height: 2.4;
 		margin: 0;
 		
@@ -53,8 +51,10 @@ nav {
 	}
 	
 	.menu--main {
-		float: left;
-		text-align: right;
+		&, & li {
+			float: left;
+			text-align: right;
+		}
 		
 		a {
 			margin-right: 1.3em;
@@ -66,19 +66,21 @@ nav {
 		}
 	}
 	.menu--user {
-		float: right;
-		text-align: left;
+		&, & li {
+			float: right;
+			text-align: left;
+		}
 		
 		a {
 			margin-left: 1.3em;
 			
-			color: $cor-verde;
+			color: $cor-cinza-claro;
 			&:hover {
-			    color: $cor-verde-musgo;
+			    color: $cor-cinza-claro;
 			}
 		}
 		.menu__title {
-		    color: $cor-verde-musgo;
+		    color: $cor-cinza-claro;
 		}
 	}
 }
