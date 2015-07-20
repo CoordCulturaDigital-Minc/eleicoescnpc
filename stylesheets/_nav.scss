@@ -10,6 +10,7 @@ nav.access {
 	text-transform: uppercase;
 	font-family: $fonte-principal-bold;
 	background-color: #1C7033;
+	position: relative !important;
     
     &.opened {
 	    max-height: 9999px;
@@ -56,6 +57,45 @@ nav.access {
 		.current_page_item,
 		.current-menu-ancestor {
 		    position: static;
+		}
+	}
+
+	.login-form-menu {
+		display: none;
+		position: absolute;
+		right: 130px;
+		top: 60px;
+
+		z-index: 2;
+
+		background-color: #f4f4f4;;
+
+		padding: 20px;
+
+		border: 1px solid #adadad;
+
+		border-radius: 5px;
+		box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+
+		// font-size: 12px;
+
+		text-transform: none;
+		font-weight: normal;
+
+		&:before {
+			  content: "";
+			  display: block;
+			  position: absolute;
+			  top: -9px;
+			  right: 40px;
+			  width: 0;
+			  border-width: 0px 9px 9px 9px;
+			  border-style: solid;
+			  border-color: #f4f4f4 transparent;
+		}
+
+		form {
+			display: block;
 		}
 	}
 	

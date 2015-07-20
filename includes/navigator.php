@@ -32,11 +32,22 @@
 
                         <li><?php wp_loginout($_SERVER['REQUEST_URI']); ?></li>
                 <?php else: ?>
-                        <li><?php wp_loginout($_SERVER['REQUEST_URI']); ?></li>
+                        <li><a id="login" href="#">Entrar</a></li>
                         <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscreva-se</a></li>
                 <?php endif; ?>
                 
             </ul>
+
+             <div class="login-form-menu">
+                <?php wp_login_form(
+                    array(      'label_username' => __( 'Email' ),
+                                'label_password' => ('Senha'),
+                                'label_log_in' => ('Entrar'),
+                                'form_id'        => 'login-menu',
+                                'remember' => false ) );
+                ?>
+                <a href="<?php echo wp_lostpassword_url( $_SERVER['REQUEST_URI'] ); ?>" id="lost-password"><?php _e( 'Esqueci a senha', 'historias' ); ?></a>
+            </div>
 
             <?php wp_nav_menu( array( 'theme_location' => 'secondary', 'container' => false, 'menu_class' => 'menu--sub  menu', 'fallback_cb' => false ) ); ?>
 

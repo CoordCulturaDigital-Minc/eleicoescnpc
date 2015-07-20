@@ -23,10 +23,19 @@
 	        return false;
 	    });
 
-	    // fechar a lista ao clicar fora da área do mapa
+	    $('#login').click(function(e) {
+	    	 $('.login-form-menu').show();
+	    	 return false;
+	    });
+
+	    // fechar ao clicar fora da área do mapa
 	    $(document).click(function(event) { 
 	        if(!$(event.target).closest('path, .menu-setoriais-container, text').length )
 	            $('.menu-setoriais-container').hide();
+
+	        if(!$(event.target).closest('#login-menu').length )
+	            $('.login-form-menu').hide();
+
 	    }); 
 
 	    // widget de login

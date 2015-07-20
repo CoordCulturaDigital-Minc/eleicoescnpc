@@ -1812,7 +1812,8 @@ nav.access {
   max-width: 1080px;
   text-transform: uppercase;
   font-family: "TheSans B7 Bold";
-  background-color: #1C7033; }
+  background-color: #1C7033;
+  position: relative !important; }
   nav.access.opened {
     max-height: 9999px; }
   nav.access ul {
@@ -1840,6 +1841,31 @@ nav.access {
     nav.access ul .current_page_item,
     nav.access ul .current-menu-ancestor {
       position: static; }
+  nav.access .login-form-menu {
+    display: none;
+    position: absolute;
+    right: 130px;
+    top: 60px;
+    z-index: 2;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border: 1px solid #adadad;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    text-transform: none;
+    font-weight: normal; }
+    nav.access .login-form-menu:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: -9px;
+      right: 40px;
+      width: 0;
+      border-width: 0px 9px 9px 9px;
+      border-style: solid;
+      border-color: #f4f4f4 transparent; }
+    nav.access .login-form-menu form {
+      display: block; }
   nav.access .menu--main, nav.access .menu--main li {
     float: left;
     text-align: right; }
