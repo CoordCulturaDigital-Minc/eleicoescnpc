@@ -5,11 +5,11 @@
             wp_nav_menu( array( 'theme_location' => 'mobile', 'container' => false, 'menu_class' => 'menu--mobile  menu', 'fallback_cb' => false ) );
         else : ?>
             <ul id="menu-user" class="menu--user  menu">
-                <?php if ( is_user_logged_in() ) : global $user_login, $user_ID; ?>
+                <?php if ( is_user_logged_in() ) : global $user_ID, $current_user; ?>
 
                         <?php $user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $user_ID ) ); ?>
 
-                        <li class="menu__title"><?php printf( __('Hello, %s!', 'historias' ), $user_meta['user_name'] ); ?></li>
+                        <li class="menu__title"><?php printf( __('Hello, %s!', 'historias' ), $current_user->display_name); ?></li>
                         <?php if ( current_user_can( 'level_10' ) ) : ?>
                            
                             <li><a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
