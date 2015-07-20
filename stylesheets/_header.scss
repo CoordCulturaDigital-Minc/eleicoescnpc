@@ -1,32 +1,26 @@
-.header-wrap {
-	background-color: $cor_verde;
-	width: 100%;
-	
-header, nav {
-	padding: 20px 54px;
-	max-width: 1080px;
-	overflow: hidden;
-    width: 98%;
-    margin: 0px auto;
-}
-
-header {
+header#header {
+	margin-bottom: 30px;
+	min-height: 150px;
 	h1 {
-		margin-top: 20px;
-		color: $cor-cinza-claro;
-		font-family: Helvetica, sans-serif;
-		font-weight: bold;
+		display: none;
+		// margin-top: 20px;
+		// color: $cor-cinza-claro;
+		// font-family: Helvetica, sans-serif;
+		// font-weight: bold;
 		
-		text-transform: uppercase;
+		// text-transform: uppercase;
 		
 		small {
-			color: $cor-cinza-claro;
-			text-transform: none;
+			// color: $cor-cinza-claro;
+			// text-transform: none;
 		}
+	}
+	a {
+		margin-left: -40px;
 	}
 	form {
 		height: 39px;
-	    margin-top: 40px;
+	    margin-top: 70px;
 	    position: relative;
 	    width: 100%;
 	    max-width: 300px;
@@ -45,10 +39,15 @@ header {
 		    border: none;
 		}
 		button {
-			float: right;
-			
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			width: 62px;
+			height: 37px;
+			background-color: #175823;
+
 			&, &:hover {
-				background: none;
+				// background: none;
 				border: none;
 			}
 			
@@ -66,7 +65,7 @@ header {
 
 @import 'nav';
 
-}
+// }
 
 @media only screen and (min-width: 48em) {
 	header .csn {
@@ -238,5 +237,12 @@ header {
 		& > a {
 	    	background: #ededed;
 	    }
+	}
+}
+
+
+#wrapper-barra-brasil {
+	.brasil-flag { 
+		box-sizing: content-box;
 	}
 }

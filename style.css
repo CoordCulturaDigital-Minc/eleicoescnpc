@@ -461,6 +461,7 @@ img.aligncenter {
 
 #main {
   padding-bottom: 3rem;
+  padding-top: 3rem;
   border-bottom: 1px solid #dedede; }
 
 .site-footer {
@@ -1760,33 +1761,22 @@ aside {
   aside a#lost-password {
     font-size: 16px; }
 
-.header-wrap {
-  background-color: #125b26;
-  width: 100%; }
-  .header-wrap header, .header-wrap nav {
-    padding: 20px 54px;
-    max-width: 1080px;
-    overflow: hidden;
-    width: 98%;
-    margin: 0px auto; }
-  .header-wrap header h1 {
-    margin-top: 20px;
-    color: #f4f4f4;
-    font-family: Helvetica, sans-serif;
-    font-weight: bold;
-    text-transform: uppercase; }
-    .header-wrap header h1 small {
-      color: #f4f4f4;
-      text-transform: none; }
-  .header-wrap header form {
+header#header {
+  margin-bottom: 30px;
+  min-height: 150px; }
+  header#header h1 {
+    display: none; }
+  header#header a {
+    margin-left: -40px; }
+  header#header form {
     height: 39px;
-    margin-top: 40px;
+    margin-top: 70px;
     position: relative;
     width: 100%;
     max-width: 300px;
     border: 1px solid #bababa;
     border-radius: 3px; }
-    .header-wrap header form input[type="search"] {
+    header#header form input[type="search"] {
       float: left;
       width: 70%;
       padding: 12px;
@@ -1796,93 +1786,109 @@ aside {
       font-weight: normal;
       font-size: 13px;
       border: none; }
-    .header-wrap header form button {
-      float: right;
+    header#header form button {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 62px;
+      height: 37px;
+      background-color: #175823;
       color: #f4f4f4;
       margin-left: 5px;
       font-size: 19px; }
-      .header-wrap header form button, .header-wrap header form button:hover {
-        background: none;
+      header#header form button, header#header form button:hover {
         border: none; }
-      .header-wrap header form button:hover {
+      header#header form button:hover {
         background-color: #1c7133;
         cursor: pointer; }
-  .header-wrap nav {
-    text-transform: uppercase;
-    font-family: "TheSans B7 Bold";
-    background-color: #1C7033; }
-    .header-wrap nav.opened {
-      max-height: 9999px; }
-    .header-wrap nav ul {
-      font-size: 1.5rem;
-      line-height: 2.4;
-      margin: 0; }
-      .header-wrap nav ul > li {
-        margin: 0;
-        text-align: right; }
-      .header-wrap nav ul a {
-        position: relative;
-        display: block; }
-      .header-wrap nav ul .current-cat > a:after,
-      .header-wrap nav ul .current_page_item > a:after,
-      .header-wrap nav ul .current-menu-item > a:after {
-        content: " ";
-        border-bottom: 4px solid #ffae16;
-        width: 100%;
-        display: block;
-        position: absolute;
-        bottom: -4px;
-        left: 0px; }
-      .header-wrap nav ul .menu-item-has-children {
-        position: relative; }
-      .header-wrap nav ul .current_page_item,
-      .header-wrap nav ul .current-menu-ancestor {
-        position: static; }
-    .header-wrap nav .menu--main, .header-wrap nav .menu--main li {
-      float: left;
+
+.site-wrap.nav {
+  width: 100%;
+  padding: 0px;
+  border: none; }
+
+nav.access {
+  padding: 20px 54px;
+  max-width: 1080px;
+  text-transform: uppercase;
+  font-family: "TheSans B7 Bold";
+  background-color: #1C7033; }
+  nav.access.opened {
+    max-height: 9999px; }
+  nav.access ul {
+    font-size: 1.5rem;
+    line-height: 2.4;
+    margin: 0; }
+    nav.access ul > li {
+      margin: 0;
       text-align: right; }
-    .header-wrap nav .menu--main a {
-      margin-right: 1.3em;
-      color: #ffae16; }
-      .header-wrap nav .menu--main a:hover {
-        color: #7c5100; }
-    .header-wrap nav .menu--user, .header-wrap nav .menu--user li {
-      float: right;
-      text-align: left; }
-    .header-wrap nav .menu--user a {
+    nav.access ul a {
+      position: relative;
+      display: block; }
+    nav.access ul .current-cat > a:after,
+    nav.access ul .current_page_item > a:after,
+    nav.access ul .current-menu-item > a:after {
+      content: " ";
+      border-bottom: 4px solid #ffae16;
+      width: 100%;
+      display: block;
+      position: absolute;
+      bottom: 6px;
+      left: 0px; }
+    nav.access ul .menu-item-has-children {
+      position: relative; }
+    nav.access ul .current_page_item,
+    nav.access ul .current-menu-ancestor {
+      position: static; }
+  nav.access .menu--main, nav.access .menu--main li {
+    float: left;
+    text-align: right; }
+  nav.access .menu--main a {
+    margin-right: 1.3em;
+    color: #ffae16; }
+    nav.access .menu--main a:hover {
+      color: #7c5100; }
+  nav.access .menu--user {
+    float: right; }
+    nav.access .menu--user li {
+      text-align: left;
+      display: inline-block; }
+    nav.access .menu--user a {
       margin-left: 1.3em;
       color: #f4f4f4; }
-      .header-wrap nav .menu--user a:hover {
+      nav.access .menu--user a:hover {
         color: #f4f4f4; }
-    .header-wrap nav .menu--user .menu__title {
-      color: #f4f4f4; }
-  .header-wrap .menu .current_page_item > .sub-menu,
-  .header-wrap .menu .current-menu-ancestor > .sub-menu {
-    position: static;
-    z-index: 8888;
-    background-color: #ededed;
-    box-shadow: none;
+    nav.access .menu--user .menu__title {
+      color: rgba(244, 244, 244, 0.72); }
+
+.menu .current_page_item > .sub-menu,
+.menu .current-menu-ancestor > .sub-menu {
+  position: static;
+  z-index: 8888;
+  background-color: #ededed;
+  box-shadow: none;
+  clip: inherit;
+  overflow: inherit;
+  height: inherit;
+  width: inherit; }
+
+@media screen and (min-width: 40em) {
+  .menu-item:hover > .sub-menu {
     clip: inherit;
     overflow: inherit;
     height: inherit;
     width: inherit; }
-  @media screen and (min-width: 40em) {
-    .header-wrap .menu-item:hover > .sub-menu {
-      clip: inherit;
-      overflow: inherit;
-      height: inherit;
-      width: inherit; }
-    .header-wrap .menu .current_page_item > .sub-menu,
-    .header-wrap .menu .current-menu-ancestor > .sub-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      border-bottom: 1px solid #ccc; }
-      .header-wrap .menu .current_page_item > .sub-menu li,
-      .header-wrap .menu .current-menu-ancestor > .sub-menu li {
-        float: left; } }
 
+  .menu .current_page_item > .sub-menu,
+  .menu .current-menu-ancestor > .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid #ccc; }
+    .menu .current_page_item > .sub-menu li,
+    .menu .current-menu-ancestor > .sub-menu li {
+      float: left; } }
 @media only screen and (min-width: 48em) {
   header .csn {
     float: right;
@@ -2001,13 +2007,15 @@ aside {
   .sub-menu .current-menu-item > a {
     background: #ededed; }
 
+#wrapper-barra-brasil .brasil-flag {
+  box-sizing: content-box; }
+
 section {
   float: right;
   width: 65.63%; }
   section.content--full, section.content--sidebarless {
     float: none;
-    width: 100%;
-    margin-top: 30px; }
+    width: 100%; }
   section article {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
