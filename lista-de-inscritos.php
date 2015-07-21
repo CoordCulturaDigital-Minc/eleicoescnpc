@@ -96,7 +96,7 @@ $subscriptions = list_subscriptions(
                     <td class="subscription__setorial"><a href='<?php echo site_url("foruns/$uf_setorial");?>' title="Ver fórum deste candidato"><?php echo get_label_setorial_by_slug($user_meta['setorial']); ?></a></td>
                     <td class="subscription__state"><?php echo $user_meta['UF']; ?></td>
                     <td class="subscription__cpf"><?php echo $user_meta['cpf']; ?></td>
-                    <td class="subscription__id"><span class="subscription_number"><?php echo $subscription_number;?></span></td>
+                    <td class="subscription__id"><a href="<?php echo site_url("inscricoes/$subscription_number");?>" title="Ver a ficha do candidato"><span class="subscription_number"><?php echo $subscription_number;?></span></a></td>
                     <?php if(!current_user_can('administrator')): ?>
                         <td><?php $e = load_evaluation($s['pid'], $current_user->ID);
 

@@ -719,34 +719,34 @@ function list_subscriptions($fields=null, $valid_only=true) {
 
 
 /** loads cities from a given state */
-function get_cities_by_state_id($state_id, $except=null) {
-    global $wpdb;
-    return $wpdb->get_results($wpdb->prepare('SELECT id, nome FROM municipio WHERE ufid = %d and id <> %d ORDER BY nome', $state_id, $except));
-}
+// function get_cities_by_state_id($state_id, $except=null) {
+//     global $wpdb;
+//     return $wpdb->get_results($wpdb->prepare('SELECT id, nome FROM municipio WHERE ufid = %d and id <> %d ORDER BY nome', $state_id, $except));
+// }
 
 /** get city name from given id */
-function get_city_name_by_id($id) {
-    global $wpdb;
-    return $wpdb->get_var($wpdb->prepare('SELECT nome FROM municipio WHERE id = %d', $id));
-}
+// function get_city_name_by_id($id) {
+//     global $wpdb;
+//     return $wpdb->get_var($wpdb->prepare('SELECT nome FROM municipio WHERE id = %d', $id));
+// }
 
 /** get city from given id */
-function get_city_by_id($id) {
-    global $wpdb;
-    return $wpdb->get_row($wpdb->prepare('SELECT id, nome FROM municipio WHERE id = %d', $id));
-}
+// function get_city_by_id($id) {
+//     global $wpdb;
+//     return $wpdb->get_row($wpdb->prepare('SELECT id, nome FROM municipio WHERE id = %d', $id));
+// }
 
 /** get state from given id */
-function get_state_name_by_id($id) {
-    global $wpdb;
-    return $wpdb->get_var($wpdb->prepare('SELECT nome FROM uf WHERE id = %d', $id));
-}
+// function get_state_name_by_id($id) {
+//     global $wpdb;
+//     return $wpdb->get_var($wpdb->prepare('SELECT nome FROM uf WHERE id = %d', $id));
+// }
 
 /** get state from given id */
-function get_state_by_id($id) {
-    global $wpdb;
-    return $wpdb->get_row($wpdb->prepare('SELECT id, nome FROM uf WHERE id = %d', $id));
-}
+// function get_state_by_id($id) {
+//     global $wpdb;
+//     return $wpdb->get_row($wpdb->prepare('SELECT id, nome FROM uf WHERE id = %d', $id));
+// }
 
 /** get user from subscription number (that will be an hexa) */
 function get_user_from_subscription_number($n) {
