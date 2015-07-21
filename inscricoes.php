@@ -64,7 +64,7 @@ if(is_user_logged_in()) {
 		exit;
 
 	} else {
-        $pid = get_current_user_project();
+        $pid = get_current_user_project(); // pega o id do projeto, se não existir salva
 		$subscription_number = get_post_meta($pid, 'subscription_number', true);
 
 
@@ -90,6 +90,7 @@ if(is_user_logged_in()) {
 	wp_enqueue_script('jquery-maskedinput', get_setoriaiscnpc_baseurl().'js/jquery.maskedinput-1.3.min.js', array('jquery'));  // funciona
 	wp_enqueue_script('cadastro', get_setoriaiscnpc_baseurl().'js/cadastro.js', array('jquery'));
 	wp_localize_script('cadastro', 'cadastro', array('ajaxurl' => admin_url('admin-ajax.php'), 'today' => date('Y-m-d') ));
+	wp_enqueue_script( 'setoriaiscnpc', get_template_directory_uri() . '/js/setoriaiscnpc.js');
 }
 
 ?>
@@ -174,88 +175,98 @@ if(is_user_logged_in()) {
 		
 		<?php else : // Data nascimento válida e não é delegado ?>
 
-			<?php if ( get_user_meta($user_ID, 'e_candidato', true) ) : //TODO verifica se o usuário é candidato, se não for, perguntar se quer se candidatar?>z) : // verifica se o usuário é candidato, se não for, perguntar se quer se candidatar?>	
+			<?php if ( !get_user_meta( $userID, 'e_candidato', true)==1) : //TODO verifica se o usuário é candidato, se não for, perguntar se quer se candidatar?>
+
+				<div class="form-eleitor">
+					<div class="candidate-not-found">
+						<i class="fa fa-question"></i>
+						<p>Você já está inscrito/a mas não é candidato/a<br>
+						Deseja se candidatar?</p>
+						<a href="#" id="eleitor-candidate-question" class="button">Candidatar</a>
+					</div>
+				</div>
 
 			<?php endif; ?>
 
 			<?php $step1 = load_step(1,$pid); $f = $step1['fields']; ?>
 
-			<div class="form-controls  cf">
-				<?php if($subscription_number): ?>
-					<a href="<?php echo site_url("inscricoes/".substr($subscription_number,0,8)."/imprimir");?>" target="_blank" class="button  u-pull-right  print"><?php _e('Print', 'historias'); ?></a>
-				
-					<?php if( current_user_can( 'administrator' ) ): ?>
-						<div class="form__item--inline">
-							<input id="subscription-valid" type="checkbox" name="subscription-valid" id="subscription-valid" value="<?php echo $subscription_number;?>"<?php if(get_post_meta($pid, 'subscription-valid', true)) echo ' checked="checked"';?>/>
-							<label for="subscription-valid">Admins: Marcar como Válida <a href="<?php bloginfo('siteurl'); ?>/inscricoes">(e voltar para lista de inscritos)</a></label>
-						</div>
-						<input type="hidden" id="js-protocol-number" value="<?php echo substr($subscription_number, 0, 8);?>" />
-						
-					<?php endif; ?>
-				<?php else: ?>
-					<a id="print-button" class="button  u-pull-right  print" style="display: none"><?php _e('Print', 'historias'); ?></a>
-				<?php endif; ?>
-	        </div>
-
-			<form id="application-form" class="form-application  inline" method="post">
-
-	            <?php if(get_theme_option('inscricoes_abertas') == false): ?>
-					<div class="error">Inscrições encerradas!</div>
-				<?php endif;?>
-
-				<?php if( $step == 'step-1' || $step == '' ) : ?>
-					<div id="formstep-1" class="form-step">
-						<header class="step__head">
-							<h3 class="step__title">Candidato <?php if ($step1['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
-							<div class="step__about">
-								<?php echo nl2br( get_theme_option( 'txt_candidato_topo' ) ); ?>
-							</div>
-							<div class="step-status <?php print $step1['complete']?' completo':'';?>"></div>
-						</header>
-						<?php include( 'inscricoes-step1.php' ); ?>
-
-					</div><!-- #formstep-1 -->
-				<?php endif; ?>
-
-				<?php $step2 = load_step(2,$pid); $f = $step2['fields']; ?>
-
-				<?php if( $step1['complete'] && $step == 'step-2') : ?>
-
-					<div id="formstep-2" class="form-step">
-						<header class="step__head">
-							<h3 class="step__title">Candidato <?php if ($step2['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
-							<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
-							<div <?php echo ($step1['complete'] )?' style="display:none"':''; ?> class="step__about">
-								<?php echo nl2br(get_theme_option('txt_candidato_step2')); ?>
-							</div>
-							<span id="formstep-2-error" class="form-error"></span>
-						</header>
-
-						<?php include( 'inscricoes-step2.php' ); ?>
-
-					</div><!-- #formstep-2 -->
-				<?php endif; ?>
-
-
-				<?php if( $step1['complete'] && $step2['complete'] && $step == 'step-3' ) : ?>
+			<div class="form-candidato" style="<?php echo !get_user_meta( $userID, 'e_candidato', true)==1 ? 'display: none' : '' ?>">
+				<div class="form-controls  cf">
+					<?php if($subscription_number): ?>
+						<a href="<?php echo site_url("inscricoes/".substr($subscription_number,0,8)."/imprimir");?>" target="_blank" class="button  u-pull-right  print"><?php _e('Print', 'historias'); ?></a>
 					
-					<div id="formstep-3" class="form-step">
-						<header class="step__head">
-							<h3 class="step__title">Conferir Dados e Finalizar Inscrição <?php if ( $subscription_number ) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
-							<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
-							<div <?php echo ($step1['complete'] )?' style="display:none"':''; ?> class="step__about">
-								<?php echo nl2br(get_theme_option('txt_candidato_step3a')); ?>
+						<?php if( current_user_can( 'administrator' ) ): ?>
+							<div class="form__item--inline">
+								<input id="subscription-valid" type="checkbox" name="subscription-valid" id="subscription-valid" value="<?php echo $subscription_number;?>"<?php if(get_post_meta($pid, 'subscription-valid', true)) echo ' checked="checked"';?>/>
+								<label for="subscription-valid">Admins: Marcar como Válida <a href="<?php bloginfo('siteurl'); ?>/inscricoes">(e voltar para lista de inscritos)</a></label>
 							</div>
-							<span id="formstep-3-error" class="form-error"></span>
-						</header>
-						<?php include( 'inscricoes-step3.php' ); ?>
-					</div><!-- #formstep-3 -->
+							<input type="hidden" id="js-protocol-number" value="<?php echo substr($subscription_number, 0, 8);?>" />
+							
+						<?php endif; ?>
+					<?php else: ?>
+						<a id="print-button" class="button  u-pull-right  print" style="display: none"><?php _e('Print', 'historias'); ?></a>
+					<?php endif; ?>
+		        </div>
 
-				<?php endif; ?>
+				<form id="application-form" class="form-application  inline" method="post">
 
-				<?php show_steps( $step ); ?>
-			</form>
+		            <?php if(get_theme_option('inscricoes_abertas') == false): ?>
+						<div class="error">Inscrições encerradas!</div>
+					<?php endif;?>
 
+					<?php if( $step == 'step-1' || $step == '' ) : ?>
+						<div id="formstep-1" class="form-step">
+							<header class="step__head">
+								<h3 class="step__title">Candidato <?php if ($step1['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+								<div class="step__about">
+									<?php echo nl2br( get_theme_option( 'txt_candidato_topo' ) ); ?>
+								</div>
+								<div class="step-status <?php print $step1['complete']?' completo':'';?>"></div>
+							</header>
+							<?php include( 'inscricoes-step1.php' ); ?>
+
+						</div><!-- #formstep-1 -->
+					<?php endif; ?>
+
+					<?php $step2 = load_step(2,$pid); $f = $step2['fields']; ?>
+
+					<?php if( $step1['complete'] && $step == 'step-2') : ?>
+
+						<div id="formstep-2" class="form-step">
+							<header class="step__head">
+								<h3 class="step__title">Candidato <?php if ($step2['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+								<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
+								<div <?php echo ($step1['complete'] )?' style="display:none"':''; ?> class="step__about">
+									<?php echo nl2br(get_theme_option('txt_candidato_step2')); ?>
+								</div>
+								<span id="formstep-2-error" class="form-error"></span>
+							</header>
+
+							<?php include( 'inscricoes-step2.php' ); ?>
+
+						</div><!-- #formstep-2 -->
+					<?php endif; ?>
+
+
+					<?php if( $step1['complete'] && $step2['complete'] && $step == 'step-3' ) : ?>
+						
+						<div id="formstep-3" class="form-step">
+							<header class="step__head">
+								<h3 class="step__title">Conferir Dados e Finalizar Inscrição <?php if ( $subscription_number ) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+								<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
+								<div <?php echo ($step1['complete'] )?' style="display:none"':''; ?> class="step__about">
+									<?php echo nl2br(get_theme_option('txt_candidato_step3a')); ?>
+								</div>
+								<span id="formstep-3-error" class="form-error"></span>
+							</header>
+							<?php include( 'inscricoes-step3.php' ); ?>
+						</div><!-- #formstep-3 -->
+
+					<?php endif; ?>
+
+					<?php show_steps( $step ); ?>
+				</form>
+			</div><!-- .form-candidato -->
 			
 	    <?php endif; ?>
 	<?php endif; ?>

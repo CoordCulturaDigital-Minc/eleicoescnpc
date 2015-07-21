@@ -220,9 +220,11 @@ add_action('wp_ajax_load_step_html', 'load_step_html');
 
 /** save field in database, if field is valid */
 function setoriaiscnpc_save_field() {
+    global $user_ID;
+
     $pid = get_current_user_project();
 
-    if(get_user_meta($pid, 'subscription_number', true)) {
+    if(get_user_meta($pid, 'subscription_number', true)) { //TODO checar se salva no postmeta ou usermeta
         header("HTTP/1.1 403 Forbidden");
         print __('Este projeto já teve os dados submetidos e não pode mais ser alterado.');
         die;
@@ -253,6 +255,12 @@ function setoriaiscnpc_save_field() {
                 }
             }
         }
+
+        // salvar o usuário como candidato caso não seja ainda
+        if( empty(get_user_meta( $user_ID, 'e_candidato', true) ) ) {
+            add_user_meta($user_ID, 'e_candidato', true );
+        }
+
     } else {
         foreach($_POST as $stepfield => $value) {
             if(preg_match('/^(step\d+)-([\w-]+)$/', $stepfield, $stepfield)) {
@@ -427,8 +435,6 @@ function subscribe_project() {
             add_post_meta( $pid, 'subscription_number', $response['subscription_number'], true);
             $response['status'] = 'success';
             $response['message'] = nl2br(get_theme_option('txt_candidato_step4'));
-
-            add_user_meta($current_user->ID, 'e_candidato', true);
 
             do_action('setoriaiscnpc_subscription_done', $subscription_number, $pid);
         } else {
@@ -707,54 +713,6 @@ function list_subscriptions($fields=null, $valid_only=true) {
 }
 
 
-// não sei pq funciona, mas os valores de cidades e estados não estão utf8 na base
-
-/** get states from a given region */
-function get_states_by_region($region) {
-    $regions = array(
-        'nortecentroeste' => array(
-            array('id'=>'12', 'nome'=>'Acre'),                  //
-            array('id'=>'13', 'nome'=>'Amazonas'),               //
-            array('id'=>'16', 'nome'=>'Amapá'),                  //
-            array('id'=>'15', 'nome'=>'Pará'),                   // norte
-            array('id'=>'11', 'nome'=>'Rondônia'),               //
-            array('id'=>'14', 'nome'=>'Roraima'),                //
-            array('id'=>'17', 'nome'=>'Tocantins'),               //
-
-            array('id'=>'53', 'nome'=>'Distrito Federal'),      //
-            array('id'=>'52', 'nome'=>'Goiás'),                  // centroeste
-            array('id'=>'50', 'nome'=>'Mato Grosso do Sul'),     //
-            array('id'=>'51', 'nome'=>'Mato Grosso'),             //
-        ),
-        'nordeste'=>array(
-            array('id'=>'27', 'nome'=>'Alagoas'),
-            array('id'=>'29', 'nome'=>'Bahia'),
-            array('id'=>'23', 'nome'=>'Ceará'),
-            array('id'=>'21', 'nome'=>'Maranhão'),
-            array('id'=>'25', 'nome'=>'Paraíba'),
-            array('id'=>'26', 'nome'=>'Pernambuco'),
-            array('id'=>'22', 'nome'=>'Piauí'),
-            array('id'=>'24', 'nome'=>'Rio Grande do Norte'),
-            array('id'=>'28', 'nome'=>'Sergipe')
-        ),
-        'sudeste'=>array(
-            array('id'=>'32', 'nome'=>'Espírito Santo'),
-            array('id'=>'31', 'nome'=>'Minas Gerais'),
-            array('id'=>'33', 'nome'=>'Rio de Janeiro'),
-            array('id'=>'35', 'nome'=>'São Paulo')
-        ),
-        'sul'=>array(
-            array('id'=>'41', 'nome'=>'Paraná'),
-            array('id'=>'43', 'nome'=>'Rio Grande do Sul'),
-            array('id'=>'42', 'nome'=>'Santa Catarina')
-        )
-    );
-
-    if(isset($regions[$region])) {
-        return $regions[$region];
-    }
-}
-
 /** loads cities from a given state */
 function get_cities_by_state_id($state_id, $except=null) {
     global $wpdb;
@@ -998,9 +956,7 @@ class Validator {
         'step1' => array(
             'candidate-confirm-infos' => array('not_empty'),
             'candidate-display-name' => array(),
-            // 'candidate-cpf' => array('not_empty', 'cpf_not_in_blacklist'),
             'candidate-phone-1' => array('not_empty','is_a_valid_phone'),
-            // 'candidate-birth' => array('not_empty', 'is_a_valid_birth'),
             'candidate-race' => array('not_empty'),
             'candidate-genre' => array('not_empty'),
             'candidate-avatar' => array('not_empty'),
@@ -1166,71 +1122,6 @@ class Validator {
         return true; 
 	}
 
-    /** Return true if supplied cpf is valid or give an error message otherwise */
-    static function is_a_valid_cnpj($cnpj) {
-        $error = __("O CNPJ fornecido é inválido.");
-        $cnpj = preg_replace('/[^0-9]/', '', $cnpj);
-
-        if(strlen($cnpj) != 14) {
-            return $error;
-        }
-
-        $mask = array(6,5,4,3,2,9,8,7,6,5,4,3,2);
-
-        $a = array();
-        $b = 0;
-        for($i=0; $i < 12; $i++) {
-            $a[] = (int) $cnpj[$i];
-            $b += $a[$i] * $mask[$i+1];
-        }
-
-        $x = $b % 11;
-        if($x < 2) {
-            $a[12] = 0;
-        } else {
-            $a[12] = 11 - $x;
-        }
-
-        $b = 0;
-        for($i=0; $i < 13; $i++) {
-            $b += $a[$i] * $mask[$i];
-        }
-
-        $x = $b % 11;
-        if($x < 2) {
-            $a[13] = 0;
-        } else {
-            $a[13] = 11 - $x;
-        }
-
-        if($cnpj[12] == $a[12] && $cnpj[13] == $a[13]) {
-            return true;
-        }
-        return $error;
-    }
-
-    static function cnpj_does_not_exist($c,$pid) {
-        global $wpdb;
-        $result = $wpdb->get_var($wpdb->prepare("select count(1) from {$wpdb->postmeta} where meta_key='company-cnpj' and post_id<>%d and meta_value='%s';",$pid,$c));
-        if($result > 0) {
-            return __('Já existe um projeto cadastrado com este CNPJ.');
-        }
-        return $result == 0; // $result provavelmente é String
-    }
-
-    static function maximum_2_projects_with_same_cnpj($c,$pid) {
-        global $wpdb;
-
-        // corta o cnpj antes da /
-        $c = substr($c, 0, strrpos($c, '/'));
-
-        $result = $wpdb->get_var($wpdb->prepare("select count(1) from {$wpdb->postmeta} where meta_key='company-cnpj' and post_id<>%d and meta_value like '%s';",$pid,$c.'%'));
-        if($result > 1) {
-            return __('Já existem dois projetos cadastrados com este CNPJ.');
-        }
-        return true; // $result provavelmente é String
-    }
-
     static function is_a_valid_cep($c) {
         if(preg_match('/^\d\d\d\d\d-\d\d\d$/', $c)) {
             return true;
@@ -1243,20 +1134,6 @@ class Validator {
             return true;
         }
         return __('O número do telefone é invalido');
-    }
-
-    static function is_brl_money_format($v) {
-        if(preg_match('/^R\$ \d\d?\d?(\.\d\d\d)*,\d\d$/', $v)){
-            return true;
-        }
-        return __('Formato inválido para o valor. Por favor apague e comece novamente.');
-    }
-
-    static function is_non_zero_money_ammount($v) {
-        if(preg_match('/^R\$ 0+(\.000)*,00*$/', $v)){
-            return __('O valor não pode ser zero.');
-        }
-        return true;
     }
 
     static function is_a_valid_date($d) {
@@ -1290,57 +1167,6 @@ class Validator {
         return true;
     }
    
-    static function total_budget_is_valid($total, $pid=null) {
-        if(!is_null($pid) && is_numeric($pid)) {
-            $values = array(
-                get_post_meta($pid,'budget-pre-production', true),
-                get_post_meta($pid,'budget-production', true),
-                get_post_meta($pid,'budget-post-production', true),
-                '-'.$total
-            );
-            $sum = 0.00;
-            foreach($values as $v) {
-                if(preg_match('/^(-)?R\$ ([1-9]\d?\d?(\.\d\d\d)*,\d\d)$/', $v, $m)){
-                    $m = $m[1] . str_replace('.','',$m[2]);
-                    $m = str_replace(',','.',$m);
-                    $sum += floatval($m); // round to intval could be a good idea
-                }
-            }
-            if($sum < 0.01) {
-                return true;
-            } else {
-                return __('O valor total não condiz com os valores da pré-produção, produção e pós-produção.');
-            }
-        } else {
-            return __('Não é possível calcular o orçamento total através de um usuário inválido.');
-        }
-    }
-    
-    static function total_budget_is_less_than_limit($total, $pid=null) {
-        if(!is_null($pid) && is_numeric($pid)) {
-            $limit = get_theme_option('limite_orcamento');
-            
-            if ($limit && is_numeric($limit))
-                $limit = intval($limit);
-            else
-                $limit = 330000;
-            
-            if(preg_match('/^(-)?R\$ ([1-9]\d?\d?(\.\d\d\d)*,\d\d)$/', $total, $m)){
-                $m = $m[1] . str_replace('.','',$m[2]);
-                $m = str_replace(',','.',$m);
-                $total += floatval($m); // round to intval could be a good idea
-            }
-            
-            if($total <= $limit) {
-                return true;
-            } else {
-                return __('O valor total não pode ser superior a R$'.$limit.',00');
-            }
-        } else {
-            return __('Não é possível calcular o orçamento total através de um usuário inválido.');
-        }
-    }
-
     static function str_length_less_than_400($v) {
         if(strlen(utf8_decode($v)) > 400) { // php não sabe contar utf8
             return __('O texto não deve exceder 400 caracteres.');
@@ -1348,24 +1174,4 @@ class Validator {
         return true;
     }
 
-    static function str_length_less_than_3000($v) {
-        if(strlen(utf8_decode($v)) > 3000) {
-            return __('O texto não deve exceder 4000 caracteres.');
-        }
-        return true;
-    }
-
-    static function str_length_less_than_4000($v) {
-        if(strlen(utf8_decode($v)) > 4000) {
-            return __('O texto não deve exceder 4000 caracteres.');
-        }
-        return true;
-    }
-
-    static function str_length_less_than_8000($v) {
-        if(strlen(utf8_decode($v)) > 8000) {
-            return __('O texto não deve exceder 8000 caracteres.');
-        }
-        return true;
-    }
 }

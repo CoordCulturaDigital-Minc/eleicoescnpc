@@ -24,12 +24,18 @@
             var $me = $(this);
             var $step_status = $me.parents('div.form-step')
                                   .find('div.step-status');
-            
-            if( $me.is('input[type="checkbox"]'))
-                $me.prop("checked") ? '' : $me.val("0");
-            
-            var values = {'action': 'setoriaiscnpc_save_field'};
-            values[this.name] = $me.val();
+
+            var values = {'action': 'setoriaiscnpc_save_field'};   
+            values[this.name] = '';
+                        
+            if( $me.is('input[type="checkbox"]')) {
+              
+               if( $me.prop("checked") )
+                    values[this.name] = $me.val();
+               
+            }else 
+                values[this.name] = $me.val();
+           
 
             $form.set_status(this.id, 'wait');
             $.post(inscricoes.ajaxurl, values,
@@ -111,10 +117,6 @@
                             .keydown(function(e){ if(e.keyCode===13){ //enter
                                 $(this).trigger('blur').focus();
                             }});
-		
-		// Hook pra salvar e verificar quando carregar o formulário
-		// $('#candidate-cpf').blur();
-        // $('#candidate-birth').blur();
 
         // load next form step when user click in 'Preencher'
         $('div.form-step a.toggle').click(function(e) {
@@ -133,28 +135,6 @@
             $div.find('span.form-error').html('').hide();
 
             return true;
-
-            // var $div = $(this).parents('div.form-step');
-            // var step = $div.attr('id').replace(/^[^-]+-/,'');
-
-            // $.post(inscricoes.ajaxurl, {'action': 'load_step_html', 'step': step},
-            //     function(html) {
-            //         $div.find('div.form-step-content').remove();
-            //         $div.find('p').hide();
-            //         $div.append(html);
-
-            //         // character counter for textarea
-            //         $div.find('label .form-tip').each(display_text_length);
-            //         // the submit
-            //         $div.find('#submit-button').click(submit_subscription);
-
-            //         $div.find('span.form-error').html('');
-            //     }, 'html'
-            // ).error(function(e){
-            //     // some messages come from 403. use e.responseText to see them
-            //     $div.find('span.form-error').html(e.responseText).show();
-            // });
-            // return false;
         });
 
         // *** this assignments does <em>NOT</em> affect fields loaded throught ajax ** //
@@ -193,12 +173,14 @@
 
         });
 
+        $('#eleitor-candidate-question').click( function(e){
+            $('.form-eleitor').hide();
+            $('.form-candidato').show();
 
+            return; false;
+        });
 
         /**** Masks ****/
-        // $form.find('#candidate-cpf').mask('999.999.999-99');
-        // $form.find('#candidate-date-birth').mask('99/99/9999');
-        // $form.find('input.cep').mask('99999-999');
         $form.find('input.phone').mask('(99) 999999?999');
     });
 })(jQuery);
