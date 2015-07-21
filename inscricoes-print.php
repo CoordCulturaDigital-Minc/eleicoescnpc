@@ -1,18 +1,25 @@
 <?php
 
+
 $subscription_number = get_query_var('subscription_number');
 $pid = get_project_id_from_subscription_number($subscription_number);
 
-
 if($pid) {
 	
+	$current_user_ID = get_current_user_id();
+	$userID 		 = get_post_field( 'post_author', $pid );
+
+	$user 			 = get_user_by( 'id', $userID);
+	$user_meta 		 = array_map( function( $a ){ return $a[0]; }, get_user_meta( $userID ) );
+
+	// verificar se o usuário atual tem privilégio para imprimir o documento.
+	if( $current_user_ID != $userID && !current_user_can('administrator')) {
+		wp_redirect(site_url('inscricoes'));
+		exit;	
+	}
 
 	$step1 = load_step(1, $pid);
 	$step2 = load_step(2, $pid);
-
-	$userID = get_post_field( 'post_author', $pid );
-	$user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $userID ) );
-	$user = get_user_by( 'id', $userID);
 
 	$avatar_file_id 	= get_post_meta($pid, 'candidate-avatar', true);
 	$portfolio_file_id 	= get_post_meta($pid, 'candidate-portfolio', true);

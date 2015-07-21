@@ -100,23 +100,28 @@ function get_user_by_cpf($c) {
     return get_userdata($user_id);
 }
 
-// retirar
-function user_cpf_does_not_exist($c) {
-    global $wpdb;
+function current_user_voter($userID) {
 
-    $result = $wpdb->get_var($wpdb->prepare("SELECT count(1) FROM {$wpdb->usermeta} WHERE"
-                                        ." meta_key='cpf' and meta_value='%s';",$c));
-    
-    if($result > 0) {
-        return true;
-    }
-    return false;
+    if( current_user_can( 'read' ) 
+        && !current_user_can( 'level_10' )
+            && !get_user_meta( $userID, 'e_candidato', true)==1 )
+                return true;
+
+    return false; 
+}   
+
+function current_user_candidate($userID) {
+    if( current_user_can( 'read' ) 
+        && !current_user_can( 'level_10' )
+            && get_user_meta( $userID, 'e_candidato', true)==1 )
+                return true;
+
+    return false; 
+
 }
 
-
 /**
- * define os passos
- *
+ * define as etapas
  */
 function get_steps()
 {

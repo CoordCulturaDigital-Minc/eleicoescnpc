@@ -175,7 +175,7 @@ if(is_user_logged_in()) {
 		
 		<?php else : // Data nascimento válida e não é delegado ?>
 
-			<?php if ( !get_user_meta( $userID, 'e_candidato', true)==1) : //TODO verifica se o usuário é candidato, se não for, perguntar se quer se candidatar?>
+			<?php if ( current_user_voter( $userID ) ) : // verifica se o usuário é eleitor, se for, perguntar se quer se candidatar?>
 
 				<div class="form-eleitor">
 					<div class="candidate-not-found">
@@ -190,7 +190,7 @@ if(is_user_logged_in()) {
 
 			<?php $step1 = load_step(1,$pid); $f = $step1['fields']; ?>
 
-			<div class="form-candidato" style="<?php echo !get_user_meta( $userID, 'e_candidato', true)==1 ? 'display: none' : '' ?>">
+			<div class="form-candidato" style="<?php echo ( current_user_voter($userID) )? 'display: none' : '' ?>">
 				<div class="form-controls  cf">
 					<?php if($subscription_number): ?>
 						<a href="<?php echo site_url("inscricoes/".substr($subscription_number,0,8)."/imprimir");?>" target="_blank" class="button  u-pull-right  print"><?php _e('Print', 'historias'); ?></a>
