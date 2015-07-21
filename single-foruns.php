@@ -32,7 +32,7 @@ get_header(); ?>
 							<?php while ( $candidates->have_posts() ) : $candidates->the_post(); ?>
 
 								<div class="candidate" id="<?php the_ID(); ?>">
-									<div class="candidate-avatar">
+									<div class="candidate-avatar" data-candidate-id="<?php the_ID(); ?>">
 										<?php $avatar_file_id = get_post_meta(get_the_ID(), 'candidate-avatar', true); ?>
 										<?php echo wp_get_attachment_image($avatar_file_id, 'avatar_candidate'); ?>
 									</div>

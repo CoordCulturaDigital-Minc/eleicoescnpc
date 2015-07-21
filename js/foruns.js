@@ -1,14 +1,14 @@
 (function($) {
     $(document).ready(function(e) {
 
-        $('.show-candidate-details').click(function() {
+        $('.show-candidate-details, .candidate-avatar').click(function() {
 			var cid = $(this).data('candidate-id');
 			$('#candidate-details-'+cid).toggle();
 		});
 
 		// fechar a lista ao clicar fora da área do mapa
         $(document).click(function(event) { 
-            if(!$(event.target).closest('.show-candidate-details').length )
+            if(!$(event.target).closest('.show-candidate-details,  .candidate-avatar').length )
                 $('.candidate-details').hide();
         }); 
 

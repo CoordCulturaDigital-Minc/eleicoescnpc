@@ -2438,7 +2438,8 @@ footer.site-footer div {
         display: block;
         border-radius: 5px;
         background: #FFFFFF;
-        border: 5px solid #959595; }
+        border: 5px solid #959595;
+        cursor: pointer; }
         .candidates-content .candidates .candidate .candidate-avatar img {
           width: 100%;
           height: 100%; }
