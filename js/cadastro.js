@@ -96,16 +96,20 @@
 
             //dados do cpf
        function get_dados_cpf() {
+            $form.find('#user_cpf').before('<i class="fa fa-spinner fa-spin"></i>');
+
             $.post(cadastro.ajaxurl,{'action':'setoriaiscnpc_get_data_receita_by_cpf','cpf':$form.find('#user_cpf').val()},
                 function(data) {
-                    if(data) {
-                                            
+                    if(data) {     
                         var obj = $.parseJSON( data );
-                  
                         $form.find('#user_name').val( obj.nmPessoaFisica).prop('readonly', true);
+                        $form.find('i').remove();
+
                         // $form.find('#user_birth').val( obj.dtNascimento).prop('readonly', true);
+                    }else {
+
                     }
-                }, 'json');
+                },'json');
         };
 
 
@@ -137,8 +141,8 @@
                             $form.find('#'+field+'-error').html(data[field]).show(); 
 
 
-                            if( field == 'user_cpf' )
-                                $form.find('#user_name').val('').prop('readonly', false);
+                            // if( field == 'user_cpf' )
+                            //     $form.find('#user_name').val('').prop('readonly', false);
                         }
                     }
                 }, 'json');

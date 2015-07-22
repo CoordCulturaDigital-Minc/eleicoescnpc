@@ -1238,6 +1238,15 @@ img.aligncenter {
 #step-2-register #step-2-dropdown {
   display: none; }
 
+#step-3-register i {
+  font-size: 27px;
+  text-align: center;
+  width: 2.285714em;
+  display: inline-block;
+  position: absolute;
+  top: 40px;
+  right: -7px; }
+
 .form-application h2 {
   text-align: center;
   margin-bottom: 30px;
@@ -1250,6 +1259,8 @@ img.aligncenter {
   line-height: 1.33;
   padding-top: 1.5rem;
   padding-bottom: 0.5rem; }
+  .form-application legend span {
+    font-weight: normal; }
 .form-application .avatar {
   text-align: center; }
   .form-application .avatar label {
@@ -1399,7 +1410,7 @@ img.aligncenter {
   font-size: .88rem;
   font-size: 14px;
   line-height: 1.71;
-  padding: 0 .5em;
+  padding: .5em;
   color: #fff;
   background-color: #ed4747;
   margin-bottom: 2px; }

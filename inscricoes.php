@@ -245,6 +245,14 @@ if(is_user_logged_in()) {
 							<?php include( 'inscricoes-step2.php' ); ?>
 
 						</div><!-- #formstep-2 -->
+					<?php elseif( $step == 'step-2' ): ?>
+						<div class="candidate-not-found">
+							<i class="fa fa-exclamation"></i>
+							<p>Você não preencheu a etapa anterior corretamente!<br>
+							Volte, verifique os campos e tente novamente</p>
+							<a href="?step=step-1" class="button">Voltar</a>
+						</div>
+
 					<?php endif; ?>
 
 
@@ -262,6 +270,13 @@ if(is_user_logged_in()) {
 							<?php include( 'inscricoes-step3.php' ); ?>
 						</div><!-- #formstep-3 -->
 
+					<?php elseif( $step == 'step-3' ): ?>
+						<div class="candidate-not-found">
+							<i class="fa fa-exclamation"></i>
+							<p>Você não preencheu a etapa anterior corretamente!<br>
+							Volte, verifique os campos e tente novamente</p>
+							<a href="?step=step-2" class="button">Voltar</a>
+						</div>
 					<?php endif; ?>
 
 					<?php show_steps( $step ); ?>

@@ -51,11 +51,12 @@
 									<label for="user_cpf">CPF</label>
 									<input id="user_cpf" type="text" name="user_cpf" value="<?php echo isset($_POST['user_cpf']) ?  $_POST['user_cpf'] : '' ?>" />
 									<div id="user_cpf-error" class="field__error"></div>
+
 								</div><!--
 
 								--><div class="grid__item  one-whole">
-									<label for="user_name">Nome</label>
-									<input id="user_name" type="text" name="user_name" value="<?php echo isset($_POST['user_name']) ?  $_POST['user_name'] : '' ?>"/>
+									<label for="user_name">Nome</label><div class="field__note" >Seu nome será preenchido automaticamente</div>
+									<input id="user_name" type="text" name="user_name" value="<?php echo isset($_POST['user_name']) ?  $_POST['user_name'] : '' ?>" readonly/>
 								</div><!--
 
 								--><div class="grid__item  one-whole">

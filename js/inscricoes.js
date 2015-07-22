@@ -162,7 +162,7 @@
                 }, onComplete: function(result) {
                     result = JSON.parse(result);
                     if (result.error) {
-                        $self.find('.js-feedback').html(result.error).fadeIn().delay(1000).fadeOut();
+                        $self.find('.js-feedback').html(result.error).fadeIn().delay(5000).fadeOut();
                     } else {
                         $('#' + $self.data('field')).val(result.success.id).trigger('blur'); //trigger save
                         $self.parents('.grid__item').find('.js-current').html(result.success.html);
