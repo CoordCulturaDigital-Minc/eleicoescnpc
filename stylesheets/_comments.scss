@@ -278,6 +278,17 @@
     border-bottom: 1px dotted;
 }
 
+#commentform {
+    position: relative;
+}
+
+.logged-in-as {
+    position: absolute;
+    bottom: -50px;
+    left: 0px;
+}
+
+
 #commentform label {
     font-size: 16px;
     line-height: 1.5;
@@ -290,6 +301,7 @@
 
     *display: inline;
 }
+
 
 .comment-area {
     margin-bottom: 1.5rem;

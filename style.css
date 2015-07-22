@@ -314,6 +314,15 @@ object {
   .cf:after {
     clear: both; }
 
+.assistive-text {
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px;
+  height: 1px; }
+
 .ir {
   overflow: hidden;
   border: 0;
@@ -953,6 +962,14 @@ img.aligncenter {
 .logged-in-as a,
 .comment-notes a {
   border-bottom: 1px dotted; }
+
+#commentform {
+  position: relative; }
+
+.logged-in-as {
+  position: absolute;
+  bottom: -50px;
+  left: 0px; }
 
 #commentform label {
   font-size: 16px;
