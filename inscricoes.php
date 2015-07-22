@@ -217,7 +217,7 @@ if(is_user_logged_in()) {
 					<?php if( $step == 'step-1' || $step == '' ) : ?>
 						<div id="formstep-1" class="form-step">
 							<header class="step__head">
-								<h3 class="step__title">Candidato <?php if ($step1['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+								<h3 class="step__title">Candidato/a <?php if ($step1['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
 								<div class="step__about">
 									<?php echo nl2br( get_theme_option( 'txt_candidato_topo' ) ); ?>
 								</div>
@@ -234,7 +234,7 @@ if(is_user_logged_in()) {
 
 						<div id="formstep-2" class="form-step">
 							<header class="step__head">
-								<h3 class="step__title">Candidato <?php if ($step2['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+								<h3 class="step__title">Candidato/a <?php if ($step2['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
 								<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
 								<div <?php echo ($step1['complete'] )?' style="display:none"':''; ?> class="step__about">
 									<?php echo nl2br(get_theme_option('txt_candidato_step2')); ?>

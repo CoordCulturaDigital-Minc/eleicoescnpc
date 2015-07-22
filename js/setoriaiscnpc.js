@@ -39,7 +39,7 @@
 	    }); 
 
 	    // widget de login
-	    $('.widget_cnpc_login .widget-body').hide();
+	    // $('.widget_cnpc_login .widget-body').hide();
 	    $('.widget_cnpc_login .widget__title').click( function(e) {
 	    	$('.widget_cnpc_login .widget-body').slideToggle();
 	    });

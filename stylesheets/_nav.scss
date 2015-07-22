@@ -11,6 +11,8 @@ nav.access {
 	font-family: $fonte-principal-bold;
 	background-color: #1C7033;
 	position: relative !important;
+
+	@include linear-vertical-gradient($cor-verde-inicio, $cor-verde-fim);
     
     &.opened {
 	    max-height: 9999px;

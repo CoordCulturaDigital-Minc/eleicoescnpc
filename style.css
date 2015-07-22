@@ -506,15 +506,10 @@ img.aligncenter {
   font-size: 1.5rem;
   font-size: 35px;
   line-height: 1;
-  margin-bottom: 0px; }
+  margin-bottom: 1.5rem; }
   .entry-title a {
     display: inline-block;
     color: #52660b; }
-
-.archive .entry-title {
-  font-size: 2.25rem;
-  line-height: 1.33;
-  margin-bottom: 1.5rem; }
 
 .entry-title a:hover,
 .single .entry-title a {
@@ -1832,7 +1827,19 @@ nav.access {
   text-transform: uppercase;
   font-family: "TheSans B7 Bold";
   background-color: #1C7033;
-  position: relative !important; }
+  position: relative !important;
+  background: -moz-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1f6f3a), color-stop(100%, #0c451a));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #1f6f3a 0%, #0c451a 100%);
+  /* W3C */ }
   nav.access.opened {
     max-height: 9999px; }
   nav.access ul {
@@ -2102,7 +2109,63 @@ section {
       margin-bottom: 5px; }
       section article p.read-more {
         margin-bottom: 10px; }
+  section .quote {
+    padding: 1.5rem 0; }
+    section .quote > p {
+      text-transform: uppercase; }
+  section .page__title {
+    margin-bottom: 1.5rem; }
+  section .hentry {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    /*border-bottom: 1px dotted #888;*/ }
+  section .hentry:last-child,
+  section .single .hentry {
+    border-bottom: none; }
+  section .entry-title {
+    font-size: 1.5rem;
+    font-size: 35px;
+    line-height: 1;
+    margin-bottom: 1.5rem; }
+    section .entry-title a {
+      display: inline-block;
+      color: #52660b; }
+  section .entry-title a:hover,
+  section .single .entry-title a {
+    color: #444; }
+  section .entry-date {
+    font-size: .88rem;
+    line-height: 1.71;
+    /*color: #888;*/
+    color: #b49e49; }
+  section .entry-format {
+    font-size: .88rem;
+    line-height: 1.71;
+    display: inline-block;
+    padding: 0 .5em;
+    color: #fff !important;
+    background-color: #125b26; }
+  section .entry__summary {
+    margin-bottom: 1.5rem; }
+  section .entry__image {
+    overflow: hidden;
+    width: 998px;
+    margin: 1.5rem 0 1.5rem -150px; }
+    section .entry__image .entry__image img {
+      display: block; }
+  section .entry__meta {
+    font-size: .88rem;
+    line-height: 1.75;
+    margin-bottom: 1.5rem; }
+    section .entry__meta a {
+      color: #fff; }
+  section .entry__info {
+    color: #fff;
+    background: #125b26; }
 
+@media only screen and (min-width: 48em) {
+  .quote {
+    display: block; } }
 .pagination {
   width: 100%;
   border-bottom: 1px solid #dedede;

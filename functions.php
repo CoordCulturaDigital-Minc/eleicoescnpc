@@ -252,7 +252,6 @@ function historias_content_nav( $nav_id ) {
 	?>
 	<nav role="navigation" id="<?php echo $nav_id; ?>" class="<?php echo $nav_class; ?>">
 		<h1 class="assistive-text"><?php _e( 'Post navigation', 'historias' ); ?></h1>
-		<?php echo $wp_query->post_count; ?>
 	<?php if ( is_single() ) : ?>
 
 		<?php previous_post_link( '<div class="nav-previous">%link</div>', '<i class="fa fa-arrow-left"></i> %title' ); ?>

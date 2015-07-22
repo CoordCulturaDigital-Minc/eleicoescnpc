@@ -23,7 +23,7 @@
                             <li><a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">Meu fórum</a></li>
                             
                             <?php if (get_user_meta($user_ID, 'e_candidato', true)): ?> 
-                                <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Ficha</a></li>
+                                <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Inscrição</a></li>
                             <?php else: ?>
                                 <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Quero me candidatar</a></li>
                             <?php endif; ?>

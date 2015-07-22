@@ -3,13 +3,16 @@
 	<section class="content">
 
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-			<div class="hentry-wrap">
+			
+			<header>
 				<h2 class="entry-title"><?php the_title(); ?></h2>
-				<div class="entry-content">
-					<?php the_content(); ?>
-					<?php wp_link_pages('before=<div class="page-link">' . __( 'Pages:', 'historias' ) . '&after=</div>') ?>
-				</div><!-- /entry-content -->
-			</div>
+			</header>
+			
+			<div class="entry-content">
+				<?php the_content(); ?>
+				<?php wp_link_pages('before=<div class="page-link">' . __( 'Pages:', 'historias' ) . '&after=</div>') ?>
+			</div><!-- /entry-content -->
+			
 		</article><!-- /page-<?php the_ID(); ?> -->
 
 		<?php comments_template('', true); ?>

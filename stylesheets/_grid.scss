@@ -291,7 +291,7 @@ img.aligncenter {
     font-size: 35px;
  
     line-height: 1;
-    margin-bottom: 0px;
+    margin-bottom: 1.5rem;
     
     a {
 	    display: inline-block;
@@ -299,12 +299,12 @@ img.aligncenter {
 	}
 }
 
-.archive .entry-title {
-    font-size: 2.25rem;
-    line-height: 1.33;
+// .archive .entry-title {
+//     font-size: 2.25rem;
+//     line-height: 1.33;
 
-    margin-bottom: 1.5rem;
-}
+//     margin-bottom: 1.5rem;
+// }
 
 .entry-title a:hover,
 .single .entry-title a {

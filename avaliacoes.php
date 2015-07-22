@@ -19,8 +19,10 @@
 <?php get_header(); ?>
 
 <section class="content  content--full">
-	<h2 class="page__title">Incrições avaliadas</h2>
-
+	<header>
+		<h2 class="page__title">Incrições avaliadas</h2>
+	</header>
+	
 	<table class="js-sortable-table  inscritos--lista">
 		<thead>
 			<tr>

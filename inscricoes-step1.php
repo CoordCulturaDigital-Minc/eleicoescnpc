@@ -9,6 +9,7 @@
 			</div>
 			<div class="col-xs-3 grid__item avatar">
 				<?php inscricoes_file_upload_field_template($f, 1, '', 'candidate-avatar', '','Envie sua foto'); ?>
+				<div>Obrigatório</div>
 			</div>
 
 			<div class="col-xs-9">
