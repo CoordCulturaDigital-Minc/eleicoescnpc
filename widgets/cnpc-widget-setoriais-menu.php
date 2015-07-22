@@ -64,7 +64,7 @@ class CNPC_Widget_Setoriais_Menu extends WP_Widget
 			echo "<ul class='menu menu-setorial'>";
 
 			foreach ($setoriais as $key => $setorial) {
-				echo "<li><a href='$base$key'>$setorial</a></li>";
+				echo "<li><i class='fa fa-angle-right'></i><a href='$base$key'>$setorial</a></li>";
 			}
 			echo "</ul>";
 		}

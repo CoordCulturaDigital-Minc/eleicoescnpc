@@ -482,74 +482,6 @@ img.aligncenter {
   line-height: 2.4;
   padding: 0 1.3em; }
 
-.quote {
-  padding: 1.5rem 0; }
-  .quote > p {
-    text-transform: uppercase; }
-
-@media only screen and (min-width: 48em) {
-  .quote {
-    display: block; } }
-.page__title {
-  margin-bottom: 1.5rem; }
-
-.hentry {
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
-  /*border-bottom: 1px dotted #888;*/ }
-
-.hentry:last-child,
-.single .hentry {
-  border-bottom: none; }
-
-.entry-title {
-  font-size: 1.5rem;
-  font-size: 35px;
-  line-height: 1;
-  margin-bottom: 1.5rem; }
-  .entry-title a {
-    display: inline-block;
-    color: #52660b; }
-
-.entry-title a:hover,
-.single .entry-title a {
-  color: #444; }
-
-.entry-date {
-  font-size: .88rem;
-  line-height: 1.71;
-  /*color: #888;*/
-  color: #b49e49; }
-
-.entry-format {
-  font-size: .88rem;
-  line-height: 1.71;
-  display: inline-block;
-  padding: 0 .5em;
-  color: #fff !important;
-  background-color: #125b26; }
-
-.entry__summary {
-  margin-bottom: 1.5rem; }
-
-.entry__image {
-  overflow: hidden;
-  width: 998px;
-  margin: 1.5rem 0 1.5rem -150px; }
-  .entry__image .entry__image img {
-    display: block; }
-
-.entry__meta {
-  font-size: .88rem;
-  line-height: 1.75;
-  margin-bottom: 1.5rem; }
-  .entry__meta a {
-    color: #fff; }
-
-.entry__info {
-  color: #fff;
-  background: #125b26; }
-
 .u-pull-left {
   float: left; }
 
@@ -1306,8 +1238,7 @@ img.aligncenter {
   .form-application input[type='password']:disabled,
   .form-application textarea:read-only,
   .form-application textarea:disabled {
-    background: #EFEFEF;
-    border: 1px solid #ededed; }
+    background: #EFEFEF; }
 .form-application select {
   height: 50px;
   font-size: 20px;
@@ -1712,6 +1643,9 @@ aside {
       font-weight: bold; }
       aside ul.menu--user li a {
         color: #125b26; }
+  aside .menu-setorial i {
+    color: #c9bf9b;
+    margin-right: 5px; }
   aside h3 {
     margin: 0 0 10px 0;
     padding: 1.2rem 0rem 0.4em 1rem;
@@ -2604,7 +2538,7 @@ footer.site-footer div {
             color: #fff;
             background-color: rgba(93, 170, 51, 0.87);
             cursor: pointer; }
-      .candidates-content .candidates .candidate .vote {
+      .candidates-content .candidates .candidate .vote, .candidates-content .candidates .candidate .voted {
         margin: 0 auto;
         padding: 10px 5px;
         width: 165px;
@@ -2617,8 +2551,15 @@ footer.site-footer div {
         background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
         border-radius: 5px;
         cursor: pointer; }
-        .candidates-content .candidates .candidate .vote:hover {
+        .candidates-content .candidates .candidate .vote:hover, .candidates-content .candidates .candidate .voted:hover {
           background-color: #DEB90E; }
+      .candidates-content .candidates .candidate .voted {
+        cursor: default;
+        color: #D2D1D1;
+        background-color: #119134;
+        border: 1px solid #008425; }
+        .candidates-content .candidates .candidate .voted:hover {
+          background-color: #4F5651; }
   .candidates-content .flex-direction-nav li {
     list-style: none; }
     .candidates-content .flex-direction-nav li a {

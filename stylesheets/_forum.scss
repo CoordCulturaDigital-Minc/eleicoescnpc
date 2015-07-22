@@ -128,7 +128,7 @@
                 }
             }
 
-            .vote {
+            .vote, .voted {
                 margin: 0 auto;
                 padding: 10px 5px;
                 width: 165px;
@@ -150,6 +150,17 @@
                     background-color: #DEB90E;
                 }
             }
+
+            .voted {
+                cursor: default;
+                color: #D2D1D1;
+                background-color: #119134;
+                border: 1px solid #008425;
+                &:hover {
+                    background-color: #4F5651;
+                }
+            }
+
 
             .number_votes {
               

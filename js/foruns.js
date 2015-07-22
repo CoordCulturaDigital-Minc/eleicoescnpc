@@ -16,6 +16,11 @@
 
 			var pid = $(this).data('project_id');
 
+			if( $('a.vote').hasClass('voted') && !$(this).hasClass('voted') ) {
+				 if( !confirm("Você está alterando o seu voto. Deseja continuar?"))
+			        return false;			    
+			}		
+
 			$.post(
 				vars.ajaxurl,
 				{
@@ -25,8 +30,8 @@
 				function(data) {
 					if (data.success) {
 						var voted_id = data.voted_project_id;
-						$('a.vote').html('Votar');
-						$('#vote-for-'+voted_id).html('Voto registrado');
+						$('a.vote').removeClass('voted').html('Votar');
+						$('#vote-for-'+voted_id).addClass('voted').html('Voto registrado');
 					} else {
 						alert(data.errormsg);
 					}
