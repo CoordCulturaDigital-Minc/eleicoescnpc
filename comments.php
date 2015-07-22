@@ -6,47 +6,27 @@
 <?php if ( comments_open() || '0' < get_comments_number() ) : ?>
 <div id="comments" class="comments-area">
 
-    <?php if ( have_comments() ) : ?>
     <?php 
-
     $args = array(
         'comment_field' =>  '<p class="comment-form-comment"><label for="comment">' .
         '</label><textarea id="comment" name="comment" cols="45" rows="4" aria-required="true">' .
         '</textarea></p>',
-        'logged_in_as' => '<p class="logged-in-as">' .
-    sprintf(
-    __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>' ),
-      admin_url( 'profile.php' ),
-      $user_identity,
-      wp_logout_url( apply_filters( 'the_permalink', get_permalink( ) ) )
-    ) . '</p>',
         
         'must_log_in' => '<p class="must-log-in">' .
         sprintf(
           __( 'Você precisa se <a href="%s">cadastrar</a> e/ou fazer <a href="%s">login</a> para comentar no fórum, participe!' ),
           site_url('/inscricoes/'),  wp_login_url( apply_filters( 'the_permalink', get_permalink() ) )
         ) . '</p>',
-        
-        'comment_notes_before' => '<p class="comment-notes">' .
-        __( 'Your email address will not be published.' ) . ( $req ? $required_text : '' ) .
-        '</p>',
-
-        'comment_notes_after' => '<p class="form-allowed-tags">' .
-        sprintf(
-          __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s' ),
-          ' <code>' . allowed_tags() . '</code>'
-        ) . '</p>',
         'title_reply'=>'Participe!',
         'fields' => apply_filters( 'comment_form_default_fields', $fields ),
-    );
-     ?>
+    ); ?>
 
+    <?php comment_form($args); ?>
 
-
-         <?php comment_form($args); ?>
+    <?php if ( have_comments() ) : ?>
 
         <h3 class="comments-title">
-            <?php printf( _n( 'Um comentário', '%1$s comentários', get_comments_number(), 'historias' ), number_format_i18n( get_comments_number() ) ); ?>
+            <?php printf( _n( 'Uma participação', '%1$s participações', get_comments_number(), 'historias' ), number_format_i18n( get_comments_number() ) ); ?>
             <?php if ( comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
                 <a href="#respond"><?php printf( __('%s Leave a reply', 'historias' ), '<i class="fa fa-comment"></i>' ); ?></a>
         	<?php endif; ?>
@@ -64,17 +44,11 @@
         </nav><!-- /comments-navigation -->
         <?php endif; ?>
 
-        <?php endif; ?>
-
-    <?php
-        // If comments are closed and there are comments, let's leave a little note, shall we?
-        if ( ! comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
-    ?>
-        <p class="nocomments"><?php _e( 'O Fórum está fechado', 'historias' ); ?></p>
     <?php endif; ?>
 
-
-
+    <?php if ( ! comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
+            <p class="nocomments"><?php _e( 'O Fórum está fechado', 'historias' ); ?></p>
+        <?php endif; ?>
    
 </div><!-- /comments -->
 <?php endif; ?>
