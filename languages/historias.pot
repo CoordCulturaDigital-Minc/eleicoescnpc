@@ -361,7 +361,7 @@ msgstr ""
 msgid "Other Selected Movies"
 msgstr ""
 
-#: ../inc/theme-options.php:121
+#: ../includes/theme-options.php:121
 msgid "Save Changes"
 msgstr ""
 

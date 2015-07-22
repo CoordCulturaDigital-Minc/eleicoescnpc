@@ -11,23 +11,23 @@ function historias_setup() {
 	/**
 	 * Handle the custom post types
 	 */
-	//require_once( get_template_directory() . '/inc/post_type-historias_filmes.php' );
-    require_once( get_template_directory() . '/inc/post_type_projetos.php' );
-    //require_once( get_template_directory() . '/inc/post_type-consultant.php' );
-    require_once( get_template_directory() . '/inc/post_type_foruns.php' );
+	//require_once( get_template_directory() . '/includes/post_type-historias_filmes.php' );
+    require_once( get_template_directory() . '/includes/post_type_projetos.php' );
+    //require_once( get_template_directory() . '/includes/post_type-consultant.php' );
+    require_once( get_template_directory() . '/includes/post_type_foruns.php' );
 
 	/**
 	 * We need these for the inscricoes
 	 */
-    require_once( get_template_directory() . '/inc/theme-options.php' );
+    require_once( get_template_directory() . '/includes/theme-options.php' );
 	require_once( get_template_directory() . '/inscricoes-functions.php' );
 	require_once( get_template_directory() . '/vote-functions.php' );
-	require_once( get_template_directory() . '/inc/shame.php' );
-    require_once( get_template_directory() . '/inc/customizr.php' );
-    require_once( get_template_directory() . '/inc/contextual-help.php' );
-	require_once( get_template_directory() . '/inc/post2home/post2home.php' );
-	require_once( get_template_directory() . '/inc/estatisticas-inscricoes.php' );
-	// require_once( get_template_directory() . '/inc/admin-cpfs-cnpjs.php' );
+	require_once( get_template_directory() . '/includes/shame.php' );
+    require_once( get_template_directory() . '/includes/customizr.php' );
+    require_once( get_template_directory() . '/includes/contextual-help.php' );
+	require_once( get_template_directory() . '/includes/post2home/post2home.php' );
+	require_once( get_template_directory() . '/includes/estatisticas-inscricoes.php' );
+	// require_once( get_template_directory() . '/includes/admin-cpfs-cnpjs.php' );
 
 	// widgets
 	require_once( get_template_directory() . '/widgets/cnpc-widget-custom-page.php' );
@@ -515,12 +515,12 @@ function default_menu() { ?>
 /**
  * Load Meta Box for the "Capa/Inscricoes" Template
  */
-require get_template_directory() . '/inc/meta_box-feature-url.php';
+require get_template_directory() . '/includes/meta_box-feature-url.php';
 
 /**
  * Load Meta Box for the Front Page
  */
-require get_template_directory() . '/inc/meta_box-feature-text.php';
+require get_template_directory() . '/includes/meta_box-feature-text.php';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////// EMAILS SENDER  /////////////////////////////////////

@@ -26,7 +26,7 @@ msgid "More about &ldquo;%s&rdquo;"
 msgstr "Mais sobre &ldquo;%s&rdquo;"
 
 #: ../archive-historias_filmes.php:14 ../content.php:6 ../functions.php:288
-#: ../functions.php:308 ../inc/post_type-consultant.php:74
+#: ../functions.php:308 ../includes/post_type-consultant.php:74
 #: ../single-historias_filmes.php:17
 #, php-format
 msgid "%s Edit"
@@ -190,27 +190,27 @@ msgstr "Olá, %s!"
 msgid "Hello, friend!"
 msgstr "Olá, amigo!"
 
-#: ../inc/contextual-help.php:15
+#: ../includes/contextual-help.php:15
 msgid "Front Page Templates"
 msgstr "Modelos de Capa"
 
-#: ../inc/customizr.php:36
+#: ../includes/customizr.php:36
 msgid "Highlight Color"
 msgstr "Cor destacada"
 
-#: ../inc/customizr.php:52
+#: ../includes/customizr.php:52
 msgid "Site Logo"
 msgstr "Logo"
 
-#: ../inc/customizr.php:68
+#: ../includes/customizr.php:68
 msgid "Tagline"
 msgstr "Descrição"
 
-#: ../inc/meta_box-feature-text.php:20
+#: ../includes/meta_box-feature-text.php:20
 msgid "Text"
 msgstr "Texto"
 
-#: ../inc/meta_box-feature-text.php:21
+#: ../includes/meta_box-feature-text.php:21
 msgid ""
 "In the Inscricoes Template, this will be over the Featured Image; In the "
 "Divulgacao Template, it will be in the Selected Films box"
@@ -218,182 +218,182 @@ msgstr ""
 "No Modelo Inscrições, vai aparecer por cima da Imagem Destacada; no Modelo "
 "Divulgação, estará na caixa Filmes Selecionados"
 
-#: ../inc/meta_box-feature-text.php:44
+#: ../includes/meta_box-feature-text.php:44
 msgid "Feature Text"
 msgstr "Texto Destacado"
 
-#: ../inc/meta_box-feature-url.php:20
+#: ../includes/meta_box-feature-url.php:20
 msgid "URL"
 msgstr "URL"
 
-#: ../inc/meta_box-feature-url.php:21
+#: ../includes/meta_box-feature-url.php:21
 msgid "Link for the Featured Image"
 msgstr "Link para a Imagem Destacada"
 
-#: ../inc/meta_box-feature-url.php:46
+#: ../includes/meta_box-feature-url.php:46
 msgid "Feature URL"
 msgstr "URL do Destaque"
 
-#: ../inc/post2home/post2home.php:43
+#: ../includes/post2home/post2home.php:43
 msgid "Feature"
 msgstr "Destaque"
 
-#: ../inc/post2home/post2home.php:58
+#: ../includes/post2home/post2home.php:58
 msgid "Set / unset post feature"
 msgstr ""
 
-#: ../inc/post_type-consultant.php:10 ../inc/post_type-consultant.php:21
+#: ../includes/post_type-consultant.php:10 ../includes/post_type-consultant.php:21
 msgid "Consultants"
 msgstr "Consultores"
 
-#: ../inc/post_type-consultant.php:11
+#: ../includes/post_type-consultant.php:11
 msgid "Consultant"
 msgstr "Consultor"
 
-#: ../inc/post_type-consultant.php:12
+#: ../includes/post_type-consultant.php:12
 #, fuzzy
 msgctxt "Consultant"
 msgid "Add New"
 msgstr "Adicionar novo"
 
-#: ../inc/post_type-consultant.php:13
+#: ../includes/post_type-consultant.php:13
 msgid "Add New Consultant"
 msgstr "Adicionar novo consultor"
 
-#: ../inc/post_type-consultant.php:14
+#: ../includes/post_type-consultant.php:14
 msgid "Edit Consultant"
 msgstr "Editar consultor"
 
-#: ../inc/post_type-consultant.php:15
+#: ../includes/post_type-consultant.php:15
 msgid "New Consultant"
 msgstr "Novo consultor"
 
-#: ../inc/post_type-consultant.php:16
+#: ../includes/post_type-consultant.php:16
 msgid "All Consultants"
 msgstr "Todos os consultores"
 
-#: ../inc/post_type-consultant.php:17
+#: ../includes/post_type-consultant.php:17
 msgid "View Consultant"
 msgstr "Ver consultores"
 
-#: ../inc/post_type-consultant.php:18
+#: ../includes/post_type-consultant.php:18
 msgid "Search Consultants"
 msgstr "Pesquisar consultores"
 
-#: ../inc/post_type-consultant.php:19
+#: ../includes/post_type-consultant.php:19
 msgid "No Consultant Found"
 msgstr "Nenhum consultor encontrado"
 
-#: ../inc/post_type-consultant.php:20
+#: ../includes/post_type-consultant.php:20
 msgid "No Consultant Found in the trash"
 msgstr "Nenhum consultor na lixeira"
 
-#: ../inc/post_type-historias_filmes.php:16
+#: ../includes/post_type-historias_filmes.php:16
 msgid "Director"
 msgstr "Diretor"
 
-#: ../inc/post_type-historias_filmes.php:22
+#: ../includes/post_type-historias_filmes.php:22
 msgid "Region"
 msgstr "Estado"
 
-#: ../inc/post_type-historias_filmes.php:28
+#: ../includes/post_type-historias_filmes.php:28
 msgid "Producer"
 msgstr "Produtora"
 
-#: ../inc/post_type-historias_filmes.php:34
+#: ../includes/post_type-historias_filmes.php:34
 msgid "Producer URL"
 msgstr "Site da produtora"
 
-#: ../inc/post_type-historias_filmes.php:55
-#: ../inc/post_type-historias_filmes.php:66
+#: ../includes/post_type-historias_filmes.php:55
+#: ../includes/post_type-historias_filmes.php:66
 msgid "Movies"
 msgstr "Filmes"
 
-#: ../inc/post_type-historias_filmes.php:56
+#: ../includes/post_type-historias_filmes.php:56
 msgid "Movie"
 msgstr "Filme"
 
-#: ../inc/post_type-historias_filmes.php:57
+#: ../includes/post_type-historias_filmes.php:57
 msgctxt "historias_filmes"
 msgid "Add New"
 msgstr "Adicionar novo"
 
-#: ../inc/post_type-historias_filmes.php:58
+#: ../includes/post_type-historias_filmes.php:58
 msgid "Add New Movie"
 msgstr "Adicionar filme"
 
-#: ../inc/post_type-historias_filmes.php:59
+#: ../includes/post_type-historias_filmes.php:59
 msgid "Edit Movie"
 msgstr "Editar filme"
 
-#: ../inc/post_type-historias_filmes.php:60
+#: ../includes/post_type-historias_filmes.php:60
 msgid "New Movie"
 msgstr "Novo filme"
 
-#: ../inc/post_type-historias_filmes.php:61
+#: ../includes/post_type-historias_filmes.php:61
 msgid "All Movies"
 msgstr "Todos os filmes"
 
-#: ../inc/post_type-historias_filmes.php:62
+#: ../includes/post_type-historias_filmes.php:62
 msgid "View Movie"
 msgstr "Visualizar filme"
 
-#: ../inc/post_type-historias_filmes.php:63
+#: ../includes/post_type-historias_filmes.php:63
 msgid "Search Movies"
 msgstr "Buscar filmes"
 
-#: ../inc/post_type-historias_filmes.php:64
+#: ../includes/post_type-historias_filmes.php:64
 msgid "No Movie Found"
 msgstr "Nenhum filme encontrado"
 
-#: ../inc/post_type-historias_filmes.php:65
+#: ../includes/post_type-historias_filmes.php:65
 msgid "No Movie Found in the trash"
 msgstr "Nenhum filme na lixeira"
 
-#: ../inc/post_type-historias_filmes.php:92
+#: ../includes/post_type-historias_filmes.php:92
 msgid "About the Movie"
 msgstr "Sobre o filme"
 
-#: ../inc/post_type_projetos.php:29
+#: ../includes/post_type_projetos.php:29
 msgctxt "post type singular name"
 msgid "Projetos"
 msgstr ""
 
-#: ../inc/post_type_projetos.php:30
+#: ../includes/post_type_projetos.php:30
 msgctxt "image"
 msgid "Adicionar Novo"
 msgstr ""
 
-#: ../inc/post_type_projetos.php:31
+#: ../includes/post_type_projetos.php:31
 msgid "Adicionar novo Projetos"
 msgstr ""
 
-#: ../inc/post_type_projetos.php:32
+#: ../includes/post_type_projetos.php:32
 msgid "Editar Projetos"
 msgstr ""
 
-#: ../inc/post_type_projetos.php:33
+#: ../includes/post_type_projetos.php:33
 msgid "Novo Projetos"
 msgstr ""
 
-#: ../inc/post_type_projetos.php:34
+#: ../includes/post_type_projetos.php:34
 msgid "Ver Projetos"
 msgstr ""
 
-#: ../inc/post_type_projetos.php:35
+#: ../includes/post_type_projetos.php:35
 #, fuzzy
 msgid "Search Projetoss"
 msgstr "Buscar filmes"
 
-#: ../inc/post_type_projetos.php:36
+#: ../includes/post_type_projetos.php:36
 msgid "Nenhum Projetos Encontrado"
 msgstr ""
 
-#: ../inc/post_type_projetos.php:37
+#: ../includes/post_type_projetos.php:37
 msgid "Nenhum Projetos na Lixeira"
 msgstr ""
 
-#: ../inc/theme-options.php:125
+#: ../includes/theme-options.php:125
 msgid "Save Changes"
 msgstr ""
 

@@ -73,9 +73,9 @@ function post2home_enqueue_scripts( $hook ) {
 	global $post_type;
 
 	if ( $hook == 'edit.php' && $post_type == 'post' ) {
-		wp_enqueue_script( 'post2home', get_template_directory_uri() . '/inc/post2home/post2home.js', array( 'jquery' ) );
+		wp_enqueue_script( 'post2home', get_template_directory_uri() . '/includes/post2home/post2home.js', array( 'jquery' ) );
 
-		wp_register_style( 'post2home', get_template_directory_uri() . '/inc/post2home/post2home.css', false );
+		wp_register_style( 'post2home', get_template_directory_uri() . '/includes/post2home/post2home.css', false );
 		wp_enqueue_style( 'post2home' );
 
 		wp_localize_script('post2home', 'historias', array('ajaxurl' => admin_url('admin-ajax.php') ));
