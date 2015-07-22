@@ -69,3 +69,27 @@ section {
 		}
 	}
 }
+
+
+.pagination {	
+	width: 100%;
+	border-bottom: 1px solid #dedede;
+	padding-bottom: 20px;
+	div {
+		margin: 0 10% ;
+		width: 80%;
+		text-align: center;
+
+		span, a {
+			color:	#898989;
+			padding: 5px 10px;
+			margin: 0px 10px;
+			font-size: 20px;
+			border-radius: 8px;
+		}
+		span {
+			background-color: #fed626;
+		}
+	}
+
+}

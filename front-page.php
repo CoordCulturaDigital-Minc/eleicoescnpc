@@ -31,37 +31,57 @@ get_header(); the_post(); ?>
         </div>
 
         <?php get_sidebar(); ?>
+        
+        <section class="content">
 
-        <?php 
+            <?php 
             
-            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+            $paged = (get_query_var('page')) ? get_query_var('page') : 1;
 
             $args = array(
-                'posts_per_page' => 10,
+                'posts_per_page' => 6,
                 'orderby'=> 'date',
                 'order' => 'DESC',
                 'paged' => $paged
             );
 
+            // the query
+            $the_query = new WP_Query(  $args ); 
+            ?>
+
+            <?php if ( $the_query->have_posts() ) : ?>
+
+            <?php while ( $the_query->have_posts() ) : $the_query->the_post();  ?>
+                <?php get_template_part( 'content', false ); ?>
+            <?php endwhile; ?>
+
             
-            $query = new WP_Query( $args ); ?>
 
-            <section class="content">
+            <div class="section-foot">
+                <div class="pagination alignright">
+                    <?php if( function_exists( 'wp_pagenavi' ) ) : ?>
+                        <?php wp_pagenavi( array( 'query' => $the_query ) );?>
+                    <?php else : ?>
+                        <?php
+                            // next_posts_link() usage with max_num_pages
+                            next_posts_link( 'Older Entries', $the_query->max_num_pages );
+                            previous_posts_link( 'Newer Entries',  $the_query->max_num_pages );
+                        ?>
+                    <?php endif; ?>
+                </div>
+            </div>
 
-                <?php if ( $query->have_posts() ) : ?>
+            <?php  wp_reset_postdata();  ?>
 
-                    <?php while ( $query->have_posts() ) : $query->the_post(); ?>
+            <?php else:  ?>
+                <p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
+            <?php endif; ?>
 
-                        <?php get_template_part( 'content', false ); ?>
 
-                    <?php endwhile; ?>
 
-                    <?php wp_reset_postdata(); ?>
-                    
-                <?php endif; ?>
 
-                <?php historias_content_nav( 'nav-below' ); ?>
-            </section>
+    </section>
+         
 
 
 <?php get_footer(); ?>
