@@ -617,7 +617,12 @@ function inscricoes_get_uploaded_template($attachment_id) {
     else {
         $url = wp_get_attachment_url($attachment_id);
 
-        return '<a href="' . $url . '">Baixar arquivo</a>';
+        $filename_only = basename( get_attached_file( $attachment_id ) );
+
+        $filename_only = preg_replace('/^.{7}_/','', $filename_only);
+        $filename_only = preg_replace('/(\.pdf)$/','', $filename_only);
+
+        return '<a href="' . $url . '" target="_blank">'. $filename_only .'</a>';
     }
     
 
