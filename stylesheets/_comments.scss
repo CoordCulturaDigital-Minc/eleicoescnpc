@@ -9,7 +9,7 @@
 
 .comments-title,
 #reply-title {
-    font-size: 25px;
+    font-size: 24px;
     font-weight: normal;
     line-height: 1;
 
@@ -276,6 +276,7 @@
 .logged-in-as a,
 .comment-notes a {
     border-bottom: 1px dotted;
+    font-size: 13px;
 }
 
 #commentform {
@@ -286,6 +287,7 @@
     position: absolute;
     bottom: -50px;
     left: 0px;
+
 }
 
 

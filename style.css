@@ -727,7 +727,7 @@ img.aligncenter {
 
 .comments-title,
 #reply-title {
-  font-size: 25px;
+  font-size: 24px;
   font-weight: normal;
   line-height: 1;
   margin-bottom: 1.5rem;
@@ -888,7 +888,8 @@ img.aligncenter {
 
 .logged-in-as a,
 .comment-notes a {
-  border-bottom: 1px dotted; }
+  border-bottom: 1px dotted;
+  font-size: 13px; }
 
 #commentform {
   position: relative; }

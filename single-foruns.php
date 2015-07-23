@@ -72,9 +72,10 @@ get_header(); ?>
 										<p><h3>Defesa do candidato:</h3><?php echo $candidate_meta['candidate-explanatory']; ?></p>
 										<p><h3>Experiência:</h3><?php echo $candidate_meta['candidate-experience']; ?></p>
 										
-										<p><strong>Portfólio: </strong><?php echo wp_get_attachment_link($candidate_meta['candidate-portfolio']); ?></p>
-										<p><strong>Portfólio: </strong><?php echo wp_get_attachment_link($candidate_meta['candidate-activity-history']); ?></p>
-										<p><strong>Portfólio: </strong><?php echo wp_get_attachment_link($candidate_meta['candidate-diploma']); ?></p>
+										<p><strong>Portfólio: </strong><?php echo wp_get_attachment_link($candidate_meta['candidate-portfolio'], 'thumbnail', false, false, false, array('target'=>'_blank')); ?></p>
+										<?php  ?>
+										<p><strong>Histórico de atividades e/ou atuação profissional: </strong><?php echo wp_get_attachment_link($candidate_meta['candidate-activity-history']); ?></p>
+										<p><strong>Diploma Profissional e/ou Registro profissional: </strong><?php echo wp_get_attachment_link($candidate_meta['candidate-diploma']); ?></p>
 									
 									</div>
 

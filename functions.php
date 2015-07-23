@@ -103,12 +103,22 @@ function historias_setup() {
 	// filtra os padroes dos uploads
 	update_option( 'image_default_align','center' );
 
+
     /*
      * This theme styles the visual editor to resemble the theme style,
      * specifically font, colors, icons, and column width.
      */
     add_editor_style( array( 'editor-style.css', str_replace( ',', '%2C', 'http://fonts.googleapis.com/css?family=Sanchez:400italic,400' ) ) );
 }
+
+
+function custom_attachment_link( $link ) {
+
+	$link = preg_replace("/('>){1}/", "' target='_blank'>", $link );
+
+	return $link;
+}
+add_filter( 'wp_get_attachment_link', 'custom_attachment_link', 999);
 
 
 function custom_excerpt_length( $length ) {
