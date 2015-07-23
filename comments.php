@@ -18,7 +18,6 @@
           site_url('/inscricoes/'),  wp_login_url( apply_filters( 'the_permalink', get_permalink() ) )
         ) . '</p>',
         'title_reply'=>'Participe, comente sobre as demandas do setor!',
-        'fields' => apply_filters( 'comment_form_default_fields', $fields ),
     ); ?>
 
     <?php comment_form($args); ?>

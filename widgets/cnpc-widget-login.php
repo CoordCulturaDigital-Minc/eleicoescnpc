@@ -51,9 +51,9 @@ class CNPC_Widget_Login extends WP_Widget
         } else {
             if( !empty( $instance[ 'title' ] ) )
             {
-                print $before_head;
+                // print $before_head;
                 print $before_title . $instance[ 'title' ] . $after_title;
-                print $after_head;
+                // print $after_head;
             }
         }
         echo '<div class="widget-body">';
@@ -66,16 +66,16 @@ class CNPC_Widget_Login extends WP_Widget
                     <?php if ( current_user_can( 'level_10' ) ) : //admin ?>
                        
                         <li><i class="fa fa-cog"></i> <a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
-                        <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscrições</a></li>
-                        <li><i class="fa fa-check-square-o"></i> <a href="<?php bloginfo('siteurl'); ?>/avaliacoes">Avaliações</a></li>
+                        <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('url'); ?>/inscricoes">Inscrições</a></li>
+                        <li><i class="fa fa-check-square-o"></i> <a href="<?php bloginfo('url'); ?>/avaliacoes">Avaliações</a></li>
                     
                     <?php elseif ( current_user_can( 'curate' ) ) : //curador ou avaliador ?>
                         
-                        <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscrições</a></li>
+                        <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('url'); ?>/inscricoes">Inscrições</a></li>
                     
                     <?php elseif ( current_user_can( 'publish_posts' ) ): //editor do site ?>
                         
-                        <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Ficha</a></li>
+                        <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('url'); ?>/inscricoes">Minha Ficha</a></li>
                         <li><i class="fa fa-cog"></i> <a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
                     
                     <?php elseif ( current_user_can( 'read' ) ) : //eleitor ?>
@@ -83,9 +83,9 @@ class CNPC_Widget_Login extends WP_Widget
                         <li><i class="fa fa-comments"></i> <a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">Meu fórum</a></li>
                       
                         <?php if (get_user_meta($user_ID, 'e_candidato', true)): ?> 
-                            <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha ficha de inscrição</a></li>
+                            <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('url'); ?>/inscricoes">Minha ficha de inscrição</a></li>
                         <?php else: ?>
-                              <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('siteurl'); ?>/inscricoes">Quero me candidatar!</a></li>
+                              <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('url'); ?>/inscricoes">Quero me candidatar!</a></li>
                         <?php endif; ?>
                     <?php endif; ?>
                     <li><i class="fa fa-sign-out"></i> <?php wp_loginout( get_permalink() ); ?></li>
@@ -101,7 +101,7 @@ class CNPC_Widget_Login extends WP_Widget
         	        			'remember' => false ) );
         	    ?>
                 <a href="<?php echo wp_lostpassword_url( get_permalink() ); ?>" id="lost-password"><?php _e( 'Esqueci a senha', 'historias' ); ?></a>
-                <a href="<?php bloginfo('siteurl'); ?>/inscricoes" id="registrar" class="button"><?php _e( 'Inscrever-me', 'historias' ); ?></a>
+                <a href="<?php bloginfo('url'); ?>/inscricoes" id="registrar" class="button"><?php _e( 'Inscrever-me', 'historias' ); ?></a>
                 </div>
             <?php endif;
         echo '</div>';

@@ -198,7 +198,7 @@ if(is_user_logged_in()) {
 						<?php if( current_user_can( 'administrator' ) ): ?>
 							<div class="form__item--inline">
 								<input id="subscription-valid" type="checkbox" name="subscription-valid" id="subscription-valid" value="<?php echo $subscription_number;?>"<?php if(get_post_meta($pid, 'subscription-valid', true)) echo ' checked="checked"';?>/>
-								<label for="subscription-valid">Admins: Marcar como Válida <a href="<?php bloginfo('siteurl'); ?>/inscricoes">(e voltar para lista de inscritos)</a></label>
+								<label for="subscription-valid">Admins: Marcar como Válida <a href="<?php bloginfo('url'); ?>/inscricoes">(e voltar para lista de inscritos)</a></label>
 							</div>
 							<input type="hidden" id="js-protocol-number" value="<?php echo substr($subscription_number, 0, 8);?>" />
 							

@@ -331,7 +331,7 @@ function get_cpf_data_in_receita( $cpf, $fields='' ) {
         return false;
 
     if( empty( $fields ) )
-        $fields = array("nmPessoaFisica");
+        $fields = array("nmPessoaFisica","dtNascimento");
 
     $cpf = preg_replace("/\D+/", "", $cpf); // remove qualquer caracter não numérico
 

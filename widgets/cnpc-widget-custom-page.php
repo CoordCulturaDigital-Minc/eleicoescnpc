@@ -191,7 +191,7 @@ class CNPC_Widget_Custom_Page extends WP_Widget
 
 		// includes
 		if( !function_exists( 'limit_chars' ) )
-			include( get_template_directory()  . '/include/limit-chars.php' );
+			include( get_template_directory()  . '/includes/limit-chars.php' );
 	}
 
 	// DESTRUCTOR ////////////////////////////////////////////////////////////////////////////////////

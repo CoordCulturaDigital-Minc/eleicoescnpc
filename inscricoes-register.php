@@ -1,9 +1,11 @@
 
 <?php
 
+$register_errors = array();
+
 if(isset($_POST['register']) && $_POST['register'] == 1) {
     
-    require_once( ABSPATH . WPINC . '/registration.php' );
+    // require_once( ABSPATH . WPINC . '/registration.php' );
     
     $user_login = sanitize_user($_POST['user_email']);
     $user_email = $user_login;
@@ -14,9 +16,9 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
     $user_tipo = $_POST['user_tipo']; 
     $user_name = $_POST['user_name'];
     $user_birth = $_POST['user_birth'];
-    $user_confirm_informations = $_POST['user_confirm_informations'];
+    $user_confirm_informations = isset( $_POST['user_confirm_informations'] ) ? $_POST['user_confirm_informations'] : '';
     
-    $register_errors = array();
+    // $register_errors = array();
     $form = 'register';
 
 
@@ -72,12 +74,12 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
         else { 
             $valid_birth = $validator->validate_field( $form, 'user_birth', $user_birth, $user_tipo);
             if( $valid_birth !== true )
-                $register_errors['birth'] = $valid_birth . "<br/>";     
+                $register_errors['user_birth'] = $valid_birth . "<br/>";     
         }
 
         /* declaração de veracidade */
         if( strlen( $user_confirm_informations )==0)
-            $register_errors['user_birth'] = __('Você precisa afirmar que os dados são verdadeiros.<br/>', 'tnb');
+            $register_errors['user_confirm_informations'] = __('Você precisa afirmar que os dados são verdadeiros.<br/>', 'tnb');
         
         
         if(!sizeof($register_errors)>0){

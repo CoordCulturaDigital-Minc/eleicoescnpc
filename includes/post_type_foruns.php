@@ -80,7 +80,7 @@ class Foruns
 		) );
     }
     
-    function create_foruns() {
+    static function create_foruns() {
 		
 		//rodar uma vez só
 		if (get_option('foruns_inicializados') !== false)
@@ -132,7 +132,7 @@ class Foruns
 		
 	}
 	
-	function archive_pre_filter($query) {
+	static function archive_pre_filter($query) {
 		if( is_tax( 'estado' ) || is_tax( 'setorial' ) ) {
 			$query->set( 'orderby', 'post_title' );
 			$query->set( 'order', 'asc' );
@@ -141,7 +141,7 @@ class Foruns
 		}
 	}
 	
-	function get_candidates($uf, $setorial) {
+	static function get_candidates($uf, $setorial) {
 		global $wpdb;
 		//TODO: query certa
 		$ids = $wpdb->get_col(

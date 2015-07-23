@@ -40,10 +40,10 @@
 					<label for="candidate-genre">Sexo</label>
 				</div>
 				<div class="col-xs-7 grid__item">
-						
-					<label for="genre_f"><input <?php echo $form_disabled?' disabled':'';?> id="genre_f" type="radio" class="required" name="step1-candidate-genre" value="feminino" <?php checked( $f['candidate-genre'], 'feminino' ); ?>  />Feminino
+					<?php $candidate_genre = isset($f['candidate-genre'])?$f['candidate-genre']:'' ?>
+					<label for="genre_f"><input <?php echo $form_disabled?' disabled':'';?> id="genre_f" type="radio" class="required" name="step1-candidate-genre" value="feminino" <?php checked( $candidate_genre, 'feminino' ); ?>  />Feminino
 					</label>
-					<label class="col-sm-offset-2" for="genre_m"><input <?php echo $form_disabled?' disabled':'';?> id="genre_m" type="radio" name="step1-candidate-genre" value="masculino" <?php checked( $f['candidate-genre'], 'masculino' ); ?>  />Masculino
+					<label class="col-sm-offset-2" for="genre_m"><input <?php echo $form_disabled?' disabled':'';?> id="genre_m" type="radio" name="step1-candidate-genre" value="masculino" <?php checked( $candidate_genre, 'masculino' ); ?>  />Masculino
 					</label>
 
 					<div class="field-status <?php print isset($f['candiate-genre'])?'completo':'invalido'?>"></div>
@@ -54,11 +54,11 @@
 					<label>Afrodescente?</label>
 				</div>
 				<div class="col-xs-7 grid__item">
-					
-					<input <?php echo $form_disabled?' disabled':'';?> id="race-true" type="radio" name="step1-candidate-race" value="true" <?php checked( $f['candidate-race'], 'true' ); ?>  />
+					<?php $candidate_race = isset(  $f['candidate-race'] ) ?  $f['candidate-race'] : ''; ?>
+					<input <?php echo $form_disabled?' disabled':'';?> id="race-true" type="radio" name="step1-candidate-race" value="true" <?php checked( $candidate_race, 'true' ); ?>  />
 					<label for="race-true">Sim</label>
 					<span class="col-sm-offset-3">
-					<input <?php echo $form_disabled?' disabled':'';?> id="race-false" type="radio" name="step1-candidate-race" value="false" <?php checked( $f['candidate-race'], 'false' ); ?>  />
+					<input <?php echo $form_disabled?' disabled':'';?> id="race-false" type="radio" name="step1-candidate-race" value="false" <?php checked( $candidate_race, 'false' ); ?>  />
 					<label for="race-false">Não</label>
 					<div class="field-status <?php print isset($f['candidate-race'])?'completo':'invalido'?>"></div>
 					<div id="candidate-race-error" class="field__error"></div>

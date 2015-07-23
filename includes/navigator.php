@@ -13,27 +13,27 @@
                         <?php if ( current_user_can( 'level_10' ) ) : ?>
                            
                             <li><a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
-                            <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscrições</a></li>
-                            <!-- <li><a href="<?php bloginfo('siteurl'); ?>/avaliacoes">Avaliações</a></li> -->
+                            <li><a href="<?php bloginfo('url'); ?>/inscricoes">Inscrições</a></li>
+                            <!-- <li><a href="<?php bloginfo('url'); ?>/avaliacoes">Avaliações</a></li> -->
                         <?php elseif ( current_user_can( 'curate' ) ) : ?>
                             
-                            <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscrições</a></li>
+                            <li><a href="<?php bloginfo('url'); ?>/inscricoes">Inscrições</a></li>
                         
                         <?php elseif ( current_user_can( 'read' ) ): ?>
                             <li><a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">Meu fórum</a></li>
                             
                             <?php if (get_user_meta($user_ID, 'e_candidato', true)): ?> 
-                                <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Minha Inscrição</a></li>
+                                <li><a href="<?php bloginfo('url'); ?>/inscricoes">Minha Inscrição</a></li>
                             <?php else: ?>
-                                <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Quero me candidatar</a></li>
+                                <li><a href="<?php bloginfo('url'); ?>/inscricoes">Quero me candidatar</a></li>
                             <?php endif; ?>
                                 
                         <?php endif; ?>
 
-                        <li><?php wp_loginout($_SERVER['REQUEST_URI']); ?></li>
+                        <li><?php wp_loginout(home_url()); ?></li>
                 <?php else: ?>
-                        <li><a id="login" href="#">Entrar</a></li>
-                        <li><a href="<?php bloginfo('siteurl'); ?>/inscricoes">Inscreva-se</a></li>
+                        <!-- <li><a id="login" href="#">Entrar</a></li> -->
+                        <li><a href="<?php bloginfo('url'); ?>/inscricoes">Inscreva-se</a></li>
                 <?php endif; ?>
                 
             </ul>

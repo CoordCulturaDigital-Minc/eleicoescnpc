@@ -107,7 +107,7 @@ class MetaBoxFeatureText {
      * Save custom fields
      *
      */
-    function save_postdata( $post_id ) {
+    static function save_postdata( $post_id ) {
 
         global $post;
 
@@ -119,11 +119,15 @@ class MetaBoxFeatureText {
           return;
 
         // Não salva o campo caso seja uma revisão
-        if ( $post->post_type == 'revision' )
+        $post_type = isset( $post->post_type ) ? $post->post_type : '';
+
+        if ( $post_type == 'revision' )
             return;
 
         // Verifica o nonce
-        if ( ! wp_verify_nonce( $_POST['meta_noncename'], 'save_meta' ) )
+        $nonce_name = isset( $_POST['meta_noncename'] ) ? $_POST['meta_noncename'] : '';
+        
+        if ( ! wp_verify_nonce( $nonce_name, 'save_meta' ) )
             return;
 
 

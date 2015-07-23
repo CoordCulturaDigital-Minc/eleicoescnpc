@@ -105,7 +105,8 @@
                         $form.find('#user_name').val( obj.nmPessoaFisica).prop('readonly', true);
                         $form.find('i').remove();
 
-                        // $form.find('#user_birth').val( obj.dtNascimento).prop('readonly', true);
+                        $form.find('#user_birth').val( obj.dtNascimento).blur();
+                        // $form.find('#user_birth').val( obj.dtNascimento).prop('readonly', true).blur();
                     }else {
 
                     }
@@ -140,9 +141,8 @@
                             // $form.find('#'+field).val('');
                             $form.find('#'+field+'-error').html(data[field]).show(); 
 
-
-                            // if( field == 'user_cpf' )
-                            //     $form.find('#user_name').val('').prop('readonly', false);
+                            if( field == 'user_cpf' )
+                                $form.find('#user_name').val('');
                         }
                     }
                 }, 'json');

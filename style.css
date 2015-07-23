@@ -1075,7 +1075,6 @@ img.aligncenter {
   .inscritos--lista td td:last-child {
     border-right: none; }
 .inscritos--lista thead {
-  font-family: 'Sanchez', serif;
   font-size: 1.13rem;
   font-size: 18px;
   line-height: 1.33;
@@ -1100,7 +1099,6 @@ img.aligncenter {
   text-align: center;
   color: #999; }
 .inscritos--lista .subscription__title {
-  font-family: 'Sanchez', serif;
   font-size: 1.13rem;
   font-size: 18px;
   line-height: 1.33; }
@@ -1117,9 +1115,6 @@ img.aligncenter {
 
 .form-controls {
   margin-bottom: 1.5rem; }
-
-.project-switcher {
-  font-family: 'Sanchez', serif; }
 
 #cadastro.form-step {
   padding-top: 0px;
@@ -1180,7 +1175,6 @@ img.aligncenter {
   margin-bottom: 30px;
   font-size: 20px; }
 .form-application legend {
-  font-family: 'Sanchez', serif;
   font-size: 1.13rem;
   font-size: 18px;
   font-weight: bold;

@@ -52,7 +52,7 @@ class CNPC_Widget_Setoriais_Menu extends WP_Widget
 			print $args[ 'after_head' ];
 		}
 
-		print $args[ 'before_body' ];
+		// print $args[ 'before_body' ];
 
 
 		// $termos = get_terms('setorial');
@@ -68,7 +68,7 @@ class CNPC_Widget_Setoriais_Menu extends WP_Widget
 			}
 			echo "</ul>";
 		}
-		print $args[ 'after_body' ];
+		// print $args[ 'after_body' ];
 		print $args[ 'after_widget' ];
 	}
 
