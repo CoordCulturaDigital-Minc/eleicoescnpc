@@ -460,6 +460,7 @@ function cancel_subscription() {
     if(current_user_can('administrator')) {
         $pid = sprintf("%d", $_POST['pid']);
         if(delete_post_meta($pid, 'subscription_number')) {
+            delete_post_meta($pid, 'subscription-valid');
             print 'true';
             die;
         }
