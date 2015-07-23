@@ -17,6 +17,8 @@
 
     .candidates {
         float: left; 
+        max-height: 380px;
+        overflow: hidden;
 
         position: relative;
     
@@ -91,6 +93,8 @@
                     font-size: 20px;
                     color: $cor-verde;
                     font-weight: bold;
+                    text-transform: uppercase;
+
                }
 
 
@@ -109,6 +113,15 @@
                     font-weight: bold;
                     margin-top: 10px;
                     text-align: center;
+                    text-transform: uppercase;
+                    min-height: 60px;
+                    line-height: 60px;
+
+                    span {
+                        display: inline-block;
+                        vertical-align: middle;
+                        line-height: normal;
+                    }                   
                 }
 
                 .show-candidate-details {
@@ -172,7 +185,7 @@
         list-style: none;
         a {
             position: absolute;
-            top: 75px;
+            top: 110px;
             width: 40px;
             height: 83px;
             cursor: pointer;

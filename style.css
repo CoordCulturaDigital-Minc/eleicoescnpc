@@ -2460,6 +2460,8 @@ footer.site-footer div {
   position: relative; }
   .candidates-content .candidates {
     float: left;
+    max-height: 380px;
+    overflow: hidden;
     position: relative; }
     .candidates-content .candidates .candidate {
       display: block;
@@ -2514,7 +2516,8 @@ footer.site-footer div {
         .candidates-content .candidates .candidate .candidate-details .candidate-name {
           font-size: 20px;
           color: #125b26;
-          font-weight: bold; }
+          font-weight: bold;
+          text-transform: uppercase; }
       .candidates-content .candidates .candidate .candidate-text {
         display: block;
         clear: both;
@@ -2525,7 +2528,14 @@ footer.site-footer div {
           font-size: 22px;
           font-weight: bold;
           margin-top: 10px;
-          text-align: center; }
+          text-align: center;
+          text-transform: uppercase;
+          min-height: 60px;
+          line-height: 60px; }
+          .candidates-content .candidates .candidate .candidate-text .candidate-name span {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: normal; }
         .candidates-content .candidates .candidate .candidate-text .show-candidate-details {
           display: inline-block;
           margin: 10px 0 0 0;
@@ -2564,7 +2574,7 @@ footer.site-footer div {
     list-style: none; }
     .candidates-content .flex-direction-nav li a {
       position: absolute;
-      top: 75px;
+      top: 110px;
       width: 40px;
       height: 83px;
       cursor: pointer;
