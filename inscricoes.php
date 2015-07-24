@@ -165,7 +165,7 @@ if(is_user_logged_in()) {
 
 		if( $valid_cpf !== true || $valid_birth !== true ) : ?>
 			<?php
-			echo "<div class='error'>Atenção! Você não pode se canidatar!<br/>";
+			echo "<div class='error'>Atenção! Você não pode se candidatar!<br/>";
 
 			if( isset( $register_errors['birth'] ) )
 				echo $register_errors['birth'] . "<br/>";

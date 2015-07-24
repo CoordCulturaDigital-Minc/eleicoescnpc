@@ -928,7 +928,7 @@ class Filter {
 class Validator {
     public $fields_rules = array(
         'register' => array(
-            'user_cpf' => array('not_empty','is_a_valid_cpf', 'user_cpf_does_not_exist', 'cpf_not_in_blacklist', 'cpf_exists_in_receita'),
+            'user_cpf' => array('not_empty','is_a_valid_cpf', 'user_cpf_does_not_exist', 'cpf_not_in_blacklist', 'cpf_not_in_list_two_years', 'cpf_exists_in_receita'),
             'user_name' => array('not_empty'),
             'user_email' => array('not_empty','is_valid_email','is_email_does_not_exist'),
             'user_password' => array('not_empty'),
@@ -952,7 +952,7 @@ class Validator {
             'candidate-confirm-data' => array('not_empty')
         ),
         'extra' => array(
-            'user_cpf' => array('cpf_not_in_blacklist'),
+            'user_cpf' => array('cpf_not_in_blacklist', 'cpf_not_in_list_two_years'),
             'user_birth' => array('is_a_valid_date','is_a_valid_birth')
         )
     );
@@ -1103,6 +1103,25 @@ class Validator {
 		
         return true; 
 	}
+
+    static function cpf_not_in_list_two_years($c, $user_type=null) {
+     
+        if( $user_type == 'eleitor')
+            return true;
+
+        if( empty($c) )
+            return 'Cpf não informado';
+
+        $blacklist = get_theme_option('delegates_two_years');
+
+        if( !empty( $blacklist) ) {
+
+            if( in_array($c, $blacklist) )
+                return 'Conforme item x(2 anos), do edital, você não pode se candidatar!'; //TODO alterar o texto
+        }
+        
+        return true; 
+    }
 
     static function is_a_valid_cep($c) {
         if(preg_match('/^\d\d\d\d\d-\d\d\d$/', $c)) {

@@ -31,6 +31,7 @@ function theme_options_validate_callback_function($input) {
 
     //$input['slug_updates'] = sanitize_title($input['slug_updates']);
     $input['candidatos_blacklist'] = explode(',', $input['candidatos_blacklist']);
+    $input['delegates_two_years'] = explode(',', $input['delegates_two_years']);
     // $input['limite_orcamento'] = preg_replace('/\D/', '', $input['limite_orcamento']);
     return $input;
 
@@ -128,8 +129,8 @@ function theme_options_page_callback_function() {
 
         <h3>Lista de delegados eleitos por 2 vezes nos últimos anos</h3>
         
-          <label for="delegates_two_year"><strong>Informe o CPF dos delegados, separados por vírgula. Exemplo: (999.9999.999-99, 888.888.888-88)</strong></label><br/>
-          <textarea id="delegates_two_year" name="theme_options[cdelegates_two_year]" rows="5" cols="60" ><?php echo htmlspecialchars(implode(",", $options['delegates_two_year'])); ?></textarea>
+          <label for="delegates_two_years"><strong>Informe o CPF dos delegados, separados por vírgula. Exemplo: (999.9999.999-99, 888.888.888-88)</strong></label><br/>
+          <textarea id="delegates_two_years" name="theme_options[delegates_two_years]" rows="5" cols="60" ><?php echo htmlspecialchars(implode(",", $options['delegates_two_years'])); ?></textarea>
           <br/><br/>
         
         <h3>Inscrições</h3>
