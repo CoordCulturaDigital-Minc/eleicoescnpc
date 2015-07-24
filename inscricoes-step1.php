@@ -51,7 +51,7 @@
 				</div><!--
 
 				--><div class="col-md-3 col-xs-5 grid__item">
-					<label>Afrodescente?</label>
+					<label>Afrodescendente</label>
 				</div>
 				<div class="col-md-7 col-xs-7 grid__item">
 					<?php $candidate_race = isset(  $f['candidate-race'] ) ?  $f['candidate-race'] : ''; ?>

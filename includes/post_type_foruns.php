@@ -44,6 +44,7 @@ class Foruns
             'capability_type' => 'post',
             //'hierarchical' => true,
             'menu_position' => 6,
+             'supports'      => array( 'comments' ),
             'has_archive' => true //se precisar de arquivo
             //'taxonomies' => array('taxonomia')
             )

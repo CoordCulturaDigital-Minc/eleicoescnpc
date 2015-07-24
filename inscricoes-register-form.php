@@ -82,7 +82,7 @@
 				</div><!--
 
 				--><div class="grid__item  col-md-6 col-xs-12">
-					<label for="user_birth">Data Nascimento</label>
+					<label for="user_birth">Data de Nascimento</label>
 					<input id="user_birth" type="text" name="user_birth" value="<?php echo isset($_POST['user_birth']) ?  $_POST['user_birth'] : '' ?>" />
 					<div id="user_birth-error" class="field__error"></div>
 				</div><!--
