@@ -42,7 +42,7 @@ function theme_options_page_callback_function() {
 
 ?>
   <div class="wrap span-20">
-    <h2>Oções</h2>
+    <h2>Opções</h2>
 
     <form action="options.php" method="post" class="clear prepend-top">
       <?php settings_fields('theme_options_options'); ?>
@@ -50,59 +50,86 @@ function theme_options_page_callback_function() {
 
       <div class="span-20 ">
 
-        <h3>Textos da página de inscrição</h3>
-
+        
         <div class="span-6 last">
+
+          <h3>Textos da página de registro</h3>
 
           <!-- TEXTAREA -->
           <label for="txt_visitante"><strong>Para usuários não cadastrados, formulário inicial</strong></label><br/>
           <textarea id="txt_visitante" name="theme_options[txt_visitante]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_visitante']); ?></textarea>
           <br/><br/>
 
-          <label for="txt_candidato"><strong>Para candidatos, na lateral</strong></label><br/>
+          <h3>Textos da inscrição do candidato</h3>
+
+          <label for="txt_candidato"><strong>Para candidatos, no topo do formúlário</strong></label><br/>
           <textarea id="txt_candidato" name="theme_options[txt_candidato]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_candidato']); ?></textarea>
           <br/><br/>
 
-          <label for="txt_candidato_step1"><strong>Para candidatos, Etapa 1</strong></label><br/>
-          <textarea id="txt_candidato_step1" name="theme_options[txt_candidato_step1]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_candidato_step1']); ?></textarea>
-          <br/><br/>
-
-          <label for="txt_candidato_topo"><strong>Para candidatos, Etapa 2</strong></label><br/>
+          <label for="txt_candidato_topo"><strong>Para candidatos, Topo</strong></label><br/>
           <textarea id="txt_candidato_topo" name="theme_options[txt_candidato_topo]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_candidato_topo']); ?></textarea>
           <br/><br/>
 
-          <label for="txt_candidato_step2"><strong>Para candidatos, Etapa 3</strong></label><br/>
+          <label for="txt_candidato_step1"><strong>Cabeçalho para candidatos, Etapa 1</strong></label><br/>
+          <textarea id="txt_candidato_step1" name="theme_options[txt_candidato_step1]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_candidato_step1']); ?></textarea>
+          <br/><br/>
+
+          <label for="txt_candidato_step2"><strong>Cabeçalho para candidatos, Etapa 2</strong></label><br/>
           <textarea id="txt_candidato_step2" name="theme_options[txt_candidato_step2]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_candidato_step2']); ?></textarea>
           <br/><br/>
 
-          <label for="txt_candidato_step3a"><strong>Para candidatos, Etapa 4, antes de clicar no "Conferir"</strong></label><br/>
+          <label for="txt_candidato_step3a"><strong>Cabeçalho para candidatos, Etapa 3</strong></label><br/>
           <textarea id="txt_candidato_step3a" name="theme_options[txt_candidato_step3a]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_candidato_step3a']); ?></textarea>
           <br/><br/>
 
-          <label for="txt_candidato_step3"><strong>Para candidatos, Etapa 4, depois de clicar no "Conferir" (caixa amarela)</strong></label><br/>
+          <label for="txt_candidato_step3"><strong>Para candidatos, Etapa 3, antes de finalizar candidatura (caixa amarela)</strong></label><br/>
           <textarea id="txt_candidato_step3" name="theme_options[txt_candidato_step3]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_candidato_step3']); ?></textarea>
           <br/><br/>
 
-          <label for="txt_candidato_step4"><strong>Para candidatos, Etapa 4, quando aparece o número de inscrição</strong></label><br/>
+          <label for="txt_candidato_step4"><strong>Conteúdo para candidatos, Etapa 3, finalizada a inscrição</strong></label><br/>
           <textarea id="txt_candidato_step4" name="theme_options[txt_candidato_step4]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_candidato_step4']); ?></textarea>
           <br/><br/>
 
-          <label for="txt_candidato"><strong>Para candidatos (entra no email aos candidatos que acabaram se inscrever)</strong></label><br/>
+        <h3>Texto para E-mail</h3>
+
+          <label for="txt_candidato"><strong>Para candidatos (entra no e-mail aos candidatos que acabaram se inscrever)</strong></label><br/>
           <textarea id="txt_candidato" name="theme_options[txt_mail_candidato]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_mail_candidato']); ?></textarea>
           <br/><br/>
 
+        <h3>Textos dos fóruns</h3>
+          
+            <label for="txt_forum_is_voter"><strong>Para eleitor que é da Setorial e UF</strong></label><br/>
+            <textarea id="txt_forum_is_voter" name="theme_options[txt_forum_is_voter]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_forum_is_voter']); ?></textarea>
+            <br/><br/>
+
+            <label for="txt_forum_is_not_voter"><strong>Para não eleitor da Setorial e UF</strong></label><br/>
+            <textarea id="txt_forum_is_not_voter" name="theme_options[txt_forum_is_not_voter]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_forum_is_not_voter']); ?></textarea>
+            <br/><br/>
+
+            <label for="txt_forum"><strong>Para qualquer usuário</strong></label><br/>
+            <textarea id="txt_forum" name="theme_options[txt_forum]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_forum']); ?></textarea>
+            <br/><br/>
+
+        <h3>Textos para curadores</h3>
+        
           <label for="txt_curador"><strong>Para curadores, na lateral</strong></label><br/>
           <textarea id="txt_curador" name="theme_options[txt_curador]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_curador']); ?></textarea>
           <br/><br/>
 
-          <label for="txt_admin"><strong>Para administrador, na lateral</strong></label><br/>
+          <!-- <label for="txt_admin"><strong>Para administrador, na lateral</strong></label><br/>
           <textarea id="txt_admin" name="theme_options[txt_admin]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_admin']); ?></textarea>
-          <br/><br/>
+          <br/><br/> -->
 
         <h3>Delegados Natos</h3>
         
           <label for="candidatos_blacklist"><strong>Informe o CPF dos delegados natos, separados por vírgula. Exemplo: (999.9999.999-99, 888.888.888-88)</strong></label><br/>
           <textarea id="candidatos_blacklist" name="theme_options[candidatos_blacklist]" rows="5" cols="60" ><?php echo htmlspecialchars(implode(",", $options['candidatos_blacklist'])); ?></textarea>
+          <br/><br/>
+
+        <h3>Lista de delegados eleitos por 2 vezes nos últimos anos</h3>
+        
+          <label for="delegates_two_year"><strong>Informe o CPF dos delegados, separados por vírgula. Exemplo: (999.9999.999-99, 888.888.888-88)</strong></label><br/>
+          <textarea id="delegates_two_year" name="theme_options[cdelegates_two_year]" rows="5" cols="60" ><?php echo htmlspecialchars(implode(",", $options['delegates_two_year'])); ?></textarea>
           <br/><br/>
         
         <h3>Inscrições</h3>

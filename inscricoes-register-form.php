@@ -9,10 +9,10 @@
 		</div>
 	<?php endif; ?>
 	<div class="form-step-content">
-		<div class="grid">
+		<div class="row">
 			<span id="register-error" class="form-error hidden"></span>
 			<div id="step-1-register">
-				<div class="grid__item  one-whole">
+				<div class="grid__item  col-md-12 col-xs-12">
 					<?php $user_tipo = isset($_POST['user_tipo']) ? $_POST['user_tipo'] : '' ?>
 
 					<input id="tipo_eleitor" class="user_type hidden" type="radio" name="user_tipo" value="eleitor" <?php checked( $user_tipo, 'eleitor' ); ?> />
@@ -27,19 +27,23 @@
 			
 			<div id="step-2-register">
 				<h2>Selecione seu estado e setorial</h2>
-				<div class="grid__item  one-whole">
+				<div class="grid__item  col-md-12 col-xs-12 hidden-xs">
 					<?php include('includes/mapa.php'); ?>
 				</div>
 				
-				<div id="step-2-dropdown">
-					<div class="grid__item  one-half">
+				<div id="step-2-dropdown hidden-lg">
+					<div class="grid__item col-xs-2">
 						<label for="user_UF">UF</label>
+					</div>
+					<div class="grid__item col-xs-10">
 						<?php $user_UF = isset($_POST['user_UF']) ? $_POST['user_UF'] : '' ?>
 						<?php echo dropdown_states('user_UF', $user_UF, true); ?>
 					</div><!--
 
-					--><div class="grid__item  one-half">
+					--><div class="grid__item col-xs-2">
 						<label for="user_setorial">Setorial</label>
+					</div>
+					<div class="grid__item col-xs-10">
 						<?php $user_setorial = isset($_POST['user_setorial']) ?  $_POST['user_setorial'] : '' ?>
 						<?php echo dropdown_setoriais('user_setorial', $user_setorial, true); ?>
 					</div>
@@ -47,43 +51,43 @@
 			</div>
 
 			<div id="step-3-register">
-				<div class="grid__item  one-half">
+				<div class="grid__item  col-md-12 col-xs-12">
 					<label for="user_cpf">CPF</label>
 					<input id="user_cpf" type="text" name="user_cpf" value="<?php echo isset($_POST['user_cpf']) ?  $_POST['user_cpf'] : '' ?>" />
 					<div id="user_cpf-error" class="field__error"></div>
 
 				</div><!--
 
-				--><div class="grid__item  one-whole">
+				--><div class="grid__item  col-md-12 col-xs-12">
 					<label for="user_name">Nome</label><div class="field__note" >Seu nome será preenchido automaticamente</div>
 					<input id="user_name" type="text" name="user_name" value="<?php echo isset($_POST['user_name']) ?  $_POST['user_name'] : '' ?>" readonly/>
 				</div><!--
 
-				--><div class="grid__item  one-whole">
-					<label for="user_email">Seu email</label>
+				--><div class="grid__item  col-md-12 col-xs-12">
+					<label for="user_email">Seu e-mail</label>
 					<input id="user_email" type="email" name="user_email" value="<?php echo isset($_POST['user_email']) ?  $_POST['user_email'] : '' ?>" />
 					<div id="user_email-error" class="field__error"></div>
 				</div><!--
 
-				--><div class="grid__item  one-half">
+				--><div class="grid__item  col-md-6 col-xs-12">
 					<label for="user_password">Senha</label>
 					<input id="user_password" type="password" name="user_password" />
 					<div id="user_password-error" class="field__error"></div>
 				</div><!--
 
-				--><div class="grid__item  one-half">
+				--><div class="grid__item  col-md-6 col-xs-12">
 					<label for="user_password_confirm">Confirme a senha</label>
 					<input id="user_password_confirm" type="password" name="user_password_confirm" />
 					<div id="user_password_confirm-error" class="field__error"></div>
 				</div><!--
 
-				--><div class="grid__item  one-half">
+				--><div class="grid__item  col-md-6 col-xs-12">
 					<label for="user_birth">Data Nascimento</label>
 					<input id="user_birth" type="text" name="user_birth" value="<?php echo isset($_POST['user_birth']) ?  $_POST['user_birth'] : '' ?>" />
 					<div id="user_birth-error" class="field__error"></div>
 				</div><!--
 
-				--><div class="grid__item  one-half"><br>
+				--><div class="grid__item  col-md-6 col-xs-12"><br>
 					<input id="user_confirm_informations" type="checkbox" name="user_confirm_informations" />
 					<label for="user_confirm_informations">Afirmo que todos os dados citados acima são verdadeiros.</label>
 					<div id="user_confirm_informations-error" class="field__error"></div>

@@ -132,6 +132,7 @@
 
 	label {
 	    width: 45%;
+	    max-width: 200px;
 	    padding: 40px;
 	    margin-right: 10%;
 	
@@ -145,6 +146,7 @@
 	    
 	    font-size: 1.4em;
 	    font-size: 22px;
+
 	    
 	    &:last-child {
 		    margin-right: 0px;
@@ -204,17 +206,22 @@
 
 	.avatar {
 		text-align: center;
-		label {
+		label {display: none;}
+
+		.js-current {
+			display: inline-block;
 			min-height: 150px;
 			min-width: 150px;
 			max-height: 200px;
 			max-width: 200px;
 			border: 2px solid #eaeaea;
 			overflow: hidden;
-		}
+			margin-bottom: 0px;
+		
 		img {
 			width: 100%;
 			height: auto;
+		}
 		}
 	}
 
@@ -228,19 +235,21 @@
 	    display: inline;
 	}
 
-	label {
-		color: 888;
+	.js-current {
+		color: #888;
+		margin-bottom: 50px;
 		a {
-			background: #125b26;
+			background: rgba(55, 55, 55, 0.26);
 			border-radius: 2px;
-			color: #fff;
+			color: #073ABE;
 			font-size: 16px;
 			line-height: 1;
 			padding: 4px 8px;
-			margin-left: 5px;
-			opacity: 0.5;
-			float: right;
-
+			/* opacity: 0.5; */
+			display: inline-block;
+			margin-bottom: 10px;
+			text-decoration: underline;
+			
 			&:hover {
 				opacity: 1;
 			}
@@ -267,6 +276,7 @@
 	select {
 	  height: 50px;
 	  font-size: 20px;
+	  width: 100%;
 	  min-width: 200px;
 	  background: transparent;
 	}
@@ -294,6 +304,17 @@
 	padding: 20px;
     margin-bottom: 3rem;
     padding: 1.5rem;
+}
+
+#formstep-2 .grid__item .field__note{
+
+	margin-top: 5px;
+}
+
+#formstep-2 .button {
+	background: rgba(5, 63, 5, 0.93);
+
+
 }
 
 #formstep-3 .textcenter {

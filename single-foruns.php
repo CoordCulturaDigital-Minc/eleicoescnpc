@@ -13,6 +13,8 @@ get_header(); ?>
 		<?php while ( have_posts() ) : the_post(); ?>
 				<?php // Lista de candidatos ?>
 				<?php
+				global $current_user;
+
 				$uf = substr($post->post_name, 0, 2);
 
 				$setorial = substr($post->post_name, 3);
@@ -20,11 +22,23 @@ get_header(); ?>
 				$candidates = Foruns::get_candidates($uf, $setorial);
 
 				$original_post = $post;
+
 				?>
-				
+			
 				<header>
+					<div class="section-description">
+						<p>Olá <strong><?php echo $current_user->display_name; ?>!</strong> Este é o fórum de debates do Setorial de <strong><?php echo substr($post->post_title, 4); ?> </strong>do estado <strong><?php echo get_state_name_by_uf( substr($post->post_title, 0, 2) ); ?></strong>.</p>
+						<?php if( is_user_this_uf_setorial($post->post_name) ) : ?>
+							<p><?php echo nl2br(get_theme_option('txt_forum_is_voter')); ?></p>
+						<?php else: ?>
+							<p><?php echo nl2br(get_theme_option('txt_forum_is_not_voter')); ?></p>
+						<?php endif; ?>
+						<p>
+						<?php echo nl2br(get_theme_option('txt_forum')); ?></p>
+					</div>
+
 					<h2 class="entry-title">Setorial de <?php echo substr($post->post_title, 4); ?> do <?php echo substr($post->post_title, 0, 2); ?></h2>
-					<h1 class="entry-title-candidate">Canditados/as</h1>
+					<h1 class="entry-title-candidate">Canditados(as)</h1>
 				</header>
 
 				<?php if ($candidates->have_posts()):  ?>
@@ -109,15 +123,16 @@ get_header(); ?>
 					<div class="candidate-not-found">
 						<i class="fa fa-question"></i>
 						<p>Não há candidatos(as) para esta vaga!<br>
-						Deseja se candidatar?</p>
-						<a href="<?php echo site_url('/inscricoes/'); ?>" id="registrar" class="button">Candidatar</a>
+						<?php if( is_user_this_uf_setorial($post->post_name) ) : ?>
+							Deseja se candidatar?</p>
+							<a href="<?php echo site_url('/inscricoes/'); ?>" id="registrar" class="button">Candidatar</a>
+						<?php endif; ?>
 					</div>
 				<?php endif; ?>
 
 				<?php $post = $original_post; ?>
 			
 			
-				
 				<div class="clearfix"></div>
 				<?php // Discussão ?>
 				<br><br>

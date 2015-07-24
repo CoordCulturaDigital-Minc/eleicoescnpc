@@ -9,7 +9,9 @@
 
                         <?php $user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $user_ID ) ); ?>
 
-                        <li class="menu__title"><?php printf( __('Hello, %s!', 'historias' ), $current_user->display_name); ?></li>
+                        <?php preg_match( '/^([^\s]+)/', $current_user->display_name, $matches); ?>
+                        
+                        <li class="menu__title"><?php printf( __('Hello, %s!', 'historias' ), $matches[0]); ?></li>
                         <?php if ( current_user_can( 'level_10' ) ) : ?>
                            
                             <li><a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
@@ -40,7 +42,7 @@
 
              <div class="login-form-menu">
                 <?php wp_login_form(
-                    array(      'label_username' => __( 'Email' ),
+                    array(      'label_username' => __( 'E-mail' ),
                                 'label_password' => ('Senha'),
                                 'label_log_in' => ('Entrar'),
                                 'form_id'        => 'login-menu',

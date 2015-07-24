@@ -1,4 +1,9 @@
 
+
+
+
+
+
 section {
 	float: right;
 	width: 65.63%;
@@ -7,6 +12,18 @@ section {
 	&.content--sidebarless {
 		float: none;
 		width: 100%;
+	}
+
+	.section-description {
+		color: $cor-verde;
+	 	border: 1px solid #EDE9E9;
+		padding: 10px;
+		border-radius: 10px;
+		margin-bottom: 30px;
+		p {
+			margin: 3px 0px;
+			line-height: 1.5;
+		}
 	}
 
 	article {
@@ -50,6 +67,7 @@ section {
 			span.entry-date {
 				font-size: 14px;
 			}
+
 		}
 		
 		.featured-media {
@@ -172,6 +190,12 @@ section {
     }
 }
 
+
+@media only screen and (max-width: 40em) {
+    section {
+	    width: 100%;
+	}
+}
 
 .pagination {	
 	width: 100%;

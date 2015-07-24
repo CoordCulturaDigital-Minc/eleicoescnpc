@@ -634,11 +634,12 @@ function inscricoes_file_upload_field_template($f, $step, $label, $field, $descr
     if( $required )
         $required = 'required';
     ?>
-    <div class="">
-        <label><?php echo $label; ?> <span class="js-current"><?php if (isset($f[$field])) echo inscricoes_get_uploaded_template($f[$field]); ?></span></label>
+    <div class="upload-template">
+        <label><?php echo $label; ?></label>
         <input id="<?php echo $field; ?>" class="<?php echo $required ?>" type="hidden" name="step<?php echo $step; ?>-<?php echo $field; ?>" value="<?php echo isset($f[$field])?$f[$field]:'';?>" />
         <div class="field-status <?php print isset($f[$field])?'completo':'invalido'?>"></div>
 
+        <span class="js-current"><?php if (isset($f[$field])) echo inscricoes_get_uploaded_template($f[$field]); ?></span>
         <div id="<?php echo $field; ?>-upload" class="file-upload" data-field="<?php echo $field; ?>">
             <div class="js-upload-button  u-pull-left  button"><?php echo( empty( $button_label ) ) ? __('Select File', 'historias') : $button_label; ?></div>
             <div class="js-feedback  feedback  u-pull-right"></div>
@@ -1000,14 +1001,14 @@ class Validator {
         if(filter_var($e, FILTER_VALIDATE_EMAIL) === $e) {
             return true;
         }
-        return __('O email não tem um formato válido');
+        return __('O e-mail não tem um formato válido');
     }
 
     /** Return true if supplied email is valid or give an error message otherwise */
     static function is_email_does_not_exist($e) {
 
         if( email_exists( $e ) ) {
-            return __('Já existe um usuário com o email informado'); 
+            return __('Já existe um usuário com o e-mail informado'); 
         }
         return true;
        
@@ -1141,9 +1142,9 @@ class Validator {
         $interval = date_diff( date_create($birth), date_create($today) );
 
         if($interval->format("%a") < 6574 && $user_type == 'candidato' )
-            return __( 'A idade mínima para candidado é de 18 anos.');
+            return __( 'A idade mínima para ser candidato é de 18 anos.');
         else if($interval->format("%a") < 5844 && $user_type == 'eleitor')
-            return __( 'A idade mínima para eleitor é de 16 anos.');
+            return __( 'A idade mínima para ser eleitor é de 16 anos.');
 
         return true;
     }

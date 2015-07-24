@@ -106,3 +106,15 @@ function get_number_of_votes_by_project($project_id) {
 	global $wpdb;
 	return $wpdb->get_var("SELECT COUNT(user_id) FROM $wpdb->usermeta WHERE meta_key = 'vote-project-id' AND meta_value = $project_id");
 }
+
+
+// verifica se o usuário atual é deste estado e setorial
+function is_user_this_uf_setorial( $uf_setorial ) {
+	$user = wp_get_current_user();
+	$user_uf_setorial = strtolower( get_user_meta($user->ID, 'uf-setorial', true) );
+	
+	if( $user_uf_setorial == $uf_setorial )
+		return true;
+
+	return false;
+}

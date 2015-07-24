@@ -10,11 +10,16 @@
     display: inline-block;
 
     padding-bottom: 1.5rem;
-    padding-left: 1.5rem;
+   
 
     vertical-align: top;
 }
 
+@media screen and (min-width: 40em) {
+    .grid__item {
+        padding-left: 1.5rem;
+    }
+}
 .one-whole {
     clear: both;
 
@@ -268,9 +273,12 @@ img.aligncenter {
     display: none;
 }
 
+
+
 @media only screen and (min-width: 40em) {
     .site-wrap {
         overflow: visible;
+        
 
         margin: 0px auto;
     }
@@ -290,5 +298,11 @@ img.aligncenter {
     .box--news {
         width: 34%;
         margin-top: -1.5rem;
+    }
+}
+
+@media only screen and (max-width: 40em) {
+    .site-wrap {
+        padding: 0 1.4rem;
     }
 }

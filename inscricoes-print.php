@@ -44,7 +44,7 @@ if($pid) {
 	<script type="text/javascript">window.onload=function(){window.print();};</script>
 </head>
 <body>
-	<h1>Fóruns Setorias - CNPC</h1>
+	<h1>Fóruns Setoriais - CNPC</h1>
 	<h3>Avatar</h3>
 		<?php echo wp_get_attachment_image($avatar_file_id, 'avatar_candidate'); ?>
 	<h3>Pré-Candidato</h3>
@@ -59,7 +59,7 @@ if($pid) {
 		<li><strong>Estado</strong>: <?php echo $user_meta['UF']; ?></li>
 		<li><strong>E-mail</strong>: <?php echo $user->user_email;?></li>
 		<li><strong>Telefone 1</strong>: <?php echo $f['candidate-phone-1'];?></li>
-		<li><strong>Etnia</strong>: <?php echo $f['candidate-race'];?></li>
+		<li><strong>Afrodescendente</strong>: <?php echo( $f['candidate-race'] == 'true') ? 'Sim' : 'Não';?></li>
 		<li><strong>Sexo</strong>: <?php echo $f['candidate-genre'];?></li>
 		<li><strong>Breve experiência no setor</strong>: <?php echo $f['candidate-experience'];?></li>
 		<li><strong>Exposição de motivos para a candidatura</strong>: <?php echo $f['candidate-explanatory'];?></li>

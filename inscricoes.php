@@ -87,6 +87,7 @@ if(is_user_logged_in()) {
 	exit;
 
 } else {
+	 wp_enqueue_script( 'responsive-nav', get_template_directory_uri() . '/js/responsive-nav.min.js', array( 'jquery' ), '1.0.32', true );
 	wp_enqueue_script('jquery-maskedinput', get_setoriaiscnpc_baseurl().'js/jquery.maskedinput-1.3.min.js', array('jquery'));  // funciona
 	wp_enqueue_script('cadastro', get_setoriaiscnpc_baseurl().'js/cadastro.js', array('jquery'));
 	wp_localize_script('cadastro', 'cadastro', array('ajaxurl' => admin_url('admin-ajax.php'), 'today' => date('Y-m-d') ));
@@ -180,7 +181,7 @@ if(is_user_logged_in()) {
 				<div class="form-eleitor">
 					<div class="candidate-not-found">
 						<i class="fa fa-question"></i>
-						<p>Você já está inscrito/a mas não é candidato/a<br>
+						<p>Você já está inscrito(a) mas não é candidato(a)<br>
 						Deseja se candidatar?</p>
 						<a href="#" id="eleitor-candidate-question" class="button">Candidatar</a>
 					</div>
@@ -217,9 +218,9 @@ if(is_user_logged_in()) {
 					<?php if( $step == 'step-1' || $step == '' ) : ?>
 						<div id="formstep-1" class="form-step">
 							<header class="step__head">
-								<h3 class="step__title">Candidato/a <?php if ($step1['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+								<h3 class="step__title">Candidato(a) <?php if ($step1['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
 								<div class="step__about">
-									<?php echo nl2br( get_theme_option( 'txt_candidato_topo' ) ); ?>
+									<?php echo nl2br( get_theme_option( 'txt_candidato_step1' ) ); ?>
 								</div>
 								<div class="step-status <?php print $step1['complete']?' completo':'';?>"></div>
 							</header>
@@ -234,9 +235,9 @@ if(is_user_logged_in()) {
 
 						<div id="formstep-2" class="form-step">
 							<header class="step__head">
-								<h3 class="step__title">Candidato/a <?php if ($step2['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+								<h3 class="step__title">Candidato(a) <?php if ($step2['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
 								<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
-								<div <?php echo ($step1['complete'] )?' style="display:none"':''; ?> class="step__about">
+								<div class="step__about">
 									<?php echo nl2br(get_theme_option('txt_candidato_step2')); ?>
 								</div>
 								<span id="formstep-2-error" class="form-error"></span>
@@ -262,7 +263,7 @@ if(is_user_logged_in()) {
 							<header class="step__head">
 								<h3 class="step__title">Conferir Dados e Finalizar Inscrição <?php if ( $subscription_number ) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
 								<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
-								<div <?php echo ($step1['complete'] )?' style="display:none"':''; ?> class="step__about">
+								<div class="step__about">
 									<?php echo nl2br(get_theme_option('txt_candidato_step3a')); ?>
 								</div>
 								<span id="formstep-3-error" class="form-error"></span>

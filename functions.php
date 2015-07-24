@@ -616,7 +616,7 @@ function get_state_name_by_uf( $uf ) {
 function get_setoriais() {
 
 	return array(
-        'arquitetura-urbanismo'     => 'Aquitetura e Urbanismo',
+        'arquitetura-urbanismo'     => 'Arquitetura e Urbanismo',
         'arquivos'                  => 'Arquivos',
         'arte-digital'              => 'Arte Digital',
         'artes-visuais'             => 'Artes Visuais',

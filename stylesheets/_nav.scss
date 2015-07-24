@@ -10,9 +10,7 @@ nav.access {
 	text-transform: uppercase;
 	font-family: $fonte-principal-bold;
 	background-color: #1C7033;
-	position: relative !important;
-
-	@include linear-vertical-gradient($cor-verde-inicio, $cor-verde-fim);
+	position: relative;
     
     &.opened {
 	    max-height: 9999px;
@@ -162,7 +160,20 @@ nav.access {
         width: inherit;
     }
 
+   	nav {
+   		&.access {
+			@include linear-vertical-gradient($cor-verde-inicio, $cor-verde-fim);
+			padding: 20px 54px;
+			max-width: 1080px;
+			text-transform: uppercase;
+			font-family: $fonte-principal-bold;
+			background-color: #1C7033;
+			position: relative;
+    	}
+   	}
+
     .menu {
+
 	    .current_page_item > .sub-menu,
 		.current-menu-ancestor > .sub-menu {
 	        position: absolute;
@@ -175,4 +186,41 @@ nav.access {
 	        }
 	    }
     }
+
+   
+}
+
+@media screen and (max-width: 40em) {
+	 a.nav-toggle {
+	 	height: 40px;
+    	background-color: $cor-verde-fim;
+    	line-height: 40px;
+    }
+
+   	nav.access ul  {  
+    	line-height: 2.2;
+    }
+
+    nav.access .menu--main,
+    nav.access .menu--user {
+    	float: none;
+    }
+
+    nav.access .menu--main {
+    	padding-bottom: 50px;
+    }
+    nav.access .menu--user li,
+    nav.access .menu--main li {
+    	float: none;
+    	text-align: center;
+    	display: block;
+    	margin: 0px;
+    	display: block;
+
+    }
+    nav.access .menu--main a,
+    nav.access .menu--user a  {
+    	margin: 0px;
+    }
+
 }

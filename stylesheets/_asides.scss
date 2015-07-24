@@ -6,6 +6,13 @@ div.widget-area {
     width: 31.05%;
 }
 
+@media only screen and (max-width: 40em) {
+    div.widget-area {
+	    width: 100%;
+	}
+}
+
+
 aside {
     color: $cor-marrom;
     margin-bottom: 2rem;

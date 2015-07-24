@@ -33,6 +33,7 @@
 	}
 }
 
+
 .feature__author {
     font-family: 'Sanchez', serif;
     font-size: 1.13rem;
@@ -274,6 +275,30 @@
         border-bottom: 2px solid #596c18;
     }
 
+}
+
+
+@media screen and (max-width: 40em) {
+
+
+    .features--subscriptions {
+        .featured__image {
+            
+            img {
+                border-radius: 3px;
+            }
+        }
+
+        .feature__title {
+            font-size: 30px;
+            top: 10px;
+        }
+
+        .feature__status {
+            font-size: 18px;    
+            top: 60px;  
+        }
+    }
 }
 
 .featured__image {
