@@ -1727,45 +1727,58 @@ aside {
     font-size: 16px; }
 
 header#header {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   min-height: 150px; }
-  header#header h1 {
-    display: none; }
   header#header a {
     margin-left: -40px; }
+  header#header h1 {
+    display: none; }
   header#header form {
     height: 39px;
-    margin-top: 70px;
-    position: relative;
+    margin-top: 100px;
     width: 100%;
-    max-width: 300px;
-    border: 1px solid #bababa;
-    border-radius: 3px; }
+    border: none;
+    padding: 0px;
+    float: right; }
     header#header form input[type="search"] {
+      width: 71%;
       float: left;
-      width: 70%;
-      padding: 12px;
-      background-color: #fff;
+      padding: 13px 4% 12px 4%;
       margin: 0px;
+      background-color: transparent;
       color: #bab8b8;
       font-weight: normal;
       font-size: 13px;
-      border: none; }
+      border: 1px solid #bababa;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px; }
+      header#header form input[type="search"]:hover {
+        background-color: #fff; }
     header#header form button {
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      width: 62px;
-      height: 37px;
+      display: inline-block;
+      width: 20%;
+      height: 40px;
       background-color: #175823;
+      margin: 0px;
+      padding: 0px;
       color: #f4f4f4;
-      margin-left: 5px;
-      font-size: 19px; }
+      font-size: 19px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px; }
       header#header form button, header#header form button:hover {
         border: none; }
       header#header form button:hover {
         background-color: #1c7133;
         cursor: pointer; }
+      header#header form button i {
+        font-size: 25px; }
+  header#header .contact {
+    text-align: right;
+    margin-top: 30px; }
+    header#header .contact a {
+      color: #125b26; }
+      header#header .contact a i {
+        font-size: 18px; }
 
 .site-wrap.nav {
   width: 100%;
@@ -1928,7 +1941,7 @@ nav.access {
   nav.access .menu--user a {
     margin: 0px; } }
 @media only screen and (min-width: 48em) {
-  header .csn {
+  header#header .csn {
     float: right;
     margin-left: 1.5rem;
     margin-right: -48px; } }
@@ -1941,6 +1954,13 @@ nav.access {
   .nav-toggle {
     display: none; } }
 @media only screen and (max-width: 40em) {
+  header#header a {
+    margin-left: 0px; }
+    header#header a img {
+      width: 100%; }
+  header#header form {
+    margin-top: 20px; }
+
   .js nav {
     clip: rect(0 0 0 0);
     max-height: 0;

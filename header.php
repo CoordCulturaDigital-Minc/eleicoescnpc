@@ -42,7 +42,7 @@
 		<header id="header" class="clearfix row">
 			<a href="#main" title="<?php esc_attr_e( 'Skip to content', 'historias' ); ?>" class="assistive-text"><?php _e( 'Skip to content', 'historias' ); ?></a>
 			
-			<div class="col-xs-8">
+			<div class="col-md-8 col-xs-12">
 				<a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
 		            <img src="<?php
 		                $logo = get_theme_mod('site_logo');
@@ -59,7 +59,10 @@
 		        </a>
 		    </div>
 	        
-			<div class="col-xs-4">
+			<div class="col-md-4 col-xs-12">
+			<div class="contact">
+				<a href="<?php bloginfo('url'); ?>/fale-conosco">Fale Conosco <i class="fa fa-envelope"></i></a>
+			</div>
 			<form id="search" role="search" method="get" action="<?php echo home_url( '/' ); ?>">
 	            <input id="s" type="search" value="Procurar por" name="s" onfocus="if (this.value == 'Procurar por') this.value = '';" onblur="if (this.value == '') {this.value = 'Procurar por';}" />        
 	            <button type="submit" value="Buscar" >

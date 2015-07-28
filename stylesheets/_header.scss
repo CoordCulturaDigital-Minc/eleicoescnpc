@@ -1,63 +1,81 @@
 header#header {
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 	min-height: 150px;
-	h1 {
-		display: none;
-		// margin-top: 20px;
-		// color: $cor-cinza-claro;
-		// font-family: Helvetica, sans-serif;
-		// font-weight: bold;
-		
-		// text-transform: uppercase;
-		
-		small {
-			// color: $cor-cinza-claro;
-			// text-transform: none;
-		}
-	}
+
 	a {
 		margin-left: -40px;
 	}
+
+	h1 {
+		display: none;
+		
+		small {
+		}
+	}
+
 	form {
 		height: 39px;
-	    margin-top: 70px;
-	    position: relative;
+	    margin-top: 100px;
 	    width: 100%;
-	    max-width: 300px;
-	    border: 1px solid #bababa;
-	    border-radius: 3px;
+	    border: none;
+	    padding: 0px;
+	    float: right;
 		
 		input[type="search"] {
+		    width: 71%;
 			float: left;
-		    width: 70%;
-		    padding: 12px;
-		    background-color: #fff;
+		    
+		    padding: 13px 4% 12px 4%;
 		    margin: 0px;
+
+		    background-color: transparent;
 		    color: #bab8b8;
+
 		    font-weight: normal;
 		    font-size: 13px;
-		    border: none;
-		}
-		button {
-			position: absolute;
-			top: 0px;
-			right: 0px;
-			width: 62px;
-			height: 37px;
-			background-color: #175823;
 
+		    border: 1px solid #bababa;
+		    border-top-left-radius: 3px;
+		    border-bottom-left-radius: 3px;
+			&:hover {
+				 background-color: #fff;
+			}
+		}
+
+		button {
+			display: inline-block;
+			width: 20%;
+			height: 40px;
+			background-color: #175823;
+			margin: 0px;
+			padding: 0px;
+			color: $cor-cinza-claro;
+			font-size: 19px;
+
+			border-top-right-radius: 5px;
+		    border-bottom-right-radius: 5px;
 			&, &:hover {
-				// background: none;
 				border: none;
 			}
-			
-			color: $cor-cinza-claro;
-			margin-left: 5px;
-			font-size: 19px;
-			
 			&:hover {
 			    background-color: #1c7133;
 			    cursor: pointer;
+			}
+
+			i {
+				font-size: 25px;
+			}
+		}
+	}
+
+	.contact {
+		text-align: right;
+		margin-top: 30px;
+		a{
+			color: $cor-verde;
+
+			i {
+				font-size: 18px;
 			}
 		}
 	}
@@ -68,11 +86,15 @@ header#header {
 // }
 
 @media only screen and (min-width: 48em) {
-	header .csn {
-        float: right;
-        margin-left: 1.5rem;
-        margin-right: -48px;
+	header#header {
+		.csn {
+	        float: right;
+	        margin-left: 1.5rem;
+	        margin-right: -48px;
+
+	    }
     }
+
 }
 
 @media screen and (min-width: 40em) {
@@ -89,6 +111,26 @@ header#header {
 }
 
 @media only screen and (max-width: 40em) {
+
+	header#header {
+
+		h1 {
+
+		}
+		a {
+			margin-left: 0px;
+			img	{
+				width: 100%;
+			}
+		}
+
+		form {
+			margin-top: 20px;
+		}
+
+    }
+
+
     .js nav {
         clip: rect(0 0 0 0);
         max-height: 0;
