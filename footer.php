@@ -16,27 +16,25 @@
 						href="https://www.flickr.com/photos/ministeriodacultura/" target="_blank" title="Flickr Cultura"></a>
 				</div>
 				
-				<div class="logos col-xs-10 col-xs-offset-1">
-<!--
-					<a class="col-xs-2" id="PNC" href="#" title="PNC - Plano Nacional de Cultura">
-						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/pnc_logo.png'/></a>
--->
-					<div class="col-xs-4">
+				<div class="logos col-xs-10 col-md-offset-1">
+
+					<div class="col-md-4 col-xs-12">
 						<div class="col-xs-12"><p>Desenvolvimento</p></div>
 						<a class="col-xs-12" id="Cultura_digital" href="http://culturadigital.br" title="Cultura digital">
 						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/culturadigital_logo.png'/></a>
 					</div>
-					<div class="col-xs-8">
+					<div class="col-md-8 col-xs-12">
 						<div class="col-xs-12"><p>Realização</p></div>
-						<a class="col-xs-6" id="MinC" href="http://www.cultura.gov.br" title="Ministério da Cultura - Governo Federal">
-						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/MINC_logo.png'/></a>
-						<a class="col-xs-4 col-xs-offset-1" id="CNPC" href="#" title="Conselho Nacional de Política Cultural">
+						<a class="col-md-4 col-xs-10 col-md-offset-1 text-center" id="CNPC" href="#" title="Conselho Nacional de Política Cultural">
 						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/CNPC_logo.png'/></a>
+						<a class="col-md-6 col-xs-10 text-center" id="MinC" href="http://www.cultura.gov.br" title="Ministério da Cultura - Governo Federal">
+						<img class="img-responsive" src='<?php echo get_template_directory_uri(); ?>/images/MINC_logo.png'/></a>
 					</div>
 				</div>
 
-				<div class="creditos col-xs-6 col-xs-offset-3">
-					<p class="text-center">2015 &#169; Conselho Nacional de Política Cultural. Alguns direitos reservados.</p>
+				<div class="creditos col-md-6 col-xs-12 col-md-offset-3">
+				<p class="text-center termos-de-uso"><a href="<?php bloginfo('url'); ?>/termos-de-uso">Termos de uso</a></p>
+					<p class="text-center">2015 &#169; Conselho Nacional de Política Cultural.</p>
 					<p class="text-center">Endereço: Esplanada dos Ministérios, Bloco B, 3º andar, CEP 70068-900, Brasília - Distrito Federal, Telefone: (61) 2024-2361/2302</p>
 				</div>
 		</footer> 
