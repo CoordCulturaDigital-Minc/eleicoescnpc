@@ -1,0 +1,25 @@
+
+================ 1. REGISTRE OS FORMS =================
+Registre um ou mais formulários no seu functions.php:
+
+register_congelado_form($id_do_formulario, array $fields);
+
+register_congelado_form('assinantes-formulario', array(
+            'name' => array('not_empty'),
+            'email' => array('not_empty','is_valid_email'),
+            'phone' => array('not_empty'),
+            'message' => array('not_empty')
+        ));
+        
+        
+O ID do formulario será um ID do elemento HTML e o seu identificador na página de admin.
+
+o array de campos segue a estrutura nome_do_campo => array de validações;
+
+Pra verificar as validações possíveis, veja o arquivo validation.php
+
+================ 2. CRIE OS FORMS =================
+
+Use o arquivo HTML como modelo e crie o formulário no seu tema, mantendo as classes, trocando o ID do form pelo id que vc registrou
+
+e garantindo que os nomes dos campos são os nomes dos campos q vc registrou

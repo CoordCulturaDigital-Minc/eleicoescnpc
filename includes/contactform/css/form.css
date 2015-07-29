@@ -1,0 +1,79 @@
+.hl-error-alert, .hl-message-alert { display: none; }
+
+/* formulário */
+.hl-form textarea,
+.hl-form input[type=text],
+.hl-form input[type=tel],
+.hl-form input[type=email],
+.hl-form select{
+    border: 1px solid #ccc;
+    background: #fafafa;
+    border-radius: 0;
+    color: #888;
+    font: inherit;
+    font-size: 100%;
+    padding: 6px;
+    font-size: 15px;
+    margin-top: 10px;
+    width: 100%;
+    text-align: left;
+}
+
+.hl-message-alert { 
+    padding:0.8em;
+    margin-bottom:1em;
+    border:1px solid #c6d880; 
+    background:#e6efc2;
+    color:#264409;
+}
+
+.hl-error-alert { 
+    background-color: #fdc;
+    border: 1px solid #a00;
+    clear: left;
+    color: #800;
+    padding: 5px;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.article--content--form--content {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.one-column {
+    width: 100%;
+
+}
+
+.two-column {
+    width: 49.7%;
+    display: inline-block;
+
+}
+
+.three-column {
+    width: 33%;
+    display: inline-block;
+}
+
+input#uf {
+    width: 80px;
+} 
+
+@media (max-width: 1200px) {
+    .two-column {
+        width: 49.5%;
+
+    }
+}
+
+
+@media (max-width: 760px) {
+    .two-column,
+    .three-column {
+        width: 100%;
+        display: block;
+    }
+}
