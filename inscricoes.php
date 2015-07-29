@@ -247,6 +247,7 @@ if(is_user_logged_in()) {
 
 						</div><!-- #formstep-2 -->
 					<?php elseif( $step == 'step-2' ): ?>
+						
 						<div class="candidate-not-found">
 							<i class="fa fa-exclamation"></i>
 							<p>Você não preencheu a etapa anterior corretamente!<br>

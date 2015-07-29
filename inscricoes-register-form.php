@@ -12,7 +12,17 @@
 		<div class="row">
 			<span id="register-error" class="form-error hidden"></span>
 			<div id="step-1-register">
-				<div class="grid__item  col-md-12 col-xs-12">
+
+				<div id="terms" class="grid__item  col-md-12 col-xs-12">
+					<div class="term">
+						<?php $terms_of_use = isset( $_POST['terms_of_use'] ) ? $_POST['terms_of_use'] : '' ?>
+						<input id="terms_of_use" class="" type="checkbox" name="terms_of_use" value="concordo" <?php checked( $terms_of_use, 'concordo' ); ?> />
+						<label for="terms_of_use"></label>
+					</div>
+					<label class="terms_label" for="terms_of_use">Eu concordo com os <a href="<?php echo site_url('/termos-de-uso/'); ?>">termos de uso</a> das eleições</label>
+				</div>
+
+				<div id="user_type" class="grid__item  col-md-12 col-xs-12">
 					<?php $user_tipo = isset($_POST['user_tipo']) ? $_POST['user_tipo'] : '' ?>
 
 					<input id="tipo_eleitor" class="user_type hidden" type="radio" name="user_tipo" value="eleitor" <?php checked( $user_tipo, 'eleitor' ); ?> />
@@ -31,7 +41,7 @@
 					<?php include('includes/mapa.php'); ?>
 				</div>
 				
-				<div id="step-2-dropdown hidden-lg">
+				<div id="step-2-dropdown" class="visible-xs-block">
 					<div class="grid__item col-xs-2">
 						<label for="user_UF">UF</label>
 					</div>
@@ -88,7 +98,8 @@
 				</div><!--
 
 				--><div class="grid__item  col-md-6 col-xs-12"><br>
-					<input id="user_confirm_informations" type="checkbox" name="user_confirm_informations" />
+					<?php $user_confirm_informations = isset($_POST['user_confirm_informations']) ? $_POST['user_confirm_informations'] : '' ?>
+					<input id="user_confirm_informations" type="checkbox" name="user_confirm_informations" value="afirmo" <?php checked( $user_confirm_informations, 'afirmo' ); ?> />
 					<label for="user_confirm_informations">Afirmo que todos os dados citados acima são verdadeiros.</label>
 					<div id="user_confirm_informations-error" class="field__error"></div>
 				</div>

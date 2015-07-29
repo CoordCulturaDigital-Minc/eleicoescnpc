@@ -16,6 +16,7 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
     $user_tipo = $_POST['user_tipo']; 
     $user_name = $_POST['user_name'];
     $user_birth = $_POST['user_birth'];
+    $terms_of_use = $_POST['terms_of_use'];
     $user_confirm_informations = isset( $_POST['user_confirm_informations'] ) ? $_POST['user_confirm_informations'] : '';
     
     // $register_errors = array();
@@ -25,6 +26,10 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
      // validar antes de salvar
     if( class_exists('Validator') ) {
         $validator = new Validator();
+
+        /* tipo de usuário*/
+        if( strlen( $terms_of_use)==0 )
+            $register_errors['terms_of_use'] = __('Você deve concordar com os termos para a inscrição no site.<br/>', 'tnb');    
 
         /* tipo de usuário*/
         if( strlen($user_tipo)==0 )
@@ -99,7 +104,8 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
             } else {
     		
     			add_user_meta($user_id, 'cpf', $user_cpf);
-    			add_user_meta($user_id, 'UF', $user_UF);
+                add_user_meta($user_id, 'terms_of_use', $terms_of_use);
+                add_user_meta($user_id, 'UF', $user_UF);
                 add_user_meta($user_id, 'user_name', $user_name); // checar se precisa salvar como meta e firt_name
                 add_user_meta($user_id, 'date_birth', convert_format_date($user_birth)); 
                 add_user_meta($user_id, 'setorial', $user_setorial);

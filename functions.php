@@ -29,12 +29,18 @@ function historias_setup() {
 	require_once( get_template_directory() . '/includes/estatisticas-inscricoes.php' );
 	// require_once( get_template_directory() . '/includes/admin-cpfs-cnpjs.php' );
 
+	// classes
+	require_once( get_template_directory() . '/includes/validator.class.php' );
+	require_once( get_template_directory() . '/includes/filter.class.php' );
+
 	// widgets
 	require_once( get_template_directory() . '/widgets/cnpc-widget-custom-page.php' );
 	require_once( get_template_directory() . '/widgets/cnpc-widget-setoriais-menu.php' );
 	require_once( get_template_directory() . '/widgets/cnpc-widget-login.php' );
-	
 
+	// formulário de contato
+	require_once(get_template_directory() . '/includes/contactform/process.php');
+	require_once(get_template_directory() . '/includes/contactform/shortcode-contato.php');
 
 	// torna o tema traduzível
 	load_theme_textdomain( 'historias', get_template_directory() . '/languages' );
@@ -103,6 +109,12 @@ function historias_setup() {
 	// filtra os padroes dos uploads
 	update_option( 'image_default_align','center' );
 
+	register_congelado_form('formulario-contato', array(
+        'nome' => array('not_empty'),
+        'email' => array('not_empty','is_valid_email'),
+        'mensagem' => array('not_empty'),
+        'assunto' => array()
+    ));
 
     /*
      * This theme styles the visual editor to resemble the theme style,

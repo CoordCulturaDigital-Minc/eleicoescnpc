@@ -20,9 +20,8 @@
             $('#cadastro').hide();
             $('#loginform').show();
         });
-
         // se carregar a página mostrar o lugar correto
-        if ( $( ".user_type" ).attr( "checked" ) == "checked") {
+        if ( $( ".user_type" ).attr( "checked" ) == "checked" && $( "#terms_of_use" ).attr( "checked" ) == "checked") {
             $('#step-1-register').hide();
             $('#step-2-register').show();
         }
@@ -35,11 +34,17 @@
 
         // etapa 1 -> etapa 2
         $('#step-1-register .user_type').click(function(){
+            if ( $( "#terms_of_use" ).attr( "checked" ) == "checked") {
         	$('#step-1-register').hide();
             $('#step-2-register').show();
 
             scrollCadastro("#cadastro");
-            stepsCount('.step_2');            
+            stepsCount('.step_2');
+
+            } else {
+                alert("Você deve concordar com os termos para continuar!")
+                return false;
+            }           
         });
 
         // etapa 2 -> etapa 3 - desativado
@@ -118,13 +123,17 @@
         var verify_register_field = function(e) {
 
             var $me = $(this);
-
-            if( $me.is('input[type="checkbox"]'))
-                $me.prop("checked") ? '' : $me.val("0");
-
+            
             var values = {'action': 'setoriaiscnpc_register_verify_field'};
             values['user_type'] = $('input[name="user_tipo"]:checked').val();
-            values[this.name] = $me.val();
+
+            if( $me.is('input[type="checkbox"]')) {
+               if( $me.prop("checked") )
+                    values[this.name] = $me.val();
+            }else 
+                values[this.name] = $me.val();
+
+            // values[this.name] = $me.val();
 
             $.post(cadastro.ajaxurl, values,
                 function(data) {

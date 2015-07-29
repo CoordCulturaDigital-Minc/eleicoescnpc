@@ -34,7 +34,7 @@
 
                         <li><?php wp_loginout(home_url()); ?></li>
                 <?php else: ?>
-                        <!-- <li><a id="login" href="#">Entrar</a></li> -->
+                        <li class="visible-xs-block"><a id="login" href="#">Entrar</a></li>
                         <li><a href="<?php bloginfo('url'); ?>/inscricoes">Inscreva-se</a></li>
                 <?php endif; ?>
                 
