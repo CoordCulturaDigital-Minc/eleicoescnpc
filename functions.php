@@ -786,13 +786,16 @@ function dropdown_genres( $name, $selected = null, $all = false, $extra = null )
 
 }
 
-function user_short_name() {
+function user_short_name( $name = null ) {
 
 	if( is_user_logged_in() ) {
 		
-		global $current_user; 
+		global $current_user;
+
+		if( empty( $name ) )
+			$name = $current_user->display_name;
 	            
-	    preg_match( '/^([^\s]+)/', $current_user->display_name, $matches);
+	    preg_match( '/^([^\s]+)/', $name, $matches);
 	    
 	    return $matches[0];
 	} else 

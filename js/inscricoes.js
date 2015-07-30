@@ -80,9 +80,10 @@
                     $parent.find('p').remove();
                     $('<p class="textcenter">').html(data['message']).appendTo($parent);
                     // $('<p id="protocol-number">').html('&mdash; Inscrição Número &mdash;<strong>' + data['subscription_number'].substring(0,8) + '</strong>').appendTo($parent);
-                    $('<p class="step__advance alignleft">').html("<a class='button' href='?step=step-2'>Voltar para etapa anterior</a>").appendTo($parent);
+                    // $('<p class="step__advance alignleft">').html("<a class='button' href='?step=step-2'>Voltar para etapa anterior</a>").appendTo($parent);
                     $('#application-form :input').unbind().attr('disabled',true);
                     $('#print-button').attr({'href':data['subscription_number'].substring(0,8)+"/imprimir/", "target": "_blank"}).show();
+                    $('#application-form').find('.steps__content').remove();
                 }, 'json')
                 .error(function(e) {
                     $parent.find('.textcenter').remove();

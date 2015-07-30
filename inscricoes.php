@@ -11,6 +11,7 @@
  * @package forunssetoriaiscnpc
  */
 
+// arquivo que salva as informações do cadastro inicial
 include('inscricoes-register.php');
 
 if(!isset($errors)) {
@@ -112,7 +113,7 @@ if(is_user_logged_in()) {
 	<?php endif; ?>
 
 	
-	<?php if(!is_user_logged_in()) : ?>
+	<?php if(!is_user_logged_in()) : // template de cadastro inicial ?>
 
 		<?php if(get_theme_option('inscricoes_abertas')) : ?>
 			<div id="cadastro" class="form-step">
@@ -215,7 +216,7 @@ if(is_user_logged_in()) {
 						<div class="error">Inscrições encerradas!</div>
 					<?php endif;?>
 
-					<?php if( $step == 'step-1' || $step == '' ) : ?>
+					<?php if( ( $step == 'step-1' || $step == '' ) && empty( $subscription_number ) ) : ?>
 						<div id="formstep-1" class="form-step">
 							<header class="step__head">
 								<h3 class="step__title">Pré-Candidato(a) <?php if ($step1['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
@@ -231,7 +232,7 @@ if(is_user_logged_in()) {
 
 					<?php $step2 = load_step(2,$pid); $f = $step2['fields']; ?>
 
-					<?php if( $step1['complete'] && $step == 'step-2') : ?>
+					<?php if( $step1['complete'] && $step == 'step-2' && empty( $subscription_number ) ) : ?>
 
 						<div id="formstep-2" class="form-step">
 							<header class="step__head">
@@ -258,11 +259,16 @@ if(is_user_logged_in()) {
 					<?php endif; ?>
 
 
-					<?php if( $step1['complete'] && $step2['complete'] && $step == 'step-3' ) : ?>
+					<?php if( $step1['complete'] && $step2['complete'] && ( $step == 'step-3' || !empty( $subscription_number ) ) ) : ?>
 						
 						<div id="formstep-3" class="form-step">
 							<header class="step__head">
-								<h3 class="step__title">Conferir Dados e Finalizar Inscrição <?php if ( $subscription_number ) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+								<?php if ( empty( $subscription_number ) ) : ?>
+									<h3 class="step__title">Conferir dados e finalizar inscrição </h3>
+								<?php else: ?>
+									<h3 class="step__title">Informações da candidatura <i class="fa fa-check"></i></h3>
+								<?php endif; ?>
+
 								<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
 								<div class="step__about">
 									<?php echo nl2br(get_theme_option('txt_candidato_step3a')); ?>
@@ -280,8 +286,9 @@ if(is_user_logged_in()) {
 							<a href="?step=step-2" class="button">Voltar</a>
 						</div>
 					<?php endif; ?>
-
-					<?php show_steps( $step ); ?>
+					<?php if ( empty( $subscription_number ) ) : ?>
+						<?php show_steps( $step ); ?>
+					<?php endif; ?>
 				</form>
 			</div><!-- .form-candidato -->
 			
