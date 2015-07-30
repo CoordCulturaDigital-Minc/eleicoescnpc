@@ -116,6 +116,12 @@ function historias_setup() {
         'assunto' => array()
     ));
 
+
+	if (!current_user_can('administrator') && !is_admin()) {
+	  show_admin_bar(false);
+	}
+
+
     /*
      * This theme styles the visual editor to resemble the theme style,
      * specifically font, colors, icons, and column width.
