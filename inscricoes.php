@@ -181,7 +181,7 @@ if(is_user_logged_in()) {
 				<div class="form-eleitor">
 					<div class="candidate-not-found">
 						<i class="fa fa-question"></i>
-						<p>Você já está inscrito(a) mas não é candidato(a)<br>
+						<p>Você já está inscrito(a) mas não é pré-candidato(a)<br>
 						Deseja se candidatar?</p>
 						<a href="#" id="eleitor-candidate-question" class="button">Candidatar</a>
 					</div>
@@ -218,7 +218,7 @@ if(is_user_logged_in()) {
 					<?php if( $step == 'step-1' || $step == '' ) : ?>
 						<div id="formstep-1" class="form-step">
 							<header class="step__head">
-								<h3 class="step__title">Candidato(a) <?php if ($step1['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+								<h3 class="step__title">Pré-Candidato(a) <?php if ($step1['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
 								<div class="step__about">
 									<?php echo nl2br( get_theme_option( 'txt_candidato_step1' ) ); ?>
 								</div>
@@ -235,7 +235,7 @@ if(is_user_logged_in()) {
 
 						<div id="formstep-2" class="form-step">
 							<header class="step__head">
-								<h3 class="step__title">Candidato(a) <?php if ($step2['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
+								<h3 class="step__title">Pré-Candidato(a) <?php if ($step2['complete']) : ?><i class="fa fa-check"></i><span class="assistive-text"><?php _e( 'Complete!', 'historias'); ?></span><?php endif; ?></h3>
 								<div class="step-status <?php print ($subscription_number)?' completo':'';?>"></div>
 								<div class="step__about">
 									<?php echo nl2br(get_theme_option('txt_candidato_step2')); ?>
