@@ -7,18 +7,25 @@
 <div id="comments" class="comments-area">
 
     <?php 
-    $args = array(
-        'comment_field' =>  '<p class="comment-form-comment"><label for="comment">' .
-        '</label><textarea id="comment" name="comment" cols="45" rows="4" aria-required="true">' .
-        '</textarea></p>',
-        
-        'must_log_in' => '<p class="must-log-in">' .
-        sprintf(
-          __( 'Você precisa se <a href="%s">cadastrar</a> e/ou fazer <a href="%s">login</a> para comentar no fórum, participe!' ),
-          site_url('/inscricoes/'),  wp_login_url( apply_filters( 'the_permalink', get_permalink() ) )
-        ) . '</p>',
-        'title_reply'=>'Participe, comente sobre as demandas do setor!',
-    ); ?>
+     $args = array();
+     
+    if( is_singular( 'foruns' ) ) {
+  
+        $args = array(
+            'comment_field' =>  '<p class="comment-form-comment"><label for="comment">' .
+            '</label><textarea id="comment" name="comment" cols="45" rows="4" aria-required="true">' .
+            '</textarea></p>',
+            
+            'must_log_in' => '<p class="must-log-in">' .
+            sprintf(
+              __( 'Você precisa se <a href="%s">cadastrar</a> e/ou fazer <a href="%s">login</a> para comentar no fórum, participe!' ),
+              site_url('/inscricoes/'),  wp_login_url( apply_filters( 'the_permalink', get_permalink() ) )
+            ) . '</p>',
+            'title_reply'=>'Participe, comente sobre as demandas do setor!',
+        );
+    }
+
+    ?>
 
     <?php comment_form($args); ?>
 
