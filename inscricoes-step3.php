@@ -7,6 +7,8 @@
 
 			<p class="textcenter">
 				<?php echo nl2br( get_theme_option( 'txt_candidato_step4' ) ); ?>
+				<br>
+				Enquanto isso, participe no seu <a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>" title="Meu fórum">fórum de debates.</a>
 			</p>
 
 		<?php elseif(get_theme_option('inscricoes_abertas')): ?>
