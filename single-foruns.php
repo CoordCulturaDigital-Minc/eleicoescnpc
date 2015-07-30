@@ -13,7 +13,6 @@ get_header(); ?>
 		<?php while ( have_posts() ) : the_post(); ?>
 				<?php // Lista de candidatos ?>
 				<?php
-				global $current_user;
 
 				$uf = substr($post->post_name, 0, 2);
 
@@ -27,7 +26,7 @@ get_header(); ?>
 			
 				<header>
 					<div class="section-description">
-						<p>Olá <strong><?php echo $current_user->display_name; ?>!</strong> Este é o fórum de debates do Setorial de <strong><?php echo substr($post->post_title, 4); ?> </strong>do estado <strong><?php echo get_state_name_by_uf( substr($post->post_title, 0, 2) ); ?></strong>.</p>
+						<p>Olá <strong><?php echo user_short_name(); ?>!</strong> Este é o fórum de debates do Setorial de <strong><?php echo substr($post->post_title, 4); ?> </strong>do estado <strong><?php echo get_state_name_by_uf( substr($post->post_title, 0, 2) ); ?></strong>.</p>
 						<?php if( is_user_this_uf_setorial($post->post_name) ) : ?>
 							<p><?php echo nl2br(get_theme_option('txt_forum_is_voter')); ?></p>
 						<?php else: ?>

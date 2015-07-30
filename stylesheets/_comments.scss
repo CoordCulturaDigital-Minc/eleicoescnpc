@@ -19,6 +19,7 @@
 }
 
 .comments-title a {
+    display: none;
     font-size: 16px;
     font-size: 1rem;
     font-weight: normal;
@@ -139,7 +140,7 @@
 
     margin: 0;
 
-    color: #636466;
+    color: $cor_verde;
     span {
         display: block;
         &.entry-date {

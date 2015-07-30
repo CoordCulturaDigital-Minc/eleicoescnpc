@@ -19,7 +19,7 @@
 						<input id="terms_of_use" class="" type="checkbox" name="terms_of_use" value="concordo" <?php checked( $terms_of_use, 'concordo' ); ?> />
 						<label for="terms_of_use"></label>
 					</div>
-					<label class="terms_label" for="terms_of_use">Eu concordo com os <a href="<?php echo site_url('/termos-de-uso/'); ?>">termos de uso</a> das eleições</label>
+					<label class="terms_label" for="terms_of_use">Eu concordo com os <a href="<?php echo site_url('/termos-de-uso/'); ?> " target="_blank">termos de uso</a> das eleições</label>
 				</div>
 
 				<div id="user_type" class="grid__item  col-md-12 col-xs-12">
@@ -32,7 +32,7 @@
 					<label for="tipo_candidato">Sou Candidato(a)</label>
 
 				</div>
-				<p class="step__footer">Se você já se inscreveu, basta <a href="<?php echo wp_login_url( site_url( '/inscricoes/' )); ?>" title="Fazer login">fazer o login.</a></p>
+				<!-- <p class="step__footer">Se você já se inscreveu, basta <a href="<?php echo wp_login_url( site_url( '/inscricoes/' )); ?>" title="Fazer login">fazer o login.</a></p> -->
 			</div>
 			
 			<div id="step-2-register">
@@ -69,7 +69,7 @@
 				</div><!--
 
 				--><div class="grid__item  col-md-12 col-xs-12">
-					<label for="user_name">Nome</label><div class="field__note" >Seu nome será preenchido automaticamente</div>
+					<label for="user_name">Nome</label><div class="field__note" >Seu nome será preenchido automaticamente com dados da Receita Federal, conforme <a href="<?php echo site_url('/termos-de-uso/'); ?> " target="_blank">Termos de Uso</a></div>
 					<input id="user_name" type="text" name="user_name" value="<?php echo isset($_POST['user_name']) ?  $_POST['user_name'] : '' ?>" readonly/>
 				</div><!--
 
@@ -97,7 +97,7 @@
 					<div id="user_birth-error" class="field__error"></div>
 				</div><!--
 
-				--><div class="grid__item  col-md-6 col-xs-12"><br>
+				--><div class="grid__item  col-md-6 col-xs-12 form__item--inline"><br>
 					<?php $user_confirm_informations = isset($_POST['user_confirm_informations']) ? $_POST['user_confirm_informations'] : '' ?>
 					<input id="user_confirm_informations" type="checkbox" name="user_confirm_informations" value="afirmo" <?php checked( $user_confirm_informations, 'afirmo' ); ?> />
 					<label for="user_confirm_informations">Afirmo que todos os dados citados acima são verdadeiros.</label>

@@ -636,6 +636,9 @@ img.aligncenter {
   .entry-content a:hover {
     color: #444; }
 
+.cat-links {
+  display: none; }
+
 .comment-content blockquote {
   font-style: italic;
   padding: 24px;
@@ -739,6 +742,7 @@ img.aligncenter {
   color: #125b26; }
 
 .comments-title a {
+  display: none;
   font-size: 16px;
   font-size: 1rem;
   font-weight: normal;
@@ -805,7 +809,7 @@ img.aligncenter {
   width: 85%;
   overflow: hidden;
   margin: 0;
-  color: #636466; }
+  color: #125b26; }
   .comment-meta span {
     display: block; }
     .comment-meta span.entry-date {
@@ -1803,8 +1807,9 @@ header#header {
     header#header form input[type="search"] {
       width: 71%;
       float: left;
-      padding: 13px 4% 12px 4%;
+      padding: 14px 4% 14px 4%;
       margin: 0px;
+      max-height: 44px;
       background-color: transparent;
       color: #bab8b8;
       font-weight: normal;
@@ -1817,7 +1822,7 @@ header#header {
     header#header form button {
       display: inline-block;
       width: 20%;
-      height: 40px;
+      height: 44px;
       background-color: #175823;
       margin: 0px;
       padding: 0px;
@@ -2753,7 +2758,8 @@ footer.site-footer div {
 .forum-title {
   text-align: center;
   font-size: 34px;
-  margin-top: 30px; }
+  margin-top: 30px;
+  color: #125b26; }
 
 .candidate-not-found {
   margin: 40px auto;

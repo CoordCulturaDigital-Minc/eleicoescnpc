@@ -77,7 +77,7 @@ function form_process () {
             if ( is_array($opcoes) && isset($opcoes[$formID]) && is_array($opcoes[$formID])  && isset($opcoes[$formID]['assunto']) && !empty($opcoes[$formID]['assunto'])) :
                 $subjectTo = $opcoes[$_GET['formID']]['assunto'];
             else :
-                $subjectTo = "Email recebido de Assinaturas";
+                $subjectTo = "E-mail recebido das Eleições";
             endif;
             
             //save
@@ -99,7 +99,7 @@ function form_process () {
             $struct['sucesso'] = wp_mail($emailTo, $subjectTo, $emailMsg);
 
             if (!$struct['sucesso']) :
-                $struct['error_messages']['general'] = 'Falha ao enviar o email';
+                $struct['error_messages']['general'] = 'Falha ao enviar o e-mail';
             endif;
 
         endif;

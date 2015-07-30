@@ -22,7 +22,7 @@ function add_shortcode_contato() {
 
                     <div class="article--content--form--content">
                         <div class="form--content--label clearfix">
-                            <label for="email" >Email</label>
+                            <label for="email" >E-mail</label>
                             <div id="error-email" class="hl-error-alert"></div>
                         </div>
                         <input id="email" type="email" name="email" class="form-control" />

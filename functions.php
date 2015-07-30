@@ -779,4 +779,17 @@ function dropdown_genres( $name, $selected = null, $all = false, $extra = null )
     return $output;
 
 }
+
+function user_short_name() {
+
+	if( is_user_logged_in() ) {
+		
+		global $current_user; 
+	            
+	    preg_match( '/^([^\s]+)/', $current_user->display_name, $matches);
+	    
+	    return $matches[0];
+	} else 
+		return "Visitante";
+}
 ?>

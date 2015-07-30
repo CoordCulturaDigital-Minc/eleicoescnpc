@@ -46,7 +46,8 @@ class CNPC_Widget_Login extends WP_Widget
 
             $user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $user_ID ) );
             
-            printf( '<h3 class="widget__title">' . __('Olá, %s!', 'historias' ) . '</h3>', $user_meta['nickname']);
+            
+            printf( '<h3 class="widget__title">' . __('Olá, %s!', 'historias' ) . '</h3>', user_short_name());
 
         } else {
             if( !empty( $instance[ 'title' ] ) )
@@ -95,7 +96,7 @@ class CNPC_Widget_Login extends WP_Widget
             	
                 <div class="login-form">
                 <?php wp_login_form(
-        	        array( 		'label_username' => __( 'Usuário ou email' ),
+        	        array( 		'label_username' => __( 'E-mail ' ),
         	        			'label_password' => ('Senha'),
         	        			'label_log_in' => ('Entrar'),
         	        			'remember' => false ) );
