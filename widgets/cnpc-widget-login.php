@@ -68,7 +68,7 @@ class CNPC_Widget_Login extends WP_Widget
                        
                         <li><i class="fa fa-cog"></i> <a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
                         <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('url'); ?>/inscricoes">Inscrições</a></li>
-                        <li><i class="fa fa-check-square-o"></i> <a href="<?php bloginfo('url'); ?>/avaliacoes">Avaliações</a></li>
+                        <!-- <li><i class="fa fa-check-square-o"></i> <a href="<?php bloginfo('url'); ?>/avaliacoes">Avaliações</a></li> -->
                     
                     <?php elseif ( current_user_can( 'curate' ) ) : //curador ou avaliador ?>
                         

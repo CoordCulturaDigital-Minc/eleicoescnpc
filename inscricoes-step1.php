@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="col-md-12 col-xs-12 grid__item">
 				<h2>
-					<?php printf("Olá %s, vamos completar sua inscrição?", $user_meta['first_name'] )?>
+					<?php printf("Olá %s, vamos completar sua inscrição?", user_short_name( $user_meta['first_name'] ) )?>
 				</h2>
 			</div>
 			<div class="col-md-3 col-xs-12 grid__item avatar">
@@ -51,7 +51,7 @@
 				</div><!--
 
 				--><div class="col-md-3 col-xs-5 grid__item">
-					<label>Afrodescendente</label>
+					<label>Afrobrasileiro</label>
 				</div>
 				<div class="col-md-7 col-xs-7 grid__item">
 					<?php $candidate_race = isset(  $f['candidate-race'] ) ?  $f['candidate-race'] : ''; ?>

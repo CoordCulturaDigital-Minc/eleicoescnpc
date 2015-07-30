@@ -20,6 +20,7 @@ if($pid) {
 
 	$step1 = load_step(1, $pid);
 	$step2 = load_step(2, $pid);
+	$f = array_merge($step1['fields'], $step2['fields']);
 
 	$avatar_file_id 	= get_post_meta($pid, 'candidate-avatar', true);
 	$portfolio_file_id 	= get_post_meta($pid, 'candidate-portfolio', true);
@@ -28,7 +29,6 @@ if($pid) {
 
 
 
-	$f = array_merge($step1['fields'], $step2['fields']);
 } else {
 	wp_redirect(site_url('inscricoes'));
 	exit;
@@ -55,11 +55,11 @@ if($pid) {
 		<?php endif;?>
 		<li><strong>Nascimento</strong>: <?php echo restore_format_date( $user_meta['date_birth'] );?></li>
 		<li><strong>CPF</strong>: <?php echo $user_meta['cpf'];?></li>
-		<li><strong>Setorial</strong>: <?php echo $user_meta['setorial']; ?></li>
+		<li><strong>Setorial</strong>: <?php echo get_label_setorial_by_slug( $user_meta['setorial']); ?></li>
 		<li><strong>Estado</strong>: <?php echo $user_meta['UF']; ?></li>
 		<li><strong>E-mail</strong>: <?php echo $user->user_email;?></li>
 		<li><strong>Telefone 1</strong>: <?php echo $f['candidate-phone-1'];?></li>
-		<li><strong>Afrodescendente</strong>: <?php echo( $f['candidate-race'] == 'true') ? 'Sim' : 'Não';?></li>
+		<li><strong>Afrobrasileiro</strong>: <?php echo( $f['candidate-race'] == 'true') ? 'Sim' : 'Não';?></li>
 		<li><strong>Sexo</strong>: <?php echo $f['candidate-genre'];?></li>
 		<li><strong>Breve experiência no setor</strong>: <?php echo $f['candidate-experience'];?></li>
 		<li><strong>Exposição de motivos para a candidatura</strong>: <?php echo $f['candidate-explanatory'];?></li>
@@ -67,7 +67,7 @@ if($pid) {
 
 	<h3>Anexos</h3>
 	<ul>
-		<li><strong>Currículo e/ou Portfólio</strong>: <?php echo wp_get_attachment_link($portfolio_file_id 	);?></li>
+		<li><strong>Currículo e/ou Portfólio</strong>: <?php echo wp_get_attachment_link($portfolio_file_id );?></li>
 		<li><strong>Histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma</strong>: <?php echo wp_get_attachment_link($activity_file_id );?></li>
 		<li><strong>Diploma Profissional e/ou Registro profissional</strong>: <?php echo wp_get_attachment_link($diploma_file_id );?></li>
 	</ul>
