@@ -44,13 +44,13 @@ function template_redirect_intercept(){
 			exit;
 		}
 	} elseif ( $wp_query->get('setoriaiscnpc_tpl') == 'inscricoes-print' ) {
-		if (file_exists( TEMPLATEPATH . '/inscricoes-print.php' )) {
-			include( TEMPLATEPATH . '/inscricoes-print.php' );
+		if (file_exists( TEMPLATEPATH . '/inscricoes/inscricoes-print.php' )) {
+			include( TEMPLATEPATH . '/inscricoes/inscricoes-print.php' );
 			exit;
 		}
 	} elseif ( $wp_query->get('setoriaiscnpc_tpl') == 'avaliacoes' ) {
-		if (file_exists( TEMPLATEPATH . '/avaliacoes.php' )) {
-			include( TEMPLATEPATH . '/avaliacoes.php' );
+		if (file_exists( TEMPLATEPATH . '/inscricoes/avaliacoes.php' )) {
+			include( TEMPLATEPATH . '/inscricoes/avaliacoes.php' );
 			exit;
 		}
 	}

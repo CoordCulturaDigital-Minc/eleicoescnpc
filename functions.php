@@ -20,7 +20,6 @@ function historias_setup() {
 	 * We need these for the inscricoes
 	 */
     require_once( get_template_directory() . '/includes/theme-options.php' );
-	require_once( get_template_directory() . '/inscricoes-functions.php' );
 	require_once( get_template_directory() . '/vote-functions.php' );
 	require_once( get_template_directory() . '/includes/shame.php' );
     require_once( get_template_directory() . '/includes/customizr.php' );
@@ -28,6 +27,9 @@ function historias_setup() {
 	require_once( get_template_directory() . '/includes/post2home/post2home.php' );
 	require_once( get_template_directory() . '/includes/estatisticas-inscricoes.php' );
 	// require_once( get_template_directory() . '/includes/admin-cpfs-cnpjs.php' );
+
+	// inscrições
+	require_once( get_template_directory() . '/inscricoes/inscricoes-functions.php' );
 
 	// classes
 	require_once( get_template_directory() . '/includes/validator.class.php' );

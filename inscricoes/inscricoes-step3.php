@@ -1,4 +1,4 @@
-<?php include( 'inscricoes-check-informations.php' ); ?>
+<?php include( get_template_directory() . '/inscricoes/inscricoes-check-informations.php' ); ?>
 
 <div class="form-step-content">
 	<div class="grid__item one-whole">

@@ -38,7 +38,7 @@
 			<div id="step-2-register">
 				<h2>Selecione seu estado e setorial</h2>
 				<div class="grid__item  col-md-12 col-xs-12 hidden-xs">
-					<?php include('includes/mapa.php'); ?>
+					<?php include( get_template_directory() . '/includes/mapa.php'); ?>
 				</div>
 				
 				<div id="step-2-dropdown" class="visible-xs-block">
