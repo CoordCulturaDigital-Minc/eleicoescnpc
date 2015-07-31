@@ -110,7 +110,7 @@ if( $current_user_ID != $userID && !current_user_can('administrator')) {
 				<strong>Sexo:</strong>
 			</div>
 			<div class="col-md-9 col-xs-12 grid__item">
-				<?php echo $f['candidate-genre'];?>
+				<?php echo ucfirst($f['candidate-genre']);?>
 			</div>
 
 			<div class="col-md-3 col-xs-12 grid__item">
