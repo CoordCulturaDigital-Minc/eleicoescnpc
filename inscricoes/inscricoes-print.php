@@ -22,17 +22,16 @@ if($pid) {
 	$step2 = load_step(2, $pid);
 	$f = array_merge($step1['fields'], $step2['fields']);
 
-	$avatar_file_id 	= get_post_meta($pid, 'candidate-avatar', true);
-	$portfolio_file_id 	= get_post_meta($pid, 'candidate-portfolio', true);
-	$activity_file_id 	= get_post_meta($pid, 'candidate-activity-history', true);
-	$diploma_file_id 	= get_post_meta($pid, 'candidate-diploma', true);
-
-
 
 } else {
 	wp_redirect(site_url('inscricoes'));
 	exit;
 }
+
+	$avatar_file_id 	= get_post_meta($pid, 'candidate-avatar', true);
+	$portfolio_file_id 	= get_post_meta($pid, 'candidate-portfolio', true);
+	$activity_file_id 	= get_post_meta($pid, 'candidate-activity-history', true);
+	$diploma_file_id 	= get_post_meta($pid, 'candidate-diploma', true);
 
 
 ?><!DOCTYPE html>
@@ -45,6 +44,20 @@ if($pid) {
 </head>
 <body>
 	<h1>Fóruns Setoriais - CNPC</h1>
+	<div>
+		<?php if(isset($f['candidate-display-name'])): ?>
+			<?php $name = $f['candidate-display-name']; ?>
+		<?php else: ?>
+			<?php $name = user_short_name($user_meta['user_name']); ?>
+		<?php endif; ?>
+		
+		<p><?php printf( "Olá %s! Da Setorial %s do %s.", $name, get_label_setorial_by_slug( $user_meta['setorial']), $user_meta['UF'] ) ?></p>
+
+		<p>Confirmamos sua pré candidatura nas eleições de 2015 do Conselho Nacional de Políticas Culturais (CNPC).</p>
+		<p>Em breve sua inscrição será validada pela Comissão Eleitoral. Enquanto isso, participe no  <a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">fórum de debate.</a><p> 
+		<p>Confira seus dados a seguir.</p>
+	</div>
+
 	<h3>Avatar</h3>
 		<?php echo wp_get_attachment_image($avatar_file_id, 'avatar_candidate'); ?>
 	<h3>Pré-Candidato</h3>
@@ -67,9 +80,19 @@ if($pid) {
 
 	<h3>Anexos</h3>
 	<ul>
-		<li><strong>Currículo e/ou Portfólio</strong>: <?php echo wp_get_attachment_link($portfolio_file_id );?></li>
-		<li><strong>Histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma</strong>: <?php echo wp_get_attachment_link($activity_file_id );?></li>
-		<li><strong>Diploma Profissional e/ou Registro profissional</strong>: <?php echo wp_get_attachment_link($diploma_file_id );?></li>
+		<?php if( $portfolio_file_id ) : ?>
+			<li><strong>Currículo e/ou Portfólio</strong>: <?php echo wp_get_attachment_link($portfolio_file_id );?></li>
+		<?php endif; ?>
+
+		<?php if( $activity_file_id ) : ?>
+			<li><strong>Histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma</strong>: <?php echo wp_get_attachment_link($activity_file_id );?></li>
+		<?php endif; ?>
+
+		<?php if( $diploma_file_id ) : ?>
+			<li><strong>Diploma Profissional e/ou Registro profissional</strong>: <?php echo wp_get_attachment_link($diploma_file_id );?></li>
+		<?php endif; ?>
 	</ul>
+	<p>Atenciosamente,</p>
+	<p>Equipe Conselho Nacional de Políticas Culturais</p>
 </body>
 <html>
