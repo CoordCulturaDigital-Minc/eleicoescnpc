@@ -7,16 +7,17 @@
 					<?php printf("Olá %s, vamos completar sua inscrição?", user_short_name( $user_meta['first_name'] ) )?>
 				</h2>
 			</div>
+			
 			<div class="col-md-3 col-xs-12 grid__item avatar">
 				<?php inscricoes_file_upload_field_template($f, 1, '', 'candidate-avatar', '','Envie sua foto'); ?>
-				<div>Obrigatório</div>
+				<div class="campoObrigatorio">Obrigatório</div>
 			</div>
 
 			<div class="col-md-9 col-xs-12">
 				<div class="col-md-12 col-xs-12 grid__item form__item--inline">
 	            	
 	            	<input<?php echo $form_disabled?' disabled':'';?> id="candidate-confirm-infos" type="checkbox" class="required" name="step1-candidate-confirm-infos" value="true" <?php if( isset($f['candidate-confirm-infos']) ) echo 'checked="checked"';?>/>
-					<label for="candidate-confirm-infos">Declaro que todas as informações são verdadeiras</label>
+					<label for="candidate-confirm-infos">Declaro que todas as informações são verdadeiras <span>(Obrigatório)</span></label>
 					<div class="field-status <?php print isset($f['candidate-confirm-infos'])?'completo':'invalido'?>"></div>
 
 					<div id="candidate-confirm-infos-error" class="field__error"></div>

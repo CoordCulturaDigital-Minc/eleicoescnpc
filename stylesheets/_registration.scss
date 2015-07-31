@@ -370,8 +370,12 @@
 	}
 
 	.js-upload-button {
-		margin: 0px !important;
+		margin: 12px !important;
 	}
+
+}
+.campoObrigatorio {
+color:red;
 
 }
 
@@ -410,8 +414,8 @@
 
 
 .step__head {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
+    /* margin-bottom: 1.5rem; */
+    /* padding-bottom: 1.5rem; */
 
     min-height: 50px;
 }
@@ -429,7 +433,7 @@
 .step__about {
     font-style: italic;
 
-    margin-bottom: 1.5rem;
+    /* margin-bottom: 1.5rem; */
 
     color: #888;
 }
