@@ -176,6 +176,7 @@
                         $self.parents('.grid__item').find('.js-current').html(result.success.html);
                         $self.find('.js-feedback').html('Upload feito com sucesso!').fadeIn().delay(1000).fadeOut();
                         $self.parents('.grid__item').find('.campoObrigatorio').remove();
+                        
                     }
                 }
             });

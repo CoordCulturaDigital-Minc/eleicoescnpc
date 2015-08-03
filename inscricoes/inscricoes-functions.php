@@ -633,9 +633,16 @@ function inscricoes_file_upload_field_template($f, $step, $label, $field, $descr
 
     if( $required )
         $required = 'required';
+
+    $text_required  = '';
+
+    if( $required && !isset($f[$field])) {
+        $text_required = '<span class="campoObrigatorio"> Obrigatório</span>';
+    }
     ?>
+
     <div class="upload-template">
-        <label><?php echo $label; ?></label>
+        <label><?php echo $label; echo $text_required; ?> </label>
         <input id="<?php echo $field; ?>" class="<?php echo $required ?>" type="hidden" name="step<?php echo $step; ?>-<?php echo $field; ?>" value="<?php echo isset($f[$field])?$f[$field]:'';?>" />
         <div class="field-status <?php print isset($f[$field])?'completo':'invalido'?>"></div>
 
@@ -646,10 +653,6 @@ function inscricoes_file_upload_field_template($f, $step, $label, $field, $descr
         </div>
         <div id="<?php echo $field; ?>-error" class="field__error"></div>
         <div class="field__note"><?php echo $description; ?></div>
-
-        <?php if( $required && !isset($f[$field])) : ?>
-            <div class="campoObrigatorio">Obrigatório</div>
-        <?php endif; ?>
     </div>
     <?php
 
