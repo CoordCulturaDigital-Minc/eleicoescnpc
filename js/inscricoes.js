@@ -28,7 +28,7 @@
             var values = {'action': 'setoriaiscnpc_save_field'};   
             values[this.name] = '';
                         
-            if( $me.is('input[type="checkbox"]')) {
+            if( $me.is('input[type="checkbox"]') || $me.is('input[type="radio"]')) {
               
                if( $me.prop("checked") )
                     values[this.name] = $me.val();
@@ -46,15 +46,17 @@
                             $form.find('#'+field+'-error').hide().html('');
                             if($me.parents('div.form-step').find('.required ~ div.invalido').length == 0) {
                                 $step_status.addClass('completo');
+                                $form.find('.button.toggle').removeClass('disabled');
                             }
                         } else {
-                            $form.find('#'+field+'-error').html(data[field]).show();
                             if($me.hasClass('required')) {
                                 $form.set_status(field, 'invalid');
                                 $step_status.removeClass('completo');
+                                $form.find('#'+field+'-error').html(data[field]).show();
                             } else {
                                 $form.set_status(field);
                             }
+
                         }
                     }
                     block_formstep.call($me.get(0), e);
@@ -121,14 +123,17 @@
                                 $(this).trigger('blur').focus();
                             }});
 
-        // load next form step when user click in 'Preencher'
+        // load next form step when user click in 'Avançar para a próxima etapa'
         $('div.form-step a.toggle').click(function(e) {
 
             var $div = $(this).parents('div.form-step');
+            
+            if( $div.find('.required ~ div.invalido').length > 0 ) {
 
-            if($div.find('.required ~ div.invalido').length > 0) {
-
-                $div.find('.required ~ div.invalido').parent().find('.required').blur();
+                if( $div.find('.required').val() )
+                    $div.find('.required').blur();
+                else
+                    $div.find('.required ~ div.invalido').parent().find('.required').blur();
                 
                 $div.find('span.form-error').html('Os campos destacados são obrigatórios para continuar').show();
                 
@@ -170,6 +175,7 @@
                         $('#' + $self.data('field')).val(result.success.id).trigger('blur'); //trigger save
                         $self.parents('.grid__item').find('.js-current').html(result.success.html);
                         $self.find('.js-feedback').html('Upload feito com sucesso!').fadeIn().delay(1000).fadeOut();
+                        $self.parents('.grid__item').find('.campoObrigatorio').remove();
                     }
                 }
             });

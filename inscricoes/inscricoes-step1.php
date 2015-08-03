@@ -9,8 +9,7 @@
 			</div>
 			
 			<div class="col-md-3 col-xs-12 grid__item avatar">
-				<?php inscricoes_file_upload_field_template($f, 1, '', 'candidate-avatar', '','Envie sua foto'); ?>
-				<div class="campoObrigatorio">Obrigatório</div>
+				<?php inscricoes_file_upload_field_template($f, 1, '', 'candidate-avatar', '','Envie sua foto',true); ?>
 			</div>
 
 			<div class="col-md-9 col-xs-12">
@@ -46,7 +45,6 @@
 					</label>
 					<label class="col-sm-offset-2" for="genre_m"><input <?php echo $form_disabled?' disabled':'';?> id="genre_m" type="radio" name="step1-candidate-genre" value="masculino" <?php checked( $candidate_genre, 'masculino' ); ?>  />Masculino
 					</label>
-
 					<div class="field-status <?php print isset($f['candiate-genre'])?'completo':'invalido'?>"></div>
 					<div id="candidate-genre-error" class="field__error"></div>
 				</div><!--
@@ -59,7 +57,7 @@
 					<input <?php echo $form_disabled?' disabled':'';?> id="race-true" type="radio" name="step1-candidate-race" value="true" <?php checked( $candidate_race, 'true' ); ?>  />
 					<label for="race-true">Sim</label>
 					<span class="col-sm-offset-3">
-					<input <?php echo $form_disabled?' disabled':'';?> id="race-false" type="radio" name="step1-candidate-race" value="false" <?php checked( $candidate_race, 'false' ); ?>  />
+					<input <?php echo $form_disabled?' disabled':'';?> id="race-false" type="radio" name="step1-candidate-race" class="required" value="false" <?php checked( $candidate_race, 'false' ); ?>  />
 					<label for="race-false">Não</label>
 					<div class="field-status <?php print isset($f['candidate-race'])?'completo':'invalido'?>"></div>
 					<div id="candidate-race-error" class="field__error"></div>
@@ -88,7 +86,7 @@
 
 	<?php// if ( !$step1['complete'] ) : ?>
 		<p class="step__advance">
-			Depois de preencher os campos obrigatórios, você pode <a class="button toggle" href="?step=step-2">Avançar para a próxima etapa</a>
+			Depois de preencher os campos obrigatórios, você pode <a class="button toggle disabled" href="?step=step-2">Avançar para a próxima etapa</a>
 		</p>
 		
 	<?php //endif; ?>
