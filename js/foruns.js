@@ -40,19 +40,48 @@
 			);
 
 		});
+
+		 // store the slider in a local variable
+		  var $window = $(window),
+		      flexslider;
+		 
+		  // tiny helper function to add breakpoints
+		  function getGridSize() {
+		    return (window.innerWidth < 600) ? 1 : 
+		    (window.innerWidth < 765) ? 2 : 
+		    (window.innerWidth < 970) ? 3 : 4;
+		  }
+		 
+		  $(function() {
+		     //SyntaxHighlighter.all();
+		  });
+		 
+		  $window.load(function() {
+		    $('.candidates-content').flexslider({
+		      	animation: "slide",
+			 	controlsContainer: ".candidates-content .navigation",
+			 	selector: ".candidates > .candidate",
+			 	prevText: "",
+			 	nextText: "",
+				itemWidth: 200,
+			 	useCSS: false,
+			 	minItems: 1,
+			 	maxItems: 4,
+			    minItems: getGridSize(), // use function to pull in initial value
+			    maxItems: getGridSize(), // use function to pull in initial value
+			    start: function(slider){
+					flexslider = slider;
+				}
+		    });
+		  });
+		 
+		  // check grid size on resize event
+		  $window.resize(function() {
+		    var gridSize = getGridSize();
+		 
+		    flexslider.vars.minItems = gridSize;
+		    flexslider.vars.maxItems = gridSize;
+		  });
 		
-		//slide
-	    $('.candidates-content').flexslider({
-				 
-		 	animation: "slide",
-		 	controlsContainer: ".candidates-content .navigation",
-		 	selector: ".candidates > .candidate",
-		 	prevText: "",
-		 	nextText: "",
-			itemWidth: "200",
-		 	useCSS: false,
-		 	minItems: 4,
-		 	maxItems: 5
-		 });
     });
 })(jQuery);
