@@ -118,11 +118,9 @@ if(is_user_logged_in()) {
 		<?php if(get_theme_option('inscricoes_abertas')) : ?>
 			<div id="cadastro" class="form-step">
 				<div class="step__head">
-					<h2 class="step__title">Inscrições</h2>
+					<h2 class="step__title">Inscrição</h2>
 					<div class="step__about">
 						<?php echo nl2br(get_theme_option('txt_visitante')); ?>
-					</div>
-					<div class="step__count">
 					</div>
 				</div>
 
