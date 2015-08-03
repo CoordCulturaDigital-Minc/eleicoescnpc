@@ -58,7 +58,7 @@ if($pid) {
 		<p>Confira seus dados a seguir.</p>
 	</div>
 
-	<h3>Avatar</h3>
+	<h3>Foto</h3>
 		<?php echo wp_get_attachment_image($avatar_file_id, 'avatar_candidate'); ?>
 	<h3>Pré-Candidato</h3>
 	<ul>

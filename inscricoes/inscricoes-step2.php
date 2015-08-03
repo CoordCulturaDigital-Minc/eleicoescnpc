@@ -2,7 +2,7 @@
 	<fieldset>
 		<div class="row">
 			<div class="grid__item col-xs-12">
-				<legend>Apenas um anexo é obrigatório <br> <span>Por outro lado quanto mais informação sobre você disponível, mais seus eleitores/as saberão sobre você!</span></legend>
+				<legend>Apenas um anexo é obrigatório</legend>
 			</div>
 
 			<div class="grid__item col-xs-12">
