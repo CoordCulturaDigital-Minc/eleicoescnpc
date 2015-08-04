@@ -37,7 +37,7 @@ get_header(); ?>
 					</div>
 
 					<h2 class="entry-title">Setorial de <?php echo substr($post->post_title, 4); ?> do <?php echo substr($post->post_title, 0, 2); ?></h2>
-					<h1 class="entry-title-candidate">Pré-Candidatos(as)</h1>
+					<h1 class="entry-title-candidate">Candidatos(as)</h1>
 				</header>
 
 				<?php if ($candidates->have_posts()):  ?>

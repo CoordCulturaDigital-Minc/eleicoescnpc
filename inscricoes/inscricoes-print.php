@@ -53,14 +53,14 @@ if($pid) {
 		
 		<p><?php printf( "Olá %s! Da Setorial %s do %s.", $name, get_label_setorial_by_slug( $user_meta['setorial']), $user_meta['UF'] ); ?></p>
 
-		<p>Confirmamos sua pré candidatura nas eleições de 2015 do Conselho Nacional de Políticas Culturais (CNPC).</p>
+		<p>Confirmamos sua candidatura nas eleições de 2015 do Conselho Nacional de Políticas Culturais (CNPC).</p>
 		<p>Em breve sua inscrição será validada pela Comissão Eleitoral. Enquanto isso, participe no  <a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">fórum de debate.</a><p> 
 		<p>Confira seus dados a seguir.</p>
 	</div>
 
 	<h3>Foto</h3>
 		<?php echo wp_get_attachment_image($avatar_file_id, 'avatar_candidate'); ?>
-	<h3>Pré-Candidato</h3>
+	<h3>Candidato</h3>
 	<ul>
 		<li><strong>Nome</strong>: <?php echo $user_meta['user_name'];?></li>
 		<?php if(isset($f['candidate-display-name'])): ?>
