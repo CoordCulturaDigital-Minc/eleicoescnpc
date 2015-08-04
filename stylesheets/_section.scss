@@ -114,8 +114,7 @@ section {
 
 	.entry-title {
 	    font-size: 1.5rem;
-	    font-size: 35px;
-	 
+	    font-size: 35px;	    
 	    line-height: 1;
 	    margin-bottom: 1.5rem;
 	    
@@ -124,8 +123,7 @@ section {
 		    color: #52660b;
 		}
 	}
-
-
+	
 	.entry-title a:hover,
 	.single .entry-title a {
 	    color: #444;
@@ -183,7 +181,28 @@ section {
 	}
 
 }
+.tax-setorial .entry-title,
+.page-template .entry-title {
+		text-align:center;
+		color:$cor_verde;		
+		}   
+		
+.home .entry-title {
+		text-align:left;
+		
+		
+		}   		
 
+.subtitle {
+	    text-align:center;
+		color:$cor_verde;
+		margin-bottom: 1.5rem;
+		font-size: 25px;
+		} 		
+
+   
+	
+		
 @media only screen and (min-width: 48em) {
     .quote {
         display: block;

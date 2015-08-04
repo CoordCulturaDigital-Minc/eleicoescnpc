@@ -2246,6 +2246,20 @@ section {
     color: #fff;
     background: #125b26; }
 
+.tax-setorial .entry-title,
+.page-template .entry-title {
+  text-align: center;
+  color: #125b26; }
+
+.home .entry-title {
+  text-align: left; }
+
+.subtitle {
+  text-align: center;
+  color: #125b26;
+  margin-bottom: 1.5rem;
+  font-size: 25px; }
+
 @media only screen and (min-width: 48em) {
   .quote {
     display: block; } }
