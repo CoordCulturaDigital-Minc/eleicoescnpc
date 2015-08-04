@@ -216,7 +216,7 @@ function load_step_html() {
 
     if(!$valid) {
         header("HTTP/1.1 403 Forbidden");
-        print __('<span class="error">Os campos da etapa anterior nao estao preenchidos corretamente.</span>');
+        print __('<span class="error">Alguns itens da etapa anterior não estão preenchidos corretamente.</span>');
     }
     die;
 }
@@ -633,16 +633,23 @@ function inscricoes_file_upload_field_template($f, $step, $label, $field, $descr
 
     if( $required )
         $required = 'required';
+
+    $text_required  = '';
+
+    if( $required && !isset($f[$field])) {
+        $text_required = '<span class="campoObrigatorio"> Obrigatório</span>';
+    }
     ?>
+
     <div class="upload-template">
-        <label><?php echo $label; ?></label>
+        <label><?php echo $label; echo $text_required; ?> </label>
         <input id="<?php echo $field; ?>" class="<?php echo $required ?>" type="hidden" name="step<?php echo $step; ?>-<?php echo $field; ?>" value="<?php echo isset($f[$field])?$f[$field]:'';?>" />
         <div class="field-status <?php print isset($f[$field])?'completo':'invalido'?>"></div>
 
         <span class="js-current"><?php if (isset($f[$field])) echo inscricoes_get_uploaded_template($f[$field]); ?></span>
         <div id="<?php echo $field; ?>-upload" class="file-upload" data-field="<?php echo $field; ?>">
             <div class="js-upload-button  u-pull-left  button"><?php echo( empty( $button_label ) ) ? __('Select File', 'historias') : $button_label; ?></div>
-            <div class="js-feedback  feedback  u-pull-right"></div>
+            <div class="js-feedback  feedback  u-pull-right"><div class="campoObrigatorio">Obrigatório</div></div>
         </div>
         <div id="<?php echo $field; ?>-error" class="field__error"></div>
         <div class="field__note"><?php echo $description; ?></div>

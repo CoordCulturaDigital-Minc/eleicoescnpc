@@ -221,31 +221,10 @@ img.aligncenter {
     margin-left: auto;
 }
 
-.site-wrap {
-    overflow: hidden;
-
-    width: 98%;
-    max-width: 1080px;
-    margin: 0px auto;
-    padding: 0 5.4rem;
-
-    border: 1px solid #ededed;
-    background: #f4f4f4;
-}
-
 #main {
     padding-bottom: 3rem;
     padding-top: 3rem;
     border-bottom: 1px solid #dedede;
-}
-
-.site-footer {
-    padding: 1.5rem;
-    border-top: 1px solid #fff;
-    min-height: 170px;
-
-    position: relative;
-    /*background-color: rgba(41,39,36,.9);*/
 }
 
 .disable-pointer-events {
@@ -273,10 +252,18 @@ img.aligncenter {
     display: none;
 }
 
+body > div.site-wrap {
+    overflow: hidden;
 
+    width: 98%;
+    max-width: 1080px;
+    margin: 0px auto;
+    
+    background: #f4f4f4;
+}
 
 @media only screen and (min-width: 40em) {
-    .site-wrap {
+    body > div.site-wrap {
         overflow: visible;
         
 
@@ -301,8 +288,16 @@ img.aligncenter {
     }
 }
 
+div.site-wrap > {
+	header, footer {
+		padding: 0 5.4rem;
+	}
+}
+
 @media only screen and (max-width: 40em) {
-    .site-wrap {
-        padding: 0 1.4rem;
-    }
+	div.site-wrap > {
+		header, footer {
+	        padding: 0 1.4rem;
+	    }
+	}
 }

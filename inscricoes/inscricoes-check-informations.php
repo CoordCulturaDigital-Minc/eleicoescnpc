@@ -37,7 +37,7 @@ if( $current_user_ID != $userID && !current_user_can('administrator')) {
 		<div class="row">
 			
 			<div class="col-md-3 col-xs-12 grid__item">
-				<strong>Avatar:</strong>
+				<strong>Foto:</strong>
 			</div>
 			<div class="col-md-9 col-xs-12 grid__item">
 				<?php echo wp_get_attachment_image($avatar_file_id, 'avatar_candidate'); ?>
@@ -128,26 +128,26 @@ if( $current_user_ID != $userID && !current_user_can('administrator')) {
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4 col-xs-12 grid__item"> 
+			<div class="col-md-3 col-xs-12 grid__item"> 
 				<strong>Currículo e/ou Portfólio:</strong>
 			</div>
-			<div class="col-md-8 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12 grid__item">
 				<?php echo wp_get_attachment_link($portfolio_file_id );?>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4 col-xs-12 grid__item"> 
+			<div class="col-md-3 col-xs-12 grid__item"> 
 				<strong>Histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma:</strong>
 			</div>
-			<div class="col-md-8 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12 grid__item">
 				<?php echo wp_get_attachment_link($activity_file_id );?>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4 col-xs-12 grid__item"> 
+			<div class="col-md-3 col-xs-12 grid__item"> 
 				<strong>Diploma Profissional e/ou Registro profissional:</strong>
 			</div>
-			<div class="col-md-8 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12 grid__item">
 				<?php echo wp_get_attachment_link($diploma_file_id );?>
 			</div>
 

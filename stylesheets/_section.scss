@@ -1,22 +1,7 @@
-
-
-
-
-
-
 section {
-	float: right;
-	width: 65.63%;
-	
-	&.content--full,
-	&.content--sidebarless {
-		float: none;
-		width: 100%;
-	}
-
 	.section-description {
 		color: $cor-verde;
-	 	border: 1px solid #EDE9E9;
+		border: 1px solid #EDE9E9;
 		padding: 10px;
 		border-radius: 10px;
 		margin-bottom: 30px;

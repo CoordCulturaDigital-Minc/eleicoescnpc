@@ -99,7 +99,7 @@ if(is_user_logged_in()) {
 
 <?php get_header(); ?>
 
-<section id="form-area" class="content  content--sidebarless" >
+<section id="form-area" class="col-xs-12">
 	<?php if(is_user_logged_in()) : ?>
 		<div class="hentry">
 			<?php if (current_user_can('subscriber')): ?>
@@ -118,11 +118,9 @@ if(is_user_logged_in()) {
 		<?php if(get_theme_option('inscricoes_abertas')) : ?>
 			<div id="cadastro" class="form-step">
 				<div class="step__head">
-					<h2 class="step__title">Inscrições</h2>
+					<h2 class="step__title">Inscrição</h2>
 					<div class="step__about">
 						<?php echo nl2br(get_theme_option('txt_visitante')); ?>
-					</div>
-					<div class="step__count">
 					</div>
 				</div>
 

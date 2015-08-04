@@ -1,5 +1,3 @@
-<?php endif;?>
-
 <?php
 
 $userID = get_post_field( 'post_author', $pid );
@@ -29,7 +27,7 @@ $diploma_file_id 	= get_post_meta($pid, 'candidate-diploma', true);
 			<?php $name = user_short_name($user_meta['user_name']); ?>
 		<?php endif; ?>
 		
-		<p><?php printf( "Olá %s! Da Setorial %s do %s.", $name, get_label_setorial_by_slug( $user_meta['setorial']), $user_meta['UF'] ) ?></p>
+		<p><?php printf( "Olá %s! Da Setorial %s do %s.", $name, get_label_setorial_by_slug( $user_meta['setorial']), $user_meta['UF'] ); ?></p>
 
 		<p>Confirmamos sua pré candidatura nas eleições de 2015 do Conselho Nacional de Políticas Culturais (CNPC).</p>
 		<p>Em breve sua inscrição será validada pela Comissão Eleitoral. Enquanto isso, participe no  <a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">fórum de debate.</a><p> 
@@ -37,7 +35,9 @@ $diploma_file_id 	= get_post_meta($pid, 'candidate-diploma', true);
 	</div>
 
 	<?php if(get_theme_option('txt_mail_candidato')): ?>
-	<p><?php echo get_theme_option('txt_mail_candidato');?></p>
+		<p><?php echo get_theme_option('txt_mail_candidato');?></p>
+	<?php endif; ?>
+	
 	<h3>Pré-Candidato</h3>
 	<ul>
 		<li><strong>Nome</strong>: <?php echo $user_meta['user_name'];?></li>

@@ -5,7 +5,9 @@
  *
  */
     
-get_header(); the_post(); ?>
+get_header();
+get_sidebar();
+the_post(); ?>
 
     <div class="features  features--subscriptions">
          
@@ -29,10 +31,8 @@ get_header(); the_post(); ?>
             <?php endif; ?>
         <?php endif; ?>
     </div>
-
-    <?php get_sidebar(); ?>
     
-    <section class="content">
+    <section class="col-xs-12 col-md-8">
 
         <?php 
         

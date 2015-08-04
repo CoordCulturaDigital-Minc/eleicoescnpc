@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-	<section class="content content--sidebarless">
+	<section class="col-xs-12">
 
 		<article id="<?php echo get_query_var('term'); ?>">
 			

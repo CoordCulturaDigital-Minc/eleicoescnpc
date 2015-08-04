@@ -71,7 +71,7 @@ class Validator {
     /** Return true if parameter is not empty or a message otherwise */
     static function not_empty($v) {
         if(!isset($v) || empty($v)) {
-            return __('Este campo não pode ser vazio');
+            return __('Este item não pode ser vazio');
         }
         return true;
     }

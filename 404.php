@@ -7,9 +7,10 @@
  *
  */
 
-get_header(); ?>
+get_header();
+get_sidebar(); ?>
 
-		<section class="content">
+		<section class="col-xs-12 col-md-8">
 
 			
 			<header>
@@ -23,5 +24,4 @@ get_header(); ?>
 
 		</section><!-- #content .site-content --><!-- #primary .content-area -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
