@@ -63,15 +63,10 @@
 	            </button>
 	        </form>
 			</div>
-	    </header><!-- /site-header -->
-
-	</div>   
+	    </header><!-- /site-header -->  
 	
 	<?php require_once 'includes/navigator.php'; ?>
-    
-    <div class="site-wrap">
-
-	<div id="main" class="wrap cf">
+	    
 		<?php if( !is_page() ) : ?>
 			<?php $featured_posts = new WP_Query( array( 'ignore_sticky_posts' => 1, 'meta_key' => '_post2home', 'meta_value' => 1, 'posts_per_page' => '4' ) );
 			if ( $featured_posts->have_posts() ) : ?>
@@ -86,3 +81,5 @@
 			<?php endif; ?>
 			<?php wp_reset_postdata(); ?>
 		<?php endif; ?>
+		
+		
