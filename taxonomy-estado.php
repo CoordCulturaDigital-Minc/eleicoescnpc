@@ -1,4 +1,6 @@
-<?php get_header(); ?>
+<?php
+get_header();
+get_sidebar(); ?>
 
 	<section class="content">
 
@@ -20,5 +22,4 @@
 		<?php historias_content_nav( 'nav-below' ); ?>
 	</section><!-- /content -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

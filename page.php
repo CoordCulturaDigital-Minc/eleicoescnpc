@@ -1,4 +1,7 @@
-<?php get_header(); the_post(); ?>
+<?php
+get_header();
+get_sidebar();
+the_post(); ?>
 
 	<section class="content">
 
@@ -17,5 +20,5 @@
 
 		<?php comments_template('', true); ?>
 	</section><!-- /content -->
-<?php get_sidebar(); ?>
+
 <?php get_footer(); ?>

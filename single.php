@@ -6,7 +6,8 @@
  *
  */
 
-get_header(); ?>
+get_header();
+get_sidebar(); ?>
 
 		<section class="content">
 
@@ -26,5 +27,4 @@ get_header(); ?>
 
 		</section><!-- #content .site-content --><!-- #primary .content-area -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
