@@ -15,14 +15,20 @@
 .candidates-content {
     position: relative;
 
-    .candidates {
-        float: left; 
-        max-height: 380px;
-        overflow: hidden;
+    .loading h2 {
+        margin-top: 100px;
+        margin-bottom: 100px;
+        text-align: center;
+        color: $cor_verde;
+        font-size: 36px;
+    }
 
+    .candidates {
+        display: none;
         position: relative;
-    
+        
         .candidate {
+            overflow: hidden;
             display: block;
             position: relative;
 
@@ -44,29 +50,29 @@
             }
 
             .candidate-details {
-                display: none;
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                width: 650px;
-                min-height: 415px;
-                margin-left: -350px;
-                margin-top: -215px;
-                background-color: #F4F4F4;
-                border: 1px solid #aaa;
-                padding: 15px;
-                font-size: 14px;
-                line-height: 1.3;
-                border: 26px solid #0F4E21;           
-                z-index: 2; 
+                // display: none;
+                // position: fixed;
+                // top: 50%;
+                // left: 50%;
+                // width: 650px;
+                // min-height: 415px;
+                // margin-left: -350px;
+                // margin-top: -215px;
+                // background-color: #F4F4F4;
+                // border: 1px solid #aaa;
+                // padding: 15px;
+                // font-size: 14px;
+                // line-height: 1.3;
+                // border: 26px solid #0F4E21;           
+                // z-index: 2; 
 
                i {
-                position: absolute;
-                top: -23px;
-                right: -23px;;
-                color: $cor-laranja;
-                opacity: 1;
-                font-size: 25px;
+                // position: absolute;
+                // top: -23px;
+                // right: -23px;;
+                // color: $cor-laranja;
+                // opacity: 1;
+                // font-size: 25px;
                }
 
                h3 {
@@ -176,8 +182,15 @@
 
 
             .number_votes {
-              
-           }
+
+            }
+
+            &.voted {
+          
+                .candidate-avatar {
+                    border-color: lighten( $cor_verde, 10%);
+                }    
+            }    
         }
     }
 
@@ -199,12 +212,12 @@
             }
 
             &.flex-prev {
-                left: -40px;
+                left: -50px;
                 background-position: 0px 0px;
             }
 
             &.flex-next {
-                right: -40px;
+                right: -50px;
                 background-position: -45px 0px 
             }
         }
@@ -263,3 +276,77 @@
     }
 }
 
+ .dialog, .ui-dialog {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 650px;
+    min-height: 415px;
+    margin-left: -350px;
+    margin-top: -215px;
+    background-color: #F4F4F4;
+    border: 1px solid #aaa;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 1.3;
+    border: 26px solid #0F4E21;           
+    z-index: 2; 
+
+    &.ui-dialog {
+        margin-top: -115px;
+        min-height: 200px;
+    }
+
+    h3 {
+        font-weight: bold;
+        color: $cor-verde;
+    }
+
+    .ui-dialog-titlebar-close {
+        border: none;
+        background: none;    
+    }
+
+    i {
+        position: absolute;
+        top: -23px;
+        right: -23px;
+        color: #ffae16;
+        opacity: 1;
+        font-size: 25px;
+    }
+
+    .ui-dialog-buttonset {
+        text-align: center;
+        margin-top: 30px;
+
+        button:first-child {
+            margin-right: 10px;
+            background: linear-gradient(to bottom, #93AB9B 0%, #62866B 100%);
+        }
+    }
+
+    p {
+        font-size: 16px;
+        margin-top: 5px;
+    }
+}
+
+
+@media only screen and (max-width: 40em) {
+    .candidates-content {
+        .flex-direction-nav  li{
+            a {
+
+                &.flex-prev {
+                    left: 8px;
+                }
+
+                &.flex-next {
+                    right: 8px;
+                }
+            }
+        }
+    }
+}

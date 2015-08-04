@@ -42,6 +42,10 @@ get_header(); ?>
 
 				<?php if ($candidates->have_posts()):  ?>
 					<div class="candidates-content">
+						<div class="loading">
+							<h2>Carregando...</h2>
+						</div>
+
 						<div class="candidates" >
 
 							<?php while ( $candidates->have_posts() ) : $candidates->the_post(); ?>
@@ -58,7 +62,7 @@ get_header(); ?>
 									}
 								 ?>
 
-								<div class="candidate" id="<?php the_ID(); ?>">
+								<div class="candidate <?php echo (get_current_user_vote() == get_the_ID()) ? 'voted':'' ?>" id="<?php the_ID(); ?>">
 									<div class="candidate-avatar" data-candidate-id="<?php the_ID(); ?>">
 										<?php echo wp_get_attachment_image($candidate_meta['candidate-avatar'], 'avatar_candidate'); ?>
 									</div>
@@ -73,7 +77,7 @@ get_header(); ?>
 									
 									</div>
 
-									<div class="candidate-details" id="candidate-details-<?php the_ID(); ?>">
+									<div class="candidate-details dialog" id="candidate-details-<?php the_ID(); ?>">
 										
 										<i class="fa fa-times close"></i>
 
@@ -89,13 +93,13 @@ get_header(); ?>
 
 									<br />
 
-									<?php if (is_votacoes_abertas() && current_user_can_vote_in_project(get_the_ID())): ?>
-										
-											<?php if (get_current_user_vote() == get_the_ID()): ?>
+									<?php if (is_votacoes_abertas() && current_user_can_vote_in_project( get_the_ID() )): ?>
+
+											<?php if ( get_current_user_vote() == get_the_ID() ): ?>
 												<a class="vote voted" id="vote-for-<?php the_ID(); ?>" data-project_id="<?php the_ID(); ?>">
 												Voto registrado
 												</a>
-											<?php else: ?>
+											<?php else : ?>
 												<a class="vote" id="vote-for-<?php the_ID(); ?>" data-project_id="<?php the_ID(); ?>">
 												Votar
 												</a>

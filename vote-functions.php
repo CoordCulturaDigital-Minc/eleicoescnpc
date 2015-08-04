@@ -48,7 +48,7 @@ function register_vote($user_id, $project_id) {
 	// verifica se pode votar
 	if (!user_can_vote_in_project($user_id, $project_id))
 		return false;
-	
+
 	// remove todos os votos
 	delete_user_meta($user_id, 'vote-project-id');
 	
@@ -68,6 +68,7 @@ function ajax_register_vote() {
 	
 	if (is_votacoes_abertas()) {
 		
+
 		if ( register_vote($user->ID, $_POST['project_id'])  ) {
 		
 			$response['voted_project_id'] = $_POST['project_id'];
@@ -76,6 +77,7 @@ function ajax_register_vote() {
 			$response['success'] = false;
 			$response['errormsg'] = 'Erro ao registrar voto';
 		}
+
 		
 	} else {
 		$response['success'] = false;
@@ -106,7 +108,6 @@ function get_number_of_votes_by_project($project_id) {
 	global $wpdb;
 	return $wpdb->get_var("SELECT COUNT(user_id) FROM $wpdb->usermeta WHERE meta_key = 'vote-project-id' AND meta_value = $project_id");
 }
-
 
 // verifica se o usuário atual é deste estado e setorial
 function is_user_this_uf_setorial( $uf_setorial ) {
