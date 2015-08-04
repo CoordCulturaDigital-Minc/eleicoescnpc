@@ -1,8 +1,8 @@
 @charset "UTF-8";
 /*
-Theme Name: Eleições do CNPC
+Theme Name: Elei├º├Áes do CNPC
 Theme URI: http://culturadigital.br
-Description: Tema do Fóruns Setoriais do CNPC 2015.
+Description: Tema do F├│runs Setoriais do CNPC 2015.
 Author: Cultura Digital Team
 Author URI: http://culturadigital.br
 License: GNU General Public License
@@ -1346,6 +1346,7 @@ section #comments {
 
 .step__title {
   font-size: 2.60rem;
+  text-align: center;
   font-size: 36px;
   line-height: 1.33;
   margin-bottom: 0;
@@ -1353,7 +1354,8 @@ section #comments {
 
 .step__about {
   font-style: italic;
-  /* margin-bottom: 1.5rem; */
+  text-align: center;
+  margin-bottom: 1.65rem;
   color: #888; }
 
 .step__count {
