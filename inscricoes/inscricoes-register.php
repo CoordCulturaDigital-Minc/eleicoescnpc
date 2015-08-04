@@ -68,6 +68,9 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
         /* passwords */
         if(strlen($user_pass)==0 )
             $register_errors['pass'] = __('A senha é obrigatória para a inscrição no site.<br/>', 'tnb');
+
+        if(strlen($user_pass) < 6 )
+            $register_errors['pass'] = __('A senha deve ter no mínimo 6 caracteres.<br/>', 'tnb');
         
         if( $user_pass != $_POST['user_password_confirm'])
             $register_errors['pass_confirm'] = __('As senhas informadas não são iguais.<br/>', 'tnb');
