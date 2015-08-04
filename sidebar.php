@@ -2,7 +2,7 @@
 
 if ( is_active_sidebar( 'primary-widget-area' ) ) :
 
-	?><div class="widget-area"><?php
+	?><div class="col-xs-12 col-md-4"><?php
 	
 	if ( is_active_sidebar( 'primary-widget-area' ) ) dynamic_sidebar( 'primary-widget-area' );
 	

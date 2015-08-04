@@ -3,7 +3,7 @@
 ?>
 <?php get_header(); the_post(); ?>
 
-	<section class="content content--sidebarless">
+	<section class="col-xs-12">
 
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			

@@ -288,12 +288,12 @@ body > div.site-wrap {
     }
 }
 
-header, section.content, footer {
+header, footer {
 	padding: 0 5.4rem;
 }
 
 @media only screen and (max-width: 40em) {
-	header, section.content, footer {
+	header, footer {
         padding: 0 1.4rem;
     }
 }

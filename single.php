@@ -9,7 +9,7 @@
 get_header();
 get_sidebar(); ?>
 
-		<section class="content">
+		<section class="col-xs-12 col-md-8">
 
 			<?php while ( have_posts() ) : the_post(); ?>
 

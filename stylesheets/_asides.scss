@@ -1,18 +1,6 @@
 $cor-verde-inicio:	rgba(31,111,58,1);
 $cor-verde-fim:		rgba(12,69,26,1);
 
-div.widget-area {
-	float: left;
-    width: 31.05%;
-}
-
-@media only screen and (max-width: 40em) {
-    div.widget-area {
-	    width: 100%;
-	}
-}
-
-
 aside {
     color: $cor-marrom;
     margin-bottom: 2rem;

@@ -99,7 +99,7 @@ if(is_user_logged_in()) {
 
 <?php get_header(); ?>
 
-<section id="form-area" class="content  content--sidebarless" >
+<section id="form-area" class="col-xs-12">
 	<?php if(is_user_logged_in()) : ?>
 		<div class="hentry">
 			<?php if (current_user_can('subscriber')): ?>

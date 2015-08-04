@@ -32,7 +32,7 @@ the_post(); ?>
         <?php endif; ?>
     </div>
     
-    <section class="content">
+    <section class="col-xs-12 col-md-8">
 
         <?php 
         
