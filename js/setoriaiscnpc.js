@@ -5,7 +5,7 @@
 	$(document).ready(function(e) {
 		
 		// mapa nas páginas
-	    $(".page #mapa .estado").click(function(e){
+	    $(".archive #mapa .estado, .page #mapa .estado").click(function(e){
 
 	        var state = $(this).find('path').attr('id');
 	       	var $setoriais = $('.menu-setoriais-container');
