@@ -33,7 +33,7 @@ $subscriptions = list_subscriptions(
 
 <?php get_header(); ?>
 
-    <section class="content content--full">
+    <section class="col-xs-12">
         <?php if(count($errors->errors) > 0): ?>
             <ul class="error">
             <?php foreach($errors->get_error_messages() as $message): ?>

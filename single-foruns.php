@@ -8,7 +8,7 @@
 
 get_header(); ?>
 
-	<section class="content content--full">
+	<section class="col-xs-12">
 
 		<?php while ( have_posts() ) : the_post(); ?>
 				<?php // Lista de candidatos ?>

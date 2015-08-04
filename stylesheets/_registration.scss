@@ -422,6 +422,7 @@ color:red;
 
 .step__title {
     font-size: 2.60rem;
+	text-align: center;
     font-size: 36px;
     line-height: 1.33;
 
@@ -432,8 +433,8 @@ color:red;
 
 .step__about {
     font-style: italic;
-
-    /* margin-bottom: 1.5rem; */
+	text-align: center;
+     margin-bottom: 1.65rem; 
 
     color: #888;
 }
@@ -611,7 +612,7 @@ color:red;
 	.entry-title {
 	    font-size: 1.13rem;
 	    line-height: 1.33;
-	
+	    
 	    position: absolute;
 	    bottom: 0;
 	    left: 0;
