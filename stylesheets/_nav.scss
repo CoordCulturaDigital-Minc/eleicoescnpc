@@ -1,10 +1,13 @@
 nav.access {
 	padding: 20px 54px;
+	
 	max-width: 1080px;
 	text-transform: uppercase;
 	font-family: $fonte-principal-bold;
 	background-color: #1C7033;
 	position: relative;
+	
+	margin-bottom: 20px;
     
     &.opened {
 	    max-height: 9999px;
