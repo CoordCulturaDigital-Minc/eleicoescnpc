@@ -137,11 +137,13 @@ a.post-edit-link {
     color: rgba(0,0,0,.3);
 }
 
+.ui-button,
+.primary-button,
 .button {
 	$cor-verde-inicio:	rgba(31,111,58,1);
 	$cor-verde-fim:		rgba(12,69,26,1);
 	
-    position: relative;
+    // position: relative;
 	
 	display: inline-block;
 	
@@ -166,6 +168,10 @@ a.post-edit-link {
 	&:hover {
 	    @include linear-vertical-gradient($cor-verde-fim, $cor-verde-inicio);
 	}
+}
+
+.secondary-button {
+
 }
 
 a.highlight {

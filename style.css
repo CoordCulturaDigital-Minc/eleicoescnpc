@@ -1,8 +1,8 @@
 @charset "UTF-8";
 /*
-Theme Name: Elei├º├Áes do CNPC
+Theme Name: Eleições do CNPC
 Theme URI: http://culturadigital.br
-Description: Tema do F├│runs Setoriais do CNPC 2015.
+Description: Tema do Fóruns Setoriais do CNPC 2015.
 Author: Cultura Digital Team
 Author URI: http://culturadigital.br
 License: GNU General Public License
@@ -374,8 +374,10 @@ a.post-edit-link {
   font-style: italic;
   color: rgba(0, 0, 0, 0.3); }
 
-.button, aside form#loginform input#wp-submit {
-  position: relative;
+.ui-button,
+.primary-button,
+.button,
+aside form#loginform input#wp-submit {
   display: inline-block;
   margin: 5px 0;
   padding: .5em;
@@ -400,7 +402,10 @@ a.post-edit-link {
   /* IE10+ */
   background: linear-gradient(to bottom, #1f6f3a 0%, #0c451a 100%);
   /* W3C */ }
-  .button:hover, aside form#loginform input#wp-submit:hover {
+  .ui-button:hover,
+  .primary-button:hover,
+  .button:hover,
+  aside form#loginform input#wp-submit:hover {
     background: -moz-linear-gradient(top, #0c451a 0%, #1f6f3a 100%);
     /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #0c451a), color-stop(100%, #1f6f3a));
@@ -2623,12 +2628,17 @@ footer.site-footer div {
 
 .candidates-content {
   position: relative; }
+  .candidates-content .loading h2 {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    text-align: center;
+    color: #125b26;
+    font-size: 36px; }
   .candidates-content .candidates {
-    float: left;
-    max-height: 380px;
-    overflow: hidden;
+    display: none;
     position: relative; }
     .candidates-content .candidates .candidate {
+      overflow: hidden;
       display: block;
       position: relative; }
       .candidates-content .candidates .candidate .candidate-avatar {
@@ -2643,46 +2653,23 @@ footer.site-footer div {
         .candidates-content .candidates .candidate .candidate-avatar img {
           width: 100%;
           height: 100%; }
-      .candidates-content .candidates .candidate .candidate-details {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        width: 650px;
-        min-height: 415px;
-        margin-left: -350px;
-        margin-top: -215px;
-        background-color: #F4F4F4;
-        border: 1px solid #aaa;
-        padding: 15px;
-        font-size: 14px;
-        line-height: 1.3;
-        border: 26px solid #0F4E21;
-        z-index: 2; }
-        .candidates-content .candidates .candidate .candidate-details i {
-          position: absolute;
-          top: -23px;
-          right: -23px;
-          color: #ffae16;
-          opacity: 1;
-          font-size: 25px; }
-        .candidates-content .candidates .candidate .candidate-details h3 {
-          font-weight: bold;
-          color: #125b26; }
-        .candidates-content .candidates .candidate .candidate-details .candidate-avatar {
-          border: none;
-          width: 150px;
-          height: 150px;
-          float: left;
-          margin-right: 10px;
-          margin-bottom: 10px; }
-          .candidates-content .candidates .candidate .candidate-details .candidate-avatar img {
-            border-radius: 5px; }
-        .candidates-content .candidates .candidate .candidate-details .candidate-name {
-          font-size: 20px;
-          color: #125b26;
-          font-weight: bold;
-          text-transform: uppercase; }
+      .candidates-content .candidates .candidate .candidate-details h3 {
+        font-weight: bold;
+        color: #125b26; }
+      .candidates-content .candidates .candidate .candidate-details .candidate-avatar {
+        border: none;
+        width: 150px;
+        height: 150px;
+        float: left;
+        margin-right: 10px;
+        margin-bottom: 10px; }
+        .candidates-content .candidates .candidate .candidate-details .candidate-avatar img {
+          border-radius: 5px; }
+      .candidates-content .candidates .candidate .candidate-details .candidate-name {
+        font-size: 20px;
+        color: #125b26;
+        font-weight: bold;
+        text-transform: uppercase; }
       .candidates-content .candidates .candidate .candidate-text {
         display: block;
         clear: both;
@@ -2735,6 +2722,8 @@ footer.site-footer div {
         border: 1px solid #008425; }
         .candidates-content .candidates .candidate .voted:hover {
           background-color: #4F5651; }
+      .candidates-content .candidates .candidate.voted .candidate-avatar {
+        border-color: #1a8638; }
   .candidates-content .flex-direction-nav li {
     list-style: none; }
     .candidates-content .flex-direction-nav li a {
@@ -2750,10 +2739,10 @@ footer.site-footer div {
         opacity: 0.05;
         cursor: default; }
       .candidates-content .flex-direction-nav li a.flex-prev {
-        left: -40px;
+        left: -50px;
         background-position: 0px 0px; }
       .candidates-content .flex-direction-nav li a.flex-next {
-        right: -40px;
+        right: -50px;
         background-position: -45px 0px; }
   .candidates-content .flex-control-paging {
     display: none; }
@@ -2799,5 +2788,53 @@ footer.site-footer div {
     display: block;
     width: 100px;
     margin-left: 400px; }
+
+.dialog, .ui-dialog {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 650px;
+  min-height: 415px;
+  margin-left: -350px;
+  margin-top: -215px;
+  background-color: #F4F4F4;
+  border: 1px solid #aaa;
+  padding: 15px;
+  font-size: 14px;
+  line-height: 1.3;
+  border: 26px solid #0F4E21;
+  z-index: 2; }
+  .dialog.ui-dialog, .ui-dialog.ui-dialog {
+    margin-top: -115px;
+    min-height: 200px; }
+  .dialog h3, .ui-dialog h3 {
+    font-weight: bold;
+    color: #125b26; }
+  .dialog .ui-dialog-titlebar-close, .ui-dialog .ui-dialog-titlebar-close {
+    border: none;
+    background: none; }
+  .dialog i, .ui-dialog i {
+    position: absolute;
+    top: -23px;
+    right: -23px;
+    color: #ffae16;
+    opacity: 1;
+    font-size: 25px; }
+  .dialog .ui-dialog-buttonset, .ui-dialog .ui-dialog-buttonset {
+    text-align: center;
+    margin-top: 30px; }
+    .dialog .ui-dialog-buttonset button:first-child, .ui-dialog .ui-dialog-buttonset button:first-child {
+      margin-right: 10px;
+      background: linear-gradient(to bottom, #93AB9B 0%, #62866B 100%); }
+  .dialog p, .ui-dialog p {
+    font-size: 16px;
+    margin-top: 5px; }
+
+@media only screen and (max-width: 40em) {
+  .candidates-content .flex-direction-nav li a.flex-prev {
+    left: 8px; }
+  .candidates-content .flex-direction-nav li a.flex-next {
+    right: 8px; } }
 
 /*# sourceMappingURL=style.css.map */
