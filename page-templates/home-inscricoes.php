@@ -6,32 +6,36 @@
  */
     
 get_header();
-get_sidebar();
 the_post(); ?>
 
-    <div class="features  features--subscriptions">
-         
+    <section class="features col-xs-12">
         <?php if ( '' != get_the_post_thumbnail() ) : ?>
             <?php if( $featureurl = get_post_meta($post->ID,'_meta_feature-url', true) ) : ?>
                 <a href="<?php echo $featureurl ?>">
             <?php endif; ?>
-
-                <div class="featured__image">
-                    <?php the_post_thumbnail( 'large' ); ?>
-                </div>
-                <?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
-                    <h1 class="feature__title"><?php the_title(); ?></h1>
+            
+            <header class="col-xs-12">
+				<?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
+                    <h1><?php the_title(); ?></h1>
                 <?php endif; ?>
                 <?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
-                    <p class="feature__status"><?php echo $status ?></p>
+                    <p><?php echo $status ?></p>
                 <?php endif; ?>
+            	<h1>Alguma coisa</h1>
+				<p>Alguma coisa</p>
+            </header>
+			<div class="img-wrap img-responsive">
+            <?php the_post_thumbnail( 'full' ); ?>  <!-- array('class' => 'img-responsive') -->
+			</div>
         
             <?php if( $featureurl = get_post_meta($post->ID,'_meta_feature-url', true) ) : ?>
                 </a>
             <?php endif; ?>
         <?php endif; ?>
-    </div>
-    
+    </section>
+	
+	<?php get_sidebar(); ?>
+	
     <section class="col-xs-12 col-md-8">
 
         <?php 

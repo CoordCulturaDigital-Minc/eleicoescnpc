@@ -1,4 +1,4 @@
-<nav class="access clearfix js-access" role="navigation">        
+<nav class="col-xs-12 access clearfix js-access" role="navigation">        
     <?php if ( wp_is_mobile() ) :
         wp_nav_menu( array( 'theme_location' => 'mobile', 'container' => false, 'menu_class' => 'menu--mobile  menu', 'fallback_cb' => false ) );
     else : ?>

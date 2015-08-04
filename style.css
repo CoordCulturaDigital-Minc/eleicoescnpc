@@ -185,6 +185,10 @@ body {
   /* IE6-9 */
   margin: 0 auto; }
 
+.col-xs-12, .col-md-4, col-md-8 {
+  padding-left: 30px;
+  padding-right: 30px; }
+
 pre,
 code,
 kbd,
@@ -1841,7 +1845,8 @@ header#header {
         font-size: 18px; }
 
 nav.access {
-  padding: 20px 54px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   max-width: 1080px;
   text-transform: uppercase;
   font-family: "TheSans B7 Bold";
@@ -1952,7 +1957,8 @@ nav.access {
     /* IE10+ */
     background: linear-gradient(to bottom, #1f6f3a 0%, #0c451a 100%);
     /* W3C */
-    padding: 20px 54px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     max-width: 1080px;
     text-transform: uppercase;
     font-family: "TheSans B7 Bold";
@@ -2304,6 +2310,41 @@ footer.site-footer div {
     footer.site-footer div.creditos a:a:hover {
       text-decoration: underline; }
 
+section.features {
+  position: relative;
+  height: 270px;
+  overflow: hidden !important;
+  margin-bottom: 20px; }
+  section.features header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: right;
+    margin-top: 24px;
+    /*
+    	    border-top: 2px solid #596c18;
+    	    border-bottom: 2px solid #596c18;
+    */
+    color: #ffce00;
+    font-weight: bold; }
+    section.features header > * {
+      padding-right: 40px;
+      width: 100%;
+      line-height: 1.2;
+      margin: 0; }
+    section.features header h1 {
+      font-size: 64px;
+      text-transform: uppercase; }
+    section.features header p {
+      font-size: 36px; }
+  section.features .img-wrap {
+    border-radius: 20px;
+    overflow: hidden; }
+  section.features img {
+    min-width: 100%; }
+
 .feature__info {
   position: absolute;
   top: 3rem;
@@ -2396,15 +2437,6 @@ footer.site-footer div {
     border-bottom: none;
     margin: 0.8rem auto 0 auto; }
 
-.features {
-  /* background-color: #ededed;
-   box-shadow: inset 0 0 0 6px rgba(41,39,36,.1);*/
-  margin: 0 auto;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  margin-bottom: 3em; }
-
 .features-wrap {
   position: absolute;
   top: 0;
@@ -2412,10 +2444,6 @@ footer.site-footer div {
   bottom: 0;
   right: 0; }
 
-@media screen and (min-width: 40em) {
-  .features--subscriptions {
-    width: 100%;
-    max-width: 970px; } }
 .featured--inscricoes {
   position: relative;
   float: left;
@@ -2446,43 +2474,6 @@ footer.site-footer div {
       color: #fff;
       background: #444; }
 
-.features--subscriptions {
-  position: relative; }
-  .features--subscriptions .featured__image {
-    overflow: hidden; }
-    .features--subscriptions .featured__image img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      text-align: center; }
-  .features--subscriptions .feature__title {
-    position: absolute;
-    top: 24px;
-    left: 0;
-    color: #ffce00;
-    font-size: 64px;
-    font-weight: bold;
-    text-align: right;
-    text-transform: uppercase;
-    padding: 10px 10% 10px 0px;
-    margin: 0px;
-    line-height: 1;
-    border-top: 2px solid #596c18;
-    width: 100%; }
-  .features--subscriptions .feature__status {
-    position: absolute;
-    top: 110px;
-    right: 0;
-    padding: 0px 10% 10px 0px;
-    margin: 0px;
-    width: 100%;
-    color: #ffce00;
-    font-size: 36px;
-    font-weight: bold;
-    text-align: right;
-    border-bottom: 2px solid #596c18; }
-
 @media screen and (max-width: 40em) {
   .features--subscriptions .featured__image img {
     border-radius: 3px; }
@@ -2492,13 +2483,6 @@ footer.site-footer div {
   .features--subscriptions .feature__status {
     font-size: 18px;
     top: 60px; } }
-.featured__image {
-  overflow: hidden; }
-  .featured__image img {
-    display: block;
-    max-width: 100%;
-    height: auto; }
-
 .featured__summary {
   position: absolute; }
 
@@ -2524,25 +2508,6 @@ footer.site-footer div {
     .box--howto a:hover {
       color: #125b26; }
 
-@media screen and (min-width: 40em) {
-  .box--howto {
-    /*margin-left: -1.5rem;*/ }
-
-  .box--howto:before {
-       /* position: absolute;
-        z-index: 1;
-        top: 0;
-        left: -1.5rem;
-
-        display: block;
-
-        width: 0;
-
-        content: '';
-
-        border-width: 1.5rem 1.5rem 1.5rem 0;
-        border-style: solid;
-        border-color: transparent rgba(41,39,36,.9);*/ } }
 #mapa {
   position: relative; }
   #mapa svg {
