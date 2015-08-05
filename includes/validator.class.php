@@ -197,7 +197,7 @@ class Validator {
         if( !empty( $blacklist) ) {
 
             if( in_array($c, $blacklist) )
-                return 'Conforme item x(2 anos), do edital, você não pode se candidatar!'; //TODO alterar o texto
+                return 'Você não pode se candidatar pois já teve dois mandatos, conforme item 6.1.5 do Edita!'; //TODO alterar o texto
         }
         
         return true; 
