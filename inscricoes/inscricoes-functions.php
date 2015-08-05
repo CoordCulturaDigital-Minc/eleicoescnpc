@@ -16,6 +16,8 @@ function get_project_id_by_user_id($user_id) {
     // se sou um usuário e tenho sessão pra segunda avaliação
     $project_index = get_current_project_index($user_id);
 
+    $current_user = wp_get_current_user();
+
     global $wpdb;
     $project_id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE"
                                          ." post_status = 'publish'"
@@ -24,7 +26,7 @@ function get_project_id_by_user_id($user_id) {
                                          ." ORDER BY ID ASC LIMIT 1 OFFSET %d", $user_id, $project_index));
     if (!$project_id) {
         $p = array(
-            'post_title' => $user_id . ' - ' . 'Candidato ' . $project_index,
+            'post_title' => $current_user->display_name . ' - ' . 'Candidato ' . $project_index,
             'post_type' => 'projetos',
             'post_status' => 'publish',
             'post_author' => $user_id
