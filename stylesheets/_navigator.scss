@@ -150,7 +150,7 @@ nav.access {
 	}
 }
 
-@media screen and (min-width: 769px) {
+@include respond-to(md) {
     .menu-item:hover > .sub-menu {
         clip: inherit;
         overflow: inherit;
@@ -158,22 +158,19 @@ nav.access {
         width: inherit;
     }
 
-   	nav {
-   		&.access {
-			@include linear-vertical-gradient($cor-verde-inicio, $cor-verde-fim);
-			padding-top: 20px;
-			padding-bottom: 20px;
-			max-width: 1080px;
-			text-transform: uppercase;
-			font-family: $fonte-principal-bold;
-			background-color: #1C7033;
-			position: relative;
-    	}
+   	nav.access {
+		@include linear-vertical-gradient($cor-verde-inicio, $cor-verde-fim);
+		padding-top: 20px;
+		padding-bottom: 20px;
+		max-width: 1080px;
+		text-transform: uppercase;
+		font-family: $fonte-principal-bold;
+		background-color: #1C7033;
+		position: relative;
    	}
 
     .menu {
-
-	    .current_page_item > .sub-menu,
+		.current_page_item > .sub-menu,
 		.current-menu-ancestor > .sub-menu {
 	        position: absolute;
 	        top: 100%;
@@ -185,41 +182,169 @@ nav.access {
 	        }
 	    }
     }
-
-   
+    .js .access {
+        position: relative;
+        
+        &.closed {
+            max-height: none;
+        }
+    }
+    .nav-toggle {
+        display: none;
+    }
+    .menu--sub {
+        float: right;
+    }
 }
 
-@media screen and (max-width: 768px) {
+@include respond-to(xs) {
 	 a.nav-toggle {
 	 	height: 40px;
     	background-color: $cor-verde-fim;
     	line-height: 40px;
     }
-
-   	nav.access ul  {  
-    	line-height: 2.2;
+	nav.access {
+	   	ul  {  
+	    	line-height: 2.2;
+	    }
+		.menu--main, .menu--user {
+	    	float: none;
+	    	li {
+		    	float: none;
+		    	text-align: center;
+		    	display: block;
+		    	margin: 0px;
+		    	display: block;
+	    	}
+	    	a {
+		    	margin: 0px;
+	    	}
+	    }
+	    .menu--main {
+	    	padding-bottom: 50px;
+	    }
+    }
+	.js nav {
+        clip: rect(0 0 0 0);
+        max-height: 0;
+        position: absolute;
+        display: block;
+        overflow: hidden;
+        zoom: 1;
     }
 
-    nav.access .menu--main,
-    nav.access .menu--user {
-    	float: none;
+    .nav-toggle {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-color: rgba(41,39,36,.9);
+        color: #fff;
+        display: block;
+        font-size: 1.25rem;
+        line-height: 2.4;
+        padding: 0 1.3em;
+        text-decoration: none;
+        position: relative;
+        font-family: 'Sanchez', serif;
+        overflow: hidden;
+        
+        &.nav-toggle {
+	        color: #fff;
+	    }
+	    
+	    &:before {
+	        color: #fff;
+	        display: block;
+	        font-family: 'FontAwesome';
+	        font-style: normal;
+	        font-weight: normal;
+	        font-variant: normal;
+	        font-size: 100%;
+	        text-transform: none;
+	        position: absolute;
+	        right: 1.3em;
+	        content: '\f0d7';
+	        text-indent: 0;
+	        speak: none;
+	        width: 1em;
+	    }
+        &::before {
+            content: '\f0d8';
+        }
     }
+}
 
-    nav.access .menu--main {
-    	padding-bottom: 50px;
-    }
-    nav.access .menu--user li,
-    nav.access .menu--main li {
-    	float: none;
-    	text-align: center;
-    	display: block;
-    	margin: 0px;
-    	display: block;
+.menu--sub {
+    font-size: 1rem;
+    line-height: 1.44;
 
-    }
-    nav.access .menu--main a,
-    nav.access .menu--user a  {
-    	margin: 0px;
-    }
+    margin-bottom: 1px;
 
+    background-color: rgba(41,39,36,.6);
+    
+    a:hover {
+	    background-color: rgba(41,39,36,.9);
+	}
+}
+
+.menu--mobile {
+    background-color: #125b26;
+    font-size: 1.25rem;
+    line-height: 2.4;
+
+    float: left;
+}
+
+.sub-menu {
+    font-size: 1rem;
+    position: absolute;
+    z-index: 9999;
+    top: 100%;
+    left: 0;
+
+    margin: 0;
+
+    background-color: #fff;
+    box-shadow: 0 3px 3px rgba(0,0,0,.2);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+
+	ul {
+	    top: 0;
+	    left: 100%;
+	}
+	
+	a {
+	    color: #888;
+	    background: transparent;
+	    text-shadow: none;
+	    
+	    &:hover {
+		    color: #125b26;
+		    background: transparent;
+		}
+	}
+	
+	li {
+	    float: none;
+	    margin: 0;
+	    border: none;
+	}
+	
+	.current-menu-item a {
+	    color: #111;
+	}
+	
+	.current_page_item,
+	.current-menu-item {
+		& > a {
+	    	background: #ededed;
+	    }
+	}
 }

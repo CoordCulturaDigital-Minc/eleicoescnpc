@@ -1849,6 +1849,26 @@ header#header {
       color: #125b26; }
       header#header .contact a i {
         font-size: 18px; }
+  @media only screen and (min-width: 769px) {
+    header#header .csn {
+      float: right;
+      margin-left: 1.5rem;
+      margin-right: -48px; }
+    header#header ul .menu-item-has-children > a:after {
+      font-family: 'FontAwesome';
+      margin-left: .5em;
+      content: '\f107'; }
+    header#header ul > li {
+      display: inline-block;
+      text-align: left;
+      border-bottom: none; } }
+  @media only screen and (max-width: 768px) {
+    header#header a {
+      margin-left: 0px; }
+      header#header a img {
+        width: 100%; }
+    header#header form {
+      margin-top: 20px; } }
 
 nav.access {
   padding-top: 20px;
@@ -1943,7 +1963,7 @@ nav.access {
   height: inherit;
   width: inherit; }
 
-@media screen and (min-width: 40em) {
+@media only screen and (min-width: 769px) {
   .menu-item:hover > .sub-menu {
     clip: inherit;
     overflow: inherit;
@@ -1980,8 +2000,19 @@ nav.access {
     border-bottom: 1px solid #ccc; }
     .menu .current_page_item > .sub-menu li,
     .menu .current-menu-ancestor > .sub-menu li {
-      float: left; } }
-@media screen and (max-width: 40em) {
+      float: left; }
+
+  .js .access {
+    position: relative; }
+    .js .access.closed {
+      max-height: none; }
+
+  .nav-toggle {
+    display: none; }
+
+  .menu--sub {
+    float: right; } }
+@media only screen and (max-width: 768px) {
   a.nav-toggle {
     height: 40px;
     background-color: #0c451a;
@@ -1989,45 +2020,18 @@ nav.access {
 
   nav.access ul {
     line-height: 2.2; }
-
-  nav.access .menu--main,
-  nav.access .menu--user {
+  nav.access .menu--main, nav.access .menu--user {
     float: none; }
-
+    nav.access .menu--main li, nav.access .menu--user li {
+      float: none;
+      text-align: center;
+      display: block;
+      margin: 0px;
+      display: block; }
+    nav.access .menu--main a, nav.access .menu--user a {
+      margin: 0px; }
   nav.access .menu--main {
     padding-bottom: 50px; }
-
-  nav.access .menu--user li,
-  nav.access .menu--main li {
-    float: none;
-    text-align: center;
-    display: block;
-    margin: 0px;
-    display: block; }
-
-  nav.access .menu--main a,
-  nav.access .menu--user a {
-    margin: 0px; } }
-@media only screen and (min-width: 48em) {
-  header#header .csn {
-    float: right;
-    margin-left: 1.5rem;
-    margin-right: -48px; } }
-@media screen and (min-width: 40em) {
-  .js .access {
-    position: relative; }
-    .js .access.closed {
-      max-height: none; }
-
-  .nav-toggle {
-    display: none; } }
-@media only screen and (max-width: 40em) {
-  header#header a {
-    margin-left: 0px; }
-    header#header a img {
-      width: 100%; }
-  header#header form {
-    margin-top: 20px; }
 
   .js nav {
     clip: rect(0 0 0 0);
@@ -2074,15 +2078,6 @@ nav.access {
       width: 1em; }
     .nav-toggle::before {
       content: '\f0d8'; } }
-@media screen and (min-width: 40em) {
-  header ul .menu-item-has-children > a:after {
-    font-family: 'FontAwesome';
-    margin-left: .5em;
-    content: '\f107'; }
-  header ul > li {
-    display: inline-block;
-    text-align: left;
-    border-bottom: none; } }
 .menu--sub {
   font-size: 1rem;
   line-height: 1.44;
@@ -2091,9 +2086,6 @@ nav.access {
   .menu--sub a:hover {
     background-color: rgba(41, 39, 36, 0.9); }
 
-@media screen and (min-width: 40em) {
-  .menu--sub {
-    float: right; } }
 .menu--mobile {
   background-color: #125b26;
   font-size: 1.25rem;
@@ -2132,9 +2124,6 @@ nav.access {
   .sub-menu .current_page_item > a,
   .sub-menu .current-menu-item > a {
     background: #ededed; }
-
-#wrapper-barra-brasil .brasil-flag {
-  box-sizing: content-box; }
 
 section .section-description {
   color: #125b26;
@@ -2798,5 +2787,8 @@ section.features {
     left: 8px; }
   .candidates-content .flex-direction-nav li a.flex-next {
     right: 8px; } }
+/* JUNK THAT HAS NO PLACE */
+#wrapper-barra-brasil .brasil-flag {
+  box-sizing: content-box; }
 
 /*# sourceMappingURL=style.css.map */

@@ -79,113 +79,15 @@ header#header {
 			}
 		}
 	}
-}
-
-@media only screen and (min-width: 48em) {
-	header#header {
+	
+	@include respond-to(md) {
 		.csn {
 	        float: right;
 	        margin-left: 1.5rem;
 	        margin-right: -48px;
 
 	    }
-    }
-
-}
-
-@media screen and (min-width: 40em) {
-    .js .access {
-        position: relative;
-        
-        &.closed {
-            max-height: none;
-        }
-    }
-    .nav-toggle {
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 40em) {
-
-	header#header {
-
-		h1 {
-
-		}
-		a {
-			margin-left: 0px;
-			img	{
-				width: 100%;
-			}
-		}
-
-		form {
-			margin-top: 20px;
-		}
-
-    }
-
-
-    .js nav {
-        clip: rect(0 0 0 0);
-        max-height: 0;
-        position: absolute;
-        display: block;
-        overflow: hidden;
-        zoom: 1;
-    }
-
-    .nav-toggle {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        background-color: rgba(41,39,36,.9);
-        color: #fff;
-        display: block;
-        font-size: 1.25rem;
-        line-height: 2.4;
-        padding: 0 1.3em;
-        text-decoration: none;
-        position: relative;
-        font-family: 'Sanchez', serif;
-        overflow: hidden;
-        
-        &.nav-toggle {
-	        color: #fff;
-	    }
-	    
-	    &:before {
-	        color: #fff;
-	        display: block;
-	        font-family: 'FontAwesome';
-	        font-style: normal;
-	        font-weight: normal;
-	        font-variant: normal;
-	        font-size: 100%;
-	        text-transform: none;
-	        position: absolute;
-	        right: 1.3em;
-	        content: '\f0d7';
-	        text-indent: 0;
-	        speak: none;
-	        width: 1em;
-	    }
-        &::before {
-            content: '\f0d8';
-        }
-    }
-}
-
-
-
-@media screen and (min-width: 40em) {
-	header {
-		ul {
+	    ul {
 			.menu-item-has-children > a:after {
 		        font-family: 'FontAwesome';
 		        margin-left: .5em;
@@ -196,91 +98,19 @@ header#header {
 		        text-align: left;
 		        border-bottom: none;
 		    }
-	    }	
-	}
-}
-
-.menu--sub {
-    font-size: 1rem;
-    line-height: 1.44;
-
-    margin-bottom: 1px;
-
-    background-color: rgba(41,39,36,.6);
-    
-    a:hover {
-	    background-color: rgba(41,39,36,.9);
-	}
-}
-
-@media screen and (min-width: 40em) {
-	.menu--sub {
-        float: right;
-    }
-
-}
-
-.menu--mobile {
-    background-color: #125b26;
-    font-size: 1.25rem;
-    line-height: 2.4;
-
-    float: left;
-}
-
-.sub-menu {
-    font-size: 1rem;
-    position: absolute;
-    z-index: 9999;
-    top: 100%;
-    left: 0;
-
-    margin: 0;
-
-    background-color: #fff;
-    box-shadow: 0 3px 3px rgba(0,0,0,.2);
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-
-	ul {
-	    top: 0;
-	    left: 100%;
-	}
-	
-	a {
-	    color: #888;
-	    background: transparent;
-	    text-shadow: none;
-	    
-	    &:hover {
-		    color: #125b26;
-		    background: transparent;
-		}
-	}
-	
-	li {
-	    float: none;
-	    margin: 0;
-	    border: none;
-	}
-	
-	.current-menu-item a {
-	    color: #111;
-	}
-	
-	.current_page_item,
-	.current-menu-item {
-		& > a {
-	    	background: #ededed;
 	    }
 	}
-}
+	
+	@include respond-to(xs) {
+		a {
+			margin-left: 0px;
+			img	{
+				width: 100%;
+			}
+		}
 
-
-#wrapper-barra-brasil {
-	.brasil-flag { 
-		box-sizing: content-box;
+		form {
+			margin-top: 20px;
+		}
 	}
 }
