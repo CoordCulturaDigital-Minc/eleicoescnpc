@@ -283,8 +283,14 @@
 	}
 
 	.avatar {
+		position: relative;
 		text-align: center;
-		label {display: none;}
+		label {
+			position: absolute;
+			bottom: -12px;
+			left: 0px;
+			width: 100%;
+		}
 
 		.js-current {
 			display: inline-block;

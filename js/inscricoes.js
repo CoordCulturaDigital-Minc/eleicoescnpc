@@ -67,7 +67,7 @@
         // callback to remove a formstep if the previous one is invalid
         var block_formstep = function(e) {
             var $div = $(this).parents('div.form-step');
-            if($div.find('.required + div .invalido').length > 0) {
+            if($div.find('.required ~ div.invalido').length > 0) {
                 $div.find('~ .form-step').find('.form-step-content').remove();
                 $div.find('~ .form-step').find('a.toggle').show();
                 $div.find('~ .form-step').find('p').show();
@@ -128,18 +128,20 @@
 
             var $div = $(this).parents('div.form-step');
             
-            if( $div.find('.required ~ div.invalido').length > 0 ) {
+            if( $div.find('.required ~ div.invalido').length > 0 || $div.find('.required ~ div.espera').length > 0 ) {
 
                 $div.find('.required ~ div.invalido').parent().find('.required').blur();
                 
                 $div.find('span.form-error').html('Os campos destacados são obrigatórios para continuar').show();
                 
                 return false;
+            }else {
+                $div.find('span.form-error').html('').hide();
+                return true; 
             }
 
-            $div.find('span.form-error').html('').hide();
-
-            return true;
+            return false;
+            
         });
 
         // *** this assignments does <em>NOT</em> affect fields loaded throught ajax ** //

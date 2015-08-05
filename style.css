@@ -1257,9 +1257,13 @@ section #comments {
   .form-application legend span {
     font-weight: normal; }
 .form-application .avatar {
+  position: relative;
   text-align: center; }
   .form-application .avatar label {
-    display: none; }
+    position: absolute;
+    bottom: -12px;
+    left: 0px;
+    width: 100%; }
   .form-application .avatar .js-current {
     display: inline-block;
     min-height: 150px;
