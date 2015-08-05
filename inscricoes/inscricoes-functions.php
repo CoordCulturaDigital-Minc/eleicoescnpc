@@ -440,6 +440,8 @@ function subscribe_project() {
             $response['subscription_number'] = $subscription_number;
 
             add_post_meta( $pid, 'subscription_number', $response['subscription_number'], true);
+            update_post_meta($pid, 'subscription-valid', get_current_user_id() ); // TODO - os candidatos inicialmente sao validos
+
             $response['status'] = 'success';
             $response['message'] = nl2br(get_theme_option('txt_candidato_step4'));
 
