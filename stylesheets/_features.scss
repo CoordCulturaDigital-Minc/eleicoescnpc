@@ -1,33 +1,18 @@
 section.features {	
-    position: relative;
-    height: 270px;
+    height: 200px;
     overflow: hidden !important;
     margin-bottom: 20px;
     
     header {
-	    position: absolute;
-	    left: 0;
-	    top: 0;
+	    position: relative;
 	    
-	    padding-top: 10px;
-	    padding-bottom: 10px;
-	    text-align: right;
-	    margin-top: 24px;
 	    
-/*
-	    border-top: 2px solid #596c18;
-	    border-bottom: 2px solid #596c18;
-*/
+	    overflow: hidden;
+	    height: 200px;
+	    border-radius: 20px;
 	    
 	    color: $cor-amarelo;
 	    font-weight: bold;
-	    
-	    & > * {
-		    padding-right: 40px;
-		    width: 100%;
-		    line-height: 1.2;
-		    margin: 0;
-	    }
 	    
 	    h1 {
 		    font-size: 64px;
@@ -36,16 +21,36 @@ section.features {
 	    p {
 		    font-size: 36px;
 	    }
-    }
-    
-    .img-wrap {
-	    border-radius: 20px;
-	    overflow: hidden;
-    }
-    
-    img {
-	    min-width: 100%;
-    }
+	    
+	    
+	    .some {
+			width: 100%;
+		    
+		    text-align: right;
+		    
+		    & > * {
+			    padding-right: 40px;
+			    margin-top: 0;
+			    line-height: 1.2;
+		    }
+		    
+		    border-top: 2px solid #596c18;
+			border-bottom: 2px solid #596c18;
+		    background-color: rgba(0, 0, 0, 0.3);
+		    
+		    position: absolute;
+		    left: 0;
+		    top: 20px;
+	    }
+	    .img-wrap {
+		    position: absolute;
+		    left: 0;
+		    top: 0;
+			img {
+		    	min-width: 100%;
+	    	}
+	    }
+	}
 }
 
 .feature__info {
