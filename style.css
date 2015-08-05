@@ -2234,6 +2234,7 @@ section .entry__info {
   color: #fff;
   background: #125b26; }
 
+.archive .entry-title,
 .tax-setorial .entry-title,
 .page-template .entry-title {
   text-align: center;
