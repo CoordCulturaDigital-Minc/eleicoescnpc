@@ -2311,39 +2311,40 @@ footer.site-footer div {
       text-decoration: underline; }
 
 section.features {
-  position: relative;
-  height: 270px;
+  height: 200px;
   overflow: hidden !important;
   margin-bottom: 20px; }
   section.features header {
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: right;
-    margin-top: 24px;
-    /*
-    	    border-top: 2px solid #596c18;
-    	    border-bottom: 2px solid #596c18;
-    */
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+    border-radius: 20px;
     color: #ffce00;
     font-weight: bold; }
-    section.features header > * {
-      padding-right: 40px;
-      width: 100%;
-      line-height: 1.2;
-      margin: 0; }
     section.features header h1 {
       font-size: 64px;
       text-transform: uppercase; }
     section.features header p {
       font-size: 36px; }
-  section.features .img-wrap {
-    border-radius: 20px;
-    overflow: hidden; }
-  section.features img {
-    min-width: 100%; }
+    section.features header .some {
+      width: 100%;
+      text-align: right;
+      border-top: 2px solid #596c18;
+      border-bottom: 2px solid #596c18;
+      background-color: rgba(0, 0, 0, 0.3);
+      position: absolute;
+      left: 0;
+      top: 20px; }
+      section.features header .some > * {
+        padding-right: 40px;
+        margin-top: 0;
+        line-height: 1.2; }
+    section.features header .img-wrap {
+      position: absolute;
+      left: 0;
+      top: 0; }
+      section.features header .img-wrap img {
+        min-width: 100%; }
 
 .feature__info {
   position: absolute;

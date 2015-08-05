@@ -13,18 +13,21 @@ the_post(); ?>
             <?php if( $featureurl = get_post_meta($post->ID,'_meta_feature-url', true) ) : ?>
                 <a href="<?php echo $featureurl ?>">
             <?php endif; ?>
-            
             <header class="col-xs-12">
-				<?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
-                    <h1><?php the_title(); ?></h1>
-                <?php endif; ?>
-                <?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
-                    <p><?php echo $status ?></p>
-                <?php endif; ?>
+	            <div class="img-wrap img-responsive">
+	            	<?php the_post_thumbnail( 'full' ); ?>  <!-- array('class' => 'img-responsive') -->
+				</div>
+				
+				<div class="some">
+	            	<?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
+	                    <h1><?php the_title(); ?></h1>
+	                <?php endif; ?>
+	                <?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
+	                    <p><?php echo $status ?></p>
+	                <?php endif; ?>
+	            </div>
+				
             </header>
-			<div class="img-wrap img-responsive">
-            <?php the_post_thumbnail( 'full' ); ?>  <!-- array('class' => 'img-responsive') -->
-			</div>
         
             <?php if( $featureurl = get_post_meta($post->ID,'_meta_feature-url', true) ) : ?>
                 </a>
