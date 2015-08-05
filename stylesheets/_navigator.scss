@@ -150,7 +150,7 @@ nav.access {
 	}
 }
 
-@media screen and (min-width: 40em) {
+@media screen and (min-width: 769px) {
     .menu-item:hover > .sub-menu {
         clip: inherit;
         overflow: inherit;
@@ -189,7 +189,7 @@ nav.access {
    
 }
 
-@media screen and (max-width: 40em) {
+@media screen and (max-width: 768px) {
 	 a.nav-toggle {
 	 	height: 40px;
     	background-color: $cor-verde-fim;
