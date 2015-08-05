@@ -1,6 +1,9 @@
 $cor-verde-inicio:	rgba(31,111,58,1);
 $cor-verde-fim:		rgba(12,69,26,1);
 
+.sidebar {
+	padding-right: 27px !important;
+
 aside {
     color: $cor-marrom;
     margin-bottom: 2rem;
@@ -144,4 +147,5 @@ aside {
 	a#lost-password {
 		font-size: 16px;
 	}
+}
 }

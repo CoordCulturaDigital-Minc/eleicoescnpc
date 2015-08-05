@@ -16,7 +16,6 @@ Tags: one-column, two-columns, right-sidebar, custom-menu, editor-style, microfo
 @import 'typography';
 
 $borda-separar:			1px solid #dedede;
-$element-padding:		30px;
 
 $responsive-breakpoint: 768px;
 
@@ -73,9 +72,11 @@ body {
     margin: 0 auto;
 }
 
-.col-xs-12, .col-md-4, col-md-8 {
-	padding-left: $element-padding;
-	padding-right: $element-padding;
+body .site-wrap > {
+	.col-xs-12, .col-md-4, col-md-8 {
+		padding-left: 54px;
+		padding-right: 54px;
+	}	
 }
 
 @import 'code';
