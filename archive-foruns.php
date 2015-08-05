@@ -1,11 +1,12 @@
 <?php get_header(); ?>
 
-	<section class="content content--sidebarless">
+	<section class="content content--sidebarless col-xs-12">
 
 		<article id="<?php echo get_query_var('term'); ?>">
 			
 			<header>
-				<h2 class="entry-title"><?php single_term_title('Selecione o estado da Setorial de '); ?></h2>
+				<h2 class="entry-title">Fóruns</h2>
+                <h3 class="subtitle">Selecione seu estado e setorial</h3>
 			</header>
 			
 			<div class="entry-content">
