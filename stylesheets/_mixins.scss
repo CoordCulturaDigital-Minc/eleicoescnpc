@@ -53,3 +53,12 @@
 	border-bottom: 1px solid #dedede;
 	border-top: 1px solid #fff;
 }
+
+@mixin respond-to($media) {
+	@if $media == xs {
+		@media only screen and (max-width: $responsive-breakpoint) { @content; }
+	}
+	@else if $media == md {
+		@media only screen and (min-width: $responsive-breakpoint + 1) { @content; }
+	}
+}
