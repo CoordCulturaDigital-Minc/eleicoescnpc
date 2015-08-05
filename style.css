@@ -185,9 +185,9 @@ body {
   /* IE6-9 */
   margin: 0 auto; }
 
-.col-xs-12, .col-md-4, col-md-8 {
-  padding-left: 30px;
-  padding-right: 30px; }
+body .site-wrap > .col-xs-12, body .site-wrap > .col-md-4, body .site-wrap > col-md-8 {
+  padding-left: 54px;
+  padding-right: 54px; }
 
 pre,
 code,
@@ -381,7 +381,7 @@ a.post-edit-link {
 .ui-button,
 .primary-button,
 .button,
-aside form#loginform input#wp-submit {
+.sidebar aside form#loginform input#wp-submit {
   display: inline-block;
   margin: 5px 0;
   padding: .5em;
@@ -409,13 +409,13 @@ aside form#loginform input#wp-submit {
   .ui-button.secondary,
   .primary-button.secondary,
   .button.secondary,
-  aside form#loginform input.secondary#wp-submit {
+  .sidebar aside form#loginform input.secondary#wp-submit {
     margin-right: 10px;
     background: linear-gradient(to bottom, #93AB9B 0%, #62866B 100%); }
   .ui-button:hover,
   .primary-button:hover,
   .button:hover,
-  aside form#loginform input#wp-submit:hover {
+  .sidebar aside form#loginform input#wp-submit:hover {
     background: -moz-linear-gradient(top, #0c451a 0%, #1f6f3a 100%);
     /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #0c451a), color-stop(100%, #1f6f3a));
@@ -1340,7 +1340,7 @@ section #comments {
 #formstep-2 .grid__item .field__note {
   margin-top: 5px; }
 
-#formstep-2 .button, #formstep-2 aside form#loginform input#wp-submit, aside form#loginform #formstep-2 input#wp-submit {
+#formstep-2 .button, #formstep-2 .sidebar aside form#loginform input#wp-submit, .sidebar aside form#loginform #formstep-2 input#wp-submit {
   background: rgba(5, 63, 5, 0.93); }
 
 #formstep-3 .textcenter {
@@ -1445,13 +1445,13 @@ section #comments {
 
 .file-upload {
   cursor: pointer; }
-  .file-upload .button, .file-upload aside form#loginform input#wp-submit, aside form#loginform .file-upload input#wp-submit {
+  .file-upload .button, .file-upload .sidebar aside form#loginform input#wp-submit, .sidebar aside form#loginform .file-upload input#wp-submit {
     margin: .75rem 0;
     position: relative;
     opacity: 0.8;
     cursor: pointer;
     transition: none; }
-    .file-upload .button:hover, .file-upload aside form#loginform input#wp-submit:hover, aside form#loginform .file-upload input#wp-submit:hover {
+    .file-upload .button:hover, .file-upload .sidebar aside form#loginform input#wp-submit:hover, .sidebar aside form#loginform .file-upload input#wp-submit:hover {
       opacity: 1; }
   .file-upload input[type='file'] {
     height: 50px !important;
@@ -1692,109 +1692,111 @@ section #comments {
   color: #fff;
   background: #125b26; }
 
-aside {
-  color: #826815;
-  margin-bottom: 2rem;
-  border-radius: 5px;
-  background-color: #eeece6;
-  *zoom: 1; }
-  aside > a, aside > ul, aside > p, aside > ol, aside > div, aside > form {
-    margin-left: 16px;
-    margin-right: 16px; }
-  aside:before, aside:after {
-    display: table;
-    content: " "; }
-  aside:after {
-    clear: both; }
-  aside a, aside a:visited {
-    color: #826815; }
-    aside a:hover, aside a:visited:hover {
-      color: #e2bf4e; }
-    aside a.button, aside a:visited.button {
-      float: right;
-      margin-bottom: 16px; }
-    aside a.lost-password, aside a:visited.lost-password {
-      font-size: .88rem;
-      line-height: 1.71;
-      display: block;
-      margin-top: -40px;
-      margin-bottom: 17px; }
-  aside ul {
-    margin-top: 1rem;
-    margin-bottom: 1em;
-    margin-right: 1em;
-    line-height: 1.71;
-    list-style: none; }
-    aside ul.menu--user li {
-      color: #125b26;
-      font-weight: bold; }
-      aside ul.menu--user li a {
-        color: #125b26; }
-  aside .menu-setorial i {
-    color: #c9bf9b;
-    margin-right: 5px; }
-  aside h3 {
-    margin: 0 0 10px 0;
-    padding: 1.2rem 0rem 0.4em 1rem;
+.sidebar {
+  padding-right: 27px !important; }
+  .sidebar aside {
+    color: #826815;
+    margin-bottom: 2rem;
     border-radius: 5px;
-    width: 100%;
-    color: #ffce00;
-    border-bottom: none;
-    font-family: "TheSans B7 Bold";
-    font-size: 20px;
-    color: #ffce00;
-    background: #1f6f3a;
-    /* Old browsers */
-    background: -moz-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
-    /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1f6f3a), color-stop(100%, #0c451a));
-    /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
-    /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
-    /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
-    /* IE10+ */
-    background: linear-gradient(to bottom, #1f6f3a 0%, #0c451a 100%);
-    /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f6f3a', endColorstr='#0c451a',GradientType=0 );
-    /* IE6-9 */
-    position: relative; }
-    aside h3:after {
-      content: "";
-      display: block;
-      position: absolute;
-      bottom: -9px;
-      left: 10px;
-      width: 0;
-      border-width: 9px 9px 0px 9px;
-      border-style: solid;
-      border-color: #0c451a transparent; }
-  aside .widget-body {
-    margin-top: 14px;
-    margin-bottom: 14px; }
-  aside form#loginform {
+    background-color: #eeece6;
     *zoom: 1; }
-    aside form#loginform:before, aside form#loginform:after {
+    .sidebar aside > a, .sidebar aside > ul, .sidebar aside > p, .sidebar aside > ol, .sidebar aside > div, .sidebar aside > form {
+      margin-left: 16px;
+      margin-right: 16px; }
+    .sidebar aside:before, .sidebar aside:after {
       display: table;
       content: " "; }
-    aside form#loginform:after {
+    .sidebar aside:after {
       clear: both; }
-    aside form#loginform p {
-      font-size: 16px;
-      line-height: 1;
-      color: #a8a8a8; }
-      aside form#loginform p.login-submit {
+    .sidebar aside a, .sidebar aside a:visited {
+      color: #826815; }
+      .sidebar aside a:hover, .sidebar aside a:visited:hover {
+        color: #e2bf4e; }
+      .sidebar aside a.button, .sidebar aside a:visited.button {
         float: right;
-        margin-top: 0; }
-    aside form#loginform .input {
-      font-size: 14px;
+        margin-bottom: 16px; }
+      .sidebar aside a.lost-password, .sidebar aside a:visited.lost-password {
+        font-size: .88rem;
+        line-height: 1.71;
+        display: block;
+        margin-top: -40px;
+        margin-bottom: 17px; }
+    .sidebar aside ul {
+      margin-top: 1rem;
+      margin-bottom: 1em;
+      margin-right: 1em;
+      line-height: 1.71;
+      list-style: none; }
+      .sidebar aside ul.menu--user li {
+        color: #125b26;
+        font-weight: bold; }
+        .sidebar aside ul.menu--user li a {
+          color: #125b26; }
+    .sidebar aside .menu-setorial i {
+      color: #c9bf9b;
+      margin-right: 5px; }
+    .sidebar aside h3 {
+      margin: 0 0 10px 0;
+      padding: 1.2rem 0rem 0.4em 1rem;
+      border-radius: 5px;
       width: 100%;
-      padding: 0.8em;
-      border: 1px solid #ccc;
-      background: #fff; }
-  aside a#lost-password {
-    font-size: 16px; }
+      color: #ffce00;
+      border-bottom: none;
+      font-family: "TheSans B7 Bold";
+      font-size: 20px;
+      color: #ffce00;
+      background: #1f6f3a;
+      /* Old browsers */
+      background: -moz-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+      /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1f6f3a), color-stop(100%, #0c451a));
+      /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+      /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+      /* Opera 11.10+ */
+      background: -ms-linear-gradient(top, #1f6f3a 0%, #0c451a 100%);
+      /* IE10+ */
+      background: linear-gradient(to bottom, #1f6f3a 0%, #0c451a 100%);
+      /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f6f3a', endColorstr='#0c451a',GradientType=0 );
+      /* IE6-9 */
+      position: relative; }
+      .sidebar aside h3:after {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: -9px;
+        left: 10px;
+        width: 0;
+        border-width: 9px 9px 0px 9px;
+        border-style: solid;
+        border-color: #0c451a transparent; }
+    .sidebar aside .widget-body {
+      margin-top: 14px;
+      margin-bottom: 14px; }
+    .sidebar aside form#loginform {
+      *zoom: 1; }
+      .sidebar aside form#loginform:before, .sidebar aside form#loginform:after {
+        display: table;
+        content: " "; }
+      .sidebar aside form#loginform:after {
+        clear: both; }
+      .sidebar aside form#loginform p {
+        font-size: 16px;
+        line-height: 1;
+        color: #a8a8a8; }
+        .sidebar aside form#loginform p.login-submit {
+          float: right;
+          margin-top: 0; }
+      .sidebar aside form#loginform .input {
+        font-size: 14px;
+        width: 100%;
+        padding: 0.8em;
+        border: 1px solid #ccc;
+        background: #fff; }
+    .sidebar aside a#lost-password {
+      font-size: 16px; }
 
 header#header {
   min-height: 150px; }
@@ -2124,6 +2126,9 @@ nav.access {
   .sub-menu .current_page_item > a,
   .sub-menu .current-menu-item > a {
     background: #ededed; }
+
+body .site-wrap > section.col-md-8 {
+  padding-left: 27px; }
 
 section .section-description {
   color: #125b26;
@@ -2732,12 +2737,12 @@ section.features {
     margin-left: 10px;
     font-weight: bold;
     color: #125b26; }
-  .candidate-not-found .button, .candidate-not-found aside form#loginform input#wp-submit, aside form#loginform .candidate-not-found input#wp-submit {
+  .candidate-not-found .button, .candidate-not-found .sidebar aside form#loginform input#wp-submit, .sidebar aside form#loginform .candidate-not-found input#wp-submit {
     position: absolute;
     bottom: 20px;
     right: 30px;
     display: block; }
-    .candidate-not-found .button.secondary, .candidate-not-found aside form#loginform input.secondary#wp-submit, aside form#loginform .candidate-not-found input.secondary#wp-submit {
+    .candidate-not-found .button.secondary, .candidate-not-found .sidebar aside form#loginform input.secondary#wp-submit, .sidebar aside form#loginform .candidate-not-found input.secondary#wp-submit {
       right: 144px; }
 
 .dialog, .ui-dialog {
