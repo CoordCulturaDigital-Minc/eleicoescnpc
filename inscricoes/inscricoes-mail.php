@@ -29,8 +29,8 @@ $diploma_file_id 	= get_post_meta($pid, 'candidate-diploma', true);
 		
 		<p><?php printf( "Olá %s! Da Setorial %s do %s.", $name, get_label_setorial_by_slug( $user_meta['setorial']), $user_meta['UF'] ); ?></p>
 
-		<p>Confirmamos sua candidatura nas eleições de 2015 do Conselho Nacional de Políticas Culturais (CNPC).</p>
-		<p>Em breve sua inscrição será validada pela Comissão Eleitoral. Enquanto isso, participe no  <a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">fórum de debate.</a><p> 
+		<p>Confirmamos sua inscrição como candidato nas eleições de 2015 do Conselho Nacional de Políticas Culturais (CNPC).</p>
+		<p>Participe no  <a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">fórum de debate.</a><p> 
 		<p>Confira seus dados a seguir.</p>
 	</div>
 
