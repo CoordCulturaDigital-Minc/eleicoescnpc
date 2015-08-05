@@ -567,26 +567,37 @@ function inscricoes_handle_ajax_upload() {
     $field  = $_POST['data-field']; // TODO ver outro jeito depois
     $name   = $_FILES['file-upload'][ 'name' ];
     $type   = $_FILES[ 'file-upload' ][ 'type' ];
+    $size   = $_FILES[ 'file-upload' ][ 'size' ];
+   
 
     require_once( ABSPATH . 'wp-admin/includes/image.php' );
 	require_once( ABSPATH . 'wp-admin/includes/file.php' );
 	require_once( ABSPATH . 'wp-admin/includes/media.php' );
 
+    if( 2100000 < $size )
+    {
+        $return['error'] = "O arquivo excedeu o tamanho limite de 2MB";
+        echo json_encode($return);
+        die;
+    }
 
     if( 'candidate-avatar' == $field ) {
 
         if( 'image/png' !== $type && 'image/jpeg' !== $type && 'image/gif' !== $type ) {
-            $return['error'] = "O arquivo deve ser no formato de imagem (jpg, png, gif)";
+            $return['error'] = "O arquivo deve ser no formato de imagem (jpg, png, gif)" .  $type;
             echo json_encode($return);
             die;
         }
 
     } else if(  'application/pdf' !== $type  )
     {
-        $return['error'] = "O arquivo deve ser no formato portable document file (.pdf)";
+        $return['error'] = "O arquivo deve ser no formato portable document file (.pdf) " .  $type;
         echo json_encode($return);
         die;
     }
+
+
+
 
 	/// evitar que outros usuários acessem arquivos de outros candidatos
     $_FILES[ 'file-upload' ][ 'name' ] = wp_generate_password( 7, false ) . '_' . $name;
