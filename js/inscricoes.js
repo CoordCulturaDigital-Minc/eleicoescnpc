@@ -130,10 +130,7 @@
             
             if( $div.find('.required ~ div.invalido').length > 0 ) {
 
-                if( $div.find('.required').val() )
-                    $div.find('.required').blur();
-                else
-                    $div.find('.required ~ div.invalido').parent().find('.required').blur();
+                $div.find('.required ~ div.invalido').parent().find('.required').blur();
                 
                 $div.find('span.form-error').html('Os campos destacados são obrigatórios para continuar').show();
                 
@@ -182,7 +179,8 @@
             });
 
         });
-
+        
+        // botão que questiona se o usuário ele
         $('#eleitor-candidate-question').click( function(e){
             $('.form-eleitor').hide();
             $('.form-candidato').show();

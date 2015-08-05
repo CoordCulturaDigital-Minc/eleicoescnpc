@@ -21,8 +21,6 @@ the_post(); ?>
                 <?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
                     <p><?php echo $status ?></p>
                 <?php endif; ?>
-            	<h1>Alguma coisa</h1>
-				<p>Alguma coisa</p>
             </header>
 			<div class="img-wrap img-responsive">
             <?php the_post_thumbnail( 'full' ); ?>  <!-- array('class' => 'img-responsive') -->

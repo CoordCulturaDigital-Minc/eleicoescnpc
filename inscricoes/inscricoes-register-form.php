@@ -81,7 +81,7 @@
 
 				--><div class="grid__item  col-md-6 col-xs-12">
 					<label for="user_password">Senha</label>
-					<span class="field__note"> Sua senha deve ter no mínimo de 6 caracteres</span>
+					<span class="field__note"> Sua senha deve ter no mínimo 6 caracteres</span>
 					<input id="user_password" type="password" name="user_password" />
 					<div id="user_password-error" class="field__error"></div>
 
