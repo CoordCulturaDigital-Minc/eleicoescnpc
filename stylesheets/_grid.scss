@@ -165,14 +165,17 @@ a.post-edit-link {
 	
 	@include linear-vertical-gradient($cor-verde-inicio, $cor-verde-fim);
 	
+
+    &.secondary {
+        margin-right: 10px;
+        background: linear-gradient(to bottom, #93AB9B 0%, #62866B 100%);
+    }
+
 	&:hover {
 	    @include linear-vertical-gradient($cor-verde-fim, $cor-verde-inicio);
 	}
 }
 
-.secondary-button {
-
-}
 
 a.highlight {
     line-height: 3;

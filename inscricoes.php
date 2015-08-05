@@ -182,7 +182,8 @@ if(is_user_logged_in()) {
 						<i class="fa fa-question"></i>
 						<p>Você já está inscrito(a) mas não é candidato(a)<br>
 						Deseja se candidatar?</p>
-						<a href="#" id="eleitor-candidate-question" class="button">Candidatar</a>
+						<a href="<?php echo get_link_forum_user(); ?>" id="return_forum" class="button secondary">Não quero me candidatar</a>
+						<a href="#" id="eleitor-candidate-question" class="button primary">Candidatar</a>
 					</div>
 				</div>
 

@@ -406,6 +406,12 @@ aside form#loginform input#wp-submit {
   /* IE10+ */
   background: linear-gradient(to bottom, #1f6f3a 0%, #0c451a 100%);
   /* W3C */ }
+  .ui-button.secondary,
+  .primary-button.secondary,
+  .button.secondary,
+  aside form#loginform input.secondary#wp-submit {
+    margin-right: 10px;
+    background: linear-gradient(to bottom, #93AB9B 0%, #62866B 100%); }
   .ui-button:hover,
   .primary-button:hover,
   .button:hover,
@@ -2733,7 +2739,7 @@ section.features {
     font-size: 22px;
     display: inline-block;
     margin: 0px;
-    line-height: 1;
+    line-height: 1.40;
     margin-left: 10px;
     font-weight: bold;
     color: #125b26; }
@@ -2741,9 +2747,9 @@ section.features {
     position: absolute;
     bottom: 20px;
     right: 30px;
-    display: block;
-    width: 100px;
-    margin-left: 400px; }
+    display: block; }
+    .candidate-not-found .button.secondary, .candidate-not-found aside form#loginform input.secondary#wp-submit, aside form#loginform .candidate-not-found input.secondary#wp-submit {
+      right: 144px; }
 
 .dialog, .ui-dialog {
   display: none;

@@ -261,7 +261,7 @@
         font-size: 22px;
         display: inline-block;
         margin: 0px;
-        line-height: 1;
+        line-height: 1.40;
         margin-left: 10px;
         font-weight: bold;
         color: $cor_verde;
@@ -271,8 +271,17 @@
         bottom: 20px;
         right: 30px;
         display: block;
-        width: 100px;
-        margin-left: 400px;
+        // width: 100px;
+        // margin-left: 400px;
+    
+        &.primary {
+
+
+        }
+
+        &.secondary {
+            right: 144px;
+        }
     }
 }
 
