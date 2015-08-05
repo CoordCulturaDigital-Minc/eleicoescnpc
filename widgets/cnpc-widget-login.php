@@ -80,8 +80,7 @@ class CNPC_Widget_Login extends WP_Widget
                         <li><i class="fa fa-cog"></i> <a href="<?php bloginfo( 'url' ); ?>/wp-admin/">Painel</a></li>
                     
                     <?php elseif ( current_user_can( 'read' ) ) : //eleitor ?>
-                        <!-- <li><i class="fa fa-users"></i> <a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">Meus candidatos</a></li> -->
-                        <li><i class="fa fa-comments"></i> <a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">Meu fórum</a></li>
+                        <li><i class="fa fa-comments"></i> <a href="<?php echo get_link_forum_user(); ?>">Meu fórum</a></li>
                       
                         <?php if (get_user_meta($user_ID, 'e_candidato', true)): ?> 
                             <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('url'); ?>/inscricoes">Minha ficha de inscrição</a></li>

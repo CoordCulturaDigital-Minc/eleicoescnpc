@@ -804,4 +804,19 @@ function user_short_name( $name = null ) {
 	} else 
 		return "Visitante";
 }
+
+
+function get_link_forum_user( $user_id = null ) {
+
+	if( is_user_logged_in() ) {
+
+		$uf_setorial = get_user_option( 'uf-setorial', $user_id );
+		
+		return site_url('foruns/' . $uf_setorial );
+	}
+
+	return false;
+
+}
+
 ?>

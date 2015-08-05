@@ -4,9 +4,6 @@
     else : ?>
         <ul id="menu-user" class="menu--user  menu">
             <?php if ( is_user_logged_in() ) : global $user_ID ?>
-
-                    <?php $user_meta = array_map( function( $a ){ return $a[0]; }, get_user_meta( $user_ID ) ); ?>
-
                     
                     <li class="menu__title"><?php printf( __('Hello, %s!', 'historias' ), user_short_name() ); ?></li>
                     <?php if ( current_user_can( 'level_10' ) ) : ?>
@@ -19,7 +16,7 @@
                         <li><a href="<?php bloginfo('url'); ?>/inscricoes">Inscrições</a></li>
                     
                     <?php elseif ( current_user_can( 'read' ) ): ?>
-                        <li><a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">Meu fórum</a></li>
+                        <li><a href="<?php echo get_link_forum_user(); ?>">Meu fórum</a></li>
                         
                         <?php if (get_user_meta($user_ID, 'e_candidato', true)): ?> 
                             <li><a href="<?php bloginfo('url'); ?>/inscricoes">Minha Inscrição</a></li>
