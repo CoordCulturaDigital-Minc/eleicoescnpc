@@ -73,7 +73,7 @@
     _overflow: visible;
 }
 
-@media screen and (min-width: 40em) {
+@include respond-to(md) {
 
     .media .img {
         float: left;
@@ -83,7 +83,7 @@
 
 }
 
-@media screen and (min-width: 40em) {
+@include respond-to(md) {
 
     .media-container .media:nth-child(odd) .img {
         float: right;
@@ -244,10 +244,6 @@ img.aligncenter {
     float: right;
 }
 
-.hidden {
-    display: none;
-}
-
 body > div.site-wrap {
     overflow: hidden;
 
@@ -258,7 +254,7 @@ body > div.site-wrap {
     background: #f4f4f4;
 }
 
-@media only screen and (min-width: 40em) {
+@include respond-to(md) {
     body > div.site-wrap {
         overflow: visible;
         
@@ -290,7 +286,7 @@ div.site-wrap > {
 	}
 }
 
-@media only screen and (max-width: 40em) {
+@include respond-to(xs) {
 	div.site-wrap > {
 		header, footer {
 	        padding: 0 1.4rem;
