@@ -128,7 +128,7 @@
 
             var $div = $(this).parents('div.form-step');
             
-            if( $div.find('.required ~ div.invalido').length > 0 || $div.find('.required ~ div.espera').length > 0 ) {
+            if( $div.find('.required ~ div.invalido').length > 0 ) {
 
                 $div.find('.required ~ div.invalido').parent().find('.required').blur();
                 
@@ -172,9 +172,9 @@
                         $self.find('.js-feedback').html(result.error).fadeIn().delay(5000).fadeOut();
                     } else {
                         $('#' + $self.data('field')).val(result.success.id).trigger('blur'); //trigger save
-                        $self.parents('.grid__item').find('.js-current').html(result.success.html); // Cleber might need to fix this.
+                        $self.parents('.upload-template').find('.js-current').html(result.success.html); // Cleber might need to fix this.
                         $self.find('.js-feedback').html('Upload feito com sucesso!').fadeIn().delay(1000).fadeOut();
-                        $self.parents('.grid__item').find('.campoObrigatorio').remove();
+                        $self.parents('.upload-template').find('.campoObrigatorio').remove();
                         
                     }
                 }
