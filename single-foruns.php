@@ -127,6 +127,14 @@ get_header(); ?>
 						<?php endif; ?>
 					</div>
 				<?php endif; ?>
+				<div class="clearfix"></div>
+				
+				<?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) ) : ?>
+					<div class="text-center social-share">
+						<h3>Compartilhe</h3>
+						<?php ADDTOANY_SHARE_SAVE_KIT(); ?>
+					</div>
+				<?php endif; ?>
 
 				<?php $post = $original_post; ?>
 			
