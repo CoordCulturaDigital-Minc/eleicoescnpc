@@ -287,39 +287,6 @@ iframe,
 object {
   max-width: 100%; }
 
-.grid {
-  margin-left: -1.5rem; }
-
-.grid__item {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 1.5rem;
-  vertical-align: top; }
-
-@media screen and (min-width: 40em) {
-  .grid__item {
-    padding-left: 1.5rem; } }
-.one-whole {
-  clear: both;
-  width: 100%; }
-
-.one-half {
-  width: 50%; }
-
-.one-third {
-  width: 33.333%; }
-
-.two-thirds {
-  width: 66.666%; }
-
-.cf {
-  *zoom: 1; }
-  .cf:before, .cf:after {
-    display: table;
-    content: ' '; }
-  .cf:after {
-    clear: both; }
-
 .assistive-text {
   position: absolute !important;
   overflow: hidden;
@@ -345,11 +312,11 @@ object {
   zoom: 1;
   _overflow: visible; }
 
-@media screen and (min-width: 40em) {
+@media only screen and (min-width: 769px) {
   .media .img {
     float: left;
     margin-right: 1.5rem; } }
-@media screen and (min-width: 40em) {
+@media only screen and (min-width: 769px) {
   .media-container .media:nth-child(odd) .img {
     float: right;
     margin-right: 0;
@@ -489,9 +456,6 @@ img.aligncenter {
 .u-pull-right {
   float: right; }
 
-.hidden {
-  display: none; }
-
 body > div.site-wrap {
   overflow: hidden;
   width: 98%;
@@ -499,7 +463,7 @@ body > div.site-wrap {
   margin: 0px auto;
   background: #f4f4f4; }
 
-@media only screen and (min-width: 40em) {
+@media only screen and (min-width: 769px) {
   body > div.site-wrap {
     overflow: visible;
     margin: 0px auto; }
@@ -518,7 +482,7 @@ body > div.site-wrap {
 div.site-wrap > header, div.site-wrap > footer {
   padding: 0 5.4rem; }
 
-@media only screen and (max-width: 40em) {
+@media only screen and (max-width: 768px) {
   div.site-wrap > header, div.site-wrap > footer {
     padding: 0 1.4rem; } }
 .entry-content p,

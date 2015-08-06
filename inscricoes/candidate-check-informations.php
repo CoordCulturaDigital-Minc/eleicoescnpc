@@ -36,102 +36,102 @@ if( $current_user_ID != $userID && !current_user_can('administrator')) {
 	<fieldset>
 		<div class="row">
 			
-			<div class="col-md-3 col-xs-12 grid__item">
+			<div class="col-md-3 col-xs-12">
 				<strong>Foto:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php echo wp_get_attachment_image($avatar_file_id, 'avatar_candidate'); ?>
 			</div>
 
-			<div class="col-md-3 col-xs-12 grid__item">
+			<div class="col-md-3 col-xs-12">
 				<strong>Nome:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php echo $user_meta['user_name'];?>
 			</div>
 
-			<div class="col-md-3 col-xs-12 grid__item">
+			<div class="col-md-3 col-xs-12">
 				<strong>Nome Artístico:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php echo isset( $f['candidate-display-name'] ) ? $f['candidate-display-name'] : "Não informado"; ?>
 			</div>
 
-			<div class="col-md-3 col-xs-12 grid__item">
+			<div class="col-md-3 col-xs-12">
 				<strong>Nascimento:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php echo restore_format_date( $user_meta['date_birth'] );?>
 			</div>
 
-			<div class="col-md-3 col-xs-12 grid__item">
+			<div class="col-md-3 col-xs-12">
 				<strong>CPF:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php echo $user_meta['cpf'];?>
 			</div>
 
-			<div class="col-md-3 col-xs-12 grid__item">
+			<div class="col-md-3 col-xs-12">
 				<strong>Setorial:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php echo get_label_setorial_by_slug($user_meta['setorial']); ?>
 			</div>
 
-			<div class="col-md-3 col-xs-12 grid__item">
+			<div class="col-md-3 col-xs-12">
 				<strong>Estado:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php echo $user_meta['UF']; ?>
 			</div>
 
-			<div class="col-md-3 col-xs-12 grid__item">
+			<div class="col-md-3 col-xs-12">
 				<strong>E-mail:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php echo $user->user_email;?>
 			</div>
 
-			<div class="col-md-3 col-xs-12 grid__item">
+			<div class="col-md-3 col-xs-12">
 				<strong>Telefone 1:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php echo $f['candidate-phone-1'];?>
 			</div>
 
-			<div class="col-md-3 col-xs-12 grid__item">
+			<div class="col-md-3 col-xs-12">
 				<strong>Afrobrasileiro:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php echo( $f['candidate-race'] == 'true') ? 'Sim' : 'Não';?>
 			</div>
 
-			<div class="col-md-3 col-xs-12 grid__item">
+			<div class="col-md-3 col-xs-12">
 				<strong>Sexo:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php echo ucfirst($f['candidate-genre']);?>
 			</div>
 
-			<div class="col-md-3 col-xs-12 grid__item">
+			<div class="col-md-3 col-xs-12">
 				<strong>Breve experiência no setor:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php echo $f['candidate-experience'];?>
 			</div>
 
-			<div class="col-md-3 col-xs-12 grid__item">
+			<div class="col-md-3 col-xs-12">
 				<strong>Exposição de motivos para a candidatura:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php echo $f['candidate-explanatory'];?>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3 col-xs-12 grid__item"> 
+			<div class="col-md-3 col-xs-12"> 
 				<strong>Currículo e/ou Portfólio:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php if( $portfolio_file_id ) : ?>
 					<?php echo wp_get_attachment_link($portfolio_file_id );?>
 				<?php else : ?>
@@ -140,10 +140,10 @@ if( $current_user_ID != $userID && !current_user_can('administrator')) {
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3 col-xs-12 grid__item"> 
+			<div class="col-md-3 col-xs-12"> 
 				<strong>Histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php if( $activity_file_id  ) : ?>
 					<?php echo wp_get_attachment_link( $activity_file_id );?>
 				<?php else : ?>
@@ -152,10 +152,10 @@ if( $current_user_ID != $userID && !current_user_can('administrator')) {
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3 col-xs-12 grid__item"> 
+			<div class="col-md-3 col-xs-12"> 
 				<strong>Diploma Profissional e/ou Registro profissional:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12 grid__item">
+			<div class="col-md-9 col-xs-12">
 				<?php if( $diploma_file_id ) : ?>
 					<?php echo wp_get_attachment_link($diploma_file_id );?>
 				<?php else : ?>

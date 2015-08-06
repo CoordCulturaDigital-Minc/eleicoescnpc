@@ -1,7 +1,7 @@
 <?php include( get_template_directory() . '/inscricoes/candidate-check-informations.php' ); ?>
 
-<div class="form-step-content">
-	<div class="grid__item one-whole">
+<div class="form-step-content row">
+	<div class="col-xs-12">
 
 		<?php if( $subscription_number ) : ?>
 

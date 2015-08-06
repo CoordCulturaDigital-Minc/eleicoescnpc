@@ -1,24 +1,24 @@
 <div class="form-step-content">
 	<fieldset>
 		<div class="row">
-			<div class="grid__item col-xs-12">
+			<div class="col-xs-12">
 				<legend>Apenas um anexo é obrigatório</legend>
 			</div>
 
-			<div class="grid__item col-xs-12">
+			<div class="col-xs-12">
 				<?php inscricoes_file_upload_field_template($f, 2, 'Currículo e/ou Portfólio (obrigatório)', 'candidate-portfolio', 'Faça Upload, em um único PDF, do currículo e/ou portfólio', '' , true); ?>
             </div><!--
 
-			--><div class="grid__item col-xs-12">
+			--><div class="col-xs-12">
             	<?php inscricoes_file_upload_field_template($f, 2, 'Histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma', 'candidate-activity-history', 'Faça Upload, em um único PDF, do histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma'); ?>
             </div><!--
 
-			--><div class="grid__item col-xs-12">
+			--><div class="col-xs-12">
             	 <?php inscricoes_file_upload_field_template($f, 2, 'Diploma Profissional e/ou Registro profissional', 'candidate-diploma', 'Faça Upload, em um único PDF, do diploma profissional ou certificado de profissionalização'); ?>
             </div>
 
 
-			<div class="grid__item col-xs-12">
+			<div class="col-xs-12">
 				<legend>Declaração</legend>
 			</div>
 
