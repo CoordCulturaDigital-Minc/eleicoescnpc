@@ -287,31 +287,6 @@ iframe,
 object {
   max-width: 100%; }
 
-.grid {
-  margin-left: -1.5rem; }
-
-.grid__item {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 1.5rem;
-  vertical-align: top; }
-  @media only screen and (min-width: 769px) {
-    .grid__item {
-      padding-left: 1.5rem; } }
-
-.one-whole {
-  clear: both;
-  width: 100%; }
-
-.one-half {
-  width: 50%; }
-
-.one-third {
-  width: 33.333%; }
-
-.two-thirds {
-  width: 66.666%; }
-
 .assistive-text {
   position: absolute !important;
   overflow: hidden;
