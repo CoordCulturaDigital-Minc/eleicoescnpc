@@ -231,7 +231,7 @@ add_filter( 'wp_title', 'historias_wp_title', 10, 2 );
 
 function historias_share() {
 	global $post; ?>
-		<div class="entry-share  cf">
+		<div class="entry-share clearfix">
             <input type="text" class="share-shortlink" value="<?php echo wp_get_shortlink( get_the_ID() ); ?>" onclick="this.focus(); this.select();" readonly="readonly" />
 
             <?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
@@ -532,7 +532,7 @@ function new_gallery_shortcode($attr) {
  */
 function default_menu() { ?>
 
-    <ul id="menu-main" class="menu--main  menu  cf">
+    <ul id="menu-main" class="menu--main menu clearfix">
         <?php if ( is_user_logged_in() && current_user_can( 'level_10' ) ) : ?>
             <li><a href="<?php bloginfo('url'); ?>/wp-admin/nav-menus.php"><?php _e('Hey admin, don\'t forget to set up a menu!', 'historias' ); ?></a></li>
         <?php endif; ?>

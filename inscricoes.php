@@ -191,7 +191,7 @@ if(is_user_logged_in()) {
 			<?php $step1 = load_step(1,$pid); $f = $step1['fields']; ?>
 
 			<div class="form-candidato" style="<?php echo ( current_user_voter($userID) )? 'display: none' : '' ?>">
-				<div class="form-controls  cf">
+				<div class="form-controls clearfix">
 					<?php if($subscription_number): ?>
 						<a href="<?php echo site_url("inscricoes/".substr($subscription_number,0,8)."/imprimir");?>" target="_blank" class="button  u-pull-right  print"><?php _e('Print', 'historias'); ?></a>
 					

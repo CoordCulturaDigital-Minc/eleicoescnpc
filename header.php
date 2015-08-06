@@ -70,7 +70,7 @@
 		<?php if( !is_page() ) : ?>
 			<?php $featured_posts = new WP_Query( array( 'ignore_sticky_posts' => 1, 'meta_key' => '_post2home', 'meta_value' => 1, 'posts_per_page' => '4' ) );
 			if ( $featured_posts->have_posts() ) : ?>
-				<div class="featured-posts  cf">
+				<div class="featured-posts clearfix">
 					<?php while($featured_posts->have_posts()) : $featured_posts->the_post(); ?>
 						<article <?php post_class(); ?>>
 							<?php if ( has_post_thumbnail() ) the_post_thumbnail( 'medium' ); ?>

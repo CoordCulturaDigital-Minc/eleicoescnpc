@@ -13,13 +13,12 @@
    
 
     vertical-align: top;
-}
-
-@media screen and (min-width: 40em) {
-    .grid__item {
-        padding-left: 1.5rem;
+    
+    @include respond-to(md) {
+	    padding-left: 1.5rem;
     }
 }
+
 .one-whole {
     clear: both;
 
@@ -36,18 +35,6 @@
 
 .two-thirds {
     width: 66.666%;
-}
-
-.cf {
-	&:before, &:after {
-		display: table;
-		content: ' ';
-	}
-	&:after {
-		clear: both;
-	}
-	
-    *zoom: 1;
 }
 
 .assistive-text {

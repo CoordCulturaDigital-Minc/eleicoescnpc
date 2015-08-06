@@ -295,10 +295,10 @@ object {
   display: inline-block;
   padding-bottom: 1.5rem;
   vertical-align: top; }
+  @media only screen and (min-width: 769px) {
+    .grid__item {
+      padding-left: 1.5rem; } }
 
-@media screen and (min-width: 40em) {
-  .grid__item {
-    padding-left: 1.5rem; } }
 .one-whole {
   clear: both;
   width: 100%; }
@@ -311,14 +311,6 @@ object {
 
 .two-thirds {
   width: 66.666%; }
-
-.cf {
-  *zoom: 1; }
-  .cf:before, .cf:after {
-    display: table;
-    content: ' '; }
-  .cf:after {
-    clear: both; }
 
 .assistive-text {
   position: absolute !important;
