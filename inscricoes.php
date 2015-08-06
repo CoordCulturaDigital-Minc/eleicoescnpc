@@ -223,7 +223,7 @@ if(is_user_logged_in()) {
 								</div>
 								<div class="step-status <?php print $step1['complete']?' completo':'';?>"></div>
 							</header>
-							<?php include( get_template_directory() . '/inscricoes/inscricoes-step1.php' ); ?>
+							<?php include( get_template_directory() . '/inscricoes/candidate-step1.php' ); ?>
 
 						</div><!-- #formstep-1 -->
 					<?php endif; ?>
@@ -242,7 +242,7 @@ if(is_user_logged_in()) {
 								<span id="formstep-2-error" class="form-error"></span>
 							</header>
 
-							<?php include( get_template_directory() . '/inscricoes/inscricoes-step2.php' ); ?>
+							<?php include( get_template_directory() . '/inscricoes/candidate-step2.php' ); ?>
 
 						</div><!-- #formstep-2 -->
 					<?php elseif( $step == 'step-2' ): ?>
@@ -273,7 +273,7 @@ if(is_user_logged_in()) {
 								</div>
 								<span id="formstep-3-error" class="form-error"></span>
 							</header>
-							<?php include( get_template_directory() . '/inscricoes/inscricoes-step3.php' ); ?>
+							<?php include( get_template_directory() . '/inscricoes/candidate-step3.php' ); ?>
 						</div><!-- #formstep-3 -->
 
 					<?php elseif( $step == 'step-3' ): ?>

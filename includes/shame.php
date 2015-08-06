@@ -44,8 +44,8 @@ function template_redirect_intercept(){
 			exit;
 		}
 	} elseif ( $wp_query->get('setoriaiscnpc_tpl') == 'inscricoes-print' ) {
-		if (file_exists( TEMPLATEPATH . '/inscricoes/inscricoes-print.php' )) {
-			include( TEMPLATEPATH . '/inscricoes/inscricoes-print.php' );
+		if (file_exists( TEMPLATEPATH . '/inscricoes/candidate-print.php' )) {
+			include( TEMPLATEPATH . '/inscricoes/candidate-print.php' );
 			exit;
 		}
 	} elseif ( $wp_query->get('setoriaiscnpc_tpl') == 'avaliacoes' ) {

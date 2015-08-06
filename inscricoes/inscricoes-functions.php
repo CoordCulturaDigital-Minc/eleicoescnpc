@@ -26,7 +26,7 @@ function get_project_id_by_user_id($user_id) {
                                          ." ORDER BY ID ASC LIMIT 1 OFFSET %d", $user_id, $project_index));
     if (!$project_id) {
         $p = array(
-            'post_title' => $current_user->display_name . ' - ' . 'Candidato ' . $project_index,
+            'post_title' => $current_user->display_name . ' - ' . $user_id . ' - '. 'Candidato ' . $project_index,
             'post_type' => 'projetos',
             'post_status' => 'publish',
             'post_author' => $user_id
@@ -207,7 +207,7 @@ function load_step_html() {
                 $f = $step['fields'];
 
                 // TODO: ver se alguma do wordpress já faz isso
-                $file = dirname(__FILE__).sprintf('/inscricoes-step%d.php', $step_number);
+                $file = dirname(__FILE__).sprintf('/candidate-step%d.php', $step_number);
 
                 if(file_exists($file)) {
                     include($file);
@@ -687,7 +687,7 @@ function mail_new_subscription($subscription_number, $pid) {
     $subscription_number = substr($subscription_number, 0, 8);
 
     ob_start();
-    include('inscricoes-mail.php');
+    include('candidato-mail.php');
     $mail_content = ob_get_contents();
     ob_end_clean();
 
