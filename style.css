@@ -2433,10 +2433,22 @@ section.features {
     color: #ffce00;
     font-weight: bold; }
     section.features header h1 {
-      font-size: 64px;
+      font-size: 48px;
       text-transform: uppercase; }
+      @media only screen and (min-width: 751px) and (max-width: 970px) {
+        section.features header h1 {
+          font-size: 36px; } }
+      @media only screen and (max-width: 750px) {
+        section.features header h1 {
+          font-size: 24px; } }
     section.features header p {
-      font-size: 36px; }
+      font-size: 24px; }
+      @media only screen and (min-width: 751px) and (max-width: 970px) {
+        section.features header p {
+          font-size: 20px; } }
+      @media only screen and (max-width: 750px) {
+        section.features header p {
+          font-size: 18px; } }
     section.features header .some {
       width: 100%;
       text-align: right;
@@ -2448,8 +2460,13 @@ section.features {
       top: 20px; }
       section.features header .some > * {
         padding-right: 40px;
+        padding-left: 20px;
         margin-top: 0;
         line-height: 1.2; }
+      section.features header .some h1 {
+        padding-top: 10px; }
+      section.features header .some p {
+        padding-bottom: 10px; }
     section.features header .img-wrap {
       position: absolute;
       left: 0;

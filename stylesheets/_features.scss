@@ -15,11 +15,24 @@ section.features {
 	    font-weight: bold;
 	    
 	    h1 {
-		    font-size: 64px;
+		    font-size: 48px;
 		    text-transform: uppercase;
+		    
+		    @include respond-to(sm) {
+			    font-size: 36px;
+		    }
+		    @include respond-to(xs) {
+			    font-size: 24px;
+		    }
 	    }
 	    p {
-		    font-size: 36px;
+		    font-size: 24px;
+		    @include respond-to(sm) {
+			    font-size: 20px;
+		    }
+		    @include respond-to(xs) {
+			    font-size: 18px;
+		    }
 	    }
 	    
 	    
@@ -30,8 +43,15 @@ section.features {
 		    
 		    & > * {
 			    padding-right: 40px;
+			    padding-left: 20px;
 			    margin-top: 0;
 			    line-height: 1.2;
+		    }
+		    h1 {
+			    padding-top: 10px;
+		    }
+		    p {
+			    padding-bottom: 10px;
 		    }
 		    
 		    border-top: 2px solid #596c18;
