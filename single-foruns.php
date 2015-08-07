@@ -36,7 +36,7 @@ get_header(); ?>
 						<?php echo nl2br(get_theme_option('txt_forum')); ?></p>
 					</div>
 
-					<h2 class="entry-title">Setorial de <?php echo substr($post->post_title, 4); ?> do <?php echo substr($post->post_title, 0, 2); ?></h2>
+					<h2 class="entry-title">Setorial de <?php echo substr($post->post_title, 4); ?> <?php echo show_text_state_by_uf($uf); ?></h2>
 					<h1 class="entry-title-candidate">Candidatos(as)</h1>
 				</header>
 

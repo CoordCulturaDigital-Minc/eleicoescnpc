@@ -634,6 +634,49 @@ function get_state_name_by_uf( $uf ) {
 }
 
 
+function show_text_state_by_uf( $uf ) {
+	$uf = strtoupper($uf);
+
+	switch($uf) {
+		case 'BA':
+		case 'PB':
+			$text = 'da';
+			break;
+		case 'AL':
+		case 'GO':
+		case 'MT':
+		case 'MS':
+		case 'MG':
+		case 'PE':
+		case 'RO':
+		case 'RR':
+		case 'SC':
+		case 'SP':
+		case 'SE':	
+			$text = 'de';
+			break;
+		case 'AP':
+		case 'AM':
+		case 'CE':
+		case 'DF':
+		case 'ES':
+		case 'MA':
+		case 'PA':
+		case 'PR':
+		case 'PI':
+		case 'RJ':
+		case 'RN':
+		case 'RS':
+		case 'TO':
+			$text = 'do';
+			break;
+		default:
+			$text = 'do';
+	}
+	
+	return $text .' '. get_state_name_by_uf($uf) .' ('. $uf .')';
+}
+
 function get_setoriais() {
 
 	return array(
@@ -658,10 +701,10 @@ function get_setoriais() {
 
 function get_label_setorial_by_slug( $slug ) {
 
-    $states = get_setoriais();
+    $setoriais = get_setoriais();
 
-    if( isset( $states[$slug] ) )
-        return $states[$slug];
+    if( isset( $setoriais[$slug] ) )
+        return $setoriais[$slug];
 }
 
 
