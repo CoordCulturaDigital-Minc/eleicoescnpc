@@ -118,13 +118,31 @@ get_header(); ?>
 						<div class="navigation"></div>
 					</div><!--candidates-content -->
 				<?php else: // colocar botão para cadastro ?>
-					<div class="candidate-not-found">
-						<i class="fa fa-question"></i>
-						<p>Não há candidatos(as) para esta vaga!<br>
-						<?php if( is_user_this_uf_setorial($post->post_name) ) : ?>
-							Deseja se candidatar?</p>
-							<a href="<?php echo site_url('/inscricoes/'); ?>" id="registrar" class="button">Candidatar</a>
-						<?php endif; ?>
+					<div class="candidate-not-found row">
+						<div class="col-md-3 text-center">
+							<i class="fa fa-question"></i>
+						</div>
+						<div class="col-md-9">
+							<div class="col-md-12">
+								<p>Não há candidatos(as) para esta vaga!</p>
+							</div>
+
+							<?php if( is_user_this_uf_setorial($post->post_name) ) : ?>
+								<div class="col-md-12">
+									<p>Deseja se candidatar?</p>
+								</div>
+					
+								<div class="col-md-12">
+									<a href="<?php echo get_link_forum_user(); ?>" id="return_forum" class="button secondary">Não quero me candidatar</a>
+									<a href="<?php echo site_url('/inscricoes/'); ?>" id="registrar" class="button">Candidatar</a>
+								</div>
+					
+							<?php else: ?>
+								<div class="col-md-12">
+									<a href="<?php echo get_link_forum_user(); ?>" id="return_forum" class="button secondary alignright">Ir para o meu fórum</a>
+								</div>
+							<?php endif; ?>
+						</div>
 					</div>
 				<?php endif; ?>
 				<div class="clearfix"></div>

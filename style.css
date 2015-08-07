@@ -2825,23 +2825,18 @@ section.features {
   margin: 40px auto;
   border-top: 1px solid #aaa;
   border-bottom: 1px solid #aaa;
-  width: 70%;
-  padding: 15px 0px;
-  height: 160px;
+  width: 80%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
   position: relative; }
   .candidate-not-found i {
-    position: absolute;
-    top: 15px;
-    left: 0px;
     font-size: 100px;
     color: #125b26;
     border: 2px solid #aaa;
     padding: 10px 40px;
     display: inline-block; }
   .candidate-not-found p {
-    position: absolute;
-    top: 30px;
-    left: 150px;
     font-size: 22px;
     display: inline-block;
     margin: 0px;
@@ -2850,12 +2845,7 @@ section.features {
     font-weight: bold;
     color: #125b26; }
   .candidate-not-found .button, .candidate-not-found .sidebar aside form#loginform input#wp-submit, .sidebar aside form#loginform .candidate-not-found input#wp-submit {
-    position: absolute;
-    bottom: 20px;
-    right: 30px;
-    display: block; }
-    .candidate-not-found .button.secondary, .candidate-not-found .sidebar aside form#loginform input.secondary#wp-submit, .sidebar aside form#loginform .candidate-not-found input.secondary#wp-submit {
-      right: 144px; }
+    margin-top: 20px; }
 
 .dialog, .ui-dialog {
   display: none;

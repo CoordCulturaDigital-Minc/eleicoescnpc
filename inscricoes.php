@@ -176,15 +176,21 @@ if(is_user_logged_in()) {
 
 			<?php if ( current_user_voter( $userID ) ) : // verifica se o usuário é eleitor, se for, perguntar se quer se candidatar?>
 
-				<div class="form-eleitor">
-					<div class="candidate-not-found">
-						<i class="fa fa-question"></i>
-						<p>Você já está inscrito(a) mas não é candidato(a)<br>
-						Deseja se candidatar?</p>
+			<div class="candidate-not-found row">
+				<div class="col-md-3">
+					<i class="fa fa-question"></i>
+				</div>
+				<div class="col-md-9">
+					<div class="col-md-12">
+						<p>Você já está inscrito(a) mas não é candidato(a)</p>
+						<p>Deseja se candidatar?</p>
+					</div>
+					<div class="col-md-12">
 						<a href="<?php echo get_link_forum_user(); ?>" id="return_forum" class="button secondary">Não quero me candidatar</a>
 						<a href="#" id="eleitor-candidate-question" class="button primary">Candidatar</a>
 					</div>
 				</div>
+			</div>
 
 			<?php endif; ?>
 
