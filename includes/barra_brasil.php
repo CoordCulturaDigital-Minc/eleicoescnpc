@@ -4,3 +4,5 @@
         <li><a style="font-family:sans,sans-serif; text-decoration:none; color:white;" href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize sua Barra de Governo</a></li>
     </ul>
 </div>
+
+<script src="http://barra.brasil.gov.br/barra.js?cor=verde" type="text/javascript"></script>

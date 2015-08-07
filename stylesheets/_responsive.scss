@@ -1,0 +1,39 @@
+$responsive-sm: 750px;
+$responsive-md: 970px;
+$responsive-lg: 1170px;
+
+@mixin respond-to($media) {
+	@if $media == xs {
+		@media only screen and (max-width: $responsive-sm) { @content; }
+	}
+	@else if $media == sm {
+		@media only screen and (min-width: $responsive-sm + 1) and (max-width: $responsive-md) { @content; }
+	}
+	@else if $media == md {
+		@media only screen and (min-width: $responsive-md + 1) and (max-width: $responsive-lg) { @content; }
+	}
+	@else if $media == lg {
+		@media only screen and (min-width: $responsive-md + 1) { @content; }
+	}
+}
+
+body .site-wrap > {
+	.col-xs-12, .col-md-4, col-md-8 {
+		padding-left: 54px;
+		padding-right: 54px;
+	}	
+}
+
+div.site-wrap > {
+	header, footer {
+		padding: 0 5.4rem;
+	}
+}
+
+@include respond-to(xs) {
+	div.site-wrap > {
+		header, footer {
+	        padding: 0 1.4rem;
+	    }
+	}
+}

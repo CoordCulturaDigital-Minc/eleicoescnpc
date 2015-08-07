@@ -1,5 +1,9 @@
 footer.site-footer {
 	div {
+		&, & a {
+			margin-bottom: 20px;
+		}
+		
 		&.social {
 			a {
 			    color: $cor-verde;
@@ -41,21 +45,20 @@ footer.site-footer {
 			}
 		}
 		
-		&.creditos, &.creditos a {
-		    font-size: 11px;
-		    color: $cor-cinza-escuro;
-		    line-height: 1.3; 
+		&.creditos {
+			&, & a, & p a {
+				font-size: 11px;
+				color: $cor-cinza-escuro;
+				line-height: 1.3; 
+			}
+		    
 		}
 
 		&.creditos a {
-			font-size: 14px;
 			&:a:hover {
+				color: $cor-cinza-escuro;
 				text-decoration: underline;
 			}
 		}
-
-
-		
-		margin-bottom: 20px;
 	}
 }
