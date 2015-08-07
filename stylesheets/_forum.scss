@@ -19,7 +19,7 @@
         margin-top: 100px;
         margin-bottom: 100px;
         text-align: center;
-        color: $cor_verde;
+        color: $cor-verde;
         font-size: 36px;
     }
 
@@ -164,7 +164,7 @@
             &.voted {
           
                 .candidate-avatar {
-                    border-color: lighten( $cor_verde, 10%);
+                    border-color: lighten( $cor-verde, 10%);
                 }    
             }    
         }
@@ -208,7 +208,7 @@
     text-align: center;
     font-size: 34px;
     margin-top: 30px;
-    color: $cor_verde;
+    color: $cor-verde;
 }
 
 .candidate-not-found {
@@ -225,7 +225,7 @@
         top: 15px;
         left: 0px;
         font-size: 100px;
-        color: $cor_verde;
+        color: $cor-verde;
         border: 2px solid #aaa;
         padding: 10px 40px;
         display: inline-block;
@@ -240,7 +240,7 @@
         line-height: 1.40;
         margin-left: 10px;
         font-weight: bold;
-        color: $cor_verde;
+        color: $cor-verde;
     }
     .button {
         position: absolute;
