@@ -124,20 +124,16 @@ get_header(); ?>
 						</div>
 						<div class="col-md-9">
 							<div class="col-md-12">
-								<p>Não há candidatos(as) para esta vaga!</p>
+								<p>Ainda não há candidatos(as)<?php echo ( is_user_this_uf_setorial( $post->post_name ) ) ? ', deseja se candidatar?' : '!'; ?></p>
 							</div>
 
 							<?php if( is_user_this_uf_setorial($post->post_name) ) : ?>
-								<div class="col-md-12">
-									<p>Deseja se candidatar?</p>
-								</div>
-					
-								<div class="col-md-9">
+								<div class="col-md-11">
 									<a href="<?php echo site_url('/inscricoes/'); ?>" id="registrar" class="button alignright">Candidatar</a>
 								</div>
 					
 							<?php else: ?>
-								<div class="col-md-9">
+								<div class="col-md-11">
 									<a href="<?php echo get_link_forum_user(); ?>" id="return_forum" class="button alignright">Ir para o meu fórum</a>
 								</div>
 							<?php endif; ?>
