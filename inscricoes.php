@@ -176,7 +176,7 @@ if(is_user_logged_in()) {
 
 			<?php if ( current_user_voter( $userID ) ) : // verifica se o usuário é eleitor, se for, perguntar se quer se candidatar?>
 
-			<div class="candidate-not-found row">
+			<div class="form-eleitor candidate-not-found row">
 				<div class="col-md-3">
 					<i class="fa fa-question"></i>
 				</div>

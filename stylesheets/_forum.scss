@@ -219,13 +219,10 @@
     padding-top: 15px;
     padding-bottom: 15px;
     margin-bottom: 30px;
-    // height: 160px;
     position: relative;
 
     i {
-        // position: absolute;
-        // top: 15px;
-        // left: 0px;
+
         font-size: 100px;
         color: $cor-verde;
         border: 2px solid #aaa;
@@ -233,9 +230,6 @@
         display: inline-block;
     }
     p {
-        // position:absolute;
-        // top: 30px;
-        // left: 150px;
         font-size: 22px;
         display: inline-block;
         margin: 0px;
@@ -246,20 +240,12 @@
     }
     .button {
         margin-top: 20px;
-        // position: absolute;
-        // top: 70px;
-        // right: 30px;
-        // display: block;
-        // width: 100px;
-        // margin-left: 400px;
-    
         &.primary {
 
 
         }
 
         &.secondary {
-            // right: 144px;
 
         }
     }

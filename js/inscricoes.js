@@ -187,7 +187,7 @@
             $('.form-eleitor').hide();
             $('.form-candidato').show();
 
-            return; false;
+            return false;
         });
 
         /**** Masks ****/

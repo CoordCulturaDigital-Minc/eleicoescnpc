@@ -132,14 +132,13 @@ get_header(); ?>
 									<p>Deseja se candidatar?</p>
 								</div>
 					
-								<div class="col-md-12">
-									<a href="<?php echo get_link_forum_user(); ?>" id="return_forum" class="button secondary">Não quero me candidatar</a>
-									<a href="<?php echo site_url('/inscricoes/'); ?>" id="registrar" class="button">Candidatar</a>
+								<div class="col-md-9">
+									<a href="<?php echo site_url('/inscricoes/'); ?>" id="registrar" class="button alignright">Candidatar</a>
 								</div>
 					
 							<?php else: ?>
-								<div class="col-md-12">
-									<a href="<?php echo get_link_forum_user(); ?>" id="return_forum" class="button secondary alignright">Ir para o meu fórum</a>
+								<div class="col-md-9">
+									<a href="<?php echo get_link_forum_user(); ?>" id="return_forum" class="button alignright">Ir para o meu fórum</a>
 								</div>
 							<?php endif; ?>
 						</div>
