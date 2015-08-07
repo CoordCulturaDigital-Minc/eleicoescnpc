@@ -61,11 +61,12 @@
 			</div>
 
 			<div id="step-3-register">
-				<div class="col-md-6 col-xs-12">
+
+				<div class="col-md-6 col-xs-12 form-group has-error" >
 					<label for="user_cpf">CPF</label>
 					<input id="user_cpf" type="text" name="user_cpf" value="<?php echo isset($_POST['user_cpf']) ?  $_POST['user_cpf'] : '' ?>" />
 					<div id="user_cpf-error" class="field__error"></div>
-
+					<div id="user_cpf-warning" class="bg-warning field__warning"></div>
 				</div><!--
 
 				--><div class="col-md-12 col-xs-12">

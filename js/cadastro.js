@@ -14,13 +14,13 @@
             $('#cadastro .step__count').children(c).addClass('active');
         }
 
-        
         $('#loginform').hide();
         $('#cadastro-toggle').click(function(){
             $('#cadastro').hide();
             $('#loginform').show();
         });
-        // se carregar a página mostrar o lugar correto
+
+        // se recarregar a página voltar para o lugar correto
         if ( $( ".user_type" ).attr( "checked" ) == "checked" && $( "#terms_of_use" ).attr( "checked" ) == "checked") {
             $('#step-1-register').hide();
             $('#step-2-register').show();
@@ -99,7 +99,7 @@
                 $('.menu-setoriais-container').hide();
         }); 
 
-            //dados do cpf
+        // popular nome e data de nascimento com os dados do cpf
        function get_dados_cpf() {
             $form.find('#user_cpf').before('<i class="fa fa-spinner fa-spin"></i>');
 
@@ -115,7 +115,26 @@
                     }else {
 
                     }
-                },'json');
+                },
+            'json');
+        };
+
+        // verifica se o candidato é valido, se não for altera para eleitor
+       function check_is_valid_candidate() {
+
+            if( $( "#tipo_candidato" ).attr( "checked" ) == "checked" && $( "#tipo_candidato" ).val() == 'candidato' ) {
+               
+                $.post(cadastro.ajaxurl,{'action':'is_user_candidate_valid','cpf':$form.find('#user_cpf').val()},
+                    function(data) {
+        
+                        if( data !== true ) {   
+                            $form.find('#user_cpf-warning').html(data).show(); 
+                            $form.find('#tipo_eleitor').attr('checked', true); 
+                            $form.find('#tipo_candidato').attr('checked', false);  
+                        }
+                    },
+                'json');
+            }
         };
 
 
@@ -127,6 +146,7 @@
             var values = {'action': 'setoriaiscnpc_register_verify_field'};
             values['user_type'] = $('input[name="user_tipo"]:checked').val();
 
+            // no checkbox o ajax pega o valor mesmo sem estar selecionado
             if( $me.is('input[type="checkbox"]')) {
                if( $me.prop("checked") )
                     values[this.name] = $me.val();
@@ -143,15 +163,20 @@
                         if(data[field] === true && $me.val().length > 0) {
                             $form.find('#'+field+'-error').hide().html('');
 
-                            if( field == 'user_cpf' )
+                            // se o cpf estiver com os dados válidos, popular o nome no form
+                            if( field == 'user_cpf' ){
+                                check_is_valid_candidate();
                                 get_dados_cpf();
+                            }
                             
                         } else {
                             // $form.find('#'+field).val('');
                             $form.find('#'+field+'-error').html(data[field]).show(); 
 
-                            if( field == 'user_cpf' )
+                            if( field == 'user_cpf' ) {
                                 $form.find('#user_name').val('');
+                                $form.find('#user_birth').val('');
+                            }
                         }
                     }
                 }, 'json');

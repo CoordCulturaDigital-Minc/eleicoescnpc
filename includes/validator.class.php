@@ -2,7 +2,7 @@
 class Validator {
     public $fields_rules = array(
         'register' => array(
-            'user_cpf' => array('not_empty','is_a_valid_cpf', 'user_cpf_does_not_exist', 'cpf_not_in_blacklist', 'cpf_not_in_list_two_years', 'cpf_exists_in_receita'),
+            'user_cpf' => array('not_empty','is_a_valid_cpf', 'user_cpf_does_not_exist', 'cpf_exists_in_receita'),
             'user_name' => array('not_empty'),
             'user_email' => array('not_empty','is_valid_email','is_email_does_not_exist'),
             'user_password' => array('not_empty'),
@@ -147,7 +147,7 @@ class Validator {
 
     static function cpf_exists_in_receita($c) {
 
-        if (!defined('VERIFICA_CPF_RECEITA') || VERIFICA_CPF_RECEITA !== true)
+        if (!defined('VERIFICA_CPF_RECEITA') || VERIFICA_CPF_RECEITA !== true )
             return true;
 
         if( empty( $c ) )
@@ -197,7 +197,7 @@ class Validator {
         if( !empty( $blacklist) ) {
 
             if( in_array($c, $blacklist) )
-                return 'Você não pode se candidatar pois já teve dois mandatos, conforme item 6.1.5 do Edita!'; //TODO alterar o texto
+                return 'Você não pode se candidatar pois já teve dois mandatos, conforme item 6.1.5 do Edital!'; //TODO alterar o texto
         }
         
         return true; 

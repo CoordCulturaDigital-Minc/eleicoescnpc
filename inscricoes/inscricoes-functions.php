@@ -164,26 +164,26 @@ function show_steps( $step )
 /************************ Ajax Functions *************************************/
 
 /** loads state from a given region */
-function get_states() {
-    if(isset($_POST['region'])) {
-        $region = $_POST['region'];
-        $output = get_states_by_region($region);
+// function get_states() {
+//     if(isset($_POST['region'])) {
+//         $region = $_POST['region'];
+//         $output = get_states_by_region($region);
 
-        if($output) {
-            print json_encode($output);
-        }
-    }
-    die; // or wordpress will print 0
-}
-add_action('wp_ajax_get_states', 'get_states');
+//         if($output) {
+//             print json_encode($output);
+//         }
+//     }
+//     die; // or wordpress will print 0
+// }
+// add_action('wp_ajax_get_states', 'get_states');
 
-function get_cities() {
-    if(isset($_POST['state'])) {
-        print json_encode(get_cities_by_state_id($_POST['state']));
-    }
-    die;
-}
-add_action('wp_ajax_get_cities', 'get_cities');
+// function get_cities() {
+//     if(isset($_POST['state'])) {
+//         print json_encode(get_cities_by_state_id($_POST['state']));
+//     }
+//     die;
+// }
+// add_action('wp_ajax_get_cities', 'get_cities');
 
 /** render html part for corresponding step */
 function load_step_html() {
@@ -406,6 +406,30 @@ function setoriaiscnpc_get_data_receita_by_cpf() {
 }   
 add_action('wp_ajax_setoriaiscnpc_get_data_receita_by_cpf', 'setoriaiscnpc_get_data_receita_by_cpf');
 add_action( 'wp_ajax_nopriv_setoriaiscnpc_get_data_receita_by_cpf', 'setoriaiscnpc_get_data_receita_by_cpf' );
+
+// verifica se o cpf é de um candidato que está na lista de delegados natos ou se já foi eleito por dois anos.
+// se sim retorna true
+function is_user_candidate_valid( ) {
+
+    $validator = new Validator();
+
+    $cpf = $_POST['cpf'];
+
+    $cpf_not_in_blacklist = $validator->cpf_not_in_blacklist( $cpf );
+    $cpf_not_in_list_two_years = $validator->cpf_not_in_list_two_years( $cpf );
+    
+    if( $cpf_not_in_blacklist !== true ) {
+        $response = "Você é delegado nato e não pode se candidatar, seu perfil será alterado para eleitor";
+    }elseif( $cpf_not_in_list_two_years !== true ) {
+        $response = "Você não pode se candidatar pois já teve dois mandatos, seu perfil será alterado para eleitor";
+    }
+
+    print json_encode($response);
+    die; // or wordpress will print 0
+
+}
+add_action('wp_ajax_is_user_candidate_valid', 'is_user_candidate_valid');
+add_action( 'wp_ajax_nopriv_is_user_candidate_valid', 'is_user_candidate_valid');
 
 /**
  * The store_data_to_hash() will concat strings from

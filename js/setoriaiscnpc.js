@@ -5,7 +5,7 @@
 	$(document).ready(function(e) {
 		
 		// mapa nas páginas
-	    $(".archive #mapa .estado, .page #mapa .estado").click(function(e){
+	    $(".post-type-archive-foruns #mapa .estado, .page #mapa .estado").click(function(e){
 
 	        var state = $(this).find('path').attr('id');
 	       	var $setoriais = $('.menu-setoriais-container');
@@ -47,7 +47,7 @@
 	   $('#mapa a.estado').each(function(){
 	   		var term_link	= $('#term_link').attr('href');
 	   		var estado 		= $(this).find('path').attr('id');
-		 	var setorial 	= $('.content article').attr('id');
+		 	var setorial 	= $('article').attr('id');
 			 
 			$(this).attr('xlink:href', term_link + '/foruns/' + estado + '-' + setorial );
 		});
