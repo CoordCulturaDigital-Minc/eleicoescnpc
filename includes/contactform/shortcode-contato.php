@@ -10,8 +10,6 @@ function add_shortcode_contato() {
             <div class="col-md-6 col-xs-12 col-md-offset-3">
                 <form action="" id="formulario-contato" class="hl-form" method="post" role="form">
 
-                    <div id="error-general" class="hl-message-alert"></div>
-
                     <div class="article--content--form--content form-group">
                         <div class="form--content--label clearfix">
                             <label for="nome" >Nome</label>
@@ -43,6 +41,8 @@ function add_shortcode_contato() {
                         </div>
                         <textarea id="mensagem" name="mensagem" class="form-control" ></textarea>
                     </div>
+
+                    <div id="error-general" class="hl-message-alert"></div>
                     
                     <input type="submit" class="hl-form-submit button alignright" value="Enviar" />
 
