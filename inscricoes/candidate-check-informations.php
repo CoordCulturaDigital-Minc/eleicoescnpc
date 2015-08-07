@@ -133,7 +133,8 @@ if( $current_user_ID != $userID && !current_user_can('administrator')) {
 			</div>
 			<div class="col-md-9 col-xs-12">
 				<?php if( $portfolio_file_id ) : ?>
-					<?php echo wp_get_attachment_link($portfolio_file_id );?>
+					<?php  $filename = clear_pdf_file_name( $portfolio_file_id ); ?>
+					<?php echo wp_get_attachment_link($portfolio_file_id,'','','',$filename );?>
 				<?php else : ?>
 					Não enviado
 				<?php endif; ?>
@@ -145,7 +146,8 @@ if( $current_user_ID != $userID && !current_user_can('administrator')) {
 			</div>
 			<div class="col-md-9 col-xs-12">
 				<?php if( $activity_file_id  ) : ?>
-					<?php echo wp_get_attachment_link( $activity_file_id );?>
+					<?php  $filename = clear_pdf_file_name( $activity_file_id ); ?>
+					<?php echo wp_get_attachment_link( $activity_file_id,'','','',$filename );?>
 				<?php else : ?>
 					Não enviado
 				<?php endif; ?>
@@ -157,7 +159,8 @@ if( $current_user_ID != $userID && !current_user_can('administrator')) {
 			</div>
 			<div class="col-md-9 col-xs-12">
 				<?php if( $diploma_file_id ) : ?>
-					<?php echo wp_get_attachment_link($diploma_file_id );?>
+					<?php  $filename = clear_pdf_file_name( $diploma_file_id ); ?>
+					<?php echo wp_get_attachment_link($diploma_file_id,'','','',$filename );?>
 				<?php else : ?>
 					Não enviado
 				<?php endif; ?>

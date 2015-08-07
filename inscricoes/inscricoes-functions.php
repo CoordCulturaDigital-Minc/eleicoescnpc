@@ -657,10 +657,7 @@ function inscricoes_get_uploaded_template($attachment_id) {
     else {
         $url = wp_get_attachment_url($attachment_id);
 
-        $filename_only = basename( get_attached_file( $attachment_id ) );
-
-        $filename_only = preg_replace('/^.{7}_/','', $filename_only);
-        $filename_only = preg_replace('/(\.pdf)$/','', $filename_only);
+        $filename_only = clear_pdf_file_name( $attachment_id );
 
         return '<a href="' . $url . '" target="_blank">'. $filename_only .'</a>';
     }
@@ -694,6 +691,16 @@ function inscricoes_file_upload_field_template($f, $step, $label, $field, $descr
         <div class="field__note"><?php echo $description; ?></div>
     </div>
     <?php
+
+}
+
+function clear_pdf_file_name( $file_id ){
+
+    $filename = basename( get_attached_file( $file_id ) );
+    $filename = preg_replace('/^.{7}_/','', $filename);
+    $filename = preg_replace('/(\.pdf)$/','', $filename);
+
+    return $filename;
 
 }
 
