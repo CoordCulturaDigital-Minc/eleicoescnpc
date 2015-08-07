@@ -16,12 +16,21 @@ $responsive-lg: 1170px;
 		@media only screen and (min-width: $responsive-md + 1) { @content; }
 	}
 }
-
+@include respond-to(md) {
 body .site-wrap > {
 	.col-xs-12, .col-md-4, col-md-8 {
 		padding-left: 54px;
 		padding-right: 54px;
 	}	
+}
+}
+@include respond-to(lg) {
+body .site-wrap > {
+	.col-xs-12, .col-md-4, col-md-8 {
+		padding-left: 54px;
+		padding-right: 54px;
+	}	
+}
 }
 
 div.site-wrap > {

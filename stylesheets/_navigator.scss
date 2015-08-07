@@ -1,3 +1,12 @@
+.nav-toggle {
+	font-family: $fonte-principal-bold;
+	
+	font-size: 1.5rem;
+	line-height: 2.4;
+	text-align: center;
+	text-transform: uppercase;
+}
+
 nav.access {
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -197,8 +206,102 @@ nav.access {
     }
 }
 
+@include respond-to(md) {
+    .menu-item:hover > .sub-menu {
+        clip: inherit;
+        overflow: inherit;
+        height: inherit;
+        width: inherit;
+    }
+
+   	nav.access {
+		@include linear-vertical-gradient($cor-verde-inicio, $cor-verde-fim);
+		padding-top: 20px;
+		padding-bottom: 20px;
+		max-width: 1080px;
+		text-transform: uppercase;
+		font-family: $fonte-principal-bold;
+		background-color: #1C7033;
+		position: relative;
+   	}
+
+    .menu {
+		.current_page_item > .sub-menu,
+		.current-menu-ancestor > .sub-menu {
+	        position: absolute;
+	        top: 100%;
+	        left: 0;
+	        right: 0;
+ 	        border-bottom: 1px solid #ccc;
+	        li {
+		        float: left;
+	        }
+	    }
+    }
+    .js .access {
+        position: relative;
+        
+        &.closed {
+            max-height: none;
+        }
+    }
+    .nav-toggle {
+        display: none;
+    }
+    .menu--sub {
+        float: right;
+    }
+}
+
+@include respond-to(lg) {
+    .menu-item:hover > .sub-menu {
+        clip: inherit;
+        overflow: inherit;
+        height: inherit;
+        width: inherit;
+    }
+
+   	nav.access {
+		@include linear-vertical-gradient($cor-verde-inicio, $cor-verde-fim);
+		padding-top: 20px;
+		padding-bottom: 20px;
+		max-width: 1080px;
+		text-transform: uppercase;
+		font-family: $fonte-principal-bold;
+		background-color: #1C7033;
+		position: relative;
+   	}
+
+    .menu {
+		.current_page_item > .sub-menu,
+		.current-menu-ancestor > .sub-menu {
+	        position: absolute;
+	        top: 100%;
+	        left: 0;
+	        right: 0;
+ 	        border-bottom: 1px solid #ccc;
+	        li {
+		        float: left;
+	        }
+	    }
+    }
+    .js .access {
+        position: relative;
+        
+        &.closed {
+            max-height: none;
+        }
+    }
+    .nav-toggle {
+        display: none;
+    }
+    .menu--sub {
+        float: right;
+    }
+}
+
 @include respond-to(xs) {
-	 a.nav-toggle {
+	a.nav-toggle {
 	 	height: 40px;
     	background-color: $cor-verde-fim;
     	line-height: 40px;
@@ -249,7 +352,6 @@ nav.access {
         padding: 0 1.3em;
         text-decoration: none;
         position: relative;
-        font-family: 'Sanchez', serif;
         overflow: hidden;
         
         &.nav-toggle {
