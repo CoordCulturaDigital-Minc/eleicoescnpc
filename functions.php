@@ -642,7 +642,6 @@ function get_setoriais() {
         'arte-digital'              => 'Arte Digital',
         'artes-visuais'             => 'Artes Visuais',
         'artesanato'                => 'Artesanato',
-        'audiovisual'               => 'Audiovisual',
         'circo'                     => 'Circo',
         'afro-brasileiro'           => 'Culturas Afro-Brasileiras',
         'culturas-populares'        => 'Culturas Populares',
