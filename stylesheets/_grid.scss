@@ -36,7 +36,7 @@
     _overflow: visible;
 }
 
-@include respond-to(md) {
+@include respond-to(sm) {
 
     .media .img {
         float: left;
@@ -46,7 +46,7 @@
 
 }
 
-@include respond-to(md) {
+@include respond-to(sm) {
 
     .media-container .media:nth-child(odd) .img {
         float: right;
@@ -217,7 +217,7 @@ body > div.site-wrap {
     background: #f4f4f4;
 }
 
-@include respond-to(md) {
+@include respond-to(sm) {
     body > div.site-wrap {
         overflow: visible;
         
@@ -241,18 +241,4 @@ body > div.site-wrap {
         width: 34%;
         margin-top: -1.5rem;
     }
-}
-
-div.site-wrap > {
-	header, footer {
-		padding: 0 5.4rem;
-	}
-}
-
-@include respond-to(xs) {
-	div.site-wrap > {
-		header, footer {
-	        padding: 0 1.4rem;
-	    }
-	}
 }

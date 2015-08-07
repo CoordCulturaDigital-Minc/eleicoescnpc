@@ -189,6 +189,12 @@ body .site-wrap > .col-xs-12, body .site-wrap > .col-md-4, body .site-wrap > col
   padding-left: 54px;
   padding-right: 54px; }
 
+div.site-wrap > header, div.site-wrap > footer {
+  padding: 0 5.4rem; }
+
+@media only screen and (max-width: 750px) {
+  div.site-wrap > header, div.site-wrap > footer {
+    padding: 0 1.4rem; } }
 pre,
 code,
 kbd,
@@ -312,11 +318,11 @@ object {
   zoom: 1;
   _overflow: visible; }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 751px) and (max-width: 970px) {
   .media .img {
     float: left;
     margin-right: 1.5rem; } }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 751px) and (max-width: 970px) {
   .media-container .media:nth-child(odd) .img {
     float: right;
     margin-right: 0;
@@ -463,7 +469,7 @@ body > div.site-wrap {
   margin: 0px auto;
   background: #f4f4f4; }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 751px) and (max-width: 970px) {
   body > div.site-wrap {
     overflow: visible;
     margin: 0px auto; }
@@ -479,12 +485,6 @@ body > div.site-wrap {
   .box--news {
     width: 34%;
     margin-top: -1.5rem; } }
-div.site-wrap > header, div.site-wrap > footer {
-  padding: 0 5.4rem; }
-
-@media only screen and (max-width: 768px) {
-  div.site-wrap > header, div.site-wrap > footer {
-    padding: 0 1.4rem; } }
 .entry-content p,
 .entry-summary p,
 .comment-content p {
@@ -1819,7 +1819,7 @@ header#header {
       color: #125b26; }
       header#header .contact a i {
         font-size: 18px; }
-  @media only screen and (min-width: 769px) {
+  @media only screen and (min-width: 751px) and (max-width: 970px) {
     header#header .csn {
       float: right;
       margin-left: 1.5rem;
@@ -1832,7 +1832,7 @@ header#header {
       display: inline-block;
       text-align: left;
       border-bottom: none; } }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 750px) {
     header#header a {
       margin-left: 0px; }
       header#header a img {
@@ -1933,7 +1933,7 @@ nav.access {
   height: inherit;
   width: inherit; }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 751px) and (max-width: 970px) {
   .menu-item:hover > .sub-menu {
     clip: inherit;
     overflow: inherit;
@@ -1982,7 +1982,7 @@ nav.access {
 
   .menu--sub {
     float: right; } }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 750px) {
   a.nav-toggle {
     height: 40px;
     background-color: #0c451a;
@@ -2240,44 +2240,43 @@ section .entry__info {
     .pagination div span {
       background-color: #fed626; }
 
-footer.site-footer div {
+footer.site-footer div, footer.site-footer div a {
   margin-bottom: 20px; }
-  footer.site-footer div.social a {
-    color: #125b26;
-    vertical-align: center;
-    text-align: center;
-    line-height: 2;
-    font-size: 34px !important; }
-    footer.site-footer div.social a:hover {
-      bottom: 2px;
-      text-decoration: none;
-      -webkit-transition: all .1s linear;
-      transition: all .1s linear; }
-    footer.site-footer div.social a.twitter:hover {
-      color: #55acee; }
-    footer.site-footer div.social a.facebook:hover {
-      color: #3b5998; }
-    footer.site-footer div.social a.flickr:hover {
-      color: #ff0084; }
-    footer.site-footer div.social a.instagram:hover {
-      color: #624335; }
-    footer.site-footer div.social a.tumblr:hover {
-      color: #35465D; }
-    footer.site-footer div.social a.youtube:hover {
-      color: #CF3427; }
-  footer.site-footer div.logos {
-    color: #a8a8a8;
-    font-size: 11px; }
-    footer.site-footer div.logos #CNPC {
-      padding-left: 0; }
-  footer.site-footer div.creditos, footer.site-footer div.creditos a {
-    font-size: 11px;
-    color: #a8a8a8;
-    line-height: 1.3; }
-  footer.site-footer div.creditos a {
-    font-size: 14px; }
-    footer.site-footer div.creditos a:a:hover {
-      text-decoration: underline; }
+footer.site-footer div.social a {
+  color: #125b26;
+  vertical-align: center;
+  text-align: center;
+  line-height: 2;
+  font-size: 34px !important; }
+  footer.site-footer div.social a:hover {
+    bottom: 2px;
+    text-decoration: none;
+    -webkit-transition: all .1s linear;
+    transition: all .1s linear; }
+  footer.site-footer div.social a.twitter:hover {
+    color: #55acee; }
+  footer.site-footer div.social a.facebook:hover {
+    color: #3b5998; }
+  footer.site-footer div.social a.flickr:hover {
+    color: #ff0084; }
+  footer.site-footer div.social a.instagram:hover {
+    color: #624335; }
+  footer.site-footer div.social a.tumblr:hover {
+    color: #35465D; }
+  footer.site-footer div.social a.youtube:hover {
+    color: #CF3427; }
+footer.site-footer div.logos {
+  color: #a8a8a8;
+  font-size: 11px; }
+  footer.site-footer div.logos #CNPC {
+    padding-left: 0; }
+footer.site-footer div.creditos, footer.site-footer div.creditos a, footer.site-footer div.creditos p a {
+  font-size: 11px;
+  color: #a8a8a8;
+  line-height: 1.3; }
+footer.site-footer div.creditos a:a:hover {
+  color: #a8a8a8;
+  text-decoration: underline; }
 
 section.features {
   height: 200px;

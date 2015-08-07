@@ -150,7 +150,7 @@ nav.access {
 	}
 }
 
-@include respond-to(md) {
+@include respond-to(sm) {
     .menu-item:hover > .sub-menu {
         clip: inherit;
         overflow: inherit;
