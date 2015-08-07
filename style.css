@@ -463,6 +463,8 @@ img.aligncenter {
   float: right; }
 
 body > div.site-wrap {
+  padding-bottom: 20px;
+  padding-top: 20px;
   overflow: hidden;
   width: 98%;
   max-width: 1080px;
@@ -1767,18 +1769,62 @@ section #comments {
       font-size: 16px; }
 
 header#header {
-  min-height: 150px; }
-  header#header a {
-    margin-left: -40px; }
-  header#header h1 {
-    display: none; }
+  min-height: 150px;
+  position: relative; }
+  header#header .contact {
+    margin-top: 0;
+    height: 0;
+    overflow-y: visible;
+    z-index: 1; }
+    header#header .contact a:hover {
+      color: #125b26; }
+    header#header .contact i {
+      font-size: 18px; }
+  @media only screen and (min-width: 751px) and (max-width: 970px) {
+    header#header a.img-and-text {
+      margin-left: -40px; } }
+  @media only screen and (min-width: 971px) and (max-width: 1170px) {
+    header#header a.img-and-text {
+      margin-left: -40px; } }
+  @media only screen and (min-width: 971px) {
+    header#header a.img-and-text {
+      margin-left: -40px; } }
+  @media only screen and (min-width: 751px) and (max-width: 970px) {
+    header#header h1 {
+      margin-top: 20px;
+      font-size: 24px; } }
+  @media only screen and (max-width: 750px) {
+    header#header h1 {
+      margin-top: 20px;
+      font-size: 24px;
+      text-transform: uppercase; }
+      header#header h1 small {
+        text-transform: none; } }
+  @media only screen and (min-width: 751px) and (max-width: 970px) {
+    header#header div.search-wrap {
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      width: 30%; } }
+  @media only screen and (min-width: 971px) and (max-width: 1170px) {
+    header#header div.search-wrap {
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      width: 30%; } }
+  @media only screen and (min-width: 971px) {
+    header#header div.search-wrap {
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      width: 30%; } }
   header#header form {
     height: 39px;
-    margin-top: 100px;
-    width: 100%;
     border: none;
     padding: 0px;
-    float: right; }
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px; }
     header#header form input[type="search"] {
       width: 71%;
       float: left;
@@ -1812,13 +1858,6 @@ header#header {
         cursor: pointer; }
       header#header form button i {
         font-size: 25px; }
-  header#header .contact {
-    text-align: right;
-    margin-top: 30px; }
-    header#header .contact a {
-      color: #125b26; }
-      header#header .contact a i {
-        font-size: 18px; }
   @media only screen and (min-width: 751px) and (max-width: 970px) {
     header#header .csn {
       float: right;
@@ -1832,13 +1871,6 @@ header#header {
       display: inline-block;
       text-align: left;
       border-bottom: none; } }
-  @media only screen and (max-width: 750px) {
-    header#header a {
-      margin-left: 0px; }
-      header#header a img {
-        width: 100%; }
-    header#header form {
-      margin-top: 20px; } }
 
 nav.access {
   padding-top: 20px;

@@ -1,24 +1,73 @@
 header#header {
 	min-height: 150px;
-
-	a {
-		margin-left: -40px;
-	}
-
-	h1 {
-		display: none;
-		
-		small {
+	
+	position: relative;
+	
+	.contact {
+		margin-top: 0;
+		height: 0;
+		overflow-y: visible;
+		z-index: 1;
+		a:hover {
+			color: $cor-verde;
+		}
+		i {
+			font-size: 18px;
 		}
 	}
+	a.img-and-text {
+		@include respond-to(sm) { margin-left: -40px; }
+		@include respond-to(md) { margin-left: -40px; }
+		@include respond-to(lg) { margin-left: -40px; }
+	}
+	
+	@include respond-to(sm) {
+		h1 {
+			margin-top: 20px;
+			font-size: 24px;
+		}
+	}
+	@include respond-to(xs) {
+		h1 {
+			margin-top: 20px;
+			font-size: 24px;
+			text-transform: uppercase;
+			small {
+				text-transform: none;
+			}
+		}
+	}
+	
+	@include respond-to(sm) {
+		div.search-wrap {
+		position: absolute;
+		bottom: 20px;
+		right: 40px;
+		width: 30%;
+	}}
+	@include respond-to(md) {
+		div.search-wrap {
+		position: absolute;
+		bottom: 20px;
+		right: 40px;
+		width: 30%;
+	}}
+	@include respond-to(lg) {
+		div.search-wrap {
+		position: absolute;
+		bottom: 20px;
+		right: 40px;
+		width: 30%;
+	}}
 
 	form {
 		height: 39px;
-	    margin-top: 100px;
-	    width: 100%;
 	    border: none;
 	    padding: 0px;
-	    float: right;
+	    width: 100%;
+	    
+	    margin-top: 20px;
+	    margin-bottom: 20px;
 		
 		input[type="search"] {
 		    width: 71%;
@@ -67,18 +116,6 @@ header#header {
 			}
 		}
 	}
-
-	.contact {
-		text-align: right;
-		margin-top: 30px;
-		a{
-			color: $cor-verde;
-
-			i {
-				font-size: 18px;
-			}
-		}
-	}
 	
 	@include respond-to(sm) {
 		.csn {
@@ -99,18 +136,5 @@ header#header {
 		        border-bottom: none;
 		    }
 	    }
-	}
-	
-	@include respond-to(xs) {
-		a {
-			margin-left: 0px;
-			img	{
-				width: 100%;
-			}
-		}
-
-		form {
-			margin-top: 20px;
-		}
 	}
 }
