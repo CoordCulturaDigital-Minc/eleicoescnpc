@@ -42,7 +42,7 @@ $diploma_file_id 	= get_post_meta($pid, 'candidate-diploma', true);
 	<ul>
 		<li><strong>Nome</strong>: <?php echo $user_meta['user_name'];?></li>
 		<?php if(isset($f['candidate-display-name'])): ?>
-			<li><strong>Nome Artístico</strong>: <?php echo $f['candidate-display-name'];?></li>
+			<li><strong>Nome de candidato</strong>: <?php echo $f['candidate-display-name'];?></li>
 		<?php endif;?>
 		<li><strong>Nascimento</strong>: <?php echo restore_format_date( $user_meta['date_birth'] );?></li>
 		<li><strong>CPF</strong>: <?php echo $user_meta['cpf'];?></li>

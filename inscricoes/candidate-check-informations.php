@@ -51,7 +51,7 @@ if( $current_user_ID != $userID && !current_user_can('administrator')) {
 			</div>
 
 			<div class="col-md-3 col-xs-12">
-				<strong>Nome Artístico:</strong>
+				<strong>Nome de candidato:</strong>
 			</div>
 			<div class="col-md-9 col-xs-12">
 				<?php echo isset( $f['candidate-display-name'] ) ? $f['candidate-display-name'] : "Não informado"; ?>

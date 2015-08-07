@@ -23,7 +23,7 @@
 	            </div><!--
 
 				--><div class="col-md-12 col-xs-12">
-					<label for="candidate-display-name">Nome Artístico</label>
+					<label for="candidate-display-name">Nome de candidato</label>
 					<input<?php echo $form_disabled?' disabled':'';?> id="candidate-display-name" type="text" name="step1-candidate-display-name" value="<?php echo isset($f['candidate-display-name'])?$f['candidate-display-name']:'';?>" />
 					<div class="field-status <?php print isset($f['candidate-display-name'])?'completo':'invalido'?>"></div>
 					<div id="candidate-display-name-error" class="field__error"></div>
