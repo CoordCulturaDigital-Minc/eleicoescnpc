@@ -5,10 +5,8 @@ header#header {
 	
 	.contact {
 		margin-top: 0;
-		margin-bottom: -40px;
-	}
-	
-	.contact {
+		height: 0;
+		overflow-y: visible;
 		z-index: 1;
 		a:hover {
 			color: $cor-verde;
@@ -17,12 +15,10 @@ header#header {
 			font-size: 18px;
 		}
 	}
-	
-	@include respond-to(md) {
-		
-		a {
-			margin-left: -40px;
-		}
+	a.img-and-text {
+		@include respond-to(sm) { margin-left: -40px; }
+		@include respond-to(md) { margin-left: -40px; }
+		@include respond-to(lg) { margin-left: -40px; }
 	}
 	
 	@include respond-to(sm) {
@@ -41,12 +37,37 @@ header#header {
 			}
 		}
 	}
+	
+	@include respond-to(sm) {
+		div.search-wrap {
+		position: absolute;
+		bottom: 20px;
+		right: 40px;
+		width: 30%;
+	}}
+	@include respond-to(md) {
+		div.search-wrap {
+		position: absolute;
+		bottom: 20px;
+		right: 40px;
+		width: 30%;
+	}}
+	@include respond-to(lg) {
+		div.search-wrap {
+		position: absolute;
+		bottom: 20px;
+		right: 40px;
+		width: 30%;
+	}}
 
 	form {
 		height: 39px;
 	    border: none;
 	    padding: 0px;
-	    float: right;
+	    width: 100%;
+	    
+	    margin-top: 20px;
+	    margin-bottom: 20px;
 		
 		input[type="search"] {
 		    width: 71%;

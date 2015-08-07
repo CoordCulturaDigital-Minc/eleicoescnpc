@@ -1773,15 +1773,21 @@ header#header {
   position: relative; }
   header#header .contact {
     margin-top: 0;
-    margin-bottom: -40px; }
-  header#header .contact {
+    height: 0;
+    overflow-y: visible;
     z-index: 1; }
     header#header .contact a:hover {
       color: #125b26; }
     header#header .contact i {
       font-size: 18px; }
+  @media only screen and (min-width: 751px) and (max-width: 970px) {
+    header#header a.img-and-text {
+      margin-left: -40px; } }
   @media only screen and (min-width: 971px) and (max-width: 1170px) {
-    header#header a {
+    header#header a.img-and-text {
+      margin-left: -40px; } }
+  @media only screen and (min-width: 971px) {
+    header#header a.img-and-text {
       margin-left: -40px; } }
   @media only screen and (min-width: 751px) and (max-width: 970px) {
     header#header h1 {
@@ -1794,11 +1800,31 @@ header#header {
       text-transform: uppercase; }
       header#header h1 small {
         text-transform: none; } }
+  @media only screen and (min-width: 751px) and (max-width: 970px) {
+    header#header div.search-wrap {
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      width: 30%; } }
+  @media only screen and (min-width: 971px) and (max-width: 1170px) {
+    header#header div.search-wrap {
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      width: 30%; } }
+  @media only screen and (min-width: 971px) {
+    header#header div.search-wrap {
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      width: 30%; } }
   header#header form {
     height: 39px;
     border: none;
     padding: 0px;
-    float: right; }
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px; }
     header#header form input[type="search"] {
       width: 71%;
       float: left;

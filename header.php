@@ -39,7 +39,9 @@
 			   href="<?php bloginfo('url'); ?>/fale-conosco">Fale Conosco <i class="fa fa-envelope"></i></a>
 			
 			<a class="
+				img-and-text
 				col-xs-10 col-xs-offset-1
+				col-sm-12 col-sm-offset-0
 				"
 				href="<?php echo esc_url(home_url('/')); ?>"
 				title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>"
@@ -68,13 +70,18 @@
 			        "><?php bloginfo('name'); ?><br>
 	            	<small>Conselho Nacional de Política Cultural<?php echo get_option( 'site_tagline' ) ?></small></h1>
 	        </a>
-	        
-			<form class="col-xs-12" id="search" role="search" method="get" action="<?php echo home_url( '/' ); ?>">
+	        <div class="
+		        search-wrap
+			    col-sm-8 col-sm-offset-2
+		        col-xs-12
+			    ">
+			<form id="search" role="search" method="get" action="<?php echo home_url( '/' ); ?>">
 	            <input id="s" type="search" value="Procurar por" name="s" onfocus="if (this.value == 'Procurar por') this.value = '';" onblur="if (this.value == '') {this.value = 'Procurar por';}" />        
 	            <button type="submit" value="Buscar" >
 	                <i class="fa fa-search"></i>
 	            </button>
 	        </form>
+	        </div>
 	    </header><!-- /site-header -->  
 	
 	<?php require_once 'includes/navigator.php'; ?>
