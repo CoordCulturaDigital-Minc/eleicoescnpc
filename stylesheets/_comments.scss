@@ -273,7 +273,21 @@ section #comments {
 
     color: #666;
 }
-
+.logged-in-as {
+	@respond-to(xs) {
+		width: 41.666667%;
+		bottom: -80px;
+	}
+	@respond-to(md) {
+		width: 66.666667%;
+	}
+	@respond-to(md) {
+		width: 66.666667%;
+	}
+	@respond-to(md) {
+		width: 83.333333%;
+	}
+}
 .logged-in-as a,
 .comment-notes a {
     border-bottom: 1px dotted;

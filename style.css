@@ -876,6 +876,19 @@ section #comments {
   line-height: 1.71;
   color: #666; }
 
+@respond-to (xs) {
+  .logged-in-as {
+    width: 41.666667%;
+    bottom: -80px; } }
+@respond-to (md) {
+  .logged-in-as {
+    width: 66.666667%; } }
+@respond-to (md) {
+  .logged-in-as {
+    width: 66.666667%; } }
+@respond-to (md) {
+  .logged-in-as {
+    width: 83.333333%; } }
 .logged-in-as a,
 .comment-notes a {
   border-bottom: 1px dotted;
