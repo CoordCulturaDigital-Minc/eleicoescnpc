@@ -842,9 +842,9 @@ function user_short_name( $name = null ) {
 	            
 	    preg_match( '/^([^\s]+)/', $name, $matches);
 	    
-	    return $matches[0];
+	    return ucfirst(strtolower($matches[0]));
 	} else 
-		return "Visitante";
+		return "visitante";
 }
 
 
