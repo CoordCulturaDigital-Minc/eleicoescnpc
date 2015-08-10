@@ -16,7 +16,8 @@
 			--><div class="col-xs-12">
             	 <?php inscricoes_file_upload_field_template($f, 2, 'Diploma Profissional e/ou Registro profissional', 'candidate-diploma', 'Faça Upload, em um único PDF, do diploma profissional ou certificado de profissionalização'); ?>
             </div>
-
+			
+			<br>
 
 			<div class="col-xs-12">
 				<legend>Declaração</legend>
