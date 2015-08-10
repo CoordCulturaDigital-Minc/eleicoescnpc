@@ -15,6 +15,10 @@ section #comments {
     color: #125b26;
 }
 
+#reply-title {
+	position: relative;
+}
+
 .comments-title a {
     display: none;
     font-size: 16px;
@@ -186,8 +190,7 @@ section #comments {
 
     background: yellow;
 }
-
-.comment-reply-link {
+.comment-reply-link, #cancel-comment-reply-link {
     position: absolute;
     right: 0px;
     top: 0px;

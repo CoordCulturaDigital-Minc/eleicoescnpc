@@ -719,6 +719,9 @@ section #comments {
   margin-bottom: 1.5rem;
   color: #125b26; }
 
+#reply-title {
+  position: relative; }
+
 .comments-title a {
   display: none;
   font-size: 16px;
@@ -816,7 +819,7 @@ section #comments {
   float: left;
   background: yellow; }
 
-.comment-reply-link {
+.comment-reply-link, #cancel-comment-reply-link {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -826,7 +829,7 @@ section #comments {
   z-index: 2;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 2px 0 #b9b7b8;
   border-radius: 3px; }
-  .comment-reply-link:hover {
+  .comment-reply-link:hover, #cancel-comment-reply-link:hover {
     color: #DEB90E;
     background-color: #125A26;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 2px 0 #2d9481;
