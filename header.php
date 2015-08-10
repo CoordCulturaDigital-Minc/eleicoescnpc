@@ -18,6 +18,8 @@
 	<?php// require_once 'dependencies/jquery.php';?>
 	<?php require_once 'dependencies/twitter_bootstrap.php'; ?>
 	<?php require_once 'dependencies/font_awesome.php'; ?>
+	
+	<?php require_once 'includes/favicons.php'?>
 
 	<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>?ver=2">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
