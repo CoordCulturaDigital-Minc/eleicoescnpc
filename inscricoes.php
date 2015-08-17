@@ -182,8 +182,8 @@ if(is_user_logged_in()) {
 				</div>
 				<div class="col-md-9">
 					<div class="col-md-12">
-						<p>Você já está inscrito(a) mas não é candidato(a)</p>
-						<p>Deseja se candidatar?</p>
+						<p>Você já está inscrito(a), confirma sua inscrição </p>
+						<p>como candidato(a)?</p>
 					</div>
 					<div class="col-md-12">
 						<a href="<?php echo get_link_forum_user(); ?>" id="return_forum" class="button secondary">Não quero me candidatar</a>
