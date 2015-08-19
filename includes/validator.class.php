@@ -178,7 +178,7 @@ class Validator {
         if( !empty( $blacklist) ) {
 
             if( in_array($c, $blacklist) )
-                return 'Você já é delegado nato na etapa nacional';
+                return 'Você é delegado nato na etapa nacional e não pode se candidatar na etapa estadual, seu perfil será alterado para eleitor.';
         }
 		
         return true; 

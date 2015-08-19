@@ -25,7 +25,7 @@
 
 			<div class="col-xs-12 form__item--inline">
 				<input<?php echo $form_disabled?' disabled':'';?> id="candidate-confirm-data" class="required" type="checkbox" name="step2-candidate-confirm-data" value="true" <?php if( isset($f['candidate-confirm-data']) ) echo 'checked="checked"';?>/>
-				<label for="candidate-confirm-data">Não ocupo cargo nos poderes executivo, legislativo ou judiciário na administração pública federal, estadual, municipal ou distrital.</label>
+				<label for="candidate-confirm-data">Não ocupo cargo comissionado nos poderes executivo, legislativo ou judiciário na administração pública federal, estadual, municipal ou distrital.</label>
 				<div class="field-status <?php print isset($f['candidate-confirm-data'])?'completo':'invalido'?>"></div>
 				<div id="candidate-confirm-data-error" class="field__error"></div>
             </div>
