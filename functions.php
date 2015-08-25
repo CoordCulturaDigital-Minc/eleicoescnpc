@@ -348,8 +348,9 @@ function historias_get_favicon( $url = '' ) {
 function historias_comment( $comment, $args, $depth ) {
     $GLOBALS['comment'] = $comment;
 
-    $is_candidate = current_user_candidate( $comment->user_id);
-   	$class = ( $is_candidate ) ? 'candidate' : '';
+    $is_candidate = get_user_meta( $comment->user_id, 'e_candidato', true);
+   	$class = ( $is_candidate==1 ) ? 'candidate' : '';
+
     switch ( $comment->comment_type ) :
         case 'pingback' :
         case 'trackback' :
@@ -365,7 +366,7 @@ function historias_comment( $comment, $args, $depth ) {
             <div class="vcard">
             	
 				<div class="comment-author-avatar">
-					<?php if( $is_candidate ) : ?>
+					<?php if( $is_candidate == 1 ) : ?>
 						<?php echo get_avatar_candidate( $comment->user_id ); ?>
 					<?php else: ?>
 						<?php echo get_avatar( $comment, 96 ); ?>
@@ -375,7 +376,7 @@ function historias_comment( $comment, $args, $depth ) {
 			
 			<header class="comment-meta">
             	<cite class="fn">
-            		<?php if( $is_candidate ) : ?>
+            		<?php if( $is_candidate == 1 ) : ?>
             			<span class="entry-author"><?php echo get_display_name_candidate( $comment->user_id ); ?></span>
             		<?php else: ?>
 	            		<span class="entry-author"><?php echo get_comment_author_link(); ?></span>
