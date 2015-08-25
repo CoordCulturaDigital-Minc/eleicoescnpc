@@ -744,6 +744,11 @@ section #comments {
     margin: 0 0 10px 0;
     padding: 10px;
     border: 1px solid #EAEAEA; }
+    .comments-list li.comment.candidate {
+      background-color: rgba(226, 226, 226, 0.54);
+      border: 1px solid #D2D2D2; }
+      .comments-list li.comment.candidate .entry-author a {
+        color: #125b26; }
   .comments-list article {
     border: none; }
   .comments-list .children {

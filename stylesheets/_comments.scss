@@ -51,7 +51,18 @@ section #comments {
         // background-color: #EAEAEA;
         // border-radius: 5px;
         border: 1px solid #EAEAEA;;
-	}
+	
+        &.candidate {
+            background-color: rgba(226, 226, 226, 0.54);
+            border: 1px solid #D2D2D2;
+
+            .entry-author a {
+                color: $cor-verde;
+            }
+        }
+    }
+
+
 
     article {
         border: none;
