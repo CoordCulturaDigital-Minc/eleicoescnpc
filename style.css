@@ -748,6 +748,7 @@ section #comments {
       background-color: rgba(226, 226, 226, 0.54);
       border: 1px solid #D2D2D2; }
       .comments-list li.comment.candidate .entry-author a {
+        text-transform: uppercase;
         color: #125b26; }
   .comments-list article {
     border: none; }
