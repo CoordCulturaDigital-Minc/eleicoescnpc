@@ -135,6 +135,21 @@ function current_user_candidate($userID) {
 
 }
 
+function is_valid_candidate($user_id) {
+
+    // pega o id do projeto do usuário
+    $id_project = cnpc_get_project_id_by_user_id( $user_id );
+
+    // verifica se é um projeto válido
+    $is_valid = get_post_meta($id_project,'subscription-valid', true);
+    
+    // se for um candidato e tiver um projeto válido
+    if( get_user_meta( $user_id, 'e_candidato', true) && $is_valid )
+        return true;
+
+    return false;
+}
+
 
 // pegar o avatar do candidato, para usar nos comentários
 function get_avatar_candidate( $user_id ) {

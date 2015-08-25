@@ -347,8 +347,8 @@ function historias_get_favicon( $url = '' ) {
 
 function historias_comment( $comment, $args, $depth ) {
     $GLOBALS['comment'] = $comment;
-
-    $is_candidate = get_user_meta( $comment->user_id, 'e_candidato', true);
+    $is_candidate = is_valid_candidate($comment->user_id);
+    // $is_candidate = get_user_meta( $comment->user_id, 'e_candidato', true);
    	$class = ( $is_candidate==1 ) ? 'candidate' : '';
 
     switch ( $comment->comment_type ) :
@@ -377,7 +377,7 @@ function historias_comment( $comment, $args, $depth ) {
 			<header class="comment-meta">
             	<cite class="fn">
             		<?php if( $is_candidate == 1 ) : ?>
-            			<span class="entry-author"><a href="<?php get_link_forum_user($comment->user_id); ?>"><?php echo get_display_name_candidate( $comment->user_id ); ?> (Candidato(a))</a></span>
+            			<span class="entry-author"><a href="<?php get_link_forum_user($comment->user_id); ?>"><?php echo get_display_name_candidate( $comment->user_id ); ?> </a> - candidato(a)</span>
             		<?php else: ?>
 	            		<span class="entry-author"><?php echo get_comment_author_link(); ?></span>
 	            	<?php endif; ?>
