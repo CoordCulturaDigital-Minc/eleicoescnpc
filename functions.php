@@ -380,7 +380,7 @@ function historias_comment( $comment, $args, $depth ) {
             		<?php else: ?>
 	            		<span class="entry-author"><?php echo get_comment_author_link(); ?></span>
 	            	<?php endif; ?>
-	            	<span class="entry-date"><?php echo get_the_date(); ?></span>
+	            	<span class="entry-date"><?php printf( __('%1$s às %2$s'), get_comment_date(),  get_comment_time() ); ?></span>
             	</cite>
             	<?php comment_reply_link( array_merge( $args, array( 'reply_text' => 'Responder', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
             	<?php edit_comment_link( sprintf( __( '%s Edit', 'historias' ), '<i class="fa fa-pencil"></i>' ) ); ?>
