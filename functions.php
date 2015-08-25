@@ -377,7 +377,7 @@ function historias_comment( $comment, $args, $depth ) {
 			<header class="comment-meta">
             	<cite class="fn">
             		<?php if( $is_candidate == 1 ) : ?>
-            			<span class="entry-author"><a href="<?php get_link_forum_user($comment->user_id); ?>"><?php echo get_display_name_candidate( $comment->user_id ); ?> </a> - candidato(a)</span>
+            			<span class="entry-author"><a href="<?php echo get_link_forum_user( $comment->user_id ); ?>"><?php echo get_display_name_candidate( $comment->user_id ); ?> </a> - candidato(a)</span>
             		<?php else: ?>
 	            		<span class="entry-author"><?php echo get_comment_author_link(); ?></span>
 	            	<?php endif; ?>
@@ -861,10 +861,10 @@ function user_short_name( $name = null ) {
 }
 
 
-function get_link_forum_user( $user_id = null ) {
+function get_link_forum_user( $user_id=null ) {
 
 	$uf_setorial = get_user_option( 'uf-setorial', $user_id );
-	
+
 	if( !empty( $uf_setorial ) )
 		return site_url('foruns/' . $uf_setorial );
 
