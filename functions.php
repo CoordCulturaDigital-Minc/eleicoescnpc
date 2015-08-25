@@ -347,6 +347,9 @@ function historias_get_favicon( $url = '' ) {
 
 function historias_comment( $comment, $args, $depth ) {
     $GLOBALS['comment'] = $comment;
+
+    $is_candidate = current_user_candidate( $comment->user_id);
+   	$class = ( $is_candidate ) ? 'candidate' : '';
     switch ( $comment->comment_type ) :
         case 'pingback' :
         case 'trackback' :
@@ -357,17 +360,26 @@ function historias_comment( $comment, $args, $depth ) {
             break;
         default :
     ?>
-    <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+    <li <?php comment_class($class); ?> id="li-comment-<?php comment_ID(); ?>">
         <article id="comment-<?php comment_ID(); ?>" class="comment-container">
             <div class="vcard">
+            	
 				<div class="comment-author-avatar">
-					<?php echo get_avatar( $comment, 96 ); ?>
+					<?php if( $is_candidate ) : ?>
+						<?php echo get_avatar_candidate( $comment->user_id ); ?>
+					<?php else: ?>
+						<?php echo get_avatar( $comment, 96 ); ?>
+					<?php endif; ?>
 				</div>
 			</div>
 			
 			<header class="comment-meta">
             	<cite class="fn">
-	            	<span class="entry-author"><?php echo get_comment_author_link(); ?></span>
+            		<?php if( $is_candidate ) : ?>
+            			<span class="entry-author"><?php echo get_display_name_candidate( $comment->user_id ); ?></span>
+            		<?php else: ?>
+	            		<span class="entry-author"><?php echo get_comment_author_link(); ?></span>
+	            	<?php endif; ?>
 	            	<span class="entry-date"><?php echo get_the_date(); ?></span>
             	</cite>
             	<?php comment_reply_link( array_merge( $args, array( 'reply_text' => 'Responder', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
@@ -871,4 +883,5 @@ function cnpc_preprocess_comment($comment) {
 
     return $comment;
 }
+
 ?>

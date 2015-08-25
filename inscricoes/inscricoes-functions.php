@@ -11,6 +11,7 @@ function get_current_user_project() {
 
 }
 
+// talvez tenha que mudar o nome desta função, pois além de retorna ele tbm salva um novo projeto.
 function get_project_id_by_user_id($user_id) {
 
     // se sou um usuário e tenho sessão pra segunda avaliação
@@ -37,7 +38,19 @@ function get_project_id_by_user_id($user_id) {
     }
 
     return $project_id;
+}
 
+function cnpc_get_project_id_by_user_id( $user_id ) {
+
+    global $wpdb;
+
+    $project_id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE"
+                                         ." post_status = 'publish'"
+                                         ." AND post_type = 'projetos'"
+                                         ." AND post_author = %d"
+                                         ." ORDER BY ID ASC LIMIT 1", $user_id ));
+
+    return $project_id;
 
 }
 
@@ -120,6 +133,31 @@ function current_user_candidate($userID) {
 
     return false; 
 
+}
+
+
+// pegar o avatar do candidato, para usar nos comentários
+function get_avatar_candidate( $user_id ) {
+
+    if( empty( $user_id) )
+        return false;
+
+    $pid = cnpc_get_project_id_by_user_id( $user_id );
+
+    $avatar_file_id = get_post_meta($pid, 'candidate-avatar', true);
+
+    return wp_get_attachment_image($avatar_file_id, 'avatar_candidate', 'avatar_candidate');
+
+}
+
+// pegar o nome artístico do usuário, para usar nos comentários
+function get_display_name_candidate( $user_id ) {
+    if( empty( $user_id) )
+        return false;
+
+    $pid = cnpc_get_project_id_by_user_id( $user_id );
+
+    return strtoupper( get_post_meta($pid, 'candidate-display-name', true) );
 }
 
 /**
