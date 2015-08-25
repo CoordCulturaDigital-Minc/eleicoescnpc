@@ -381,7 +381,7 @@ function historias_comment( $comment, $args, $depth ) {
             		<?php else: ?>
 	            		<span class="entry-author"><?php echo get_comment_author_link(); ?></span>
 	            	<?php endif; ?>
-	            	<span class="entry-date"><?php printf( __('%1$s às %2$s'), get_comment_date(),  get_comment_time() ); ?></span>
+	            	<span class="entry-date"><?php echo get_comment_date(); ?> / <?php echo get_setorial_and_uf_user($comment->user_id); ?></span>
             	</cite>
             	<?php comment_reply_link( array_merge( $args, array( 'reply_text' => 'Responder', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
             	<?php edit_comment_link( sprintf( __( '%s Edit', 'historias' ), '<i class="fa fa-pencil"></i>' ) ); ?>
@@ -863,17 +863,21 @@ function user_short_name( $name = null ) {
 
 function get_link_forum_user( $user_id = null ) {
 
-	if( is_user_logged_in() ) {
-
-		$uf_setorial = get_user_option( 'uf-setorial', $user_id );
-		
+	$uf_setorial = get_user_option( 'uf-setorial', $user_id );
+	
+	if( !empty( $uf_setorial ) )
 		return site_url('foruns/' . $uf_setorial );
-	}
 
 	return false;
-
 }
 
+
+function get_setorial_and_uf_user( $user_id ) {
+
+	$uf_setorial = get_user_option( 'uf-setorial', $user_id );
+
+	return get_label_setorial_by_slug( substr( $uf_setorial, 3) ) . ' - ' . substr( $uf_setorial, 0, 2 );
+}
 
 add_filter( 'preprocess_comment', 'cnpc_preprocess_comment' );
 
