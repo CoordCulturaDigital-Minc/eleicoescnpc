@@ -64,7 +64,7 @@ get_header(); ?>
 
 								<div class="candidate <?php echo (get_current_user_vote() == get_the_ID()) ? 'voted':'' ?>" id="<?php the_ID(); ?>">
 									<div class="candidate-avatar" data-candidate-id="<?php the_ID(); ?>">
-										<?php echo wp_get_attachment_image($candidate_meta['candidate-avatar'], 'avatar_candidate'); ?>
+										<?php echo wp_get_attachment_image($candidate_meta['candidate-avatar'], 'avatar_candidate', 'avatar_candidate'); ?>
 									</div>
 
 									<div class="candidate-text">
@@ -82,7 +82,7 @@ get_header(); ?>
 										<i class="fa fa-times close"></i>
 
 										<div class="candidate-avatar" align="center">
-											<?php echo wp_get_attachment_image($candidate_meta['candidate-avatar'], 'avatar_candidate'); ?>
+											<?php echo wp_get_attachment_image($candidate_meta['candidate-avatar'], 'avatar_candidate', 'avatar_candidate'); ?>
 										</div>
 
 										<h2 class="candidate-name"><?php echo $candidate_meta['candidate-display-name']; ?></h2>
@@ -127,6 +127,7 @@ get_header(); ?>
 								<p>Ainda não há candidatos(as)<?php echo ( is_user_this_uf_setorial( $post->post_name ) ) ? ', deseja se candidatar?' : '!'; ?></p>
 							</div>
 
+							<?php  ?>
 							<?php if( is_user_this_uf_setorial($post->post_name) ) : ?>
 								<div class="col-md-11">
 									<a href="<?php echo site_url('/inscricoes/'); ?>" id="registrar" class="button alignright">Candidatar</a>
