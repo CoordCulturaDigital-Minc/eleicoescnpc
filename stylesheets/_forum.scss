@@ -42,10 +42,14 @@
                 background: #FFFFFF;
                 border: 5px solid #959595;
                 cursor: pointer;
+                overflow: hidden;
 
                 img {
-                    width: 100%;
-                    height: 100%;
+                    // width: 100%;
+                    // height: 100%;
+                    height: auto;
+                    min-width: 190px;
+                    min-height: 190px;
                 }
             }
 
