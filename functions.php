@@ -377,7 +377,7 @@ function historias_comment( $comment, $args, $depth ) {
 			<header class="comment-meta">
             	<cite class="fn">
             		<?php if( $is_candidate == 1 ) : ?>
-            			<span class="entry-author"><a href="<?php get_link_forum_user($comment->user_id); ?>"><?php echo get_display_name_candidate( $comment->user_id ); ?> (Candidato)</a></span>
+            			<span class="entry-author"><a href="<?php get_link_forum_user($comment->user_id); ?>"><?php echo get_display_name_candidate( $comment->user_id ); ?> (Candidato(a))</a></span>
             		<?php else: ?>
 	            		<span class="entry-author"><?php echo get_comment_author_link(); ?></span>
 	            	<?php endif; ?>
