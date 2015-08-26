@@ -993,3 +993,117 @@ function restore_format_date( $d ) {
 
     return false;
 }
+
+
+/* relatórios */
+
+function get_count_users_states() {
+
+    global $wpdb;
+
+    $states = get_all_states();
+
+    $count = array();
+
+    foreach( $states as $key => $state )
+    {   
+         $count[$key] = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM {$wpdb->usermeta} WHERE meta_key = 'uf' AND meta_value = %s", $key ) );
+    }
+
+    return $count;
+}
+
+function get_count_candidates_setoriais_by_uf($uf) {
+    global $wpdb;
+
+    if( empty($uf) )
+        return false;
+
+    $setorais = get_setoriais();
+
+    $count = array();
+
+    foreach( $setorais as $key => $setorial )
+    {   
+         // $count[$key] = $wpdb->get_var( $wpdb->prepare("SELECT count(u.umeta_id) FROM {$wpdb->usermeta} AS u INNER JOIN {$wpdb->usermeta} AS us ON u.user_id = us.user_id where u.meta_key = 'uf' AND u.meta_value = %s AND us.meta_key = 'e_candidato'", $key ) );
+    
+        $count[$key] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(u.umeta_id)" 
+                                                    ."FROM {$wpdb->posts} as p " 
+                                                    ."INNER JOIN {$wpdb->postmeta} as m ON p.ID = m.post_id "
+                                                    ."INNER JOIN {$wpdb->usermeta} as u ON p.post_author = u.user_id "
+                                                    ."INNER JOIN {$wpdb->usermeta} as um ON p.post_author = um.user_id "
+                                                    ."WHERE p.post_type = 'projetos' "
+                                                    ."AND m.meta_key = 'subscription-valid' " 
+                                                    ."AND u.meta_key = 'setorial' AND u.meta_value = %s "
+                                                    ."AND um.meta_key = 'uf' AND um.meta_value = %s", $key, $uf ) );
+    }
+
+    return $count;
+}
+
+function get_count_users_setorias_by_uf( $uf ) {
+
+    global $wpdb;
+
+    if( empty( $uf ) )
+        return false;
+
+    $setoriais = get_setoriais();
+
+    $count = array();
+
+    foreach( $setoriais as $key => $setorial )
+    {   
+         $count[$key] = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM {$wpdb->usermeta} as u "
+                                                        ."INNER JOIN {$wpdb->usermeta} as um ON u.user_id = um.user_id "
+                                                        ."WHERE u.meta_key = 'setorial' "
+                                                        ."AND u.meta_value = %s"
+                                                        ."AND um.meta_key = 'uf'"
+                                                        ."AND um.meta_value = %s", $key, $uf ) );
+    }
+
+    return $count;
+}
+
+function get_count_candidates_states() {
+
+    global $wpdb;
+
+    $states = get_all_states();
+
+    $count = array();
+
+    foreach( $states as $key => $state )
+    {   
+         // $count[$key] = $wpdb->get_var( $wpdb->prepare("SELECT count(u.umeta_id) FROM {$wpdb->usermeta} AS u INNER JOIN {$wpdb->usermeta} AS us ON u.user_id = us.user_id where u.meta_key = 'uf' AND u.meta_value = %s AND us.meta_key = 'e_candidato'", $key ) );
+    
+        $count[$key] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(u.umeta_id)" 
+                                                    ."FROM {$wpdb->posts} as p " 
+                                                    ."INNER JOIN {$wpdb->postmeta} as m ON p.ID = m.post_id "
+                                                    ."INNER JOIN {$wpdb->usermeta} as u ON p.post_author = u.user_id "
+                                                    ."WHERE p.post_type = 'projetos' "
+                                                    ."AND m.meta_key = 'subscription-valid' " 
+                                                    ."AND u.meta_key = 'uf' AND u.meta_value = %s", $key ) );
+    }
+
+    return $count;
+}
+
+
+function get_count_users_setorias() {
+
+    global $wpdb;
+
+    $setoriais = get_setoriais();
+
+    $count = array();
+
+    foreach( $setoriais as $key => $setorial )
+    {   
+         $count[$key] = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM {$wpdb->usermeta} WHERE meta_key = 'setorial' AND meta_value = %s", $key ) );
+    }
+
+    return $count;
+}
+
+
