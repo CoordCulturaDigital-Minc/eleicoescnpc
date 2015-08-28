@@ -776,7 +776,7 @@ section #comments {
   line-height: 1.5;
   position: relative;
   float: right;
-  width: 85%;
+  width: 80%;
   margin-bottom: 16px;
   margin-bottom: 1rem;
   padding: 0px;
@@ -793,7 +793,7 @@ section #comments {
   position: relative;
   z-index: 1;
   float: right;
-  width: 85%;
+  width: 80%;
   overflow: hidden;
   margin: 0;
   color: #125b26; }
