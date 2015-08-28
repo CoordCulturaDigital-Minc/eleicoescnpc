@@ -93,7 +93,7 @@ get_header(); ?>
 
 									<br />
 
-									<?php if (is_votacoes_abertas() && current_user_can_vote_in_project( get_the_ID() )): ?>
+									<?php if (is_votacoes_abertas() && is_user_logged_in() /*&& current_user_can_vote_in_project( get_the_ID() ) */): ?>
 
 											<?php if ( get_current_user_vote() == get_the_ID() ): ?>
 												<a class="vote voted" id="vote-for-<?php the_ID(); ?>" data-project_id="<?php the_ID(); ?>">
@@ -105,15 +105,17 @@ get_header(); ?>
 												</a>
 											<?php endif; ?>
 
-										
 									<?php endif; ?>
 
+									
 									<?php if (current_user_can('administrator')): ?>
-										<span class="number_votes">Votos: <?php echo get_number_of_votes_by_project(get_the_ID()); ?></span>
+										<div class="number_votes">Votos: <span><?php echo get_number_of_votes_by_project(get_the_ID()); ?></span></div>
 									<?php endif; ?>
+
 
 								</div>
 							<?php endwhile; ?>
+
 						</div>
 						<div class="navigation"></div>
 					</div><!--candidates-content -->
@@ -127,13 +129,13 @@ get_header(); ?>
 								<p>Ainda não há candidatos(as)<?php echo ( is_user_this_uf_setorial( $post->post_name ) ) ? ', deseja se candidatar?' : '!'; ?></p>
 							</div>
 
-							<?php  ?>
 							<?php if( is_user_this_uf_setorial($post->post_name) ) : ?>
+
 								<div class="col-md-11">
 									<a href="<?php echo site_url('/inscricoes/'); ?>" id="registrar" class="button alignright">Candidatar</a>
 								</div>
 					
-							<?php else: ?>
+							<?php elseif( is_user_logged_in() ) : ?>
 								<div class="col-md-11">
 									<a href="<?php echo get_link_forum_user(); ?>" id="return_forum" class="button alignright">Ir para o meu fórum</a>
 								</div>
@@ -141,8 +143,16 @@ get_header(); ?>
 						</div>
 					</div>
 				<?php endif; ?>
+
+				<?php if (is_votacoes_abertas() && !is_user_logged_in()) : ?>
+					<div class="text-center">
+						<p>Para votar você precisa se <a href="<?php echo site_url('/inscricoes/'); ?>" title="Inscrever">inscrever</a> e/ou fazer <a href="<?php echo wp_login_url( $_SERVER['REQUEST_URI'] ); ?>" title="login">login</a>.</p>
+					</div>
+					
+				<?php endif; ?>
+
 				<div class="clearfix"></div>
-				
+				<br>
 				<?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) ) : ?>
 					<div class="text-center social-share">
 						<h3>Compartilhe</h3>

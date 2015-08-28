@@ -136,6 +136,7 @@ function ajax_register_vote() {
 		
 		$canvote = false;
 
+		// se o usuário já votou
 		if (current_user_already_voted()) {
 
 			if (current_user_can_change_vote_by_date()) {
@@ -158,18 +159,23 @@ function ajax_register_vote() {
 		}
 
 		if ($canvote) {
-			if ( register_vote($user->ID, $_POST['project_id'])  ) {
-			
-				$response['voted_project_id'] = $_POST['project_id'];
-			
+
+			// verifica se pode votar
+			if ( user_can_vote_in_project($user->ID, $_POST['project_id'])) {
+				
+				if ( register_vote($user->ID, $_POST['project_id'])  ) {
+				
+					$response['voted_project_id'] = $_POST['project_id'];
+				
+				} else {
+					$response['success'] = false;
+					$response['errormsg'] = 'Erro ao registrar voto';
+				}	
 			} else {
 				$response['success'] = false;
-				$response['errormsg'] = 'Erro ao registrar voto';
-			}	
-		}
-		
-
-		
+				$response['errormsg'] = 'Você não se inscreveu nesta setorial deste estado, pode participar do debate, mas não pode votar.';
+			}
+		}	
 	} else {
 		$response['success'] = false;
 		$response['errormsg'] = 'A votação não está aberta';
