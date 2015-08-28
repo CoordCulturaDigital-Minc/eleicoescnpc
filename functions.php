@@ -845,6 +845,10 @@ function dropdown_genres( $name, $selected = null, $all = false, $extra = null )
 }
 
 function convert_format_date( $d ) {
+	
+	if( empty($d))
+		return false;
+
     $format = "d/m/Y";
     $dateTime = DateTime::createFromFormat($format, $d);
     return $dateTime->format("Y-m-d");  
@@ -852,7 +856,7 @@ function convert_format_date( $d ) {
 
 function restore_format_date( $d ) {
 
-    if( !empty( $d ) ) {
+	if( !empty( $d ) ) {
         $format = "Y-m-d";
         $dateTime = DateTime::createFromFormat($format, $d);
         return $dateTime->format("d/m/Y");  
