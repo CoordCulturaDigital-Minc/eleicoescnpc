@@ -977,24 +977,6 @@ function is_a_valid_birth($d) {
     return true;
 }
 
-function convert_format_date( $d ) {
-    $format = "d/m/Y";
-    $dateTime = DateTime::createFromFormat($format, $d);
-    return $dateTime->format("Y-m-d");  
-}
-
-function restore_format_date( $d ) {
-
-    if( !empty( $d ) ) {
-        $format = "Y-m-d";
-        $dateTime = DateTime::createFromFormat($format, $d);
-        return $dateTime->format("d/m/Y");  
-    }
-
-    return false;
-}
-
-
 /* relatórios */
 
 function get_count_users_states() {

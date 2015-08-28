@@ -176,7 +176,7 @@ function historias_load_scripts() {
 		wp_enqueue_script('jquery-ui-dialog');
 		wp_enqueue_script('jquery-flexslider', get_template_directory_uri().'/js/flexslider-min.js', array('jquery'));
 		wp_enqueue_script( 'foruns', get_template_directory_uri() . '/js/foruns.js');
-		wp_localize_script('foruns', 'vars', array('ajaxurl' => admin_url('admin-ajax.php')));
+		wp_localize_script('foruns', 'vars', array( 'ajaxurl' => admin_url('admin-ajax.php')));
 	}
 
 	/* Para todo o tema */
@@ -842,6 +842,23 @@ function dropdown_genres( $name, $selected = null, $all = false, $extra = null )
 
     return $output;
 
+}
+
+function convert_format_date( $d ) {
+    $format = "d/m/Y";
+    $dateTime = DateTime::createFromFormat($format, $d);
+    return $dateTime->format("Y-m-d");  
+}
+
+function restore_format_date( $d ) {
+
+    if( !empty( $d ) ) {
+        $format = "Y-m-d";
+        $dateTime = DateTime::createFromFormat($format, $d);
+        return $dateTime->format("d/m/Y");  
+    }
+
+    return false;
 }
 
 function user_short_name( $name = null ) {

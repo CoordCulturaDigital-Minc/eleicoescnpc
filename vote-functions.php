@@ -42,6 +42,62 @@ function user_can_vote_in_user($user_id, $candidate_id) {
 	return $user_area == $candidate_area;
 }
 
+// verifica se o usuário já votou
+// retorna 0 se ainda não votou
+// retorna int com o numero de vezes que ja votou
+function user_already_voted($user_id) {
+
+	$vote = get_user_meta($user_id, 'vote-project-id', true);
+	if (empty($vote))
+		return 0;
+
+	return (int) get_user_meta($user_id, 'vote-counter', true);
+
+}
+function current_user_already_voted() {
+	$user = wp_get_current_user();
+	return user_already_voted($user->ID);
+}
+
+// verifica se o usuário pode mudar seu voto pela data de inicio da troca
+function user_can_change_vote_by_date($user_id) {
+	
+	$data_inicio_da_troca = get_theme_option('data_inicio_da_troca'); //'2015-08-27' // pode botar no admin
+
+	$hoje = date('Y-m-d');
+
+	// verifica data
+	if ($data_inicio_da_troca > $hoje)
+		return false;
+
+	return true;
+}
+
+// verifica se o usuário pode mudar seu voto pela quantidade permitida
+function user_can_change_vote_by_counter($user_id) {
+
+	$vote_counter = user_already_voted($user_id);
+
+	$vezes_que_pode_mudar = get_theme_option('vezes_que_pode_mudar_voto'); // se quiser pode botar isso no admin. Isso é vezes que pode mudar, não votar. Então se é igual a 1, o vote-counter vai poder chegar até 2
+
+	// verifica se o numero de vezes se está dentro do permitido
+	if ($vote_counter > $vezes_que_pode_mudar) 
+		return false;
+
+	return true;
+}
+
+
+function current_user_can_change_vote_by_date() {
+	$user = wp_get_current_user();
+	return user_can_change_vote_by_date($user->ID);
+}
+
+function current_user_can_change_vote_by_counter() {
+	$user = wp_get_current_user();
+	return user_can_change_vote_by_counter($user->ID);
+}
+
 
 function register_vote($user_id, $project_id) {
 
@@ -55,6 +111,16 @@ function register_vote($user_id, $project_id) {
 	// registra voto
 	add_user_meta($user_id, 'vote-project-id', $project_id);
 	
+	// incrementa um no vote-counter
+	$current_count = get_user_meta($user_id, 'vote-counter', true);
+
+	$current_count = empty($current_count) ? 0 : (int) $current_count;
+
+	$current_count ++;
+
+	update_user_meta($user_id, 'vote-counter', $current_count);
+
+
 	return true;
 
 }
@@ -68,15 +134,40 @@ function ajax_register_vote() {
 	
 	if (is_votacoes_abertas()) {
 		
+		$canvote = false;
 
-		if ( register_vote($user->ID, $_POST['project_id'])  ) {
-		
-			$response['voted_project_id'] = $_POST['project_id'];
-		
+		if (current_user_already_voted()) {
+
+			if (current_user_can_change_vote_by_date()) {
+
+				if (current_user_can_change_vote_by_counter()) {
+					$canvote = true;
+				} else {
+					$response['success'] = false;
+
+					$response['errormsg'] = 'Erro ao registrar o voto! <br>Você atingiu o limite para troca de voto';
+				}
+			} else {
+				$response['success'] = false;
+
+				$response['errormsg'] = 'Erro ao registrar o voto! <br>Só é possível alterar o voto a partir do dia ' . restore_format_date( get_theme_option('data_inicio_da_troca'));
+			}
+
 		} else {
-			$response['success'] = false;
-			$response['errormsg'] = 'Erro ao registrar voto';
+			$canvote = true;
 		}
+
+		if ($canvote) {
+			if ( register_vote($user->ID, $_POST['project_id'])  ) {
+			
+				$response['voted_project_id'] = $_POST['project_id'];
+			
+			} else {
+				$response['success'] = false;
+				$response['errormsg'] = 'Erro ao registrar voto';
+			}	
+		}
+		
 
 		
 	} else {
@@ -94,7 +185,13 @@ add_action('wp_ajax_register_vote', 'ajax_register_vote');
 
 function is_votacoes_abertas() {
 
-	return get_theme_option('votacoes_abertas');
+	$hoje = date('Y-m-d');
+
+	if( get_theme_option('data_inicio_votacao') <= $hoje && get_theme_option('data_fim_votacao') >= $hoje )
+		return true;
+
+	return false;
+	// return get_theme_option('votacoes_abertas');
 
 }
 

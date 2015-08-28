@@ -17,12 +17,20 @@
 
 			var pid = $(this).data('project_id');
 
-			var text = '<p>Você realmente deseja votar neste candidato?</p>';
+			if( $(this).hasClass('voted') )
+				return false;
 
-			//TODO se pode alterar voto, ativa
-			if( $('a.vote').hasClass('voted') && !$(this).hasClass('voted') ) {
-				text = 	'<p>Você está alterando o seu voto, deseja continuar?</p>'	    
-			}
+			// var mudar_voto = ( vars.vezes_que_pode_mudar_voto > 1 ) ? 'vezes' : 'vez';
+
+			var text = '<p>Você realmente deseja votar neste candidato?</p>'
+						
+			// if( $('a.vote').hasClass('voted') ) {
+			// 	text = '<p>Você está alterando o seu voto, deseja continuar?</p>';    
+			// }
+
+			// text += '<p>Só é possível trocar o voto '+ vars.vezes_que_pode_mudar_voto+ ' ' 
+			// 			+ mudar_voto +', a partir do dia '+ parseDate(vars.data_inicio_troca)
+			// 			+'</p>';
 
 			$('<div class="dialogs"></div>').appendTo( $( ".candidates" ) )
 			  .html('<div class="htl"><h3>Atenção</h3>'+text+'</div')
@@ -52,7 +60,7 @@
 									$('.candidate').removeClass('voted')
 									$('.candidate#'+voted_id).addClass('voted');
 								} else {
-									alert(data.errormsg);
+									show_message(data.errormsg, 'erro');
 								}
 							},
 							'json'
@@ -67,8 +75,32 @@
 		});
 
 
+		function show_message( text, type) {
 
-		// carrosel na página do fórum 
+			$('<div class="dialogs '+type+'" ></div>').appendTo( $( ".candidates" ) )
+			  .html('<div class="htl"><h3>Atenção</h3><p>'+text+'</p></div')
+			  .dialog({
+			      modal: true, title: '', zIndex: 10000, autoOpen: true, closeText: '<i class="fa fa-times close"></i>',
+			      width: 'auto', resizable: false,
+			      buttons: {
+			          Fechar: function () {
+			              $(this).dialog("close");
+							return false;
+			          }
+			      },
+			      close: function (event, ui) {
+			          $(this).remove();
+			      }
+			});
+		}
+
+
+		function parseDate(str) {
+		  var m = str.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+		  return m[3]+"/"+m[2]+"/"+m[1];
+		}
+
+		/********* carrosel na página do fórum ********/ 
 
 		// store the slider in a local variable
 		var $window = $(window),
@@ -76,9 +108,9 @@
 
 		// tiny helper function to add breakpoints
 		function getGridSize() {
-		return (window.innerWidth < 600) ? 1 : 
-		(window.innerWidth < 765) ? 2 : 
-		(window.innerWidth < 970) ? 3 : 4;
+			return (window.innerWidth < 600) ? 1 : 
+			(window.innerWidth < 765) ? 2 : 
+			(window.innerWidth < 970) ? 3 : 4;
 		}
 
 		$(function() {

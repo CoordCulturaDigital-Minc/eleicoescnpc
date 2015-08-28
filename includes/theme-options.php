@@ -22,16 +22,27 @@ function theme_options_menu() {
 
     /* Top level menu */
     add_submenu_page('theme_options', $page_title, $menu_title, 'manage_options', 'theme_options', 'theme_options_page_callback_function');
-    add_menu_page($topLevelMenuLabel, $topLevelMenuLabel, 'manage_options', 'theme_options', 'theme_options_page_callback_function');
+   $theme_options = add_menu_page($topLevelMenuLabel, $topLevelMenuLabel, 'manage_options', 'theme_options', 'theme_options_page_callback_function');
 
+    add_action( "admin_print_scripts-{$theme_options}", "addScripts" );
+}
+
+function addScripts() { 
+  wp_enqueue_script('jquery-ui-datepicker');
+  wp_enqueue_script('theme_options_js', get_template_directory_uri() . '/js/theme-options.js', array('jquery', 'jquery-ui-datepicker'));
+  wp_enqueue_style('jquery-ui-style', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css');
 
 }
 
 function theme_options_validate_callback_function($input) {
 
     //$input['slug_updates'] = sanitize_title($input['slug_updates']);
-    $input['candidatos_blacklist'] = explode(',', $input['candidatos_blacklist']);
-    $input['delegates_two_years'] = explode(',', $input['delegates_two_years']);
+    $input['candidatos_blacklist']  = explode(',', $input['candidatos_blacklist']);
+    $input['delegates_two_years']   = explode(',', $input['delegates_two_years']);
+    $input['data_inicio_votacao']   = convert_format_date($input['data_inicio_votacao']);
+    $input['data_fim_votacao']      = convert_format_date($input['data_fim_votacao']);
+    $input['data_inicio_da_troca']  = convert_format_date($input['data_inicio_da_troca']);
+
     // $input['limite_orcamento'] = preg_replace('/\D/', '', $input['limite_orcamento']);
     return $input;
 
@@ -149,14 +160,27 @@ function theme_options_page_callback_function() {
           <textarea id="aviso" name="theme_options[aviso]" rows="5" cols="60"><?php echo htmlspecialchars($options['aviso']); ?></textarea>
           <br/><br/>
           
-          <h3>Votação</h3>
+          <h3>Cronograma Votação</h3>
 
           <!-- CHECKBOX -->
-          <input type="checkbox" id="votacoes_abertas" class="text" name="theme_options[votacoes_abertas]" value="1" <?php checked(true, get_theme_option('votacoes_abertas'), true); ?>/>
-          <label for="votacoes_abertas"><strong>Votações abertas</strong></label><br/>
+        <!--   <input type="checkbox" id="votacoes_abertas" class="text" name="theme_options[votacoes_abertas]" value="1" <?php checked(true, get_theme_option('votacoes_abertas'), true); ?>/>
+          <label for="votacoes_abertas"><strong>Votações abertas</strong></label><br/> -->
 
+          <label for="data_inicio_da_votacao"><strong>Data início da votação</strong></label><br/>
+          <input type="text" id="data_inicio_da_votacao" class="text select_date" name="theme_options[data_inicio_votacao]" value="<?php echo restore_format_date(htmlspecialchars($options['data_inicio_votacao'])); ?>">
+
+          <br><br>
+          <label for="data_fim_da_votacao"><strong>Data fim da votação</strong></label><br/>
+          <input type="text" id="data_fim_da_votacao" class="text select_date" name="theme_options[data_fim_votacao]" value="<?php echo restore_format_date(htmlspecialchars($options['data_fim_votacao'])); ?>">
           
+          <br><br>
+          <label for="data_inicio_da_troca"><strong>Data início da troca de votos</strong></label><br/>
+          <input type="text" id="data_inicio_da_troca" class="text select_date" name="theme_options[data_inicio_da_troca]" value="<?php echo restore_format_date(htmlspecialchars($options['data_inicio_da_troca'])); ?>">
 
+          <br><br>
+          <label for="vezes_que_pode_mudar_voto"><strong>Quantidade de vezes que pode trocar o voto</strong></label><br/>
+          <input type="text" id="vezes_que_pode_mudar_voto" class="text" name="theme_options[vezes_que_pode_mudar_voto]" value="<?php echo htmlspecialchars($options['vezes_que_pode_mudar_voto']); ?>">
+          
         </div>
       </div>
 
