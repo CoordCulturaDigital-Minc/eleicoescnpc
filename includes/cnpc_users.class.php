@@ -191,11 +191,11 @@ function CNPC_Users_init() {
 		/**
 		 * Esconde alguns campos dos usuários
 		 *
-		 * @name    current_user_delete_account
+		 * @name    hidden_fields_user_profile
 		 * @author  Cleber Santos <oclebersantos@gmail.com>
 		 * @since   2015-08-31
 		 * @updated 2015-08-31
-		 * @return  mixed
+		 * @return  css
 		 */
 		function hidden_fields_user_profile() {
 
@@ -243,10 +243,8 @@ function CNPC_Users_init() {
 	$CNPC_Users = new CNPC_Users();
 }
 
-global $pagenow;
-
 // adicionar apenas no profile
-if( is_admin() && $pagenow == 'profile.php' )
+if( is_admin() )
 	add_action( 'init', 'CNPC_Users_init' );
 	
  ?>
