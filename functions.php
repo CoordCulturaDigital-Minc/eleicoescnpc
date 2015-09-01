@@ -44,6 +44,8 @@ function historias_setup() {
 	require_once(get_template_directory() . '/includes/contactform/process.php');
 	require_once(get_template_directory() . '/includes/contactform/shortcode-contato.php');
 
+	require_once(get_template_directory() . '/includes/cnpc_users.class.php');
+
 	// torna o tema traduzível
 	load_theme_textdomain( 'historias', get_template_directory() . '/languages' );
 

@@ -1087,5 +1087,3 @@ function get_count_users_setorias() {
 
     return $count;
 }
-
-
