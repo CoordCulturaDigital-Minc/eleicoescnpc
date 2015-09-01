@@ -50,10 +50,11 @@ function CNPC_Users_init() {
 		function button_user_profile_delete_account() {
 			?>	
 			<table class="form-table wp-core-ui">
-				<tr>
-					<th><label for="address"><?php _e("Deletar conta"); ?></label></th>
+				<tr class="user_delete_account">
+					<th ><label for="address"><?php _e("Deletar conta"); ?></label></th>
 					<td>
 						<a href="" id="delete_account" class="button button-secondary">Deletar minha conta</a>
+						<div id="cnpc-loading" style="display:none;"></div>
 						<p class="description">Esta ação não pode ser desfeita, todos os seus dados serão apagados, inclusive os votos.</p>
 					</td>
 				</tr>
@@ -211,6 +212,13 @@ function CNPC_Users_init() {
 		    		.form-table .user-user-login-wrap  { display: none; } 
 
 		    		.description.indicator-hint { clear: both; }
+
+		    		#cnpc-loading {
+						width: 20px;
+						height:20px;
+						background:url(../wp-admin/images/wpspin_light.gif) no-repeat center;
+					}
+
 		    	</style>";
 		}
 

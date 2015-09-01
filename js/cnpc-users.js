@@ -7,6 +7,7 @@
 			 		   +'<br>Todos seus dados serão apagados, inclusive seus votos!'
 			 		   +'<br>Após concluir não será possível recuperar suas informações!</p>';
 
+		
 			$('<div class="dialogs"></div>').appendTo( $( "body" ) )
 			  .html('<div class="htl"><h3>Atenção</h3>'+text+'</div')
 			  .dialog({
@@ -18,6 +19,7 @@
 							return false;
 			          },
 			          Sim: function () {
+			          		$('#cnpc-loading').show();
 			              	$(this).dialog("close");
 
 			             	$.post(
@@ -33,6 +35,8 @@
 								} else {
 									alert(data.errormsg);
 								}
+
+								$('#cnpc-loading').hide();
 							},
 							'json'
 						);
