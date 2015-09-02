@@ -128,6 +128,12 @@ if(is_user_logged_in()) {
 			</div>
 		<?php endif; ?>
 
+		
+        <?php if(get_theme_option('inscricoes_abertas') == false): ?>
+			<div class="error">Inscrições encerradas!</div>
+		<?php endif;?>
+
+
 	<?php else: // } user logged in { ?>
 		<?php 
 		
@@ -216,10 +222,6 @@ if(is_user_logged_in()) {
 		        </div>
 
 				<form id="application-form" class="form-application  inline" method="post">
-
-		            <?php if(get_theme_option('inscricoes_abertas') == false): ?>
-						<div class="error">Inscrições encerradas!</div>
-					<?php endif;?>
 
 					<?php if( ( $step == 'step-1' || $step == '' ) && empty( $subscription_number ) ) : ?>
 						<div id="formstep-1" class="form-step">

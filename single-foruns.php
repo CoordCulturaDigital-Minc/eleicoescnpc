@@ -156,7 +156,15 @@ get_header(); ?>
 				<?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) ) : ?>
 					<div class="text-center social-share">
 						<h3>Compartilhe</h3>
-						<?php ADDTOANY_SHARE_SAVE_KIT(); ?>
+						<br>
+						<?php //ADDTOANY_SHARE_SAVE_KIT(); ?>
+
+						<?php 
+						if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) ) { 
+					        echo '<div class="addtoany_list_container">';
+					            ADDTOANY_SHARE_SAVE_KIT( array( 'linkname' => "Acesse Setorial de" . substr($original_post->post_title, 4) . " " . show_text_state_by_uf($uf), 'linkurl' => wp_get_shortlink($original_post->ID) ));
+					        echo '</div>';
+					    } ?>
 					</div>
 				<?php endif; ?>
 
