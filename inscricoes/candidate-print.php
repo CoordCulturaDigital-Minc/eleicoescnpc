@@ -51,7 +51,7 @@ if($pid) {
 			<?php $name = user_short_name($user_meta['user_name']); ?>
 		<?php endif; ?>
 		
-		<p><?php printf( "Olá %s! Da Setorial %s do %s.", $name, get_label_setorial_by_slug( $user_meta['setorial']), $user_meta['UF'] ); ?></p>
+		<p><?php printf( "Olá %s da Setorial %s do %s.", $name, get_label_setorial_by_slug( $user_meta['setorial']), $user_meta['UF'] ); ?></p>
 
 		<p>Confirmamos sua inscrição como candidato nas eleições de 2015 do Conselho Nacional de Políticas Culturais (CNPC).</p>
 		<p>Participe no  <a href="<?php echo site_url('foruns/' . $user_meta['uf-setorial']); ?>">fórum de debate.</a><p> 
@@ -64,7 +64,7 @@ if($pid) {
 	<ul>
 		<li><strong>Nome</strong>: <?php echo $user_meta['user_name'];?></li>
 		<?php if(isset($f['candidate-display-name'])): ?>
-			<li><strong>Nome de candidato</strong>: <?php echo $f['candidate-display-name'];?></li>
+			<li><strong>Nome do candidato</strong>: <?php echo $f['candidate-display-name'];?></li>
 		<?php endif;?>
 		<li><strong>Nascimento</strong>: <?php echo restore_format_date( $user_meta['date_birth'] );?></li>
 		<li><strong>CPF</strong>: <?php echo $user_meta['cpf'];?></li>
