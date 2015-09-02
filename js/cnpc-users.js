@@ -30,7 +30,7 @@
 							},
 							function(data) {
 								if (data.success) {
-									alert("Usuário deletado com sucesso!")
+									alert("Inscrição apagada com sucesso!")
 									location.reload(true);
 								} else {
 									alert(data.errormsg);
