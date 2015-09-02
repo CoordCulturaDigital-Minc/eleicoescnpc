@@ -88,7 +88,7 @@ class CNPC_Widget_Login extends WP_Widget
                               <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('url'); ?>/inscricoes">Quero me candidatar!</a></li>
                         <?php endif; ?>
                     <?php endif; ?>
-                    <li><i class="fa fa-user"></i> <a href="<?php bloginfo('url'); ?>/wp-admin/profile.php">Meu perfil</a></li>
+                    <!-- <li><i class="fa fa-user"></i> <a href="<?php bloginfo('url'); ?>/wp-admin/profile.php">Meu perfil</a></li> -->
                     <li><i class="fa fa-sign-out"></i> <?php wp_loginout( get_permalink() ); ?></li>
                 </ul>
 
