@@ -19,10 +19,24 @@
 	<?php require_once 'dependencies/twitter_bootstrap.php'; ?>
 	<?php require_once 'dependencies/font_awesome.php'; ?>
 	
-	<?php require_once 'includes/favicons.php'?>
+	<?php require_once 'includes/favicons.php'; ?>
 
 	<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>?ver=2">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+
+    <meta property="og:title" content="<?php echo get_the_title(); ?>"/>
+    <meta property="og:url" content="<?php echo wp_get_shortlink(); ?>"/>
+    <meta property="og:site_name" content="<?php echo get_bloginfo( 'name' ); ?>"/>
+
+	<?php if(!has_post_thumbnail( $post->ID )) { 
+		$default_image=get_template_directory_uri() . '/images/template_header.png';
+		echo '<meta property="og:image" content="' . $default_image . '"/>';
+	}
+	else{
+		$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
+		echo '<meta property="og:image" content="' . esc_attr( $thumbnail_src[0] ) . '"/>';
+	}
+	 ?>
 
 	<?php wp_head(); ?>
 </head>

@@ -2,8 +2,8 @@
 
 function CNPC_Users_init() {
 	class CNPC_Users
-	{
-
+	{	
+		
 		// ATRIBUTES /////////////////////////////////////////////////////////////////////////////////////
 		var $slug  = 'cnpc_users';
 		var $dir   = '';
