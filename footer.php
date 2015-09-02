@@ -97,5 +97,5 @@ if ( $mostra_query->have_posts() ) : ?>
 <?php wp_reset_postdata(); ?>
 
 <?php wp_footer(); ?>
-
+<script src="http://barra.brasil.gov.br/barra.js?cor=verde" type="text/javascript"></script>
 </body></html>

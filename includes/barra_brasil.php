@@ -5,4 +5,4 @@
     </ul>
 </div>
 
-<script src="http://barra.brasil.gov.br/barra.js?cor=verde" type="text/javascript"></script>
+
