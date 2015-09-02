@@ -106,6 +106,8 @@ fieldset br {
 
 .form-controls {
     margin-bottom: 1.5rem;
+
+    
 }
 
 .project-switcher {
@@ -277,6 +279,11 @@ fieldset br {
 	    // font-weight: bold;
 	    font-size: 32px;
 	}
+	
+	a {
+    	text-decoration: underline;
+    }
+
 
 	legend {
 	    // font-family: 'Sanchez', serif;

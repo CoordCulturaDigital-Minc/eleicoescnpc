@@ -314,6 +314,11 @@
 
 
 @media only screen and (max-width: 40em) {
+    .dialog, .ui-dialog {
+        margin-top: -215px;
+        width: 90% !important;
+    }
+
     .candidates-content {
         .flex-direction-nav  li{
             a {

@@ -6,7 +6,9 @@ $fonte-principal-bold:	'TheSans B7 Bold';
 
 a {
     text-decoration: none;
-    color: #111;
+    // color: #111;
+    color: #125b26;
+
     
     &:visited {
 	    color: #111;
@@ -21,7 +23,7 @@ a {
 		-webkit-transition: color .1s ease-in-out;
 	        	transition: color .1s ease-in-out;
 	
-		color: #125b26;
+		color: darken(#125b26, 15%);
 		border: 0;
 	}
 	&:focus {

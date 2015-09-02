@@ -25,7 +25,7 @@ Tags: one-column, two-columns, right-sidebar, custom-menu, editor-style, microfo
   font-style: normal; }
 a {
   text-decoration: none;
-  color: #111; }
+  color: #125b26; }
   a:visited {
     color: #111; }
   a:hover {
@@ -33,7 +33,7 @@ a {
   a:hover, a:focus, a:active {
     -webkit-transition: color .1s ease-in-out;
     transition: color .1s ease-in-out;
-    color: #125b26;
+    color: #051b0b;
     border: 0; }
   a:focus {
     outline: thin dotted; }
@@ -1277,6 +1277,8 @@ fieldset br {
   text-align: center;
   margin-bottom: 30px;
   font-size: 32px; }
+.form-application a {
+  text-decoration: underline; }
 .form-application legend {
   font-size: 1.13rem;
   font-size: 18px;
@@ -2969,6 +2971,10 @@ section.features {
     margin-top: 5px; }
 
 @media only screen and (max-width: 40em) {
+  .dialog, .ui-dialog {
+    margin-top: -215px;
+    width: 90% !important; }
+
   .candidates-content .flex-direction-nav li a.flex-prev {
     left: 8px; }
   .candidates-content .flex-direction-nav li a.flex-next {
