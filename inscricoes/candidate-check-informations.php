@@ -131,7 +131,7 @@ if( $current_user_ID != $userID && !current_user_can('administrator')) {
 			<div class="col-md-3 col-xs-12"> 
 				<strong>Currículo e/ou Portfólio:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12">
+			<div class="col-md-9 col-xs-12 file">
 				<?php if( $portfolio_file_id ) : ?>
 					<?php  $filename = clear_pdf_file_name( $portfolio_file_id ); ?>
 					<?php echo wp_get_attachment_link($portfolio_file_id,'','','',$filename );?>
@@ -144,7 +144,7 @@ if( $current_user_ID != $userID && !current_user_can('administrator')) {
 			<div class="col-md-3 col-xs-12"> 
 				<strong>Histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12">
+			<div class="col-md-9 col-xs-12 file">
 				<?php if( $activity_file_id  ) : ?>
 					<?php  $filename = clear_pdf_file_name( $activity_file_id ); ?>
 					<?php echo wp_get_attachment_link( $activity_file_id,'','','',$filename );?>
@@ -157,7 +157,7 @@ if( $current_user_ID != $userID && !current_user_can('administrator')) {
 			<div class="col-md-3 col-xs-12"> 
 				<strong>Diploma Profissional e/ou Registro profissional:</strong>
 			</div>
-			<div class="col-md-9 col-xs-12">
+			<div class="col-md-9 col-xs-12 file">
 				<?php if( $diploma_file_id ) : ?>
 					<?php  $filename = clear_pdf_file_name( $diploma_file_id ); ?>
 					<?php echo wp_get_attachment_link($diploma_file_id,'','','',$filename );?>

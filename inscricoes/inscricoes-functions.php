@@ -712,7 +712,7 @@ function inscricoes_get_uploaded_template($attachment_id) {
 
         $filename_only = clear_pdf_file_name( $attachment_id );
 
-        return '<a href="' . $url . '" target="_blank">'. $filename_only .'</a>';
+        return '<a class="file_upload" href="' . $url . '" target="_blank">'. $filename_only .'</a>';
     }
     
 

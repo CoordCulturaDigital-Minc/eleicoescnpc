@@ -279,8 +279,8 @@ fieldset br {
 	    // font-weight: bold;
 	    font-size: 32px;
 	}
-	
-	a {
+	.file a,
+	a.file_upload {
     	text-decoration: underline;
     }
 

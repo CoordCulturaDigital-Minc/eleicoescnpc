@@ -1277,7 +1277,8 @@ fieldset br {
   text-align: center;
   margin-bottom: 30px;
   font-size: 32px; }
-.form-application a {
+.form-application .file a,
+.form-application a.file_upload {
   text-decoration: underline; }
 .form-application legend {
   font-size: 1.13rem;
