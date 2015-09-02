@@ -18,12 +18,14 @@
             $('#step-1-register').show();
             $('#step-2-register').hide();
             $('#step-3-register').hide();
+            $(".form-application #submit").hide();
         }
 
         function show_step2() {
             $('#step-1-register').hide();
             $('#step-2-register').show();
             $('#step-3-register').hide();
+            $(".form-application #submit").hide();
         }
 
         function show_step3() {
