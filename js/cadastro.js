@@ -2,12 +2,14 @@
     $(document).ready(function(e) {
         $form = $("#user-register");
 
-
         function scrollCadastro(e) {
             $('html, body').animate({
                 scrollTop: $(e).offset().top - 50
             }, 500);
         }
+
+        // esconder botao
+        show_step1();
 
         function stepsCount(c) {
             $('#cadastro .step__count').show().find('.active').removeClass('active');
