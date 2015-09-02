@@ -707,9 +707,12 @@ body > div.site-wrap {
   width: 40%; }
 
 section #comments {
-  padding: 5% 10%;
+  padding: 5% 3%;
   border: 1px solid #eaeaea;
   border-radius: 5px; }
+
+.single-foruns section #comments {
+  padding: 5% 10%; }
 
 .comments-title,
 #reply-title {
@@ -754,7 +757,7 @@ section #comments {
     border: none; }
   .comments-list .children {
     margin: 0 0 0 48px;
-    margin: 10px 0 0 4rem; }
+    margin: 10px 0 0 2rem; }
     .comments-list .children .vcard .comment-author-avatar img,
     .comments-list .children .vcard .comment-author-avatar {
       width: 70px;
@@ -785,6 +788,9 @@ section #comments {
     margin: 0;
     color: #676767; }
 
+.single-foruns .comment-content {
+  width: 85%; }
+
 .comment-content p + * {
   margin-bottom: 1.5rem; }
 
@@ -803,6 +809,19 @@ section #comments {
       margin-top: -5px;
       color: #b0b0b0; }
 
+.single-foruns .comment-meta {
+  width: 85%; }
+
+@media (max-width: 850px) {
+  .single-foruns .comment-content,
+  .single-foruns .comment-meta {
+    width: 75%; } }
+@media (max-width: 670px) {
+  .single-foruns .comment-content,
+  .single-foruns .comment-meta,
+  .comment-content,
+  .comment-meta {
+    width: 70%; } }
 .vcard {
   float: left;
   width: 15%; }
@@ -841,6 +860,17 @@ section #comments {
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 2px 0 #2d9481;
     color: #fff; }
 
+#cancel-comment-reply-link {
+  left: 0px;
+  right: auto;
+  top: 205px; }
+
+@media (max-width: 670px) {
+  #cancel-comment-reply-link {
+    top: 204px; }
+
+  .single-foruns #cancel-comment-reply-link {
+    top: 230px; } }
 .comment-permalink {
   float: right; }
 

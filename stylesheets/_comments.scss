@@ -1,7 +1,11 @@
 section #comments {
-    padding: 5% 10%;
+    padding: 5% 3%;
     border: 1px solid #eaeaea;
     border-radius: 5px;
+}
+
+.single-foruns section #comments {
+    padding: 5% 10%;
 }
 
 .comments-title,
@@ -71,7 +75,7 @@ section #comments {
 	
 	.children {
 	    margin: 0 0 0 48px;
-	    margin: 10px 0 0 4rem;
+	    margin: 10px 0 0 2rem;
         .vcard .comment-author-avatar img,
         .vcard .comment-author-avatar {
             width: 70px;
@@ -104,7 +108,7 @@ section #comments {
     position: relative;
     
     float: right;
-    width: 85%;
+    width: 80%;
     
     margin-bottom: 16px;
     margin-bottom: 1rem;
@@ -113,28 +117,17 @@ section #comments {
     border-radius: 1rem;
     
     &:after {
-	    // position: absolute;
-	    // bottom: -8px;
-	    // bottom: -.5rem;
-	    // left: 40px;
-	    // left: 2.5rem;
-	
-	    // display: block;
-	
-	    // width: 0;
-	
-	    // content: '';
-	
-	    // border-width: 8px 8px 0;
-	    // border-width: .5rem .5rem 0;
-	    // border-style: solid;
-	    // border-color: #f5f5f5 transparent;
+
 	}
 	
 	p {
 	    margin: 0;
         color: #676767;
 	}
+}
+
+.single-foruns .comment-content {
+    width: 85%;
 }
 
 .comment-content p + * {
@@ -147,7 +140,7 @@ section #comments {
     position: relative;
     z-index: 1;
     float: right;
-    width: 85%;
+    width: 80%;
 
     overflow: hidden;
 
@@ -163,6 +156,30 @@ section #comments {
     }
     
 }
+
+.single-foruns .comment-meta {
+    width: 85%;
+}
+
+
+ @media (max-width: 850px)  {
+    .single-foruns .comment-content,
+    .single-foruns .comment-meta {
+        width: 75%;
+    }
+
+
+ }
+
+ @media (max-width: 670px)  {
+    .single-foruns .comment-content,
+    .single-foruns .comment-meta, 
+    .comment-content,
+    .comment-meta {
+        width: 70%;
+    }
+
+ }
 
 .vcard {
     float: left;
@@ -223,6 +240,24 @@ section #comments {
         color: #fff;
     }
 }
+
+#cancel-comment-reply-link {
+    left: 0px;
+    right: auto;
+    top: 205px;
+}
+
+@media (max-width: 670px)  {
+    #cancel-comment-reply-link  {
+         top: 204px;
+    }
+
+    .single-foruns #cancel-comment-reply-link  {
+         top: 230px;
+    }
+}
+
+
 .comment-permalink {
     float: right;
 }
