@@ -14,32 +14,42 @@
             $('#cadastro .step__count').children(c).addClass('active');
         }
 
-        $('#loginform').hide();
-        $('#cadastro-toggle').click(function(){
-            $('#cadastro').hide();
-            $('#loginform').show();
-        });
+        function show_step1() {
+            $('#step-1-register').show();
+            $('#step-2-register').hide();
+            $('#step-3-register').hide();
+        }
+
+        function show_step2() {
+            $('#step-1-register').hide();
+            $('#step-2-register').show();
+            $('#step-3-register').hide();
+        }
+
+        function show_step3() {
+            $('#step-1-register').hide();
+            $('#step-2-register').hide();
+            $('#step-3-register').show();
+            $(".form-application #submit").show();
+        }
 
         // se recarregar a página voltar para o lugar correto
         if ( $( ".user_type" ).attr( "checked" ) == "checked" && $( "#terms_of_use" ).attr( "checked" ) == "checked") {
-            $('#step-1-register').hide();
-            $('#step-2-register').show();
+            show_step2();
         }
 
         if($('#user_UF').val()!="" && $('#user_setorial').val()!="" ){ 
-            $('#step-2-register').hide();
-            $('#step-3-register').show();
-            $(".form-application input[type='submit']").show();
+           show_step3();
         }
 
         // etapa 1 -> etapa 2
         $('#step-1-register .user_type').click(function(){
             if ( $( "#terms_of_use" ).attr( "checked" ) == "checked") {
-        	$('#step-1-register').hide();
-            $('#step-2-register').show();
+                
+                show_step2();
 
-            scrollCadastro("#cadastro");
-            stepsCount('.step_2');
+                scrollCadastro("#cadastro");
+                stepsCount('.step_2');
 
             } else {
                 alert("Você deve concordar com os termos para continuar!")
@@ -47,12 +57,15 @@
             }           
         });
 
+
+
         // etapa 2 -> etapa 3 - desativado
         $('#user_UF, #user_setorial').change(function() {
-		    if($('#user_UF').val()!="" && $('#user_setorial').val()!="" ){ 
-		       	$('#step-2-register').hide();
-            	$('#step-3-register').show();
-            	$(".form-application input[type='submit']").show();
+		    if($('#user_UF').val()!="" && $('#user_setorial').val()!="" ){
+                 show_step3(); 
+		       	// $('#step-2-register').hide();
+          //   	$('#step-3-register').show();
+          //   	$(".form-application #submit").show();
 		    }
 
             scrollCadastro("#cadastro");
@@ -82,11 +95,8 @@
             var setorial = $(this).attr('id');
             $form.find('#user_setorial').val( setorial);
 
-            $('#step-2-register').hide();
-            $('#step-3-register').show();
-            $(".form-application input[type='submit']").show();
+            show_step3();
 
-            
             scrollCadastro("#cadastro");
             stepsCount('.step_3');
             $form.find('#user_cpf').focus();
@@ -137,7 +147,6 @@
             }
         };
 
-
         // callback to verify field through
         var verify_register_field = function(e) {
 
@@ -187,19 +196,94 @@
                                 $(this).trigger('blur').focus();
                             }});
 
-    
-        // $form.find("#user_password_confirm").keyup( function checkPasswordMatch() {
-        //     var password = $form.find('#user_password').val();
-        //     var confirmPassword = $form.find("#user_password_confirm").val();
+        function show_text_state_by_uf( uf, estado ) {
+            var text;
 
-        //     if (password != confirmPassword)
-        //         $form.find("#user_password_confirm-error").html("As senhas não são iguais").show();
-        //     else
-        //         $form.find("#user_password_confirm-error").hide().html('');
-        // });
+            switch(uf) {
+                case 'BA':
+                case 'PB':
+                    text = 'da';
+                    break;
+                case 'AL':
+                case 'GO':
+                case 'MT':
+                case 'MS':
+                case 'MG':
+                case 'PE':
+                case 'RO':
+                case 'RR':
+                case 'SC':
+                case 'SP':
+                case 'SE':  
+                    text = 'de';
+                    break;
+                case 'AP':
+                case 'AM':
+                case 'CE':
+                case 'DF':
+                case 'ES':
+                case 'MA':
+                case 'PA':
+                case 'PR':
+                case 'PI':
+                case 'RJ':
+                case 'RN':
+                case 'RS':
+                case 'TO':
+                    text = 'do';
+                    break;
+                default:
+                    text = 'do';
+            }
+            
+            return text +' '+ estado +' ('+ uf +')';
+        }
+
+        $("#user-register #submit").click(function(event) {
+            
+            var text, setorial, uf, estado;
+
+            setorial = $form.find('#user_setorial option:selected').text();
+            uf       = $form.find('#user_UF option:selected').val();
+            estado   = $form.find('#user_UF option:selected').text();
+
+            text = '<p>Confirma o cadastro na Setorial de '+setorial+' '+show_text_state_by_uf( uf, estado )+'?</p>';           
+
+            $('<div class="dialogs"></div>').appendTo( $( "#user-register" ) )
+              .html('<div class="htl"><h3>Atenção</h3>'+text+'</div')
+              .dialog({
+                    modal: true, 
+                    title: '', 
+                    zIndex: 10000, 
+                    autoOpen: true, 
+                    closeText: '<i class="fa fa-times close"></i>',
+                    width: 'auto', 
+                    resizable: false,
+                    buttons: {
+                        Não: function () {
+                            $(this).dialog("close");
+                            show_step2();
+                        },
+                        Sim: function () {
+                            $form.submit();
+                            $(this).dialog("close");
+                        }
+                  },
+                  close: function (event, ui) {
+                      $(this).remove();
+                  }
+            });
+            return false;
+        });
 
         $(document).find('#user_cpf').mask('999.999.999-99');
         $(document).find('#user_birth').mask('99/99/9999');
+
+        $('#loginform').hide();
+        $('#cadastro-toggle').click(function(){
+            $('#cadastro').hide();
+            $('#loginform').show();
+        });
 
 
         // desativa o enter no formulário
@@ -211,7 +295,7 @@
             }
         });
 
-        // enter vira tab
+        // // enter vira tab
         $form.find(':input').keydown(function (e) {
             if (e.which === 13) {
                 var index = $form.find(':input').index(this) + 1;

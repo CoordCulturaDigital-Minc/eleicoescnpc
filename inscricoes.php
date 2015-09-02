@@ -87,8 +87,9 @@ if(is_user_logged_in()) {
 	exit;
 
 } else {
-	 wp_enqueue_script( 'responsive-nav', get_template_directory_uri() . '/js/responsive-nav.min.js', array( 'jquery' ), '1.0.32', true );
+	wp_enqueue_script( 'responsive-nav', get_template_directory_uri() . '/js/responsive-nav.min.js', array( 'jquery' ), '1.0.32', true );
 	wp_enqueue_script('jquery-maskedinput', get_setoriaiscnpc_baseurl().'js/jquery.maskedinput-1.3.min.js', array('jquery'));  // funciona
+	wp_enqueue_script('jquery-ui-dialog');
 	wp_enqueue_script('cadastro', get_setoriaiscnpc_baseurl().'js/cadastro.js', array('jquery'));
 	wp_localize_script('cadastro', 'cadastro', array('ajaxurl' => admin_url('admin-ajax.php'), 'today' => date('Y-m-d') ));
 	wp_enqueue_script( 'setoriaiscnpc', get_template_directory_uri() . '/js/setoriaiscnpc.js');

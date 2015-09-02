@@ -8,6 +8,7 @@
 			<?php endforeach; ?>
 		</div>
 	<?php endif; ?>
+	<br>
 	<div class="form-step-content">
 		<div class="row">
 			<span id="register-error" class="form-error hidden"></span>
@@ -82,10 +83,9 @@
 
 				--><div class="col-md-6 col-xs-12">
 					<label for="user_password">Senha</label>
-					<span class="field__note"> Sua senha deve ter no mínimo 6 caracteres</span>
+					<span class="field__note">Sua senha deve ter no mínimo 6 caracteres</span>
 					<input id="user_password" type="password" name="user_password" />
 					<div id="user_password-error" class="field__error"></div>
-
 				</div><!--
 
 				--><div class="col-md-6 col-xs-12">
@@ -108,7 +108,7 @@
 				</div>
 			</div>
 		</div>
-		<input type="submit" id="submit" class="button" value="Inscrever" />
+		<a id="submit" class="button" title="Inscrever">Inscrever</a>
 
 	</div>
 </form>
