@@ -140,7 +140,7 @@ class Validator {
                                             ." meta_key='cpf' and meta_value='%s';",$c));
         
         if($result > 0) {
-            return __('Já existe um usuário cadastrado com este CPF.');
+            return __('Já existe um usuário cadastrado com este CPF. <a href="' . wp_lostpassword_url() .'">Recuperar senha?</a>');
         }
         return $result == 0; // $result provavelmente é String
     }
