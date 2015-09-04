@@ -175,9 +175,11 @@ function historias_load_scripts() {
 		
 	/* Foruns de discussão e votação */
 	if ( is_single() ) {
+
 		wp_enqueue_script('jquery-ui-dialog');
 		wp_enqueue_script('jquery-flexslider', get_template_directory_uri().'/js/flexslider-min.js', array('jquery'));
-		wp_enqueue_script( 'foruns', get_template_directory_uri() . '/js/foruns.js');
+		wp_enqueue_script('foruns', get_template_directory_uri() . '/js/foruns.js');
+
 		wp_localize_script('foruns', 'vars', array( 'ajaxurl' => admin_url('admin-ajax.php')));
 	}
 

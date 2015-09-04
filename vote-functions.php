@@ -73,6 +73,22 @@ function user_can_change_vote_by_date($user_id) {
 	return true;
 }
 
+// retorna quantas vezes o usuário ainda pode votar
+function how_many_current_user_can_vote() {
+
+	$vote_counter = current_user_already_voted();
+
+	$vezes_que_pode_mudar = get_theme_option('vezes_que_pode_mudar_voto');
+
+	// o sistema conta o primeiro voto, se ele pode mudar 1, entao o resultado tem que ser 1
+	$restante = ( $vezes_que_pode_mudar - $vote_counter ) + 1;
+
+	if( $restante > 0 )
+		return $restante;
+
+	return 0;
+}
+
 // verifica se o usuário pode mudar seu voto pela quantidade permitida
 function user_can_change_vote_by_counter($user_id) {
 
@@ -130,7 +146,16 @@ function ajax_register_vote() {
 
 	$response = array();
 	$response['success'] = true;
-	$user = wp_get_current_user();
+	$response['msg'] = '';
+
+	$user 	       = wp_get_current_user();
+	$confirms_vote = isset( $_POST['confirms_vote'] ) ? $_POST['confirms_vote'] : false;
+
+	$data_fim_votacao  = restore_format_date( get_theme_option('data_fim_votacao'));
+	$data_inicio_troca = restore_format_date( get_theme_option('data_inicio_da_troca'));
+
+	$vote_counter 	  = how_many_current_user_can_vote();
+	$text_change_voto = ( $vote_counter > 1 ) ? 'vezes' : 'vez';
 	
 	if (is_votacoes_abertas()) {
 		
@@ -143,42 +168,53 @@ function ajax_register_vote() {
 
 				if (current_user_can_change_vote_by_counter()) {
 					$canvote = true;
+					$response['code'] = 'sucess_change_voto';
+					$response['msg'] = 'Você pode mudar o voto ' . $vote_counter . ' ' . $text_change_voto . ' até o dia ' . $data_fim_votacao;
 				} else {
 					$response['success'] = false;
-
-					$response['errormsg'] = 'Erro ao registrar o voto! <br>Você atingiu o limite para troca de voto';
+					$response['code'] = 'error_counter_change';
+					$response['msg'] = 'Você já atingiu o limite para troca de voto';
 				}
 			} else {
 				$response['success'] = false;
-
-				$response['errormsg'] = 'Erro ao registrar o voto! <br>Só é possível alterar o voto a partir do dia ' . restore_format_date( get_theme_option('data_inicio_da_troca'));
+				$response['code'] = 'error_date_change';
+				$response['msg'] = 'Só é possível alterar o voto ' . $vote_counter . ' ' . $text_change_voto . '  entre os dias ' . $data_inicio_troca . ' e ' . $data_fim_votacao;
 			}
 
-		} else {
+		} else { // se o usuário ainda não votou
 			$canvote = true;
 		}
 
-		if ($canvote) {
+		// verifica se pode votar
+		if ( user_can_vote_in_project($user->ID, $_POST['project_id'])) {
 
-			// verifica se pode votar
-			if ( user_can_vote_in_project($user->ID, $_POST['project_id'])) {
+			if ($canvote) {
 				
-				if ( register_vote($user->ID, $_POST['project_id'])  ) {
-				
-					$response['voted_project_id'] = $_POST['project_id'];
-				
-				} else {
-					$response['success'] = false;
-					$response['errormsg'] = 'Erro ao registrar voto';
+				// se o usuário confirma o voto
+				if( $confirms_vote == true ) {
+					if ( register_vote($user->ID, $_POST['project_id'])  ) {
+					
+						$response['voted_project_id'] = $_POST['project_id'];
+					
+					} else {
+						$response['success'] = false;
+						$response['code'] 	= 'error_vote';
+						$response['msg'] = 'Erro ao registrar voto';
+					}
 				}	
-			} else {
-				$response['success'] = false;
-				$response['errormsg'] = 'Você não se inscreveu nesta setorial deste estado, pode participar do debate, mas não pode votar.';
 			}
-		}	
+
+		} else {
+			$response['success'] = false;
+			$response['code'] = 'error_setorial_uf';
+			$response['msg'] = 'Você não se inscreveu nesta setorial deste estado, pode participar do debate, mas não pode votar.';
+		}
+		
+
 	} else {
 		$response['success'] = false;
-		$response['errormsg'] = 'A votação não está aberta';
+		$response['code'] 	= 'error_vote_closed';
+		$response['msg'] = 'A votação não está aberta';
 	}
 	
 	echo json_encode($response);

@@ -12,66 +12,80 @@
                 $('.candidate-details').hide();
         });
 
-
 		$('.vote').click(function() {
 
-			var pid = $(this).data('project_id');
+			var pid  = $(this).data('project_id');
+			var text = '';
 
+			text = '<p>Você realmente deseja votar neste candidato?</p>';
+			
+			// se já votou
+			if( $('a.vote').hasClass('voted') )
+				text = '<p>Tem certeza que deseja mudar seu voto?</p>';
+
+			// se o botao de votar for de um candidato já votado
 			if( $(this).hasClass('voted') )
 				return false;
 
-			// var mudar_voto = ( vars.vezes_que_pode_mudar_voto > 1 ) ? 'vezes' : 'vez';
+			$.post(
+				vars.ajaxurl,
+				{
+					'action':'register_vote',
+					'project_id': pid,
+				},
+				function(data) {
+					if (data.success) {
+						text += '<p>' + data.msg + '</p>';
 
-			var text = '<p>Você realmente deseja votar neste candidato?</p>'
-						
-			// if( $('a.vote').hasClass('voted') ) {
-			// 	text = '<p>Você está alterando o seu voto, deseja continuar?</p>';    
-			// }
+						$('<div class="dialogs"></div>').appendTo( $( ".candidates" ) )
+							.html('<div class="htl"><h3>Atenção</h3>'+text+'</div')
+							.dialog({
+							  modal: true, title: '', zIndex: 10000, autoOpen: true, closeText: '<i class="fa fa-times close"></i>',
+							  width: 'auto', resizable: false,
+							  buttons: {
+							      Não: function () {
+							          $(this).dialog("close");
+										return false;
+							      },
+							      Sim: function () {
 
-			// text += '<p>Só é possível trocar o voto '+ vars.vezes_que_pode_mudar_voto+ ' ' 
-			// 			+ mudar_voto +', a partir do dia '+ parseDate(vars.data_inicio_troca)
-			// 			+'</p>';
+							          	$(this).dialog("close");
 
-			$('<div class="dialogs"></div>').appendTo( $( ".candidates" ) )
-			  .html('<div class="htl"><h3>Atenção</h3>'+text+'</div')
-			  .dialog({
-			      modal: true, title: '', zIndex: 10000, autoOpen: true, closeText: '<i class="fa fa-times close"></i>',
-			      width: 'auto', resizable: false,
-			      buttons: {
-			          Não: function () {
-			              $(this).dialog("close");
-							return false;
-			          },
-			          Sim: function () {
+							         	$.post(
+										vars.ajaxurl,
+										{
+											'action':'register_vote',
+											'project_id': pid,
+											'confirms_vote': true, 
+										},
+										function(data) {
+											if (data.success) {
+												var voted_id = data.voted_project_id;
+												$('a.vote').removeClass('voted').html('Votar');
+												$('#vote-for-'+voted_id).addClass('voted').html('Voto registrado');
+												$('.candidate').removeClass('voted')
+												$('.candidate#'+voted_id).addClass('voted');
+											} else {
+												show_message(data.msg, 'erro');
+											}
+										},
+										'json'
+									);
 
-			              	$(this).dialog("close");
+							      }
+							  },
+							  close: function (event, ui) {
+							      $(this).remove();
+							  }
+							});
 
-			             	$.post(
-							vars.ajaxurl,
-							{
-								'action':'register_vote',
-								'project_id': pid,
-							},
-							function(data) {
-								if (data.success) {
-									var voted_id = data.voted_project_id;
-									$('a.vote').removeClass('voted').html('Votar');
-									$('#vote-for-'+voted_id).addClass('voted').html('Voto registrado');
-									$('.candidate').removeClass('voted')
-									$('.candidate#'+voted_id).addClass('voted');
-								} else {
-									show_message(data.errormsg, 'erro');
-								}
-							},
-							'json'
-						);
-
-			          }
-			      },
-			      close: function (event, ui) {
-			          $(this).remove();
-			      }
-			});
+					} else {
+						show_message(data.msg, 'erro');
+					}
+				},
+				'json'
+			);
+		
 		});
 
 
@@ -97,7 +111,7 @@
 
 		function parseDate(str) {
 		  var m = str.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-		  return m[3]+"/"+m[2]+"/"+m[1];
+		  return m[3]+"/"+m[2];
 		}
 
 		/********* carrosel na página do fórum ********/ 
