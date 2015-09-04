@@ -164,21 +164,23 @@ function ajax_register_vote() {
 		// se o usuário já votou
 		if (current_user_already_voted()) {
 
-			if (current_user_can_change_vote_by_date()) {
-
-				if (current_user_can_change_vote_by_counter()) {
+			if (current_user_can_change_vote_by_counter()) {
+					
+				if (current_user_can_change_vote_by_date()) {
 					$canvote = true;
 					$response['code'] = 'sucess_change_voto';
 					$response['msg'] = 'Você pode mudar o voto ' . $vote_counter . ' ' . $text_change_voto . ' até o dia ' . $data_fim_votacao;
+
 				} else {
 					$response['success'] = false;
-					$response['code'] = 'error_counter_change';
-					$response['msg'] = 'Você já atingiu o limite para troca de voto';
+					$response['code'] = 'error_date_change';
+					$response['msg'] = 'Só é possível alterar o voto ' . $vote_counter . ' ' . $text_change_voto . ' entre os dias ' . $data_inicio_troca . ' e ' . $data_fim_votacao;
 				}
+			
 			} else {
 				$response['success'] = false;
-				$response['code'] = 'error_date_change';
-				$response['msg'] = 'Só é possível alterar o voto ' . $vote_counter . ' ' . $text_change_voto . '  entre os dias ' . $data_inicio_troca . ' e ' . $data_fim_votacao;
+				$response['code'] = 'error_counter_change';
+				$response['msg'] = 'Você já atingiu o limite para troca de voto';
 			}
 
 		} else { // se o usuário ainda não votou
