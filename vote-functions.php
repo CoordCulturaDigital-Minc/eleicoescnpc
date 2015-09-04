@@ -180,7 +180,7 @@ function ajax_register_vote() {
 			} else {
 				$response['success'] = false;
 				$response['code'] = 'error_counter_change';
-				$response['msg'] = 'Você já atingiu o limite para troca de voto';
+				$response['msg'] = 'Você não pode mudar seu voto novamente!';
 			}
 
 		} else { // se o usuário ainda não votou
