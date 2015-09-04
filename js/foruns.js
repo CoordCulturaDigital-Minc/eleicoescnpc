@@ -65,6 +65,7 @@
 												$('#vote-for-'+voted_id).addClass('voted').html('Voto registrado');
 												$('.candidate').removeClass('voted')
 												$('.candidate#'+voted_id).addClass('voted');
+												show_message('Voto registrado com sucesso!')
 											} else {
 												show_message(data.msg, 'erro');
 											}
