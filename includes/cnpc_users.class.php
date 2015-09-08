@@ -23,19 +23,21 @@ function CNPC_Users_init() {
 		 */
 		function scripts()
 		{
-			wp_enqueue_script( 'jquery-ui-dialog' );
-			wp_enqueue_script( 'cnpc_users', $this->url . '/js/cnpc-users.js', array( 'jquery-ui-dialog' ) );
+			// TODO deletar usuario
 
-			wp_localize_script( 
-	            'cnpc_users', 
-	            'vars', 
-	            array(
-	                'ajaxurl'   => admin_url( 'admin-ajax.php' ),
-	                'nonce' => wp_create_nonce( "user_delete_account" ),
-	            )
-	        );
+			// wp_enqueue_script( 'jquery-ui-dialog' );
+			// wp_enqueue_script( 'cnpc_users', $this->url . '/js/cnpc-users.js', array( 'jquery-ui-dialog' ) );
 
-	        wp_enqueue_style("wp-jquery-ui-dialog");
+			// wp_localize_script( 
+	  //           'cnpc_users', 
+	  //           'vars', 
+	  //           array(
+	  //               'ajaxurl'   => admin_url( 'admin-ajax.php' ),
+	  //               'nonce' => wp_create_nonce( "user_delete_account" ),
+	  //           )
+	  //       );
+
+	  //       wp_enqueue_style("wp-jquery-ui-dialog");
 		}
 
 		/**
@@ -135,6 +137,169 @@ function CNPC_Users_init() {
 			return apply_filters( 'wpb_get_ip', $ip );
 		}
 
+		/**
+		 * Campos extras no perfil do usuário
+		 *
+		 * @name    edit_user_details
+		 * @author  Cleber Santos <oclebersantos@gmail.com>
+		 * @since   2015-08-31
+		 * @updated 2015-08-31
+		 * @return  mixed
+		 */
+		function edit_user_details($user) {
+			?> 
+			<table class="form-table">
+				 <tr>
+			        <th>
+			        	<label>CPF</label>
+			        </th>
+			        <td>
+			       		<input id="cpf" type="text" name="cpf" value="<?php echo esc_attr(get_user_meta($user->ID, 'cpf', true)); ?>" disabled="disabled" />
+			       		<span class="description">Não é possível alterar</span>
+			        </td>
+			    </tr>
+
+			    <tr>
+			        <th><label>Nome completo</label></th>
+			        <td>
+			           <input type="text" class="regular-text" name="user_name" value="<?php echo esc_attr(get_user_meta($user->ID, 'user_name', true)); ?>" disabled="disabled" />
+			        	<span class="description">Não é possível alterar</span>
+			        </td>
+			    </tr>
+
+			    <tr>
+			        <th><label>Data nascimento</label></th>
+			        <td>
+			           <input type="text" name="date_birth" value="<?php echo restore_format_date(esc_attr(get_user_meta($user->ID, 'date_birth', true))); ?>" disabled="disabled"/>
+			        	<span class="description">Não é possível alterar</span>
+			        </td>
+			    </tr>
+			    <?php $disabled = ''; ?>
+			    <?php $disabled = $this->user_can_change_setorial_uf( $user->ID ) ? '': 'disabled="disabled"'; ?>
+			    <tr>
+			        <th><label>Estado</label></th>
+			        <td>
+			           <?php echo dropdown_states( 'uf', get_user_meta($user->ID, 'UF', true), true, $disabled); ?>
+			           <span class="description">Só pode alterar uma vez</span>
+			        </td>
+			    </tr>
+
+			    <tr>
+			        <th><label>Setorial</label></th>
+			        <td>
+			           <?php echo dropdown_setoriais( 'setorial', get_user_meta($user->ID, 'setorial', true), true, $disabled); ?>
+			        	<span class="description">Só pode alterar uma vez</span>
+			        </td>
+			    </tr>
+			</table>
+			<?php
+		}
+
+		/**
+		 *  Save_user_details
+		 *
+		 * @name    save_user_details
+		 * @author  Cleber Santos <oclebersantos@gmail.com>
+		 * @since   2015-08-31
+		 * @updated 2015-08-31
+		 * @param int $user_id
+		 * @return null
+		 */
+		function save_user_details($user_id) {
+
+			$current_uf 		= get_user_meta($user_id, 'UF', true);
+			$current_setorial 	= get_user_meta($user_id, 'setorial', true);
+
+			$uf =  $_POST['uf'];
+			$setorial = $_POST['setorial'];
+
+			// se mudar UF ou Setorial
+			if( $uf !== $current_uf || $setorial !== $current_setorial ) {
+
+				// se for candidato
+				if( is_valid_candidate( $user_id ) ) 
+					wp_die('Você é candidato, não pode alterar seu estado e/ou setorial.', '', array( 'back_link' => true ) );
+
+				// verifica se o usuário possui algum projeto com voto
+				// essa verificacao é para resguardar se tiver algum requisito que abra o perfil do candidato para edição,
+				// deixando de ser um candidato válido até finalizar inscricao
+				if( $this->user_is_candidate_was_voted( $user_id ))
+					wp_die('Você já possui votos, não pode alterar seu estado e/ou setorial.', '', array( 'back_link' => true ) );
+
+				// verificar o prazo para alterações
+				if( !$this->user_can_change_by_date() ) 
+					wp_die('O prazo para alterar estado ou setorial já expirou.', '', array( 'back_link' => true ) );
+
+
+				if( $uf !== $current_uf ) {
+
+					if( !$this->user_can_change_uf( $user_id ) )
+						wp_die('Você não pode mais alterar o seu estado.', '', array( 'back_link' => true ) ); 
+
+					$current_count_uf = get_user_meta($user_id, 'uf-counter', true);
+
+					$current_count_uf = empty($current_count_uf) ? 0 : (int) $current_count_uf;
+
+					$current_count_uf ++;
+
+					update_user_meta($user_id, 'UF', $uf);
+
+					if( !current_user_can('administrator') )
+						update_user_meta($user_id, 'uf-counter', $current_count_uf);
+				}
+
+				if( $setorial !== $current_setorial ) {
+
+					if( !$this->user_can_change_setorial( $user_id ) )
+						wp_die('Você não pode mais alterar a sua setorial.', '', array( 'back_link' => true ) ); 
+					
+					$current_count_setorial = get_user_meta($user_id, 'setorial-counter', true);
+
+					$current_count_setorial = empty($current_count_setorial) ? 0 : (int) $current_count_setorial;
+
+					$current_count_setorial ++;
+
+					update_user_meta($user_id, 'setorial', $setorial);
+
+					if( !current_user_can('administrator') )
+						update_user_meta($user_id, 'setorial-counter', $current_count_setorial);
+				}
+
+				update_user_meta($user_id, 'uf-setorial', $uf . '-' . $setorial);
+			}
+			
+		}
+
+		/**
+		 *  Verifica se o pode alterar a setorial ou estado
+		 *
+		 * @name    user_can_change_setorial_uf
+		 * @author  Cleber Santos <oclebersantos@gmail.com>
+		 * @since   2015-08-31
+		 * @updated 2015-08-31
+		 * @param int $user_id
+		 * @return null
+		 */
+		function user_can_change_setorial_uf( $user_id ) {
+
+			if( current_user_can('administrator'))
+				return false;
+			
+			if( is_valid_candidate( $user_id ) ) 
+				return false;
+
+			if( $this->user_is_candidate_was_voted( $user_id ))
+				return false;
+
+			if( !$this->user_can_change_by_date() ) 
+				return false;
+
+			if( !$this->user_can_change_uf( $user_id ) && !$this->user_can_change_setorial( $user_id ) )
+				return false;
+
+			return true;
+		}
+
 
 		/**
 		 * Enviar email para o admin da conta deletada
@@ -189,6 +354,105 @@ function CNPC_Users_init() {
 			wp_mail( $to, $subject, $message );
 		}
 
+	
+		/**
+		 * Verifica se o usuário pode alterar a uf
+		 *
+		 * @name    user_can_change_uf
+		 * @author  Cleber Santos <oclebersantos@gmail.com>
+		 * @since   2015-09-08
+		 * @updated 2015-09-08
+		 * @return  boolean
+		 */
+		function user_can_change_uf($user_id) {
+
+			$uf_counter = $this->user_already_changed_uf($user_id);
+
+			$vezes_que_pode_alterar = (int) get_theme_option('vezes_que_pode_mudar_uf_e_setorial');
+
+			if ($uf_counter >= $vezes_que_pode_alterar) 
+				return false;
+
+			return true;
+			
+		}
+
+
+		/**
+		 * Verifica se o usuário pode alterar a setorial
+		 *
+		 * @name    user_can_change_setorial
+		 * @author  Cleber Santos <oclebersantos@gmail.com>
+		 * @since   2015-09-08
+		 * @updated 2015-09-08
+		 * @return  boolean
+		 */
+		function user_can_change_setorial($user_id) {
+
+			$setorial_counter = $this->user_already_changed_setorial($user_id);
+
+			$vezes_que_pode_alterar = (int) get_theme_option('vezes_que_pode_mudar_uf_e_setorial');
+
+			if ($setorial_counter >= $vezes_que_pode_alterar) 
+				return false;
+
+			return true;
+			
+		}
+
+
+		/**
+		 * Quantas vezes o usuário já alterou o estado
+		 *
+		 * @name    user_already_changed_uf
+		 * @author  Cleber Santos <oclebersantos@gmail.com>
+		 * @since   2015-09-08
+		 * @updated 2015-09-08
+		 * @return  int
+		 */
+		function user_already_changed_uf($user_id) {
+
+			return (int) get_user_meta($user_id, 'uf-counter', true);
+			
+		}
+
+		/**
+		 * Quantas vezes o usuário já alterou a setorial
+		 *
+		 * @name    user_already_changed_setorial
+		 * @author  Cleber Santos <oclebersantos@gmail.com>
+		 * @since   2015-09-08
+		 * @updated 2015-09-08
+		 * @return  int
+		 */
+		function user_already_changed_setorial($user_id) {
+
+			return (int) get_user_meta($user_id, 'setorial-counter', true);
+		}
+
+		/**
+		 * Verifica o período que oo usuário pode alterar Setorial e UF
+		 *
+		 * @name    user_can_change_by_date
+		 * @author  Cleber Santos <oclebersantos@gmail.com>
+		 * @since   2015-09-08
+		 * @updated 2015-09-08
+		 * @return  boolean
+		 */
+		function user_can_change_by_date() {
+
+			$data_fim_da_troca = get_theme_option('data_fim_troca_uf_setorial'); //'2015-09-26'
+
+			$hoje = date('Y-m-d');
+
+			// verifica data
+			if ($data_fim_da_troca < $hoje)
+				return false;
+
+			return true;
+			
+		}
+
 		/**
 		 * Esconde alguns campos dos usuários
 		 *
@@ -223,6 +487,29 @@ function CNPC_Users_init() {
 		}
 
 
+		/**
+		 * Verifica se o usuário possui projeto com voto
+		 *
+		 * @name    user_is_candidate_was_voted
+		 * @author  Cleber Santos <oclebersantos@gmail.com>
+		 * @since   2015-08-31
+		 * @updated 2015-08-31
+		 * @return  boolean
+		 */
+		function user_is_candidate_was_voted( $user_id ) {
+
+			// pega o projeto do usuário
+			$project_id = cnpc_get_project_id_by_user_id( $user_id );
+
+			// busca a quantidade de votos
+			$votos = get_number_of_votes_by_project($project_id);
+
+			if( $votos > 0 )
+				return true;
+
+			return false;
+
+		}
 
 		// CONSTRUCTOR ///////////////////////////////////////////////////////////////////////////////////
 		/**
@@ -238,13 +525,20 @@ function CNPC_Users_init() {
 
 			add_action( 'admin_enqueue_scripts', array( &$this, 'scripts' ) );
 
-			if( get_theme_option('inscricoes_abertas') )
-				add_action('show_user_profile', array( &$this, 'button_user_profile_delete_account') );
+			add_action('edit_user_profile', array( &$this, 'edit_user_details'));
+			add_action('profile_personal_options', array( &$this, 'edit_user_details'));
+			// add_action('show_user_profile', array( &$this, 'edit_user_details'));
+
+			// add_action('edit_user_profile_update', array( &$this, 'save_user_details'));
+			add_action('personal_options_update', array( &$this, 'save_user_details'));
+
+			// if( get_theme_option('inscricoes_abertas') ) // TODO deletar usuario
+				// add_action('show_user_profile', array( &$this, 'button_user_profile_delete_account') );
 
 			if( !current_user_can('administrator') )
 				add_action('show_user_profile', array( &$this, 'hidden_fields_user_profile') );
 
-			add_action( 'wp_ajax_current_user_delete_account', array( &$this, 'current_user_delete_account' ) ); 
+			// add_action( 'wp_ajax_current_user_delete_account', array( &$this, 'current_user_delete_account' ) );  // TODO deletar usuario
 		}
 	}
 

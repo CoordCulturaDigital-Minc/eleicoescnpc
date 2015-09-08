@@ -43,6 +43,9 @@ function theme_options_validate_callback_function($input) {
     $input['data_fim_votacao']      = convert_format_date($input['data_fim_votacao']);
     $input['data_inicio_da_troca']  = convert_format_date($input['data_inicio_da_troca']);
 
+    $input['data_fim_troca_uf_setorial']  = convert_format_date($input['data_fim_troca_uf_setorial']);
+    
+
     // $input['limite_orcamento'] = preg_replace('/\D/', '', $input['limite_orcamento']);
     return $input;
 
@@ -181,6 +184,13 @@ function theme_options_page_callback_function() {
           <label for="vezes_que_pode_mudar_voto"><strong>Quantidade de vezes que pode trocar o voto</strong></label><br/>
           <input type="text" id="vezes_que_pode_mudar_voto" class="text" name="theme_options[vezes_que_pode_mudar_voto]" value="<?php echo htmlspecialchars($options['vezes_que_pode_mudar_voto']); ?>">
           
+          <br><br>
+          <label for="data_fim_troca_uf_setorial"><strong>Data fim para alterar Setorial e Estado</strong></label><br/>
+          <input type="text" id="data_fim_troca_uf_setorial" class="text select_date" name="theme_options[data_fim_troca_uf_setorial]" value="<?php echo restore_format_date(htmlspecialchars($options['data_fim_troca_uf_setorial'])); ?>">
+
+           <br><br>
+          <label for="vezes_que_pode_mudar_uf_e_setorial"><strong>Quantidade de vezes que pode trocar Setorial e Estado</strong></label><br/>
+          <input type="text" id="vezes_que_pode_mudar_uf_e_setorial" class="text" name="theme_options[vezes_que_pode_mudar_uf_e_setorial]" value="<?php echo htmlspecialchars($options['vezes_que_pode_mudar_uf_e_setorial']); ?>">
         </div>
       </div>
 
