@@ -61,7 +61,7 @@ $subscriptions = list_subscriptions(
         <h2 class="page__title">Lista de inscritos</h2>
 
         <div class="finder-wrapper">
-            <label for="finder">Localizar projeto pelo número de inscrição</label>
+            <label for="finder">Localizar projeto pelo número do CPF</label>
             <input type="text" id="finder" class="js-finder" value="" />
         </div>
 
@@ -73,7 +73,7 @@ $subscriptions = list_subscriptions(
                     <th>Setorial</th>
                     <th>Estado</th>
                     <th>CPF</th>
-                    <th>Número</th>
+                    <th>Votos</th>
                     <?php if(!current_user_can('administrator')): ?>
                         <th>Minha nota</th>
                     <?php endif; ?>
@@ -96,7 +96,7 @@ $subscriptions = list_subscriptions(
                     <td class="subscription__setorial"><a href='<?php echo site_url("foruns/$uf_setorial");?>' title="Ver fórum deste candidato"><?php echo get_label_setorial_by_slug($user_meta['setorial']); ?></a></td>
                     <td class="subscription__state"><?php echo $user_meta['UF']; ?></td>
                     <td class="subscription__cpf"><?php echo $user_meta['cpf']; ?></td>
-                    <td class="subscription__id"><a href="<?php echo site_url("inscricoes/$subscription_number");?>" title="Ver a ficha do candidato"><span class="subscription_number"><?php echo $subscription_number;?></span></a></td>
+                    <td class="subscription__id text-center"><a href="<?php echo site_url("inscricoes/$subscription_number");?>" title="Ver a ficha do candidato"><span class="subscription_number"><?php // echo $subscription_number;?><?php echo get_number_of_votes_by_project($s['pid']); ?></span></a></td>
                     <?php if(!current_user_can('administrator')): ?>
                         <td><?php $e = load_evaluation($s['pid'], $current_user->ID);
 

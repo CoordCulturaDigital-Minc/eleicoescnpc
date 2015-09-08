@@ -18,7 +18,7 @@
 
 		$( '.js-finder' ).keyup(function(e) {
 			var filtro = $(this).val();
-			$('.subscription_number').each(function() {
+			$('.subscription__cpf').each(function() {
 				if ($(this).html().match( new RegExp(filtro ))) {
 					$(this).parents('tr').show();
 				} else {
