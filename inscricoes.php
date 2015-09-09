@@ -80,9 +80,9 @@ if(is_user_logged_in()) {
 			wp_enqueue_script('ajaxupload', get_setoriaiscnpc_baseurl().'js/min/ajaxupload.min.js', array('jquery'));
 			wp_localize_script('inscricoes', 'inscricoes', array('ajaxurl' => admin_url('admin-ajax.php')));
 		}elseif( !empty($subscription_number) ) {
-
-			wp_enqueue_script('candidate-registered', get_setoriaiscnpc_baseurl().'js/candidate-registered.js', array('jquery'));  
-			wp_localize_script('candidate-registered', 'vars', array('ajaxurl' => admin_url('admin-ajax.php')));
+			//TODO candidato reeditar formulario
+			// wp_enqueue_script('candidate-registered', get_setoriaiscnpc_baseurl().'js/candidate-registered.js', array('jquery'));  
+			// wp_localize_script('candidate-registered', 'vars', array('ajaxurl' => admin_url('admin-ajax.php')));
 		
 		}
 	}
@@ -221,10 +221,10 @@ if(is_user_logged_in()) {
 							<input type="hidden" id="js-protocol-number" value="<?php echo substr($subscription_number, 0, 8);?>" />
 							
 						<?php endif; ?>
-
-						<?php if( current_user_is_the_author($pid) && get_theme_option('inscricoes_abertas') ): ?>
-							<a  href="<?php echo site_url('inscricoes/'); ?>" id="pid-<?php echo $pid;?>" class="cancel-subscription"><i class="fa fa-pencil-square-o" title="<?php _e( 'Reopen Subscription', 'historias'); ?>"></i>  Editar meu perfil de candidato(a)</a>
-						<?php endif; ?>
+						<?php //TODO candidato reeditar formulario ?>
+						<?php// if( current_user_is_the_author($pid) && get_theme_option('inscricoes_abertas') ): ?>
+							<!-- <a  href="<?php echo site_url('inscricoes/'); ?>" id="pid-<?php echo $pid;?>" class="cancel-subscription"><i class="fa fa-pencil-square-o" title="<?php _e( 'Reopen Subscription', 'historias'); ?>"></i>  Editar meu perfil de candidato(a)</a> -->
+						<?php// endif; ?>
 					<?php else: ?>
 						<a id="print-button" class="button  u-pull-right  print" style="display: none"><?php _e('Print', 'historias'); ?></a>
 					<?php endif; ?>
