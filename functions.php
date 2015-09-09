@@ -907,8 +907,8 @@ function get_setorial_and_uf_user( $user_id ) {
 add_filter( 'preprocess_comment', 'cnpc_preprocess_comment' );
 
 function cnpc_preprocess_comment($comment) {
-    if ( strlen( $comment['comment_content'] ) > 1000 ) {
-    	wp_die( 'Seu comentário é muito grande. A quantidade máxima permitida é de 1.000 caracteres', 'Comentário grande', array( 'back_link' => true ) );
+    if ( strlen( $comment['comment_content'] ) > 5000 ) {
+    	wp_die( 'Seu comentário é muito grande. A quantidade máxima permitida é de 5.000 caracteres', 'Comentário grande', array( 'back_link' => true ) );
     }
 
     return $comment;
