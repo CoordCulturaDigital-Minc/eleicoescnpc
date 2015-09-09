@@ -1294,7 +1294,7 @@ fieldset br {
   text-align: center; }
   .form-application .avatar label {
     position: absolute;
-    bottom: -12px;
+    top: 175px;
     left: 0px;
     width: 100%; }
   .form-application .avatar .js-current {
