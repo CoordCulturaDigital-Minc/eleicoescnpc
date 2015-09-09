@@ -9,7 +9,7 @@
 			</div>
 			
 			<div class="col-md-3 col-xs-12 avatar">
-				<span>Tamanho max(5mb)</span>
+				<span>Tamanho máx.(5mb)</span>
 				<?php inscricoes_file_upload_field_template($f, 1, '', 'candidate-avatar', '','Envie sua foto',true); ?>		
 			</div>
 
