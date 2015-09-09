@@ -6,15 +6,15 @@
 			</div>
 
 			<div class="col-xs-12">
-				<?php inscricoes_file_upload_field_template($f, 2, 'Currículo e/ou Portfólio (obrigatório)', 'candidate-portfolio', 'Faça Upload, em um único PDF, do currículo e/ou portfólio', '' , true); ?>
+				<?php inscricoes_file_upload_field_template($f, 2, 'Currículo e/ou Portfólio', 'candidate-portfolio', 'Faça Upload, em um único PDF, do currículo e/ou portfólio (tamanho 2mb)', '' , true); ?>
             </div><!--
 
 			--><div class="col-xs-12">
-            	<?php inscricoes_file_upload_field_template($f, 2, 'Histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma', 'candidate-activity-history', 'Faça Upload, em um único PDF, do histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma'); ?>
+            	<?php inscricoes_file_upload_field_template($f, 2, 'Histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma', 'candidate-activity-history', 'Faça Upload, em um único PDF, do histórico de atividades realizadas no setor e/ou descrição da atuação profissional autônoma (tamanho 2mb)'); ?>
             </div><!--
 
 			--><div class="col-xs-12">
-            	 <?php inscricoes_file_upload_field_template($f, 2, 'Diploma Profissional e/ou Registro profissional', 'candidate-diploma', 'Faça Upload, em um único PDF, do diploma profissional ou certificado de profissionalização'); ?>
+            	 <?php inscricoes_file_upload_field_template($f, 2, 'Diploma Profissional e/ou Registro profissional', 'candidate-diploma', 'Faça Upload, em um único PDF, do diploma profissional ou certificado de profissionalização  (tamanho 2mb)'); ?>
             </div>
 			
 			<br>

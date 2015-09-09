@@ -725,8 +725,8 @@ function inscricoes_file_upload_field_template($f, $step, $label, $field, $descr
 
     $text_required  = '';
 
-    if( $required && !isset($f[$field])) {
-        $text_required = '<span class="campoObrigatorio"> Obrigatório</span>';
+    if( $required ) {
+        $text_required = '<span class="campoObrigatorio"> (obrigatório)</span>';
     }
     ?>
 
