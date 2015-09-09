@@ -525,12 +525,12 @@ function CNPC_Users_init() {
 
 			add_action( 'admin_enqueue_scripts', array( &$this, 'scripts' ) );
 
-			add_action('edit_user_profile', array( &$this, 'edit_user_details'));
-			add_action('profile_personal_options', array( &$this, 'edit_user_details'));
-			// add_action('show_user_profile', array( &$this, 'edit_user_details'));
+			//TODO alterar estado e setorial
+			add_action('edit_user_profile', array( &$this, 'edit_user_details')); // para os admins
+			// add_action('profile_personal_options', array( &$this, 'edit_user_details')); // somente para o usuário
 
-			// add_action('edit_user_profile_update', array( &$this, 'save_user_details'));
-			add_action('personal_options_update', array( &$this, 'save_user_details'));
+			// add_action('edit_user_profile_update', array( &$this, 'save_user_details')); // admins podem salvar
+			// add_action('personal_options_update', array( &$this, 'save_user_details')); // somente o usuário pode salvar
 
 			// if( get_theme_option('inscricoes_abertas') ) // TODO deletar usuario
 				// add_action('show_user_profile', array( &$this, 'button_user_profile_delete_account') );
