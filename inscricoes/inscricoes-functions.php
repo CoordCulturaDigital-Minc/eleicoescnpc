@@ -558,9 +558,6 @@ function cancel_subscription() {
     if( empty($pid) )
         return false;
 
-    if( !current_user_can('administrator') ) //TODO candidato reeditar formulario - se aprovar remover isso
-        return false;
-
     // se as inscricoes estiverem encerradas apenas administradores podem cancelar
     if( !current_user_can('administrator') && !get_theme_option('inscricoes_abertas') )
         return false;
