@@ -258,15 +258,16 @@ function get_number_of_votes_setorial_by_uf($uf) {
     $count = array();
 
     foreach( $setorais as $key => $setorial )
-    {   
+    {
         $count[$key] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(u.umeta_id)"
                                                      ."FROM {$wpdb->usermeta} as u "
                                                      ."INNER JOIN {$wpdb->usermeta} as uu ON u.user_id = uu.user_id "
                                                      ."INNER JOIN {$wpdb->usermeta} as uuu ON u.user_id = uuu.user_id "        
                                                      ."WHERE u.meta_key = 'vote-project-id'"
-                                                     ."AND uu.meta_key = 'setorial' AND uu.meta_value = %s "        
-                                                     ."AND uuu.meta_key = 'uf' AND uuu.meta_value = %s"), $key, $uf );
+                                                     ."AND uu.meta_key = 'setorial' AND uu.meta_value = %s "
+                                                     ."AND uuu.meta_key = 'uf' AND uuu.meta_value = %s", $key, $uf ));
     }
+    return $count;
 }
 
 
@@ -278,7 +279,7 @@ function get_number_of_votes_setorial_by_genre($uf) {
 
     foreach( $setorais as $key => $setorial )
     {   
-        $count[$key] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(u.umeta_id), pm.meta_value as genre"
+        $count[$key] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(u.umeta_id) as count, pm.meta_value as genre"
                                                      ."FROM {$wpdb->usermeta} as u "
                                                      ."INNER JOIN {$wpdb->usermeta} as uu ON u.user_id = uu.user_id "
                                                      ."INNER JOIN {$wpdb->usermeta} as uuu ON u.user_id = uuu.user_id "
@@ -288,7 +289,7 @@ function get_number_of_votes_setorial_by_genre($uf) {
                                                      ."AND uu.meta_key = 'setorial' AND uu.meta_value = %s "        
                                                      ."AND uuu.meta_key = 'uf' AND uuu.meta_value = %s"
                                                      ."AND uuu.meta_key = 'candidate-genre'"
-                                                     ."GROUP BY genre" ), $key, $uf );
+                                                     ."GROUP BY genre" , $key, $uf ));
         }
 }
 
