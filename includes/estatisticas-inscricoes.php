@@ -318,6 +318,40 @@ function votos_afrodescendencia_page_callback_function() {
 
         <h2>Votos por afrodescendência setorial/estado</h2>
 
+        <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-role">Estado</th>
+                    <th scope="col"  class="manage-column column-posts">Setorial</th>
+                    <th scope="col"  class="manage-column column-posts num">Afrodescendentes</th>
+                    <th scope="col"  class="manage-column column-posts num">Outros</th>    
+                </tr>
+            </thead>
+
+            <?php $states = get_all_states(); ?>
+            <?php $setoriais = get_setoriais(); ?>
+
+            <tbody>
+                <?php foreach ( $states as $uf => $state ): ?>
+                    <?php $votes = get_number_of_votes_setorial_race_by_uf($uf); ?>
+                    <?php foreach ( $setoriais as $slug => $setorial ): ?>
+                        <?php if( $votes[$slug] != 0 ) : ?>
+                            <?php $page = get_page_by_path( $uf .'-'. $slug, 'OBJECT', 'foruns' ) ?>
+
+                            <tr class="alternate">
+                                <td><?php echo $uf; ?></td>
+                                <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
+                                <td class="num"><?php $text = ($votes[$slug]['afro'] != '') ? $votes[$slug]['afro'] : 0; echo $text; ?></td>
+                                <td class="num"><?php $text = ($votes[$slug]['outros'] != '') ? $votes[$slug]['outros'] : 0; echo $text; ?></td>
+                            </tr>
+                        <?php endif; ?>
+
+                    <?php endforeach ?>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+    
 <?php } 
 
 
