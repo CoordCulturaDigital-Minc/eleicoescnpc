@@ -48,6 +48,7 @@
 
         // etapa 1 -> etapa 2
         $('#step-1-register .user_type').click(function(){
+
             if ( $( "#terms_of_use" ).attr( "checked" ) == "checked") {
                 
                 show_step2();
@@ -57,7 +58,7 @@
 
             } else {
                 alert("Você deve concordar com os termos para continuar!")
-                return false;
+                // return false;
             }           
         });
 
@@ -137,11 +138,10 @@
        function check_is_valid_candidate() {
 
             if( $( "#tipo_candidato" ).attr( "checked" ) == "checked" && $( "#tipo_candidato" ).val() == 'candidato' ) {
-               
+
                 $.post(cadastro.ajaxurl,{'action':'is_user_candidate_valid','cpf':$form.find('#user_cpf').val()},
                     function(data) {
-        
-                        if( data !== true ) {   
+                        if( data !== 'true' ) {   
                             $form.find('#user_cpf-warning').html(data).show(); 
                             $form.find('#tipo_eleitor').attr('checked', true); 
                             $form.find('#tipo_candidato').attr('checked', false);  

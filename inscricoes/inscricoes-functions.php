@@ -479,6 +479,8 @@ function is_user_candidate_valid( ) {
     $validator = new Validator();
 
     $cpf = $_POST['cpf'];
+    
+    $response = 'true';
 
     $cpf_not_in_blacklist = $validator->cpf_not_in_blacklist( $cpf );
     $cpf_not_in_list_two_years = $validator->cpf_not_in_list_two_years( $cpf );
