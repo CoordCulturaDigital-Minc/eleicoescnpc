@@ -250,6 +250,71 @@ function get_number_of_votes_by_project($project_id) {
 	return $wpdb->get_var("SELECT COUNT(user_id) FROM $wpdb->usermeta WHERE meta_key = 'vote-project-id' AND meta_value = $project_id");
 }
 
+
+function get_number_of_votes_setorial_by_uf($uf) {
+	global $wpdb;
+    $setorais = get_setoriais();
+
+    $count = array();
+
+    foreach( $setorais as $key => $setorial )
+    {   
+        $count[$key] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(u.umeta_id)"
+                                                     ."FROM {$wpdb->usermeta} as u "
+                                                     ."INNER JOIN {$wpdb->usermeta} as uu ON u.user_id = uu.user_id "
+                                                     ."INNER JOIN {$wpdb->usermeta} as uuu ON u.user_id = uuu.user_id "        
+                                                     ."WHERE u.meta_key = 'vote-project-id'"
+                                                     ."AND uu.meta_key = 'setorial' AND uu.meta_value = %s "        
+                                                     ."AND uuu.meta_key = 'uf' AND uuu.meta_value = %s"), $key, $uf );
+    }
+}
+
+
+function get_number_of_votes_setorial_by_genre($uf) {
+	global $wpdb;
+    $setorais = get_setoriais();
+
+    $count = array();
+
+    foreach( $setorais as $key => $setorial )
+    {   
+        $count[$key] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(u.umeta_id), pm.meta_value as genre"
+                                                     ."FROM {$wpdb->usermeta} as u "
+                                                     ."INNER JOIN {$wpdb->usermeta} as uu ON u.user_id = uu.user_id "
+                                                     ."INNER JOIN {$wpdb->usermeta} as uuu ON u.user_id = uuu.user_id "
+                                                     ."INNER JOIN {$wpdb->posts} as p ON p.post_author = u.user_id"      
+                                                     ."INNER JOIN {$wpdb->postmeta} as pm ON p.ID = pm.post_id"      
+                                                     ."WHERE u.meta_key = 'vote-project-id'"
+                                                     ."AND uu.meta_key = 'setorial' AND uu.meta_value = %s "        
+                                                     ."AND uuu.meta_key = 'uf' AND uuu.meta_value = %s"
+                                                     ."AND uuu.meta_key = 'candidate-genre'"
+                                                     ."GROUP BY genre" ), $key, $uf );
+        }
+}
+
+
+function get_number_of_votes_setorial_by_race($uf) {
+	global $wpdb;
+    $setorais = get_setoriais();
+
+    $count = array();
+
+    foreach( $setorais as $key => $setorial )
+    {   
+        $count[$key] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(u.umeta_id), pm.meta_value as race"
+                                                     ."FROM {$wpdb->usermeta} as u "
+                                                     ."INNER JOIN {$wpdb->usermeta} as uu ON u.user_id = uu.user_id "
+                                                     ."INNER JOIN {$wpdb->usermeta} as uuu ON u.user_id = uuu.user_id "
+                                                     ."INNER JOIN {$wpdb->posts} as p ON p.post_author = u.user_id"      
+                                                     ."INNER JOIN {$wpdb->postmeta} as pm ON p.ID = pm.post_id"      
+                                                     ."WHERE u.meta_key = 'vote-project-id'"
+                                                     ."AND uu.meta_key = 'setorial' AND uu.meta_value = %s "        
+                                                     ."AND uuu.meta_key = 'uf' AND uuu.meta_value = %s"
+                                                     ."AND uuu.meta_key = 'candidate-race'"
+                                                     ."GROUP BY race" ), $key, $uf );
+        }
+}
+
 // verifica se o usuário atual é deste estado e setorial
 function is_user_this_uf_setorial( $uf_setorial ) {
 	$user = wp_get_current_user();
