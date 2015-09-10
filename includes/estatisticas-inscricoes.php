@@ -143,7 +143,8 @@ function candidatos_genero_page_callback_function() {
                     <th scope="col"  class="manage-column column-role">Estado</th>
                     <th scope="col"  class="manage-column column-posts">Setorial</th>
                     <th scope="col"  class="manage-column column-posts num">Mulheres</th>
-                    <th scope="col"  class="manage-column column-posts num">Homens</th>    
+                    <th scope="col"  class="manage-column column-posts num">Homens</th>
+                    <th scope="col"  class="manage-column column-posts num">Total</th>    
                 </tr>
             </thead>
 
@@ -155,14 +156,20 @@ function candidatos_genero_page_callback_function() {
                     <?php $candidates = get_count_candidates_setoriais_genre_by_uf($uf); ?>
 
                     <?php foreach ( $setoriais as $slug => $setorial ): ?>
-
                     <?php if( !empty($candidates[$slug]) ) : ?>
+<?php
+            $candidates_masc = intval(($candidates[$slug]['masculino'] != '') ? $candidates[$slug]['masculino'] : 0);
+            $candidates_fem = intval(($candidates[$slug]['feminino'] != '') ? $candidates[$slug]['feminino'] : 0);
+            $candidates_tot = $candidates_masc + $candidates_fem;
+            $candidates_masc_perc = round($candidates_masc / $candidates_tot * 100, 2);
+            $candidates_fem_perc = round($candidates_fem / $candidates_tot * 100, 2);
+?>                                   
                             <tr class="alternate">
                                 <td><?php echo $uf; ?></td>
                                 <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
-                                <td class="num"><?php $text = ($candidates[$slug]['feminino'] != '') ? $candidates[$slug]['feminino'] : 0; echo $text; ?></td>
-                                <td class="num"><?php $text = ($candidates[$slug]['masculino'] != '') ? $candidates[$slug]['masculino'] : 0; echo $text; ?></td>
-
+                                <td class="num"><?php echo $candidates_fem_perc ?>% (<?php echo $candidates_fem; ?>)</td>
+                                <td class="num"><?php echo $candidates_masc_perc ?>% (<?php echo $candidates_masc; ?>)</td>
+                                <td class="num"><?php echo $candidates_tot; ?></td>                    
                             </tr>
                         <?php endif; ?>
 
@@ -191,7 +198,11 @@ function candidatos_afrodescententes_page_callback_function() {
                     <th scope="col"  class="manage-column column-role">Estado</th>
                     <th scope="col"  class="manage-column column-posts">Setorial</th>
                     <th scope="col"  class="manage-column column-posts num">Afrodescendentes</th>
-                    <th scope="col"  class="manage-column column-posts num">Outros</th>    
+                    <th scope="col"  class="manage-column column-posts num">Outros</th>
+                    <th scope="col"  class="manage-column column-posts num">Total
+
+
+    </th>    
                 </tr>
             </thead>
 
@@ -203,14 +214,21 @@ function candidatos_afrodescententes_page_callback_function() {
                     <?php $candidates = get_count_candidates_setoriais_afrodesc_by_uf($uf); ?>
 
                     <?php foreach ( $setoriais as $slug => $setorial ): ?>
-
+            
                     <?php if( !empty($candidates[$slug]) ) : ?>
+<?php
+            $candidates_afro = intval(($candidates[$slug]['afro'] != '') ? $candidates[$slug]['afro'] : 0);
+            $candidates_outros = intval(($candidates[$slug]['outros'] != '') ? $candidates[$slug]['outros'] : 0);
+            $candidates_tot = $candidates_afro + $candidates_outros;
+            $candidates_afro_perc = round($candidates_afro / $candidates_tot * 100, 2);
+            $candidates_outros_perc = round($candidates_outros / $candidates_tot * 100, 2);
+?>                                   
                             <tr class="alternate">
                                 <td><?php echo $uf; ?></td>
                                 <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
-                                <td class="num"><?php $text = ($candidates[$slug]['afro'] != '') ? $candidates[$slug]['afro'] : 0; echo $votes; ?></td>
-                                <td class="num"><?php $text = ($candidates[$slug]['outros'] != '') ? $candidates[$slug]['outros'] : 0; echo $text; ?></td>
-
+                                <td class="num"><?php echo $candidates_afro_perc ?>% (<?php echo $candidates_afro; ?>)</td>
+                                <td class="num"><?php echo $candidates_outros_perc ?>% (<?php echo $candidates_outros; ?>)</td>
+                                <td class="num"><?php echo $candidates_tot; ?></td>    
                             </tr>
                         <?php endif; ?>
 
@@ -280,7 +298,8 @@ function votos_genero_page_callback_function() {
                     <th scope="col"  class="manage-column column-role">Estado</th>
                     <th scope="col"  class="manage-column column-posts">Setorial</th>
                     <th scope="col"  class="manage-column column-posts num">Mulheres</th>
-                    <th scope="col"  class="manage-column column-posts num">Homens</th>    
+                    <th scope="col"  class="manage-column column-posts num">Homens</th>
+                    <th scope="col"  class="manage-column column-posts num">Total</th>        
                 </tr>
             </thead>
 
@@ -293,12 +312,19 @@ function votos_genero_page_callback_function() {
                     <?php foreach ( $setoriais as $slug => $setorial ): ?>
                         <?php if( $votes[$slug] != 0 ) : ?>
                             <?php $page = get_page_by_path( $uf .'-'. $slug, 'OBJECT', 'foruns' ) ?>
-
+<?php
+            $votos_masc = intval(($votes[$slug]['masculino'] != '') ? $votes[$slug]['masculino'] : 0);
+            $votos_fem = intval(($votes[$slug]['feminino'] != '') ? $votes[$slug]['feminino'] : 0);
+            $votos_tot = $votos_fem + $votos_masc;
+            $votos_masc_perc = round($votos_masc / $votos_tot * 100, 2);
+            $votos_fem_perc = round($votos_fem / $votos_tot * 100, 2);
+?>
                             <tr class="alternate">
                                 <td><?php echo $uf; ?></td>
                                 <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
-                                <td class="num"><?php $text = ($votes[$slug]['feminino'] != '') ? $votes[$slug]['feminino'] : 0; echo $text; ?></td>
-                                <td class="num"><?php $text = ($votes[$slug]['masculino'] != '') ? $votes[$slug]['masculino'] : 0; echo $text; ?></td>
+                                <td class="num"><?php echo $votos_fem_perc ?>% (<?php echo $votos_fem; ?>)</td>
+                                <td class="num"><?php echo $votos_masc_perc ?>% (<?php echo $votos_masc; ?>)</td>
+                                <td class="num"><?php echo $votos_tot; ?></td>
                             </tr>
                         <?php endif; ?>
 
@@ -338,12 +364,20 @@ function votos_afrodescendencia_page_callback_function() {
                         <?php if( $votes[$slug] != 0 ) : ?>
                             <?php $page = get_page_by_path( $uf .'-'. $slug, 'OBJECT', 'foruns' ) ?>
 
+<?php
+            $votos_afro = intval(($votes[$slug]['afro'] != '') ? $votes[$slug]['afro'] : 0);
+            $votos_outros = intval(($votes[$slug]['outros'] != '') ? $votes[$slug]['outros'] : 0);
+            $votos_tot = $votos_afro + $votos_outros;
+            $votos_afro_perc = round($votos_afro / $votos_tot * 100, 2);
+            $votos_outros_perc = round($votos_outros / $votos_tot * 100, 2);
+?>            
                             <tr class="alternate">
                                 <td><?php echo $uf; ?></td>
                                 <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
-                                <td class="num"><?php $text = ($votes[$slug]['afro'] != '') ? $votes[$slug]['afro'] : 0; echo $text; ?></td>
-                                <td class="num"><?php $text = ($votes[$slug]['outros'] != '') ? $votes[$slug]['outros'] : 0; echo $text; ?></td>
-                            </tr>
+                                <td class="num"><?php echo $votos_afro_perc ?>% (<?php echo $votos_afro; ?>)</td>
+                                <td class="num"><?php echo $votos_outros_perc ?>% (<?php echo $votos_outros; ?>)</td>
+                                <td class="num"><?php echo $votos_tot; ?></td>
+                             </tr>
                         <?php endif; ?>
 
                     <?php endforeach ?>
