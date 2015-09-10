@@ -24,7 +24,7 @@
 			<p id="submit-button" class="enabled button alignright">Inscrever candidatura</p>
 		<?php else: ?>
 			<div class="form__item--inline alignright">
-				<p id="submit-button" class="button">Inscrever candidatura</p>
+				<p id="submit-button" class="button">Inscrições encerradas</p>
 			</div>
 		<?php endif; ?>	
 

@@ -558,9 +558,6 @@ function cancel_subscription() {
     if( empty($pid) )
         return false;
 
-    if( !current_user_can('administrator') ) //TODO candidato reeditar formulario - se aprovar remover isso
-        return false;
-
     // se as inscricoes estiverem encerradas apenas administradores podem cancelar
     if( !current_user_can('administrator') && !get_theme_option('inscricoes_abertas') )
         return false;
@@ -1007,3 +1004,18 @@ function is_a_valid_birth($d) {
     return true;
 }
 
+
+function cnpc_get_the_user_ip() {
+
+    if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+        //check ip from share internet
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+        //to check ip is pass from proxy
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+
+    return apply_filters( 'wpb_get_ip', $ip );
+}

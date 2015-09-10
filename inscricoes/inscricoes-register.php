@@ -114,7 +114,8 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
                 add_user_meta($user_id, 'setorial', $user_setorial);
                 add_user_meta($user_id, 'uf-setorial', $user_UF . '-' . $user_setorial);
                 add_user_meta($user_id, 'user_confirm_informations', $user_confirm_informations);
-    			
+    			add_user_meta($user_id, 'user_register_ip', cnpc_get_the_user_ip());
+                
     			if ($user_tipo == 'candidato')
     				add_user_meta($user_id, 'e_candidato', true);
     		
