@@ -258,61 +258,87 @@ function get_number_of_votes_setorial_by_uf($uf) {
     $count = array();
 
     foreach( $setorais as $key => $setorial )
-    {   
+    {
         $count[$key] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(u.umeta_id)"
                                                      ."FROM {$wpdb->usermeta} as u "
                                                      ."INNER JOIN {$wpdb->usermeta} as uu ON u.user_id = uu.user_id "
                                                      ."INNER JOIN {$wpdb->usermeta} as uuu ON u.user_id = uuu.user_id "        
                                                      ."WHERE u.meta_key = 'vote-project-id'"
-                                                     ."AND uu.meta_key = 'setorial' AND uu.meta_value = %s "        
-                                                     ."AND uuu.meta_key = 'uf' AND uuu.meta_value = %s"), $key, $uf );
+                                                     ."AND uu.meta_key = 'setorial' AND uu.meta_value = %s "
+                                                     ."AND uuu.meta_key = 'uf' AND uuu.meta_value = %s", $key, $uf ));
     }
+    return $count;
 }
 
 
-function get_number_of_votes_setorial_by_genre($uf) {
+function get_number_of_votes_setorial_genre_by_uf($uf) {
 	global $wpdb;
     $setorais = get_setoriais();
 
     $count = array();
+    $results = array();
 
     foreach( $setorais as $key => $setorial )
     {   
-        $count[$key] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(u.umeta_id), pm.meta_value as genre"
+        $count[$key] = $wpdb->get_results( $wpdb->prepare("SELECT COUNT(u.umeta_id) as count, pm.meta_value as genre "
                                                      ."FROM {$wpdb->usermeta} as u "
+                                                     ."INNER JOIN {$wpdb->posts} as p ON p.post_author = u.user_id "      
                                                      ."INNER JOIN {$wpdb->usermeta} as uu ON u.user_id = uu.user_id "
                                                      ."INNER JOIN {$wpdb->usermeta} as uuu ON u.user_id = uuu.user_id "
-                                                     ."INNER JOIN {$wpdb->posts} as p ON p.post_author = u.user_id"      
-                                                     ."INNER JOIN {$wpdb->postmeta} as pm ON p.ID = pm.post_id"      
-                                                     ."WHERE u.meta_key = 'vote-project-id'"
+                                                     ."INNER JOIN {$wpdb->postmeta} as pm ON p.ID = pm.post_id "      
+                                                     ."WHERE u.meta_key = 'vote-project-id' "
                                                      ."AND uu.meta_key = 'setorial' AND uu.meta_value = %s "        
-                                                     ."AND uuu.meta_key = 'uf' AND uuu.meta_value = %s"
-                                                     ."AND uuu.meta_key = 'candidate-genre'"
-                                                     ."GROUP BY genre" ), $key, $uf );
+                                                     ."AND uuu.meta_key = 'uf' AND uuu.meta_value = %s "
+                                                     ."AND pm.meta_key = 'candidate-genre' "
+                                                     ."GROUP BY genre " , $key, $uf ));
+        
+        if (!empty($count[$key])) {
+            foreach($count[$key] as $item) {
+                if ($item->genre == 'masculino') {
+                    $results[$key]['masculino'] = $item->count;
+                } else if ($item->genre == 'feminino')  {
+                    $results[$key]['feminino'] = $item->count;
+                }
+            }
         }
+    }
+    return $results;
 }
 
 
-function get_number_of_votes_setorial_by_race($uf) {
+function get_number_of_votes_setorial_race_by_uf($uf) {
 	global $wpdb;
     $setorais = get_setoriais();
 
     $count = array();
+    $results = array();
 
     foreach( $setorais as $key => $setorial )
-    {   
-        $count[$key] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(u.umeta_id), pm.meta_value as race"
+    {
+
+        $count[$key] = $wpdb->get_results( $wpdb->prepare("SELECT COUNT(u.umeta_id) as count, pm.meta_value as race "
                                                      ."FROM {$wpdb->usermeta} as u "
+                                                     ."INNER JOIN {$wpdb->posts} as p ON p.post_author = u.user_id "      
                                                      ."INNER JOIN {$wpdb->usermeta} as uu ON u.user_id = uu.user_id "
                                                      ."INNER JOIN {$wpdb->usermeta} as uuu ON u.user_id = uuu.user_id "
-                                                     ."INNER JOIN {$wpdb->posts} as p ON p.post_author = u.user_id"      
-                                                     ."INNER JOIN {$wpdb->postmeta} as pm ON p.ID = pm.post_id"      
-                                                     ."WHERE u.meta_key = 'vote-project-id'"
+                                                     ."INNER JOIN {$wpdb->postmeta} as pm ON p.ID = pm.post_id "      
+                                                     ."WHERE u.meta_key = 'vote-project-id' "
                                                      ."AND uu.meta_key = 'setorial' AND uu.meta_value = %s "        
-                                                     ."AND uuu.meta_key = 'uf' AND uuu.meta_value = %s"
-                                                     ."AND uuu.meta_key = 'candidate-race'"
-                                                     ."GROUP BY race" ), $key, $uf );
+                                                     ."AND uuu.meta_key = 'uf' AND uuu.meta_value = %s "
+                                                     ."AND pm.meta_key = 'candidate-race' "
+                                                     ."GROUP BY race " , $key, $uf ));
+        
+        if (!empty($count[$key])) {
+            foreach($count[$key] as $item) {
+                if ($item->race == 'true') {                  
+                    $results[$key]['afro'] = $item->count;
+                } else {
+                    $results[$key]['outros'] = $item->count;
+                }
+            }
         }
+        return $results;
+    }
 }
 
 // verifica se o usuário atual é deste estado e setorial
