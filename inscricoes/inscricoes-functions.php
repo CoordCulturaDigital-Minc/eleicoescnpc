@@ -150,6 +150,18 @@ function is_valid_candidate($user_id) {
     return false;
 }
 
+// verificar se o usuário atual é o author do projeto
+function current_user_is_the_author( $pid ) {
+
+    $userID = get_post_field( 'post_author', $pid );
+
+    if( get_current_user_id() == $userID ) {
+        return true;
+    }
+
+    return false;
+}
+
 
 // pegar o avatar do candidato, para usar nos comentários
 function get_avatar_candidate( $user_id ) {
@@ -538,8 +550,20 @@ add_action('wp_ajax_subscribe_project', 'subscribe_project');
 
 /** cancel subscription by user id */
 function cancel_subscription() {
-    if(current_user_can('administrator')) {
-        $pid = sprintf("%d", $_POST['pid']);
+
+    $pid = sprintf("%d", $_POST['pid']);
+
+    if( empty($pid) )
+        return false;
+
+    if( !current_user_can('administrator') ) //TODO candidato reeditar formulario - se aprovar remover isso
+        return false;
+
+    // se as inscricoes estiverem encerradas apenas administradores podem cancelar
+    if( !current_user_can('administrator') && !get_theme_option('inscricoes_abertas') )
+        return false;
+
+    if(current_user_can('administrator') || current_user_is_the_author($pid)) {
         if(delete_post_meta($pid, 'subscription_number')) {
             delete_post_meta($pid, 'subscription-valid');
             print 'true';
@@ -651,14 +675,14 @@ function inscricoes_handle_ajax_upload() {
 	require_once( ABSPATH . 'wp-admin/includes/file.php' );
 	require_once( ABSPATH . 'wp-admin/includes/media.php' );
 
-    if( 2100000 < $size )
-    {
-        $return['error'] = "O arquivo excedeu o tamanho limite de 2MB";
-        echo json_encode($return);
-        die;
-    }
-
     if( 'candidate-avatar' == $field ) {
+
+        if( 5100000 < $size )
+        {
+            $return['error'] = "O arquivo excedeu o tamanho limite de 5MB";
+            echo json_encode($return);
+            die;
+        }
 
         if( 'image/png' !== $type && 'image/jpeg' !== $type && 'image/gif' !== $type ) {
             $return['error'] = "O arquivo deve ser no formato de imagem (jpg, png, gif)" .  $type;
@@ -666,15 +690,19 @@ function inscricoes_handle_ajax_upload() {
             die;
         }
 
-    } else if(  'application/pdf' !== $type  )
-    {
+    } else if(  'application/pdf' == $type  ) {
+        if( 2100000 < $size ) {
+            $return['error'] = "O arquivo excedeu o tamanho limite de 2MB";
+            echo json_encode($return);
+            die;
+        }
+    }
+    else {
+
         $return['error'] = "O arquivo deve ser no formato portable document file (.pdf) " .  $type;
         echo json_encode($return);
         die;
     }
-
-
-
 
 	/// evitar que outros usuários acessem arquivos de outros candidatos
     $_FILES[ 'file-upload' ][ 'name' ] = wp_generate_password( 7, false ) . '_' . $name;
@@ -731,7 +759,7 @@ function inscricoes_file_upload_field_template($f, $step, $label, $field, $descr
     ?>
 
     <div class="upload-template">
-        <label><?php echo $label; echo $text_required; ?> </label>
+        <label><?php echo $label; echo $text_required; ?></label>
         <input id="<?php echo $field; ?>" class="<?php echo $required ?>" type="hidden" name="step<?php echo $step; ?>-<?php echo $field; ?>" value="<?php echo isset($f[$field])?$f[$field]:'';?>" />
         <div class="field-status <?php print isset($f[$field])?'completo':'invalido'?>"></div>
 

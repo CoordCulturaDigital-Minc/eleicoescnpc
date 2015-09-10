@@ -109,6 +109,7 @@ section {
 	    font-size: 35px;	    
 	    line-height: 1;
 	    margin-bottom: 1.5rem;
+		
 	    
 	    a {
 		    display: inline-block;
@@ -176,7 +177,7 @@ section {
 .post-type-archive-foruns .entry-title,
 .tax-setorial .entry-title,
 .page-template .entry-title {
-	text-align:center;
+	text-align:left;
 	color:$cor-verde;		
 }   
 		

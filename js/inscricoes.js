@@ -192,5 +192,6 @@
 
         /**** Masks ****/
         $form.find('input.phone').mask('(99) 999999?999');
+
     });
 })(jQuery);

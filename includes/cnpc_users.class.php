@@ -175,7 +175,8 @@ function CNPC_Users_init() {
 			        </td>
 			    </tr>
 			    <?php $disabled = ''; ?>
-			    <?php $disabled = $this->user_can_change_setorial_uf( $user->ID ) ? '': 'disabled="disabled"'; ?>
+			    <?php $disabled = ( $this->user_can_change_setorial_uf( $user->ID ) && $this->user_can_change_uf( $user->ID ) ) ? '': 'disabled="disabled"'; ?>
+
 			    <tr>
 			        <th><label>Estado</label></th>
 			        <td>
@@ -183,6 +184,8 @@ function CNPC_Users_init() {
 			           <span class="description">Só pode alterar uma vez</span>
 			        </td>
 			    </tr>
+
+			    <?php $disabled = ( $this->user_can_change_setorial_uf( $user->ID ) && $this->user_can_change_setorial( $user->ID ) ) ? '': 'disabled="disabled"'; ?>
 
 			    <tr>
 			        <th><label>Setorial</label></th>
@@ -210,8 +213,8 @@ function CNPC_Users_init() {
 			$current_uf 		= get_user_meta($user_id, 'UF', true);
 			$current_setorial 	= get_user_meta($user_id, 'setorial', true);
 
-			$uf =  $_POST['uf'];
-			$setorial = $_POST['setorial'];
+			$uf		  = isset( $_POST['uf'] ) ? $_POST['uf'] : $current_uf;
+			$setorial = isset( $_POST['setorial'] ) ? $_POST['setorial'] : $current_setorial;
 
 			// se mudar UF ou Setorial
 			if( $uf !== $current_uf || $setorial !== $current_setorial ) {
@@ -292,9 +295,6 @@ function CNPC_Users_init() {
 				return false;
 
 			if( !$this->user_can_change_by_date() ) 
-				return false;
-
-			if( !$this->user_can_change_uf( $user_id ) && !$this->user_can_change_setorial( $user_id ) )
 				return false;
 
 			return true;
@@ -525,12 +525,12 @@ function CNPC_Users_init() {
 
 			add_action( 'admin_enqueue_scripts', array( &$this, 'scripts' ) );
 
-			add_action('edit_user_profile', array( &$this, 'edit_user_details'));
-			add_action('profile_personal_options', array( &$this, 'edit_user_details'));
-			// add_action('show_user_profile', array( &$this, 'edit_user_details'));
+			//TODO alterar estado e setorial
+			add_action('edit_user_profile', array( &$this, 'edit_user_details')); // para os admins
+			// add_action('profile_personal_options', array( &$this, 'edit_user_details')); // somente para o usuário
 
-			// add_action('edit_user_profile_update', array( &$this, 'save_user_details'));
-			add_action('personal_options_update', array( &$this, 'save_user_details'));
+			// add_action('edit_user_profile_update', array( &$this, 'save_user_details')); // admins podem salvar
+			// add_action('personal_options_update', array( &$this, 'save_user_details')); // somente o usuário pode salvar
 
 			// if( get_theme_option('inscricoes_abertas') ) // TODO deletar usuario
 				// add_action('show_user_profile', array( &$this, 'button_user_profile_delete_account') );
