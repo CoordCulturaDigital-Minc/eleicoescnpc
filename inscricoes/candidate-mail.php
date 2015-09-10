@@ -50,7 +50,7 @@ $diploma_file_id 	= get_post_meta($pid, 'candidate-diploma', true);
 		<li><strong>Estado</strong>: <?php echo $user_meta['UF']; ?></li>
 		<li><strong>E-mail</strong>: <?php echo $user->user_email;?></li>
 		<li><strong>Telefone 1</strong>: <?php echo $f['candidate-phone-1'];?></li>
-		<li><strong>Afrobrasileiro</strong>: <?php echo( $f['candidate-race'] == 'true') ? 'Sim' : 'Não';?></li>
+		<li><strong>Afro-brasileiro</strong>: <?php echo( $f['candidate-race'] == 'true') ? 'Sim' : 'Não';?></li>
 		<li><strong>Sexo</strong>: <?php echo ucfirst($f['candidate-genre']);?></li>
 		<li><strong>Breve experiência no setor</strong>: <?php echo $f['candidate-experience'];?></li>
 		<li><strong>Exposição de motivos para a candidatura</strong>: <?php echo $f['candidate-explanatory'];?></li>

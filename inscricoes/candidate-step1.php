@@ -54,7 +54,7 @@
 				</div><!--
 
 				--><div class="col-md-3 col-xs-5">
-					<label>Afrobrasileiro</label>
+					<label>Afro-brasileiro</label>
 				</div>
 				<div class="col-md-7 col-xs-7">
 					<?php $candidate_race = isset(  $f['candidate-race'] ) ?  $f['candidate-race'] : ''; ?>
