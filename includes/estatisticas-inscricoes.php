@@ -77,8 +77,8 @@ function relatorios_sumario_page_callback_function() {
 	<ul class='wp-submenu wp-submenu-wrap'>
     <li><h4>Inscritos</h4></li>            
     <li><a href='admin.php?page=inscritos_estado'>Inscrições por Estado</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=inscritos_setorial'>Inscrições por Setorial</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=inscritos_setorial_estado'>Inscrições por Setorial/Estado</a></li>
+    <li><a href='admin.php?page=inscritos_setorial'>Inscrições por Setorial</a></li>
+    <li><a href='admin.php?page=inscritos_setorial_estado'>Inscrições por Setorial/Estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_inscritos_votaram'>Inscritos que votaram/não votaram</a></li>
     <li><h4>Candidatos</h4></li>        
     <li><a href='admin.php?page=candidatos_inscritos' class="current">Total de candidatos inscritos</a></li>
@@ -108,7 +108,7 @@ function relatorios_sumario_page_callback_function() {
  ***/
 
 
-function inscritos_setorial_page_callback_function() {
+function inscritos_setorial_estado_page_callback_function() {
 
     $setorial_selected = $_GET['setorial'];
     $setoriais = get_setoriais();
@@ -129,7 +129,7 @@ function inscritos_setorial_page_callback_function() {
       
 <?php if ($setorial_selected != '') : ?>      
     <div class="wrap span-20">
-      <h2>Total de inscritos por setorial: <em><?php echo $setoriais[$setorial_selected] ?></em></h2>
+      <h2>Total de inscritos nos estados por setorial: <em><?php echo $setoriais[$setorial_selected] ?></em></h2>
       
         <table class="wp-list-table widefat">
             <thead>
@@ -208,7 +208,7 @@ if (!in_array($uf_selected, array_keys($states))) {
     <?php
 }
 
-function inscritos_setorial_estado_page_callback_function() {
+function inscritos_setorial_page_callback_function() {
 }
 
 function votos_inscritos_votaram_page_callback_function() {
