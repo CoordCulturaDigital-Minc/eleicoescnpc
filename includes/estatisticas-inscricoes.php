@@ -5,6 +5,7 @@ add_action('admin_menu', 'inscricoes_estatisticas_menu');
 
 function inscricoes_estatisticas_init() {
     register_setting('inscricoes_estatisticas_options', 'inscricoes_estatisticas', 'inscricoes_estatisticas_validate_callback_function');
+	wp_enqueue_script( 'filtros-relatorios', get_template_directory_uri() . '/js/filtros-relatorios.js');    
 }
 
 function inscricoes_estatisticas_menu() {
@@ -26,21 +27,6 @@ function inscricoes_estatisticas_menu() {
    add_submenu_page('inscricoes_estatisticas', 'Eleitores e candidatos por setorial/estado', 'Eleitores e candidatos setorial/estado', 'manage_options', 'eleitores_candidatos_setorial', 'eleitores_candidatos_setorial_page_callback_function');
    add_submenu_page('inscricoes_estatisticas', 'Total de candidatos e eleitores', 'Total candidatos e eleitores', 'manage_options', 'total_candidatos_eleitores', 'total_candidatos_eleitores_page_callback_function');
 }
-
-
-/*
-  3) candidatos genero setorial estado - ok
-  4) candidatos afrodescendencia setorial estado - ok
-  5) votos setorial estado - ok
-  6) votos setorial estado genero - ok
-  7) votos setorial estado afrodescendencia - ok
-  8) faixa estaria setorial estado
-  10) inscritos habilitados e inabilitados estado
-  11) numero de eleitores e candidados por setorial nacional
-  relatorio de usuarios: mostrar no perfil do eleitor o estado e setorial
-  total inscricoes e total inscricoes candidatos
-  tornar menu relatorios visualizavel pelo perfil de editora / membro da comissao eleitoral
- */
 
     // $norte = $wpdb->get_var("select COUNT(meta_id) from $wpdb->postmeta where meta_key = 'company-region' and meta_value = 'nortecentroeste'");
     // $sul = $wpdb->get_var("select COUNT(meta_id) from $wpdb->postmeta where meta_key = 'company-region' and meta_value = 'sul'");
@@ -129,15 +115,35 @@ function candidatos_inscritos_page_callback_function() {
 
 <?php } 
 
-function candidatos_genero_page_callback_function() {   
+                function candidatos_genero_page_callback_function() {
 ?>
 
     <div class="wrap span-20">
-
         <h2>Candidatos por gênero por setorial/estado</h2>
+    <h3>Selecione o estado ou a setorial</h3>
+                    
+<?php
+// tenta pegar UF para fazer filtros
+$uf_selected = $_GET['uf'];
+$states = get_all_states();
+$setoriais = get_setoriais();
 
+if (!in_array($uf_selected, array_keys($states))) {
+    if ($uf_selected != 'all') {
+        $uf_selected = '';
+    }
+}
+?>                    
+    <h4>Selecione a UF:</h4>
+    <select class="select-state" id="candidatos_genero">
+      <option></option>
+      <?php foreach ( $states as $uf_item => $state_item ): ?>
+      <option value="<?php echo $uf_item ?>" <?php if ($uf_item == $uf_selected) { echo "selected"; } ?>><?php echo $state_item ?></option>
+      <?php endforeach ?>
+      <option value="all">TODOS (lento)</option>
+    </select>
+      <br/><br/>
         <table class="wp-list-table widefat">
-
             <thead>
                 <tr>
                     <th scope="col"  class="manage-column column-role">Estado</th>
@@ -147,14 +153,13 @@ function candidatos_genero_page_callback_function() {
                     <th scope="col"  class="manage-column column-posts num">Total</th>    
                 </tr>
             </thead>
-
-            <?php $states = get_all_states(); ?>
-            <?php $setoriais = get_setoriais(); ?>
-
+<?php
+if ($uf_selected == 'all') {
+?>
+<!--  TODO: listagem completa dará saída somente dos dados raw / csv -->
             <tbody>
-                <?php foreach ( $states as $uf => $state ): ?>
+            <?php foreach ( $states as $uf => $state ): ?>
                     <?php $candidates = get_count_candidates_setoriais_genre_by_uf($uf); ?>
-
                     <?php foreach ( $setoriais as $slug => $setorial ): ?>
                     <?php if( !empty($candidates[$slug]) ) : ?>
 <?php
@@ -172,10 +177,35 @@ function candidatos_genero_page_callback_function() {
                                 <td class="num"><?php echo $candidates_tot; ?></td>                    
                             </tr>
                         <?php endif; ?>
-
                     <?php endforeach ?>
                 <?php endforeach ?>
-            </tbody>
+            </tbody><?php   
+    
+} else if ($uf_selected != '') {
+?>         <tbody>
+                    <?php $candidates = get_count_candidates_setoriais_genre_by_uf($uf_selected); ?>
+                    <?php foreach ( $setoriais as $slug => $setorial ): ?>
+                    <?php if( !empty($candidates[$slug]) ) : ?>
+<?php
+            $candidates_masc = intval(($candidates[$slug]['masculino'] != '') ? $candidates[$slug]['masculino'] : 0);
+            $candidates_fem = intval(($candidates[$slug]['feminino'] != '') ? $candidates[$slug]['feminino'] : 0);
+            $candidates_tot = $candidates_masc + $candidates_fem;
+            $candidates_masc_perc = round($candidates_masc / $candidates_tot * 100, 2);
+            $candidates_fem_perc = round($candidates_fem / $candidates_tot * 100, 2);
+?>                                   
+                            <tr class="alternate">
+                                <td><?php echo $uf_selected; ?></td>
+                                <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
+                                <td class="num"><?php echo $candidates_fem_perc ?>% (<?php echo $candidates_fem; ?>)</td>
+                                <td class="num"><?php echo $candidates_masc_perc ?>% (<?php echo $candidates_masc; ?>)</td>
+                                <td class="num"><?php echo $candidates_tot; ?></td>                    
+                            </tr>
+                        <?php endif; ?>
+                    <?php endforeach ?>
+            </tbody><?php      
+} else {
+    
+} ?>
                 
         </table>    
 
