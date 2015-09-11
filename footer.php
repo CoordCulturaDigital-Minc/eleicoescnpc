@@ -63,7 +63,7 @@
 		">
 		<p><a href="<?php bloginfo('url'); ?>/termos-de-uso">Termos de uso</a></p>
 		<p>2015 &#169; Conselho Nacional de Política Cultural.</p>
-		<p>Endereço: Esplanada dos Ministérios, Bloco B, 3º andar, CEP 70068-900, Brasília - Distrito Federal, Telefone: (61) 2024-2336/2335</p>
+		<p>Endereço: Esplanada dos Ministérios, Bloco B, 3º andar, CEP 70068-900, Brasília - Distrito Federal, Telefone: (61) 2024-2336/2335/2186</p>
 	</div>
 </footer>
 
