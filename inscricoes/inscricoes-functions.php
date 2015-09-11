@@ -1019,3 +1019,19 @@ function cnpc_get_the_user_ip() {
 
     return apply_filters( 'wpb_get_ip', $ip );
 }
+
+
+/***** 
+ *  FUNÇÕES DE RELATÓRIO
+ *
+ ***/
+
+
+function get_count_subscriptions() {
+    global $wpdb;
+    $count = $wpdb->get_var("SELECT count(user_id) FROM {$wpdb->usermeta} WHERE"
+                                         ." meta_key='cpf' AND meta_value!=''");
+    
+    return $count;
+
+ }

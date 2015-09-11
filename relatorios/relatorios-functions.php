@@ -18,6 +18,19 @@ function get_count_users_states() {
     return $count;
 }
 
+function get_count_users_states_by_uf($uf){ 
+
+    global $wpdb;
+    
+    $count = $wpdb->get_var( $wpdb->prepare( "SELECT count(u.user_id) FROM {$wpdb->usermeta} as u "
+                                                  ."INNER JOIN {$wpdb->usermeta} as um ON u.user_id = um.user_id "
+                                                  ."WHERE um.meta_key = 'uf'"
+                                                  ."AND u.meta_key = 'UF'"    
+                                                  ."AND um.meta_value = %s", $uf ) );
+    
+    return $count;
+}
+
 function get_count_candidates_setoriais_by_uf($uf) {
     global $wpdb;
 
@@ -46,7 +59,21 @@ function get_count_candidates_setoriais_by_uf($uf) {
     return $count;
 }
 
-function get_count_users_setorias_by_uf( $uf ) {
+function get_count_candidates() {
+    global $wpdb;
+    
+    $count = $wpdb->get_var("SELECT COUNT(u.umeta_id) " 
+                                                    ."FROM {$wpdb->posts} as p " 
+                                                    ."INNER JOIN {$wpdb->postmeta} as m ON p.ID = m.post_id "
+                                                    ."INNER JOIN {$wpdb->usermeta} as u ON p.post_author = u.user_id "
+                                                    ."WHERE p.post_type = 'projetos' "
+                                                    ."AND m.meta_key = 'subscription-valid' " 
+                                                    ."AND u.meta_key = 'setorial' AND u.meta_value != '' ");
+    return $count;
+}
+
+
+function get_count_users_setoriais_by_uf( $uf ) {
 
     global $wpdb;
 
@@ -66,9 +93,35 @@ function get_count_users_setorias_by_uf( $uf ) {
                                                         ."AND um.meta_key = 'uf'"
                                                         ."AND um.meta_value = %s", $key, $uf ) );
     }
-
+    
     return $count;
 }
+
+
+function get_count_users_by_setoriais( $setorial ) {
+
+    global $wpdb;
+
+    if( empty( $setorial ) )
+        return false;
+
+    $states = get_all_states();
+
+    $count = array();
+
+    foreach( $states as $uf => $state )
+    {   
+         $count[$uf] = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM {$wpdb->usermeta} as u "
+                                                        ."INNER JOIN {$wpdb->usermeta} as um ON u.user_id = um.user_id "
+                                                        ."WHERE u.meta_key = 'setorial' "
+                                                        ."AND u.meta_value = %s"
+                                                        ."AND um.meta_key = 'uf'"
+                                                        ."AND um.meta_value = %s", $setorial, $uf ) );
+    }
+    
+    return $count;
+}
+
 
 function get_count_candidates_states() {
 
