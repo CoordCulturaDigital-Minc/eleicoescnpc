@@ -30,14 +30,14 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inabilitados', 'Candidatos inabilitados', 'edit_published_posts', 'candidatos_inabilitados', 'candidatos_inabilitados_page_callback_function');
     
     /* votos */
-    add_submenu_page('inscricoes_estatisticas', 'Total geral de votos', 'Total geral de votos', 'edit_published_posts', 'votos_total', 'votos_total_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Total de votos por estado', 'Votos por estado', 'edit_published_posts', 'votos_estado', 'votos_estado_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Total de votos por setorial', 'Votos por setorial', 'edit_published_posts', 'votos_setorial', 'votos_setorial_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Total de votos por gênero', 'Votos por gênero', 'edit_published_posts', 'votos_genero', 'votos_genero_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Total de votos por afrodescendência', 'Votos por afrodescendência', 'edit_published_posts', 'votos_afrodescendencia', 'votos_afrodescendencia_page_callback_function');           
-    add_submenu_page('inscricoes_estatisticas', 'Votos por setorial/estado', 'Votos por setorial/estado', 'edit_published_posts', 'votos_setorial_estado', 'votos_setorial_estado_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Votos por gênero setorial/estado', 'Votos por gênero', 'edit_published_posts', 'votos_genero_setorial_estado', 'votos_genero_setorial_estado_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Votos por afrodescendência setorial/estado', 'Votos por afrodescendência', 'edit_published_posts', 'votos_afrodescendencia_setorial_estado', 'votos_afrodescendencia_setorial_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Total geral de votos', 'Total geral de votos', 'manage_options', 'votos_total', 'votos_total_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Total de votos por estado', 'Votos por estado', 'manage_options', 'votos_estado', 'votos_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Total de votos por setorial', 'Votos por setorial', 'manage_options', 'votos_setorial', 'votos_setorial_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Total de votos por gênero', 'Votos por gênero', 'manage_options', 'votos_genero', 'votos_genero_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Total de votos por afrodescendência', 'Votos por afrodescendência', 'manage_options', 'votos_afrodescendencia', 'votos_afrodescendencia_page_callback_function');           
+    add_submenu_page('inscricoes_estatisticas', 'Votos por setorial/estado', 'Votos por setorial/estado', 'manage_options', 'votos_setorial_estado', 'votos_setorial_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Votos por gênero setorial/estado', 'Votos por gênero', 'manage_options', 'votos_genero_setorial_estado', 'votos_genero_setorial_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Votos por afrodescendência setorial/estado', 'Votos por afrodescendência', 'manage_options', 'votos_afrodescendencia_setorial_estado', 'votos_afrodescendencia_setorial_estado_page_callback_function');
 }
 
     // $norte = $wpdb->get_var("select COUNT(meta_id) from $wpdb->postmeta where meta_key = 'company-region' and meta_value = 'nortecentroeste'");
@@ -261,7 +261,7 @@ function inscritos_setorial_page_callback_function() {
 }
 
 function votos_inscritos_votaram_page_callback_function() {
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 
@@ -489,37 +489,37 @@ function candidatos_inscritos_afrodescententes_page_callback_function() {
  **/
 
 function votos_total_page_callback_function() {
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 }
 
 function votos_estado_page_callback_function() {
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }    
 }
 
 function votos_setorial_estado_page_callback_function() {
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 }
 
 function votos_genero_setorial_estado_page_callback_function() {
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 }
 
 function votos_afrodescendencia_setorial_estado_page_callback_function() {
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 }
 
 function votos_setorial_page_callback_function() {   
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 ?>
@@ -565,7 +565,7 @@ function votos_setorial_page_callback_function() {
                 
 
 function votos_genero_page_callback_function() {   
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 ?>
@@ -620,7 +620,7 @@ function votos_genero_page_callback_function() {
 
 
 function votos_afrodescendencia_page_callback_function() {   
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 ?>
