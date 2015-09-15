@@ -24,8 +24,8 @@ function inscricoes_estatisticas_menu() {
 
     /* candidatos */    
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inscritos por setorial', 'Candidatos inscritos por setorial', 'manage_options', 'candidatos_setorial', 'candidatos_setorial_page_callback_function');        
-    add_submenu_page('inscricoes_estatisticas', 'Candidatos inscritos por estado', 'Candidatos inscritos por estado', 'manage_options', 'candidatos_estado', 'candidatos_estado_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Candidatos inscritos por setorial/estado', 'Candidatos inscritos por setorial/estado', 'manage_options', 'candidatos_setorial_estado', 'candidatos_inscritos_setorial_estado_page_callback_function');        
+    add_submenu_page('inscricoes_estatisticas', 'Candidatos inscritos - total por estado', 'Candidatos inscritos - total por estado', 'manage_options', 'candidatos_estado', 'candidatos_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Candidatos inscritos por setorial/estado', 'Candidatos inscritos por setorial/estado', 'manage_options', 'candidatos_setorial_estado', 'candidatos_setorial_estado_page_callback_function');        
     add_submenu_page('inscricoes_estatisticas', 'Candidatos por gênero por setorial/estado', 'Candidatos por gênero', 'manage_options', 'candidatos_genero', 'candidatos_genero_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Candidatos afrodescendentes por setorial/estado', 'Candidatos afrodescendentes', 'manage_options', 'candidatos_afrodescententes', 'candidatos_afrodescententes_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inabilitados', 'Candidatos inabilitados', 'manage_options', 'candidatos_inabilitados', 'candidatos_inabilitados_page_callback_function');
@@ -80,9 +80,9 @@ function relatorios_sumario_page_callback_function() {
     <li><a href='admin.php?page=inscritos_setorial_estado'>Inscrições por Setorial/Estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_inscritos_votaram'>Inscritos que votaram/não votaram</a></li>
     <li><h4>Candidatos</h4></li>        
-    <li><a href='admin.php?page=candidatos_estado'>Candidatos por estado</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=candidatos_estado'>Candidatos por estado</a> </li>
     <li><a href='admin.php?page=candidatos_setorial'>Candidatos por setorial</a> </li>
-    <li><a href='admin.php?page=candidatos_setorial_estado'>Candidatos por setorial/estado</a> </li>            
+    <li><a href='admin.php?page=candidatos_setorial_estado'>Candidatos por setorial/estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_genero'>Candidatos por gênero</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_afrodescententes'>Candidatos afrodescendentes</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_inabilitados'>Candidatos inabilitados</a></li>
@@ -172,6 +172,7 @@ if (!in_array($uf_selected, array_keys($states))) {
     </select>
 
 <?php if ($uf_selected != '') : ?>
+    <?php $total_inscritos_estado = get_count_users_states_by_uf($uf_selected); ?>
     <div class="wrap span-20">
       <h2>Total de inscritos por estado: <em><?php echo $states[$uf_selected] ?></em></h2>      
         <table class="wp-list-table widefat">
@@ -197,8 +198,15 @@ if (!in_array($uf_selected, array_keys($states))) {
                                 <td class="num"><?php echo $users[$slug]; ?></td>
                             </tr>
                         <?php endif; ?>
-
+                        <?php $count_states += $users[$slug]; ?>
                     <?php endforeach ?>
+                            <tr class="alternate">
+                                <td class="num"><strong>Total <?php echo $uf_selected; ?></strong></td>
+                                <td>&nbsp;</td>
+                                <td class="num"><strong><?php echo $count_states; ?></strong></td>
+                            </tr>
+        <p>Total de inscritos em <?php echo $uf_selected; ?>: <?php echo $total_inscritos_estado; ?></p>
+                            
             </tbody> 
         </table>
     </div>
@@ -227,11 +235,8 @@ function inscritos_setorial_page_callback_function() {
                 <?php foreach ( $setoriais as $slug => $setorial ): ?>
                     <?php $users = get_count_users_by_setorial($slug); ?>
                         <?php if( $users != 0 ) : ?>
-
-                            <?php $page = get_page_by_path( $uf .'-'. $slug, 'OBJECT', 'foruns' ) ?>
-
                             <tr class="alternate">
-                                <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
+                                <td><?php echo $setorial; ?></a></td>
                                 <td class="num"><?php echo $users; ?></td>
                             </tr>
                         <?php endif; ?>
@@ -250,16 +255,7 @@ function votos_inscritos_votaram_page_callback_function() {
  * CANDIDATOS
  **/
 
-function candidatos_setorial_estado_page_callback_function() {
-}
-
-function candidatos_page_callback_function() {
-}
-
-function candidatos_setorial_page_callback_function() {
-}
-
-function candidatos_estado_page_callback_function() {   
+function candidatos_setorial_estado_page_callback_function() {   
 
 $uf_selected = $_GET['uf'];
 $states = get_all_states();
@@ -270,7 +266,7 @@ if (!in_array($uf_selected, array_keys($states))) {
 }
 ?>            
     <h4>Selecione a UF:</h4>
-    <select class="select-state" id="candidatos_estado">
+    <select class="select-state" id="candidatos_setorial_estado">
       <option></option>
       <?php foreach ( $states as $uf_item => $state_item ): ?>
       <option value="<?php echo $uf_item ?>" <?php if ($uf_item == $uf_selected) { echo "selected"; } ?>><?php echo $state_item ?></option>
@@ -304,6 +300,7 @@ if (!in_array($uf_selected, array_keys($states))) {
         </table>
     </div>
 <?php endif ?>
+
 <?php }
 
 function candidatos_genero_page_callback_function() {
@@ -638,22 +635,44 @@ function candidatos_inabilitados_page_callback_function() {
 <?php } 
 
 
-function eleitores_candidatos_setorial_page_callback_function() {   
+function candidatos_setorial_page_callback_function() {   
 ?>
 
     <div class="wrap span-20">
 
-    <h2>Eleitores e candidatos por setorial</h2>
+    <h2>Candidatos por setorial</h2>
 
 <?php
 }
 
-function eleitores_candidatos_setorial_estado_page_callback_function() {   
+function candidatos_estado_page_callback_function() {   
 ?>
-
     <div class="wrap span-20">
-
-    <h2>Eleitores e candidatos por setorial/estado</h2>
+      <h2>Total de candidatos - total por estados</em></h2>      
+        <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-role">Estado</th>
+                    <th scope="col"  class="manage-column column-role num">Candidados</th>
+                </tr>
+            </thead>      
+            <tbody>
+            <tbody>
+            <?php $candidates = get_count_candidates_states(); ?>
+                    <?php foreach ( $candidates as $uf => $candidate_count ): ?>
+                            <?php $count_brasil += $candidate_count; ?>
+                            <tr class="alternate">
+                                <td class="num"><?php echo $uf; ?></td>
+                                <td class="num"><?php echo $candidate_count; ?></td>
+                            </tr>
+                    <?php endforeach ?>
+                            <tr class="alternate">
+                                <td class="num"><strong>Brasil</strong></td>
+                                <td class="num"><Strong><?php echo $count_brasil; ?></strong></td>
+                            </tr>                            
+            </tbody> 
+        </table>
+    </div>
 
 <?php } 
 

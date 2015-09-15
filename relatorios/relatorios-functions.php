@@ -140,7 +140,7 @@ function get_count_candidates_states() {
 }
 
 
-function get_count_users_setorias() {
+function get_count_users_setoriais() {
 
     global $wpdb;
 
