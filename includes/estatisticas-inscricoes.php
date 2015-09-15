@@ -18,7 +18,7 @@ function inscricoes_estatisticas_menu() {
 
     /* inscritos */
     add_submenu_page('inscricoes_estatisticas', 'Inscrições por Estado', 'Inscrições por Estado', 'manage_options', 'inscritos_estado', 'inscritos_estado_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Inscrições por Setorial', 'Inscrições por Setorial', 'manage_options', 'inscritos_setorial', 'inscritos_setorial_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Inscrições por Setorial (total nacional)', 'Inscrições por Setorial (total nacional)', 'manage_options', 'inscritos_setorial', 'inscritos_setorial_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Inscrições por Setorial/Estado', 'Inscrições por Setorial/Estado', 'manage_options', 'inscritos_setorial_estado', 'inscritos_setorial_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Inscritos que votaram/não votaram', 'Inscritos que votaram/não votaram', 'manage_options', 'votos_inscritos_votaram', 'votos_inscritos_votaram_page_callback_function');
 
@@ -77,7 +77,7 @@ function relatorios_sumario_page_callback_function() {
 	<ul class='wp-submenu wp-submenu-wrap'>
     <li><h4>Inscritos</h4></li>            
     <li><a href='admin.php?page=inscritos_estado'>Inscrições por Estado</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=inscritos_setorial'>Inscrições por Setorial</a></li>
+<li><a href='admin.php?page=inscritos_setorial'>Inscrições por Setorial (total nacional)</a> <small>disponível</small></li>
     <li><a href='admin.php?page=inscritos_setorial_estado'>Inscrições por Setorial/Estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_inscritos_votaram'>Inscritos que votaram/não votaram</a></li>
     <li><h4>Candidatos</h4></li>        
@@ -209,6 +209,40 @@ if (!in_array($uf_selected, array_keys($states))) {
 }
 
 function inscritos_setorial_page_callback_function() {
+
+?>
+    <div class="wrap span-20">
+
+    <h2>Total de inscritos nas setoriais (acumulado nacional)</h2>
+        <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-posts">Setorial</th>
+                    <th scope="col"  class="manage-column column-role num">Inscritos</th>
+                </tr>
+            </thead>
+
+            <?php $states = get_all_states(); ?>
+            <?php $setoriais = get_setoriais(); ?>
+
+            <tbody>
+                <?php foreach ( $setoriais as $slug => $setorial ): ?>
+                    <?php $users = get_count_users_by_setorial($slug); ?>
+                        <?php if( $users != 0 ) : ?>
+
+                            <?php $page = get_page_by_path( $uf .'-'. $slug, 'OBJECT', 'foruns' ) ?>
+
+                            <tr class="alternate">
+                                <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
+                                <td class="num"><?php echo $users; ?></td>
+                            </tr>
+                        <?php endif; ?>
+
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+<?php 
 }
 
 function votos_inscritos_votaram_page_callback_function() {

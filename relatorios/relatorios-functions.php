@@ -98,27 +98,19 @@ function get_count_users_setoriais_by_uf( $uf ) {
 }
 
 
-function get_count_users_by_setoriais( $setorial ) {
+function get_count_users_by_setorial( $setorial ) {
 
     global $wpdb;
 
     if( empty( $setorial ) )
         return false;
 
-    $states = get_all_states();
-
-    $count = array();
-
-    foreach( $states as $uf => $state )
-    {   
-         $count[$uf] = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM {$wpdb->usermeta} as u "
+    $count = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM {$wpdb->usermeta} as u "
                                                         ."INNER JOIN {$wpdb->usermeta} as um ON u.user_id = um.user_id "
                                                         ."WHERE u.meta_key = 'setorial' "
-                                                        ."AND u.meta_value = %s"
-                                                        ."AND um.meta_key = 'uf'"
-                                                        ."AND um.meta_value = %s", $setorial, $uf ) );
-    }
-    
+                                                        ."AND u.meta_value = %s "
+                                                        ."AND um.meta_key = 'uf' "
+                                                        ."AND um.meta_value != '' ", $setorial ) );
     return $count;
 }
 
