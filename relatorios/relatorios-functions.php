@@ -59,6 +59,34 @@ function get_count_candidates_setoriais_by_uf($uf) {
     return $count;
 }
 
+
+function get_count_candidates_by_setorial($setorial) {
+    global $wpdb;
+
+    if( empty($setorial) )
+        return false;
+
+    $states = get_all_states();
+    
+    $count = array();
+
+    foreach($states as $uf => $state )
+    {   
+        $count[$uf] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(u.umeta_id)" 
+                                                    ."FROM {$wpdb->posts} as p " 
+                                                    ."INNER JOIN {$wpdb->postmeta} as m ON p.ID = m.post_id "
+                                                    ."INNER JOIN {$wpdb->usermeta} as u ON p.post_author = u.user_id "
+                                                    ."INNER JOIN {$wpdb->usermeta} as um ON p.post_author = um.user_id "
+                                                    ."WHERE p.post_type = 'projetos' "
+                                                    ."AND m.meta_key = 'subscription-valid' " 
+                                                    ."AND u.meta_key = 'setorial' AND u.meta_value = %s "
+                                                    ."AND um.meta_key = 'uf' AND um.meta_value = %s", $setorial, $uf ) );
+    }
+    
+    return $count;
+}
+
+
 function get_count_candidates() {
     global $wpdb;
     

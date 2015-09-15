@@ -79,12 +79,12 @@ function relatorios_sumario_page_callback_function() {
 	<ul class='wp-submenu wp-submenu-wrap'>
     <li><h4>Inscritos</h4></li>            
     <li><a href='admin.php?page=inscritos_estado'>Inscrições por Estado</a> <small>disponível</small></li>
-<li><a href='admin.php?page=inscritos_setorial'>Inscrições por Setorial (total nacional)</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=inscritos_setorial'>Inscrições por Setorial (total nacional)</a> <small>disponível</small></li>
     <li><a href='admin.php?page=inscritos_setorial_estado'>Inscrições por Setorial/Estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_inscritos_votaram'>Inscritos que votaram/não votaram</a></li>
     <li><h4>Candidatos</h4></li>        
     <li><a href='admin.php?page=candidatos_estado'>Candidatos por estado - total por estado</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=candidatos_setorial'>Candidatos por setorial</a> </li>
+    <li><a href='admin.php?page=candidatos_setorial'>Candidatos por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_setorial_estado'>Candidatos por setorial/estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_genero'>Candidatos por gênero</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_afrodescententes'>Candidatos afrodescendentes</a> <small>disponível</small></li>
@@ -691,12 +691,48 @@ function candidatos_setorial_page_callback_function() {
     if(!current_user_can('edit_published_posts')){
         return false;
     }
-?>
+       
+    $setorial_selected = $_GET['setorial'];
+    $states = get_all_states();
+    $setoriais = get_setoriais();
+    
+    if (!in_array($setorial_selected, array_keys($setoriais))) {
+        $setorial_selected = '';
+    }
+?>            
+    <h4>Selecione a Setorial:</h4>
+    <select class="select-setorial" id="candidatos_setorial">
+      <option></option>
+      <?php foreach ( $setoriais as $slug => $setorial ): ?>
+      <option value="<?php echo $slug ?>" <?php if ($slug == $setorial_selected) { echo "selected"; } ?>><?php echo $setorial ?></option>
+      <?php endforeach ?>
+    </select>
 
+<?php if ($setorial_selected != '') : ?>
     <div class="wrap span-20">
 
-    <h2>Candidatos por setorial</h2>
+        <h2>Candidatos por setorial</h2>
 
+        <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-posts">Estado</th>
+                    <th scope="col"  class="manage-column column-posts num">Candidatos</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                    <?php $candidates = get_count_candidates_by_setorial($setorial_selected); ?>
+                    <?php foreach ( $states as $uf => $state ): ?>                        
+                            <tr class="alternate">
+                                <td class="num"><?php echo $uf;?></td>                    
+                                <td class="num"><?php echo $candidates[$uf];?></td>
+                            </tr>
+                    <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+<?php endif ?>
 <?php
 }
 
