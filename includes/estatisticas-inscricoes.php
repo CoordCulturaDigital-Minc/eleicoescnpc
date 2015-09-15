@@ -89,6 +89,8 @@ function relatorios_sumario_page_callback_function() {
     <li><a href='admin.php?page=candidatos_genero'>Candidatos por gênero</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_afrodescententes'>Candidatos afrodescendentes</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_inabilitados'>Candidatos inabilitados</a></li>
+
+<?php if(current_user_can('manage_options')): ?>
     <li><h4>Votos</h4></li>    
     <li><a href='admin.php?page=votos_total'>Total geral de votos</a></li>
     <li><a href='admin.php?page=votos_estado'>Votos por estado</a></li>
@@ -98,7 +100,7 @@ function relatorios_sumario_page_callback_function() {
     <li><a href='admin.php?page=votos_afrodescendencia'>Votos por afrodescendência</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_afrodescendencia_setorial_estado'>Votos por setorial/estado por afrodescendência</a> </li>
     <li><a href='admin.php?page=votos_genero_setorial_estado'>Votos por setorial/estado por gênero</a></li>    
-    
+<?php endif ?>
     </ul>
     
     <?php
