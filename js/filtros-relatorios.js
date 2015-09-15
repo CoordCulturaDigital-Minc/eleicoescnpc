@@ -2,8 +2,9 @@
     $(document).ready(function(e) {
 	// usado para filtros de relatorios
 	
-	var atualizaFiltroUf = function(action, uf) {
+	var atualizaFiltro = function(action, uf, setorial) {
             var uf = uf || false,
+		setorial = setorial || false,
                 currentPage = window.location.href.split('?')[0],
 		action = action || false;
 	    
@@ -12,10 +13,16 @@
 	    if (uf !== false) {
                 window.location.href = currentPage + '?page=' + action + '&uf=' + uf;
             }
+	    if (setorial !== false) {
+                window.location.href = currentPage + '?page=' + action + '&setorial=' + setorial;
+	    }
         }
 	
 	$('.select-state').change(function() {
-            atualizaFiltroUf(this.id, this.value);
+            atualizaFiltro(this.id, this.value, false);
+        });
+	$('.select-setorial').change(function() {
+            atualizaFiltro(this.id, false, this.value);
         });	
     });
 })(jQuery);
