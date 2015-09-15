@@ -10,18 +10,21 @@ function inscricoes_estatisticas_init() {
 
 function inscricoes_estatisticas_menu() {
 
-
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
+        
     $topLevelMenuLabel = 'Relatórios';
-
+    
     /* Top level menu */
     add_menu_page($topLevelMenuLabel, $topLevelMenuLabel, 'manage_options', 'inscricoes_estatisticas', 'relatorios_sumario_page_callback_function');
-
+    
     /* inscritos */
     add_submenu_page('inscricoes_estatisticas', 'Inscrições por Estado', 'Inscrições por Estado', 'manage_options', 'inscritos_estado', 'inscritos_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Inscrições por Setorial (total nacional)', 'Inscrições por Setorial (total nacional)', 'manage_options', 'inscritos_setorial', 'inscritos_setorial_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Inscrições por Setorial/Estado', 'Inscrições por Setorial/Estado', 'manage_options', 'inscritos_setorial_estado', 'inscritos_setorial_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Inscritos que votaram/não votaram', 'Inscritos que votaram/não votaram', 'manage_options', 'votos_inscritos_votaram', 'votos_inscritos_votaram_page_callback_function');
-
+    
     /* candidatos */    
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inscritos por setorial', 'Candidatos inscritos por setorial', 'manage_options', 'candidatos_setorial', 'candidatos_setorial_page_callback_function');        
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inscritos - total por estado', 'Candidatos inscritos - total por estado', 'manage_options', 'candidatos_estado', 'candidatos_estado_page_callback_function');
@@ -29,7 +32,7 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Candidatos por gênero por setorial/estado', 'Candidatos por gênero', 'manage_options', 'candidatos_genero', 'candidatos_genero_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Candidatos afrodescendentes por setorial/estado', 'Candidatos afrodescendentes', 'manage_options', 'candidatos_afrodescententes', 'candidatos_afrodescententes_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inabilitados', 'Candidatos inabilitados', 'manage_options', 'candidatos_inabilitados', 'candidatos_inabilitados_page_callback_function');
-
+    
     /* votos */
     add_submenu_page('inscricoes_estatisticas', 'Total geral de votos', 'Total geral de votos', 'manage_options', 'votos_total', 'votos_total_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por estado', 'Votos por estado', 'manage_options', 'votos_estado', 'votos_estado_page_callback_function');
@@ -58,6 +61,10 @@ function inscricoes_estatisticas_menu() {
 
 
 function relatorios_sumario_page_callback_function() {
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
+    
     ?>
     <div class="wrap span-20">
 
@@ -107,7 +114,10 @@ function relatorios_sumario_page_callback_function() {
 
 
 function inscritos_setorial_estado_page_callback_function() {
-
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
+    
     $setorial_selected = $_GET['setorial'];
     $setoriais = get_setoriais();
     $states = get_all_states();
@@ -154,14 +164,17 @@ function inscritos_setorial_estado_page_callback_function() {
 }
 
 function inscritos_estado_page_callback_function() {
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
+    
+    $uf_selected = $_GET['uf'];
+    $states = get_all_states();
+    $setoriais = get_setoriais();
 
-$uf_selected = $_GET['uf'];
-$states = get_all_states();
-$setoriais = get_setoriais();
-
-if (!in_array($uf_selected, array_keys($states))) {
-    $uf_selected = '';
-}
+    if (!in_array($uf_selected, array_keys($states))) {
+        $uf_selected = '';
+    }
 ?>            
     <h4>Selecione a UF:</h4>
     <select class="select-state" id="inscritos_estado">
@@ -215,7 +228,10 @@ if (!in_array($uf_selected, array_keys($states))) {
 }
 
 function inscritos_setorial_page_callback_function() {
-
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
+    
 ?>
     <div class="wrap span-20">
 
@@ -249,6 +265,10 @@ function inscritos_setorial_page_callback_function() {
 }
 
 function votos_inscritos_votaram_page_callback_function() {
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
+
 }
 
 /**
@@ -256,14 +276,18 @@ function votos_inscritos_votaram_page_callback_function() {
  **/
 
 function candidatos_setorial_estado_page_callback_function() {   
-
-$uf_selected = $_GET['uf'];
-$states = get_all_states();
-$setoriais = get_setoriais();
-
-if (!in_array($uf_selected, array_keys($states))) {
-    $uf_selected = '';
-}
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
+    
+    
+    $uf_selected = $_GET['uf'];
+    $states = get_all_states();
+    $setoriais = get_setoriais();
+    
+    if (!in_array($uf_selected, array_keys($states))) {
+        $uf_selected = '';
+    }
 ?>            
     <h4>Selecione a UF:</h4>
     <select class="select-state" id="candidatos_setorial_estado">
@@ -304,6 +328,9 @@ if (!in_array($uf_selected, array_keys($states))) {
 <?php }
 
 function candidatos_genero_page_callback_function() {
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
 ?>
 
     <div class="wrap span-20">
@@ -398,7 +425,10 @@ if ($uf_selected == 'all') {
 }
 
 
-function candidatos_inscritos_afrodescententes_page_callback_function() {   
+function candidatos_inscritos_afrodescententes_page_callback_function() {
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
 ?>
 
     <div class="wrap span-20">
@@ -463,22 +493,39 @@ function candidatos_inscritos_afrodescententes_page_callback_function() {
  **/
 
 function votos_total_page_callback_function() {
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
 }
 
 function votos_estado_page_callback_function() {
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }    
 }
 
 function votos_setorial_estado_page_callback_function() {
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
 }
 
 function votos_genero_setorial_estado_page_callback_function() {
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
 }
 
 function votos_afrodescendencia_setorial_estado_page_callback_function() {
-
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
 }
 
 function votos_setorial_page_callback_function() {   
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
 ?>
 
     <div class="wrap span-20">
@@ -522,6 +569,9 @@ function votos_setorial_page_callback_function() {
                 
 
 function votos_genero_page_callback_function() {   
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
 ?>
 
     <div class="wrap span-20">
@@ -574,6 +624,9 @@ function votos_genero_page_callback_function() {
 
 
 function votos_afrodescendencia_page_callback_function() {   
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
 ?>
 
     <div class="wrap span-20">
@@ -626,6 +679,9 @@ function votos_afrodescendencia_page_callback_function() {
 
 
 function candidatos_inabilitados_page_callback_function() {   
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
 ?>
 
     <div class="wrap span-20">
@@ -636,6 +692,9 @@ function candidatos_inabilitados_page_callback_function() {
 
 
 function candidatos_setorial_page_callback_function() {   
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
 ?>
 
     <div class="wrap span-20">
@@ -646,6 +705,9 @@ function candidatos_setorial_page_callback_function() {
 }
 
 function candidatos_estado_page_callback_function() {   
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
 ?>
     <div class="wrap span-20">
       <h2>Total de candidatos - total por estados</em></h2>      
@@ -678,6 +740,9 @@ function candidatos_estado_page_callback_function() {
 
 
 function total_candidatos_eleitores_page_callback_function() {   
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
 ?>
 
     <div class="wrap span-20">
