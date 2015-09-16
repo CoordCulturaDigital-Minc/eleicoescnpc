@@ -77,7 +77,7 @@ function form_process () {
             if ( is_array($opcoes) && isset($opcoes[$formID]) && is_array($opcoes[$formID])  && isset($opcoes[$formID]['assunto']) && !empty($opcoes[$formID]['assunto'])) :
                 $subjectTo = $opcoes[$_GET['formID']]['assunto'];
             else :
-                $subjectTo = "E-mail recebido das Eleições";
+                $subjectTo = get_option('assunto');
             endif;
             
             //save
