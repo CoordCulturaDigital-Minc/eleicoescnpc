@@ -30,14 +30,14 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inabilitados', 'Candidatos inabilitados', 'edit_published_posts', 'candidatos_inabilitados', 'candidatos_inabilitados_page_callback_function');
     
     /* votos */
-    add_submenu_page('inscricoes_estatisticas', 'Total geral de votos', 'Total geral de votos', 'edit_published_posts', 'votos_total', 'votos_total_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Total de votos por estado', 'Votos por estado', 'edit_published_posts', 'votos_estado', 'votos_estado_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Total de votos por setorial', 'Votos por setorial', 'edit_published_posts', 'votos_setorial', 'votos_setorial_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Total de votos por gênero', 'Votos por gênero', 'edit_published_posts', 'votos_genero', 'votos_genero_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Total de votos por afrodescendência', 'Votos por afrodescendência', 'edit_published_posts', 'votos_afrodescendencia', 'votos_afrodescendencia_page_callback_function');           
-    add_submenu_page('inscricoes_estatisticas', 'Votos por setorial/estado', 'Votos por setorial/estado', 'edit_published_posts', 'votos_setorial_estado', 'votos_setorial_estado_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Votos por gênero setorial/estado', 'Votos por gênero', 'edit_published_posts', 'votos_genero_setorial_estado', 'votos_genero_setorial_estado_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Votos por afrodescendência setorial/estado', 'Votos por afrodescendência', 'edit_published_posts', 'votos_afrodescendencia_setorial_estado', 'votos_afrodescendencia_setorial_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Total geral de votos', 'Total geral de votos', 'manage_options', 'votos_total', 'votos_total_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Total de votos por estado', 'Votos por estado', 'manage_options', 'votos_estado', 'votos_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Total de votos por setorial', 'Votos por setorial', 'manage_options', 'votos_setorial', 'votos_setorial_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Total de votos por gênero', 'Votos por gênero', 'manage_options', 'votos_genero', 'votos_genero_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Total de votos por afrodescendência', 'Votos por afrodescendência', 'manage_options', 'votos_afrodescendencia', 'votos_afrodescendencia_page_callback_function');           
+    add_submenu_page('inscricoes_estatisticas', 'Votos por setorial/estado', 'Votos por setorial/estado', 'manage_options', 'votos_setorial_estado', 'votos_setorial_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Votos por gênero setorial/estado', 'Votos por gênero', 'manage_options', 'votos_genero_setorial_estado', 'votos_genero_setorial_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Votos por afrodescendência setorial/estado', 'Votos por afrodescendência', 'manage_options', 'votos_afrodescendencia_setorial_estado', 'votos_afrodescendencia_setorial_estado_page_callback_function');
 }
 
     // $norte = $wpdb->get_var("select COUNT(meta_id) from $wpdb->postmeta where meta_key = 'company-region' and meta_value = 'nortecentroeste'");
@@ -79,16 +79,18 @@ function relatorios_sumario_page_callback_function() {
 	<ul class='wp-submenu wp-submenu-wrap'>
     <li><h4>Inscritos</h4></li>            
     <li><a href='admin.php?page=inscritos_estado'>Inscrições por Estado</a> <small>disponível</small></li>
-<li><a href='admin.php?page=inscritos_setorial'>Inscrições por Setorial (total nacional)</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=inscritos_setorial'>Inscrições por Setorial (total nacional)</a> <small>disponível</small></li>
     <li><a href='admin.php?page=inscritos_setorial_estado'>Inscrições por Setorial/Estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_inscritos_votaram'>Inscritos que votaram/não votaram</a></li>
     <li><h4>Candidatos</h4></li>        
     <li><a href='admin.php?page=candidatos_estado'>Candidatos por estado - total por estado</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=candidatos_setorial'>Candidatos por setorial</a> </li>
+    <li><a href='admin.php?page=candidatos_setorial'>Candidatos por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_setorial_estado'>Candidatos por setorial/estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_genero'>Candidatos por gênero</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_afrodescententes'>Candidatos afrodescendentes</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_inabilitados'>Candidatos inabilitados</a></li>
+
+<?php if(current_user_can('manage_options')): ?>
     <li><h4>Votos</h4></li>    
     <li><a href='admin.php?page=votos_total'>Total geral de votos</a></li>
     <li><a href='admin.php?page=votos_estado'>Votos por estado</a></li>
@@ -98,7 +100,7 @@ function relatorios_sumario_page_callback_function() {
     <li><a href='admin.php?page=votos_afrodescendencia'>Votos por afrodescendência</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_afrodescendencia_setorial_estado'>Votos por setorial/estado por afrodescendência</a> </li>
     <li><a href='admin.php?page=votos_genero_setorial_estado'>Votos por setorial/estado por gênero</a></li>    
-    
+<?php endif ?>
     </ul>
     
     <?php
@@ -261,7 +263,7 @@ function inscritos_setorial_page_callback_function() {
 }
 
 function votos_inscritos_votaram_page_callback_function() {
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 
@@ -489,37 +491,37 @@ function candidatos_inscritos_afrodescententes_page_callback_function() {
  **/
 
 function votos_total_page_callback_function() {
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 }
 
 function votos_estado_page_callback_function() {
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }    
 }
 
 function votos_setorial_estado_page_callback_function() {
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 }
 
 function votos_genero_setorial_estado_page_callback_function() {
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 }
 
 function votos_afrodescendencia_setorial_estado_page_callback_function() {
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 }
 
 function votos_setorial_page_callback_function() {   
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 ?>
@@ -565,7 +567,7 @@ function votos_setorial_page_callback_function() {
                 
 
 function votos_genero_page_callback_function() {   
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 ?>
@@ -620,7 +622,7 @@ function votos_genero_page_callback_function() {
 
 
 function votos_afrodescendencia_page_callback_function() {   
-    if(!current_user_can('edit_published_posts')){
+    if(!current_user_can('manage_options')){
         return false;
     }
 ?>
@@ -691,12 +693,48 @@ function candidatos_setorial_page_callback_function() {
     if(!current_user_can('edit_published_posts')){
         return false;
     }
-?>
+       
+    $setorial_selected = $_GET['setorial'];
+    $states = get_all_states();
+    $setoriais = get_setoriais();
+    
+    if (!in_array($setorial_selected, array_keys($setoriais))) {
+        $setorial_selected = '';
+    }
+?>            
+    <h4>Selecione a Setorial:</h4>
+    <select class="select-setorial" id="candidatos_setorial">
+      <option></option>
+      <?php foreach ( $setoriais as $slug => $setorial ): ?>
+      <option value="<?php echo $slug ?>" <?php if ($slug == $setorial_selected) { echo "selected"; } ?>><?php echo $setorial ?></option>
+      <?php endforeach ?>
+    </select>
 
+<?php if ($setorial_selected != '') : ?>
     <div class="wrap span-20">
 
-    <h2>Candidatos por setorial</h2>
+        <h2>Candidatos por setorial</h2>
 
+        <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-posts">Estado</th>
+                    <th scope="col"  class="manage-column column-posts num">Candidatos</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                    <?php $candidates = get_count_candidates_by_setorial($setorial_selected); ?>
+                    <?php foreach ( $states as $uf => $state ): ?>                        
+                            <tr class="alternate">
+                                <td class="num"><?php echo $uf;?></td>                    
+                                <td class="num"><?php echo $candidates[$uf];?></td>
+                            </tr>
+                    <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+<?php endif ?>
 <?php
 }
 
