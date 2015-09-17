@@ -7,7 +7,7 @@ add_action('admin_menu', 'inscricoes_estatisticas_menu');
 function inscricoes_estatisticas_init() {
     register_setting('inscricoes_estatisticas_options', 'inscricoes_estatisticas', 'inscricoes_estatisticas_validate_callback_function');
 	wp_enqueue_script( 'filtros-relatorios', get_template_directory_uri() . '/js/filtros-relatorios.js');
-    wp_enqueue_style('form', get_template_directory_uri().'/admin.css');
+    wp_enqueue_style('admin', get_template_directory_uri().'/admin.css');
 }
 
 function inscricoes_estatisticas_menu() {

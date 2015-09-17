@@ -24,6 +24,8 @@ wp_enqueue_script('lista-de-inscritos', get_setoriaiscnpc_baseurl().'js/lista-de
 wp_localize_script('lista-de-inscritos', 'inscricoes', array('ajaxurl' => admin_url('admin-ajax.php')));
 
 wp_enqueue_script('tablesorter', get_setoriaiscnpc_baseurl().'js/jquery.tablesorter.min.js', array('jquery'));
+wp_enqueue_style('admin', get_template_directory_uri().'/admin.css');
+wp_enqueue_script('filtros-relatorios', get_template_directory_uri() . '/js/filtros-relatorios.js');
 
 $setorial = isset( $_POST['setorial'] ) ? $_POST['setorial'] : "arquitetura-urbanismo";
 
@@ -100,6 +102,7 @@ $subscriptions = list_candidates_by_setorial(
             </thead>
             <tbody>
             <?php if( !empty($subscriptions) ) : ?>
+                <?php $data[] = ['Candidato', 'Setorial', 'Estado', 'CPF', 'Votos', 'Situação']; ?>
                 <?php $i=1;foreach($subscriptions as $s): $subscription_number=substr($s['subscription_number'],0,8); ?>
                     
                     <?php $userID = get_post_field( 'post_author', $s['pid'] ); ?>
@@ -134,6 +137,14 @@ $subscriptions = list_candidates_by_setorial(
                         <td id="pid-<?php echo $s['pid'];?>" class="cancel-subscription"><i class="fa fa-unlock" title="<?php _e( 'Reopen Subscription', 'historias'); ?>"></i></td>
                     <?php endif;  ?>
                     </tr>
+<?php $data[] = [
+    (isset( $user_meta['user_name'] ) ? $user_meta['user_name'] : ''),
+    (isset( $user_meta['setorial'] ) ? $user_meta['setorial'] : ''),
+    (isset( $user_meta['UF'] ) ? $user_meta['UF'] : ''),
+    (isset( $user_meta['cpf'] ) ? $user_meta['cpf'] : ''),
+    get_number_of_votes_by_project($s['pid']),
+    (isset( $s["subscription-valid"] ) ? 'habilitado' : 'desabilitado')
+]; ?>                                       
                 <?php endforeach;?>
             <?php else : ?>
                 <tr align="center">
@@ -142,6 +153,7 @@ $subscriptions = list_candidates_by_setorial(
             <?php endif; ?>
             </tbody>
         </table>
+        <h3 id="exportarCSV" class="csv" data_filename='relatorio_inscritos_setorial_estado' data_csv='<?php echo json_encode($data) ?>'></h3>                                       
     </section>
 
 <?php get_footer(); ?>
