@@ -23,6 +23,16 @@
         });
 	$('.select-setorial').change(function() {
             atualizaFiltro(this.id, false, this.value);
-        });	
+        });
+	
+	$('#exportarCSV').click(function() {
+	    var data_csv = $('#exportarCSV').attr('data_csv'),
+		filename = $('#exportarCSV').attr('data_filename'),
+		url = window.location.href.split('wp-admin')[0] + 'wp-content/themes/eleicoescnpc/relatorios/baixar-csv.php?filename=' + filename + '&data_csv=' + data_csv,
+		iframe = $("<iframe/>").attr({
+                    src: url,
+                    style: "visibility:hidden;display:none"
+		}).appendTo('#exportarCSV');		    
+	});	
     });
 })(jQuery);
