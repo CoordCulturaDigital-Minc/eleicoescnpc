@@ -229,10 +229,12 @@ function inscritos_setorial_page_callback_function() {
     if(!current_user_can('edit_published_posts')){
         return false;
     }
-    
+
+    $data = [];
+    $data[] = ['Setorial', 'Inscritos'];
 ?>
     <div class="wrap span-20">
-
+    
     <h2>Total de inscritos nas setoriais (acumulado nacional)</h2>
         <table class="wp-list-table widefat">
             <thead>
@@ -248,6 +250,8 @@ function inscritos_setorial_page_callback_function() {
             <tbody>
                 <?php foreach ( $setoriais as $slug => $setorial ): ?>
                     <?php $users = get_count_users_by_setorial($slug); ?>
+<?php $data[] = [$slug, $users]; ?>
+            
                         <?php if( $users != 0 ) : ?>
                             <tr class="alternate">
                                 <td><?php echo $setorial; ?></a></td>
@@ -257,7 +261,8 @@ function inscritos_setorial_page_callback_function() {
 
                 <?php endforeach ?>
             </tbody>
-        </table>
+        </table>               
+        <h3 id="exportarCSV" data_filename='relatorio_inscritos_setoriais' data_csv='<?php echo json_encode($data) ?>'>baixar planilha</h3>        
     </div>
 <?php 
 }

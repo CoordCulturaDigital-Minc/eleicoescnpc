@@ -33,7 +33,7 @@ function historias_setup() {
 
     // inscrições
 	require_once( get_template_directory() . '/relatorios/relatorios-functions.php' );
-
+    
 	// classes
 	require_once( get_template_directory() . '/includes/validator.class.php' );
 	require_once( get_template_directory() . '/includes/filter.class.php' );
