@@ -26,7 +26,6 @@ function get_setoriaiscnpc_rules($wp_rewrite) {
 		'inscricoes/?$' => 'index.php?setoriaiscnpc_tpl=inscricoes',
 		'inscricoes/([a-zA-Z0-9]{8,})/?$' => 'index.php?setoriaiscnpc_tpl=inscricoes&subscription_number=' . $wp_rewrite->preg_index(1),
 		'inscricoes/([a-zA-Z0-9]{8,})/imprimir/?$' => 'index.php?setoriaiscnpc_tpl=inscricoes-print&subscription_number=' . $wp_rewrite->preg_index(1),
-
 		'avaliacoes/?$' => 'index.php?setoriaiscnpc_tpl=avaliacoes',
 		'avaliacoes/([a-zA-Z0-9]{8,})/reviewer/([0-9]+)/?$' => 'index.php?setoriaiscnpc_tpl=inscricoes&subscription_number='.$wp_rewrite->preg_index(1)
 		. '&reviewer='.$wp_rewrite->preg_index(2),
@@ -49,8 +48,8 @@ function template_redirect_intercept(){
 			exit;
 		}
 	} elseif ( $wp_query->get('setoriaiscnpc_tpl') == 'avaliacoes' ) {
-		if (file_exists( TEMPLATEPATH . '/inscricoes/avaliacoes.php' )) {
-			include( TEMPLATEPATH . '/inscricoes/avaliacoes.php' );
+		if (file_exists( TEMPLATEPATH . '/avaliacoes.php' )) {
+			include( TEMPLATEPATH . '/avaliacoes.php' );
 			exit;
 		}
 	}
@@ -91,7 +90,35 @@ if (!get_option('curador_criado') == 1){
 		));
 	$admin = get_role('administrator');
 	$admin->add_cap('curate');
+} else {
+
+	
 }
 
+function edit_curate_extrafields($user) { ?>
+		
+	<table class="form-table">
+		 <tr>
+	        <th>
+	        	<label>Setorial para o avaliador</label>
+	        </th>
+	        <td>
+	        	<?php echo dropdown_setoriais('setorial_curate', esc_attr(get_user_meta($user->ID, 'setorial_curate', true)), true); ?>
+	        </td>
+	    </tr>
+	</table>
+<?php }
+add_action('edit_user_profile', 'edit_curate_extrafields');
+
+function save_curate_extrafields($user_id) { 
+
+	$setorial = isset( $_POST['setorial_curate'] ) ? $_POST['setorial_curate'] : '';
+
+	if( !empty($setorial) ) {
+		update_user_meta($user_id, 'setorial_curate', $setorial);
+	}
+
+} 
+add_action('edit_user_profile_update','save_curate_extrafields');
 
 ?>

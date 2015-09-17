@@ -14,4 +14,9 @@ jQuery(document).ready(function() { var $ = jQuery;
 
 	$( '.js-sortable-table' ).tablesorter();
 
+	// filtro por setorial 
+	$("select#setorial").change( function() {
+        $("#filter_setorial").submit();
+    });
+
 });

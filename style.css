@@ -1,9 +1,9 @@
 @charset "UTF-8";
 /*
-Theme Name: Elei├º├Áes do CNPC
+Theme Name: Eleições do CNPC
 Theme URI: http://culturadigital.br
-Description: Tema do F├│runs Setoriais do CNPC 2015.
-Author: Cleber Santos, Drica Veloso, Eduardo Xavier, Leo Germani e Tiago Mergulh├úo
+Description: Tema do Fóruns Setoriais do CNPC 2015.
+Author: Cleber Santos, Drica Veloso, Eduardo Xavier, Leo Germani e Tiago Mergulhão
 Author URI: http://culturadigital.br
 License: GNU General Public License
 License URI: http://www.gnu.org/licenses/gpl.html
@@ -498,7 +498,7 @@ body > div.site-wrap {
   margin: 0 0 24px;
   margin: 0 0 1rem;
   -webkit-hyphens: auto;
-  /* -moz-hyphens: auto;  Foi alterado para a quebra de linha */
+  -moz-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto; }
 
@@ -511,7 +511,7 @@ body > div.site-wrap {
 .comment-content h6 {
   margin: 24px 0;
   margin: 1.5rem 0;
-  color: #00b1dd; }
+  color: #175E2D; }
 .entry-content h1,
 .comment-content h1 {
   font-size: 1.31rem;
@@ -1294,7 +1294,7 @@ fieldset br {
   text-align: center; }
   .form-application .avatar label {
     position: absolute;
-    bottom: -12px;
+    top: 175px;
     left: 0px;
     width: 100%; }
   .form-application .avatar .js-current {
@@ -1588,18 +1588,18 @@ fieldset br {
     display: block; }
   .evaluation__comments textarea {
     border: 1px solid #ccc;
-    height: 4.5rem;
+    height: 8.5rem;
     outline: none;
     padding: .75rem;
     width: 100%; }
     .evaluation__comments textarea:focus {
       border-color: #125b26; }
 
-.evaluation__score {
+.evaluation__status {
   float: right;
   width: 40%; }
 
-.score-box {
+.status-box {
   background-color: #ededed;
   color: #878787;
   font-family: 'Sanchez', serif;
@@ -1610,28 +1610,27 @@ fieldset br {
   width: 20%;
   vertical-align: middle;
   text-align: center; }
-  .score-box:nth-child(3) {
+  .status-box:nth-child(3) {
     background-color: #e5e5e5; }
-  .score-box:nth-child(4) {
-    background-color: #dcdcdc; }
-  .score-box:nth-child(5) {
-    background-color: #d4d4d4; }
-  .score-box:nth-child(6) {
-    background-color: #cbcbcb; }
-  .score-box.checked label {
+  .status-box.checked label {
     background-color: #125b26;
     color: #fff; }
-  .score-box label {
+  .status-box.invalid.checked label {
+    background-color: #9C0101;
+    color: #fff; }
+  .status-box label {
     display: block;
     width: 100%;
     height: 100%;
     cursor: pointer;
     overflow: hidden;
     transition: background-color .2s ease-in-out, color .2s linear, box-shadow .2s linear, box-shadow .2s linear, box-shadow .2s linear; }
-    .score-box label:hover {
+    .status-box label:hover {
       box-shadow: inset 0 0 0 2px #125b26;
       color: #444; }
-  .score-box input {
+  .status-box.invalid label:hover {
+    box-shadow: inset 0 0 0 2px #9C0101; }
+  .status-box input {
     display: none; }
 
 .evaluation__toggle {
@@ -1644,12 +1643,12 @@ fieldset br {
   top: -3rem;
   padding: 0 1em; }
   .evaluation__toggle:before {
-    content: '\e802';
+    content: '\f046';
     font-family: 'FontAwesome';
     margin-right: .5em; }
 
 #evaluation-area.minimized .evaluation__toggle:before {
-  content: '\e803'; }
+  content: '\f077'; }
 
 #evaluation-tabs {
   float: left;
@@ -1684,7 +1683,7 @@ fieldset br {
 
 .ui-tabs-nav li {
   display: inline-block;
-  line-height: 3;
+  line-height: 2;
   list-style: none;
   position: relative;
   padding: 0;
@@ -1703,9 +1702,9 @@ fieldset br {
   clear: both;
   position: relative;
   width: 100%;
-  height: 10rem;
+  height: 13rem;
   border-width: 0;
-  padding: 1.5rem; }
+  padding: 0 1.5rem 1rem 1.5rem; }
 .ui-tabs .ui-tabs-hide {
   display: none; }
 
@@ -2411,7 +2410,7 @@ section {
 .post-type-archive-foruns .entry-title,
 .tax-setorial .entry-title,
 .page-template .entry-title {
-  text-align: left;
+  text-align: center;
   color: #125b26; }
 
 .home .entry-title {

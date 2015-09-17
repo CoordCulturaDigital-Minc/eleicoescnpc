@@ -10,7 +10,7 @@ if( !$pid)
 $current_user_ID = get_current_user_id();
 
 // verificar se o usuário atual tem privilégio para imprimir o documento.
-if( $current_user_ID != $userID && !current_user_can('administrator')) {
+if( $current_user_ID != $userID && !current_user_can('curate')) {
 	// wp_redirect(site_url('inscricoes'));
 	return false;	
 }

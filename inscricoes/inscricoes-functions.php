@@ -609,27 +609,31 @@ function evaluate_subscription() {
         $pid = get_project_id_from_subscription_number($_POST['subscription']);
 
         if($pid > 0) {
-            $expected_comments = array('arguments-comment', 'notes-comment', 'synopsis-comment', 'budget-comment', 'remarks-comment');
-            $expected_scores = array('arguments-score', 'notes-score', 'synopsis-score');
+            $expected_comments = array('remarks-comment');
+            // $expected_status = array('evaluation-status');
 
             $evaluation = array();
 
-            foreach($expected_scores as $es) {
-                if(isset($_POST[$es]) && is_numeric($_POST[$es]) && $_POST[$es] >= 1 && $_POST[$es] <= 5) {
-                    $evaluation[$es] = $_POST[$es];
-                } else {
-                    $evaluation[$es] = 0;
-                }
-            }
+            $evaluation['evaluation-status'] = isset( $_POST['evaluation-status'] ) ? $_POST['evaluation-status'] : '';
+            $evaluation['evaluation-curate'] = $current_user->ID;
+
+
+            // foreach($expected_status as $es) {
+            //     if(isset($_POST[$es]) && is_numeric($_POST[$es]) && $_POST[$es] >= 1 && $_POST[$es] <= 5) {
+            //         $evaluation[$es] = $_POST[$es];
+            //     } else {
+            //         $evaluation[$es] = 0;
+            //     }
+            // }
 
             foreach($expected_comments as $ec) {
                 if(isset($_POST[$ec])) {
                     $evaluation[$ec] = $_POST[$ec];
                 }
+
             }
 
-            $meta_key = sprintf('evaluation_of_%d', $pid);
-            $ok = update_user_meta($current_user->ID, $meta_key, $evaluation);
+            $ok = update_post_meta($pid, 'evaluation_of_candidate', $evaluation);
 
             if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
                 die($ok ? 'true' : 'false');
@@ -858,6 +862,65 @@ function list_subscriptions($fields=null, $valid_only=true) {
 }
 
 
+/**
+ * @param $fields An array with 'meta_key's name
+ * @return An matrix that map user_id to a set of 'meta_value's
+ */
+function list_candidates_by_setorial($fields=null, $valid_only=true, $setorial="") {
+    global $wpdb;
+
+    if($fields === null) {
+        $fields = array('candidate-display-name','subscription_number');
+    }
+
+    $subscription = "subscription_number";
+
+    if($valid_only === true) {
+        // pelo desenho do sistema, não é possível que haja 'subscription-valid' sem 'subscription_number'
+        $subscription = "subscription-valid";
+    } else {
+        $fields[] = 'subscription-valid';
+    }
+
+    // busca os candidatos válidos
+    if( empty($setorial) ) {
+        $list_query = $wpdb->prepare("SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key=%s", $subscription) ;
+    } else {
+        $list_query = $wpdb->prepare("SELECT ID "
+                     . "FROM {$wpdb->posts} as p "
+                     . "INNER JOIN {$wpdb->postmeta} as m ON p.ID = m.post_id "
+                     . "INNER JOIN {$wpdb->usermeta} as u ON p.post_author = u.user_id "
+                     . "WHERE m.meta_key=%s "
+                     . "AND u.meta_key = 'setorial' AND u.meta_value=%s GROUP BY p.ID", $subscription, $setorial);
+    }
+
+    $op = '';
+    $where = '(';
+    foreach($fields as $f) {
+        $where .= $op . "meta_key='{$f}'";
+        $op = ' OR ';
+    }
+    $where .= ')';
+
+    $projects = $wpdb->get_col($list_query);
+    $records = array();
+
+    foreach($projects as $pid) {
+        $results = $wpdb->get_results("SELECT meta_key, meta_value FROM {$wpdb->postmeta} WHERE {$where} AND post_id={$pid}");
+        
+        $record = array();
+        // acrescentar os metadados do post
+        $record['pid'] = $pid;
+        foreach($results as $r) {
+            $record[$r->meta_key] = $r->meta_value;
+        }
+
+        $records[] = $record;
+    }
+    return $records;
+}
+
+
 /** get user from subscription number (that will be an hexa) */
 function get_user_from_subscription_number($n) {
     global $wpdb;
@@ -909,8 +972,8 @@ function load_evaluation($pid, $curator=null) {
     }
 
     if(user_can($curator, 'curate')) {
-        $meta_key = sprintf('evaluation_of_%d', $pid);
-        $eval = get_user_meta($curator, $meta_key, true);
+        // $meta_key = sprintf('evaluation_of_%d', $pid);
+        $eval = get_post_meta($pid, 'evaluation_of_candidate', true);
 
         if($eval) {
             foreach($eval as $key => $value) {
@@ -1020,6 +1083,21 @@ function cnpc_get_the_user_ip() {
     return apply_filters( 'wpb_get_ip', $ip );
 }
 
+function label_status_candidate( $status ) {
+    switch ($status) {
+        case 'valid':
+            return "Habilitado";
+            break;
+        case 'invalid':
+            return "Inabilitado";
+            break;
+        
+        default:
+            return "Erro";
+            break;
+    }
+
+}
 
 /***** 
  *  FUNÇÕES DE RELATÓRIO
