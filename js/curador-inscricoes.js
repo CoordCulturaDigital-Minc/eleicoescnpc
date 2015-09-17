@@ -22,11 +22,11 @@
 
         $eval_tabs.find('input:checked').parent().addClass('checked');
         $eval_tabs.find('input').change(function(e) {
-            $(this).parents('div.evaluation__score').find('.score-box').removeClass('checked');
+            $(this).parents('div.evaluation__status').find('.status-box').removeClass('checked');
             $(this).parent().addClass('checked');
         });
         if($.browser.msie) {
-            $eval_tabs.find('.score-box label').click(function(e) {
+            $eval_tabs.find('.status-box label').click(function(e) {
                 var $input = $('#'+$(this).attr('for'));
                 if(!$input.attr('disabled')) {
                     $('#'+$(this).attr('for')).attr('checked',true).change();

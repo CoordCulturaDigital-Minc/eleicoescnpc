@@ -20,7 +20,7 @@
 	
 	textarea {
 		border: 1px solid #ccc;
-		height: 4.5rem;
+		height: 8.5rem;
 		outline: none;
 		padding: .75rem;
 		width: 100%;
@@ -31,12 +31,12 @@
 	}
 }
 
-.evaluation__score {
+.evaluation__status {
 	float: right;
 	width: 40%;
 }
 
-.score-box {
+.status-box {
 	background-color: #ededed;
 	color: #878787;
 	font-family: 'Sanchez', serif;
@@ -52,20 +52,25 @@
 		background-color: #e5e5e5;
 	}
 	
-	&:nth-child(4) {
-		background-color: #dcdcdc;
-	}
+	// &:nth-child(4) {
+	// 	background-color: #dcdcdc;
+	// }
 	
-	&:nth-child(5) {
-		background-color: #d4d4d4;
-	}
+	// &:nth-child(5) {
+	// 	background-color: #d4d4d4;
+	// }
 	
-	&:nth-child(6) {
-		background-color: #cbcbcb;
-	}
+	// &:nth-child(6) {
+	// 	background-color: #cbcbcb;
+	// }
 	
 	&.checked label {
 		background-color: #125b26;
+		color: #fff;
+	}
+
+	&.invalid.checked label {
+		background-color: #9C0101;
 		color: #fff;
 	}
 	
@@ -81,6 +86,14 @@
 			box-shadow: inset 0 0 0 2px #125b26;
 			color: #444;
 		}
+
+	}
+	
+	&.invalid label {
+		&:hover {
+			box-shadow: inset 0 0 0 2px #9C0101;
+		}
+
 	}
 	
 	input {
@@ -99,14 +112,14 @@
 	padding: 0 1em;
 
 	&:before {
-		content: '\e802';
+		content: '\f046';
 		font-family: 'FontAwesome';
 		margin-right: .5em;
 	}
 }
 
 #evaluation-area.minimized .evaluation__toggle:before {
-	content: '\e803';
+	content: '\f077';
 }
 
 #evaluation-tabs { float:left; clear: both; width: 100%; margin: 0; padding: 0; }
@@ -125,7 +138,7 @@
 .ui-tabs-nav {
 	li {
 		display: inline-block;
-		line-height: 3;
+		line-height: 2;
 		list-style: none;
 		position: relative;
 		padding: 0;
@@ -152,9 +165,9 @@
 		clear: both;
 		position: relative;
 		width: 100%;
-		height: 10rem;
+		height: 13rem;
 		border-width: 0;
-		padding: 1.5rem;
+		padding: 0 1.5rem 1rem 1.5rem;
 	}
 	
 	.ui-tabs-hide { display: none; }

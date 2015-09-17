@@ -26,5 +26,10 @@
 				}
 			});
 		});
+
+		// filtro por setorial 
+		$("select#setorial").change( function() {
+            $("#filter_setorial").submit();
+        });
 	});
 })(jQuery);
