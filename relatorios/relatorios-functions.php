@@ -132,13 +132,17 @@ function get_count_users_by_setorial( $setorial ) {
 
     if( empty( $setorial ) )
         return false;
-
-    $count = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM {$wpdb->usermeta} as u "
+    $states = get_all_states();
+    
+    $count = array();
+    foreach($states as $uf => $state ) {   
+        $count[$uf] = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM {$wpdb->usermeta} as u "
                                                         ."INNER JOIN {$wpdb->usermeta} as um ON u.user_id = um.user_id "
                                                         ."WHERE u.meta_key = 'setorial' "
                                                         ."AND u.meta_value = %s "
                                                         ."AND um.meta_key = 'uf' "
-                                                        ."AND um.meta_value != '' ", $setorial ) );
+                                                        ."AND um.meta_value = '%s' ", $setorial, $uf ) );
+    }
     return $count;
 }
 

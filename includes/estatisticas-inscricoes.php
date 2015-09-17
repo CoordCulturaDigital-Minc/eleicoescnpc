@@ -6,7 +6,8 @@ add_action('admin_menu', 'inscricoes_estatisticas_menu');
 
 function inscricoes_estatisticas_init() {
     register_setting('inscricoes_estatisticas_options', 'inscricoes_estatisticas', 'inscricoes_estatisticas_validate_callback_function');
-	wp_enqueue_script( 'filtros-relatorios', get_template_directory_uri() . '/js/filtros-relatorios.js');    
+	wp_enqueue_script( 'filtros-relatorios', get_template_directory_uri() . '/js/filtros-relatorios.js');
+    wp_enqueue_style('form', get_template_directory_uri().'/admin.css');
 }
 
 function inscricoes_estatisticas_menu() {
@@ -119,6 +120,7 @@ function inscritos_setorial_estado_page_callback_function() {
     $setorial_selected = $_GET['setorial'];
     $setoriais = get_setoriais();
     $states = get_all_states();
+    $data[] = ['Estado', 'Inscritos'];
     
     if (!in_array($setorial_selected, array_keys($setoriais))) {
         $setorial_selected = '';
@@ -126,7 +128,7 @@ function inscritos_setorial_estado_page_callback_function() {
     
 ?>            
     <h4>Selecione a setorial:</h4>
-    <select class="select-setorial" id="inscritos_setorial">
+    <select class="select-setorial" id="inscritos_setorial_estado">
       <option></option>
       <?php foreach ( $setoriais as $slug => $setorial_item ): ?>
       <option value="<?php echo $slug ?>" <?php if ($slug == $setorial_selected) { echo "selected"; } ?>><?php echo $setorial_item ?></option>
@@ -145,17 +147,18 @@ function inscritos_setorial_estado_page_callback_function() {
                 </tr>
             </thead>      
             <tbody>
-                    <?php $users = get_count_users_by_setoriais($setorial_selected); ?>
+                    <?php $users = get_count_users_by_setorial($setorial_selected); ?>
                     <?php foreach ( $states as $uf => $state ): ?>
                           <?php $page = get_page_by_path( $uf .'-'. $slug, 'OBJECT', 'foruns' ) ?>
-      
+                          <?php $data[] = [$state, $users[$uf]]; ?>
                             <tr class="alternate">
                                 <td class="num"><?php echo $state; ?></td>
                                 <td class="num"><?php echo $users[$uf]; ?></td>
                             </tr>
                     <?php endforeach ?>
-            </tbody> 
+             </tbody> 
         </table>
+        <h3 id="exportarCSV" class="csv" data_filename='relatorio_inscritos_setorial_estado' data_csv='<?php echo json_encode($data) ?>'></h3>
     </div>
 <?php endif; ?>
     <?php
@@ -169,7 +172,8 @@ function inscritos_estado_page_callback_function() {
     $uf_selected = $_GET['uf'];
     $states = get_all_states();
     $setoriais = get_setoriais();
-
+    $data[] = ['Estado', 'Setorial', 'Inscritos'];
+    
     if (!in_array($uf_selected, array_keys($states))) {
         $uf_selected = '';
     }
@@ -185,7 +189,10 @@ function inscritos_estado_page_callback_function() {
 <?php if ($uf_selected != '') : ?>
     <?php $total_inscritos_estado = get_count_users_states_by_uf($uf_selected); ?>
     <div class="wrap span-20">
-      <h2>Total de inscritos por estado: <em><?php echo $states[$uf_selected] ?></em></h2>      
+      <h2>Total de inscritos por estado: <em><?php echo $states[$uf_selected] ?></em></h2>
+         <h4>Total de inscritos em <?php echo $uf_selected; ?>: <?php echo $total_inscritos_estado; ?></h4>
+                            
+    
         <table class="wp-list-table widefat">
             <thead>
                 <tr>
@@ -199,16 +206,13 @@ function inscritos_estado_page_callback_function() {
 
                     <?php foreach ( $setoriais as $slug => $setorial ): ?>
                         
-                        <?php if( $users[$slug] != 0 ) : ?>
-
                             <?php $page = get_page_by_path( $uf .'-'. $slug, 'OBJECT', 'foruns' ) ?>
-
+                            <?php $data[] = [$uf_selected, $setorial, $users[$slug]]; ?>
                             <tr class="alternate">
                                 <td class="num"><?php echo $uf_selected; ?></td>
                                 <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
                                 <td class="num"><?php echo $users[$slug]; ?></td>
-                            </tr>
-                        <?php endif; ?>
+                            </tr> 
                         <?php $count_states += $users[$slug]; ?>
                     <?php endforeach ?>
                             <tr class="alternate">
@@ -216,11 +220,10 @@ function inscritos_estado_page_callback_function() {
                                 <td>&nbsp;</td>
                                 <td class="num"><strong><?php echo $count_states; ?></strong></td>
                             </tr>
-        <p>Total de inscritos em <?php echo $uf_selected; ?>: <?php echo $total_inscritos_estado; ?></p>
-                            
             </tbody> 
         </table>
-    </div>
+        <h3 id="exportarCSV" class="csv" data_filename='relatorio_inscritos_setoriais' data_csv='<?php echo json_encode($data) ?>'></h3>                            
+        </div>
 <?php endif; ?>
     <?php
 }
@@ -230,7 +233,6 @@ function inscritos_setorial_page_callback_function() {
         return false;
     }
 
-    $data = [];
     $data[] = ['Setorial', 'Inscritos'];
 ?>
     <div class="wrap span-20">
@@ -250,19 +252,15 @@ function inscritos_setorial_page_callback_function() {
             <tbody>
                 <?php foreach ( $setoriais as $slug => $setorial ): ?>
                     <?php $users = get_count_users_by_setorial($slug); ?>
-<?php $data[] = [$slug, $users]; ?>
-            
-                        <?php if( $users != 0 ) : ?>
+                            <?php $data[] = [$setorial, $users]; ?>                                    
                             <tr class="alternate">
                                 <td><?php echo $setorial; ?></a></td>
                                 <td class="num"><?php echo $users; ?></td>
                             </tr>
-                        <?php endif; ?>
-
                 <?php endforeach ?>
             </tbody>
-        </table>               
-        <h3 id="exportarCSV" data_filename='relatorio_inscritos_setoriais' data_csv='<?php echo json_encode($data) ?>'>baixar planilha</h3>        
+        </table>
+        <h3 id="exportarCSV" class="csv" data_filename='relatorio_inscritos_setoriais' data_csv='<?php echo json_encode($data) ?>'></h3>                            
     </div>
 <?php 
 }
@@ -278,6 +276,96 @@ function votos_inscritos_votaram_page_callback_function() {
  * CANDIDATOS
  **/
 
+function candidatos_setorial_page_callback_function() {   
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
+       
+    $setorial_selected = $_GET['setorial'];
+    $states = get_all_states();
+    $setoriais = get_setoriais();
+    $data[] = ['Estado', 'Candidatos'];
+
+    if (!in_array($setorial_selected, array_keys($setoriais))) {
+        $setorial_selected = '';
+    }
+?>            
+    <h4>Selecione a Setorial:</h4>
+    <select class="select-setorial" id="candidatos_setorial">
+      <option></option>
+      <?php foreach ( $setoriais as $slug => $setorial ): ?>
+      <option value="<?php echo $slug ?>" <?php if ($slug == $setorial_selected) { echo "selected"; } ?>><?php echo $setorial ?></option>
+      <?php endforeach ?>
+    </select>
+
+<?php if ($setorial_selected != '') : ?>
+    <div class="wrap span-20">
+
+        <h2>Candidatos por setorial</h2>
+
+        <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-posts">Estado</th>
+                    <th scope="col"  class="manage-column column-posts num">Candidatos</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                    <?php $candidates = get_count_candidates_by_setorial($setorial_selected); ?>
+                    <?php foreach ( $states as $uf => $state ): ?>
+                            <?php $data[] = [$uf, $candidates[$uf]]; ?>                                    
+                            <tr class="alternate">
+                                <td class="num"><?php echo $uf;?></td>                    
+                                <td class="num"><?php echo $candidates[$uf];?></td>
+                            </tr>
+                    <?php endforeach ?>
+            </tbody>
+        </table>
+        <h3 id="exportarCSV" class="csv" data_filename='relatorio_candidatos_setorial' data_csv='<?php echo json_encode($data) ?>'></h3>                                    
+    </div>
+<?php endif ?>
+<?php
+}
+
+function candidatos_estado_page_callback_function() {   
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
+    $data[] = ['Estado', 'Candidatos'];
+?>
+    <div class="wrap span-20">
+      <h2>Total de candidatos - total por estados</em></h2>      
+        <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-role">Estado</th>
+                    <th scope="col"  class="manage-column column-role num">Candidados</th>
+                </tr>
+            </thead>      
+            <tbody>
+            <tbody>
+            <?php $candidates = get_count_candidates_states(); ?>
+                    <?php foreach ( $candidates as $uf => $candidate_count ): ?>
+                            <?php $count_brasil += $candidate_count; ?>
+                            <?php $data[] = [$uf, $candidate_count]; ?>                                        
+                            <tr class="alternate">
+                                <td class="num"><?php echo $uf; ?></td>
+                                <td class="num"><?php echo $candidate_count; ?></td>
+                            </tr>
+                    <?php endforeach ?>
+                            <tr class="alternate">
+                                <td class="num"><strong>Brasil</strong></td>
+                                <td class="num"><Strong><?php echo $count_brasil; ?></strong></td>
+                            </tr>                            
+            </tbody> 
+        </table>
+        <h3 id="exportarCSV" class="csv" data_filename='relatorio_candidatos_setorial' data_csv='<?php echo json_encode($data) ?>'></h3>                                       
+    </div>
+
+<?php } 
+
+
 function candidatos_setorial_estado_page_callback_function() {   
     if(!current_user_can('edit_published_posts')){
         return false;
@@ -287,6 +375,7 @@ function candidatos_setorial_estado_page_callback_function() {
     $uf_selected = $_GET['uf'];
     $states = get_all_states();
     $setoriais = get_setoriais();
+    $data[] = ['Setorial', 'Candidatos'];
     
     if (!in_array($uf_selected, array_keys($states))) {
         $uf_selected = '';
@@ -315,7 +404,7 @@ function candidatos_setorial_estado_page_callback_function() {
             <tbody>
                     <?php $candidates = get_count_candidates_setoriais_by_uf($uf_selected); ?>
                     <?php foreach ( $setoriais as $slug => $setorial ): ?>
-                        
+                            <?php $data[] = [$setorial, $candidates[$slug]]; ?>  
                             <?php $page = get_page_by_path( $uf .'-'. $slug, 'OBJECT', 'foruns' ) ?>
 
                             <tr class="alternate">
@@ -325,7 +414,8 @@ function candidatos_setorial_estado_page_callback_function() {
                     <?php endforeach ?>
             </tbody>
         </table>
-    </div>
+        <h3 id="exportarCSV" class="csv" data_filename='relatorio_inscritos_setoriais' data_csv='<?php echo json_encode($data) ?>'></h3>                                                
+        </div>
 <?php endif ?>
 
 <?php }
@@ -345,6 +435,7 @@ function candidatos_genero_page_callback_function() {
 $uf_selected = $_GET['uf'];
 $states = get_all_states();
 $setoriais = get_setoriais();
+$data[] = ['Estado', 'Setorial', 'Homens', 'Mulheres', 'Total'];
 
 if (!in_array($uf_selected, array_keys($states))) {
     if ($uf_selected != 'all') {
@@ -386,7 +477,8 @@ if ($uf_selected == 'all') {
             $candidates_tot = $candidates_masc + $candidates_fem;
             $candidates_masc_perc = round($candidates_masc / $candidates_tot * 100, 2);
             $candidates_fem_perc = round($candidates_fem / $candidates_tot * 100, 2);
-?>                                   
+?>
+                            <?php $data[] = [$setorial, $candidates_fem, $candidates_masc, $candidates_fem, $candidates_tot]; ?>  
                             <tr class="alternate">
                                 <td><?php echo $uf; ?></td>
                                 <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
@@ -410,7 +502,8 @@ if ($uf_selected == 'all') {
             $candidates_tot = $candidates_masc + $candidates_fem;
             $candidates_masc_perc = round($candidates_masc / $candidates_tot * 100, 2);
             $candidates_fem_perc = round($candidates_fem / $candidates_tot * 100, 2);
-?>                                   
+?>
+                            <?php $data[] = [$uf_selected, $candidates_fem, $candidates_masc, $candidates_fem, $candidates_tot]; ?>              
                             <tr class="alternate">
                                 <td><?php echo $uf_selected; ?></td>
                                 <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
@@ -422,16 +515,18 @@ if ($uf_selected == 'all') {
                     <?php endforeach ?>
             </tbody>
         </table>
+        <h3 id="exportarCSV" class="csv" data_filename='relatorio_candidatos_genero' data_csv='<?php echo json_encode($data) ?>'></h3>                                                
      </div>
 <?php      
   }
 }
 
 
-function candidatos_inscritos_afrodescententes_page_callback_function() {
+function candidatos_afrodescententes_page_callback_function() {
     if(!current_user_can('edit_published_posts')){
         return false;
     }
+    $data[] = ['Estado', 'Setorial', 'Afrodescendentes', 'Outros', 'Total'];
 ?>
 
     <div class="wrap span-20">
@@ -471,7 +566,8 @@ function candidatos_inscritos_afrodescententes_page_callback_function() {
             $candidates_tot = $candidates_afro + $candidates_outros;
             $candidates_afro_perc = round($candidates_afro / $candidates_tot * 100, 2);
             $candidates_outros_perc = round($candidates_outros / $candidates_tot * 100, 2);
-?>                                   
+?>
+                            <?php $data[] = [$uf, $setorial, $candidates_afro, $candidates_outros, $candidates_tot]; ?>              
                             <tr class="alternate">
                                 <td><?php echo $uf; ?></td>
                                 <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
@@ -485,8 +581,9 @@ function candidatos_inscritos_afrodescententes_page_callback_function() {
                 <?php endforeach ?>
             </tbody>
                 
-
-
+        </table>
+        <h3 id="exportarCSV" class="csv" data_filename='relatorio_candidatos_afrodescendencia' data_csv='<?php echo json_encode($data) ?>'></h3>                                                
+        </div>
     
 <?php } 
 
@@ -529,6 +626,7 @@ function votos_setorial_page_callback_function() {
     if(!current_user_can('manage_options')){
         return false;
     }
+    $data[] = ['Estado', 'Setorial', 'Votos'];    
 ?>
 
     <div class="wrap span-20">
@@ -553,7 +651,7 @@ function votos_setorial_page_callback_function() {
                     <?php foreach ( $setoriais as $slug => $setorial ): ?>
                         <?php if( $votes[$slug] != 0 ) : ?>
                             <?php $page = get_page_by_path( $uf .'-'. $slug, 'OBJECT', 'foruns' ) ?>
-
+                            <?php $data[] = [$uf, $setorial, $votes[$slug]]; ?>              
                             <tr class="alternate">
                                 <td><?php echo $uf; ?></td>
                                 <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
@@ -565,6 +663,7 @@ function votos_setorial_page_callback_function() {
                 <?php endforeach ?>
             </tbody>
         </table>
+        <h3 id="exportarCSV" class="csv" data_filename='relatorio_votos_setoriais' data_csv='<?php echo json_encode($data) ?>'></h3>
     </div>
 
     
@@ -575,6 +674,7 @@ function votos_genero_page_callback_function() {
     if(!current_user_can('manage_options')){
         return false;
     }
+    $data[] = ['Estado', 'Setorial', 'Mulheres', 'Homens', 'Total'];    
 ?>
 
     <div class="wrap span-20">
@@ -608,6 +708,7 @@ function votos_genero_page_callback_function() {
             $votos_masc_perc = round($votos_masc / $votos_tot * 100, 2);
             $votos_fem_perc = round($votos_fem / $votos_tot * 100, 2);
 ?>
+                            <?php $data[] = [$uf, $setorial, $votos_fem, $votos_masc, $votos_tot]; ?>                      
                             <tr class="alternate">
                                 <td><?php echo $uf; ?></td>
                                 <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
@@ -621,6 +722,7 @@ function votos_genero_page_callback_function() {
                 <?php endforeach ?>
             </tbody>
         </table>
+        <h3 id="exportarCSV" class="csv" data_filename='relatorio_votos_genero' data_csv='<?php echo json_encode($data) ?>'></h3>                
     </div>
     
 <?php } 
@@ -630,6 +732,7 @@ function votos_afrodescendencia_page_callback_function() {
     if(!current_user_can('manage_options')){
         return false;
     }
+    $data[] = ['Estado', 'Setorial', 'Afrodescendentes', 'Outros', 'Total'];        
 ?>
 
     <div class="wrap span-20">
@@ -642,7 +745,8 @@ function votos_afrodescendencia_page_callback_function() {
                     <th scope="col"  class="manage-column column-role">Estado</th>
                     <th scope="col"  class="manage-column column-posts">Setorial</th>
                     <th scope="col"  class="manage-column column-posts num">Afrodescendentes</th>
-                    <th scope="col"  class="manage-column column-posts num">Outros</th>    
+                    <th scope="col"  class="manage-column column-posts num">Outros</th>
+                    <th scope="col"  class="manage-column column-posts num">Total</th>        
                 </tr>
             </thead>
 
@@ -662,7 +766,8 @@ function votos_afrodescendencia_page_callback_function() {
             $votos_tot = $votos_afro + $votos_outros;
             $votos_afro_perc = round($votos_afro / $votos_tot * 100, 2);
             $votos_outros_perc = round($votos_outros / $votos_tot * 100, 2);
-?>            
+?>
+                            <?php $data[] = [$uf, $setorial, $votos_afro, $votos_outros, $votos_tot]; ?>            
                             <tr class="alternate">
                                 <td><?php echo $uf; ?></td>
                                 <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
@@ -676,6 +781,7 @@ function votos_afrodescendencia_page_callback_function() {
                 <?php endforeach ?>
             </tbody>
         </table>
+        <h3 id="exportarCSV" class="csv" data_filename='relatorio_votos_afrodescendencia' data_csv='<?php echo json_encode($data) ?>'></h3>                
     </div>
     
 <?php } 
@@ -690,90 +796,6 @@ function candidatos_inabilitados_page_callback_function() {
     <div class="wrap span-20">
 
     <h2>Candidatos inabilitados por setorial/estado</h2>
-
-<?php } 
-
-
-function candidatos_setorial_page_callback_function() {   
-    if(!current_user_can('edit_published_posts')){
-        return false;
-    }
-       
-    $setorial_selected = $_GET['setorial'];
-    $states = get_all_states();
-    $setoriais = get_setoriais();
-    
-    if (!in_array($setorial_selected, array_keys($setoriais))) {
-        $setorial_selected = '';
-    }
-?>            
-    <h4>Selecione a Setorial:</h4>
-    <select class="select-setorial" id="candidatos_setorial">
-      <option></option>
-      <?php foreach ( $setoriais as $slug => $setorial ): ?>
-      <option value="<?php echo $slug ?>" <?php if ($slug == $setorial_selected) { echo "selected"; } ?>><?php echo $setorial ?></option>
-      <?php endforeach ?>
-    </select>
-
-<?php if ($setorial_selected != '') : ?>
-    <div class="wrap span-20">
-
-        <h2>Candidatos por setorial</h2>
-
-        <table class="wp-list-table widefat">
-            <thead>
-                <tr>
-                    <th scope="col"  class="manage-column column-posts">Estado</th>
-                    <th scope="col"  class="manage-column column-posts num">Candidatos</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                    <?php $candidates = get_count_candidates_by_setorial($setorial_selected); ?>
-                    <?php foreach ( $states as $uf => $state ): ?>                        
-                            <tr class="alternate">
-                                <td class="num"><?php echo $uf;?></td>                    
-                                <td class="num"><?php echo $candidates[$uf];?></td>
-                            </tr>
-                    <?php endforeach ?>
-            </tbody>
-        </table>
-    </div>
-<?php endif ?>
-<?php
-}
-
-function candidatos_estado_page_callback_function() {   
-    if(!current_user_can('edit_published_posts')){
-        return false;
-    }
-?>
-    <div class="wrap span-20">
-      <h2>Total de candidatos - total por estados</em></h2>      
-        <table class="wp-list-table widefat">
-            <thead>
-                <tr>
-                    <th scope="col"  class="manage-column column-role">Estado</th>
-                    <th scope="col"  class="manage-column column-role num">Candidados</th>
-                </tr>
-            </thead>      
-            <tbody>
-            <tbody>
-            <?php $candidates = get_count_candidates_states(); ?>
-                    <?php foreach ( $candidates as $uf => $candidate_count ): ?>
-                            <?php $count_brasil += $candidate_count; ?>
-                            <tr class="alternate">
-                                <td class="num"><?php echo $uf; ?></td>
-                                <td class="num"><?php echo $candidate_count; ?></td>
-                            </tr>
-                    <?php endforeach ?>
-                            <tr class="alternate">
-                                <td class="num"><strong>Brasil</strong></td>
-                                <td class="num"><Strong><?php echo $count_brasil; ?></strong></td>
-                            </tr>                            
-            </tbody> 
-        </table>
-    </div>
 
 <?php } 
 

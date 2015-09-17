@@ -1,0 +1,8 @@
+.csv {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background-image: url(images/csv.png);
+    background-repeat: no-repeat;
+    z-index: 1;
+}
