@@ -174,7 +174,7 @@ function ajax_register_vote() {
 				} else {
 					$response['success'] = false;
 					$response['code'] = 'error_date_change';
-					$response['msg'] = 'Só é possível alterar o voto ' . $vote_counter . ' ' . $text_change_voto . ' entre os dias ' . $data_inicio_troca . ' e ' . $data_fim_votacao;
+					$response['msg'] = 'Atenção!<br>Você já votou! Será possível alterar o voto apenas ' . $vote_counter . ' ' . $text_change_voto . ' entre os dias ' . $data_inicio_troca . ' e ' . $data_fim_votacao;
 				}
 			
 			} else {
@@ -209,7 +209,7 @@ function ajax_register_vote() {
 		} else {
 			$response['success'] = false;
 			$response['code'] = 'error_setorial_uf';
-			$response['msg'] = 'Você não se inscreveu nesta setorial deste estado, pode participar do debate, mas não pode votar.';
+			$response['msg'] = 'Você não se inscreveu nesta setorial deste estado. Por isso, não pode votar, somente participar do debate.';
 		}
 		
 
