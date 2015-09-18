@@ -245,17 +245,16 @@ function inscritos_setorial_page_callback_function() {
                     <th scope="col"  class="manage-column column-role num">Inscritos</th>
                 </tr>
             </thead>
-
-            <?php $states = get_all_states(); ?>
+    
             <?php $setoriais = get_setoriais(); ?>
 
             <tbody>
-                <?php foreach ( $setoriais as $slug => $setorial ): ?>
-                    <?php $users = get_count_users_by_setorial($slug); ?>
+                    <?php $users = get_count_users_setoriais(); ?>
+                    <?php foreach ( $users as $slug => $user_count ): ?>
                             <?php $data[] = [$setorial, $users]; ?>                                    
                             <tr class="alternate">
-                                <td><?php echo $setorial; ?></a></td>
-                                <td class="num"><?php echo $users; ?></td>
+                                <td><?php echo $setoriais[$slug]; ?></a></td>
+                                <td class="num"><?php echo $user_count; ?></td>
                             </tr>
                 <?php endforeach ?>
             </tbody>
