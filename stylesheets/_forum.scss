@@ -100,8 +100,9 @@
                     margin-top: 10px;
                     text-align: center;
                     text-transform: uppercase;
-                    min-height: 60px;
+                    height: 69px;
                     line-height: 60px;
+                    overflow: hidden;
 
                     span {
                         display: inline-block;
@@ -170,6 +171,41 @@
                 .candidate-avatar {
                     border-color: lighten( $cor-verde, 10%);
                 }    
+            }
+            &.candidacy_removed {
+                background-color: #aaa;
+                border-radius: 5px;
+                border-color: #fff;
+                border-left: 8px solid #F4F4F4;
+                border-right: 8px solid #F4F4F4;
+
+                .candidate-avatar {
+                    border-color: #959595;
+                    img {
+                        opacity: 0.8;
+                        background-color: #aaa;
+                    }
+                }
+
+                .candidacy__removed {
+                    background-color: #E09510;
+                    color: #fff;
+                    font-weight: bold;
+                    padding-bottom: 10px;
+                    padding-top: 10px;
+                }
+
+                .candidate-name span{
+                    color: #656363;
+                }
+
+                .show-candidate-details {
+                    background-color: rgba(40, 53, 32, 0.54) !important;
+                }
+
+                .dialog, .ui-dialog {
+                    border: 26px solid #959595!important;
+                }
             }    
         }
     }

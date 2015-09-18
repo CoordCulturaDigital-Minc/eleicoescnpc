@@ -23,21 +23,10 @@ function CNPC_Users_init() {
 		 */
 		function scripts()
 		{
-			// TODO deletar usuario
+			wp_enqueue_script( 'jquery-ui-dialog' );
+			wp_enqueue_script( 'cnpc_users', $this->url . '/js/cnpc-users.js', array( 'jquery-ui-dialog' ) );
 
-			// wp_enqueue_script( 'jquery-ui-dialog' );
-			// wp_enqueue_script( 'cnpc_users', $this->url . '/js/cnpc-users.js', array( 'jquery-ui-dialog' ) );
-
-			// wp_localize_script( 
-	  //           'cnpc_users', 
-	  //           'vars', 
-	  //           array(
-	  //               'ajaxurl'   => admin_url( 'admin-ajax.php' ),
-	  //               'nonce' => wp_create_nonce( "user_delete_account" ),
-	  //           )
-	  //       );
-
-	  //       wp_enqueue_style("wp-jquery-ui-dialog");
+	        wp_enqueue_style("wp-jquery-ui-dialog");
 		}
 
 		/**
@@ -194,12 +183,21 @@ function CNPC_Users_init() {
 			        	<span class="description">Só pode alterar uma vez</span>
 			        </td>
 			    </tr>
+			    <tr>
+			    	<th></th>
+				    <td>
+				    	<?php if( $this->user_is_candidate_was_voted( $user->ID ) ) : ?>
+				    		<input type="hidden" id="candidate_was_voted" value="true" />
+					    	<span class="description warning">Candidato, se você alterar o seu estado ou setorial os seus votos serão apagados. <br> Esta ação não pode ser desfeita.</span>
+					    <?php endif; ?>
+					</td>
+				</tr>
 			</table>
 			<?php
 		}
 
 		/**
-		 *  Save_user_details
+		 * Save_user_details
 		 *
 		 * @name    save_user_details
 		 * @author  Cleber Santos <oclebersantos@gmail.com>
@@ -219,20 +217,18 @@ function CNPC_Users_init() {
 			// se mudar UF ou Setorial
 			if( $uf !== $current_uf || $setorial !== $current_setorial ) {
 
-				// se for candidato
-				if( is_valid_candidate( $user_id ) ) 
-					wp_die('Você é candidato, não pode alterar seu estado e/ou setorial.', '', array( 'back_link' => true ) );
-
-				// verifica se o usuário possui algum projeto com voto
-				// essa verificacao é para resguardar se tiver algum requisito que abra o perfil do candidato para edição,
-				// deixando de ser um candidato válido até finalizar inscricao
-				if( $this->user_is_candidate_was_voted( $user_id ))
-					wp_die('Você já possui votos, não pode alterar seu estado e/ou setorial.', '', array( 'back_link' => true ) );
-
-				// verificar o prazo para alterações
+				// verifica o prazo para alterações
 				if( !$this->user_can_change_by_date() ) 
 					wp_die('O prazo para alterar estado ou setorial já expirou.', '', array( 'back_link' => true ) );
+				
 
+				// se for candidato
+				// if( is_valid_candidate( $user_id ) ) 
+				// 	wp_die('Você é candidato, não pode alterar seu estado e/ou setorial.', '', array( 'back_link' => true ) );
+				
+				/* 
+				 *	Se alterar o estado
+				 */
 
 				if( $uf !== $current_uf ) {
 
@@ -251,6 +247,10 @@ function CNPC_Users_init() {
 						update_user_meta($user_id, 'uf-counter', $current_count_uf);
 				}
 
+				/* 
+				 *	Se alterar a setorial
+				*/
+
 				if( $setorial !== $current_setorial ) {
 
 					if( !$this->user_can_change_setorial( $user_id ) )
@@ -266,6 +266,38 @@ function CNPC_Users_init() {
 
 					if( !current_user_can('administrator') )
 						update_user_meta($user_id, 'setorial-counter', $current_count_setorial);
+				}
+
+				/*
+				 * Verifica se o usuário possui algum projeto com voto
+				 * No requisito pede que quando um candidato trocar de setorial e tiver voto, 
+				 * ele deverá aparecerá na lista anterior com a mensagem "Esta candidatura foi retirada"
+				 * Como o usuário pode alterar mais de uma vez, ele deverá aparecer em todas que teve voto.
+				 * Adiciona o metadado 'uf-setorial-previous'
+				 */
+
+				if( $this->user_is_candidate_was_voted( $user_id )) {
+					
+					// salva com a quantidade de alterações para não sobscrever setoriais anteriores
+					$count = $current_count_uf + $current_count_setorial;
+
+					update_user_meta( $user_id, 'uf-setorial-previous-' . $count,  $current_uf . '-' . $current_setorial);
+
+					/*
+					 * adiciona canceled no valor do voto nos usuários que já votaram neste candidato(projeto)
+					 */
+
+					// pega o projeto do candidato
+					$project_id = cnpc_get_project_id_by_user_id( $user_id );
+
+					// pega o id dos usuários que votaram no candidato
+					$users_voted = get_id_of_users_voted_project($project_id);
+
+					// roda um loop para alterar o id do projeto nos usuário que votaram neste candidato
+					foreach ($users_voted as $user) {
+						update_user_meta($user->user_id, 'vote-project-id','canceled-'.$project_id);
+					}
+
 				}
 
 				update_user_meta($user_id, 'uf-setorial', $uf . '-' . $setorial);
@@ -288,11 +320,11 @@ function CNPC_Users_init() {
 			if( current_user_can('administrator'))
 				return false;
 			
-			if( is_valid_candidate( $user_id ) ) 
-				return false;
+			// if( is_valid_candidate( $user_id ) ) 
+			// 	return false;
 
-			if( $this->user_is_candidate_was_voted( $user_id ))
-				return false;
+			// if( $this->user_is_candidate_was_voted( $user_id ))
+			// 	return false;
 
 			if( !$this->user_can_change_by_date() ) 
 				return false;
@@ -475,6 +507,8 @@ function CNPC_Users_init() {
 		    		.form-table .user-last-name-wrap,
 		    		.form-table .user-user-login-wrap  { display: none; } 
 
+		    		.form-table .warning { color: red; font-weight: bold;}
+
 		    		.description.indicator-hint { clear: both; }
 
 		    		#cnpc-loading {
@@ -525,15 +559,12 @@ function CNPC_Users_init() {
 
 			add_action( 'admin_enqueue_scripts', array( &$this, 'scripts' ) );
 
-			//TODO alterar estado e setorial
+			// alterar estado e setorial
 			add_action('edit_user_profile', array( &$this, 'edit_user_details')); // para os admins
-			// add_action('profile_personal_options', array( &$this, 'edit_user_details')); // somente para o usuário
+			add_action('profile_personal_options', array( &$this, 'edit_user_details')); // somente para o usuário
 
 			// add_action('edit_user_profile_update', array( &$this, 'save_user_details')); // admins podem salvar
-			// add_action('personal_options_update', array( &$this, 'save_user_details')); // somente o usuário pode salvar
-
-			// if( get_theme_option('inscricoes_abertas') ) // TODO deletar usuario
-				// add_action('show_user_profile', array( &$this, 'button_user_profile_delete_account') );
+			add_action('personal_options_update', array( &$this, 'save_user_details')); // somente o usuário pode salvar
 
 			if( !current_user_can('administrator') )
 				add_action('show_user_profile', array( &$this, 'hidden_fields_user_profile') );

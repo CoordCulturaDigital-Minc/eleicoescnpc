@@ -245,9 +245,14 @@ function get_current_user_vote() {
 
 }
 
+function get_id_of_users_voted_project($project_id) {
+	global $wpdb;
+	return $wpdb->get_results($wpdb->prepare("SELECT user_id FROM $wpdb->usermeta WHERE meta_key = 'vote-project-id' AND meta_value = %s", $project_id) );
+}
+
 function get_number_of_votes_by_project($project_id) {
 	global $wpdb;
-	return $wpdb->get_var("SELECT COUNT(user_id) FROM $wpdb->usermeta WHERE meta_key = 'vote-project-id' AND meta_value = $project_id");
+	return $wpdb->get_var($wpdb->prepare("SELECT COUNT(user_id) FROM $wpdb->usermeta WHERE meta_key = 'vote-project-id' AND meta_value = %s", $project_id) );
 }
 
 
