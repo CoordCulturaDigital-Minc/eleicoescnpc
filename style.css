@@ -2979,6 +2979,89 @@ section.features {
     left: 8px; }
   .candidates-content .flex-direction-nav li a.flex-next {
     right: 8px; } }
+
+
+/* destaques - carrossel home */
+.destaques-content {
+    position: relative;
+    border: 2px solid #125b26;
+    border-radius: 10px;
+    z-index: 10;
+}
+.destaques-content .loading h2 {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    text-align: center;
+    color: #125b26;
+    font-size: 36px;
+}
+.destaques-content .destaques {
+    display: none;
+    position: relative;
+}
+.destaques-content .destaques .destaque {
+    overflow: hidden;
+    display: block;
+    position: relative;
+}
+
+.destaques-content .destaques .destaque .destaque-text {
+    clear: both;
+    text-align: center;
+    background-color:#125A26;
+    position: absolute;
+    top: 66%;
+    height: 33%;
+    width: 100%;
+    padding: 4px;
+    padding-left: 20px;
+    opacity: 0.8;
+}
+
+.destaques-content .destaques .destaque img{
+    height: 100%;
+    width: 100%;
+    min-width: 190px;
+    min-height: 190px;
+    border-radius: 10px;    
+}
+
+.destaques-content .destaques .destaque .destaque-text h1 {
+    font-size: 36px;
+    text-align: left;
+    color: #fff;
+}
+
+.destaques-content .destaques .destaque .destaque-text h3 {
+    font-size: 16px;
+    text-align: left;
+    color: #fff;
+}
+
+.destaques-content .flex-direction-nav li a {
+    position: absolute;
+    top: 110px;
+    width: 40px;
+    height: 83px;
+    cursor: pointer;
+    background-image: url(images/image-carousel-amarelo.png);
+    background-repeat: no-repeat;
+    z-index: 100;
+}
+
+.destaques-content .flex-direction-nav li a.flex-prev {
+    left: 8px;
+}
+.destaques-content .flex-direction-nav li a.flex-next {
+    right: 8px;
+    background-position: -45px 0;
+}
+
+.flexbox section,
+.flexbox section.features header {
+    height: 300px;
+}
+
 /* JUNK THAT HAS NO PLACE */
 #wrapper-barra-brasil .brasil-flag {
   box-sizing: content-box; }

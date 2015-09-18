@@ -184,7 +184,7 @@ function get_count_users_setoriais() {
     {   
          $count[$key] = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM {$wpdb->usermeta} WHERE meta_key = 'setorial' AND meta_value = %s", $key ) );
     }
-
+    
     return $count;
 }
 

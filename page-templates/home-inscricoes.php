@@ -4,34 +4,41 @@
  * Template Name: Capa/Inscrições
  *
  */
-    
+
+wp_enqueue_script('jquery-flexslider', get_template_directory_uri().'/js/flexslider-min.js', array('jquery'));    
+wp_enqueue_script( 'carrossel_home', get_template_directory_uri() . '/js/carrossel_home.js');
+
 get_header();
 the_post(); ?>
 
     <section class="features col-xs-12">
         <?php if ( '' != get_the_post_thumbnail() ) : ?>
-            <?php if( $featureurl = get_post_meta($post->ID,'_meta_feature-url', true) ) : ?>
-                <a href="<?php echo $featureurl ?>">
-            <?php endif; ?>
             <header class="col-xs-12">
-	            <div class="img-wrap img-responsive">
-	            	<?php the_post_thumbnail( 'full' ); ?>  <!-- array('class' => 'img-responsive') -->
-				</div>
-				
-				<div class="some">
-	            	<?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
-	                    <h1><?php the_title(); ?></h1>
-	                <?php endif; ?>
-	                <?php if( $status = get_post_meta( $post->ID,'_meta_feature-text', true ) ) : ?>
-	                    <p><?php echo $status ?></p>
-	                <?php endif; ?>
-	            </div>
-				
+    
+            <?php $posts = get_posts(array('category' => 55)); ?>
+            <div class="destaques-content">
+                <div class="loading">
+				    <h2>Carregando...</h2>
+                </div>
+    
+                <div class="destaques">
+                <?php foreach ($posts as $post ): ?>
+                    <div class="destaque">
+    	              <div class="img-responsive">
+                          <img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' )[0]; ?>">
+                      </div>
+    				  <div class="destaque-text">
+                          <h1><?php echo $post->post_title; ?></h1>
+                          <h3><?php echo $post->post_excerpt; ?></h3>
+	                  </div>
+
+                    </div>
+                <?php endforeach; ?>
+                </div> <!-- end destaques -->
+                <div class="navigation"></div>
+            </div> <!-- end destaques-content -->
             </header>
         
-            <?php if( $featureurl = get_post_meta($post->ID,'_meta_feature-url', true) ) : ?>
-                </a>
-            <?php endif; ?>
         <?php endif; ?>
     </section>
 	
