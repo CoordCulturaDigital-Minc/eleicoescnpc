@@ -230,14 +230,14 @@ function CNPC_Users_init() {
 				 *	Se alterar o estado
 				 */
 
+				$current_count_uf = get_user_meta($user_id, 'uf-counter', true);
+
+				$current_count_uf = empty($current_count_uf) ? 0 : (int) $current_count_uf;
+
 				if( $uf !== $current_uf ) {
 
 					if( !$this->user_can_change_uf( $user_id ) )
 						wp_die('Você não pode mais alterar o seu estado.', '', array( 'back_link' => true ) ); 
-
-					$current_count_uf = get_user_meta($user_id, 'uf-counter', true);
-
-					$current_count_uf = empty($current_count_uf) ? 0 : (int) $current_count_uf;
 
 					$current_count_uf ++;
 
@@ -251,15 +251,15 @@ function CNPC_Users_init() {
 				 *	Se alterar a setorial
 				*/
 
+				$current_count_setorial = get_user_meta($user_id, 'setorial-counter', true);
+
+				$current_count_setorial = empty($current_count_setorial) ? 0 : (int) $current_count_setorial;
+
 				if( $setorial !== $current_setorial ) {
 
 					if( !$this->user_can_change_setorial( $user_id ) )
 						wp_die('Você não pode mais alterar a sua setorial.', '', array( 'back_link' => true ) ); 
 					
-					$current_count_setorial = get_user_meta($user_id, 'setorial-counter', true);
-
-					$current_count_setorial = empty($current_count_setorial) ? 0 : (int) $current_count_setorial;
-
 					$current_count_setorial ++;
 
 					update_user_meta($user_id, 'setorial', $setorial);
