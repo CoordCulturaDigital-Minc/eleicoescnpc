@@ -148,7 +148,8 @@ class Foruns
 		$ids = $wpdb->get_col(
 			"SELECT ID FROM $wpdb->posts WHERE post_type = 'projetos'
 			AND post_author IN (
-				SELECT user_id FROM $wpdb->usermeta WHERE meta_key = 'uf-setorial' AND meta_value = '{$uf}-{$setorial}'
+				SELECT user_id FROM $wpdb->usermeta WHERE ( meta_key = 'uf-setorial' AND meta_value = '{$uf}-{$setorial}' )
+				OR ( meta_key LIKE 'uf-setorial-previous%' AND meta_value = '{$uf}-{$setorial}' )
 			) AND ID IN (
 				SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='subscription-valid'
 			)

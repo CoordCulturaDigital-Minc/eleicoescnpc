@@ -20,6 +20,8 @@ get_header(); ?>
 
 				$candidates = Foruns::get_candidates($uf, $setorial);
 
+				$forum_uf_setorial = strtoupper($uf).'-'.$setorial;
+				
 				$original_post = $post;
 
 				?>
@@ -54,15 +56,22 @@ get_header(); ?>
 
 									$candidate_meta = array_map( function( $a ){ return $a[0]; }, get_post_meta( get_the_ID() ) );
 
-									$candidate_id 	= get_post_field( 'post_author', get_the_ID() );
-									$user = get_userdata( $candidate_id );
+									$candidate_id 			= get_post_field( 'post_author', get_the_ID() );
+									$candidate_user      	= get_userdata( $candidate_id );
+									$candidate_uf_setorial 	= get_user_meta($candidate_id, 'uf-setorial', true);
+									
+									$candidacy_removed = '';
+
+									if( $candidate_uf_setorial !== $forum_uf_setorial ) {
+										$candidacy_removed = 'candidacy_removed';
+									}
 
 									if( strlen($candidate_meta['candidate-display-name']) < 1 ) {
-										$candidate_meta['candidate-display-name'] = $user->display_name;
+										$candidate_meta['candidate-display-name'] = get_user_meta($candidate_id, 'user_name', true);
 									}
 								 ?>
 
-								<div class="candidate <?php echo (get_current_user_vote() == get_the_ID()) ? 'voted':'' ?>" id="<?php the_ID(); ?>">
+								<div class="candidate <?php echo (get_current_user_vote() == get_the_ID()) ? 'voted':'' ?> <?php echo $candidacy_removed; ?>" id="<?php the_ID(); ?> ">
 									<div class="candidate-avatar" data-candidate-id="<?php the_ID(); ?>">
 										<?php echo wp_get_attachment_image($candidate_meta['candidate-avatar'], 'avatar_candidate', 'avatar_candidate'); ?>
 									</div>
@@ -86,25 +95,34 @@ get_header(); ?>
 										</div>
 
 										<h2 class="candidate-name"><?php echo $candidate_meta['candidate-display-name']; ?></h2>
-										<p><h3>Defesa do candidato:</h3><?php echo $candidate_meta['candidate-explanatory']; ?></p>
-										<p><h3>Experiência:</h3><?php echo $candidate_meta['candidate-experience']; ?></p>
-
+										
+										<?php if( empty( $candidacy_removed ) ) : ?>
+											<p><h3>Defesa do candidato:</h3><?php echo $candidate_meta['candidate-explanatory']; ?></p>
+											<p><h3>Experiência:</h3><?php echo $candidate_meta['candidate-experience']; ?></p>
+										<?php else: ?>
+											<br>
+											<p>Este candidato removeu a candidatura desta setorial.</p>
+											<p>Visitar <a href="<?php echo site_url('/foruns/'.$candidate_uf_setorial) ?>">fórum atual</a> deste candidato</p>
+										<?php endif; ?>
 									</div>
 
 									<br />
+									<?php if( empty( $candidacy_removed ) ) : ?>
+										<?php if (is_votacoes_abertas() && is_user_logged_in() /*&& current_user_can_vote_in_project( get_the_ID() ) */): ?>
 
-									<?php if (is_votacoes_abertas() && is_user_logged_in() /*&& current_user_can_vote_in_project( get_the_ID() ) */): ?>
+												<?php if ( get_current_user_vote() == get_the_ID() ): ?>
+													<a class="vote voted" id="vote-for-<?php the_ID(); ?>" data-project_id="<?php the_ID(); ?>">
+													Voto registrado
+													</a>
+												<?php else : ?>
+													<a class="vote" id="vote-for-<?php the_ID(); ?>" data-project_id="<?php the_ID(); ?>">
+													Votar
+													</a>
+												<?php endif; ?>
 
-											<?php if ( get_current_user_vote() == get_the_ID() ): ?>
-												<a class="vote voted" id="vote-for-<?php the_ID(); ?>" data-project_id="<?php the_ID(); ?>">
-												Voto registrado
-												</a>
-											<?php else : ?>
-												<a class="vote" id="vote-for-<?php the_ID(); ?>" data-project_id="<?php the_ID(); ?>">
-												Votar
-												</a>
-											<?php endif; ?>
-
+										<?php endif; ?>
+									<?php else: ?>
+										<div class="candidacy__removed text-center">Esta candidatura foi retirada</div>
 									<?php endif; ?>
 
 									

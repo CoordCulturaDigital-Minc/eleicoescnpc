@@ -174,7 +174,7 @@ function ajax_register_vote() {
 				} else {
 					$response['success'] = false;
 					$response['code'] = 'error_date_change';
-					$response['msg'] = 'Só é possível alterar o voto ' . $vote_counter . ' ' . $text_change_voto . ' entre os dias ' . $data_inicio_troca . ' e ' . $data_fim_votacao;
+					$response['msg'] = 'Atenção!<br>Você já votou! Será possível alterar o voto apenas ' . $vote_counter . ' ' . $text_change_voto . ' entre os dias ' . $data_inicio_troca . ' e ' . $data_fim_votacao;
 				}
 			
 			} else {
@@ -209,7 +209,7 @@ function ajax_register_vote() {
 		} else {
 			$response['success'] = false;
 			$response['code'] = 'error_setorial_uf';
-			$response['msg'] = 'Você não se inscreveu nesta setorial deste estado, pode participar do debate, mas não pode votar.';
+			$response['msg'] = 'Você não se inscreveu nesta setorial deste estado. Por isso, não pode votar, somente participar do debate.';
 		}
 		
 
@@ -245,9 +245,14 @@ function get_current_user_vote() {
 
 }
 
+function get_id_of_users_voted_project($project_id) {
+	global $wpdb;
+	return $wpdb->get_results($wpdb->prepare("SELECT user_id FROM $wpdb->usermeta WHERE meta_key = 'vote-project-id' AND meta_value = %s", $project_id) );
+}
+
 function get_number_of_votes_by_project($project_id) {
 	global $wpdb;
-	return $wpdb->get_var("SELECT COUNT(user_id) FROM $wpdb->usermeta WHERE meta_key = 'vote-project-id' AND meta_value = $project_id");
+	return $wpdb->get_var($wpdb->prepare("SELECT COUNT(user_id) FROM $wpdb->usermeta WHERE meta_key = 'vote-project-id' AND meta_value = %s", $project_id) );
 }
 
 

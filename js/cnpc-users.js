@@ -1,54 +1,28 @@
 (function($) {
     $(document).ready(function(e) {
 
-    	$('#delete_account').click(function() {
+    	var setorial_uf_change = false;
 
-			var text = '<p>Você realmente deseja apagar sua conta?'
-			 		   +'<br>Todos seus dados serão apagados, inclusive seus votos!'
-			 		   +'<br>Após concluir não será possível recuperar suas informações!</p>';
+    	$('#setorial, #uf' ).change(function(e) {
+    		setorial_uf_change = true;
+    	});
 
-		
-			$('<div class="dialogs"></div>').appendTo( $( "body" ) )
-			  .html('<div class="htl"><h3>Atenção</h3>'+text+'</div')
-			  .dialog({
-			      modal: true, title: '', zIndex: 10000, autoOpen: true, closeText: '<i class="fa fa-times close"></i>',
-			      width: 'auto', resizable: false,
-			      buttons: {
-			          Não: function () {
-			              $(this).dialog("close");
-							return false;
-			          },
-			          Sim: function () {
-			          		$('#cnpc-loading').show();
-			              	$(this).dialog("close");
+    	$("#your-profile #submit").click(function() {
 
-			             	$.post(
-							vars.ajaxurl,
-							{
-								'action':'current_user_delete_account',
-								'nonce': vars.nonce,
-							},
-							function(data) {
-								if (data.success) {
-									alert("Inscrição apagada com sucesso!")
-									location.reload(true);
-								} else {
-									alert(data.errormsg);
-								}
+    		if( setorial_uf_change ) {
+	    		// verifica se o candidato tem voto
+	    		var candidate_was_voted = $('#candidate_was_voted').val();
 
-								$('#cnpc-loading').hide();
-							},
-							'json'
-						);
+	    		if( candidate_was_voted == "true" ) {
+	    			var c = confirm("Candidato, se você alterar o seu estado ou setorial os seus votos serão apagados. \n\nEsta ação não pode ser desfeita.\n\n Deseja Continuar?");
+	    		}else {
+	    			var c = confirm("Você está alterando sua setorial e/ou estado! \n\n Esta ação não pode ser desfeita! \n\n Deseja continuar?");
+	    		}
 
-			          }
-			      },
-			      close: function (event, ui) {
-			          $(this).remove();
-			      }
-			});
-
-			return false;
+	    		return c
+	    		
+	    	}
+			   
 		});
 
     });
