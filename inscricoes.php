@@ -70,7 +70,7 @@ if(is_user_logged_in()) {
 
 
 
-		if(get_theme_option('inscricoes_abertas') && empty($subscription_number)) {
+		if(get_theme_option('inscricoes_abertas_candidato') && empty($subscription_number)) {
 			$form_disabled = false;
 			$disabled = '';
 			
@@ -82,7 +82,6 @@ if(is_user_logged_in()) {
 		}elseif( !empty($subscription_number) ) {
 			wp_enqueue_script('candidate-registered', get_setoriaiscnpc_baseurl().'js/candidate-registered.js', array('jquery'));  
 			wp_localize_script('candidate-registered', 'vars', array('ajaxurl' => admin_url('admin-ajax.php')));
-		
 		}
 	}
 } elseif($subscription_number) {
@@ -130,13 +129,9 @@ if(is_user_logged_in()) {
 
 				<?php include( get_template_directory() . '/inscricoes/inscricoes-register-form.php' ); ?>
 			</div>
-		<?php endif; ?>
-
-		
-        <?php if(get_theme_option('inscricoes_abertas') == false): ?>
+		<?php else: ?>
 			<div class="error">Inscrições encerradas!</div>
 		<?php endif;?>
-
 
 	<?php else: // } user logged in { ?>
 		<?php 
@@ -182,26 +177,43 @@ if(is_user_logged_in()) {
 			if( isset( $register_errors['cpf'] ) )
 				echo $register_errors['cpf'] . "<br/>"; ?>
 			<?php echo "</div>" ?>
-		
-		<?php else : // Data nascimento válida e não é delegado ?>
 
-			<?php if ( current_user_voter( $userID ) ) : // verifica se o usuário é eleitor, se for, perguntar se quer se candidatar?>
-
+		<?php elseif( !get_theme_option('inscricoes_abertas_candidato') && !$subscription_number ) : // Verifica se ainda pode se candidatar ?>
+			
 			<div class="form-eleitor candidate-not-found row">
 				<div class="col-md-3">
-					<i class="fa fa-question"></i>
+					<i class="fa fa-exclamation"></i>
 				</div>
 				<div class="col-md-9">
-					<div class="col-md-12">
-						<p>Você já está inscrito(a), confirma sua inscrição </p>
-						<p>como candidato(a)?</p>
+					<div class="col-md-12 offset3">
+						<br><br>
+						<p>Inscricoes encerradas para novos candidatos!</p>
 					</div>
 					<div class="col-md-12">
-						<a href="<?php echo get_link_forum_user(); ?>" id="return_forum" class="button secondary">Não quero me candidatar</a>
-						<a href="#" id="eleitor-candidate-question" class="button primary">Candidatar</a>
 					</div>
 				</div>
 			</div>
+			
+		<?php else : // Data nascimento válida e não é delegado ?>
+
+
+			<?php if ( current_user_voter( $userID ) ) : // verifica se o usuário é eleitor, se for, perguntar se quer se candidatar?>
+
+				<div class="form-eleitor candidate-not-found row">
+					<div class="col-md-3">
+						<i class="fa fa-question"></i>
+					</div>
+					<div class="col-md-9">
+						<div class="col-md-12">
+							<p>Você já está inscrito(a), confirma sua inscrição </p>
+							<p>como candidato(a)?</p>
+						</div>
+						<div class="col-md-12">
+							<a href="<?php echo get_link_forum_user(); ?>" id="return_forum" class="button secondary">Não quero me candidatar</a>
+							<a href="#" id="eleitor-candidate-question" class="button primary">Candidatar</a>
+						</div>
+					</div>
+				</div>
 
 			<?php endif; ?>
 
@@ -221,7 +233,7 @@ if(is_user_logged_in()) {
 							
 						<?php endif; ?>
 						
-						<?php if( current_user_is_the_author($pid) && get_theme_option('inscricoes_abertas') ): ?>
+						<?php if( current_user_is_the_author($pid) && registration_is_open_for_candidate() ): ?>
 							<a  href="<?php echo site_url('inscricoes/'); ?>" id="pid-<?php echo $pid;?>" class="cancel-subscription"><i class="fa fa-pencil-square-o" title="<?php _e( 'Reopen Subscription', 'historias'); ?>"></i>  Editar meu perfil de candidato(a)</a>
 						<?php endif; ?>
 					<?php else: ?>
