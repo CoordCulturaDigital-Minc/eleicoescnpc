@@ -58,8 +58,8 @@ function cnpc_get_project_id_by_user_id( $user_id ) {
 }
 
 function registration_is_open_for_candidate() {
-    return true;
-    // return get_theme_option('inscricoes_abertas_candidato');
+    // return true;
+    return get_theme_option('inscricoes_abertas_candidato');
 }
 
 function get_current_project_index($user_id = null) {
