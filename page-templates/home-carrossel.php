@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: Capa/Inscrições
+ * Template Name: Capa/Carrossel
  *
  */
 
