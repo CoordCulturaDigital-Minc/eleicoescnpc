@@ -15,7 +15,7 @@ the_post(); ?>
         <?php if ( '' != get_the_post_thumbnail() ) : ?>
             <header class="col-xs-12">
     
-            <?php $posts = get_posts(array('category' => 55)); ?>
+            <?php $posts = get_posts(array('category_name' => 'destaque')); ?>
             <div class="destaques-content">
                 <div class="loading">
 				    <h2>Carregando...</h2>
