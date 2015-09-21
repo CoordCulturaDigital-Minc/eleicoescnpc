@@ -2490,7 +2490,6 @@ section.features {
   section.features header {
     position: relative;
     overflow: hidden;
-    height: 200px;
     border-radius: 20px;
     color: #ffce00;
     font-weight: bold; }
@@ -3008,9 +3007,11 @@ section.features {
 /* destaques - carrossel home */
 .destaques-content {
     position: relative;
-    border: 2px solid #125b26;
-    border-radius: 10px;
+    border: 3px solid #125b26;
+    border-radius: 4px;
+    overflow: hidden;
     z-index: 10;
+    height: 100%;
 }
 .destaques-content .loading h2 {
     margin-top: 100px;
@@ -3024,7 +3025,6 @@ section.features {
     position: relative;
 }
 .destaques-content .destaques .destaque {
-    overflow: hidden;
     display: block;
     position: relative;
 }
@@ -3034,8 +3034,8 @@ section.features {
     text-align: center;
     background-color:#125A26;
     position: absolute;
-    top: 66%;
-    height: 33%;
+    top: 68%;
+    height: 26%;
     width: 100%;
     padding: 4px;
     padding-left: 20px;
@@ -3043,11 +3043,9 @@ section.features {
 }
 
 .destaques-content .destaques .destaque img{
-    height: 100%;
     width: 100%;
     min-width: 190px;
     min-height: 190px;
-    border-radius: 10px;    
 }
 
 .destaques-content .destaques .destaque .destaque-text h1 {
@@ -3058,6 +3056,7 @@ section.features {
 
 .destaques-content .destaques .destaque .destaque-text h3 {
     font-size: 16px;
+    font-weight: bold;
     text-align: left;
     color: #fff;
 }

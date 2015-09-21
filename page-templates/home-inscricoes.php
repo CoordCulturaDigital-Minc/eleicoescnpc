@@ -28,8 +28,10 @@ the_post(); ?>
                           <img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' )[0]; ?>">
                       </div>
     				  <div class="destaque-text">
-                          <h1><?php echo $post->post_title; ?></h1>
-                          <h3><?php echo $post->post_excerpt; ?></h3>
+                          <a href="<?php echo get_permalink($post->ID); ?>">
+                              <h1><?php echo $post->post_title; ?></h1>
+                              <h3><?php echo $post->post_excerpt; ?></h3>
+                          </a>
 	                  </div>
 
                     </div>
