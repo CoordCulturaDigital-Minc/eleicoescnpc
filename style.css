@@ -2490,6 +2490,7 @@ section.features {
   section.features header {
     position: relative;
     overflow: hidden;
+    height: 200px;
     border-radius: 20px;
     color: #ffce00;
     font-weight: bold; }
@@ -3080,8 +3081,11 @@ section.features {
     background-position: -45px 0;
 }
 
-.flexbox section,
-.flexbox section.features header {
+section.carrossel  {
+    height: 300px;
+}
+
+section.carrossel header {
     height: 300px;
 }
 

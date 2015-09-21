@@ -11,7 +11,7 @@ wp_enqueue_script( 'carrossel_home', get_template_directory_uri() . '/js/carross
 get_header();
 the_post(); ?>
 
-    <section class="features col-xs-12">
+    <section class="features col-xs-12 carrossel">
         <?php if ( '' != get_the_post_thumbnail() ) : ?>
             <header class="col-xs-12">
     
@@ -34,7 +34,7 @@ the_post(); ?>
                           </a>
 	                  </div>
 
-                    </div>
+                    </div> <!-- end destaque -->
                 <?php endforeach; ?>
                 </div> <!-- end destaques -->
                 <div class="navigation"></div>
