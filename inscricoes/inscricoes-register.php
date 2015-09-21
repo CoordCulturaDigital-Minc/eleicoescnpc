@@ -116,7 +116,7 @@ if(isset($_POST['register']) && $_POST['register'] == 1) {
                 add_user_meta($user_id, 'user_confirm_informations', $user_confirm_informations);
     			add_user_meta($user_id, 'user_register_ip', rpcif__set_client_ip());
                 
-    			if ($user_tipo == 'candidato')
+    			if ($user_tipo == 'candidato' && get_theme_option('inscricoes_abertas_candidato') )
     				add_user_meta($user_id, 'e_candidato', true);
     		
     		}
