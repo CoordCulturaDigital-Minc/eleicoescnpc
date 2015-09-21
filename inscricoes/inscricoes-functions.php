@@ -802,7 +802,7 @@ function mail_new_subscription($subscription_number, $pid) {
     $subscription_number = substr($subscription_number, 0, 8);
 
     ob_start();
-    include('candidato-mail.php');
+    include('candidate-mail.php');
     $mail_content = ob_get_contents();
     ob_end_clean();
 
