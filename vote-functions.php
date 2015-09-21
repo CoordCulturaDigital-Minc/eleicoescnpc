@@ -116,7 +116,6 @@ function current_user_can_change_vote_by_counter() {
 
 
 function register_vote($user_id, $project_id) {
-
 	// verifica se pode votar
 	if (!user_can_vote_in_project($user_id, $project_id))
 		return false;
@@ -136,7 +135,25 @@ function register_vote($user_id, $project_id) {
 
 	update_user_meta($user_id, 'vote-counter', $current_count);
 
+    // envia email
+    $user = wp_get_current_user();
+    $uf = get_user_meta($user_id, 'UF', true);
+    $setorial = get_label_setorial_by_slug(get_user_meta($user_id, 'setorial', true));
+    $candidato = get_post_meta(get_user_meta($user_id, 'vote-project-id', true), 'candidate-display-name', true);
+    
+    ob_start();
+    include('vote/vote-mail.php');
+    $mail_content = ob_get_contents();
+    ob_end_clean();
+    
+    $from = sprintf("%s <%s>", get_bloginfo('admin_email'), get_bloginfo('admin_email'));
+    $to = array($user->user_email, get_bloginfo('admin_email')) ;
 
+    $header = "From: $from\r\n";
+    $header .= "Content-Type: text/html\r\n";
+
+    wp_mail($to, 'Confirmação de inscrição', $mail_content, $header); // TODO verificar envio de email
+    
 	return true;
 
 }
