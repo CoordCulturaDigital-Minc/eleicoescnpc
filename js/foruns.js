@@ -162,10 +162,6 @@
 		    flexslider.vars.minItems = gridSize;
 		    flexslider.vars.maxItems = gridSize;
 		  });
-
-	// remove link de info dos comentários
-	if ($('.rw-report-link')) {
-	    $('.rw-report-link').remove();
-	}
+		
     });
 })(jQuery);
