@@ -70,7 +70,7 @@ if(is_user_logged_in()) {
 
 
 
-		if(get_theme_option('inscricoes_abertas_candidato') && empty($subscription_number)) {
+		if( registration_is_open_for_candidate() && empty($subscription_number)) {
 			$form_disabled = false;
 			$disabled = '';
 			
@@ -178,7 +178,7 @@ if(is_user_logged_in()) {
 				echo $register_errors['cpf'] . "<br/>"; ?>
 			<?php echo "</div>" ?>
 
-		<?php elseif( !get_theme_option('inscricoes_abertas_candidato') && !$subscription_number ) : // Verifica se ainda pode se candidatar ?>
+		<?php elseif( !registration_is_open_for_candidate() && !$subscription_number ) : // Verifica se ainda pode se candidatar ?>
 			
 			<div class="form-eleitor candidate-not-found row">
 				<div class="col-md-3">
@@ -187,7 +187,7 @@ if(is_user_logged_in()) {
 				<div class="col-md-9">
 					<div class="col-md-12 offset3">
 						<br><br>
-						<p>Inscricoes encerradas para novos candidatos!</p>
+						<p>Inscrições encerradas para novos candidatos!</p>
 					</div>
 					<div class="col-md-12">
 					</div>
