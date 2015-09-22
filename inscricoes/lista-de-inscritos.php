@@ -153,7 +153,8 @@ $subscriptions = list_candidates_by_setorial(
             <?php endif; ?>
             </tbody>
         </table>
-        <h3 id="exportarCSV" class="csv" data_filename='relatorio_inscritos_setorial_estado' data_csv='<?php echo json_encode($data) ?>'></h3>                                       
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_inscritos_setorial' data_csv='<?php echo json_encode($data) ?>'>
+        </iframe>
     </section>
 
 <?php get_footer(); ?>

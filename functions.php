@@ -20,7 +20,7 @@ function historias_setup() {
 	 * We need these for the inscricoes
 	 */
     require_once( get_template_directory() . '/includes/theme-options.php' );
-	require_once( get_template_directory() . '/vote-functions.php' );
+	require_once( get_template_directory() . '/vote/vote-functions.php' );
 	require_once( get_template_directory() . '/includes/shame.php' );
     require_once( get_template_directory() . '/includes/customizr.php' );
     require_once( get_template_directory() . '/includes/contextual-help.php' );
@@ -72,7 +72,9 @@ function historias_setup() {
 	 */
 	add_post_type_support( 'page', 'excerpt' );
 
-
+    // adiciona suporte a shortcode nos widgets
+    add_filter('widget_text', 'do_shortcode'); 
+    
 	// adiciona o suporte aos formatos de post
 	add_theme_support( 'post-formats', array( 'aside', 'chat', 'image', 'gallery', 'link', 'video', 'quote', 'audio', 'status' ) );
 

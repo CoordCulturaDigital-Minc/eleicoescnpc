@@ -139,10 +139,11 @@ function register_vote($user_id, $project_id) {
     $user = wp_get_current_user();
     $uf = get_user_meta($user_id, 'UF', true);
     $setorial = get_label_setorial_by_slug(get_user_meta($user_id, 'setorial', true));
-    $candidato = get_post_meta(get_user_meta($user_id, 'vote-project-id', true), 'candidate-display-name', true);
+    $candidate_name = get_post_meta(get_user_meta($user_id, 'vote-project-id', true), 'candidate-display-name', true);
+	$user_voted = user_already_voted($user_id);
     
     ob_start();
-    include('vote/vote-mail.php');
+    include('vote-mail.php');
     $mail_content = ob_get_contents();
     ob_end_clean();
     
@@ -152,10 +153,13 @@ function register_vote($user_id, $project_id) {
     $header = "From: $from\r\n";
     $header .= "Content-Type: text/html\r\n";
 
-    wp_mail($to, 'Confirmação de inscrição', $mail_content, $header); // TODO verificar envio de email
-    
-	return true;
-
+    $send_message = wp_mail($to, 'Confirmação de inscrição', $mail_content, $header); // TODO verificar envio de email
+    if (!$send_message) {
+        echo "Erro: não conseguiu enviar email!";
+        return false;
+    } else {
+        return true;
+    }
 }
 
 // ajax handle
