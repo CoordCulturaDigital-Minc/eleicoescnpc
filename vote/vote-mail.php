@@ -10,7 +10,11 @@
 
 	<div>
       <p><?php printf( "Olá %s da Setorial %s / %s.", ucwords(strtolower($user->user_name)), $setorial, $uf ); ?></p>
-        <p>Confirmamos seu voto no candidato <strong></strong>.</p>
+        <?php if ($user_voted): ?>
+      <p>Você alterou seu voto para a candidatura de <strong><?php echo $candidate_name; ?></strong>.</p>
+        <?php else : ?>
+      <p>Confirmamos seu voto na candidatura de <strong><?php echo $candidate_name; ?></strong>.</p>
+        <?php endif; ?>
 	</div>
       
 	<p>Atenciosamente,</p>
