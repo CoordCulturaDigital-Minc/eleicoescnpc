@@ -70,7 +70,7 @@ if(is_user_logged_in()) {
 
 
 
-		if( registration_is_open_for_candidate() && empty($subscription_number)) {
+		if( registration_is_open() && empty($subscription_number)) {
 			$form_disabled = false;
 			$disabled = '';
 			
@@ -118,7 +118,7 @@ if(is_user_logged_in()) {
 	
 	<?php if(!is_user_logged_in()) : // template de cadastro inicial ?>
 
-		<?php if(get_theme_option('inscricoes_abertas')) : ?>
+		<?php if( registration_is_open() ) : ?>
 			<div id="cadastro" class="form-step">
 				<div class="step__head">
 					<h2 class="step__title">Inscrição</h2>
@@ -130,7 +130,20 @@ if(is_user_logged_in()) {
 				<?php include( get_template_directory() . '/inscricoes/inscricoes-register-form.php' ); ?>
 			</div>
 		<?php else: ?>
-			<div class="error">Inscrições encerradas!</div>
+			<div class="form-eleitor candidate-not-found row">
+				<div class="col-md-3">
+					<i class="fa fa-exclamation"></i>
+				</div>
+				<div class="col-md-9">
+					<div class="col-md-12 offset3">
+						<br><br>
+						<p>Inscrições encerradas!</p>
+					</div>
+					<div class="col-md-12">
+					</div>
+				</div>
+			</div>
+			<br><br>
 		<?php endif;?>
 
 	<?php else: // } user logged in { ?>
@@ -178,7 +191,7 @@ if(is_user_logged_in()) {
 				echo $register_errors['cpf'] . "<br/>"; ?>
 			<?php echo "</div>" ?>
 
-		<?php elseif( !registration_is_open_for_candidate() && !$subscription_number ) : // Verifica se ainda pode se candidatar ?>
+		<?php elseif( !registration_is_open() && !$subscription_number ) : // Verifica se ainda pode se candidatar ?>
 			
 			<div class="form-eleitor candidate-not-found row">
 				<div class="col-md-3">
@@ -186,7 +199,8 @@ if(is_user_logged_in()) {
 				</div>
 				<div class="col-md-9">
 					<div class="col-md-12 offset3">
-						<br><br>
+						<br>
+						<p>Você já está inscrito(a) como eleitor!</p>
 						<p>Inscrições encerradas para novos candidatos!</p>
 					</div>
 					<div class="col-md-12">
@@ -233,7 +247,7 @@ if(is_user_logged_in()) {
 							
 						<?php endif; ?>
 						
-						<?php if( current_user_is_the_author($pid) && registration_is_open_for_candidate() ): ?>
+						<?php if( current_user_is_the_author($pid) && registration_is_open() ): ?>
 							<a  href="<?php echo site_url('inscricoes/'); ?>" id="pid-<?php echo $pid;?>" class="cancel-subscription"><i class="fa fa-pencil-square-o" title="<?php _e( 'Reopen Subscription', 'historias'); ?>"></i>  Editar meu perfil de candidato(a)</a>
 						<?php endif; ?>
 					<?php else: ?>
@@ -336,7 +350,7 @@ if(is_user_logged_in()) {
 			}
 			include(get_template_directory() . '/inscricoes/inscricoes-avaliacao.php');
 		} else {
-			$form_disabled = get_theme_option('avaliacoes_abertas') != '1';
+			$form_disabled = registration_is_open() != '1';
 			if( $form_disabled == true )
 				$disabled = ' disabled';
 

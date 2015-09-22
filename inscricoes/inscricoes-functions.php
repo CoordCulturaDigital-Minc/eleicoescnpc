@@ -33,9 +33,8 @@ function get_project_id_by_user_id($user_id) {
             'post_author' => $user_id
         );
         
-        if(registration_is_open_for_candidate()) 
-            $project_id = wp_insert_post($p);
 
+        $project_id = wp_insert_post($p);
         if (is_wp_error($project_id))
             die('Erro ao criar projeto');
     }
@@ -57,9 +56,9 @@ function cnpc_get_project_id_by_user_id( $user_id ) {
 
 }
 
-function registration_is_open_for_candidate() {
-    // return true;
-    return get_theme_option('inscricoes_abertas_candidato');
+function registration_is_open() {
+
+    return get_theme_option('inscricoes_abertas');
 }
 
 function get_current_project_index($user_id = null) {
@@ -312,7 +311,7 @@ function setoriaiscnpc_save_field() {
 
     $reponse = array();
 
-    if(registration_is_open_for_candidate()) {
+    if(registration_is_open()) {
         $filter = new Filter();
         $validator = new Validator();
 
@@ -530,7 +529,7 @@ function subscribe_project() {
     if($response['subscription_number']) {
         $response['status'] = 'warning';
         $response['message'] = __('Você já fez uma inscrição. Este é o seu número de inscrição');
-    } elseif(!registration_is_open_for_candidate()) {
+    } elseif(!registration_is_open()) {
         $response['status'] = 'warning';
         $response['message'] = __('Inscrições encerradas.');
     } else {
@@ -567,7 +566,7 @@ function cancel_subscription() {
         return false;
 
     // se as inscricoes estiverem encerradas apenas administradores podem cancelar
-    if( !current_user_can('administrator') && !registration_is_open_for_candidate() )
+    if( !current_user_can('administrator') && !registration_is_open() )
         return false;
 
     if(current_user_can('administrator') || current_user_is_the_author($pid)) {
