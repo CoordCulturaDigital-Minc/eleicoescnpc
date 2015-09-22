@@ -339,6 +339,7 @@ a.post-edit-link {
   font-size: 14px;
   line-height: 1.71;
   padding: 0 .5em;
+  margin-right: 50px;
   float: right; }
   a.post-edit-link:hover {
     background-color: rgba(41, 39, 36, 0.9); }
