@@ -85,7 +85,9 @@ class CNPC_Widget_Login extends WP_Widget
                         <?php if (get_user_meta($user_ID, 'e_candidato', true)): ?> 
                             <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('url'); ?>/inscricoes">Minha ficha de inscrição</a></li>
                         <?php else: ?>
-                              <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('url'); ?>/inscricoes">Quero me candidatar!</a></li>
+                            <?php if( registration_is_open() ) : ?>
+                                <li><i class="fa fa-pencil-square-o"></i> <a href="<?php bloginfo('url'); ?>/inscricoes">Quero me candidatar!</a></li>
+                            <?php endif; ?>
                         <?php endif; ?>
                     <?php endif; ?>
                     <li><i class="fa fa-user"></i> <a href="<?php bloginfo('url'); ?>/wp-admin/profile.php">Meu perfil</a></li>
@@ -102,7 +104,9 @@ class CNPC_Widget_Login extends WP_Widget
         	        			'remember' => false ) );
         	    ?>
                 <a href="<?php echo wp_lostpassword_url( get_permalink() ); ?>" id="lost-password"><?php _e( 'Esqueci a senha', 'historias' ); ?></a>
-                <a href="<?php bloginfo('url'); ?>/inscricoes" id="registrar" class="button"><?php _e( 'Inscrever-me', 'historias' ); ?></a>
+                 <?php if( registration_is_open() ) : ?>
+                    <a href="<?php bloginfo('url'); ?>/inscricoes" id="registrar" class="button"><?php _e( 'Inscrever-me', 'historias' ); ?></a>
+                <?php endif; ?>
                 </div>
             <?php endif;
         echo '</div>';

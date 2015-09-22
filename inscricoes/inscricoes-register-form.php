@@ -28,11 +28,9 @@
 					
 					<input id="tipo_eleitor" class="user_type hidden" type="radio" name="user_tipo" value="eleitor" <?php checked( $user_tipo, 'eleitor' ); ?> />
 					<label for="tipo_eleitor">Sou Eleitor(a)</label>
-				
-					<?php if( registration_is_open_for_candidate() ) : ?>
-						<input id="tipo_candidato" class="user_type hidden" type="radio" name="user_tipo" value="candidato" <?php checked( $user_tipo, 'candidato' ); ?>/>
-						<label for="tipo_candidato">Sou Candidato(a)</label>
-					<?php endif; ?>
+
+					<input id="tipo_candidato" class="user_type hidden" type="radio" name="user_tipo" value="candidato" <?php checked( $user_tipo, 'candidato' ); ?>/>
+					<label for="tipo_candidato">Sou Candidato(a)</label>
 				</div>
 				<!-- <p class="step__footer">Se você já se inscreveu, basta <a href="<?php echo wp_login_url( site_url( '/inscricoes/' )); ?>" title="Fazer login">fazer o login.</a></p> -->
 			</div>

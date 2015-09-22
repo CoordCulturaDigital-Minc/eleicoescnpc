@@ -21,15 +21,18 @@
                         <?php if (get_user_meta($user_ID, 'e_candidato', true)): ?> 
                             <li><a href="<?php bloginfo('url'); ?>/inscricoes">Minha Inscrição</a></li>
                         <?php else: ?>
-                            <li><a href="<?php bloginfo('url'); ?>/inscricoes">Quero me candidatar</a></li>
+                             <?php if( registration_is_open() ) : ?>
+                                <li><a href="<?php bloginfo('url'); ?>/inscricoes">Quero me candidatar</a></li>
+                            <?php endif; ?>
                         <?php endif; ?>
                             
                     <?php endif; ?>
-
                     <li><?php wp_loginout(home_url()); ?></li>
             <?php else: ?>
                     <li class="visible-xs-block"><a id="login" href="#">Entrar</a></li>
-                    <li><a href="<?php bloginfo('url'); ?>/inscricoes">Inscreva-se</a></li>
+                    <?php if( registration_is_open() ) : ?>
+                        <li><a href="<?php bloginfo('url'); ?>/inscricoes">Inscreva-se</a></li>
+                    <?php endif; ?>
             <?php endif; ?>
             
         </ul>

@@ -153,9 +153,6 @@ function theme_options_page_callback_function() {
           <input type="checkbox" id="inscricoes_abertas" class="text" name="theme_options[inscricoes_abertas]" value="1" <?php checked(true, get_theme_option('inscricoes_abertas'), true); ?>/>
           <label for="inscricoes_abertas"><strong>Inscrições abertas</strong></label><br/>
 
-          <input type="checkbox" id="inscricoes_abertas_candidato" class="text" name="theme_options[inscricoes_abertas_candidato]" value="1" <?php checked(true, get_theme_option('inscricoes_abertas_candidato'), true); ?>/>
-          <label for="inscricoes_abertas_candidato"><strong>Inscrições abertas para candidatos</strong></label><br/>
-
           <input type="checkbox" id="avaliacoes_abertas" class="text" name="theme_options[avaliacoes_abertas]" value="1" <?php checked(true, get_theme_option('avaliacoes_abertas'), true); ?>/>
           <label for="avaliacoes_abertas"><strong>Avaliações abertas</strong></label><br/>
 
