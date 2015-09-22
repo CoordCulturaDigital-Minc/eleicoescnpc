@@ -158,7 +158,7 @@ function inscritos_setorial_estado_page_callback_function() {
                     <?php endforeach ?>
              </tbody> 
         </table>
-        <h3 id="exportarCSV" class="csv" data_filename='relatorio_inscritos_setorial_estado' data_csv='<?php echo json_encode($data) ?>'></h3>
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_inscritos_setorial_estado' data_csv='<?php echo json_encode($data) ?>'>    
     </div>
 <?php endif; ?>
     <?php
@@ -222,7 +222,7 @@ function inscritos_estado_page_callback_function() {
                             </tr>
             </tbody> 
         </table>
-        <h3 id="exportarCSV" class="csv" data_filename='relatorio_inscritos_setoriais' data_csv='<?php echo json_encode($data) ?>'></h3>                            
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_inscritos_estado' data_csv='<?php echo json_encode($data) ?>'>
         </div>
 <?php endif; ?>
     <?php
@@ -259,7 +259,7 @@ function inscritos_setorial_page_callback_function() {
                 <?php endforeach ?>
             </tbody>
         </table>
-        <h3 id="exportarCSV" class="csv" data_filename='relatorio_inscritos_setoriais' data_csv='<?php echo json_encode($data) ?>'></h3>                            
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_inscritos_setoriais' data_csv='<?php echo json_encode($data) ?>'>                
     </div>
 <?php 
 }
@@ -321,7 +321,7 @@ function candidatos_setorial_page_callback_function() {
                     <?php endforeach ?>
             </tbody>
         </table>
-        <h3 id="exportarCSV" class="csv" data_filename='relatorio_candidatos_setorial' data_csv='<?php echo json_encode($data) ?>'></h3>                                    
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_setorial' data_csv='<?php echo json_encode($data) ?>'>    
     </div>
 <?php endif ?>
 <?php
@@ -359,7 +359,7 @@ function candidatos_estado_page_callback_function() {
                             </tr>                            
             </tbody> 
         </table>
-        <h3 id="exportarCSV" class="csv" data_filename='relatorio_candidatos_setorial' data_csv='<?php echo json_encode($data) ?>'></h3>                                       
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_total_estado' data_csv='<?php echo json_encode($data) ?>'>        
     </div>
 
 <?php } 
@@ -413,7 +413,7 @@ function candidatos_setorial_estado_page_callback_function() {
                     <?php endforeach ?>
             </tbody>
         </table>
-        <h3 id="exportarCSV" class="csv" data_filename='relatorio_inscritos_setoriais' data_csv='<?php echo json_encode($data) ?>'></h3>                                                
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_setorial' data_csv='<?php echo json_encode($data) ?>'>
         </div>
 <?php endif ?>
 
@@ -514,8 +514,8 @@ if ($uf_selected == 'all') {
                     <?php endforeach ?>
             </tbody>
         </table>
-        <h3 id="exportarCSV" class="csv" data_filename='relatorio_candidatos_genero' data_csv='<?php echo json_encode($data) ?>'></h3>                                                
-     </div>
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_genero' data_csv='<?php echo json_encode($data) ?>'>
+    </div>
 <?php      
   }
 }
@@ -581,8 +581,8 @@ function candidatos_afrodescententes_page_callback_function() {
             </tbody>
                 
         </table>
-        <h3 id="exportarCSV" class="csv" data_filename='relatorio_candidatos_afrodescendencia' data_csv='<?php echo json_encode($data) ?>'></h3>                                                
-        </div>
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_afrodescendencia' data_csv='<?php echo json_encode($data) ?>'>
+    </div>
     
 <?php } 
 
@@ -662,7 +662,7 @@ function votos_setorial_page_callback_function() {
                 <?php endforeach ?>
             </tbody>
         </table>
-        <h3 id="exportarCSV" class="csv" data_filename='relatorio_votos_setoriais' data_csv='<?php echo json_encode($data) ?>'></h3>
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_votos_setoriais' data_csv='<?php echo json_encode($data) ?>'>
     </div>
 
     
@@ -721,7 +721,7 @@ function votos_genero_page_callback_function() {
                 <?php endforeach ?>
             </tbody>
         </table>
-        <h3 id="exportarCSV" class="csv" data_filename='relatorio_votos_genero' data_csv='<?php echo json_encode($data) ?>'></h3>                
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_votos_genero' data_csv='<?php echo json_encode($data) ?>'>
     </div>
     
 <?php } 
@@ -780,7 +780,7 @@ function votos_afrodescendencia_page_callback_function() {
                 <?php endforeach ?>
             </tbody>
         </table>
-        <h3 id="exportarCSV" class="csv" data_filename='relatorio_votos_afrodescendencia' data_csv='<?php echo json_encode($data) ?>'></h3>                
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_votos_afrodescendencia' data_csv='<?php echo json_encode($data) ?>'>
     </div>
     
 <?php } 

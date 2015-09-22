@@ -72,7 +72,9 @@ function historias_setup() {
 	 */
 	add_post_type_support( 'page', 'excerpt' );
 
-
+    // adiciona suporte a shortcode nos widgets
+    add_filter('widget_text', 'do_shortcode'); 
+    
 	// adiciona o suporte aos formatos de post
 	add_theme_support( 'post-formats', array( 'aside', 'chat', 'image', 'gallery', 'link', 'video', 'quote', 'audio', 'status' ) );
 

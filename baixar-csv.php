@@ -38,16 +38,46 @@ function download_send_headers($filename) {
     header("Content-Disposition: attachment;filename={$filename}");
 }
 
-$filename = $_GET['filename'];
-$data_csv = $_GET['data_csv'];
-
-$filename = ($_GET['filename']) ? $_GET['filename'] : "relatorio";
+if (!empty($_POST)) {
+    $filename = $_POST['filename'];
+    $data_csv = $_POST['data_csv'];
+}
 
 if ($data_csv != '') {
     $data_csv = json_decode($data_csv);
     download_send_headers($filename . "_" . date("Y-m-d") . ".csv");
     echo array2csv($data_csv);
     die();
-}
+} else {
+?><!doctype html>
+<html lang="pt-BR">
+<head>
+<title></title>
+<link rel="stylesheet" href="admin.css">  
+<script type="text/javascript" src="../../../wp-includes/js/jquery/jquery.js?ver=1.11.1"></script>
+<script type="text/javascript">
+(function($) {
+    $(document).ready(function(e) {
+        // quando carregar, puxa dados do iframe parent
+        var data_csv = $("#iframeExportar", parent.document.body).attr('data_csv'),
+            filename = $("#iframeExportar", parent.document.body).attr('data_filename');
+        
+        $('#data_csv').val(data_csv);
+        $('#data_filename').val(filename);
 
-?>
+        $('#exportarCSVPost').click(function() {
+            $('#exportCSVForm').submit();
+        });
+    });
+})(jQuery); 
+    </script>
+</head>
+<body>
+<form id="exportCSVForm" action="baixar-csv.php" method="post">
+    <input id="data_csv" type="hidden" name="data_csv">
+    <input id="data_filename" type="hidden" name="data_filename">
+    <h3 id="exportarCSVPost" class="csv" data_filename='relatorio_inscritos_setorial_estado'></h3>
+</form>
+</body>
+</html>
+<?php } ?>
