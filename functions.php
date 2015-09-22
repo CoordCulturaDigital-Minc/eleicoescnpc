@@ -20,7 +20,7 @@ function historias_setup() {
 	 * We need these for the inscricoes
 	 */
     require_once( get_template_directory() . '/includes/theme-options.php' );
-	require_once( get_template_directory() . '/vote-functions.php' );
+	require_once( get_template_directory() . '/vote/vote-functions.php' );
 	require_once( get_template_directory() . '/includes/shame.php' );
     require_once( get_template_directory() . '/includes/customizr.php' );
     require_once( get_template_directory() . '/includes/contextual-help.php' );
