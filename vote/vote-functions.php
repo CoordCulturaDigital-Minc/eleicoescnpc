@@ -120,6 +120,8 @@ function register_vote($user_id, $project_id) {
 	if (!user_can_vote_in_project($user_id, $project_id))
 		return false;
 
+    $user_voted = user_already_voted($user_id);
+    
 	// remove todos os votos
 	delete_user_meta($user_id, 'vote-project-id');
 	
@@ -140,7 +142,6 @@ function register_vote($user_id, $project_id) {
     $uf = get_user_meta($user_id, 'UF', true);
     $setorial = get_label_setorial_by_slug(get_user_meta($user_id, 'setorial', true));
     $candidate_name = get_post_meta(get_user_meta($user_id, 'vote-project-id', true), 'candidate-display-name', true);
-	$user_voted = user_already_voted($user_id);
     $noreply_mail = 'nao-responder-votacultura@cultura.gov.br';
     
     ob_start();
