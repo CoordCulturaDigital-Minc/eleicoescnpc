@@ -141,13 +141,14 @@ function register_vote($user_id, $project_id) {
     $setorial = get_label_setorial_by_slug(get_user_meta($user_id, 'setorial', true));
     $candidate_name = get_post_meta(get_user_meta($user_id, 'vote-project-id', true), 'candidate-display-name', true);
 	$user_voted = user_already_voted($user_id);
+    $noreply_mail = 'nao-responder-votacultura@cultura.gov.br';
     
     ob_start();
     include('vote-mail.php');
     $mail_content = ob_get_contents();
     ob_end_clean();
     
-    $from = sprintf("%s <%s>", get_bloginfo('admin_email'), get_bloginfo('admin_email'));
+    $from = sprintf("%s <%s>", $noreply_mail, $noreply_mail);
     $to = array($user->user_email, get_bloginfo('admin_email')) ;
 
     $header = "From: $from\r\n";
