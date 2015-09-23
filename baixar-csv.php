@@ -63,7 +63,7 @@ if ($data_csv != '') {
             filename = $("#iframeExportar", parent.document.body).attr('data_filename');
         
         $('#data_csv').val(data_csv);
-        $('#data_filename').val(filename);
+        $('#filename').val(filename);
 
         $('#exportarCSVPost').click(function() {
             $('#exportCSVForm').submit();
@@ -75,7 +75,7 @@ if ($data_csv != '') {
 <body>
 <form id="exportCSVForm" action="baixar-csv.php" method="post">
     <input id="data_csv" type="hidden" name="data_csv">
-    <input id="data_filename" type="hidden" name="data_filename">
+    <input id="filename" type="hidden" name="filename">
     <h3 id="exportarCSVPost" class="csv" data_filename='relatorio_inscritos_setorial_estado'></h3>
 </form>
 </body>
