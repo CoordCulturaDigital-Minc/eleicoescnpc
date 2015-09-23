@@ -150,7 +150,7 @@ function register_vote($user_id, $project_id) {
     ob_end_clean();
     
     $from = sprintf("%s <%s>", $noreply_mail, $noreply_mail);
-    $to = array($user->user_email, $noreply_mail) ;
+    $to = array($user->user_email) ;
 
     $header = "From: $from\r\n";
     $header .= "Content-Type: text/html\r\n";
