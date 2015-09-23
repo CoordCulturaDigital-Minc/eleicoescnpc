@@ -270,3 +270,46 @@ function get_count_candidates_setoriais_afrodesc_by_uf($uf) {
     
     return $results;
 }
+
+function get_listagem_votos_auditoria($uf, $setorial) {
+    global $wpdb;
+
+    if( empty($uf) || empty($setorial) ) {
+        return false;
+    }
+    
+    $results = $wpdb->get_results($wpdb->prepare(
+        "SELECT "
+        ."u.display_name AS 'nome', "
+        ."um1.meta_value AS 'cpf', "
+        ."u.user_email AS 'email', "
+        ."u.user_registered AS 'data_inscricao', "
+        ."p.post_title AS 'candidato_votado', "
+        ."um2.meta_value AS 'uf', "
+        ."um3.meta_value AS 'voto_em', "
+        ."um4.meta_value AS 'trocou', "
+        ."um5.meta_value AS 'setorial' "
+        
+        ."FROM "
+        ."wp_users u "
+        ."INNER JOIN {$wpdb->usermeta} um1 ON um1.user_id = u.ID "
+        ."INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = u.ID "
+        ."INNER JOIN {$wpdb->usermeta} um3 ON um3.user_id = u.ID "
+        ."INNER JOIN {$wpdb->usermeta} um4 ON um4.user_id = u.ID "
+        ."INNER JOIN {$wpdb->usermeta} um5 ON um5.user_id = u.ID "
+        ."INNER JOIN {$wpdb->posts} p ON p.ID = um3.meta_value "
+        
+        ."WHERE "
+        ."um1.meta_key = 'cpf' AND "
+        ."um2.meta_key = 'UF' AND "
+        ."um3.meta_key = 'vote-project-id' AND "
+        ."um4.meta_key = 'vote-counter' AND "
+        ."um5.meta_key = 'setorial' AND "
+        ."um2.meta_value = %s AND "
+        ."um5.meta_value = %s "   
+        
+        ."ORDER BY candidato_votado ASC"
+        , $uf, $setorial));
+
+    return $results;
+}

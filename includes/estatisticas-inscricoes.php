@@ -39,6 +39,9 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Votos por setorial/estado', 'Votos por setorial/estado', 'manage_options', 'votos_setorial_estado', 'votos_setorial_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Votos por gênero setorial/estado', 'Votos por gênero', 'manage_options', 'votos_genero_setorial_estado', 'votos_genero_setorial_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Votos por afrodescendência setorial/estado', 'Votos por afrodescendência', 'manage_options', 'votos_afrodescendencia_setorial_estado', 'votos_afrodescendencia_setorial_estado_page_callback_function');
+
+    /* verificacao de fraude */
+    add_submenu_page('inscricoes_estatisticas', 'Auditoria: votos por setorial/estado ', 'Auditoria: votos por setorial estado', 'manage_options', 'listagem_votos_auditoria', 'listagem_votos_auditoria_page_callback_function');    
 }
 
     // $norte = $wpdb->get_var("select COUNT(meta_id) from $wpdb->postmeta where meta_key = 'company-region' and meta_value = 'nortecentroeste'");
@@ -810,4 +813,70 @@ function total_candidatos_eleitores_page_callback_function() {
     <h2>Total de candidatos e eleitores</h2>
 
 <?php }
+
+function listagem_votos_auditoria_page_callback_function() {
+    
+    if(!current_user_can('manage_options')){
+        return false;
+    }
+    
+    $uf_selected = $_GET['uf'];
+    $setorial_selected = $_GET['setorial'];
+
+    $states = get_all_states();
+    $setoriais = get_setoriais();
+    //$data[] = ['Setorial', 'Candidatos'];
+    
+    if (!in_array($uf_selected, array_keys($states))) {
+        $uf_selected = '';
+    }
+    if (!in_array($setorial_selected, array_keys($setoriais))) {
+        $setorial_selected = '';
+    }
+    
+    ?>
+    <h4>Selecione a UF:</h4>
+    <select class="select-state-auditoria" id="uf_listagem_votos_auditoria">
+      <option></option>
+      <?php foreach ( $states as $uf_item => $state_item ): ?>
+      <option value="<?php echo $uf_item ?>" <?php if ($uf_item == $uf_selected) { echo "selected"; } ?>><?php echo $state_item ?></option>
+      <?php endforeach ?>
+    </select>
+      
+    <h4>Selecione a Setorial:</h4>
+    <select class="select-setorial-auditoria" id="setorial_listagem_votos_auditoria">
+      <option></option>
+      <?php foreach ( $setoriais as $slug => $setorial_item ): ?>
+      <option value="<?php echo $slug ?>" <?php if ($slug == $setorial_selected) { echo "selected"; } ?>><?php echo $setorial_item ?></option>
+      <?php endforeach ?>
+    </select>
+      <br/>
+      <input type="button" value="buscar" id="listagem_votos_auditoria">
+      <br/><br/>
+      
+<?php if ($uf_selected != '' && $setorial_selected != '') : ?>
+<?php
+      /*
+        pegar de todos os votantes da setorial xyz e UF xy:
+        nome, cpf, email, data_inscricao, candidado_votado, trocou_voto     
+      */
+      $data[] = ['nome', 'cpf', 'email', 'data de inscrição', 'candidato votado', 'qtd vezes trocou de voto']; 
+      $votes = get_listagem_votos_auditoria($uf_selected, $setorial_selected);
+      
+      foreach ($votes as $vote) {
+
+          $data[] = [
+              $vote->nome,
+              $vote->cpf,
+              $vote->email,
+              $vote->data_inscricao,
+              $vote->candidato_votado,
+              $vote->trocou
+          ];
+      }
+?>     
+      <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo "auditoria-$uf_selected-$setorial_selected"; ?>' data_csv='<?php echo json_encode($data) ?>'>
+<?php endif; ?>
+<?php 
+}
 ?>
