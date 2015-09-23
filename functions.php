@@ -584,7 +584,7 @@ function hqf_mail_sender_name($from_name) {
 }
 add_filter( 'wp_mail_from', 'hqf_mail_sender' );
 function hqf_mail_sender($from_name) {
-    return get_option('admin_email');
+    return 'nao-responder-votacultura@cultura.gov.br';
 }
 
 
