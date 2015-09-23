@@ -291,7 +291,7 @@ function get_listagem_votos_auditoria($uf, $setorial) {
         ."um5.meta_value AS 'setorial' "
         
         ."FROM "
-        ."wp_users u "
+        ."{$wpdb->users} u "
         ."INNER JOIN {$wpdb->usermeta} um1 ON um1.user_id = u.ID "
         ."INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = u.ID "
         ."INNER JOIN {$wpdb->usermeta} um3 ON um3.user_id = u.ID "
