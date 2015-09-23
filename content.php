@@ -11,7 +11,7 @@
 		<?php if ( has_post_thumbnail() ) : ?>
 			<div class="featured-media">
 				<a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title(); ?>">
-<?php the_post_thumbnail(array(200, 200)); ?></a>		
+<?php the_post_thumbnail(array(250, 250)); ?></a>		
 			</div>
 		<?php endif;?>
 		
