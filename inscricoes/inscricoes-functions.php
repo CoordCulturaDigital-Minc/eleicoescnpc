@@ -807,15 +807,16 @@ function mail_new_subscription($subscription_number, $pid) {
     $user = get_user_by_project_id($pid);
     $f = array_merge($step1['fields'], $step2['fields']);
     $subscription_number = substr($subscription_number, 0, 8);
+    $noreply_mail = 'nao-responder-votacultura@cultura.gov.br';    
 
     ob_start();
     include('candidate-mail.php');
     $mail_content = ob_get_contents();
     ob_end_clean();
 
-    $from = sprintf("%s <%s>", get_bloginfo('admin_email'), get_bloginfo('admin_email'));
-    $to = array($user->user_email, get_bloginfo('admin_email')) ;
-
+    $from = sprintf("%s <%s>", $noreply_mail, $noreply_mail);
+    $to = array($user->user_email) ;
+    
     $header = "From: $from\r\n";
     $header .= "Content-Type: text/html\r\n";
 
