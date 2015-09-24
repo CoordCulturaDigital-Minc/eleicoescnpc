@@ -30,7 +30,6 @@ the_post(); ?>
     				  <div class="destaque-text">
                           <a href="<?php echo get_permalink($post->ID); ?>">
                               <h1><?php echo $post->post_title; ?></h1>
-                              <h3><?php echo $post->post_excerpt; ?></h3>
                           </a>
 	                  </div>
 

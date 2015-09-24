@@ -3053,13 +3053,6 @@ section.features {
     text-transform: none !important;    
 }
 
-.destaques-content .destaques .destaque .destaque-text h3 {
-    font-size: 16px;
-    font-weight: bold;
-    text-align: left;
-    color: #656154;
-}
-
 .destaques-content .flex-direction-nav li a {
     position: absolute;
     top: 110px;
