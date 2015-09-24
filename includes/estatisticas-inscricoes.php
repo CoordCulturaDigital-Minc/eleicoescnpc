@@ -128,11 +128,12 @@ function inscritos_setorial_estado_page_callback_function() {
     $setoriais = get_setoriais();
     $states = get_all_states();
     $data[] = ['Estado', 'Inscritos'];
+    $total_nacional = 0;
     
     if (!in_array($setorial_selected, array_keys($setoriais))) {
         $setorial_selected = '';
     }
-    // TODO: colocar total no final da listagem
+    
 ?>            
     <h4>Selecione a setorial:</h4>
     <select class="select-setorial" id="inscritos_setorial_estado">
@@ -159,10 +160,15 @@ function inscritos_setorial_estado_page_callback_function() {
                           <?php $page = get_page_by_path( $uf .'-'. $slug, 'OBJECT', 'foruns' ) ?>
                           <?php $data[] = [$state, $users[$uf]]; ?>
                             <tr class="alternate">
-                                <td class="num"><?php echo $state; ?></td>
+                                <td><?php echo $state; ?></td>
                                 <td class="num"><?php echo $users[$uf]; ?></td>
                             </tr>
+                            <?php $total_nacional += $users[$uf]; ?>
                     <?php endforeach ?>
+                            <tr class="alternate">
+                                <td><strong>Brasil</strong></td>
+                                <td class="num"><?php echo $total_nacional; ?></td>
+                            </tr>                          
              </tbody> 
         </table>
         <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_inscritos_setorial_estado' data_csv='<?php echo json_encode($data) ?>'>    
@@ -947,7 +953,6 @@ function candidatos_inabilitados_page_callback_function() {
       <input type="button" value="buscar" id="candidatos_inabilitados" class="filtrar_relatorio">
       <br/><br/>    
     <?php
-
       if ($uf_selected || $setorial_selected) {
           // por uf ou setorial
           $candidatos_total = get_count_candidates($uf_selected, $setorial_selected, false);
@@ -969,6 +974,8 @@ function candidatos_inabilitados_page_callback_function() {
       $data[] = [$candidatos_habilitados, $candidatos_inabilitados, $candidatos_total];
     ?>
     <h2>Candidatos habilitados e inabilitados:</h2>
+        <?php if ($uf_selected) { echo " <h4>" . $states[$uf_selected] . "</h4> "; } ?>
+        <?php if ($setorial_selected) { echo " <h4>" . $setoriais[$setorial_selected] . "</h4>"; } ?>
         <table class="wp-list-table widefat">
             <thead>
                 <tr>
