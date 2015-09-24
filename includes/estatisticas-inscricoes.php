@@ -27,8 +27,10 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inscritos por setorial', 'Candidatos inscritos por setorial', 'edit_published_posts', 'candidatos_setorial', 'candidatos_setorial_page_callback_function');        
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inscritos - total por estado', 'Candidatos inscritos - total por estado', 'edit_published_posts', 'candidatos_estado', 'candidatos_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inscritos por setorial/estado', 'Candidatos inscritos por setorial/estado', 'edit_published_posts', 'candidatos_setorial_estado', 'candidatos_setorial_estado_page_callback_function');        
-    add_submenu_page('inscricoes_estatisticas', 'Candidatos por gênero por setorial/estado', 'Candidatos por gênero', 'edit_published_posts', 'candidatos_genero', 'candidatos_genero_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Candidatos por gênero por setorial/estado', 'Candidatos por gênero por setorial/estado', 'edit_published_posts', 'candidatos_genero', 'candidatos_genero_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Candidatos por gênero por estado - listagem', 'Candidatos por gênero por estado - listagem', 'edit_published_posts', 'candidatos_genero_estado', 'candidatos_genero_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Candidatos afrodescendentes por setorial/estado', 'Candidatos afrodescendentes', 'edit_published_posts', 'candidatos_afrodescententes', 'candidatos_afrodescententes_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Candidatos afrodescendentes por setorial/estado', 'Candidatos afrodescendentes_estado', 'edit_published_posts', 'candidatos_afrodescententes_estado', 'candidatos_afrodescententes_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inabilitados', 'Candidatos inabilitados', 'edit_published_posts', 'candidatos_inabilitados', 'candidatos_inabilitados_page_callback_function');
     
     /* votos */
@@ -42,7 +44,7 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Votos por afrodescendência setorial/estado', 'Votos por afrodescendência', 'manage_options', 'votos_afrodescendencia_setorial_estado', 'votos_afrodescendencia_setorial_estado_page_callback_function');
 
     /* verificacao de fraude */
-    add_submenu_page('inscricoes_estatisticas', 'Auditoria: votos por setorial/estado ', 'Auditoria: votos por setorial estado', 'manage_options', 'listagem_votos_auditoria', 'listagem_votos_auditoria_page_callback_function');    
+    add_submenu_page('inscricoes_estatisticas', 'Auditoria: votos por setorial/estado ', 'Auditoria: votos por setorial estado', 'manage_options', 'listagem_votos_auditoria', 'listagem_votos_auditoria_page_callback_function');
 }
 
     // $norte = $wpdb->get_var("select COUNT(meta_id) from $wpdb->postmeta where meta_key = 'company-region' and meta_value = 'nortecentroeste'");
@@ -84,8 +86,8 @@ function relatorios_sumario_page_callback_function() {
 	<ul class='wp-submenu wp-submenu-wrap'>
     <li><h4>Inscritos</h4></li>            
     <li><a href='admin.php?page=inscritos_estado'>Inscrições por Estado</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=inscritos_estado_total'>Inscrições por Estado - listagem</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=inscritos_setorial'>Inscrições por Setorial (total nacional)</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=inscritos_estado_total'>Inscrições por Estado - total por estado</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=inscritos_setorial'>Inscrições por Setorial - total por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=inscritos_setorial_estado'>Inscrições por Setorial/Estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_inscritos_votaram'>Inscritos que votaram/não votaram</a> <small>disponível</small></li>
     <li><h4>Candidatos</h4></li>        
@@ -93,7 +95,9 @@ function relatorios_sumario_page_callback_function() {
     <li><a href='admin.php?page=candidatos_setorial'>Candidatos por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_setorial_estado'>Candidatos por setorial/estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_genero'>Candidatos por gênero</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=candidatos_genero_estado'>Candidatos por gênero por estado - listagem</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_afrodescententes'>Candidatos afrodescendentes</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=candidatos_afrodescententes_estado'>Candidatos afrodescendentes por estado - listagem</a></li>
     <li><a href='admin.php?page=candidatos_inabilitados'>Candidatos inabilitados</a> <small>disponível</small></li>
 
 <?php if(current_user_can('manage_options')): ?>
@@ -468,7 +472,7 @@ function candidatos_estado_page_callback_function() {
             <thead>
                 <tr>
                     <th scope="col"  class="manage-column column-role">Estado</th>
-                    <th scope="col"  class="manage-column column-role num">Candidados</th>
+                    <th scope="col"  class="manage-column column-role num">Candidatos</th>
                 </tr>
             </thead>      
             <tbody>
@@ -548,7 +552,74 @@ function candidatos_setorial_estado_page_callback_function() {
 
 <?php }
 
-function candidatos_genero_page_callback_function() {
+ function candidatos_genero_estado_page_callback_function() {
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
+?>
+    <div class="wrap span-20">
+       <h2>Candidatos por gênero por setorial/estado - listagem</h2>
+            <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-role">Estado</th>
+                    <th scope="col"  class="manage-column column-posts">Setorial</th>
+                    <th scope="col"  class="manage-column column-posts num">Mulheres</th>
+                    <th scope="col"  class="manage-column column-posts num">Homens</th>
+                    <th scope="col"  class="manage-column column-posts num">Total</th>    
+                </tr>
+            </thead>
+     <?php
+     $states = get_all_states();
+     $homens_nacional = 0;
+     $mulheres_nacional = 0;
+     ?>
+     <?php foreach ( $states as $uf => $state): ?>
+<?php $candidates = get_count_candidates_setoriais_genre_uf($uf); ?>
+<?php
+$candidates_masc = intval(($candidates['masculino'] != '') ? $candidates['masculino'] : 0);
+$candidates_fem = intval(($candidates['feminino'] != '') ? $candidates['feminino'] : 0);
+$candidates_tot = $candidates_masc + $candidates_fem;
+
+if ($candidates_tot == 0) {
+    $candidates_masc_perc = 0;
+    $candidates_fem_perc = 0;
+} else {
+    $candidates_masc_perc = round($candidates_masc / $candidates_tot * 100, 2);
+    $candidates_fem_perc = round($candidates_fem / $candidates_tot * 100, 2);
+}
+$data[] = [$uf, $setorial, $candidates_fem, $candidates_masc, $candidates_tot];
+$homens_nacional += $candidates_masc;
+$mulheres_nacional += $candidates_fem;
+?>           
+                <tr class="alternate">
+                    <td><?php echo $state; ?></td>
+                    <td><?php echo $setorial; ?></a></td>
+                    <td class="num"><?php echo $candidates_fem_perc ?>% (<?php echo $candidates_fem; ?>)</td>
+                    <td class="num"><?php echo $candidates_masc_perc ?>% (<?php echo $candidates_masc; ?>)</td>
+                    <td class="num"><?php echo $candidates_tot; ?></td>                    
+                </tr>
+     <?php endforeach; ?>
+<?php
+$total_nacional = $homens_nacional + $mulheres_nacional;
+$mulheres_nacional_perc = round($mulheres_nacional / $total_nacional * 100, 2);
+$homens_nacional_perc = round($homens_nacional / $total_nacional * 100, 2);
+?>
+                <tr class="alternate">
+                    <td><?php echo $state; ?></td>
+                    <td><?php echo $setorial; ?></a></td>
+                    <td class="num"><?php echo $mulheres_nacional_perc ?>% (<?php echo $mulheres_nacional; ?>)</td>
+                    <td class="num"><?php echo $homens_nacional_perc ?>% (<?php echo $homens_nacional; ?>)</td>
+                   <td class="num"><?php echo $total_nacional; ?></td>                    
+                </tr>
+
+            </tbody>
+        </table>
+     <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_genero' data_csv='<?php echo json_encode($data) ?>'>
+<?php
+ }
+
+ function candidatos_genero_page_callback_function() {
     if(!current_user_can('edit_published_posts')){
         return false;
     }
@@ -594,30 +665,25 @@ if (!in_array($uf_selected, array_keys($states))) {
 if ($uf_selected == 'all') {
 ?>
 <!--  TODO: listagem completa dará saída somente dos dados raw / csv -->
-            <tbody>
             <?php foreach ( $states as $uf => $state ): ?>
                     <?php $candidates = get_count_candidates_setoriais_genre_by_uf($uf); ?>
                     <?php foreach ( $setoriais as $slug => $setorial ): ?>
                     <?php if( !empty($candidates[$slug]) ) : ?>
 <?php
-            $candidates_masc = intval(($candidates[$slug]['masculino'] != '') ? $candidates[$slug]['masculino'] : 0);
-            $candidates_fem = intval(($candidates[$slug]['feminino'] != '') ? $candidates[$slug]['feminino'] : 0);
-            $candidates_tot = $candidates_masc + $candidates_fem;
-            $candidates_masc_perc = round($candidates_masc / $candidates_tot * 100, 2);
-            $candidates_fem_perc = round($candidates_fem / $candidates_tot * 100, 2);
-?>
-                            <?php $data[] = [$setorial, $candidates_fem, $candidates_masc, $candidates_fem, $candidates_tot]; ?>  
-                            <tr class="alternate">
-                                <td><?php echo $uf; ?></td>
-                                <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
-                                <td class="num"><?php echo $candidates_fem_perc ?>% (<?php echo $candidates_fem; ?>)</td>
-                                <td class="num"><?php echo $candidates_masc_perc ?>% (<?php echo $candidates_masc; ?>)</td>
-                                <td class="num"><?php echo $candidates_tot; ?></td>                    
-                            </tr>
+$candidates_masc = intval(($candidates[$slug]['masculino'] != '') ? $candidates[$slug]['masculino'] : 0);
+$candidates_fem = intval(($candidates[$slug]['feminino'] != '') ? $candidates[$slug]['feminino'] : 0);
+$candidates_tot = $candidates_masc + $candidates_fem;
+$candidates_masc_perc = round($candidates_masc / $candidates_tot * 100, 2);
+$candidates_fem_perc = round($candidates_fem / $candidates_tot * 100, 2);
+$data[] = [$uf, $setorial, $candidates_fem, $candidates_masc, $candidates_tot];
+?>  
                         <?php endif; ?>
                     <?php endforeach ?>
                 <?php endforeach ?>
-            </tbody><?php   
+            </tbody>
+         </table>
+         <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_genero' data_csv='<?php echo json_encode($data) ?>'>
+<?php   
     
   } else if ($uf_selected != '') {
 ?>         <tbody>
@@ -643,7 +709,11 @@ if ($uf_selected == 'all') {
                     <?php endforeach ?>
             </tbody>
         </table>
-        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_genero' data_csv='<?php echo json_encode($data) ?>'>
+<?php if (sizeof($data) > 1): ?>
+         <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_genero' data_csv='<?php echo json_encode($data) ?>'>
+<?php else: ?>
+         <strong>Sem resultados</strong>
+<?php endif ?>                    
     </div>
 <?php      
   }
@@ -1056,10 +1126,6 @@ function listagem_votos_auditoria_page_callback_function() {
       
 <?php if ($uf_selected != '' && $setorial_selected != '') : ?>
 <?php
-      /*
-        pegar de todos os votantes da setorial xyz e UF xy:
-        nome, cpf, email, data_inscricao, candidado_votado, trocou_voto     
-      */
       $data[] = ['nome', 'cpf', 'email', 'data de inscrição', 'candidato votado', 'qtd vezes trocou de voto']; 
       $votes = get_listagem_votos_auditoria($uf_selected, $setorial_selected);
       

@@ -280,6 +280,40 @@ function get_count_candidates_setoriais_genre_by_uf($uf) {
     return $results;
 }
 
+function get_count_candidates_setoriais_genre_uf($uf) {
+    global $wpdb;
+
+    if( empty($uf) )
+        return false;
+
+    $count = array();
+    $results = array();
+    $count = $wpdb->get_results( $wpdb->prepare("SELECT COUNT(u1.umeta_id) as count,"
+                                                    ."mm.meta_value AS genre "                 
+                                                    ."FROM {$wpdb->posts} as p " 
+                                                    ."INNER JOIN {$wpdb->postmeta} as m ON p.ID = m.post_id "
+                                                    ."INNER JOIN {$wpdb->usermeta} as u1 ON p.post_author = u1.user_id "
+                                                    ."INNER JOIN {$wpdb->usermeta} as u2 ON p.post_author = u2.user_id "
+                                                    ."INNER JOIN {$wpdb->postmeta} as mm ON p.ID = mm.post_id "
+                                                    ."WHERE p.post_type = 'projetos' "
+                                                    ."AND m.meta_key = 'subscription-valid' " 
+                                                    ."AND mm.meta_key = 'candidate-genre'"
+                                                    ."AND u1.meta_key = 'setorial' "
+                                                    ."AND u2.meta_key = 'uf' AND u2.meta_value = %s"
+                                                    ."GROUP BY genre", $uf) );
+    if (!empty($count)) {
+        foreach($count as $item) {
+            if ($item->genre == 'masculino') {
+                $results['masculino'] = $item->count;
+            } else if ($item->genre == 'feminino')  {
+                $results['feminino'] = $item->count;
+            }
+        }
+    }
+    
+    return $results;    
+}
+
 
 function get_count_candidates_setoriais_afrodesc_by_uf($uf) {
     global $wpdb;
