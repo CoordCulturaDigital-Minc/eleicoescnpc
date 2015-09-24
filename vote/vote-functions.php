@@ -379,3 +379,43 @@ function is_user_this_uf_setorial( $uf_setorial ) {
 
 	return false;
 }
+
+function get_inscritos_votaram() {
+    global $wpdb;
+    $results = $wpdb->get_var("SELECT count(u.ID) "
+                             ."FROM {$wpdb->users} u "
+                             ."INNER JOIN {$wpdb->usermeta} um ON um.user_id = u.ID "
+                             ."WHERE um.meta_key = 'vote-project-id'");
+    
+    return $results;
+}
+
+function get_votos_inscritos_votaram_uf_setorial($uf=false, $setorial=false) {
+    global $wpdb;
+
+    $inner = '';
+    $where = '';
+    $args = [];
+    
+    if ($uf) {
+        $inner .= "INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = u.ID ";
+        $where .= "AND um2.meta_key = 'UF' AND um2.meta_value = %s ";
+        $args[] = $uf;
+    }
+    if ($setorial) {
+        $inner .= "INNER JOIN {$wpdb->usermeta} um3 ON um3.user_id = u.ID ";
+        $where .= "AND um3.meta_key = 'setorial' AND um3.meta_value = %s ";
+        $args[] = $setorial;
+    }
+    
+    
+    $results = $wpdb->get_var($wpdb->prepare("SELECT count(u.ID) "
+                                            ."FROM {$wpdb->users} u "
+                                            ."INNER JOIN {$wpdb->usermeta} um1 ON um1.user_id = u.ID "
+                                            . $inner
+                                            ."WHERE um1.meta_key = 'vote-project-id' "
+                                            . $where, $args));
+    return $results;
+}
+
+

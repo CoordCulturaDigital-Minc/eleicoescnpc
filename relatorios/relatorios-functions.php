@@ -31,6 +31,33 @@ function get_count_users_states_by_uf($uf){
     return $count;
 }
 
+function get_count_users_setorial_uf($uf = false, $setorial = false) {
+    global $wpdb;
+    
+    $inner = '';
+    $where = '';
+    $args = [];
+
+    if ($uf) {
+        $inner .= "INNER JOIN {$wpdb->usermeta} um1 ON um1.user_id = u.ID ";
+        $where .= "AND um1.meta_key = 'UF' AND um1.meta_value = %s ";
+        $args[] = $uf;
+    }
+    if ($setorial) {
+        $inner .= "INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = u.ID ";
+        $where .= "AND um2.meta_key = 'setorial' AND um2.meta_value = %s ";
+        $args[] = $setorial;
+    }
+    
+    
+    $results = $wpdb->get_var($wpdb->prepare("SELECT count(u.ID) "
+                                            ."FROM {$wpdb->users} u "
+                                            . $inner
+                                            ."WHERE 1=1 "
+                                            . $where, $args));
+    return $results;
+}
+
 function get_count_candidates_setoriais_by_uf($uf) {
     global $wpdb;
 

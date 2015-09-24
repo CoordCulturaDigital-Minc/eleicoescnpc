@@ -3,22 +3,27 @@
 	// usado para filtros de relatorios
 	
 	var atualizaFiltro = function(action, uf, setorial) {
-            var uf = uf || false,
-		setorial = setorial || false,
+            var uf = uf || '',
+		setorial = setorial || '',
                 currentPage = window.location.href.split('?')[0],
 		action = action || false;
 
 	    if (!action) { return false }
-
-	    if (uf !== false && setorial === false) {
+	    	    
+	    if (uf !== '' && setorial === '') {
 		// somente uf
+		console.log('somente uf');
                 window.location.href = currentPage + '?page=' + action + '&uf=' + uf;
-            } else if (setorial !== false && uf === false) {
-		// somente setorial	
+            } else if ((setorial !== '') && (uf === '')) {
+		// somente setorial
+		console.log('somente setorial');		
                 window.location.href = currentPage + '?page=' + action + '&setorial=' + setorial;
-	    } else if (setorial !== false && uf !== false) {
+	    } else if ((setorial !== '') && (uf !== '')) {
 		// uf E setorial
+		console.log('both');		
                 window.location.href = currentPage + '?page=' + action + '&uf=' + uf + '&setorial=' + setorial;
+	    } else {
+		window.location.href = currentPage + '?page=' + action;
 	    }
         }
 	
@@ -28,6 +33,11 @@
 	$('.select-setorial').change(function() {
             atualizaFiltro(this.id, false, this.value);
         });
+
+	$('.filtrar_relatorio').click(function() {
+	    atualizaFiltro(this.id, $('#filtrar_uf').val(), $('#filtrar_setorial').val());
+	});
+	
 	$('#listagem_votos_auditoria').click(function() {
             atualizaFiltro(this.id, $('#uf_listagem_votos_auditoria').val(), $('#setorial_listagem_votos_auditoria').val());
 	});

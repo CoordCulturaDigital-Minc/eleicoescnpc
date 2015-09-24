@@ -85,7 +85,7 @@ function relatorios_sumario_page_callback_function() {
     <li><a href='admin.php?page=inscritos_estado'>Inscrições por Estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=inscritos_setorial'>Inscrições por Setorial (total nacional)</a> <small>disponível</small></li>
     <li><a href='admin.php?page=inscritos_setorial_estado'>Inscrições por Setorial/Estado</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=votos_inscritos_votaram'>Inscritos que votaram/não votaram</a></li>
+    <li><a href='admin.php?page=votos_inscritos_votaram'>Inscritos que votaram/não votaram</a> <small>disponível</small></li>
     <li><h4>Candidatos</h4></li>        
     <li><a href='admin.php?page=candidatos_estado'>Candidatos por estado - total por estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_setorial'>Candidatos por setorial</a> <small>disponível</small></li>
@@ -226,7 +226,7 @@ function inscritos_estado_page_callback_function() {
                                 <td class="num"><strong><?php echo $count_states; ?></strong></td>
                             </tr>
             </tbody> 
-        </table>
+       </table>
         <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_inscritos_estado' data_csv='<?php echo json_encode($data) ?>'>
         </div>
 <?php endif; ?>
@@ -274,6 +274,75 @@ function votos_inscritos_votaram_page_callback_function() {
         return false;
     }
 
+    $uf_selected = $_GET['uf'];    
+    $setorial_selected = $_GET['setorial'];
+    $states = get_all_states();
+    $setoriais = get_setoriais();
+    $data[] = ['Votaram', 'Não votaram', 'Total'];
+    
+    if (!in_array($setorial_selected, array_keys($setoriais))) {
+        $setorial_selected = '';
+    }
+    
+    ?>
+    <h4>Selecione a UF:</h4>
+    <select class="select-state-v" id="filtrar_uf">
+      <option value="">Todas</option>
+      <?php foreach ( $states as $uf_item => $state_item ): ?>
+      <option value="<?php echo $uf_item ?>" <?php if ($uf_item == $uf_selected) { echo "selected"; } ?>><?php echo $state_item ?></option>
+      <?php endforeach ?>
+    </select>
+      
+    <h4>Selecione a Setorial:</h4>
+    <select class="select-setorial-v" id="filtrar_setorial">
+      <option value="">Todas</option>
+      <?php foreach ( $setoriais as $slug => $setorial_item ): ?>
+      <option value="<?php echo $slug ?>" <?php if ($slug == $setorial_selected) { echo "selected"; } ?>><?php echo $setorial_item ?></option>
+      <?php endforeach ?>
+    </select>
+      <br/>
+      <input type="button" value="buscar" id="votos_inscritos_votaram" class="filtrar_relatorio">
+      <br/><br/>    
+    <?php
+
+      if ($uf_selected || $setorial_selected) {
+          $inscritos_total = get_count_users_setorial_uf($uf_selected, $setorial_selected);
+          $inscritos_votaram = get_votos_inscritos_votaram_uf_setorial($uf_selected, $setorial_selected);
+      } else {
+          $inscritos_total = get_count_users_setorial_uf();
+          $inscritos_votaram = get_votos_inscritos_votaram_uf_setorial();
+      }
+      
+      $inscritos_nao_votaram = $inscritos_total - $inscritos_votaram;
+      if ($inscritos_votaram == 0 || $inscritos_total == 0) {
+          $inscritos_votaram_perc = 0;
+          $inscritos_nao_votaram_perc = 0;
+      } else {
+          $inscritos_votaram_perc = round($inscritos_votaram / $inscritos_total * 100, 2);
+          $inscritos_nao_votaram_perc = round($inscritos_nao_votaram / $inscritos_total * 100, 2);
+      }
+      $data[] = [$inscritos_votaram, $inscritos_nao_votaram, $inscritos_total];
+    ?>
+    <h2>Inscritos que votaram e não votaram:</h2>
+        <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-posts">Votaram</th>
+                    <th scope="col"  class="manage-column column-role num">Não votaram</th>
+                    <th scope="col"  class="manage-column column-role num">Total</th>
+                </tr>
+            </thead>    
+            <tbody>
+                           <tr class="alternate">
+    <td class="num"><?php echo $inscritos_votaram;?> (<?php echo $inscritos_votaram_perc; ?>%)</td>
+    <td class="num"><?php echo $inscritos_nao_votaram;?> (<?php echo $inscritos_nao_votaram_perc; ?>%)</td>
+    <td class="num"><strong><?php echo $inscritos_total;?></strong></td>    
+                            </tr>
+            </tbody>
+      </table>
+      <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_votos_inscritos_votaram' data_csv='<?php echo json_encode($data) ?>'>                
+<?php
+    
 }
 
 /**
