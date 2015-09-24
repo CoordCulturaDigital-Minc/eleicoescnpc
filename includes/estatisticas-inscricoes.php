@@ -18,7 +18,8 @@ function inscricoes_estatisticas_menu() {
     
     /* inscritos */
     add_submenu_page('inscricoes_estatisticas', 'Inscrições por Estado', 'Inscrições por Estado', 'edit_published_posts', 'inscritos_estado', 'inscritos_estado_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Inscrições por Setorial (total nacional)', 'Inscrições por Setorial (total nacional)', 'edit_published_posts', 'inscritos_setorial', 'inscritos_setorial_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Inscrições por Estado - listagem', 'Inscrições por Estado - listagem', 'edit_published_posts', 'inscritos_estado_total', 'inscritos_estado_total_page_callback_function');    
+    add_submenu_page('inscricoes_estatisticas', 'Inscrições por Setorial - listagem', 'Inscrições por Setorial - listagem', 'edit_published_posts', 'inscritos_setorial', 'inscritos_setorial_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Inscrições por Setorial/Estado', 'Inscrições por Setorial/Estado', 'edit_published_posts', 'inscritos_setorial_estado', 'inscritos_setorial_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Inscritos que votaram/não votaram', 'Inscritos que votaram/não votaram', 'edit_published_posts', 'votos_inscritos_votaram', 'votos_inscritos_votaram_page_callback_function');
     
@@ -83,6 +84,7 @@ function relatorios_sumario_page_callback_function() {
 	<ul class='wp-submenu wp-submenu-wrap'>
     <li><h4>Inscritos</h4></li>            
     <li><a href='admin.php?page=inscritos_estado'>Inscrições por Estado</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=inscritos_estado_total'>Inscrições por Estado - listagem</a> <small>disponível</small></li>
     <li><a href='admin.php?page=inscritos_setorial'>Inscrições por Setorial (total nacional)</a> <small>disponível</small></li>
     <li><a href='admin.php?page=inscritos_setorial_estado'>Inscrições por Setorial/Estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_inscritos_votaram'>Inscritos que votaram/não votaram</a> <small>disponível</small></li>
@@ -92,7 +94,7 @@ function relatorios_sumario_page_callback_function() {
     <li><a href='admin.php?page=candidatos_setorial_estado'>Candidatos por setorial/estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_genero'>Candidatos por gênero</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_afrodescententes'>Candidatos afrodescendentes</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=candidatos_inabilitados'>Candidatos inabilitados</a></li>
+    <li><a href='admin.php?page=candidatos_inabilitados'>Candidatos inabilitados</a> <small>disponível</small></li>
 
 <?php if(current_user_can('manage_options')): ?>
     <li><h4>Votos</h4></li>    
@@ -130,7 +132,7 @@ function inscritos_setorial_estado_page_callback_function() {
     if (!in_array($setorial_selected, array_keys($setoriais))) {
         $setorial_selected = '';
     }
-    
+    // TODO: colocar total no final da listagem
 ?>            
     <h4>Selecione a setorial:</h4>
     <select class="select-setorial" id="inscritos_setorial_estado">
@@ -233,6 +235,48 @@ function inscritos_estado_page_callback_function() {
     <?php
 }
 
+function inscritos_estado_total_page_callback_function() {
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
+
+    $data[] = ['UF', 'Inscritos'];
+    $total_nacional = 0;
+?>
+    <div class="wrap span-20">
+    
+    <h2>Total de inscritos nos estados</h2>
+        <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-posts">Estado</th>
+                    <th scope="col"  class="manage-column column-role num">Inscritos</th>
+                </tr>
+            </thead>
+    
+            <?php $states = get_all_states(); ?>
+            <tbody>
+            <?php foreach ( $states as $uf => $state ): ?>
+                            <?php $user_count = get_count_users_states_by_uf($uf); ?>
+                            <?php $data[] = [$state, $user_count]; ?>
+                            <?php $total_nacional += $user_count; ?>
+                            <tr class="alternate">
+                                <td><?php echo $state; ?></td>                            
+                                <td class="num"><?php echo $user_count; ?></td>
+                            </tr>
+            <?php endforeach ?>
+                            <?php $data[] = ['Brasil', $total_nacional]; ?>
+                            <tr class="alternate">
+                                <td><strong>Brasil</strong></td>                            
+                                <td class="num"><?php echo $total_nacional; ?></td>
+                            </tr>                            
+            </tbody>
+        </table>
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_inscritos_estado_listagem' data_csv='<?php echo json_encode($data) ?>'>                
+    </div>
+<?php     
+}
+
 function inscritos_setorial_page_callback_function() {
     if(!current_user_can('edit_published_posts')){
         return false;
@@ -283,8 +327,13 @@ function votos_inscritos_votaram_page_callback_function() {
     if (!in_array($setorial_selected, array_keys($setoriais))) {
         $setorial_selected = '';
     }
+    if (!in_array($uf_selected, array_keys($states))) {
+        $uf_selected = '';
+    }    
     
     ?>
+    <div class="wrap span-20">
+    
     <h4>Selecione a UF:</h4>
     <select class="select-state-v" id="filtrar_uf">
       <option value="">Todas</option>
@@ -340,7 +389,7 @@ function votos_inscritos_votaram_page_callback_function() {
                             </tr>
             </tbody>
       </table>
-      <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_votos_inscritos_votaram' data_csv='<?php echo json_encode($data) ?>'>                
+      <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_votos_inscritos_votaram' data_csv='<?php echo json_encode($data) ?>'>                </div>
 <?php
     
 }
@@ -668,7 +717,7 @@ function candidatos_afrodescententes_page_callback_function() {
 function votos_total_page_callback_function() {
     if(!current_user_can('manage_options')){
         return false;
-    }
+    }    
 }
 
 function votos_estado_page_callback_function() {
@@ -864,6 +913,79 @@ function candidatos_inabilitados_page_callback_function() {
     if(!current_user_can('edit_published_posts')){
         return false;
     }
+
+    $uf_selected = $_GET['uf'];    
+    $setorial_selected = $_GET['setorial'];
+    $states = get_all_states();
+    $setoriais = get_setoriais();
+    $data[] = ['Habilitados', 'Inabilitados', 'Total'];
+    
+    if (!in_array($setorial_selected, array_keys($setoriais))) {
+        $setorial_selected = '';
+    }
+    if (!in_array($uf_selected, array_keys($states))) {
+        $uf_selected = '';
+    }
+    
+    ?>
+    <h4>Selecione a UF:</h4>
+    <select class="select-state-v" id="filtrar_uf">
+      <option value="">Todas</option>
+      <?php foreach ( $states as $uf_item => $state_item ): ?>
+      <option value="<?php echo $uf_item ?>" <?php if ($uf_item == $uf_selected) { echo "selected"; } ?>><?php echo $state_item ?></option>
+      <?php endforeach ?>
+    </select>
+      
+    <h4>Selecione a Setorial:</h4>
+    <select class="select-setorial-v" id="filtrar_setorial">
+      <option value="">Todas</option>
+      <?php foreach ( $setoriais as $slug => $setorial_item ): ?>
+      <option value="<?php echo $slug ?>" <?php if ($slug == $setorial_selected) { echo "selected"; } ?>><?php echo $setorial_item ?></option>
+      <?php endforeach ?>
+    </select>
+      <br/>
+      <input type="button" value="buscar" id="candidatos_inabilitados" class="filtrar_relatorio">
+      <br/><br/>    
+    <?php
+
+      if ($uf_selected || $setorial_selected) {
+          // por uf ou setorial
+          $candidatos_total = get_count_candidates($uf_selected, $setorial_selected, false);
+          $candidatos_habilitados = get_count_candidates($uf_selected, $setorial_selected);
+      } else {
+          // total
+          $candidatos_total = get_count_candidates(false, false, false);
+          $candidatos_habilitados = get_count_candidates();
+      }
+      
+      $candidatos_inabilitados = $candidatos_total - $candidatos_habilitados;
+      if ($candidatos_habilitados == 0 || $candidatos_total == 0) {
+          $candidatos_habilitados_perc = 0;
+          $candidatos_inabilitados_perc = 0;
+      } else {
+          $candidatos_habilitados_perc = round($candidatos_habilitados / $candidatos_total * 100, 2);
+          $candidatos_inabilitados_perc = round($candidatos_inabilitados / $candidatos_total * 100, 2);
+      }
+      $data[] = [$candidatos_habilitados, $candidatos_inabilitados, $candidatos_total];
+    ?>
+    <h2>Candidatos habilitados e inabilitados:</h2>
+        <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-posts">Habilitados</th>
+                    <th scope="col"  class="manage-column column-role num">Inabilitados</th>
+                    <th scope="col"  class="manage-column column-role num">Total</th>
+                </tr>
+            </thead>    
+            <tbody>
+                           <tr class="alternate">
+    <td class="num"><?php echo $candidatos_habilitados;?> (<?php echo $candidatos_habilitados_perc; ?>%)</td>
+    <td class="num"><?php echo $candidatos_inabilitados;?> (<?php echo $candidatos_inabilitados_perc; ?>%)</td>
+    <td class="num"><strong><?php echo $candidatos_total;?></strong></td>    
+                            </tr>
+            </tbody>
+      </table>
+      <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_habilitados_inabilitados' data_csv='<?php echo json_encode($data) ?>'>                    
 ?>
 
     <div class="wrap span-20">

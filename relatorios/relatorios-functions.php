@@ -114,16 +114,40 @@ function get_count_candidates_by_setorial($setorial) {
 }
 
 
-function get_count_candidates() {
+function get_count_candidates($uf = false, $setorial = false, $only_subscription_valid = true) {
     global $wpdb;
     
-    $count = $wpdb->get_var("SELECT COUNT(u.umeta_id) " 
+    $inner = '';
+    $where = '';
+    $args = [];
+    
+    if ($uf) {
+        $inner .= "INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = u.user_id ";
+        $where .= "AND um2.meta_key = 'UF' AND um2.meta_value = %s ";
+        $args[] = $uf;
+    }
+    if ($setorial) {
+        $inner .= "INNER JOIN {$wpdb->usermeta} um3 ON um3.user_id = u.user_id ";
+        $where .= "AND um3.meta_key = 'setorial' AND um3.meta_value = %s ";
+        $args[] = $setorial;
+    }
+
+    $inner .= "INNER JOIN {$wpdb->postmeta} as pm ON p.ID = pm.post_id ";
+    if ($only_subscription_valid) {
+        $where .= "AND pm.meta_key = 'subscription-valid' ";
+    } else {
+        $where .= "AND pm.meta_key = 'candidate-confirm-infos' ";
+    }
+    
+    $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(u.umeta_id) " 
                                                     ."FROM {$wpdb->posts} as p " 
-                                                    ."INNER JOIN {$wpdb->postmeta} as m ON p.ID = m.post_id "
                                                     ."INNER JOIN {$wpdb->usermeta} as u ON p.post_author = u.user_id "
+                                                    . $inner
                                                     ."WHERE p.post_type = 'projetos' "
-                                                    ."AND m.meta_key = 'subscription-valid' " 
-                                                    ."AND u.meta_key = 'setorial' AND u.meta_value != '' ");
+                                                    ."AND u.meta_key = 'setorial' AND u.meta_value != '' "
+                                                    . $where,
+    $args));
+    
     return $count;
 }
 
