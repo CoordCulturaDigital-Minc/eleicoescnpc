@@ -3009,7 +3009,6 @@ section.features {
 /* destaques - carrossel home */
 .destaques-content {
     position: relative;
-    border: 3px solid #125b26;
     border-radius: 4px;
     overflow: hidden;
     z-index: 10;
@@ -3034,14 +3033,11 @@ section.features {
 .destaques-content .destaques .destaque .destaque-text {
     clear: both;
     text-align: center;
-    background-color:#125A26;
+    background-color:#f0ac0e;
     position: absolute;
     top: 66%;
-    height: 33%;
-    width: 100%;
-    padding: 4px;
-    padding-left: 20px;
-    opacity: 0.8;
+    height: 16%;
+    padding: 8px 20px 0 20px;
 }
 
 .destaques-content .destaques .destaque img{
@@ -3051,16 +3047,17 @@ section.features {
 }
 
 .destaques-content .destaques .destaque .destaque-text h1 {
-    font-size: 36px;
+    font-size: 32px;
     text-align: left;
-    color: #fff;
+    color: #656154;
+    text-transform: none !important;    
 }
 
 .destaques-content .destaques .destaque .destaque-text h3 {
     font-size: 16px;
     font-weight: bold;
     text-align: left;
-    color: #fff;
+    color: #656154;
 }
 
 .destaques-content .flex-direction-nav li a {
