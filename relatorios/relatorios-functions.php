@@ -315,6 +315,50 @@ function get_count_candidates_setoriais_genre_uf($uf) {
 }
 
 
+function get_count_candidates_afrodesc_setoriais_uf($uf = false, $setorial = false) {
+    global $wpdb;
+
+    $inner = '';
+    $where = '';
+    $args = [];
+    
+    if ($uf) {
+        $inner .= "INNER JOIN {$wpdb->usermeta} um1 ON um1.user_id = p.post_author ";
+        $where .= "AND um1.meta_key = 'UF' AND um1.meta_value = %s ";
+        $args[] = $uf;
+    }
+    if ($setorial) {
+        $inner .= "INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = p.post_author ";
+        $where .= "AND um2.meta_key = 'setorial' AND um2.meta_value = %s ";
+        $args[] = $setorial;
+    }
+    
+    $results = [];
+    $count = $wpdb->get_results($wpdb->prepare("SELECT count(pm2.meta_id) AS count,"
+                                                    ."pm2.meta_value AS race "                 
+                                                    ."FROM {$wpdb->posts} as p " 
+                                                    ."INNER JOIN {$wpdb->postmeta} as pm1 ON p.ID = pm1.post_id "
+                                                    ."INNER JOIN {$wpdb->postmeta} as pm2 ON p.ID = pm2.post_id "
+                                                    . $inner
+                                                    ."WHERE p.post_type = 'projetos' "
+                                                    ."AND pm1.meta_key = 'subscription-valid' " 
+                                                    ."AND pm2.meta_key = 'candidate-race'"
+                                                    . $where
+                                                    ."GROUP BY race", $args) );
+        
+    if (!empty($count)) {
+        foreach($count as $item) {
+            if ($item->race == 'true') {                  
+                $results['afro'] = $item->count;
+            } else {
+                $results['outros'] = $item->count;
+            }
+        }
+    }        
+    
+    return $results;     
+}
+
 function get_count_candidates_setoriais_afrodesc_by_uf($uf) {
     global $wpdb;
 
