@@ -38,10 +38,11 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por estado - listagem', 'Total de votos por estado - listagem', 'manage_options', 'votos_estado_total', 'votos_estado_total_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por setorial', 'Votos por setorial', 'manage_options', 'votos_setorial', 'votos_setorial_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por gênero', 'Votos por gênero', 'manage_options', 'votos_genero', 'votos_genero_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Total de votos por afrodescendência', 'Votos por afrodescendência', 'manage_options', 'votos_afrodescendencia', 'votos_afrodescendencia_page_callback_function');           
+    add_submenu_page('inscricoes_estatisticas', 'Total de votos por gênero por estado - listagem', 'Votos por gênero - listagem', 'manage_options', 'votos_genero_estado_total', 'votos_genero_estado_total_page_callback_function');    
+    add_submenu_page('inscricoes_estatisticas', 'Total de votos por afrodescendência', 'Votos por afrodescendência', 'manage_options', 'votos_afrodesc', 'votos_afrodesc_page_callback_function');           
     add_submenu_page('inscricoes_estatisticas', 'Votos por setorial/estado', 'Votos por setorial/estado', 'manage_options', 'votos_setorial_estado', 'votos_setorial_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Votos por gênero setorial/estado', 'Votos por gênero', 'manage_options', 'votos_genero_setorial_estado', 'votos_genero_setorial_estado_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Votos por afrodescendência setorial/estado', 'Votos por afrodescendência', 'manage_options', 'votos_afrodescendencia_setorial_estado', 'votos_afrodescendencia_setorial_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Votos por afrodescendência setorial/estado', 'Votos por afrodescendência', 'manage_options', 'votos_afrodesc_setorial_estado', 'votos_afrodesc_setorial_estado_page_callback_function');
 
     /* verificacao de fraude */
     add_submenu_page('inscricoes_estatisticas', 'Auditoria: votos por setorial/estado ', 'Auditoria: votos por setorial estado', 'manage_options', 'listagem_votos_auditoria', 'listagem_votos_auditoria_page_callback_function');
@@ -99,7 +100,7 @@ function relatorios_sumario_page_callback_function() {
     <li><a href='admin.php?page=candidatos_genero'>Candidatos por gênero</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_genero_estado_total'>Candidatos por gênero por estado - listagem</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_afrodesc'>Candidatos afrodescendentes</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=candidatos_afrodesc_estado_total'>Candidatos afrodescendentes por estado - listagem</a></li>
+    <li><a href='admin.php?page=candidatos_afrodesc_estado_total'>Candidatos afrodescendentes por estado - listagem</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_inabilitados'>Candidatos inabilitados</a> <small>disponível</small></li>
 
 <?php if(current_user_can('manage_options')): ?>
@@ -108,8 +109,9 @@ function relatorios_sumario_page_callback_function() {
     <li><a href='admin.php?page=votos_setorial'>Votos por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_setorial_estado'>Votos por setorial/estado</a> </li>    
     <li><a href='admin.php?page=votos_genero'>Votos por gênero</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=votos_genero_estado_total'>Votos por gênero - listagem</a> </li>
     <li><a href='admin.php?page=votos_afrodesc'>Votos por afrodescendência</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=votos_afrodesc_setorial_estado'>Votos por setorial/estado por afrodescendência</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=votos_afrodesc_setorial_estado'>Votos por setorial/estado por afrodescendência</a> </li>
     <li><a href='admin.php?page=votos_genero_setorial_estado'>Votos por setorial/estado por gênero</a></li>
 
     <li><a href='admin.php?page=listagem_votos_auditoria'>Auditoria: votos por setorial e estado</a> <small>disponível</small></li>
@@ -982,7 +984,13 @@ function votos_setorial_page_callback_function() {
 
     
 <?php }
-                
+
+
+function votos_genero_estado_total_page_callback_function() {   
+    if(!current_user_can('manage_options')){
+        return false;
+    }
+}
 
 function votos_genero_page_callback_function() {   
     if(!current_user_can('manage_options')){
@@ -1187,18 +1195,6 @@ function candidatos_inabilitados_page_callback_function() {
 
 <?php } 
 
-
-function total_candidatos_eleitores_page_callback_function() {   
-    if(!current_user_can('edit_published_posts')){
-        return false;
-    }
-?>
-
-    <div class="wrap span-20">
-
-    <h2>Total de candidatos e eleitores</h2>
-
-<?php }
 
 function listagem_votos_auditoria_page_callback_function() {
     
