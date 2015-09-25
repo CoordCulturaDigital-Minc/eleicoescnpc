@@ -107,10 +107,10 @@ function relatorios_sumario_page_callback_function() {
     <li><h4>Votos</h4></li>    
     <li><a href='admin.php?page=votos_estado_total'>Votos por estado - listagem</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_setorial'>Votos por setorial</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=votos_setorial_estado'>Votos por setorial/estado</a> </li>    
+    <li><a href='admin.php?page=votos_setorial_estado'>Votos por setorial/estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_genero'>Votos por gênero</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_genero_estado_total'>Votos por gênero - listagem</a> </li>
-    <li><a href='admin.php?page=votos_afrodesc'>Votos por afrodescendência</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=votos_afrodesc'>Votos por afrodescendência</a> </li>
     <li><a href='admin.php?page=votos_afrodesc_setorial_estado'>Votos por setorial/estado por afrodescendência</a> </li>
     <li><a href='admin.php?page=votos_genero_setorial_estado'>Votos por setorial/estado por gênero</a></li>
 
@@ -924,6 +924,74 @@ function votos_setorial_estado_page_callback_function() {
     if(!current_user_can('manage_options')){
         return false;
     }
+
+    $uf_selected = $_GET['uf'];
+    $setorial_selected = $_GET['setorial'];
+
+    $states = get_all_states();
+    $setoriais = get_setoriais();
+    $data[] = ['UF', 'Setorial', 'Total de votos'];
+    
+    if (!in_array($uf_selected, array_keys($states))) {
+        $uf_selected = '';
+    }
+    if (!in_array($setorial_selected, array_keys($setoriais))) {
+        $setorial_selected = '';
+    }
+    
+    ?>
+    <h4>Selecione a UF:</h4>
+    <select class="select-state-v" id="filtrar_uf">
+      <option>Todas</option>
+      <?php foreach ( $states as $uf_item => $state_item ): ?>
+      <option value="<?php echo $uf_item ?>" <?php if ($uf_item == $uf_selected) { echo "selected"; } ?>><?php echo $state_item ?></option>
+      <?php endforeach ?>
+    </select>
+      
+    <h4>Selecione a Setorial:</h4>
+    <select class="select-setorial-v" id="filtrar_setorial">
+      <option value="">Todas</option>
+      <?php foreach ( $setoriais as $slug => $setorial_item ): ?>
+      <option value="<?php echo $slug ?>" <?php if ($slug == $setorial_selected) { echo "selected"; } ?>><?php echo $setorial_item ?></option>
+      <?php endforeach ?>
+    </select>
+      <br/>
+      <input type="button" value="buscar" id="votos_setorial_estado" class="filtrar_relatorio">
+      <br/><br/>
+      
+<?php $votes = get_votos_estado_setorial($uf_selected, $setorial_selected); ?>
+<?php
+      $setorial_selected = ($setorial_selected == '') ? 'Todas as setoriais' : $setorial_selected;
+      $uf_selected = ($uf_selected == '') ? 'Total nacional' : $uf_selected;
+      
+      ?>      
+<?php if ($votes > 0) : ?>    
+      <div class="wrap span-20">
+
+      <h2>Votos por setorial/estado</h2>
+
+      <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-role">Estado</th>
+                    <th scope="col"  class="manage-column column-posts">Setorial</th>
+                    <th scope="col"  class="manage-column column-posts num">Votos</th>
+                </tr>
+            </thead>
+<?php $data[] = [$uf_selected, $setorial_selected, $votes]; ?>
+                <tr class="alternate">
+                    <td><?php echo $uf_selected; ?></td>
+                    <td><?php echo $setorial_selected; ?></a></td>
+                    <td class="num"><?php echo $votes;?></td>
+                </tr>
+            </tbody>
+        </table>
+    <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo "relatoroi_votos_estado_setorial"; ?>' data_csv='<?php echo json_encode($data) ?>'>
+    </div>
+<?php else: ?>
+    Sem resultados
+<?php endif; ?>
+<?php     
 }
 
 function votos_genero_setorial_estado_page_callback_function() {
@@ -1207,7 +1275,6 @@ function listagem_votos_auditoria_page_callback_function() {
 
     $states = get_all_states();
     $setoriais = get_setoriais();
-    //$data[] = ['Setorial', 'Candidatos'];
     
     if (!in_array($uf_selected, array_keys($states))) {
         $uf_selected = '';
@@ -1218,7 +1285,7 @@ function listagem_votos_auditoria_page_callback_function() {
     
     ?>
     <h4>Selecione a UF:</h4>
-    <select class="select-state-auditoria" id="uf_listagem_votos_auditoria">
+    <select class="select-state-v" id="filtrar_relatorio">
       <option></option>
       <?php foreach ( $states as $uf_item => $state_item ): ?>
       <option value="<?php echo $uf_item ?>" <?php if ($uf_item == $uf_selected) { echo "selected"; } ?>><?php echo $state_item ?></option>
@@ -1226,21 +1293,21 @@ function listagem_votos_auditoria_page_callback_function() {
     </select>
       
     <h4>Selecione a Setorial:</h4>
-    <select class="select-setorial-auditoria" id="setorial_listagem_votos_auditoria">
+    <select class="select-setorial-v" id="filtrar_setorial">
       <option></option>
       <?php foreach ( $setoriais as $slug => $setorial_item ): ?>
       <option value="<?php echo $slug ?>" <?php if ($slug == $setorial_selected) { echo "selected"; } ?>><?php echo $setorial_item ?></option>
       <?php endforeach ?>
     </select>
       <br/>
-      <input type="button" value="buscar" id="listagem_votos_auditoria">
+      <input type="button" value="buscar" id="listagem_votos_auditoria" class="filtrar_relatorio">
       <br/><br/>
       
 <?php if ($uf_selected != '' && $setorial_selected != '') : ?>
 <?php
       $data[] = ['nome', 'cpf', 'email', 'data de inscrição', 'candidato votado', 'qtd vezes trocou de voto']; 
       $votes = get_listagem_votos_auditoria($uf_selected, $setorial_selected);
-      
+    
       foreach ($votes as $vote) {
 
           $data[] = [
@@ -1252,8 +1319,11 @@ function listagem_votos_auditoria_page_callback_function() {
               $vote->trocou
           ];
       }
+    
 ?>     
       <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo "auditoria-$uf_selected-$setorial_selected"; ?>' data_csv='<?php echo json_encode($data) ?>'>
+<?php else: ?>
+    Sem resultados.
 <?php endif; ?>
 <?php 
 }

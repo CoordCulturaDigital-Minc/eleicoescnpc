@@ -439,6 +439,6 @@ function get_listagem_votos_auditoria($uf, $setorial) {
         
         ."ORDER BY candidato_votado ASC"
         , $uf, $setorial));
-
+    
     return $results;
 }

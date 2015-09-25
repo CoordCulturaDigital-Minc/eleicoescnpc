@@ -413,6 +413,37 @@ function get_inscritos_votaram() {
     return $results;
 }
 
+
+function get_votos_estado_setorial($uf = false, $setorial = false) {
+    global $wpdb;
+    
+    $inner = '';
+    $where = '';
+    $args = [];
+
+    if ($uf) {
+        $inner .= "INNER JOIN {$wpdb->usermeta} um3 ON um3.user_id = um1.user_id ";
+        $where .= "AND um3.meta_key = 'UF' AND um3.meta_value = %s ";
+        $args[] = $uf;        
+    }
+    if ($setorial) {
+        $inner .= "INNER JOIN {$wpdb->usermeta} um4 ON um4.user_id = um1.user_id ";
+        $where .= "AND um4.meta_key = 'setorial' AND um4.meta_value = %s ";
+        $args[] = $setorial;
+    }
+    
+    $results = $wpdb->get_var($wpdb->prepare("SELECT COUNT(um1.umeta_id)"
+                                            ."FROM {$wpdb->usermeta} as um1 "
+                                            ."INNER JOIN {$wpdb->usermeta} as um2 ON um1.user_id = um2.user_id "
+                                            . $inner
+                                            ."WHERE um1.meta_key = 'vote-project-id' "
+                                            ."AND um2.meta_key = 'setorial' "
+                                            . $where, $args));
+    
+    return $results;    
+}
+
+
 function get_votos_inscritos_votaram_uf_setorial($uf=false, $setorial=false) {
     global $wpdb;
 

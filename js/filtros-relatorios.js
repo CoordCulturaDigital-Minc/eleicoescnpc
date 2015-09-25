@@ -7,9 +7,11 @@
 		setorial = setorial || '',
                 currentPage = window.location.href.split('?')[0],
 		action = action || false;
-
+	    console.log(action);
+	    console.log(uf);
+	    console.log(setorial);
 	    if (!action) { return false }
-	    	    
+	    
 	    if (uf !== '' && setorial === '') {
 		// somente uf
 		console.log('somente uf');
@@ -36,10 +38,6 @@
 
 	$('.filtrar_relatorio').click(function() {
 	    atualizaFiltro(this.id, $('#filtrar_uf').val(), $('#filtrar_setorial').val());
-	});
-	
-	$('#listagem_votos_auditoria').click(function() {
-            atualizaFiltro(this.id, $('#uf_listagem_votos_auditoria').val(), $('#setorial_listagem_votos_auditoria').val());
 	});
     });
 })(jQuery);
