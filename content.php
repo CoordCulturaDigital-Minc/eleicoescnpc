@@ -8,10 +8,11 @@
 	</header>
 
 	<?php if( is_search() || is_home() || is_front_page() ) : ?>
-		<?php if ( has_post_thumbnail() ) : ?>
+        <?php $is_destaque = has_term('destaque', 'category', $post->id); ?>
+        <?php if ( has_post_thumbnail() && !$is_destaque) : ?>
 			<div class="featured-media">
 				<a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title(); ?>">
-<?php the_post_thumbnail(array(250, 250)); ?></a>		
+                <?php the_post_thumbnail(array(250, 250)); ?></a>		
 			</div>
 		<?php endif;?>
 		
