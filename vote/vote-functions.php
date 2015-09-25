@@ -278,6 +278,29 @@ function get_number_of_votes_by_project($project_id) {
 	return $wpdb->get_var($wpdb->prepare("SELECT COUNT(user_id) FROM $wpdb->usermeta WHERE meta_key = 'vote-project-id' AND meta_value = %s", $project_id) );
 }
 
+function get_total_votes_by_uf($uf) {
+    global $wpdb;
+
+    $results = $wpdb->get_var($wpdb->prepare(    "SELECT COUNT(u.umeta_id)"
+                                                     ."FROM {$wpdb->usermeta} as u "
+                                                     ."INNER JOIN {$wpdb->usermeta} as uu ON u.user_id = uu.user_id "
+                                                     ."INNER JOIN {$wpdb->usermeta} as uuu ON u.user_id = uuu.user_id "        
+                                                     ."WHERE u.meta_key = 'vote-project-id'"
+                                                     ."AND uu.meta_key = 'setorial'"
+                                                     ."AND uuu.meta_key = 'uf' AND uuu.meta_value = %s", $uf ));
+    return $results;
+}
+
+function get_count_votes() {
+    global $wpdb;
+
+    $results = $wpdb->get_var("SELECT COUNT(u.umeta_id)"
+                             ."FROM {$wpdb->usermeta} as u "
+                             ."INNER JOIN {$wpdb->usermeta} as uu ON u.user_id = uu.user_id "
+                             ."WHERE u.meta_key = 'vote-project-id'"
+                             ."AND uu.meta_key = 'setorial'");
+    return $results;
+}
 
 function get_number_of_votes_setorial_by_uf($uf) {
 	global $wpdb;

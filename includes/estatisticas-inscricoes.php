@@ -19,23 +19,23 @@ function inscricoes_estatisticas_menu() {
     /* inscritos */
     add_submenu_page('inscricoes_estatisticas', 'Inscrições por Estado', 'Inscrições por Estado', 'edit_published_posts', 'inscritos_estado', 'inscritos_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Inscrições por Estado - listagem', 'Inscrições por Estado - listagem', 'edit_published_posts', 'inscritos_estado_total', 'inscritos_estado_total_page_callback_function');    
-    add_submenu_page('inscricoes_estatisticas', 'Inscrições por Setorial - listagem', 'Inscrições por Setorial - listagem', 'edit_published_posts', 'inscritos_setorial', 'inscritos_setorial_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Inscrições por Setorial - listagem', 'Inscrições por Setorial - listagem', 'edit_published_posts', 'inscritos_setorial_total', 'inscritos_setorial_total_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Inscrições por Setorial/Estado', 'Inscrições por Setorial/Estado', 'edit_published_posts', 'inscritos_setorial_estado', 'inscritos_setorial_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Inscritos que votaram/não votaram', 'Inscritos que votaram/não votaram', 'edit_published_posts', 'votos_inscritos_votaram', 'votos_inscritos_votaram_page_callback_function');
     
     /* candidatos */    
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inscritos por setorial', 'Candidatos inscritos por setorial', 'edit_published_posts', 'candidatos_setorial', 'candidatos_setorial_page_callback_function');        
-    add_submenu_page('inscricoes_estatisticas', 'Candidatos inscritos - total por estado', 'Candidatos inscritos - total por estado', 'edit_published_posts', 'candidatos_estado', 'candidatos_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Candidatos inscritos - total por estado', 'Candidatos inscritos - total por estado', 'edit_published_posts', 'candidatos_estado_total', 'candidatos_estado_total_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inscritos por setorial/estado', 'Candidatos inscritos por setorial/estado', 'edit_published_posts', 'candidatos_setorial_estado', 'candidatos_setorial_estado_page_callback_function');        
     add_submenu_page('inscricoes_estatisticas', 'Candidatos por gênero por setorial/estado', 'Candidatos por gênero por setorial/estado', 'edit_published_posts', 'candidatos_genero', 'candidatos_genero_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Candidatos por gênero por estado - listagem', 'Candidatos por gênero por estado - listagem', 'edit_published_posts', 'candidatos_genero_estado', 'candidatos_genero_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Candidatos por gênero por estado - listagem', 'Candidatos por gênero por estado - listagem', 'edit_published_posts', 'candidatos_genero_estado_total', 'candidatos_genero_estado_total_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Candidatos afrodescendentes por setorial/estado', 'Candidatos afrodescendentes', 'edit_published_posts', 'candidatos_afrodescententes', 'candidatos_afrodescententes_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Candidatos afrodescendentes por setorial/estado', 'Candidatos afrodescendentes_estado', 'edit_published_posts', 'candidatos_afrodescententes_estado', 'candidatos_afrodescententes_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Candidatos afrodescendentes por setorial/estado', 'Candidatos afrodescendentes_estado', 'edit_published_posts', 'candidatos_afrodescententes_estado_total', 'candidatos_afrodescententes_estado_total_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inabilitados', 'Candidatos inabilitados', 'edit_published_posts', 'candidatos_inabilitados', 'candidatos_inabilitados_page_callback_function');
     
     /* votos */
     add_submenu_page('inscricoes_estatisticas', 'Total geral de votos', 'Total geral de votos', 'manage_options', 'votos_total', 'votos_total_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Total de votos por estado', 'Votos por estado', 'manage_options', 'votos_estado', 'votos_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Total de votos por estado', 'Votos por estado - listagem', 'manage_options', 'votos_estado_total', 'votos_estado_total_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por setorial', 'Votos por setorial', 'manage_options', 'votos_setorial', 'votos_setorial_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por gênero', 'Votos por gênero', 'manage_options', 'votos_genero', 'votos_genero_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por afrodescendência', 'Votos por afrodescendência', 'manage_options', 'votos_afrodescendencia', 'votos_afrodescendencia_page_callback_function');           
@@ -73,12 +73,14 @@ function relatorios_sumario_page_callback_function() {
 
 <?php $inscritos = get_count_subscriptions(); ?>
 <?php $candidates = get_count_candidates(); ?>
+<?php $votes = get_count_votes(); ?>    
 
     <div class="wrap span-20">
     <h2>Total de inscrições:</h2>
 
-<p>Eleitores inscritos: <?php echo $inscritos; ?></p>
-<p>Candidatos inscritos: <?php echo $candidates; ?></p>
+<h4>Eleitores inscritos: <?php echo $inscritos; ?></h4>
+<h4>Candidatos inscritos: <?php echo $candidates; ?></h4>
+<h4>Total de votos: <?php echo $votes; ?></h4>
     </div>
 
     <h2>Lista de relatórios</h2>
@@ -87,23 +89,22 @@ function relatorios_sumario_page_callback_function() {
     <li><h4>Inscritos</h4></li>            
     <li><a href='admin.php?page=inscritos_estado'>Inscrições por Estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=inscritos_estado_total'>Inscrições por Estado - total por estado</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=inscritos_setorial'>Inscrições por Setorial - total por setorial</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=inscritos_setorial_total'>Inscrições por Setorial - total por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=inscritos_setorial_estado'>Inscrições por Setorial/Estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_inscritos_votaram'>Inscritos que votaram/não votaram</a> <small>disponível</small></li>
     <li><h4>Candidatos</h4></li>        
-    <li><a href='admin.php?page=candidatos_estado'>Candidatos por estado - total por estado</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=candidatos_estado_total'>Candidatos por estado - total por estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_setorial'>Candidatos por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_setorial_estado'>Candidatos por setorial/estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_genero'>Candidatos por gênero</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=candidatos_genero_estado'>Candidatos por gênero por estado - listagem</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=candidatos_genero_estado_total'>Candidatos por gênero por estado - listagem</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_afrodescententes'>Candidatos afrodescendentes</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=candidatos_afrodescententes_estado'>Candidatos afrodescendentes por estado - listagem</a></li>
+    <li><a href='admin.php?page=candidatos_afrodescententes_estado_total'>Candidatos afrodescendentes por estado - listagem</a></li>
     <li><a href='admin.php?page=candidatos_inabilitados'>Candidatos inabilitados</a> <small>disponível</small></li>
 
 <?php if(current_user_can('manage_options')): ?>
     <li><h4>Votos</h4></li>    
-    <li><a href='admin.php?page=votos_total'>Total geral de votos</a></li>
-    <li><a href='admin.php?page=votos_estado'>Votos por estado</a></li>
+    <li><a href='admin.php?page=votos_estado_total'>Votos por estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_setorial'>Votos por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_setorial_estado'>Votos por setorial/estado</a> </li>    
     <li><a href='admin.php?page=votos_genero'>Votos por gênero</a> <small>disponível</small></li>
@@ -287,7 +288,7 @@ function inscritos_estado_total_page_callback_function() {
 <?php     
 }
 
-function inscritos_setorial_page_callback_function() {
+function inscritos_setorial_total_page_callback_function() {
     if(!current_user_can('edit_published_posts')){
         return false;
     }
@@ -460,7 +461,7 @@ function candidatos_setorial_page_callback_function() {
 <?php
 }
 
-function candidatos_estado_page_callback_function() {   
+function candidatos_estado_total_page_callback_function() {   
     if(!current_user_can('edit_published_posts')){
         return false;
     }
@@ -492,7 +493,7 @@ function candidatos_estado_page_callback_function() {
                             </tr>                            
             </tbody> 
         </table>
-        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_total_estado' data_csv='<?php echo json_encode($data) ?>'>        
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_estado_total' data_csv='<?php echo json_encode($data) ?>'>        
     </div>
 
 <?php } 
@@ -552,7 +553,7 @@ function candidatos_setorial_estado_page_callback_function() {
 
 <?php }
 
- function candidatos_genero_estado_page_callback_function() {
+ function candidatos_genero_estado_total_page_callback_function() {
     if(!current_user_can('edit_published_posts')){
         return false;
     }
@@ -615,7 +616,7 @@ $homens_nacional_perc = round($homens_nacional / $total_nacional * 100, 2);
 
             </tbody>
         </table>
-     <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_genero' data_csv='<?php echo json_encode($data) ?>'>
+     <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_genero_total' data_csv='<?php echo json_encode($data) ?>'>
 <?php
  }
 
@@ -720,6 +721,13 @@ $data[] = [$uf, $setorial, $candidates_fem, $candidates_masc, $candidates_tot];
 }
 
 
+function candidatos_afrodescententes_estado_total_page_callback_function() {
+    if(!current_user_can('edit_published_posts')){
+        return false;
+    }
+}
+
+
 function candidatos_afrodescententes_page_callback_function() {
     if(!current_user_can('edit_published_posts')){
         return false;
@@ -790,16 +798,46 @@ function candidatos_afrodescententes_page_callback_function() {
  * VOTOS
  **/
 
-function votos_total_page_callback_function() {
+function votos_estado_total_page_callback_function() {
     if(!current_user_can('manage_options')){
         return false;
-    }    
-}
+    }
+    
+    $data[] = ['Estado', 'Total de votos'];
+    $count_brasil = 0;
+?>
+    <div class="wrap span-20">
+      <h2>Total de votos por estados - listagem acumulada de todas as setoriais</em></h2>      
+        <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-role">Estado</th>
+                    <th scope="col"  class="manage-column column-role num">Total de votos</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tbody>
+            <?php $states = get_all_states(); ?>
+            <?php foreach ( $states as $uf => $state ): ?>
+                <?php $vote_count = get_total_votes_by_uf($uf); ?>
+                <?php $count_brasil += $vote_count; ?>
+                <?php $data[] = [$uf, $vote_count]; ?>                                        
+                            <tr class="alternate">
+                                <td class="num"><?php echo $uf; ?></td>
+                                <td class="num"><?php echo $vote_count; ?></td>
+                            </tr>
+            <?php endforeach ?>
+                            <tr class="alternate">
+                                <td class="num"><strong>Brasil</strong></td>
+                                <td class="num"><Strong><?php echo $count_brasil; ?></strong></td>
+                            </tr>
+            </tbody> 
+        </table>
+        <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_votos_estado_total' data_csv='<?php echo json_encode($data) ?>'>        
+    </div>
 
-function votos_estado_page_callback_function() {
-    if(!current_user_can('manage_options')){
-        return false;
-    }    
+<?php    
+    
 }
 
 function votos_setorial_estado_page_callback_function() {
