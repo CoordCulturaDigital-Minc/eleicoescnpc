@@ -328,12 +328,10 @@ function get_count_votes_genre_uf($uf) {
     $votes = array();
     $results = array();
     
-    $query = $wpdb->prepare("SELECT COUNT(um1.meta_value) AS count,"
-                                              ."um1.meta_value AS candidato_id, "
+    $query = $wpdb->prepare("SELECT COUNT(pm1.meta_value) AS count,"
                                               ."pm1.meta_value AS nome_candidato, "
                                               ."pm2.meta_value AS genero, "
-                                              ."pm3.meta_value AS valido, "
-                                              ."um1.meta_value AS uf "
+                                              ."pm3.meta_value AS valido "
                                               ."FROM {$wpdb->usermeta} um1 " 
                                               ."INNER JOIN {$wpdb->postmeta} pm1 ON pm1.post_id = um1.meta_value "
                                               ."INNER JOIN {$wpdb->postmeta} pm2 ON pm2.post_id = um1.meta_value "
@@ -347,8 +345,9 @@ function get_count_votes_genre_uf($uf) {
                                               ."AND um2.meta_key = 'UF' "
                                               ."AND um2.meta_value = %s "
                                               ."AND p.post_type = 'projetos' "
-                                              ."GROUP BY candidato_id ", $uf
+                                              ."GROUP BY nome_candidato ", $uf
     );
+    
     $votes = $wpdb->get_results($query);
     
     if (!empty($votes)) {
