@@ -561,12 +561,11 @@ function candidatos_setorial_estado_page_callback_function() {
     }
 ?>
     <div class="wrap span-20">
-       <h2>Candidatos por gênero por setorial/estado - listagem</h2>
+       <h2>Candidatos por gênero por estado - listagem</h2>
             <table class="wp-list-table widefat">
             <thead>
                 <tr>
                     <th scope="col"  class="manage-column column-role">Estado</th>
-                    <th scope="col"  class="manage-column column-posts">Setorial</th>
                     <th scope="col"  class="manage-column column-posts num">Mulheres</th>
                     <th scope="col"  class="manage-column column-posts num">Homens</th>
                     <th scope="col"  class="manage-column column-posts num">Total</th>    
@@ -597,7 +596,6 @@ $mulheres_nacional += $candidates_fem;
 ?>           
                 <tr class="alternate">
                     <td><?php echo $state; ?></td>
-                    <td><?php echo $setorial; ?></a></td>
                     <td class="num"><?php echo $candidates_fem_perc ?>% (<?php echo $candidates_fem; ?>)</td>
                     <td class="num"><?php echo $candidates_masc_perc ?>% (<?php echo $candidates_masc; ?>)</td>
                     <td class="num"><?php echo $candidates_tot; ?></td>                    
@@ -609,8 +607,7 @@ $mulheres_nacional_perc = round($mulheres_nacional / $total_nacional * 100, 2);
 $homens_nacional_perc = round($homens_nacional / $total_nacional * 100, 2);
 ?>
                 <tr class="alternate">
-                    <td><?php echo $state; ?></td>
-                    <td><?php echo $setorial; ?></a></td>
+                    <td><strong>Brasil</strong></td>
                     <td class="num"><?php echo $mulheres_nacional_perc ?>% (<?php echo $mulheres_nacional; ?>)</td>
                     <td class="num"><?php echo $homens_nacional_perc ?>% (<?php echo $homens_nacional; ?>)</td>
                    <td class="num"><?php echo $total_nacional; ?></td>                    
@@ -1058,6 +1055,65 @@ function votos_genero_estado_total_page_callback_function() {
     if(!current_user_can('manage_options')){
         return false;
     }
+
+?>
+    <div class="wrap span-20">
+       <h2>Votos por gênero por estado - listagem</h2>
+            <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-role">Estado</th>
+                    <th scope="col"  class="manage-column column-posts num">Mulheres</th>
+                    <th scope="col"  class="manage-column column-posts num">Homens</th>
+                    <th scope="col"  class="manage-column column-posts num">Total</th>    
+                </tr>
+            </thead>
+     <?php
+     $states = get_all_states();
+     $homens_nacional = 0;
+     $mulheres_nacional = 0;
+     ?>
+     <?php foreach ( $states as $uf => $state): ?>
+<?php $votes = get_count_votes_genre_uf($uf); ?>
+<?php
+$votes_masc = intval(($votes['masculino'] != '') ? $votes['masculino'] : 0);
+$votes_fem = intval(($votes['feminino'] != '') ? $votes['feminino'] : 0);
+$votes_tot = $votes_masc + $votes_fem;
+
+if ($votes_tot == 0) {
+    $votes_masc_perc = 0;
+    $votes_fem_perc = 0;
+} else {
+    $votes_masc_perc = round($votes_masc / $votes_tot * 100, 2);
+    $votes_fem_perc = round($votes_fem / $votes_tot * 100, 2);
+}
+$data[] = [$uf, $setorial, $votes_fem, $votes_masc, $votes_tot];
+$homens_nacional += $votes_masc;
+$mulheres_nacional += $votes_fem;
+?>           
+                <tr class="alternate">
+                    <td><?php echo $state; ?></td>
+                    <td class="num"><?php echo $votes_fem_perc ?>% (<?php echo $votes_fem; ?>)</td>
+                    <td class="num"><?php echo $votes_masc_perc ?>% (<?php echo $votes_masc; ?>)</td>
+                    <td class="num"><?php echo $votes_tot; ?></td>                    
+                </tr>
+     <?php endforeach; ?>
+<?php
+$total_nacional = $homens_nacional + $mulheres_nacional;
+$mulheres_nacional_perc = round($mulheres_nacional / $total_nacional * 100, 2);
+$homens_nacional_perc = round($homens_nacional / $total_nacional * 100, 2);
+?>
+                <tr class="alternate">
+                    <td><strong>Brasil</strong></td>
+                    <td class="num"><?php echo $mulheres_nacional_perc ?>% (<?php echo $mulheres_nacional; ?>)</td>
+                    <td class="num"><?php echo $homens_nacional_perc ?>% (<?php echo $homens_nacional; ?>)</td>
+                   <td class="num"><?php echo $total_nacional; ?></td>                    
+                </tr>
+
+            </tbody>
+        </table>
+     <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_genero_total' data_csv='<?php echo json_encode($data) ?>'>
+<?php    
 }
 
 function votos_genero_page_callback_function() {   

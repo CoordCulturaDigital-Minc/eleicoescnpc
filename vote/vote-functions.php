@@ -322,6 +322,48 @@ function get_number_of_votes_setorial_by_uf($uf) {
 }
 
 
+function get_count_votes_genre_uf($uf) {
+	global $wpdb;
+    
+    $votes = array();
+    $results = array();
+    
+    $votes = $wpdb->get_results($wpdb->prepare("SELECT COUNT(um1.meta_value) AS count,"
+                                              ."um1.meta_value AS candidato_id, "
+                                              ."pm1.meta_value AS nome_candidato, "
+                                              ."pm2.meta_value AS genero, "
+                                              ."pm3.meta_value AS valido, "
+                                              ."um1.meta_value AS uf "
+                                              ."FROM {$wpdb->usermeta} um1 " 
+                                              ."INNER JOIN {$wpdb->postmeta} pm1 ON pm1.post_id = um1.meta_value "
+                                              ."INNER JOIN {$wpdb->postmeta} pm2 ON pm2.post_id = um1.meta_value "
+                                              ."INNER JOIN {$wpdb->postmeta} pm3 ON pm3.post_id = um1.meta_value "
+                                              ."INNER JOIN {$wpdb->posts} p ON p.ID = um1.meta_value "
+                                              ."INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = p.post_author "
+                                              ."WHERE um1.meta_key = 'vote-project-id' "
+                                              ."AND pm1.meta_key = 'candidate-display-name' "
+                                              ."AND pm2.meta_key = 'candidate-genre' "
+                                              ."AND pm3.meta_key = 'subscription-valid' "
+                                              ."AND um2.meta_key = 'UF' "
+                                              ."AND um2.meta_value = %s "
+                                              ."AND p.post_type = 'projetos' "
+                                              ."GROUP BY candidato_id ", $uf
+    ));
+    
+    if (!empty($votes)) {
+        foreach($votes as $item) {
+            if ($item->genero == 'masculino') {
+                $results['masculino'] = $item->count;
+            } else if ($item->genero == 'feminino')  {
+                $results['feminino'] = $item->count;
+            }
+        }
+    }
+    
+    return $results;
+}
+
+
 function get_number_of_votes_setorial_genre_by_uf($uf) {
 	global $wpdb;
     $setorais = get_setoriais();
