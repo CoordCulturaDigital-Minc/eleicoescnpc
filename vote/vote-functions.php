@@ -372,9 +372,9 @@ function get_number_of_votes_setorial_genre_by_uf($uf) {
     {   
         $count[$key] = $wpdb->get_results( $wpdb->prepare("SELECT COUNT(pm1.meta_value) AS count,"
                                               ."um1.meta_value AS candidato_id, "
-                                              ."pm1.meta_value AS nome_candidato, "
                                               ."pm2.meta_value AS valido, "
-                                              ."um1.meta_value AS uf "
+                                              ."um2.meta_value AS setorial, "
+                                              ."um3.meta_value AS uf "
                                               ."FROM {$wpdb->usermeta} um1 " 
                                               ."INNER JOIN {$wpdb->postmeta} pm1 ON pm1.post_id = um1.meta_value "
                                               ."INNER JOIN {$wpdb->postmeta} pm2 ON pm2.post_id = um1.meta_value "
