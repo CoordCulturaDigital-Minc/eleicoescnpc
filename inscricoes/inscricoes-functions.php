@@ -621,23 +621,17 @@ function evaluate_subscription() {
 
             $evaluation = array();
 
-            $evaluation['evaluation-status'] = isset( $_POST['evaluation-status'] ) ? $_POST['evaluation-status'] : '';
+            $evaluation_status = isset( $_POST['evaluation-status'] ) ? $_POST['evaluation-status'] : '';
             $evaluation['evaluation-curate'] = $current_user->ID;
-
-
-            // foreach($expected_status as $es) {
-            //     if(isset($_POST[$es]) && is_numeric($_POST[$es]) && $_POST[$es] >= 1 && $_POST[$es] <= 5) {
-            //         $evaluation[$es] = $_POST[$es];
-            //     } else {
-            //         $evaluation[$es] = 0;
-            //     }
-            // }
 
             foreach($expected_comments as $ec) {
                 if(isset($_POST[$ec])) {
                     $evaluation[$ec] = $_POST[$ec];
                 }
+            }
 
+            if( !empty( $evaluation_status ) ) {
+                update_post_meta($pid, 'evaluation-status', $evaluation_status);
             }
 
             $ok = update_post_meta($pid, 'evaluation_of_candidate', $evaluation);
@@ -990,6 +984,9 @@ function load_evaluation($pid, $curator=null) {
                 }
             }
         }
+
+        // if( !isset($eval['evaluation_status']))
+        $eval['evaluation-status'] = get_post_meta($pid, 'evaluation-status', true);
         
         if (!isset($eval["synopsis-score"]))
             $eval["synopsis-score"] = 0;
@@ -1101,7 +1098,7 @@ function label_status_candidate( $status ) {
             break;
         
         default:
-            return "Erro";
+            return "";
             break;
     }
 
