@@ -7,9 +7,7 @@
 		setorial = setorial || '',
                 currentPage = window.location.href.split('?')[0],
 		action = action || false;
-	    console.log(action);
-	    console.log(uf);
-	    console.log(setorial);
+	    
 	    if (!action) { return false }
 	    
 	    if (uf !== '' && setorial === '') {

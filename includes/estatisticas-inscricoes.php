@@ -37,7 +37,6 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Total geral de votos', 'Total geral de votos', 'manage_options', 'votos_total', 'votos_total_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por estado - listagem', 'Total de votos por estado - listagem', 'manage_options', 'votos_estado_total', 'votos_estado_total_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por setorial', 'Votos por setorial', 'manage_options', 'votos_setorial', 'votos_setorial_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Total de votos por gênero', 'Votos por gênero', 'manage_options', 'votos_genero', 'votos_genero_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por gênero por estado - listagem', 'Votos por gênero - listagem', 'manage_options', 'votos_genero_estado_total', 'votos_genero_estado_total_page_callback_function');    
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por afrodescendência', 'Votos por afrodescendência', 'manage_options', 'votos_afrodesc_total', 'votos_afrodesc_total_page_callback_function');           
     add_submenu_page('inscricoes_estatisticas', 'Votos por setorial/estado', 'Votos por setorial/estado', 'manage_options', 'votos_setorial_estado', 'votos_setorial_estado_page_callback_function');
@@ -71,15 +70,15 @@ function relatorios_sumario_page_callback_function() {
     
     ?>
     <div class="wrap span-20">
-
 <?php $inscritos = get_count_subscriptions(); ?>
 <?php $candidates = get_count_candidates(); ?>
 <?php $votes = get_count_votes(); ?>    
 
     <div class="wrap span-20">
     <h2>Total de inscrições:</h2>
-
+<?php if(current_user_can('manage_options')): ?>
 <h4>Eleitores inscritos: <?php echo $inscritos; ?></h4>
+<?php endif; ?>                                              
 <h4>Candidatos inscritos: <?php echo $candidates; ?></h4>
 <h4>Total de votos: <?php echo $votes; ?></h4>
     </div>
@@ -107,17 +106,20 @@ function relatorios_sumario_page_callback_function() {
     <li><a href='admin.php?page=candidatos_afrodesc_estado_total'>Candidatos afrodescendentes por estado - listagem</a> <small>disponível</small></li>
 
 <?php if(current_user_can('manage_options')): ?>
-    <li><h3>Votos</h3></li>    
+    <li><h3>Votos</h3></li>
+    <li><a href='admin.php?page=maisvotados_setorial_estado'>Candidatos mais votados por setorial e estado</a></li>
+    <li><a href='admin.php?page=resumo_setoriais'>Resumo das setoriais</a></li>
+<!--
     <li><a href='admin.php?page=votos_estado_total'>Votos por estado - listagem</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_setorial'>Votos por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_setorial_estado'>Votos por setorial/estado</a> <small>disponível</small></li>
     <li><h5>Por gênero</h5></li>
-    <li><a href='admin.php?page=votos_genero'>Votos por gênero</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_genero_estado_total'>Votos por gênero - listagem</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_genero_setorial_estado'>Votos por setorial/estado por gênero</a></li>
     <li><h5>Por afrodescendência</h5></li>
     <li><a href='admin.php?page=votos_afrodesc'>Votos por afrodescendência</a> </li>
     <li><a href='admin.php?page=votos_afrodesc_setorial_estado'>Votos por setorial/estado por afrodescendência</a> <small>disponível</small></li>
+-->
     <li><h4>Auditoria</h4></li>
     <li><a href='admin.php?page=listagem_votos_auditoria'>Auditoria: votos por setorial e estado</a> <small>disponível</small></li>
 <?php endif ?>
@@ -996,13 +998,6 @@ function votos_setorial_estado_page_callback_function() {
 <?php     
 }
 
-function votos_genero_setorial_estado_page_callback_function() {
-    if(!current_user_can('manage_options')){
-        return false;
-    }
-}
-
-
 function votos_setorial_page_callback_function() {   
     if(!current_user_can('manage_options')){
         return false;
@@ -1437,7 +1432,7 @@ function listagem_votos_auditoria_page_callback_function() {
     
     ?>
     <h4>Selecione a UF:</h4>
-    <select class="select-state-v" id="filtrar_relatorio">
+    <select class="select-state-v" id="filtrar_uf">
       <option></option>
       <?php foreach ( $states as $uf_item => $state_item ): ?>
       <option value="<?php echo $uf_item ?>" <?php if ($uf_item == $uf_selected) { echo "selected"; } ?>><?php echo $state_item ?></option>
