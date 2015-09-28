@@ -33,7 +33,7 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Candidatos afrodescendentes por setorial/estado', 'Candidatos afrodescendentes por estado', 'edit_published_posts', 'candidatos_afrodesc_estado_total', 'candidatos_afrodesc_estado_total_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Candidatos inabilitados', 'Candidatos inabilitados', 'edit_published_posts', 'candidatos_inabilitados', 'candidatos_inabilitados_page_callback_function');
     
-    /* votos */
+    /* votos
     add_submenu_page('inscricoes_estatisticas', 'Total geral de votos', 'Total geral de votos', 'manage_options', 'votos_total', 'votos_total_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por estado - listagem', 'Total de votos por estado - listagem', 'manage_options', 'votos_estado_total', 'votos_estado_total_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por setorial', 'Votos por setorial', 'manage_options', 'votos_setorial', 'votos_setorial_page_callback_function');
@@ -42,9 +42,12 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Votos por setorial/estado', 'Votos por setorial/estado', 'manage_options', 'votos_setorial_estado', 'votos_setorial_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Votos por gênero setorial/estado', 'Votos por gênero', 'manage_options', 'votos_genero_setorial_estado', 'votos_genero_setorial_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Votos por afrodescendência setorial/estado', 'Votos por afrodescendência', 'manage_options', 'votos_afrodesc_setorial_estado', 'votos_afrodesc_setorial_estado_page_callback_function');
-
+    */
+    add_submenu_page('inscricoes_estatisticas', 'Candidatos mais votados por setorial e estado', 'Mais votados por setorial e estado', 'manage_options', 'maisvotados_setorial_estado', 'maisvotados_setorial_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Resumo das setoriais', 'Resumo das setoriais', 'manage_options', 'maisvotados_setorial_estado', 'maisvotados_setorial_estado_page_callback_function');
+    
     /* verificacao de fraude */
-    add_submenu_page('inscricoes_estatisticas', 'Auditoria: votos por setorial/estado ', 'Auditoria: votos por setorial estado', 'manage_options', 'listagem_votos_auditoria', 'listagem_votos_auditoria_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Auditoria: votos por setorial/estado ', 'Auditoria: votos por setorial estado', 'manage_options', 'resumo_setoriais', 'resumo_setoriais_page_callback_function');
 }
 
     // $norte = $wpdb->get_var("select COUNT(meta_id) from $wpdb->postmeta where meta_key = 'company-region' and meta_value = 'nortecentroeste'");
@@ -1474,4 +1477,108 @@ function listagem_votos_auditoria_page_callback_function() {
 <?php endif; ?>
 <?php 
 }
+
+
+// somente exportação de csv
+function maisvotados_setorial_estado_page_callback_function() {
+    // candidato, no_votos, genero, raça
+    
+    if(!current_user_can('manage_options')){
+        return false;
+    }
+
+    $data[] = ['candidato', 'num_votos', 'genero', 'afrodescendente']; 
+    $uf_selected = $_GET['uf'];
+    $setorial_selected = $_GET['setorial'];
+    
+    $states = get_all_states();
+    $setoriais = get_setoriais();
+    
+    if (!in_array($uf_selected, array_keys($states))) {
+        if ($uf_selected != 'todos') {
+            $uf_selected = '';
+        }
+    } else {
+        $data[] = 'uf';
+    }
+    if (!in_array($setorial_selected, array_keys($setoriais))) {
+        if ($setorial_selected != 'todos') {
+            $setorial_selected = '';
+        }
+    } else {
+        $data[] = 'setorial';
+    }
+    
+    ?>
+    <h4>Selecione a UF:</h4>
+    <select class="select-state-v" id="filtrar_uf">
+      <option></option>
+      <?php foreach ( $states as $uf_item => $state_item ): ?>
+      <option value="<?php echo $uf_item ?>" <?php if ($uf_item == $uf_selected) { echo "selected"; } ?>><?php echo $state_item ?></option>
+      <?php endforeach ?>
+      <option value="todos" <?php if ($uf_selected == 'todos') { echo "selected"; } ?>>TODOS</option>
+    </select>
+      
+    <h4>Selecione a Setorial:</h4>
+    <select class="select-setorial-v" id="filtrar_setorial">
+      <option></option>
+      <?php foreach ( $setoriais as $slug => $setorial_item ): ?>
+      <option value="<?php echo $slug ?>" <?php if ($slug == $setorial_selected) { echo "selected"; } ?>><?php echo $setorial_item ?></option>
+      <?php endforeach ?>
+      <option value="todos" <?php if ($setorial_selected == 'todos') { echo "selected"; } ?>>TODOS</option>      
+    </select>
+      <br/>
+      <input type="button" value="buscar" id="maisvotados_setorial_estado" class="filtrar_relatorio">
+      <br/><br/>
+      
+<?php
+      if ($uf_selected || $setorial_selected) {
+          
+          if ($uf_selected == 'todos') {
+              $uf_selected = '';
+          }
+          if ($setorial_selected == 'todos') {
+              $setorial_selected = '';
+          }
+          
+          $votes = get_maisvotados_setorial_estado($uf_selected, $setorial_selected);
+          
+          foreach ($votes as $vote) {
+              
+              $data[] = [
+                  $vote->candidato,
+                  $vote->num_votos,
+                  $vote->genero,
+                  $vote->afrodescendente,
+                  $vote->uf,
+                  $vote->setorial
+              ];
+          }
+          
+          $nome_relatorio = "";
+          if ($uf_selected && $setorial_selected) {
+              $nome_relatorio = "apuracao-$uf_selected-$setorial_selected";
+          } else if ($uf_selected && !$setorial_selected) {
+              $nome_relatorio = "apuracao-resumo-$uf_selected";
+          } else if (!$uf_selected && $setorial_selected) {
+              $nome_relatorio = "apuracao-resumo-$setorial_selected";
+          } else {
+              $nome_relatorio = "apuracao-resumo-nacional";
+          }
+?>     
+          <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo $nome_relatorio; ?>' data_csv='<?php echo json_encode($data) ?>'>
+          
+<?php 
+      }   
+}
+
+
+
+// somente exportação de csv
+function resumo_setoriais_page_callback_function() {
+    
+}
+
+
+
 ?>
