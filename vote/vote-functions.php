@@ -329,23 +329,20 @@ function get_count_votes_genre_uf($uf) {
     $results = array();
     
     $query = $wpdb->prepare("SELECT COUNT(pm1.meta_value) AS count,"
-                                              ."pm1.meta_value AS nome_candidato, "
-                                              ."pm2.meta_value AS genero, "
-                                              ."pm3.meta_value AS valido "
+                                              ."pm1.meta_value AS genero, "
+                                              ."pm2.meta_value AS valido "
                                               ."FROM {$wpdb->usermeta} um1 " 
                                               ."INNER JOIN {$wpdb->postmeta} pm1 ON pm1.post_id = um1.meta_value "
                                               ."INNER JOIN {$wpdb->postmeta} pm2 ON pm2.post_id = um1.meta_value "
-                                              ."INNER JOIN {$wpdb->postmeta} pm3 ON pm3.post_id = um1.meta_value "
                                               ."INNER JOIN {$wpdb->posts} p ON p.ID = pm1.post_id "
                                               ."INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = p.post_author "
                                               ."WHERE um1.meta_key = 'vote-project-id' "
-                                              ."AND pm1.meta_key = 'candidate-display-name' "
-                                              ."AND pm2.meta_key = 'candidate-genre' "
-                                              ."AND pm3.meta_key = 'subscription-valid' "
+                                              ."AND pm1.meta_key = 'candidate-genre' "
+                                              ."AND pm2.meta_key = 'subscription-valid' "
                                               ."AND um2.meta_key = 'UF' "
                                               ."AND um2.meta_value = %s "
                                               ."AND p.post_type = 'projetos' "
-                                              ."GROUP BY nome_candidato ", $uf
+                                              ."GROUP BY genero ", $uf
     );
     
     $votes = $wpdb->get_results($query);
