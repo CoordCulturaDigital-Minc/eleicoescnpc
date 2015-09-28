@@ -350,6 +350,7 @@ if(is_user_logged_in()) {
 			}
 			include(get_template_directory() . '/inscricoes/inscricoes-avaliacao.php');
 		} else {
+			echo "registration" . registration_is_open();
 			$form_disabled = registration_is_open() != '1';
 			if( $form_disabled == true )
 				$disabled = ' disabled';
