@@ -39,7 +39,7 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por setorial', 'Votos por setorial', 'manage_options', 'votos_setorial', 'votos_setorial_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por gênero', 'Votos por gênero', 'manage_options', 'votos_genero', 'votos_genero_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Total de votos por gênero por estado - listagem', 'Votos por gênero - listagem', 'manage_options', 'votos_genero_estado_total', 'votos_genero_estado_total_page_callback_function');    
-    add_submenu_page('inscricoes_estatisticas', 'Total de votos por afrodescendência', 'Votos por afrodescendência', 'manage_options', 'votos_afrodesc', 'votos_afrodesc_page_callback_function');           
+    add_submenu_page('inscricoes_estatisticas', 'Total de votos por afrodescendência', 'Votos por afrodescendência', 'manage_options', 'votos_afrodesc_total', 'votos_afrodesc_total_page_callback_function');           
     add_submenu_page('inscricoes_estatisticas', 'Votos por setorial/estado', 'Votos por setorial/estado', 'manage_options', 'votos_setorial_estado', 'votos_setorial_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Votos por gênero setorial/estado', 'Votos por gênero', 'manage_options', 'votos_genero_setorial_estado', 'votos_genero_setorial_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Votos por afrodescendência setorial/estado', 'Votos por afrodescendência', 'manage_options', 'votos_afrodesc_setorial_estado', 'votos_afrodesc_setorial_estado_page_callback_function');
@@ -111,7 +111,7 @@ function relatorios_sumario_page_callback_function() {
     <li><a href='admin.php?page=votos_genero'>Votos por gênero</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_genero_estado_total'>Votos por gênero - listagem</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_afrodesc'>Votos por afrodescendência</a> </li>
-    <li><a href='admin.php?page=votos_afrodesc_setorial_estado'>Votos por setorial/estado por afrodescendência</a> </li>
+    <li><a href='admin.php?page=votos_afrodesc_setorial_estado'>Votos por setorial/estado por afrodescendência</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_genero_setorial_estado'>Votos por setorial/estado por gênero</a></li>
 
     <li><a href='admin.php?page=listagem_votos_auditoria'>Auditoria: votos por setorial e estado</a> <small>disponível</small></li>
@@ -997,11 +997,6 @@ function votos_genero_setorial_estado_page_callback_function() {
     }
 }
 
-function votos_afrodesc_setorial_estado_page_callback_function() {
-    if(!current_user_can('manage_options')){
-        return false;
-    }
-}
 
 function votos_setorial_page_callback_function() {   
     if(!current_user_can('manage_options')){
@@ -1171,16 +1166,113 @@ function votos_genero_page_callback_function() {
         <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_votos_genero' data_csv='<?php echo json_encode($data) ?>'>
     </div>
     
-<?php } 
+<?php
+} 
 
-
-function votos_afrodesc_page_callback_function() {   
+function votos_afrodesc_total_page_callback_function() {
     if(!current_user_can('manage_options')){
         return false;
     }
-    $data[] = ['Estado', 'Setorial', 'Afrodescendentes', 'Outros', 'Total'];        
-?>
 
+?>
+    <div class="wrap span-20">
+       <h2>Votos em candidatos afrodescendentes por estado - listagem</h2>
+            <table class="wp-list-table widefat">
+            <thead>
+                <tr>
+                    <th scope="col"  class="manage-column column-role">Estado</th>
+                    <th scope="col"  class="manage-column column-posts num">Afrodescendentes</th>
+                    <th scope="col"  class="manage-column column-posts num">Outros</th>
+                    <th scope="col"  class="manage-column column-posts num">Total</th>    
+                </tr>
+            </thead>
+     <?php
+     $data[] = ['Estado', 'Afrodescendentes', 'Outros']; 
+     $states = get_all_states();
+     $afro_nacional = 0;
+     $outros_nacional = 0;
+     ?>
+     <?php foreach ( $states as $uf => $state): ?>
+<?php $votes = get_count_votes_afrodesc_uf($uf); ?>
+<?php
+$votes_afro = intval(($votes['afro'] != '') ? $votes['afro'] : 0);
+$votes_outros = intval(($votes['outros'] != '') ? $votes['outros'] : 0);
+$votes_tot = $votes_afro + $votes_outros;
+
+if ($votes_tot == 0) {
+    $votes_afro_perc = 0;
+    $votes_outros_perc = 0;
+} else {
+    $votes_afro_perc = round($votes_afro / $votes_tot * 100, 2);
+    $votes_outros_perc = round($votes_outros / $votes_tot * 100, 2);
+}
+$data[] = [$uf, $votes_afro, $votes_outros, $votes_tot];
+$afro_nacional += $votes_afro;
+$outros_nacional += $votes_outros;
+?>           
+                <tr class="alternate">
+                    <td><?php echo $state; ?></td>
+                    <td class="num"><?php echo $votes_afro_perc ?>% (<?php echo $votes_afro; ?>)</td>
+                    <td class="num"><?php echo $votes_outros_perc ?>% (<?php echo $votes_outros; ?>)</td>
+                    <td class="num"><?php echo $votes_tot; ?></td>                    
+                </tr>
+     <?php endforeach; ?>
+<?php
+$total_nacional = $afro_nacional + $outros_nacional;
+$outrosnacional_perc = round($outrosnacional / $total_nacional * 100, 2);
+$homens_nacional_perc = round($homens_nacional / $total_nacional * 100, 2);
+?>
+                <tr class="alternate">
+                    <td><strong>Brasil</strong></td>
+                    <td class="num"><?php echo $afro_nacional_perc ?>% (<?php echo $afro_nacional; ?>)</td>
+                    <td class="num"><?php echo $outros_nacional_perc ?>% (<?php echo $outros_nacional; ?>)</td>
+                   <td class="num"><?php echo $total_nacional; ?></td>                    
+                </tr>
+
+            </tbody>
+        </table>
+     <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_genero_total' data_csv='<?php echo json_encode($data) ?>'>
+<?php        
+}
+
+// ultimo
+function votos_afrodesc_setorial_estado_page_callback_function() {   
+    if(!current_user_can('manage_options')){
+        return false;
+    }
+    
+    $uf_selected = $_GET['uf'];    
+    $setorial_selected = $_GET['setorial'];
+    $states = get_all_states();
+    $setoriais = get_setoriais();
+    $data[] = ['Estado', 'Setorial', 'Afrodescendentes', 'Outros', 'Total'];
+    
+    if (!in_array($setorial_selected, array_keys($setoriais))) {
+        $setorial_selected = '';
+    }
+    if (!in_array($uf_selected, array_keys($states))) {
+        $uf_selected = '';
+    }
+    
+    ?>
+    <h4>Selecione a UF:</h4>
+    <select class="select-state-v" id="filtrar_uf">
+      <option value="">Todas</option>
+      <?php foreach ( $states as $uf_item => $state_item ): ?>
+      <option value="<?php echo $uf_item ?>" <?php if ($uf_item == $uf_selected) { echo "selected"; } ?>><?php echo $state_item ?></option>
+      <?php endforeach ?>
+    </select>
+      
+    <h4>Selecione a Setorial:</h4>
+    <select class="select-setorial-v" id="filtrar_setorial">
+      <option value="">Todas</option>
+      <?php foreach ( $setoriais as $slug => $setorial_item ): ?>
+      <option value="<?php echo $slug ?>" <?php if ($slug == $setorial_selected) { echo "selected"; } ?>><?php echo $setorial_item ?></option>
+      <?php endforeach ?>
+    </select>
+      <br/>
+      <input type="button" value="buscar" id="votos_afrodesc_setorial_estado" class="filtrar_relatorio">
+      <br/><br/>
     <div class="wrap span-20">
 
         <h2>Votos por afrodescendência setorial/estado</h2>
@@ -1188,8 +1280,12 @@ function votos_afrodesc_page_callback_function() {
         <table class="wp-list-table widefat">
             <thead>
                 <tr>
+<?php if ($uf_selected): ?>
                     <th scope="col"  class="manage-column column-role">Estado</th>
+<?php endif; ?>
+<?php if ($setorial_selected): ?>
                     <th scope="col"  class="manage-column column-posts">Setorial</th>
+<?php endif; ?>
                     <th scope="col"  class="manage-column column-posts num">Afrodescendentes</th>
                     <th scope="col"  class="manage-column column-posts num">Outros</th>
                     <th scope="col"  class="manage-column column-posts num">Total</th>        
@@ -1200,31 +1296,26 @@ function votos_afrodesc_page_callback_function() {
             <?php $setoriais = get_setoriais(); ?>
 
             <tbody>
-                <?php foreach ( $states as $uf => $state ): ?>
-                    <?php $votes = get_number_of_votes_setorial_race_by_uf($uf); ?>
-                    <?php foreach ( $setoriais as $slug => $setorial ): ?>
-                        <?php if( $votes[$slug] != 0 ) : ?>
-                            <?php $page = get_page_by_path( $uf .'-'. $slug, 'OBJECT', 'foruns' ) ?>
-
+               <?php $votes = get_votos_afrodesc_estado_setorial($uf_selected, $setorial_selected); ?>
 <?php
-            $votos_afro = intval(($votes[$slug]['afro'] != '') ? $votes[$slug]['afro'] : 0);
-            $votos_outros = intval(($votes[$slug]['outros'] != '') ? $votes[$slug]['outros'] : 0);
+            $votos_afro = intval(($votes['afrodesc'] != '') ? $votes['afrodesc'] : 0);
+            $votos_outros = intval(($votes['outros'] != '') ? $votes['outros'] : 0);
             $votos_tot = $votos_afro + $votos_outros;
             $votos_afro_perc = round($votos_afro / $votos_tot * 100, 2);
             $votos_outros_perc = round($votos_outros / $votos_tot * 100, 2);
 ?>
                             <?php $data[] = [$uf, $setorial, $votos_afro, $votos_outros, $votos_tot]; ?>            
                             <tr class="alternate">
-                                <td><?php echo $uf; ?></td>
-                                <td><a href="<?php echo site_url('foruns/' . $uf .'-'. $slug); ?>"><?php echo $setorial; ?></a></td>
+<?php if ($uf_selected != ''): ?>
+                                <td><?php echo $states[$uf_selected]; ?></td>
+<?php endif; ?>
+<?php if ($setorial_selected != ''): ?>            
+                                <td><?php echo $setoriais[$setorial_selected]; ?></td>
+<?php endif; ?>
                                 <td class="num"><?php echo $votos_afro_perc ?>% (<?php echo $votos_afro; ?>)</td>
                                 <td class="num"><?php echo $votos_outros_perc ?>% (<?php echo $votos_outros; ?>)</td>
                                 <td class="num"><?php echo $votos_tot; ?></td>
                              </tr>
-                        <?php endif; ?>
-
-                    <?php endforeach ?>
-                <?php endforeach ?>
             </tbody>
         </table>
         <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_votos_afrodesc' data_csv='<?php echo json_encode($data) ?>'>
