@@ -346,7 +346,7 @@ function get_count_votes_genre_uf($uf) {
     );
     
     $votes = $wpdb->get_results($query);
-    
+
     if (!empty($votes)) {
         foreach($votes as $item) {
             if ($item->genero == 'masculino') {
@@ -380,6 +380,7 @@ function get_number_of_votes_setorial_genre_by_uf($uf) {
                                               ."INNER JOIN {$wpdb->postmeta} pm2 ON pm2.post_id = um1.meta_value "
                                               ."INNER JOIN {$wpdb->posts} p ON p.ID = pm1.post_id "
                                               ."INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = p.post_author "
+                                              ."INNER JOIN {$wpdb->usermeta} um3 ON um3.user_id = p.post_author "        
                                               ."WHERE um1.meta_key = 'vote-project-id' "
                                               ."AND pm1.meta_key = 'candidate-display-name' "
                                               ."AND pm2.meta_key = 'subscription-valid' "
