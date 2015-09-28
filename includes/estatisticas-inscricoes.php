@@ -109,7 +109,7 @@ function relatorios_sumario_page_callback_function() {
     <li><a href='admin.php?page=votos_setorial'>Votos por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_setorial_estado'>Votos por setorial/estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_genero'>Votos por gênero</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=votos_genero_estado_total'>Votos por gênero - listagem</a> </li>
+    <li><a href='admin.php?page=votos_genero_estado_total'>Votos por gênero - listagem</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_afrodesc'>Votos por afrodescendência</a> </li>
     <li><a href='admin.php?page=votos_afrodesc_setorial_estado'>Votos por setorial/estado por afrodescendência</a> </li>
     <li><a href='admin.php?page=votos_genero_setorial_estado'>Votos por setorial/estado por gênero</a></li>
