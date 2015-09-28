@@ -374,17 +374,25 @@ function get_number_of_votes_setorial_genre_by_uf($uf) {
 
     foreach( $setorais as $key => $setorial )
     {   
-        $count[$key] = $wpdb->get_results( $wpdb->prepare("SELECT COUNT(u.umeta_id) as count, pm.meta_value as genre "
-                                                     ."FROM {$wpdb->usermeta} as u "
-                                                     ."INNER JOIN {$wpdb->posts} as p ON p.post_author = u.user_id "      
-                                                     ."INNER JOIN {$wpdb->usermeta} as uu ON u.user_id = uu.user_id "
-                                                     ."INNER JOIN {$wpdb->usermeta} as uuu ON u.user_id = uuu.user_id "
-                                                     ."INNER JOIN {$wpdb->postmeta} as pm ON p.ID = pm.post_id "      
-                                                     ."WHERE u.meta_key = 'vote-project-id' "
-                                                     ."AND uu.meta_key = 'setorial' AND uu.meta_value = %s "        
-                                                     ."AND uuu.meta_key = 'uf' AND uuu.meta_value = %s "
-                                                     ."AND pm.meta_key = 'candidate-genre' "
-                                                     ."GROUP BY genre " , $key, $uf ));
+        $count[$key] = $wpdb->get_results( $wpdb->prepare("SELECT COUNT(um1.meta_value) AS count,"
+                                              ."um1.meta_value AS candidato_id, "
+                                              ."pm1.meta_value AS nome_candidato, "
+                                              ."pm2.meta_value AS valido, "
+                                              ."um1.meta_value AS uf "
+                                              ."FROM {$wpdb->usermeta} um1 " 
+                                              ."INNER JOIN {$wpdb->postmeta} pm1 ON pm1.post_id = um1.meta_value "
+                                              ."INNER JOIN {$wpdb->postmeta} pm2 ON pm2.post_id = um1.meta_value "
+                                              ."INNER JOIN {$wpdb->posts} p ON p.ID = pm1.post_id "
+                                              ."INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = p.post_author "
+                                              ."WHERE um1.meta_key = 'vote-project-id' "
+                                              ."AND pm1.meta_key = 'candidate-display-name' "
+                                              ."AND pm2.meta_key = 'subscription-valid' "
+                                              ."AND um2.meta_key = 'setorial' "
+                                              ."AND um2.meta_value = %s "
+                                              ."AND um3.meta_key = 'UF' "
+                                              ."AND um3.meta_value = %s "
+                                              ."AND p.post_type = 'projetos' "
+                                              ."GROUP BY candidato_id ", $setorial, $uf));
         
         if (!empty($count[$key])) {
             foreach($count[$key] as $item) {
