@@ -87,33 +87,38 @@ function relatorios_sumario_page_callback_function() {
     <h2>Lista de relatórios</h2>
 
 	<ul class='wp-submenu wp-submenu-wrap'>
-    <li><h4>Inscritos</h4></li>            
+    <li><h3>Inscritos</h3></li>            
     <li><a href='admin.php?page=inscritos_estado'>Inscrições por Estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=inscritos_estado_total'>Inscrições por Estado - total por estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=inscritos_setorial_total'>Inscrições por Setorial - total por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=inscritos_setorial_estado'>Inscrições por Setorial/Estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_inscritos_votaram'>Inscritos que votaram/não votaram</a> <small>disponível</small></li>
-    <li><h4>Candidatos</h4></li>        
+
+    <li><h3>Candidatos</h3></li>        
     <li><a href='admin.php?page=candidatos_estado_total'>Candidatos por estado - total por estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_setorial'>Candidatos por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_setorial_estado'>Candidatos por setorial/estado</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=candidatos_inabilitados'>Candidatos inabilitados</a> <small>disponível</small></li>
+    <li><h5>Por gênero</h5></li>
     <li><a href='admin.php?page=candidatos_genero'>Candidatos por gênero</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_genero_estado_total'>Candidatos por gênero por estado - listagem</a> <small>disponível</small></li>
+    <li><h5>Por afrodescendência</h5></li>
     <li><a href='admin.php?page=candidatos_afrodesc'>Candidatos afrodescendentes</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_afrodesc_estado_total'>Candidatos afrodescendentes por estado - listagem</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=candidatos_inabilitados'>Candidatos inabilitados</a> <small>disponível</small></li>
 
 <?php if(current_user_can('manage_options')): ?>
-    <li><h4>Votos</h4></li>    
+    <li><h3>Votos</h3></li>    
     <li><a href='admin.php?page=votos_estado_total'>Votos por estado - listagem</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_setorial'>Votos por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_setorial_estado'>Votos por setorial/estado</a> <small>disponível</small></li>
+    <li><h5>Por gênero</h5></li>
     <li><a href='admin.php?page=votos_genero'>Votos por gênero</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_genero_estado_total'>Votos por gênero - listagem</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=votos_genero_setorial_estado'>Votos por setorial/estado por gênero</a></li>
+    <li><h5>Por afrodescendência</h5></li>
     <li><a href='admin.php?page=votos_afrodesc'>Votos por afrodescendência</a> </li>
     <li><a href='admin.php?page=votos_afrodesc_setorial_estado'>Votos por setorial/estado por afrodescendência</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=votos_genero_setorial_estado'>Votos por setorial/estado por gênero</a></li>
-
+    <li><h4>Auditoria</h4></li>
     <li><a href='admin.php?page=listagem_votos_auditoria'>Auditoria: votos por setorial e estado</a> <small>disponível</small></li>
 <?php endif ?>
     </ul>
