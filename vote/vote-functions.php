@@ -370,7 +370,7 @@ function get_number_of_votes_setorial_genre_by_uf($uf) {
 
     foreach( $setorais as $key => $setorial )
     {   
-        $count[$key] = $wpdb->get_results( $wpdb->prepare("SELECT COUNT(um1.meta_value) AS count,"
+        $count[$key] = $wpdb->get_results( $wpdb->prepare("SELECT COUNT(pm1.meta_value) AS count,"
                                               ."um1.meta_value AS candidato_id, "
                                               ."pm1.meta_value AS nome_candidato, "
                                               ."pm2.meta_value AS valido, "
@@ -388,7 +388,7 @@ function get_number_of_votes_setorial_genre_by_uf($uf) {
                                               ."AND um3.meta_key = 'UF' "
                                               ."AND um3.meta_value = %s "
                                               ."AND p.post_type = 'projetos' "
-                                              ."GROUP BY candidato_id ", $setorial, $uf));
+                                              ."GROUP BY nome_candidato ", $setorial, $uf));
         
         if (!empty($count[$key])) {
             foreach($count[$key] as $item) {
