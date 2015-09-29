@@ -2999,6 +2999,17 @@ section.features {
     margin-top: -215px;
     width: 90% !important; }
 
+  .candidates-content .candidates .candidate-details {
+    border-width: 20px;
+    width: 90% !important;
+    margin-left: 0px;
+    margin-right: 0px;
+    left: 5%; }
+    .candidates-content .candidates .candidate-details i {
+      right: -20px; }
+    .candidates-content .candidates .candidate-details .candidate-avatar img {
+      width: 80px;
+      height: 80px; }
   .candidates-content .flex-direction-nav li a.flex-prev {
     left: 8px; }
   .candidates-content .flex-direction-nav li a.flex-next {
