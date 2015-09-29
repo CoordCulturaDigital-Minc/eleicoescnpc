@@ -2473,7 +2473,7 @@ section {
   text-align: center;
   background-color: #f0ac0e;
   position: absolute;
-  top: 66%;
+  top: 47%;
   height: 16%;
   padding: 8px 20px 0 20px; }
 
@@ -2490,7 +2490,7 @@ section {
 
 .destaques-content .flex-direction-nav li a {
   position: absolute;
-  top: 110px;
+  top: 68px;
   width: 40px;
   height: 83px;
   cursor: pointer;
