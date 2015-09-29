@@ -26,6 +26,7 @@ function get_count_users_states_by_uf($uf){
                                                   ."INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = um.user_id "
                                                   ."WHERE um.meta_key = 'uf' "
                                                   ."AND um2.meta_key = 'setorial' "
+                                                  ."AND um2.meta_value != '' "
                                                   ."AND um.meta_value = %s", $uf ) );
     
     return $count;
