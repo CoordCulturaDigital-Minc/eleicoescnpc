@@ -1493,7 +1493,7 @@ function maisvotados_setorial_estado_page_callback_function() {
         return false;
     }
 
-    $data[] = ['candidato', 'num_votos', 'genero', 'afrodescendente']; 
+    $data[] = ['candidato', 'num_votos', 'genero', 'afrodescendente', 'uf', 'setorial']; 
     $uf_selected = $_GET['uf'];
     $setorial_selected = $_GET['setorial'];
     
@@ -1554,9 +1554,12 @@ function maisvotados_setorial_estado_page_callback_function() {
           $votes = get_maisvotados_setorial_estado($uf_selected, $setorial_selected);
           
           foreach ($votes as $vote) {
+              $pattern = array('/\[/', '/\]/', '/\(/', '/\)/', '/\"/', '/\,/', '/\//', "/´/", "/'/");
+              
+              $candidato = preg_replace($pattern, '', $vote->candidato);    
               
               $data[] = [
-                  $vote->candidato,
+                  $candidato,
                   $vote->num_votos,
                   $vote->genero,
                   $vote->afrodescendente,
