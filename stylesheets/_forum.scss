@@ -353,9 +353,30 @@
     .dialog, .ui-dialog {
         margin-top: -215px;
         width: 90% !important;
-    }
+    }   
 
     .candidates-content {
+       
+        .candidates {
+
+            .candidate-details {
+                border-width: 20px;
+                width: 90% !important;
+                margin-left: 0px;
+                margin-right: 0px;
+                left: 5%;
+
+                i {
+                    right: -20px;
+                }
+
+                .candidate-avatar img {
+                    width: 80px;
+                    height: 80px;
+                }
+            }
+        }
+        
         .flex-direction-nav  li{
             a {
 
