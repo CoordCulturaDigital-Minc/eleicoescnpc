@@ -229,3 +229,87 @@ section {
 	}
 
 }
+
+
+
+/* destaques - carrossel home */
+.destaques-content {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 10;
+    height: 100%;
+}
+.destaques-content .loading h2 {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    text-align: center;
+    color: #125b26;
+    font-size: 36px;
+}
+.destaques-content .destaques {
+    display: none;
+    position: relative;
+}
+.destaques-content .destaques .destaque {
+    display: block;
+    position: relative;
+}
+
+.destaques-content .destaques .destaque .destaque-text {
+    clear: both;
+    text-align: center;
+    background-color:#f0ac0e;
+    position: absolute;
+    top: 47%;
+    height: 16%;
+    padding: 8px 20px 0 20px;
+}
+
+.destaques-content .destaques .destaque img{
+    width: 100%;
+    min-width: 190px;
+    min-height: 190px;
+}
+
+.destaques-content .destaques .destaque .destaque-text h1 {
+    font-size: 32px;
+    text-align: left;
+    color: #656154;
+    text-transform: none !important;    
+}
+
+.destaques-content .flex-direction-nav li a {
+    position: absolute;
+    top: 68px;
+    width: 40px;
+    height: 83px;
+    cursor: pointer;
+    background-image: url(images/image-carousel-amarelo.png);
+    background-repeat: no-repeat;
+    z-index: 100;
+}
+
+.destaques-content .flex-direction-nav li a.flex-prev {
+    left: 8px;
+}
+.destaques-content .flex-direction-nav li a.flex-next {
+    right: 8px;
+    background-position: -45px 0;
+}
+
+section.carrossel  {
+    height: 300px;
+}
+
+section.carrossel header {
+    height: 300px;
+}		
+	
+section.carrossel  {		
+   height: 300px;		
+}		
+	
+section.carrossel header {		
+   height: 300px;		
+}		

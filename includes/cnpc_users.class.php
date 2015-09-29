@@ -169,7 +169,7 @@ function CNPC_Users_init() {
 			    <tr>
 			        <th><label>Estado</label></th>
 			        <td>
-			           <?php echo dropdown_states( 'uf', get_user_meta($user->ID, 'UF', true), true, $disabled); ?>
+			           <?php echo dropdown_states( 'uf', get_user_meta($user->ID, 'UF', true), false, $disabled); ?>
 			           <span class="description">Só pode alterar uma vez</span>
 			        </td>
 			    </tr>
@@ -179,7 +179,7 @@ function CNPC_Users_init() {
 			    <tr>
 			        <th><label>Setorial</label></th>
 			        <td>
-			           <?php echo dropdown_setoriais( 'setorial', get_user_meta($user->ID, 'setorial', true), true, $disabled); ?>
+			           <?php echo dropdown_setoriais( 'setorial', get_user_meta($user->ID, 'setorial', true), false, $disabled); ?>
 			        	<span class="description">Só pode alterar uma vez</span>
 			        </td>
 			    </tr>
@@ -211,8 +211,8 @@ function CNPC_Users_init() {
 			$current_uf 		= get_user_meta($user_id, 'UF', true);
 			$current_setorial 	= get_user_meta($user_id, 'setorial', true);
 
-			$uf		  = isset( $_POST['uf'] ) ? $_POST['uf'] : $current_uf;
-			$setorial = isset( $_POST['setorial'] ) ? $_POST['setorial'] : $current_setorial;
+			$uf		  = !empty( $_POST['uf'] ) ? $_POST['uf'] : $current_uf;
+			$setorial = !empty( $_POST['setorial'] ) ? $_POST['setorial'] : $current_setorial;
 
 			// se mudar UF ou Setorial
 			if( $uf !== $current_uf || $setorial !== $current_setorial ) {
