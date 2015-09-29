@@ -1434,6 +1434,11 @@ function listagem_votos_auditoria_page_callback_function() {
     }
     
     ?>
+    <div class="wrap span-20">
+
+    <h2>Listagem de votos - auditoria</h2>
+
+    
     <h4>Selecione a UF:</h4>
     <select class="select-state-v" id="filtrar_uf">
       <option></option>
@@ -1475,6 +1480,7 @@ function listagem_votos_auditoria_page_callback_function() {
 <?php else: ?>
     Sem resultados.
 <?php endif; ?>
+        </div>
 <?php 
 }
 
@@ -1510,6 +1516,10 @@ function maisvotados_setorial_estado_page_callback_function() {
     }
     
     ?>
+    <div class="wrap span-20">
+
+    <h2>Candidatos mais votados por setorial/estado</h2>
+
     <h4>Selecione a UF:</h4>
     <select class="select-state-v" id="filtrar_uf">
       <option></option>
@@ -1567,16 +1577,129 @@ function maisvotados_setorial_estado_page_callback_function() {
           }
 ?>     
           <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo $nome_relatorio; ?>' data_csv='<?php echo json_encode($data) ?>'>
-          
+          </div>
 <?php 
       }   
 }
 
 
-
 // somente exportação de csv
 function resumo_setoriais_page_callback_function() {
+    // setorial, uf, qtd_candidatos, qtd_eleitores, qtd_votantes)
+    if(!current_user_can('manage_options')){
+        return false;
+    }
+
+    $data[] = ['setorial', 'uf', 'qtd_candidatos', 'qtd_eleitores', 'qtd_votantes']; 
+    $uf_selected = $_GET['uf'];
+    $setorial_selected = $_GET['setorial'];
     
+    $states = get_all_states();
+    $setoriais = get_setoriais();
+    
+    if (!in_array($uf_selected, array_keys($states))) {
+        if ($uf_selected != 'todos') {
+            $uf_selected = '';
+        }
+    } else {
+        $data[] = 'uf';
+    }
+    if (!in_array($setorial_selected, array_keys($setoriais))) {
+        if ($setorial_selected != 'todos') {
+            $setorial_selected = '';
+        }
+    } else {
+        $data[] = 'setorial';
+    }
+    
+    ?>
+    <div class="wrap span-20">
+
+    <h2>Resumo das setoriais e estados</h2>
+    
+    <h4>Selecione a UF:</h4>
+    <select class="select-state-v" id="filtrar_uf">
+      <option></option>
+      <?php foreach ( $states as $uf_item => $state_item ): ?>
+      <option value="<?php echo $uf_item ?>" <?php if ($uf_item == $uf_selected) { echo "selected"; } ?>><?php echo $state_item ?></option>
+      <?php endforeach ?>
+      <option value="todos" <?php if ($uf_selected == 'todos') { echo "selected"; } ?>>TODOS</option>
+    </select>
+      
+    <h4>Selecione a Setorial:</h4>
+    <select class="select-setorial-v" id="filtrar_setorial">
+      <option></option>
+      <?php foreach ( $setoriais as $slug => $setorial_item ): ?>
+      <option value="<?php echo $slug ?>" <?php if ($slug == $setorial_selected) { echo "selected"; } ?>><?php echo $setorial_item ?></option>
+      <?php endforeach ?>
+      <option value="todos" <?php if ($setorial_selected == 'todos') { echo "selected"; } ?>>TODOS</option>      
+    </select>
+      <br/>
+      <input type="button" value="buscar" id="resumo_setoriais" class="filtrar_relatorio">
+      <br/><br/>
+      
+<?php
+      if ($uf_selected != '' || $setorial_selected != '') {
+          
+          if ($uf_selected == 'todos') {
+              $uf_selected = '';
+          }
+          if ($setorial_selected == 'todos') {
+              $setorial_selected = '';
+          }
+?>
+<?php
+          if ($uf_selected == '' && $setorial_selected == '') {
+              // listagem TODOS
+              foreach ($states as $uf => $state_item) {
+                  foreach ($setoriais as $setorial => $setorial_item) {
+                      $qtd_candidatos = get_count_candidates($uf, $setorial, true);
+                      $qtd_eleitores = get_count_users_setorial_uf($uf, $setorial);
+                      $qtd_votantes = get_votos_estado_setorial($uf, $setorial);
+                      $data[] = [$setorial, $uf, $qtd_candidatos, $qtd_eleitores, $qtd_votantes];
+                  }
+              }
+              
+          } else if ($uf_selected != '' && $setorial_selected == '') {
+              // relatorio por só por uf 
+              foreach ($setoriais as $setorial => $setorial_item) {
+                  $qtd_candidatos = get_count_candidates($uf, $setorial, true);
+                  $qtd_eleitores = get_count_users_setorial_uf($uf, $setorial);
+                  $qtd_votantes = get_votos_estado_setorial($uf, $setorial);
+                  $data[] = [$setorial_item, $states[$uf_selected], $qtd_candidatos, $qtd_eleitores, $qtd_votantes];
+              }             
+          } else if ($uf_selected == '' && $setorial_selected != '') {
+              // relatorio só por setorial
+              foreach ($states as $uf => $state_item) {
+                  $qtd_candidatos = get_count_candidates($uf, $setorial, true);
+                  $qtd_eleitores = get_count_users_setorial_uf($uf, $setorial);
+                  $qtd_votantes = get_votos_estado_setorial($uf, $setorial);
+                  $data[] = [$setoriais[$setorial_selected], $state_item, $qtd_candidatos, $qtd_eleitores, $qtd_votantes];                  
+              }
+              
+          } else if ($uf_selected != '' && $setorial_selected != '') {
+              // relatorio por uf e setorial
+              $qtd_candidatos = get_count_candidates($uf, $setorial, true);
+              $qtd_eleitores = get_count_users_setorial_uf($uf, $setorial);
+              $qtd_votantes = get_votos_estado_setorial($uf, $setorial);
+              $data[] = [$setoriais[$setorial_selected], $states[$uf_selected], $qtd_candidatos, $qtd_eleitores, $qtd_votantes];              
+          }
+          
+          $nome_relatorio = "";
+          if ($uf_selected && $setorial_selected) {
+              $nome_relatorio = "resumo-$uf_selected-$setorial_selected";
+          } else if ($uf_selected && !$setorial_selected) {
+              $nome_relatorio = "resumo-resumo-$uf_selected";
+          } else if (!$uf_selected && $setorial_selected) {
+              $nome_relatorio = "resumo-$setorial_selected";
+          } else {
+              $nome_relatorio = "resumo-nacional";
+          }
+?>     
+          <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo $nome_relatorio; ?>' data_csv='<?php echo json_encode($data) ?>'>
+      </div>    
+<?php 
+      }   
 }
 
 
