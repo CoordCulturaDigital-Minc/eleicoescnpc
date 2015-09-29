@@ -234,7 +234,10 @@ function get_count_users_setoriais() {
 
     foreach( $setoriais as $key => $setorial )
     {   
-         $count[$key] = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM {$wpdb->usermeta} WHERE meta_key = 'setorial' AND meta_value = %s", $key ) );
+         $count[$key] = $wpdb->get_var( $wpdb->prepare( "SELECT count(um1.umeta_id) FROM {$wpdb->usermeta} um1 "
+                                                       ."INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = um1.user_id "
+                                                       ."WHERE um2.meta_key = 'UF' AND um2.meta_value !='' "        
+                                                       ."AND um1.meta_key = 'setorial' AND um1.meta_value = %s", $key ) );
     }
     
     return $count;
