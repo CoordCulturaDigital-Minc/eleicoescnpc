@@ -22,10 +22,10 @@ function get_count_users_states_by_uf($uf){
 
     global $wpdb;
     
-    $count = $wpdb->get_var( $wpdb->prepare( "SELECT count(u.user_id) FROM {$wpdb->usermeta} as u "
-                                                  ."INNER JOIN {$wpdb->usermeta} as um ON u.user_id = um.user_id "
-                                                  ."WHERE um.meta_key = 'uf'"
-                                                  ."AND u.meta_key = 'UF'"    
+    $count = $wpdb->get_var( $wpdb->prepare( "SELECT count(um.user_id) FROM {$wpdb->usermeta} as um "
+                                                  ."INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = um.user_id "
+                                                  ."WHERE um.meta_key = 'uf' "
+                                                  ."AND um2.meta_key = 'setorial' "
                                                   ."AND um.meta_value = %s", $uf ) );
     
     return $count;
