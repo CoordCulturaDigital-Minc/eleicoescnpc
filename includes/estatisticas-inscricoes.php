@@ -1434,6 +1434,11 @@ function listagem_votos_auditoria_page_callback_function() {
     }
     
     ?>
+    <div class="wrap span-20">
+
+    <h2>Listagem de votos - auditoria</h2>
+
+    
     <h4>Selecione a UF:</h4>
     <select class="select-state-v" id="filtrar_uf">
       <option></option>
@@ -1475,6 +1480,7 @@ function listagem_votos_auditoria_page_callback_function() {
 <?php else: ?>
     Sem resultados.
 <?php endif; ?>
+        </div>
 <?php 
 }
 
@@ -1510,6 +1516,10 @@ function maisvotados_setorial_estado_page_callback_function() {
     }
     
     ?>
+    <div class="wrap span-20">
+
+    <h2>Candidatos mais votados por setorial/estado</h2>
+
     <h4>Selecione a UF:</h4>
     <select class="select-state-v" id="filtrar_uf">
       <option></option>
@@ -1567,7 +1577,7 @@ function maisvotados_setorial_estado_page_callback_function() {
           }
 ?>     
           <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo $nome_relatorio; ?>' data_csv='<?php echo json_encode($data) ?>'>
-          
+          </div>
 <?php 
       }   
 }
@@ -1603,6 +1613,10 @@ function resumo_setoriais_page_callback_function() {
     }
     
     ?>
+    <div class="wrap span-20">
+
+    <h2>Resumo das setoriais e estados</h2>
+    
     <h4>Selecione a UF:</h4>
     <select class="select-state-v" id="filtrar_uf">
       <option></option>
@@ -1683,7 +1697,7 @@ function resumo_setoriais_page_callback_function() {
           }
 ?>     
           <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo $nome_relatorio; ?>' data_csv='<?php echo json_encode($data) ?>'>
-          
+      </div>    
 <?php 
       }   
 }
