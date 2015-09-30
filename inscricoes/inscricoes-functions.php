@@ -1112,9 +1112,14 @@ function label_status_candidate( $status ) {
 
 function get_count_subscriptions() {
     global $wpdb;
-    $count = $wpdb->get_var("SELECT count(user_id) FROM {$wpdb->usermeta} WHERE"
-                                         ." meta_key='cpf' AND meta_value!=''");
-    
+    $count = $wpdb->get_var( $wpdb->prepare( "SELECT count(um1.user_id) FROM {$wpdb->usermeta} as um1 "
+                                                  ."INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = um1.user_id "
+                                                  ."INNER JOIN {$wpdb->usermeta} um3 ON um3.user_id = um1.user_id "    
+                                                  ."WHERE um1.meta_key = 'uf' "
+                                                  ."AND um2.meta_key = 'setorial' "
+                                                  ."AND um2.meta_value != '' "
+                                                  ."AND um3.meta_key = 'cpf' " 
+                                                  ."AND um3.meta_value!=''"));
     return $count;
 
  }
