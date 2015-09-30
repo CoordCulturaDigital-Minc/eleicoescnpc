@@ -111,7 +111,7 @@ function relatorios_sumario_page_callback_function() {
 <?php if(current_user_can('manage_options')): ?>
     <li><h3>Votos</h3></li>
     <li><a href='admin.php?page=maisvotados_setorial_estado'>Candidatos mais votados por setorial e estado</a></li>
-    <li><a href='admin.php?page=resumo_setoriais'>Resumo das setoriais</a></li>
+    <li><a href='admin.php?page=resumo_setorial_estado'>Resumo das setoriais</a></li>
 <!--
     <li><a href='admin.php?page=votos_estado_total'>Votos por estado - listagem</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_setorial'>Votos por setorial</a> <small>disponível</small></li>
