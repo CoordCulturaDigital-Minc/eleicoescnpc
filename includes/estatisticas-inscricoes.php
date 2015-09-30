@@ -44,7 +44,7 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Votos por afrodescendência setorial/estado', 'Votos por afrodescendência', 'manage_options', 'votos_afrodesc_setorial_estado', 'votos_afrodesc_setorial_estado_page_callback_function');
     */
     add_submenu_page('inscricoes_estatisticas', 'Candidatos mais votados por setorial e estado', 'Mais votados por setorial e estado', 'manage_options', 'maisvotados_setorial_estado', 'maisvotados_setorial_estado_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Resumo das setoriais', 'Resumo das setoriais', 'manage_options', 'maisvotados_setorial_estado', 'maisvotados_setorial_estado_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Resumo das setoriais', 'Resumo das setoriais', 'manage_options', 'resumo_setorial_estado', 'resumo_setorial_estado_page_callback_function');
     
     /* verificacao de fraude */
     add_submenu_page('inscricoes_estatisticas', 'Auditoria: votos por setorial/estado ', 'Auditoria: votos por setorial estado', 'manage_options', 'resumo_setoriais', 'resumo_setoriais_page_callback_function');
@@ -111,7 +111,7 @@ function relatorios_sumario_page_callback_function() {
 <?php if(current_user_can('manage_options')): ?>
     <li><h3>Votos</h3></li>
     <li><a href='admin.php?page=maisvotados_setorial_estado'>Candidatos mais votados por setorial e estado</a></li>
-    <li><a href='admin.php?page=resumo_setoriais'>Resumo das setoriais</a></li>
+    <li><a href='admin.php?page=resumo_setorial_estado'>Resumo das setoriais</a></li>
 <!--
     <li><a href='admin.php?page=votos_estado_total'>Votos por estado - listagem</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_setorial'>Votos por setorial</a> <small>disponível</small></li>
@@ -1493,7 +1493,7 @@ function maisvotados_setorial_estado_page_callback_function() {
         return false;
     }
 
-    $data[] = ['candidato', 'num_votos', 'genero', 'afrodescendente']; 
+    $data[] = ['candidato', 'num_votos', 'genero', 'afrodescendente', 'uf', 'setorial']; 
     $uf_selected = $_GET['uf'];
     $setorial_selected = $_GET['setorial'];
     
@@ -1554,9 +1554,12 @@ function maisvotados_setorial_estado_page_callback_function() {
           $votes = get_maisvotados_setorial_estado($uf_selected, $setorial_selected);
           
           foreach ($votes as $vote) {
+              $pattern = array('/\[/', '/\]/', '/\(/', '/\)/', '/\"/', '/\,/', '/\//', "/´/", "/'/");
+              
+              $candidato = preg_replace($pattern, '', $vote->candidato);    
               
               $data[] = [
-                  $vote->candidato,
+                  $candidato,
                   $vote->num_votos,
                   $vote->genero,
                   $vote->afrodescendente,
@@ -1569,7 +1572,7 @@ function maisvotados_setorial_estado_page_callback_function() {
           if ($uf_selected && $setorial_selected) {
               $nome_relatorio = "apuracao-$uf_selected-$setorial_selected";
           } else if ($uf_selected && !$setorial_selected) {
-              $nome_relatorio = "apuracao-resumo-$uf_selected";
+              $nome_relatorio = "apuracao-resumo -$uf_selected";
           } else if (!$uf_selected && $setorial_selected) {
               $nome_relatorio = "apuracao-resumo-$setorial_selected";
           } else {
@@ -1584,7 +1587,7 @@ function maisvotados_setorial_estado_page_callback_function() {
 
 
 // somente exportação de csv
-function resumo_setoriais_page_callback_function() {
+function resumo_setorial_estado_page_callback_function() {
     // setorial, uf, qtd_candidatos, qtd_eleitores, qtd_votantes)
     if(!current_user_can('manage_options')){
         return false;
@@ -1635,7 +1638,7 @@ function resumo_setoriais_page_callback_function() {
       <option value="todos" <?php if ($setorial_selected == 'todos') { echo "selected"; } ?>>TODOS</option>      
     </select>
       <br/>
-      <input type="button" value="buscar" id="resumo_setoriais" class="filtrar_relatorio">
+      <input type="button" value="buscar" id="resumo_setorial_estado" class="filtrar_relatorio">
       <br/><br/>
       
 <?php
@@ -1649,14 +1652,17 @@ function resumo_setoriais_page_callback_function() {
           }
 ?>
 <?php
+
           if ($uf_selected == '' && $setorial_selected == '') {
-              // listagem TODOS
+              /* listagem TODOS */
+
+              
               foreach ($states as $uf => $state_item) {
                   foreach ($setoriais as $setorial => $setorial_item) {
                       $qtd_candidatos = get_count_candidates($uf, $setorial, true);
                       $qtd_eleitores = get_count_users_setorial_uf($uf, $setorial);
                       $qtd_votantes = get_votos_estado_setorial($uf, $setorial);
-                      $data[] = [$setorial, $uf, $qtd_candidatos, $qtd_eleitores, $qtd_votantes];
+                      $data[] = [$setoriais[$setorial], $states[$uf], $qtd_candidatos, $qtd_eleitores, $qtd_votantes];
                   }
               }
               

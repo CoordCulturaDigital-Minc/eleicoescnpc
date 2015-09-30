@@ -22,10 +22,11 @@ function get_count_users_states_by_uf($uf){
 
     global $wpdb;
     
-    $count = $wpdb->get_var( $wpdb->prepare( "SELECT count(u.user_id) FROM {$wpdb->usermeta} as u "
-                                                  ."INNER JOIN {$wpdb->usermeta} as um ON u.user_id = um.user_id "
-                                                  ."WHERE um.meta_key = 'uf'"
-                                                  ."AND u.meta_key = 'UF'"    
+    $count = $wpdb->get_var( $wpdb->prepare( "SELECT count(um.user_id) FROM {$wpdb->usermeta} as um "
+                                                  ."INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = um.user_id "
+                                                  ."WHERE um.meta_key = 'uf' "
+                                                  ."AND um2.meta_key = 'setorial' "
+                                                  ."AND um2.meta_value != '' "
                                                   ."AND um.meta_value = %s", $uf ) );
     
     return $count;
@@ -233,7 +234,10 @@ function get_count_users_setoriais() {
 
     foreach( $setoriais as $key => $setorial )
     {   
-         $count[$key] = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM {$wpdb->usermeta} WHERE meta_key = 'setorial' AND meta_value = %s", $key ) );
+         $count[$key] = $wpdb->get_var( $wpdb->prepare( "SELECT count(um1.umeta_id) FROM {$wpdb->usermeta} um1 "
+                                                       ."INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = um1.user_id "
+                                                       ."WHERE um2.meta_key = 'UF' AND um2.meta_value !='' "        
+                                                       ."AND um1.meta_key = 'setorial' AND um1.meta_value = %s", $key ) );
     }
     
     return $count;
