@@ -47,7 +47,7 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Resumo das setoriais', 'Resumo das setoriais', 'manage_options', 'resumo_setorial_estado', 'resumo_setorial_estado_page_callback_function');
     
     /* verificacao de fraude */
-    add_submenu_page('inscricoes_estatisticas', 'Auditoria: votos por setorial/estado ', 'Auditoria: votos por setorial estado', 'manage_options', 'resumo_setoriais', 'resumo_setoriais_page_callback_function');
+    add_submenu_page('inscricoes_estatisticas', 'Auditoria: votos por setorial/estado ', 'Auditoria: votos por setorial estado', 'manage_options', 'listagem_votos_auditoria', 'listagem_votos_auditoria_page_callback_function');
 }
 
     // $norte = $wpdb->get_var("select COUNT(meta_id) from $wpdb->postmeta where meta_key = 'company-region' and meta_value = 'nortecentroeste'");
@@ -110,8 +110,8 @@ function relatorios_sumario_page_callback_function() {
 
 <?php if(current_user_can('manage_options')): ?>
     <li><h3>Votos</h3></li>
-    <li><a href='admin.php?page=maisvotados_setorial_estado'>Candidatos mais votados por setorial e estado</a></li>
-    <li><a href='admin.php?page=resumo_setorial_estado'>Resumo das setoriais</a></li>
+    <li><a href='admin.php?page=maisvotados_setorial_estado'>Candidatos mais votados por setorial e estado</a> <small>disponível</small></li>
+    <li><a href='admin.php?page=resumo_setorial_estado'>Resumo das setoriais</a> <small>disponível</small></li>
 <!--
     <li><a href='admin.php?page=votos_estado_total'>Votos por estado - listagem</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_setorial'>Votos por setorial</a> <small>disponível</small></li>
