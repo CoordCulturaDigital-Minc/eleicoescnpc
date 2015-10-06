@@ -74,10 +74,10 @@ function form_process () {
                 $emailTo = get_option('admin_email');
             endif;
 
-            if ( is_array($opcoes) && isset($opcoes[$formID]) && is_array($opcoes[$formID])  && isset($opcoes[$formID]['assunto']) && !empty($opcoes[$formID]['assunto'])) :
-                $subjectTo = $opcoes[$_GET['formID']]['assunto'];
+            if ($_GET['assunto']):
+                $subjectTo = $_GET['assunto'];
             else :
-                $subjectTo = get_option('assunto');
+                $subjectTo = $opcoes[$_GET['formID']]['assunto'];
             endif;
             
             //save
