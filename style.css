@@ -2006,6 +2006,8 @@ nav.access {
   nav.access .menu--main, nav.access .menu--main li {
     float: left;
     text-align: right; }
+  nav.access .menu--main li {
+    margin-right: 10px; }
   nav.access .menu--main a {
     margin-right: 1.3em;
     color: #ffae16; }
