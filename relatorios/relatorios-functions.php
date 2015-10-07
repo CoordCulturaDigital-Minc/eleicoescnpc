@@ -446,3 +446,40 @@ function get_listagem_votos_auditoria($uf, $setorial) {
     
     return $results;
 }
+
+function get_inscritos_naovotaram() {
+    global $wpdb;
+    $results = [];
+    $count = [];
+    
+    $sql = "SELECT "
+        ."u.ID AS 'user_id', "
+        ."u.display_name AS 'nome', "
+        ."u.user_email AS 'email', "
+        ."u.user_registered AS 'data_inscricao', "        
+        ."um1.meta_value AS 'setorial', "
+        ."um2.meta_value AS 'uf' "
+        
+        ."FROM "
+        ."{$wpdb->users} u "
+        ."INNER JOIN {$wpdb->usermeta} um1 ON um1.user_id = u.ID "
+        ."INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = u.ID "
+        
+        ."WHERE "
+        ."um1.meta_key = 'setorial' AND "
+        ."um2.meta_key = 'UF' ";
+    
+    $results = $wpdb->get_results($sql);
+    
+    foreach($results as $pessoa) {
+        // verifica se votou
+        $pessoa->votou = get_user_meta( $pessoa->user_id, 'vote-project-id', true);
+        
+        // armazena apenas os que nao votaram
+        if (!$votou) {
+            $count[] = $pessoa;
+        }
+    }
+    
+    return $count;
+}
