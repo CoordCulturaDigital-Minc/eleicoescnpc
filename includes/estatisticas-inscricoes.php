@@ -43,6 +43,7 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Votos por gênero setorial/estado', 'Votos por gênero', 'manage_options', 'votos_genero_setorial_estado', 'votos_genero_setorial_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Votos por afrodescendência setorial/estado', 'Votos por afrodescendência', 'manage_options', 'votos_afrodesc_setorial_estado', 'votos_afrodesc_setorial_estado_page_callback_function');
     */
+    add_submenu_page('inscricoes_estatisticas', 'Relatório dos inscritos que não votaram', 'Relatório dos inscritos que não votaram', 'manage_options', 'relatorio_inscritos_naovotaram', 'relatorio_inscritos_naovotaram_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Candidatos mais votados por setorial e estado', 'Mais votados por setorial e estado', 'manage_options', 'maisvotados_setorial_estado', 'maisvotados_setorial_estado_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Resumo das setoriais', 'Resumo das setoriais', 'manage_options', 'resumo_setorial_estado', 'resumo_setorial_estado_page_callback_function');
     
@@ -95,7 +96,9 @@ function relatorios_sumario_page_callback_function() {
     <li><a href='admin.php?page=inscritos_setorial_total'>Inscrições por Setorial - total por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=inscritos_setorial_estado'>Inscrições por Setorial/Estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=votos_inscritos_votaram'>Inscritos que votaram/não votaram</a> <small>disponível</small></li>
-
+<?php if(current_user_can('manage_options')): ?>
+    <li><a href='admin.php?page=relatorio_inscritos_naovotaram'>Relatório de inscritos que não votaram</a> <small>disponível</small></li>
+<?php endif ?>
     <li><h3>Candidatos</h3></li>        
     <li><a href='admin.php?page=candidatos_estado_total'>Candidatos por estado - total por estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_setorial'>Candidatos por setorial</a> <small>disponível</small></li>
@@ -1708,6 +1711,32 @@ function resumo_setorial_estado_page_callback_function() {
       }   
 }
 
+
+function relatorio_inscritos_naovotaram_page_callback_function() {
+    // setorial, uf, qtd_candidatos, qtd_eleitores, qtd_votantes)
+    if(!current_user_can('manage_options')){
+        return false;
+    }
+
+    $inscritos_naovotaram = get_inscritos_naovotaram();
+    
+    $data[] = ['nome', 'email', 'data de inscrição', 'setorial', 'uf']; 
+    foreach ($inscritos_naovotaram as $pessoa) {
+        $data[] = [
+            $pessoa->nome,
+            $pessoa->email,
+            $pessoa->data_inscricao,
+            $pessoa->setorial,
+            $pessoa->uf
+        ];
+    }
+    ?>
+    <div class="wrap span-20">
+    <h2>Relatório de inscritos que não votaram:</h2>
+      <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_inscricos_naovotaram' data_csv='<?php echo json_encode($data) ?>'>                </div>
+<?php
+    
+}
 
 
 ?>
