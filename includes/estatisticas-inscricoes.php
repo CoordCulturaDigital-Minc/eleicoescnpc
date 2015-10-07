@@ -1718,19 +1718,8 @@ function relatorio_inscritos_naovotaram_page_callback_function() {
         return false;
     }
 
-    $inscritos_naovotaram = get_inscritos_naovotaram();
-    $pattern = array('/\[/', '/\]/', '/\(/', '/\)/', '/\"/', '/\,/', '/\//', "/´/", "/'/");
+    $data = get_inscritos_naovotaram();   
     
-    $data[] = ['nome', 'email', 'data de inscrição', 'setorial', 'uf']; 
-    foreach ($inscritos_naovotaram as $pessoa) {
-        $data[] = [
-            $pessoa->nome = preg_replace($pattern, '', $pessoa->nome),
-            $pessoa->email,
-            $pessoa->data_inscricao,
-            $pessoa->setorial,
-            $pessoa->uf
-        ];
-    }
     ?>
     <div class="wrap span-20">
     <h2>Relatório de inscritos que não votaram:</h2>

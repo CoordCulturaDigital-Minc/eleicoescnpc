@@ -450,7 +450,7 @@ function get_listagem_votos_auditoria($uf, $setorial) {
 function get_inscritos_naovotaram() {
     global $wpdb;
     $results = [];
-    $count = [];
+    $data = [];
     
     $sql = "SELECT "
         ."u.ID AS 'user_id', "
@@ -470,16 +470,26 @@ function get_inscritos_naovotaram() {
         ."um2.meta_key = 'UF' ";
     
     $results = $wpdb->get_results($sql);
-    
+    $pattern = array('/\[/', '/\]/', '/\(/', '/\)/', '/\"/', '/\,/', '/\//', "/´/", "/'/");
+
+    $data[] = ['nome', 'email', 'data de inscrição', 'setorial', 'uf']; 
     foreach($results as $pessoa) {
         // verifica se votou
         $pessoa->votou = get_user_meta( $pessoa->user_id, 'vote-project-id', true);
         
         // armazena apenas os que nao votaram
         if (!$votou) {
-            $count[] = $pessoa;
+            // monta estrutura de dados final
+            $pessoa = [
+                preg_replace($pattern, '', $pessoa->nome),
+                $pessoa->email,
+                $pessoa->data_inscricao,
+                $pessoa->setorial,
+                $pessoa->uf
+            ];
+            $data[] = $pessoa;
         }
     }
     
-    return $count;
+    return $data;
 }
