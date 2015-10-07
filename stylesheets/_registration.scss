@@ -81,7 +81,7 @@ fieldset br {
 	.subscription__title {
 	    // font-family: 'Sanchez', serif;
 	    font-size: 1.13rem;
-	    font-size: 18px;
+	    font-size: 15px;
 	    line-height: 1.33;
 	    
 	    small {
@@ -104,6 +104,10 @@ fieldset br {
 
 }
 
+#filter_setorial {
+	margin-bottom: 20px;
+}
+
 .form-controls {
     margin-bottom: 1.5rem;
 
@@ -112,6 +116,10 @@ fieldset br {
 
 .project-switcher {
     // font-family: 'Sanchez', serif;
+}
+
+.js-sortable-table .header:hover {
+	cursor: pointer;
 }
 
 #cadastro.form-step {
@@ -282,6 +290,10 @@ fieldset br {
 	.file a,
 	a.file_upload {
     	text-decoration: underline;
+    }
+
+    .row > div {
+    	margin-bottom: 10px;
     }
 
 

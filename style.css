@@ -1147,7 +1147,7 @@ fieldset br {
   color: #999; }
 .inscritos--lista .subscription__title {
   font-size: 1.13rem;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1.33; }
   .inscritos--lista .subscription__title small {
     font-size: .88rem;
@@ -1160,8 +1160,14 @@ fieldset br {
 .inscritos--lista a:hover {
   text-decoration: underline; }
 
+#filter_setorial {
+  margin-bottom: 20px; }
+
 .form-controls {
   margin-bottom: 1.5rem; }
+
+.js-sortable-table .header:hover {
+  cursor: pointer; }
 
 #cadastro.form-step {
   padding-top: 0px;
@@ -1280,6 +1286,8 @@ fieldset br {
 .form-application .file a,
 .form-application a.file_upload {
   text-decoration: underline; }
+.form-application .row > div {
+  margin-bottom: 10px; }
 .form-application legend {
   font-size: 1.13rem;
   font-size: 18px;
