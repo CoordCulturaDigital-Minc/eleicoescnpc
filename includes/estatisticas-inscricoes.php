@@ -1719,10 +1719,12 @@ function relatorio_inscritos_naovotaram_page_callback_function() {
     }
 
     $inscritos_naovotaram = get_inscritos_naovotaram();
+    $pattern = array('/\[/', '/\]/', '/\(/', '/\)/', '/\"/', '/\,/', '/\//', "/´/", "/'/");
     
     $data[] = ['nome', 'email', 'data de inscrição', 'setorial', 'uf']; 
     foreach ($inscritos_naovotaram as $pessoa) {
         $data[] = [
+            $pessoa->nome = preg_replace($pattern, '', $pessoa->nome),
             $pessoa->nome,
             $pessoa->email,
             $pessoa->data_inscricao,
