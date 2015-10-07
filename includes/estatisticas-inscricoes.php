@@ -1725,7 +1725,6 @@ function relatorio_inscritos_naovotaram_page_callback_function() {
     foreach ($inscritos_naovotaram as $pessoa) {
         $data[] = [
             $pessoa->nome = preg_replace($pattern, '', $pessoa->nome),
-            $pessoa->nome,
             $pessoa->email,
             $pessoa->data_inscricao,
             $pessoa->setorial,
