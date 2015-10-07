@@ -6,8 +6,11 @@
 
 	$setorial = isset( $_POST['setorial'] ) ? $_POST['setorial'] : "arquitetura-urbanismo";
 
-	if( current_user_can('curate') && !current_user_can('administrator') )
-	    $setorial = get_user_meta( get_current_user_id(),'setorial_curate',true);
+	if( current_user_can('curate') && !current_user_can('administrator') ) {
+	    $setorial_curate =  get_user_meta( get_current_user_id(),'setorial_curate',true);
+		
+		$setorial = !empty( $setorial_curate  ) ?  $setorial_curate : $setorial; 
+	}
 
 	$subscriptions = list_candidates_by_setorial(array('candidate-display-name',
 											  'evaluation_of_candidate',
@@ -26,7 +29,8 @@
 		<h2 class="page__title">Candidatos avaliados</h2>
 	</header>
 
-    <?php if( !current_user_can('curate') || current_user_can('administrator') ) : ?>
+    <?php if( ( current_user_can('curate') &&  empty( $setorial_curate ) )  || current_user_can('administrator') ) : ?>
+
         <form method="post" id="filter_setorial">    
             <label for="setorial">Selecione a setorial:</label>
             <?php echo dropdown_setoriais('setorial', $setorial, true) ?>
@@ -45,6 +49,7 @@
 		</thead>
 		<tbody>
 			<?php if( !empty($subscriptions) ) : ?>
+
 				<?php foreach($subscriptions as $sub): $s_number=substr($sub['subscription_number'],0,8);?>
 				<?php 	
 					$user_id = get_post_field( 'post_author', $sub['pid'] );
@@ -60,7 +65,6 @@
 				<tr class="">
 					<td class="subscription__title">
 						<a href="<?php echo site_url("inscricoes/".$s_number);?>"><?php echo $user_candidate['user_name'];?> <?php echo !empty($sub['candidate-display-name']) ? "(".$sub['candidate-display-name'].")" :'';?></a>
-						
 					</td>
 	                <td>
 	                    <?php echo get_label_setorial_by_slug($user_candidate['setorial']);?>
@@ -76,6 +80,15 @@
 					</td>
 
 				</tr>
+
+				<?php $data[] = [
+					(isset( $user_candidate['user_name'] ) ? $user_candidate['user_name'] : ''),
+				    (isset( $sub['candidate-display-name'] ) ? $sub['candidate-display-name'] : ''),
+				    (isset( $user_candidate['setorial'] ) ? get_label_setorial_by_slug($user_candidate['setorial']) : ''),
+				    (isset( $user_candidate['uf'] ) ? $user_candidate['uf'] : ''),
+				    get_number_of_votes_by_project($s['pid']),
+				    (isset( $e["evaluation-status"] ) ? label_status_candidate($e["evaluation-status"]) : '')
+				]; ?>    
 				<?php endforeach; ?>
 
 			<?php else : ?>
@@ -85,6 +98,9 @@
             <?php endif; ?>
 		</tbody>
 	</table>
+
+	 <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_inscritos_setorial' data_csv='<?php echo json_encode($data) ?>'>
+       </iframe>
 
 </section>
 <?php get_footer(); ?>

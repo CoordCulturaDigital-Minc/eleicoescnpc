@@ -114,9 +114,7 @@ function save_curate_extrafields($user_id) {
 
 	$setorial = isset( $_POST['setorial_curate'] ) ? $_POST['setorial_curate'] : '';
 
-	if( !empty($setorial) ) {
-		update_user_meta($user_id, 'setorial_curate', $setorial);
-	}
+	update_user_meta($user_id, 'setorial_curate', $setorial);
 
 } 
 add_action('edit_user_profile_update','save_curate_extrafields');

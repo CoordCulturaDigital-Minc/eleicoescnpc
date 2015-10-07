@@ -13,7 +13,7 @@
                         <!-- <li><a href="<?php bloginfo('url'); ?>/avaliacoes">Avaliações</a></li> -->
                     <?php elseif ( current_user_can( 'curate' ) ) : ?>
                         
-                        <li><a href="<?php bloginfo('url'); ?>/inscricoes">Inscrições</a></li>
+                        <li><a href="<?php bloginfo('url'); ?>/avaliacoes">Avaliações</a></li>
                     
                     <?php elseif ( current_user_can( 'read' ) ): ?>
                         <li><a href="<?php echo get_link_forum_user(); ?>">Meu fórum</a></li>

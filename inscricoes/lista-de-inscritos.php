@@ -143,7 +143,7 @@ $subscriptions = list_candidates_by_setorial(
     (isset( $user_meta['UF'] ) ? $user_meta['UF'] : ''),
     (isset( $user_meta['cpf'] ) ? $user_meta['cpf'] : ''),
     get_number_of_votes_by_project($s['pid']),
-    (isset( $s["subscription-valid"] ) ? 'habilitado' : 'desabilitado')
+    (isset( $e["evaluation-status"] ) ? label_status_candidate($e["evaluation-status"]) : '')
 ]; ?>                                       
                 <?php endforeach;?>
             <?php else : ?>

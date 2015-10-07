@@ -639,11 +639,11 @@ function evaluate_subscription() {
             if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
                 die($ok ? 'true' : 'false');
             } else {
-                wp_redirect(site_url('inscricoes?msg=avaliacao-salva'));
+                wp_redirect(site_url('avaliacoes?msg=avaliacao-salva'));
             }
         }
     } else {
-        wp_redirect(site_url('inscricoes'));
+        wp_redirect(site_url('avaliacoes'));
     }
 }
 add_action('wp_ajax_evaluate_subscription', 'evaluate_subscription');
