@@ -471,17 +471,18 @@ function get_inscritos_naovotaram() {
     
     $results = $wpdb->get_results($sql);
     $pattern = array('/\[/', '/\]/', '/\(/', '/\)/', '/\"/', '/\,/', '/\//', "/´/", "/'/");
-
     $data[] = ['nome', 'email', 'data de inscrição', 'setorial', 'uf']; 
+    
     foreach($results as $pessoa) {
         // verifica se votou
         $pessoa->votou = get_user_meta( $pessoa->user_id, 'vote-project-id', true);
-        
         // armazena apenas os que nao votaram
-        if (!$votou) {
+        if (!$pessoa->votou) {
             // monta estrutura de dados final
+            $nome = preg_replace($pattern, '', $pessoa->nome);
+
             $pessoa = [
-                preg_replace($pattern, '', $pessoa->nome),
+                $nome,
                 $pessoa->email,
                 $pessoa->data_inscricao,
                 $pessoa->setorial,
@@ -490,6 +491,5 @@ function get_inscritos_naovotaram() {
             $data[] = $pessoa;
         }
     }
-    
     return $data;
 }
