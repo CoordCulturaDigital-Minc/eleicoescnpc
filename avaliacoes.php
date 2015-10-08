@@ -8,12 +8,26 @@
 	$curators = get_users(array('role'=>'curador'));
 	$curators_length = count($curators);
 
-	$setorial = isset( $_POST['setorial'] ) ? $_POST['setorial'] : "arquitetura-urbanismo";
+	// verifica se foi passado alguma setorial 
+	$setorial = isset( $_POST['setorial'] ) ? $_POST['setorial'] : "";
 
+	//se for curador e não admin
 	if( current_user_can('curate') && !current_user_can('administrator') ) {
+	    
 	    $setorial_curate =  get_user_meta( get_current_user_id(),'setorial_curate',true);
 		
-		$setorial = !empty( $setorial_curate  ) ?  $setorial_curate : $setorial; 
+		// se o curador tiver setorial definida
+		if( !empty( $setorial_curate  ) ) {
+			
+			$setorial = $setorial_curate; // adiciona setorial definida para o usuário
+
+		}else if( isset( $_REQUEST['setorial_curate'] ) && empty( $setorial ) ) { // se existe setorial na requisicao e nenhum setorial foi passada
+
+			$setorial = $_REQUEST['setorial_curate'];
+
+		}else if( empty( $setorial ) ) {
+			$setorial = "arquitetura-urbanismo"; // setorial padrão
+		}
 	}
 
 	$subscriptions = list_candidates_by_setorial(array('candidate-display-name',

@@ -639,7 +639,7 @@ function evaluate_subscription() {
             if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
                 die($ok ? 'true' : 'false');
             } else {
-                wp_redirect(site_url('avaliacoes?msg=avaliacao-salva'));
+                wp_redirect(site_url('avaliacoes?setorial_curate='.$_POST["setorial_curate"]));
             }
         }
     } else {

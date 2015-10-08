@@ -6,13 +6,17 @@
  * @package forunssetoriaiscnpc
  */
 
-$eval = load_evaluation($pid, $reviewer); ?>
+$eval = load_evaluation($pid, $reviewer); 
+
+?>
+
 
 <div id="evaluation-area">
     <div class="evaluation__title"><button class="js-evaluation__toggle  evaluation__toggle"><?php _e( 'Evaluation Panel', 'historias' ); ?></button></div>
     <form action="<?php echo admin_url('admin-ajax.php');?>" method="post" id="evaluation-tabs">
         <input<?php echo $form_disabled?' disabled':'';?> type="hidden" name="action" value="evaluate_subscription"/>
         <input<?php echo $form_disabled?' disabled':'';?> type="hidden" name="subscription" value="<?php echo $subscription_number;?>"/>
+        <input<?php echo $form_disabled?' disabled':'';?> type="hidden" name="setorial_curate" value="<?php echo $user_meta['setorial'];?>"/>
 
         <ul>
             <li><a href="#evaluation-remarks">Avaliação</a></li>
