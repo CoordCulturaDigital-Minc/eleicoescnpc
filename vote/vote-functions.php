@@ -665,6 +665,7 @@ function get_maisvotados_setorial_estado($uf=false, $setorial=false) {
                            ."count(um1.meta_value) as num_votos, "   
                            ."pm2.meta_value as genero, "
                            ."pm3.meta_value as afrodescendente, "
+                           ."pm5.meta_value as habilitado, "    
                            ."um2.meta_value as uf, "
                            ."um3.meta_value as setorial "
 
@@ -673,6 +674,7 @@ function get_maisvotados_setorial_estado($uf=false, $setorial=false) {
                            ."INNER JOIN {$wpdb->postmeta} pm2 ON pm2.post_id = um1.meta_value "
                            ."INNER JOIN {$wpdb->postmeta} pm3 ON pm3.post_id = um1.meta_value "
                            ."INNER JOIN {$wpdb->postmeta} pm4 ON pm4.post_id = um1.meta_value "
+                           ."INNER JOIN {$wpdb->postmeta} pm5 ON pm5.post_id = um1.meta_value "    
                            ."INNER JOIN {$wpdb->posts} p ON p.ID = pm1.post_id "
                            ."INNER JOIN {$wpdb->usermeta} um2 ON um2.user_id = p.post_author "
                            ."INNER JOIN {$wpdb->usermeta} um3 ON um3.user_id = p.post_author "  
@@ -683,10 +685,12 @@ function get_maisvotados_setorial_estado($uf=false, $setorial=false) {
                            ."AND pm2.meta_key = 'candidate-genre' "
                            ."AND pm3.meta_key = 'candidate-race' "
                            ."AND pm4.meta_key = 'candidate-display-name' "
+                           ."AND pm5.meta_key = 'evaluation-status' "    
                            ."AND um2.meta_key = 'UF' "
                            ."AND um3.meta_key = 'setorial' "
                            . $where
-                           ."GROUP BY candidato", $args);
+                           ."GROUP BY candidato "
+                           ."ORDER BY uf, setorial, num_votos DESC", $args);
     
     $results = $wpdb->get_results($query);
     
