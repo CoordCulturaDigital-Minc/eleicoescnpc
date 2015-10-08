@@ -118,7 +118,7 @@ if ($data_csv != '') {
     <input id="data_csv" type="hidden" name="data_csv">
     <input id="filename" type="hidden" name="filename">
     <input id="output_path" type="hidden" name="output_path">
-    <p style="font-family: sans-serif; font-weight: bold">Gerar CSV</p>
+    <p style="font-family: sans-serif; font-weight: bold">Baixar CSV</p>
     <h3 id="exportarCSVPost" class="csv" data_filename='relatorio_inscritos_setorial_estado'></h3>
 </form>
 </body>

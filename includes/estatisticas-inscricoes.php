@@ -1540,6 +1540,7 @@ function resumo_setorial_estado_page_callback_function() {
     $data[] = ['setorial', 'uf', 'qtd_candidatos', 'qtd_eleitores', 'qtd_votantes']; 
     $uf_selected = $_GET['uf'];
     $setorial_selected = $_GET['setorial'];
+    $confirm = $_GET['confirm'];    
     
     $states = get_all_states();
     $setoriais = get_setoriais();
@@ -1594,9 +1595,38 @@ function resumo_setorial_estado_page_callback_function() {
           if ($setorial_selected == 'todos') {
               $setorial_selected = '';
           }
+
+
+          $nome_relatorio = "";
+          if ($uf_selected && $setorial_selected) {
+              $nome_relatorio = "resumo-$uf_selected-$setorial_selected";
+          } else if ($uf_selected && !$setorial_selected) {
+              $nome_relatorio = "resumo-resumo-$uf_selected";
+          } else if (!$uf_selected && $setorial_selected) {
+              $nome_relatorio = "resumo-$setorial_selected";
+          } else {
+              $nome_relatorio = "resumo-nacional";
+          }
+
+          // testa arquivo
+          $filename = $nome_relatorio . ".csv";
+          $file_web = get_template_directory_uri() . '/relatorios/arquivos/' . $filename;
+          $file_path = get_template_directory() . '/relatorios/arquivos/' . $filename;
+          clearstatcache();
+          if (file_exists($file_path)) {
+              echo "<strong>Já existe um relatório disponível para essa consulta:</strong> <br/>";
+              echo "<a href='$file_web'>$filename</a>";
+              
+              if (!$confirm) {
+                  echo "<br/><br/>";
+                  echo "<h3><a href='" . basename($_SERVER['PHP_SELF']) . "?" . $_SERVER['QUERY_STRING'] . '&confirm=1' . "'>desejo gerar uma nova consulta</a></h3>";
+              } 
+          }
+          
 ?>
 <?php
-
+      if ($confirm == 1 || !file_exists($file_path)) {          
+          
           if ($uf_selected == '' && $setorial_selected == '') {
               /* listagem TODOS */
 
@@ -1635,31 +1665,12 @@ function resumo_setorial_estado_page_callback_function() {
               $data[] = [$setoriais[$setorial_selected], $states[$uf_selected], $qtd_candidatos, $qtd_eleitores, $qtd_votantes];              
           }
           
-          $nome_relatorio = "";
-          if ($uf_selected && $setorial_selected) {
-              $nome_relatorio = "resumo-$uf_selected-$setorial_selected";
-          } else if ($uf_selected && !$setorial_selected) {
-              $nome_relatorio = "resumo-resumo-$uf_selected";
-          } else if (!$uf_selected && $setorial_selected) {
-              $nome_relatorio = "resumo-$setorial_selected";
-          } else {
-              $nome_relatorio = "resumo-nacional";
-          }
-
-          // testa arquivo
-          $filename = $nome_relatorio . ".csv";
-          $file_web = get_template_directory_uri() . '/relatorios/arquivos/' . $filename;
-          $file_path = get_template_directory() . '/relatorios/arquivos/' . $filename;
-          clearstatcache();
-          if (file_exists($file_path)) {
-              echo "<strong>Já existe um relatório disponível para essa consulta:</strong> ";
-              echo "<a href='$file_web'>$filename</a>";
-          }          
 ?>     
           <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo $nome_relatorio; ?>' data_csv='<?php echo json_encode($data) ?>' data_output_path='arquivo'>
       </div>    
 <?php 
-      }   
+      }
+      }
 }
 
 
