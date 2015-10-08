@@ -1,6 +1,10 @@
 <?php
 	global $current_user;
 
+	if( !current_user_can('curate') && !current_user_can('administrator') ) {
+        wp_redirect(site_url('/'));
+    }
+
 	$curators = get_users(array('role'=>'curador'));
 	$curators_length = count($curators);
 
