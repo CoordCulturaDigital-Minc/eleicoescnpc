@@ -46,6 +46,7 @@ class Projetos
             'hierarchical' => true,
             'map_meta_cap ' => true,
             'menu_position' => 6,
+            'supports' => array( 'title', 'custom-fields' ),
             'has_archive' => false //se precisar de arquivo
             //'taxonomies' => array('taxonomia')
             )
