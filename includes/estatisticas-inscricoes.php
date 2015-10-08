@@ -1422,6 +1422,7 @@ function maisvotados_setorial_estado_page_callback_function() {
     $data[] = ['candidato', 'num_votos', 'genero', 'afrodescendente', 'uf', 'setorial', 'habilitado']; 
     $uf_selected = $_GET['uf'];
     $setorial_selected = $_GET['setorial'];
+    $confirm = $_GET['confirm'];
     
     $states = get_all_states();
     $setoriais = get_setoriais();
@@ -1468,6 +1469,33 @@ function maisvotados_setorial_estado_page_callback_function() {
       <br/><br/>
       
 <?php
+      $nome_relatorio = "";
+      if ($uf_selected && $setorial_selected) {
+          $nome_relatorio = "apuracao-$uf_selected-$setorial_selected";
+      } else if ($uf_selected && !$setorial_selected) {
+          $nome_relatorio = "apuracao-resumo -$uf_selected";
+      } else if (!$uf_selected && $setorial_selected) {
+          $nome_relatorio = "apuracao-resumo-$setorial_selected";
+      } else {
+          $nome_relatorio = "apuracao-resumo-nacional";
+      }
+      
+      // testa arquivo
+      $filename = $nome_relatorio . ".csv";
+      $file_web = get_template_directory_uri() . '/relatorios/arquivos/' . $filename;
+      $file_path = get_template_directory() . '/relatorios/arquivos/' . $filename;
+      clearstatcache();
+      if (file_exists($file_path)) {
+          echo "<strong>Já existe um relatório disponível para essa consulta:</strong> <br/>";
+          echo "<a href='$file_web'>$filename</a>";
+
+          if (!$confirm) {
+              echo "<br/><br/>";
+              echo "<h3><a href='" . basename($_SERVER['PHP_SELF']) . "?" . $_SERVER['QUERY_STRING'] . '&confirm=1' . "'>desejo gerar uma nova consulta</a></h3>";
+          } 
+      }
+      
+      
       if ($uf_selected || $setorial_selected) {
           
           if ($uf_selected == 'todos') {
@@ -1476,49 +1504,28 @@ function maisvotados_setorial_estado_page_callback_function() {
           if ($setorial_selected == 'todos') {
               $setorial_selected = '';
           }
-          
-          $votes = get_maisvotados_setorial_estado($uf_selected, $setorial_selected);
-          
-          foreach ($votes as $vote) {
-              $pattern = array('/\[/', '/\]/', '/\(/', '/\)/', '/\"/', '/\,/', '/\//', "/´/", "/'/");
-              
-              $candidato = preg_replace($pattern, '', $vote->candidato);    
-              
-              $data[] = [
-                  $candidato,
-                  $vote->num_votos,
-                  $vote->genero,
-                  $vote->afrodescendente,
-                  $vote->uf,
-                  $vote->setorial,
-                  $vote->habilitado
-              ];
-          }
-          
-          $nome_relatorio = "";
-          if ($uf_selected && $setorial_selected) {
-              $nome_relatorio = "apuracao-$uf_selected-$setorial_selected";
-          } else if ($uf_selected && !$setorial_selected) {
-              $nome_relatorio = "apuracao-resumo -$uf_selected";
-          } else if (!$uf_selected && $setorial_selected) {
-              $nome_relatorio = "apuracao-resumo-$setorial_selected";
-          } else {
-              $nome_relatorio = "apuracao-resumo-nacional";
-          }
 
-          // testa arquivo
-          $filename = $nome_relatorio . ".csv";
-          $file_web = get_template_directory_uri() . '/relatorios/arquivos/' . $filename;
-          $file_path = get_template_directory() . '/relatorios/arquivos/' . $filename;
-          clearstatcache();
-          if (file_exists($file_path)) {
-              echo "<strong>Já existe um relatório disponível para essa consulta:</strong> ";
-              echo "<a href='$file_web'>$filename</a>";
-          }
+          if ($confirm == 1 || !file_exists($file_path)) {          
+              $votes = get_maisvotados_setorial_estado($uf_selected, $setorial_selected);
+              foreach ($votes as $vote) {
+                  $pattern = array('/\[/', '/\]/', '/\(/', '/\)/', '/\"/', '/\,/', '/\//', "/´/", "/'/");                
+                  $candidato = preg_replace($pattern, '', $vote->candidato);    
+                  
+                  $data[] = [
+                      $candidato,
+                      $vote->num_votos,
+                      $vote->genero,
+                      $vote->afrodescendente,
+                      $vote->uf,
+                      $vote->setorial,
+                      $vote->habilitado
+                  ];
+              }
 ?>     
-          <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo $nome_relatorio; ?>' data_csv='<?php echo json_encode($data) ?>' data_output_path='arquivo'>
-          </div>
-<?php 
+              <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo $nome_relatorio; ?>' data_csv='<?php echo json_encode($data) ?>' data_output_path='arquivo'>
+              </div>
+<?php
+          }
       }   
 }
 
