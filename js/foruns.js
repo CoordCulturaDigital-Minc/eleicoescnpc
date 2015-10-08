@@ -123,8 +123,8 @@
 
 		// tiny helper function to add breakpoints
 		function getGridSize() {
-			return (window.innerWidth < 600) ? 1 : 
-			(window.innerWidth < 765) ? 2 : 
+			return (window.innerWidth < 650) ? 1 : 
+			(window.innerWidth < 865) ? 2 : 
 			(window.innerWidth < 970) ? 3 : 4;
 		}
 
@@ -139,11 +139,9 @@
 			 	selector: ".candidates > .candidate",
 			 	prevText: "",
 			 	nextText: "",
-				itemWidth: 200,
-				itemMargin: 5,
+				itemWidth: 245,
+				itemMargin: 7,
 			 	useCSS: false,
-			 	minItems: 1,
-			 	maxItems: 4,
 			    minItems: getGridSize(), // use function to pull in initial value
 			    maxItems: getGridSize(), // use function to pull in initial value
 			    start: function(slider){

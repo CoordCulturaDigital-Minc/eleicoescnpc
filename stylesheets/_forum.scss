@@ -31,6 +31,17 @@
             overflow: hidden;
             display: block;
             position: relative;
+            padding-top: 10px;
+            padding: 5px;
+            padding-bottom: 0px;
+            margin-left: 7px;
+            margin-right: 7px;
+            // max-width: 245px;
+            width: 245px;
+            // border-left: 10px solid #F4F4F4;
+            // border-right: 10px solid #F4F4F4;
+
+            min-height: 400px;
 
             .candidate-avatar {
                 margin: 0 auto;
@@ -119,10 +130,17 @@
                     border-radius: 5px;
                     color: #fff;
                     clear: both;
+
+
+                    background-color: rgba(54, 132, 92, 0.59);
+                    position: absolute;
+                    top: 155px;
+                    left: 50%;
+                    margin-left: -15px;
                     
                     &:hover {
                         color: #fff;
-                        background-color: rgba(93, 170, 51, 0.87);
+                        background-color: rgba(93, 170, 51, 0.94);
                         cursor: pointer;
                     }
                 }
@@ -161,9 +179,15 @@
                 }
             }
 
-
             .number_votes {
-
+                display: inline-block;
+                margin: 10px 0 0 0;
+                padding: 3px 10px;
+                background-color: rgb(54, 132, 92);
+                border-radius: 3px;
+                color: #fff;
+                clear: both;
+                width: 100px;
             }
 
             &.voted {
@@ -172,12 +196,61 @@
                     border-color: lighten( $cor-verde, 10%);
                 }    
             }
+
+            // &.candidate_elected {
+            //     background-color: #aaa;
+            //     background-color: #959595;
+            //     border-radius: 5px;
+            //     border-color: #fff;
+            //     // border-left: 8px solid #F4F4F4;
+            //     // border-right: 8px solid #F4F4F4;
+            //     border-color: #F4F4F4;
+
+            //     .candidate-avatar {
+            //         border-color: #959595;
+            //         img {
+            //             opacity: 0.8;
+            //             background-color: #aaa;
+            //         }
+            //     }
+
+            //     .candidate__elected {
+            //         background-color: #E09510;
+            //         color: #fff;
+            //         font-weight: bold;
+            //         padding-bottom: 10px;
+            //         padding-top: 10px;
+            //         position: absolute;
+            //         width: 100%;
+            //         left: 0px;
+            //         bottom: 0px;
+            //     }
+
+            //     .candidate-name span{
+            //         color: #656363;
+            //     }
+
+            //     .show-candidate-details {
+            //         background-color: rgba(40, 53, 32, 0.54) !important;
+            //         &:hover {
+            //             background-color: rgba(17, 27, 11, 0.75)  !important;
+            //         }
+            //     }
+
+            //     .dialog, .ui-dialog {
+            //         border: 26px solid #959595!important;
+            //     }
+            // } 
+
+            &.candidate_elected,
             &.candidate_disabled {
                 background-color: #aaa;
+                background-color: #959595;
                 border-radius: 5px;
                 border-color: #fff;
-                border-left: 8px solid #F4F4F4;
-                border-right: 8px solid #F4F4F4;
+                // border-left: 8px solid #F4F4F4;
+                // border-right: 8px solid #F4F4F4;
+                border-color: #F4F4F4;
 
                 .candidate-avatar {
                     border-color: #959595;
@@ -187,12 +260,17 @@
                     }
                 }
 
+                .candidate__elected,
                 .candidate__disabled {
                     background-color: #E09510;
                     color: #fff;
                     font-weight: bold;
                     padding-bottom: 10px;
                     padding-top: 10px;
+                    position: absolute;
+                    width: 100%;
+                    left: 0px;
+                    bottom: 0px;
                 }
 
                 .candidate-name span{
@@ -201,12 +279,32 @@
 
                 .show-candidate-details {
                     background-color: rgba(40, 53, 32, 0.54) !important;
+                    &:hover {
+                        background-color: rgba(17, 27, 11, 0.75)  !important;
+                    }
                 }
 
                 .dialog, .ui-dialog {
                     border: 26px solid #959595!important;
                 }
-            }    
+            } 
+            &.candidate_elected {
+                background-color: rgb(36, 90, 63);
+
+                .candidate-avatar {
+                    border-color: #36845C;
+
+                }
+
+                .candidate-name span{
+                    color: #F7FFF9;
+                }
+
+                .candidate__elected {
+                    background-color: #36845C;
+                }
+            }
+
         }
     }
 
@@ -214,7 +312,7 @@
         list-style: none;
         a {
             position: absolute;
-            top: 110px;
+            top: 128px;
             width: 40px;
             height: 83px;
             cursor: pointer;

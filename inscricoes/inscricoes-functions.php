@@ -609,6 +609,35 @@ function validate_subscription() {
 add_action('wp_ajax_validate_subscription', 'validate_subscription');
 
 
+/**
+ * Mark a candidate as elected. It expects the subscription number in $_POST['subscription_number']
+ * and 'true' OR 'false' in $_POST['elected-candidate']
+ */
+function elect_candidate() {
+    global $current_user;
+
+    if(current_user_can('administrator')) {
+        // the subscriber id
+        $pid = get_project_id_from_subscription_number($_POST['subscription_number']);
+
+        if($_POST['elected-candidate'] === 'false') {
+            if(delete_post_meta($pid, 'elected-candidate')) {
+                die('true');
+            }
+        } elseif ($_POST['elected-candidate'] === 'true') {
+            // aid = admin id
+            $responsable = array('aid' => $current_user->ID, 'timestamp' => time());
+            if(update_post_meta($pid, 'elected-candidate', $responsable)) {
+                die('true');
+            }
+        }
+    }
+    print 'false';
+    die;
+}
+add_action('wp_ajax_elect_candidate', 'elect_candidate');
+
+
 function evaluate_subscription() {
     global $current_user;
 

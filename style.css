@@ -2855,7 +2855,14 @@ section.carrossel header {
     .candidates-content .candidates .candidate {
       overflow: hidden;
       display: block;
-      position: relative; }
+      position: relative;
+      padding-top: 10px;
+      padding: 5px;
+      padding-bottom: 0px;
+      margin-left: 7px;
+      margin-right: 7px;
+      width: 245px;
+      min-height: 400px; }
       .candidates-content .candidates .candidate .candidate-avatar {
         margin: 0 auto;
         width: 200px;
@@ -2913,10 +2920,15 @@ section.carrossel header {
           background-color: rgba(93, 170, 51, 0.54);
           border-radius: 5px;
           color: #fff;
-          clear: both; }
+          clear: both;
+          background-color: rgba(54, 132, 92, 0.59);
+          position: absolute;
+          top: 155px;
+          left: 50%;
+          margin-left: -15px; }
           .candidates-content .candidates .candidate .candidate-text .show-candidate-details:hover {
             color: #fff;
-            background-color: rgba(93, 170, 51, 0.87);
+            background-color: rgba(93, 170, 51, 0.94);
             cursor: pointer; }
       .candidates-content .candidates .candidate .vote, .candidates-content .candidates .candidate .voted {
         margin: 0 auto;
@@ -2940,36 +2952,61 @@ section.carrossel header {
         border: 1px solid #008425; }
         .candidates-content .candidates .candidate .voted:hover {
           background-color: #4F5651; }
+      .candidates-content .candidates .candidate .number_votes {
+        display: inline-block;
+        margin: 10px 0 0 0;
+        padding: 3px 10px;
+        background-color: #36845c;
+        border-radius: 3px;
+        color: #fff;
+        clear: both;
+        width: 100px; }
       .candidates-content .candidates .candidate.voted .candidate-avatar {
         border-color: #1a8638; }
-      .candidates-content .candidates .candidate.candidate_disabled {
+      .candidates-content .candidates .candidate.candidate_elected, .candidates-content .candidates .candidate.candidate_disabled {
         background-color: #aaa;
+        background-color: #959595;
         border-radius: 5px;
         border-color: #fff;
-        border-left: 8px solid #F4F4F4;
-        border-right: 8px solid #F4F4F4; }
-        .candidates-content .candidates .candidate.candidate_disabled .candidate-avatar {
+        border-color: #F4F4F4; }
+        .candidates-content .candidates .candidate.candidate_elected .candidate-avatar, .candidates-content .candidates .candidate.candidate_disabled .candidate-avatar {
           border-color: #959595; }
-          .candidates-content .candidates .candidate.candidate_disabled .candidate-avatar img {
+          .candidates-content .candidates .candidate.candidate_elected .candidate-avatar img, .candidates-content .candidates .candidate.candidate_disabled .candidate-avatar img {
             opacity: 0.8;
             background-color: #aaa; }
+        .candidates-content .candidates .candidate.candidate_elected .candidate__elected,
+        .candidates-content .candidates .candidate.candidate_elected .candidate__disabled, .candidates-content .candidates .candidate.candidate_disabled .candidate__elected,
         .candidates-content .candidates .candidate.candidate_disabled .candidate__disabled {
           background-color: #E09510;
           color: #fff;
           font-weight: bold;
           padding-bottom: 10px;
-          padding-top: 10px; }
-        .candidates-content .candidates .candidate.candidate_disabled .candidate-name span {
+          padding-top: 10px;
+          position: absolute;
+          width: 100%;
+          left: 0px;
+          bottom: 0px; }
+        .candidates-content .candidates .candidate.candidate_elected .candidate-name span, .candidates-content .candidates .candidate.candidate_disabled .candidate-name span {
           color: #656363; }
-        .candidates-content .candidates .candidate.candidate_disabled .show-candidate-details {
+        .candidates-content .candidates .candidate.candidate_elected .show-candidate-details, .candidates-content .candidates .candidate.candidate_disabled .show-candidate-details {
           background-color: rgba(40, 53, 32, 0.54) !important; }
-        .candidates-content .candidates .candidate.candidate_disabled .dialog, .candidates-content .candidates .candidate.candidate_disabled .ui-dialog {
+          .candidates-content .candidates .candidate.candidate_elected .show-candidate-details:hover, .candidates-content .candidates .candidate.candidate_disabled .show-candidate-details:hover {
+            background-color: rgba(17, 27, 11, 0.75) !important; }
+        .candidates-content .candidates .candidate.candidate_elected .dialog, .candidates-content .candidates .candidate.candidate_elected .ui-dialog, .candidates-content .candidates .candidate.candidate_disabled .dialog, .candidates-content .candidates .candidate.candidate_disabled .ui-dialog {
           border: 26px solid #959595 !important; }
+      .candidates-content .candidates .candidate.candidate_elected {
+        background-color: #245a3f; }
+        .candidates-content .candidates .candidate.candidate_elected .candidate-avatar {
+          border-color: #36845C; }
+        .candidates-content .candidates .candidate.candidate_elected .candidate-name span {
+          color: #F7FFF9; }
+        .candidates-content .candidates .candidate.candidate_elected .candidate__elected {
+          background-color: #36845C; }
   .candidates-content .flex-direction-nav li {
     list-style: none; }
     .candidates-content .flex-direction-nav li a {
       position: absolute;
-      top: 110px;
+      top: 128px;
       width: 40px;
       height: 83px;
       cursor: pointer;

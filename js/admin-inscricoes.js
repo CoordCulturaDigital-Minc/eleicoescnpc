@@ -15,4 +15,20 @@ jQuery(document).ready(function() { var $ = jQuery;
             'json')
     });
 
+
+    $("#elected-candidate").change(function(e) {
+        var subscription_number = $('#js-protocol-number').val();
+        var is_elected = this.checked ? 'true' : 'false';
+
+        $(document.body).css('cursor','wait !important');
+
+        jQuery.post(inscricoes.ajaxurl, { 'action':'elect_candidate',
+                                          'subscription_number': subscription_number,
+                                          'elected-candidate': is_elected},
+            function(d){
+                $(document.body).css('cursor','');
+            },
+            'json')
+    });
+
 });

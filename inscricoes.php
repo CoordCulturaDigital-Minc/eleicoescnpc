@@ -239,10 +239,17 @@ if(is_user_logged_in()) {
 						<a href="<?php echo site_url("inscricoes/".substr($subscription_number,0,8)."/imprimir");?>" target="_blank" class="button  u-pull-right  print"><?php _e('Print', 'historias'); ?></a>
 					
 						<?php if( current_user_can( 'administrator' ) ): ?>
+							
 							<div class="form__item--inline">
 								<input id="subscription-valid" type="checkbox" name="subscription-valid" id="subscription-valid" value="<?php echo $subscription_number;?>"<?php if(get_post_meta($pid, 'subscription-valid', true)) echo ' checked="checked"';?>/>
 								<label for="subscription-valid">Admins: Marcar como Válida <a href="<?php bloginfo('url'); ?>/inscricoes">(e voltar para lista de inscritos)</a></label>
 							</div>
+
+							<div class="form__item--inline">
+								<input id="elected-candidate" type="checkbox" name="elected-candidate" id="elected-candidate" value="<?php echo $subscription_number;?>"<?php if(get_post_meta($pid, 'elected-candidate', true)) echo ' checked="checked"';?>/>
+								<label for="elected-candidate">Admins: Candidato eleito <a href="<?php bloginfo('url'); ?>/inscricoes">(e voltar para lista de inscritos)</a></label>
+							</div>
+
 							<input type="hidden" id="js-protocol-number" value="<?php echo substr($subscription_number, 0, 8);?>" />
 							
 						<?php endif; ?>
@@ -299,7 +306,6 @@ if(is_user_logged_in()) {
 
 					<?php endif; ?>
 
-
 					<?php if( $step1['complete'] && $step2['complete'] && ( $step == 'step-3' || !empty( $subscription_number ) ) ) : ?>
 						
 						<div id="formstep-3" class="form-step">
@@ -316,6 +322,7 @@ if(is_user_logged_in()) {
 								</div>
 								<span id="formstep-3-error" class="form-error"></span>
 							</header>
+
 							<?php include( get_template_directory() . '/inscricoes/candidate-step3.php' ); ?>
 						</div><!-- #formstep-3 -->
 

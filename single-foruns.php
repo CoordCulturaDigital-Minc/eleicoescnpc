@@ -60,17 +60,18 @@ get_header(); ?>
 									$candidate_user      	= get_userdata( $candidate_id );
 									$candidate_uf_setorial 	= get_user_meta($candidate_id, 'uf-setorial', true);
 									
-									$candidacy_removed = '';
-									$candidate_disabled = '';
-
-									$show_invalid_candidates = false;
+									$candidate_class = '';
+									
+									$candidacy_removed 		 = false;
+									$is_candidate_elected    = false;
 									$is_candidate_invalid 	 = false;
+									$show_invalid_candidates = false;
 
 									$e = array();
 
 									if( $candidate_uf_setorial !== $forum_uf_setorial ) {
-										$candidacy_removed = 'candidacy_removed';
-										$candidate_disabled= 'candidate_disabled';
+										$candidacy_removed = true;
+										$candidate_class = 'candidate_disabled';
 									}
 
 									if( can_show_invalid_candidates() ) {
@@ -81,7 +82,14 @@ get_header(); ?>
 
 										if( $e["evaluation-status"] == 'invalid' ) {
 											$is_candidate_invalid = true;
-											$candidate_disabled = 'candidate_disabled'; //TODO: trocar classe css para candidate_disabled
+											$candidate_class = 'candidate_disabled'; //TODO: trocar classe css para candidate_disabled
+										}
+									}
+
+									if( can_show_elected_candidates() ) {
+										if( get_post_meta(get_the_ID(), 'elected-candidate', true) ) {
+											$is_candidate_elected = true;
+											$candidate_class = 'candidate_elected';
 										}
 									}
 
@@ -92,7 +100,7 @@ get_header(); ?>
 									
 								 ?>
 
-								<div class="candidate <?php echo (get_current_user_vote() == get_the_ID()) ? 'voted':'' ?> <?php echo $candidate_disabled; ?>" id="<?php the_ID(); ?> ">
+								<div class="candidate <?php echo (get_current_user_vote() == get_the_ID()) ? 'voted':'' ?> <?php echo $candidate_class; ?>" id="<?php the_ID(); ?> ">
 									<div class="candidate-avatar" data-candidate-id="<?php the_ID(); ?>">
 										<?php echo wp_get_attachment_image($candidate_meta['candidate-avatar'], 'avatar_candidate', 'avatar_candidate'); ?>
 									</div>
@@ -100,10 +108,15 @@ get_header(); ?>
 									<div class="candidate-text">
 										
 										<div class="candidate-name"><span><?php echo $candidate_meta['candidate-display-name']; ?></span></div>
-										<div class="candidate-resume"></div>
+										<!-- <div class="candidate-resume"></div> -->
 
 										<?php // mais detalhes do candidato aqui ?>
-										<a class="show-candidate-details" data-candidate-id="<?php the_ID(); ?>">Saiba +</a>
+										<a class="show-candidate-details" data-candidate-id="<?php the_ID(); ?>">+</a>
+
+
+										<?php if ( ( !$candidacy_removed && can_show_elected_candidates() ) || current_user_can('administrator') ): ?>
+											<div class="number_votes">Votos: <span><?php echo get_number_of_votes_by_project(get_the_ID()); ?></span></div>
+										<?php endif; ?>
 									
 									</div>
 
@@ -117,7 +130,7 @@ get_header(); ?>
 
 										<h2 class="candidate-name"><?php echo $candidate_meta['candidate-display-name']; ?></h2>
 										
-										<?php if( empty( $candidacy_removed ) ) : ?>
+										<?php if( !$candidacy_removed ) : ?>
 
 											<?php if( $is_candidate_invalid ) : ?>
 												<br>
@@ -135,7 +148,7 @@ get_header(); ?>
 									</div>
 
 									<br />
-									<?php if( empty( $candidacy_removed ) ) : ?>
+									<?php if( !$candidacy_removed ) : ?>
 
 										<?php if (is_votacoes_abertas() && is_user_logged_in() /*&& current_user_can_vote_in_project( get_the_ID() ) */): ?>
 
@@ -150,19 +163,15 @@ get_header(); ?>
 												<?php endif; ?>
 
 										<?php endif; ?>
-
-										<?php if( $is_candidate_invalid  ) : ?>
+										
+										<?php if( $is_candidate_elected ) : ?>
+											<div class="candidate__elected text-center">Candidato(a) eleito(a)</div>
+										<?php elseif( $is_candidate_invalid  ) : ?>
 											<div class="candidate__disabled text-center">Candidato(a) Inabilitado(a)</div>
 										<?php endif; ?>
 									<?php else: ?>
 										<div class="candidate__disabled text-center">Esta candidatura foi retirada</div>
-									<?php endif; ?>
-
-									
-									<?php if (current_user_can('administrator')): ?>
-										<div class="number_votes">Votos: <span><?php echo get_number_of_votes_by_project(get_the_ID()); ?></span></div>
-									<?php endif; ?>
-
+									<?php endif; ?>						
 
 								</div>
 							<?php endwhile; ?>
