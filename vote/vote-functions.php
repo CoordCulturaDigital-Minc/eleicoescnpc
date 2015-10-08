@@ -262,6 +262,39 @@ function is_votacoes_abertas() {
 
 }
 
+
+function can_show_invalid_candidates() {
+
+  $hoje = date('Y-m-d');
+
+  if( get_theme_option('data_divulgacao_inabilitados') <= $hoje )
+    return true;
+
+  return false;
+}
+
+
+function can_show_elected_candidates() {
+
+  $hoje = date('Y-m-d');
+
+  if( get_theme_option('data_divulgacao_eleitos') <= $hoje )
+    return true;
+
+  return false;
+}
+
+
+function is_candidate_invalid( $project_id ) {
+
+    $e = load_evaluation( $project_id );
+
+    if( $e["evaluation-status"] == 'invalid' )
+      return true;
+
+    return false; 
+}
+
 function get_current_user_vote() {
 	$user = wp_get_current_user();
 	return get_user_meta($user->ID, 'vote-project-id', true);

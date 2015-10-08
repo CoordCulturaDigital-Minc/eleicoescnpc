@@ -61,17 +61,38 @@ get_header(); ?>
 									$candidate_uf_setorial 	= get_user_meta($candidate_id, 'uf-setorial', true);
 									
 									$candidacy_removed = '';
+									$candidate_disabled = '';
+
+									$show_invalid_candidates = false;
+									$is_candidate_invalid 	 = false;
+
+									$e = array();
 
 									if( $candidate_uf_setorial !== $forum_uf_setorial ) {
 										$candidacy_removed = 'candidacy_removed';
+										$candidate_disabled= 'candidate_disabled';
+									}
+
+									if( can_show_invalid_candidates() ) {
+
+										$show_invalid_candidates = true;
+
+										$e = load_evaluation( get_the_ID() );
+
+										if( $e["evaluation-status"] == 'invalid' ) {
+											$is_candidate_invalid = true;
+											$candidate_disabled = 'candidate_disabled'; //TODO: trocar classe css para candidate_disabled
+										}
 									}
 
 									if( strlen($candidate_meta['candidate-display-name']) < 1 ) {
 										$candidate_meta['candidate-display-name'] = get_user_meta($candidate_id, 'user_name', true);
 									}
+
+									
 								 ?>
 
-								<div class="candidate <?php echo (get_current_user_vote() == get_the_ID()) ? 'voted':'' ?> <?php echo $candidacy_removed; ?>" id="<?php the_ID(); ?> ">
+								<div class="candidate <?php echo (get_current_user_vote() == get_the_ID()) ? 'voted':'' ?> <?php echo $candidate_disabled; ?>" id="<?php the_ID(); ?> ">
 									<div class="candidate-avatar" data-candidate-id="<?php the_ID(); ?>">
 										<?php echo wp_get_attachment_image($candidate_meta['candidate-avatar'], 'avatar_candidate', 'avatar_candidate'); ?>
 									</div>
@@ -97,8 +118,15 @@ get_header(); ?>
 										<h2 class="candidate-name"><?php echo $candidate_meta['candidate-display-name']; ?></h2>
 										
 										<?php if( empty( $candidacy_removed ) ) : ?>
-											<p><h3>Defesa do candidato:</h3><?php echo $candidate_meta['candidate-explanatory']; ?></p>
-											<p><h3>Experiência:</h3><?php echo $candidate_meta['candidate-experience']; ?></p>
+
+											<?php if( $is_candidate_invalid ) : ?>
+												<br>
+												<p>Este(a) candidato(a) foi inabilitado(a).</p>
+												<p>Motivo: <?php echo isset( $e["remarks-comment"]) ? $e["remarks-comment"] : '';  ?></p>
+											<?php else : ?>
+												<p><h3>Defesa do candidato:</h3><?php echo $candidate_meta['candidate-explanatory']; ?></p>
+												<p><h3>Experiência:</h3><?php echo $candidate_meta['candidate-experience']; ?></p>
+											<?php endif; ?>
 										<?php else: ?>
 											<br>
 											<p>Este candidato removeu a candidatura desta setorial.</p>
@@ -108,6 +136,7 @@ get_header(); ?>
 
 									<br />
 									<?php if( empty( $candidacy_removed ) ) : ?>
+
 										<?php if (is_votacoes_abertas() && is_user_logged_in() /*&& current_user_can_vote_in_project( get_the_ID() ) */): ?>
 
 												<?php if ( get_current_user_vote() == get_the_ID() ): ?>
@@ -121,8 +150,12 @@ get_header(); ?>
 												<?php endif; ?>
 
 										<?php endif; ?>
+
+										<?php if( $is_candidate_invalid  ) : ?>
+											<div class="candidate__disabled text-center">Candidato(a) Inabilitado(a)</div>
+										<?php endif; ?>
 									<?php else: ?>
-										<div class="candidacy__removed text-center">Esta candidatura foi retirada</div>
+										<div class="candidate__disabled text-center">Esta candidatura foi retirada</div>
 									<?php endif; ?>
 
 									

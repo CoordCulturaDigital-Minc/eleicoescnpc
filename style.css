@@ -2752,6 +2752,9 @@ section.features {
   right: 8px;
   background-position: -45px 0; }
 
+.destaques-content .flex-control-paging {
+  display: none; }
+
 section.carrossel {
   height: 300px; }
 
@@ -2939,28 +2942,28 @@ section.carrossel header {
           background-color: #4F5651; }
       .candidates-content .candidates .candidate.voted .candidate-avatar {
         border-color: #1a8638; }
-      .candidates-content .candidates .candidate.candidacy_removed {
+      .candidates-content .candidates .candidate.candidate_disabled {
         background-color: #aaa;
         border-radius: 5px;
         border-color: #fff;
         border-left: 8px solid #F4F4F4;
         border-right: 8px solid #F4F4F4; }
-        .candidates-content .candidates .candidate.candidacy_removed .candidate-avatar {
+        .candidates-content .candidates .candidate.candidate_disabled .candidate-avatar {
           border-color: #959595; }
-          .candidates-content .candidates .candidate.candidacy_removed .candidate-avatar img {
+          .candidates-content .candidates .candidate.candidate_disabled .candidate-avatar img {
             opacity: 0.8;
             background-color: #aaa; }
-        .candidates-content .candidates .candidate.candidacy_removed .candidacy__removed {
+        .candidates-content .candidates .candidate.candidate_disabled .candidate__disabled {
           background-color: #E09510;
           color: #fff;
           font-weight: bold;
           padding-bottom: 10px;
           padding-top: 10px; }
-        .candidates-content .candidates .candidate.candidacy_removed .candidate-name span {
+        .candidates-content .candidates .candidate.candidate_disabled .candidate-name span {
           color: #656363; }
-        .candidates-content .candidates .candidate.candidacy_removed .show-candidate-details {
+        .candidates-content .candidates .candidate.candidate_disabled .show-candidate-details {
           background-color: rgba(40, 53, 32, 0.54) !important; }
-        .candidates-content .candidates .candidate.candidacy_removed .dialog, .candidates-content .candidates .candidate.candidacy_removed .ui-dialog {
+        .candidates-content .candidates .candidate.candidate_disabled .dialog, .candidates-content .candidates .candidate.candidate_disabled .ui-dialog {
           border: 26px solid #959595 !important; }
   .candidates-content .flex-direction-nav li {
     list-style: none; }

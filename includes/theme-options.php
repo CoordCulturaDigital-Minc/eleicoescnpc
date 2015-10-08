@@ -43,6 +43,9 @@ function theme_options_validate_callback_function($input) {
     $input['data_fim_votacao']      = convert_format_date($input['data_fim_votacao']);
     $input['data_inicio_da_troca']  = convert_format_date($input['data_inicio_da_troca']);
 
+    $input['data_divulgacao_inabilitados']  = convert_format_date($input['data_divulgacao_inabilitados']);
+    $input['data_divulgacao_eleitos']       = convert_format_date($input['data_divulgacao_eleitos']);
+
     $input['data_fim_troca_uf_setorial']  = convert_format_date($input['data_fim_troca_uf_setorial']);
     
 
@@ -50,7 +53,6 @@ function theme_options_validate_callback_function($input) {
     return $input;
 
 }
-
 
 
 function theme_options_page_callback_function() {
@@ -63,10 +65,75 @@ function theme_options_page_callback_function() {
       <?php settings_fields('theme_options_options'); ?>
       <?php $options = get_option('theme_options'); if (!is_array($options)) $options = array(); ?>
 
+      <p class="textright clear prepend-top">
+        <input type="submit" class="button-primary" value="<?php _e('Save Changes'); ?>" />
+      </p>
+
       <div class="span-20 ">
 
         
         <div class="span-6 last">
+
+          <h3>Inscrições</h3>
+
+          <!-- CHECKBOX -->
+          <input type="checkbox" id="inscricoes_abertas" class="text" name="theme_options[inscricoes_abertas]" value="1" <?php checked(true, get_theme_option('inscricoes_abertas'), true); ?>/>
+          <label for="inscricoes_abertas"><strong>Inscrições abertas</strong></label><br/>
+
+          <input type="checkbox" id="avaliacoes_abertas" class="text" name="theme_options[avaliacoes_abertas]" value="1" <?php checked(true, get_theme_option('avaliacoes_abertas'), true); ?>/>
+          <label for="avaliacoes_abertas"><strong>Avaliações abertas</strong></label><br/>
+
+          <!-- <input type="checkbox" id="manutencao" class="text" name="theme_options[manutencao]" value="1" <?php checked(true, get_theme_option('manutencao'), true); ?>/>
+          <label for="manutencao"><strong>Manutenção (esconde o site e mostra apenas uma página estática)</strong></label><br/>
+
+          <label for="aviso"><strong>Aviso Home</strong></label><br/>
+          <textarea id="aviso" name="theme_options[aviso]" rows="5" cols="60"><?php //echo htmlspecialchars($options['aviso']); ?></textarea>
+          <br/><br/> -->
+          
+          <h3>Cronograma das Eleições</h3>
+
+          <label for="data_inicio_da_votacao"><strong>Data início da votação</strong></label><br/>
+          <input type="text" id="data_inicio_da_votacao" class="text select_date" name="theme_options[data_inicio_votacao]" value="<?php echo restore_format_date(htmlspecialchars($options['data_inicio_votacao'])); ?>">
+
+          <br><br>
+          <label for="data_fim_da_votacao"><strong>Data fim da votação</strong></label><br/>
+          <input type="text" id="data_fim_da_votacao" class="text select_date" name="theme_options[data_fim_votacao]" value="<?php echo restore_format_date(htmlspecialchars($options['data_fim_votacao'])); ?>">
+          
+          <br><br>
+          <label for="data_inicio_da_troca"><strong>Data início da troca de votos</strong></label><br/>
+          <input type="text" id="data_inicio_da_troca" class="text select_date" name="theme_options[data_inicio_da_troca]" value="<?php echo restore_format_date(htmlspecialchars($options['data_inicio_da_troca'])); ?>">
+
+          <br><br>
+          <label for="vezes_que_pode_mudar_voto"><strong>Quantidade de vezes que pode trocar o voto</strong></label><br/>
+          <input type="text" id="vezes_que_pode_mudar_voto" class="text" name="theme_options[vezes_que_pode_mudar_voto]" value="<?php echo htmlspecialchars($options['vezes_que_pode_mudar_voto']); ?>">
+          
+          <br><br>
+          <label for="data_fim_troca_uf_setorial"><strong>Data fim para alterar Setorial e Estado</strong></label><br/>
+          <input type="text" id="data_fim_troca_uf_setorial" class="text select_date" name="theme_options[data_fim_troca_uf_setorial]" value="<?php echo restore_format_date(htmlspecialchars($options['data_fim_troca_uf_setorial'])); ?>">
+
+           <br><br>
+          <label for="vezes_que_pode_mudar_uf_e_setorial"><strong>Quantidade de vezes que pode trocar Setorial e Estado</strong></label><br/>
+          <input type="text" id="vezes_que_pode_mudar_uf_e_setorial" class="text" name="theme_options[vezes_que_pode_mudar_uf_e_setorial]" value="<?php echo htmlspecialchars($options['vezes_que_pode_mudar_uf_e_setorial']); ?>">
+        
+          <br><br>
+          <label for="data_divulgacao_inabilitados"><strong>Data para divulgar os candidatos inabilitados</strong></label><br/>
+          <input type="text" id="data_divulgacao_inabilitados" class="text select_date" name="theme_options[data_divulgacao_inabilitados]" value="<?php echo restore_format_date(htmlspecialchars($options['data_divulgacao_inabilitados'])); ?>">
+
+          <br><br>
+          <label for="data_divulgacao_eleitos"><strong>Data para divulgar os candidatos eleitos</strong></label><br/>
+          <input type="text" id="data_divulgacao_eleitos" class="text select_date" name="theme_options[data_divulgacao_eleitos]" value="<?php echo restore_format_date(htmlspecialchars($options['data_divulgacao_eleitos'])); ?>">
+
+          <h3>Delegados Natos</h3>
+        
+          <label for="candidatos_blacklist"><strong>Informe o CPF dos delegados natos, separados por vírgula. Exemplo: (999.9999.999-99, 888.888.888-88)</strong></label><br/>
+          <textarea id="candidatos_blacklist" name="theme_options[candidatos_blacklist]" rows="5" cols="60" ><?php echo htmlspecialchars(implode(",", $options['candidatos_blacklist'])); ?></textarea>
+          <br/><br/>
+
+          <h3>Lista de delegados eleitos por 2 vezes nos últimos anos</h3>
+          
+            <label for="delegates_two_years"><strong>Informe o CPF dos delegados, separados por vírgula. Exemplo: (999.9999.999-99, 888.888.888-88)</strong></label><br/>
+            <textarea id="delegates_two_years" name="theme_options[delegates_two_years]" rows="5" cols="60" ><?php echo htmlspecialchars(implode(",", $options['delegates_two_years'])); ?></textarea>
+            <br/><br/>
 
           <h3>Textos da página de registro</h3>
 
@@ -135,62 +202,8 @@ function theme_options_page_callback_function() {
           <textarea id="txt_admin" name="theme_options[txt_admin]" rows="5" cols="60"><?php echo htmlspecialchars($options['txt_admin']); ?></textarea>
           <br/><br/> -->
 
-        <h3>Delegados Natos</h3>
         
-          <label for="candidatos_blacklist"><strong>Informe o CPF dos delegados natos, separados por vírgula. Exemplo: (999.9999.999-99, 888.888.888-88)</strong></label><br/>
-          <textarea id="candidatos_blacklist" name="theme_options[candidatos_blacklist]" rows="5" cols="60" ><?php echo htmlspecialchars(implode(",", $options['candidatos_blacklist'])); ?></textarea>
-          <br/><br/>
 
-        <h3>Lista de delegados eleitos por 2 vezes nos últimos anos</h3>
-        
-          <label for="delegates_two_years"><strong>Informe o CPF dos delegados, separados por vírgula. Exemplo: (999.9999.999-99, 888.888.888-88)</strong></label><br/>
-          <textarea id="delegates_two_years" name="theme_options[delegates_two_years]" rows="5" cols="60" ><?php echo htmlspecialchars(implode(",", $options['delegates_two_years'])); ?></textarea>
-          <br/><br/>
-        
-        <h3>Inscrições</h3>
-
-          <!-- CHECKBOX -->
-          <input type="checkbox" id="inscricoes_abertas" class="text" name="theme_options[inscricoes_abertas]" value="1" <?php checked(true, get_theme_option('inscricoes_abertas'), true); ?>/>
-          <label for="inscricoes_abertas"><strong>Inscrições abertas</strong></label><br/>
-
-          <input type="checkbox" id="avaliacoes_abertas" class="text" name="theme_options[avaliacoes_abertas]" value="1" <?php checked(true, get_theme_option('avaliacoes_abertas'), true); ?>/>
-          <label for="avaliacoes_abertas"><strong>Avaliações abertas</strong></label><br/>
-
-          <input type="checkbox" id="manutencao" class="text" name="theme_options[manutencao]" value="1" <?php checked(true, get_theme_option('manutencao'), true); ?>/>
-          <label for="manutencao"><strong>Manutenção (esconde o site e mostra apenas uma página estática)</strong></label><br/>
-
-          <label for="aviso"><strong>Aviso Home</strong></label><br/>
-          <textarea id="aviso" name="theme_options[aviso]" rows="5" cols="60"><?php echo htmlspecialchars($options['aviso']); ?></textarea>
-          <br/><br/>
-          
-          <h3>Cronograma Votação</h3>
-
-          <!-- CHECKBOX -->
-        <!--   <input type="checkbox" id="votacoes_abertas" class="text" name="theme_options[votacoes_abertas]" value="1" <?php checked(true, get_theme_option('votacoes_abertas'), true); ?>/>
-          <label for="votacoes_abertas"><strong>Votações abertas</strong></label><br/> -->
-
-          <label for="data_inicio_da_votacao"><strong>Data início da votação</strong></label><br/>
-          <input type="text" id="data_inicio_da_votacao" class="text select_date" name="theme_options[data_inicio_votacao]" value="<?php echo restore_format_date(htmlspecialchars($options['data_inicio_votacao'])); ?>">
-
-          <br><br>
-          <label for="data_fim_da_votacao"><strong>Data fim da votação</strong></label><br/>
-          <input type="text" id="data_fim_da_votacao" class="text select_date" name="theme_options[data_fim_votacao]" value="<?php echo restore_format_date(htmlspecialchars($options['data_fim_votacao'])); ?>">
-          
-          <br><br>
-          <label for="data_inicio_da_troca"><strong>Data início da troca de votos</strong></label><br/>
-          <input type="text" id="data_inicio_da_troca" class="text select_date" name="theme_options[data_inicio_da_troca]" value="<?php echo restore_format_date(htmlspecialchars($options['data_inicio_da_troca'])); ?>">
-
-          <br><br>
-          <label for="vezes_que_pode_mudar_voto"><strong>Quantidade de vezes que pode trocar o voto</strong></label><br/>
-          <input type="text" id="vezes_que_pode_mudar_voto" class="text" name="theme_options[vezes_que_pode_mudar_voto]" value="<?php echo htmlspecialchars($options['vezes_que_pode_mudar_voto']); ?>">
-          
-          <br><br>
-          <label for="data_fim_troca_uf_setorial"><strong>Data fim para alterar Setorial e Estado</strong></label><br/>
-          <input type="text" id="data_fim_troca_uf_setorial" class="text select_date" name="theme_options[data_fim_troca_uf_setorial]" value="<?php echo restore_format_date(htmlspecialchars($options['data_fim_troca_uf_setorial'])); ?>">
-
-           <br><br>
-          <label for="vezes_que_pode_mudar_uf_e_setorial"><strong>Quantidade de vezes que pode trocar Setorial e Estado</strong></label><br/>
-          <input type="text" id="vezes_que_pode_mudar_uf_e_setorial" class="text" name="theme_options[vezes_que_pode_mudar_uf_e_setorial]" value="<?php echo htmlspecialchars($options['vezes_que_pode_mudar_uf_e_setorial']); ?>">
         </div>
       </div>
 
