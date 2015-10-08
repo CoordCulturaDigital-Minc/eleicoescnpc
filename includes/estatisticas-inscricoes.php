@@ -31,7 +31,6 @@ function inscricoes_estatisticas_menu() {
     add_submenu_page('inscricoes_estatisticas', 'Candidatos por gênero por estado - listagem', 'Candidatos por gênero por estado - listagem', 'edit_published_posts', 'candidatos_genero_estado_total', 'candidatos_genero_estado_total_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Candidatos afrodescendentes por setorial/estado', 'Candidatos afrodescendentes', 'edit_published_posts', 'candidatos_afrodesc', 'candidatos_afrodesc_page_callback_function');
     add_submenu_page('inscricoes_estatisticas', 'Candidatos afrodescendentes por setorial/estado', 'Candidatos afrodescendentes por estado', 'edit_published_posts', 'candidatos_afrodesc_estado_total', 'candidatos_afrodesc_estado_total_page_callback_function');
-    add_submenu_page('inscricoes_estatisticas', 'Candidatos inabilitados', 'Candidatos inabilitados', 'edit_published_posts', 'candidatos_inabilitados', 'candidatos_inabilitados_page_callback_function');
     
     /* votos
     add_submenu_page('inscricoes_estatisticas', 'Total geral de votos', 'Total geral de votos', 'manage_options', 'votos_total', 'votos_total_page_callback_function');
@@ -103,7 +102,6 @@ function relatorios_sumario_page_callback_function() {
     <li><a href='admin.php?page=candidatos_estado_total'>Candidatos por estado - total por estado</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_setorial'>Candidatos por setorial</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_setorial_estado'>Candidatos por setorial/estado</a> <small>disponível</small></li>
-    <li><a href='admin.php?page=candidatos_inabilitados'>Candidatos inabilitados</a> <small>disponível</small></li>
     <li><h5>Por gênero</h5></li>
     <li><a href='admin.php?page=candidatos_genero'>Candidatos por gênero</a> <small>disponível</small></li>
     <li><a href='admin.php?page=candidatos_genero_estado_total'>Candidatos por gênero por estado - listagem</a> <small>disponível</small></li>
@@ -1329,98 +1327,11 @@ function votos_afrodesc_setorial_estado_page_callback_function() {
         <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_votos_afrodesc' data_csv='<?php echo json_encode($data) ?>'>
     </div>
     
-<?php } 
+<?php
+} 
 
 
-function candidatos_inabilitados_page_callback_function() {   
-    if(!current_user_can('edit_published_posts')){
-        return false;
-    }
-
-    $uf_selected = $_GET['uf'];    
-    $setorial_selected = $_GET['setorial'];
-    $states = get_all_states();
-    $setoriais = get_setoriais();
-    $data[] = ['Habilitados', 'Inabilitados', 'Total'];
-    
-    if (!in_array($setorial_selected, array_keys($setoriais))) {
-        $setorial_selected = '';
-    }
-    if (!in_array($uf_selected, array_keys($states))) {
-        $uf_selected = '';
-    }
-    
-    ?>
-    <h4>Selecione a UF:</h4>
-    <select class="select-state-v" id="filtrar_uf">
-      <option value="">Todas</option>
-      <?php foreach ( $states as $uf_item => $state_item ): ?>
-      <option value="<?php echo $uf_item ?>" <?php if ($uf_item == $uf_selected) { echo "selected"; } ?>><?php echo $state_item ?></option>
-      <?php endforeach ?>
-    </select>
-      
-    <h4>Selecione a Setorial:</h4>
-    <select class="select-setorial-v" id="filtrar_setorial">
-      <option value="">Todas</option>
-      <?php foreach ( $setoriais as $slug => $setorial_item ): ?>
-      <option value="<?php echo $slug ?>" <?php if ($slug == $setorial_selected) { echo "selected"; } ?>><?php echo $setorial_item ?></option>
-      <?php endforeach ?>
-    </select>
-      <br/>
-      <input type="button" value="buscar" id="candidatos_inabilitados" class="filtrar_relatorio">
-      <br/><br/>    
-    <?php
-      if ($uf_selected || $setorial_selected) {
-          // por uf ou setorial
-          $candidatos_total = get_count_candidates($uf_selected, $setorial_selected, false);
-          $candidatos_habilitados = get_count_candidates($uf_selected, $setorial_selected);
-      } else {
-          // total
-          $candidatos_total = get_count_candidates(false, false, false);
-          $candidatos_habilitados = get_count_candidates();
-      }
-      
-      $candidatos_inabilitados = $candidatos_total - $candidatos_habilitados;
-      if ($candidatos_habilitados == 0 || $candidatos_total == 0) {
-          $candidatos_habilitados_perc = 0;
-          $candidatos_inabilitados_perc = 0;
-      } else {
-          $candidatos_habilitados_perc = round($candidatos_habilitados / $candidatos_total * 100, 2);
-          $candidatos_inabilitados_perc = round($candidatos_inabilitados / $candidatos_total * 100, 2);
-      }
-      $data[] = [$candidatos_habilitados, $candidatos_inabilitados, $candidatos_total];
-    ?>
-    <h2>Candidatos habilitados e inabilitados:</h2>
-        <?php if ($uf_selected) { echo " <h4>" . $states[$uf_selected] . "</h4> "; } ?>
-        <?php if ($setorial_selected) { echo " <h4>" . $setoriais[$setorial_selected] . "</h4>"; } ?>
-        <table class="wp-list-table widefat">
-            <thead>
-                <tr>
-                    <th scope="col"  class="manage-column column-posts">Habilitados</th>
-                    <th scope="col"  class="manage-column column-role num">Inabilitados</th>
-                    <th scope="col"  class="manage-column column-role num">Total</th>
-                </tr>
-            </thead>    
-            <tbody>
-                           <tr class="alternate">
-    <td class="num"><?php echo $candidatos_habilitados;?> (<?php echo $candidatos_habilitados_perc; ?>%)</td>
-    <td class="num"><?php echo $candidatos_inabilitados;?> (<?php echo $candidatos_inabilitados_perc; ?>%)</td>
-    <td class="num"><strong><?php echo $candidatos_total;?></strong></td>    
-                            </tr>
-            </tbody>
-      </table>
-      <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_candidatos_habilitados_inabilitados' data_csv='<?php echo json_encode($data) ?>'>                    
-?>
-
-    <div class="wrap span-20">
-
-    <h2>Candidatos inabilitados por setorial/estado</h2>
-
-<?php } 
-
-
-function listagem_votos_auditoria_page_callback_function() {
-    
+function listagem_votos_auditoria_page_callback_function() {    
     if(!current_user_can('manage_options')){
         return false;
     }
@@ -1479,9 +1390,19 @@ function listagem_votos_auditoria_page_callback_function() {
               $vote->trocou
           ];
       }
-    
+
+      $nome_relatorio = "auditoria-$uf_selected-$setorial_selected";
+      // testa arquivo
+      $filename = $nome_relatorio . ".csv";
+      $file_web = get_template_directory_uri() . '/relatorios/arquivos/' . $filename;
+      $file_path = get_template_directory() . '/relatorios/arquivos/' . $filename;
+      clearstatcache();
+      if (file_exists($file_path)) {
+          echo "<strong>Já existe um relatório disponível para essa consulta:</strong> ";
+          echo "<a href='$file_web'>$filename</a>";
+      }      
 ?>     
-      <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo "auditoria-$uf_selected-$setorial_selected"; ?>' data_csv='<?php echo json_encode($data) ?>'>
+      <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo "$nome_relatorio"; ?>' data_csv='<?php echo json_encode($data) ?>' data_output_file='arquivo'>
 <?php else: ?>
     Sem resultados.
 <?php endif; ?>
@@ -1498,7 +1419,7 @@ function maisvotados_setorial_estado_page_callback_function() {
         return false;
     }
 
-    $data[] = ['candidato', 'num_votos', 'genero', 'afrodescendente', 'uf', 'setorial']; 
+    $data[] = ['candidato', 'num_votos', 'genero', 'afrodescendente', 'uf', 'setorial', 'habilitado']; 
     $uf_selected = $_GET['uf'];
     $setorial_selected = $_GET['setorial'];
     
@@ -1569,7 +1490,8 @@ function maisvotados_setorial_estado_page_callback_function() {
                   $vote->genero,
                   $vote->afrodescendente,
                   $vote->uf,
-                  $vote->setorial
+                  $vote->setorial,
+                  $vote->habilitado
               ];
           }
           
@@ -1583,8 +1505,18 @@ function maisvotados_setorial_estado_page_callback_function() {
           } else {
               $nome_relatorio = "apuracao-resumo-nacional";
           }
+
+          // testa arquivo
+          $filename = $nome_relatorio . ".csv";
+          $file_web = get_template_directory_uri() . '/relatorios/arquivos/' . $filename;
+          $file_path = get_template_directory() . '/relatorios/arquivos/' . $filename;
+          clearstatcache();
+          if (file_exists($file_path)) {
+              echo "<strong>Já existe um relatório disponível para essa consulta:</strong> ";
+              echo "<a href='$file_web'>$filename</a>";
+          }
 ?>     
-          <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo $nome_relatorio; ?>' data_csv='<?php echo json_encode($data) ?>'>
+          <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo $nome_relatorio; ?>' data_csv='<?php echo json_encode($data) ?>' data_output_path='arquivo'>
           </div>
 <?php 
       }   
@@ -1630,7 +1562,7 @@ function resumo_setorial_estado_page_callback_function() {
       <option></option>
       <?php foreach ( $states as $uf_item => $state_item ): ?>
       <option value="<?php echo $uf_item ?>" <?php if ($uf_item == $uf_selected) { echo "selected"; } ?>><?php echo $state_item ?></option>
-      <?php endforeach ?>
+<?php endforeach ?>
       <option value="todos" <?php if ($uf_selected == 'todos') { echo "selected"; } ?>>TODOS</option>
     </select>
       
@@ -1706,8 +1638,18 @@ function resumo_setorial_estado_page_callback_function() {
           } else {
               $nome_relatorio = "resumo-nacional";
           }
+
+          // testa arquivo
+          $filename = $nome_relatorio . ".csv";
+          $file_web = get_template_directory_uri() . '/relatorios/arquivos/' . $filename;
+          $file_path = get_template_directory() . '/relatorios/arquivos/' . $filename;
+          clearstatcache();
+          if (file_exists($file_path)) {
+              echo "<strong>Já existe um relatório disponível para essa consulta:</strong> ";
+              echo "<a href='$file_web'>$filename</a>";
+          }          
 ?>     
-          <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo $nome_relatorio; ?>' data_csv='<?php echo json_encode($data) ?>'>
+          <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo $nome_relatorio; ?>' data_csv='<?php echo json_encode($data) ?>' data_output_path='arquivo'>
       </div>    
 <?php 
       }   
@@ -1725,7 +1667,21 @@ function relatorio_inscritos_naovotaram_page_callback_function() {
     ?>
     <div class="wrap span-20">
     <h2>Relatório de inscritos que não votaram:</h2>
-      <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_inscricos_naovotaram' data_csv='<?php echo json_encode($data) ?>'>                </div>
+<?php
+    $nome_relatorio = 'relatorio_inscricos_naovotaram';
+    
+    // testa arquivo
+    $filename = $nome_relatorio . ".csv";
+    $file_web = get_template_directory_uri() . '/relatorios/arquivos/' . $filename;
+    $file_path = get_template_directory() . '/relatorios/arquivos/' . $filename;
+    clearstatcache();
+    if (file_exists($file_path)) {
+        echo "<strong>Já existe um relatório disponível para essa consulta:</strong> ";
+        echo "<a href='$file_web'>$filename</a>";
+    }
+?>
+      <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='<?php echo $nome_relatorio; ?>' data_csv='<?php echo json_encode($data) ?>' data_output_path='arquivo'>
+    </div>
 <?php
     
 }
