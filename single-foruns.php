@@ -137,8 +137,8 @@ get_header(); ?>
 												<?php if( $current_user_ID == $candidate_id ) : ?>
 													<br>
 													<p>Sua candidatura foi inabilitada. Se desejar envie recurso para o e-mail <a href="<?php echo site_url('/fale-conosco'); ?>">votacultura@cultura.gov.br</a> até o dia 14/10/2015.</p>
+													<p><a href="http://cultura.gov.br/votacultura/wp-content/uploads/2015/10/FORMULARIO-DE-RECURSO-ELEICOES-CNPC-2015.docx">Baixe o formulário aqui.</a>
 													<p>Motivo: <?php echo isset( $e["remarks-comment"]) ? $e["remarks-comment"] : '';  ?></p>
-
 												<?php else : ?>
 													<br>
 													<p>Este(a) candidato(a) foi inabilitado(a).</p>
