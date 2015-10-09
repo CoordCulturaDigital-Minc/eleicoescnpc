@@ -31,10 +31,6 @@
 		}
 	}
 
-	if( empty( $setorial ) ) {
-		$setorial = $setorial_default; // setorial padrão
-	}
-
 	$candidates = get_id_candidates_by_setorial( true, $setorial);
 
 	wp_enqueue_script('admin-avaliacoes', get_setoriaiscnpc_baseurl().'js/admin-avaliacoes.js', array('jquery'));
