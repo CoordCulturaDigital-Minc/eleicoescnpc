@@ -65,25 +65,13 @@ get_header(); ?>
 									$candidacy_removed 		 = false;
 									$is_candidate_elected    = false;
 									$is_candidate_invalid 	 = false;
-									$show_invalid_candidates = false;
+									// $show_invalid_candidates = false;
 
 									$e = array();
 
 									if( $candidate_uf_setorial !== $forum_uf_setorial ) {
 										$candidacy_removed = true;
 										$candidate_class = 'candidate_disabled';
-									}
-
-									if( can_show_invalid_candidates() ) {
-
-										$show_invalid_candidates = true;
-
-										$e = load_evaluation( get_the_ID() );
-
-										if( $e["evaluation-status"] == 'invalid' ) {
-											$is_candidate_invalid = true;
-											$candidate_class = 'candidate_disabled'; //TODO: trocar classe css para candidate_disabled
-										}
 									}
 
 									if( can_show_elected_candidates() ) {
@@ -93,14 +81,26 @@ get_header(); ?>
 										}
 									}
 
+									if( can_show_invalid_candidates() ) {
+
+										// $show_invalid_candidates = true;
+
+										$e = load_evaluation( get_the_ID() );
+
+										if( $e["evaluation-status"] == 'invalid' ) {
+											$is_candidate_invalid = true;
+											$candidate_class = 'candidate_disabled';
+										}
+										echo "beeee";
+									}
+
 									if( strlen($candidate_meta['candidate-display-name']) < 1 ) {
 										$candidate_meta['candidate-display-name'] = get_user_meta($candidate_id, 'user_name', true);
 									}
-
 									
 								 ?>
 
-								<div class="candidate <?php echo (get_current_user_vote() == get_the_ID()) ? 'voted':'' ?> <?php echo $candidate_class; ?>" id="<?php the_ID(); ?> ">
+								<div class="candidate <?php echo (get_current_user_vote() == get_the_ID()) ? 'voted':''; ?> <?php echo $candidate_class; ?>" id="<?php the_ID(); ?> ">
 									<div class="candidate-avatar" data-candidate-id="<?php the_ID(); ?>">
 										<?php echo wp_get_attachment_image($candidate_meta['candidate-avatar'], 'avatar_candidate', 'avatar_candidate'); ?>
 									</div>

@@ -998,13 +998,19 @@ function load_step($n, $pid=null) {
 function load_evaluation($pid, $curator=null) {
     global $current_user;
 
-    if(is_null($curator)) {
-        $curator = $current_user->ID;
-    }
+    // if(is_null($curator)) {
+    //     $curator = $current_user->ID;
+    // }
 
-    if(user_can($curator, 'curate')) {
+    if( empty($pid))
+        return false;
+
+    // if(user_can($curator, 'curate')) {
         // $meta_key = sprintf('evaluation_of_%d', $pid);
         $eval = get_post_meta($pid, 'evaluation_of_candidate', true);
+
+        if( empty( $eval ) )
+            return false;
 
         if($eval) {
             foreach($eval as $key => $value) {
@@ -1028,8 +1034,8 @@ function load_evaluation($pid, $curator=null) {
         
         
         return $eval;
-    }
-    return false;
+    // }
+    // return false;
 }
 
 /** validate all fields from subscription form by given step number */
