@@ -31,6 +31,10 @@
 		}
 	}
 
+	if( empty( $setorial ) ) {		
+		$setorial = $setorial_default; // setorial padrão		
+	}
+
 	$candidates = get_id_candidates_by_setorial( true, $setorial);
 
 	wp_enqueue_script('admin-avaliacoes', get_setoriaiscnpc_baseurl().'js/admin-avaliacoes.js', array('jquery'));
@@ -42,7 +46,8 @@
 
 <section class="col-xs-12">
 	<header>
-		<h3 class="page__title text-center">Lista de Habilitados e inabilitados CNPC</h3>
+		<h3 class="page__title text-center">Lista de habilitados e inabilitados CNPC</h3>
+		<h2 class="text-center">Selecione a setorial para visualizar a lista de candidaturas. Você pode classificar por ordem alfabética e/ou estado clicando no título da coluna.</h2>
 		<br>
 	</header>
 
@@ -50,7 +55,7 @@
 
         <form method="post" id="filter_setorial">    
             <label for="setorial">Selecione a setorial:</label>
-            <?php echo dropdown_setoriais('setorial', $setorial, true) ?>
+            <?php echo dropdown_setoriais('setorial', $setorial) ?>
         </form>
     <?php endif; ?>
 	
@@ -61,7 +66,7 @@
                 <th>Setorial</th>
                 <th>Estado</th>
 				<th>Situação</th>
-				<th>Observação</th>
+				<th>Votos</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -70,6 +75,8 @@
 				<?php foreach($candidates as $pid):?>
 				<?php 	
 					$candidate = get_candidate( $pid );
+
+					$number_votes = get_number_of_votes_by_project($pid); 
 		 		?>
 
 				<tr class="">
@@ -90,7 +97,9 @@
 					 	<?php echo isset( $candidate["evaluation-status"] ) ? label_status_candidate($candidate["evaluation-status"]) : '';  ?>  
 					</td>
 					<td>
-					 	<?php echo isset( $candidate["remarks-comment"]) ? $candidate["remarks-comment"] : '';  ?>  
+
+						<?php echo isset( $number_votes ) ? $number_votes : "";  ?>
+					 	<?php //echo isset( $candidate["remarks-comment"]) ? $candidate["remarks-comment"] : '';  ?>  
 					</td>
 				</tr>
 
@@ -100,7 +109,8 @@
 				    (isset( $candidate['setorial'] ) ? get_label_setorial_by_slug($candidate['setorial']) : ''),
 				    (isset( $candidate['UF'] ) ? $candidate['UF'] : ''),
 				    (isset( $candidate["evaluation-status"] ) ? label_status_candidate($candidate["evaluation-status"]) : ''),
-				    (isset( $candidate["remarks-comment"]) ? $candidate["remarks-comment"] : '')
+				    (isset( $number_votes ) ? $number_votes : '')
+				    // (isset( $candidate["remarks-comment"]) ? $candidate["remarks-comment"] : '')
 				]; ?>    
 				<?php endforeach; ?>
 
