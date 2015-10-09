@@ -1,7 +1,7 @@
 <?php
 	global $current_user;
 
-	if( !current_user_can('curate') && !current_user_can('administrator') ) {
+	if( (!current_user_can('curate') && !current_user_can('administrator') ) && !can_show_invalid_candidates() ) {
         wp_redirect(site_url('/'));
     }
 
@@ -46,10 +46,11 @@
 
 <section class="col-xs-12">
 	<header>
-		<h2 class="page__title">Candidatos avaliados</h2>
+		<h3 class="page__title text-center">Lista de Habilitados e inabilitados CNPC</h3>
+		<br>
 	</header>
 
-    <?php if( ( current_user_can('curate') &&  empty( $setorial_curate ) )  || current_user_can('administrator') ) : ?>
+    <?php if( ( current_user_can('curate') &&  empty( $setorial_curate ) )  || current_user_can('administrator') || can_show_invalid_candidates() ) : ?>
 
         <form method="post" id="filter_setorial">    
             <label for="setorial">Selecione a setorial:</label>
@@ -101,8 +102,9 @@
 					(isset( $candidate['user_name'] ) ? $candidate['user_name'] : ''),
 				    (isset( $candidate['candidate-display-name'] ) ? $candidate['candidate-display-name'] : ''),
 				    (isset( $candidate['setorial'] ) ? get_label_setorial_by_slug($candidate['setorial']) : ''),
-				    (isset( $candidate['uf'] ) ? $candidate['uf'] : ''),
-				    (isset( $e["evaluation-status"] ) ? label_status_candidate($candidate["evaluation-status"]) : '')
+				    (isset( $candidate['UF'] ) ? $candidate['UF'] : ''),
+				    (isset( $candidate["evaluation-status"] ) ? label_status_candidate($candidate["evaluation-status"]) : ''),
+				    (isset( $candidate["remarks-comment"]) ? $candidate["remarks-comment"] : '')
 				]; ?>    
 				<?php endforeach; ?>
 
@@ -114,8 +116,9 @@
 		</tbody>
 	</table>
 
+	<?php if( current_user_can('curate') ) : ?>
 	 <iframe id="iframeExportar" frameborder="0" src="<?php echo get_template_directory_uri(); ?>/baixar-csv.php" data_filename='relatorio_inscritos_setorial' data_csv='<?php echo json_encode($data) ?>'>
        </iframe>
-
+    <?php endif; ?>
 </section>
 <?php get_footer(); ?>
