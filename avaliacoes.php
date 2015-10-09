@@ -7,6 +7,7 @@
 
 	$curators = get_users(array('role'=>'curador'));
 	$curators_length = count($curators);
+	$setorial_default = "arquitetura-urbanismo";
 
 	// verifica se foi passado alguma setorial 
 	$setorial = isset( $_POST['setorial'] ) ? $_POST['setorial'] : "";
@@ -26,8 +27,12 @@
 			$setorial = $_REQUEST['setorial_curate'];
 
 		}else if( empty( $setorial ) ) {
-			$setorial = "arquitetura-urbanismo"; // setorial padrão
+			$setorial = $setorial_default; // setorial padrão
 		}
+	}
+
+	if( empty( $setorial ) ) {
+		$setorial = $setorial_default; // setorial padrão
 	}
 
 	$subscriptions = list_candidates_by_setorial(array('candidate-display-name',
