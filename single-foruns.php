@@ -24,6 +24,8 @@ get_header(); ?>
 				
 				$original_post = $post;
 
+				$current_user_ID = get_current_user_id();
+
 				?>
 			
 				<header>
@@ -91,7 +93,6 @@ get_header(); ?>
 											$is_candidate_invalid = true;
 											$candidate_class = 'candidate_disabled';
 										}
-										echo "beeee";
 									}
 
 									if( strlen($candidate_meta['candidate-display-name']) < 1 ) {
@@ -133,9 +134,19 @@ get_header(); ?>
 										<?php if( !$candidacy_removed ) : ?>
 
 											<?php if( $is_candidate_invalid ) : ?>
-												<br>
-												<p>Este(a) candidato(a) foi inabilitado(a).</p>
-												<p>Motivo: <?php echo isset( $e["remarks-comment"]) ? $e["remarks-comment"] : '';  ?></p>
+												<?php if( $current_user_ID == $candidate_id ) : ?>
+													<br>
+													<p>Sua candidatura foi inabilitada. Se desejar envie recurso para o e-mail <a href="<?php echo site_url('/fale-conosco'); ?>">votacultura@cultura.gov.br</a> até o dia 14/10/2015.</p>
+													<p>Motivo: <?php echo isset( $e["remarks-comment"]) ? $e["remarks-comment"] : '';  ?></p>
+
+												<?php else : ?>
+													<br>
+													<p>Este(a) candidato(a) foi inabilitado(a).</p>
+													<p>Motivo: <?php echo isset( $e["remarks-comment"]) ? $e["remarks-comment"] : '';  ?></p>
+
+												<?php endif; ?>
+
+
 											<?php else : ?>
 												<p><h3>Defesa do candidato:</h3><?php echo $candidate_meta['candidate-explanatory']; ?></p>
 												<p><h3>Experiência:</h3><?php echo $candidate_meta['candidate-experience']; ?></p>
