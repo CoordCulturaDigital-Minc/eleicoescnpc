@@ -952,6 +952,78 @@ function list_candidates_by_setorial($fields=null, $valid_only=true, $setorial="
 }
 
 
+
+function get_id_candidates_by_setorial( $valid_only=true, $setorial="") {
+   
+    global $wpdb;
+
+    $subscription = "subscription_number";
+
+    if($valid_only === true) {
+        // pelo desenho do sistema, não é possível que haja 'subscription-valid' sem 'subscription_number'
+        $subscription = "subscription-valid";
+    } 
+
+    // busca todos candidatos válidos
+    if( empty($setorial) ) {
+        $list_query = $wpdb->prepare("SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key=%s", $subscription) ;
+    } else { // filtra por setorial
+        $list_query = $wpdb->prepare("SELECT ID "
+                     . "FROM {$wpdb->posts} as p "
+                     . "INNER JOIN {$wpdb->postmeta} as m ON p.ID = m.post_id "
+                     . "INNER JOIN {$wpdb->usermeta} as u ON p.post_author = u.user_id "
+                     . "WHERE m.meta_key=%s "
+                     . "AND u.meta_key = 'setorial' AND u.meta_value=%s GROUP BY p.ID", $subscription, $setorial);
+    }
+
+    $candidates_id = $wpdb->get_col($list_query);
+
+    return $candidates_id;
+}
+
+function get_candidate( $pid ) {
+
+    if( empty($pid) )
+        return false;
+
+    global $wpdb;
+
+    $postmeta_candidate = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM {$wpdb->postmeta} WHERE post_id = %d", $pid ) );
+
+    $post_author = get_post_field( 'post_author', $pid );
+
+    $usermeta_candidate = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM {$wpdb->usermeta} WHERE user_id = %d", $post_author) );
+
+    $objects = (object) array_merge( (array) $postmeta_candidate, (array) $usermeta_candidate );
+
+    // transformar o objeto em array
+    foreach( $objects as $object )
+    {
+        $candidate[$object->meta_key] = $object->meta_value;
+    }
+
+    // Número de inscrição
+    $candidate['subscription_number'] = substr($candidate['subscription_number'],0,8);
+
+    // Avaliação
+    $eval = isset( $candidate['evaluation_of_candidate'] ) ? $candidate['evaluation_of_candidate'] : false;
+
+    if($eval) {
+        if( is_serialized( $eval ) )
+            $eval = maybe_unserialize( $eval );
+
+        foreach($eval as $key => $value) {
+
+            if(strpos($key, '-comment') > 0) {
+                $candidate[$key] = esc_attr($value);
+            }
+        }
+    }
+
+    return $candidate;
+}
+
+
 /** get user from subscription number (that will be an hexa) */
 function get_user_from_subscription_number($n) {
     global $wpdb;
@@ -1008,9 +1080,6 @@ function load_evaluation($pid, $curator=null) {
     // if(user_can($curator, 'curate')) {
         // $meta_key = sprintf('evaluation_of_%d', $pid);
         $eval = get_post_meta($pid, 'evaluation_of_candidate', true);
-
-        if( empty( $eval ) )
-            return false;
 
         if($eval) {
             foreach($eval as $key => $value) {

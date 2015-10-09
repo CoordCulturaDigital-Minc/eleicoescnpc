@@ -35,10 +35,7 @@
 		$setorial = $setorial_default; // setorial padrão
 	}
 
-	$subscriptions = list_candidates_by_setorial(array('candidate-display-name',
-											  'evaluation_of_candidate',
-											  'subscription_number',
-											  'admin_'.$current_user->ID.'_read'), true, $setorial);
+	$candidates = get_id_candidates_by_setorial( true, $setorial);
 
 	wp_enqueue_script('admin-avaliacoes', get_setoriaiscnpc_baseurl().'js/admin-avaliacoes.js', array('jquery'));
 	wp_enqueue_script('tablesorter', get_setoriaiscnpc_baseurl().'js/jquery.tablesorter.min.js', array('jquery'));
@@ -71,46 +68,41 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php if( !empty($subscriptions) ) : ?>
+			<?php if( !empty($candidates) ) : ?>
 
-				<?php foreach($subscriptions as $sub): $s_number=substr($sub['subscription_number'],0,8);?>
+				<?php foreach($candidates as $pid):?>
 				<?php 	
-					$user_id = get_post_field( 'post_author', $sub['pid'] );
-					$user_candidate = array( 
-						'user_name'=> get_user_meta($user_id, 'user_name', true),
-						'setorial' => get_user_meta($user_id, 'setorial', true),
-						'uf' 	   => get_user_meta($user_id, 'UF', true)
-					);
-
-					$e = load_evaluation($sub['pid'] );
+					$candidate = get_candidate( $pid );
 		 		?>
 
 				<tr class="">
 					<td class="subscription__title">
-						<a href="<?php echo site_url("inscricoes/".$s_number);?>"><?php echo $user_candidate['user_name'];?> <?php echo !empty($sub['candidate-display-name']) ? "(".$sub['candidate-display-name'].")" :'';?></a>
+						<?php if( current_user_can('curate') ): ?>
+							<a href="<?php echo site_url("inscricoes/".$candidate['subscription_number']);?>"><?php echo $candidate['user_name'];?> <?php echo !empty($candidate['candidate-display-name']) ? "(".$candidate['candidate-display-name'].")" :'';?></a>
+						<?php else : ?>
+							<?php echo $candidate['user_name'];?> <?php echo !empty($candidate['candidate-display-name']) ? "(".$candidate['candidate-display-name'].")" :'';?>
+						<?php endif; ?>
 					</td>
 	                <td>
-	                    <?php echo get_label_setorial_by_slug($user_candidate['setorial']);?>
+	                    <?php echo get_label_setorial_by_slug($candidate['setorial']);?>
 	                </td>
 	                <td>
-	                    <?php echo $user_candidate['uf'];?>
+	                    <?php echo $candidate['UF'];?>
 	                </td>
 					<td>
-					 	<?php echo isset( $e["evaluation-status"] ) ? label_status_candidate($e["evaluation-status"]) : '';  ?>  
+					 	<?php echo isset( $candidate["evaluation-status"] ) ? label_status_candidate($candidate["evaluation-status"]) : '';  ?>  
 					</td>
 					<td>
-					 	<?php echo isset( $e["remarks-comment"]) ? $e["remarks-comment"] : '';  ?>  
+					 	<?php echo isset( $candidate["remarks-comment"]) ? $candidate["remarks-comment"] : '';  ?>  
 					</td>
-
 				</tr>
 
 				<?php $data[] = [
-					(isset( $user_candidate['user_name'] ) ? $user_candidate['user_name'] : ''),
-				    (isset( $sub['candidate-display-name'] ) ? $sub['candidate-display-name'] : ''),
-				    (isset( $user_candidate['setorial'] ) ? get_label_setorial_by_slug($user_candidate['setorial']) : ''),
-				    (isset( $user_candidate['uf'] ) ? $user_candidate['uf'] : ''),
-				    get_number_of_votes_by_project($s['pid']),
-				    (isset( $e["evaluation-status"] ) ? label_status_candidate($e["evaluation-status"]) : '')
+					(isset( $candidate['user_name'] ) ? $candidate['user_name'] : ''),
+				    (isset( $candidate['candidate-display-name'] ) ? $candidate['candidate-display-name'] : ''),
+				    (isset( $candidate['setorial'] ) ? get_label_setorial_by_slug($candidate['setorial']) : ''),
+				    (isset( $candidate['uf'] ) ? $candidate['uf'] : ''),
+				    (isset( $e["evaluation-status"] ) ? label_status_candidate($candidate["evaluation-status"]) : '')
 				]; ?>    
 				<?php endforeach; ?>
 
