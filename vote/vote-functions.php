@@ -267,7 +267,7 @@ function can_show_invalid_candidates() {
 
   $hoje = date('Y-m-d');
 
-  if( get_theme_option('data_divulgacao_inabilitados') <= $hoje )
+  if( get_theme_option('data_divulgacao_inabilitados') <= $hoje && !empty(get_theme_option('data_divulgacao_inabilitados')))
     return true;
 
   return false;
@@ -278,7 +278,7 @@ function can_show_elected_candidates() {
 
   $hoje = date('Y-m-d');
 
-  if( get_theme_option('data_divulgacao_eleitos') <= $hoje )
+  if( get_theme_option('data_divulgacao_eleitos') <= $hoje && !empty(get_theme_option('data_divulgacao_eleitos')))
     return true;
 
   return false;
