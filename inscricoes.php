@@ -245,10 +245,14 @@ if(is_user_logged_in()) {
 								<label for="subscription-valid">Admins: Marcar como Válida <a href="<?php bloginfo('url'); ?>/inscricoes">(e voltar para lista de inscritos)</a></label>
 							</div>
 
-							<div class="form__item--inline">
-								<input id="elected-candidate" type="checkbox" name="elected-candidate" id="elected-candidate" value="<?php echo $subscription_number;?>"<?php if(get_post_meta($pid, 'elected-candidate', true)) echo ' checked="checked"';?>/>
-								<label for="elected-candidate">Admins: Candidato eleito <a href="<?php bloginfo('url'); ?>/inscricoes">(e voltar para lista de inscritos)</a></label>
-							</div>
+							<?php if( !is_candidate_invalid( $pid ) ) : ?>
+
+								<div class="form__item--inline">
+									<input id="elected-candidate" type="checkbox" name="elected-candidate" id="elected-candidate" value="<?php echo $subscription_number;?>"<?php if(get_post_meta($pid, 'elected-candidate', true)) echo ' checked="checked"';?>/>
+									<label for="elected-candidate">Admins: Candidato eleito <a href="<?php bloginfo('url'); ?>/avaliacoes?setorial_curate=<?php echo $user_meta['setorial']; ?>">(e voltar para lista de avaliações)</a></label>
+								</div>
+
+							<?php endif; ?>
 
 							<input type="hidden" id="js-protocol-number" value="<?php echo substr($subscription_number, 0, 8);?>" />
 							
