@@ -48,8 +48,8 @@ function template_redirect_intercept(){
 			exit;
 		}
 	} elseif ( $wp_query->get('setoriaiscnpc_tpl') == 'avaliacoes' ) {
-		if (file_exists( TEMPLATEPATH . '/avaliacoes.php' )) {
-			include( TEMPLATEPATH . '/avaliacoes.php' );
+		if (file_exists( TEMPLATEPATH . '/inscricoes/avaliacoes.php' )) {
+			include( TEMPLATEPATH . '/inscricoes/avaliacoes.php' );
 			exit;
 		}
 	}
