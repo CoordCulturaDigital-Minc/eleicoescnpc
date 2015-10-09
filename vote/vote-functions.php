@@ -311,6 +311,19 @@ function get_number_of_votes_by_project($project_id) {
 	return $wpdb->get_var($wpdb->prepare("SELECT COUNT(user_id) FROM $wpdb->usermeta WHERE meta_key = 'vote-project-id' AND meta_value = %s", $project_id) );
 }
 
+function get_number_of_votes_by_project_transient( $project_id ) {
+  
+  $number_of_votes = get_post_meta( $project_id, 'number_of_votes_project', true );
+
+  if( empty( $number_of_votes ) ) {
+    $number_of_votes = get_number_of_votes_by_project( $project_id );
+    update_post_meta( $project_id, 'number_of_votes_project', $number_of_votes );
+  }
+
+  return $number_of_votes;
+
+}
+
 function get_total_votes_by_uf($uf) {
     global $wpdb;
 

@@ -76,7 +76,11 @@
 				<?php 	
 					$candidate = get_candidate( $pid );
 
-					$number_votes = get_number_of_votes_by_project($pid); 
+					// $number_votes = get_number_of_votes_by_project($pid);
+
+					$number_votes = get_number_of_votes_by_project_transient($pid);
+
+					 
 		 		?>
 
 				<tr class="">
