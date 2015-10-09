@@ -87,9 +87,6 @@ $subscriptions = list_candidates_by_setorial(
                     <th>Setorial</th>
                     <th>Estado</th>
                     <th>CPF</th>
-                    <?php if(current_user_can('administrator')): ?>
-                        <th>Votos</th>
-                    <?php endif; ?>
                     <?php if(!current_user_can('administrator')): ?>
                         <th>Avaliação</th>
                     <?php endif; ?>
@@ -114,9 +111,6 @@ $subscriptions = list_candidates_by_setorial(
                         <td class="subscription__setorial"><a href='<?php echo site_url("foruns/$uf_setorial");?>' title="Ver fórum deste candidato"><?php echo isset( $user_meta['setorial'] ) ? get_label_setorial_by_slug($user_meta['setorial']) : ''; ?></a></td>
                         <td class="subscription__state"><?php echo isset( $user_meta['UF'] ) ? $user_meta['UF'] : ''; ?></td>
                         <td class="subscription__cpf"><?php echo isset( $user_meta['cpf'] ) ? $user_meta['cpf'] : ''; ?></td>
-                        <?php if(current_user_can('administrator')): ?>
-                            <td class="subscription__id text-center"><a href="<?php echo site_url("inscricoes/$subscription_number");?>" title="Ver a ficha do candidato"><span class="subscription_number"><?php // echo $subscription_number;?><?php echo get_number_of_votes_by_project($s['pid']); ?></span></a></td>
-                        <?php endif; ?>
                         <?php if(!current_user_can('administrator')): ?>
                             <td><?php $e = load_evaluation($s['pid']);
 
@@ -142,7 +136,6 @@ $subscriptions = list_candidates_by_setorial(
     (isset( $user_meta['setorial'] ) ? $user_meta['setorial'] : ''),
     (isset( $user_meta['UF'] ) ? $user_meta['UF'] : ''),
     (isset( $user_meta['cpf'] ) ? $user_meta['cpf'] : ''),
-    get_number_of_votes_by_project($s['pid']),
     (isset( $e["evaluation-status"] ) ? label_status_candidate($e["evaluation-status"]) : '')
 ]; ?>                                       
                 <?php endforeach;?>
