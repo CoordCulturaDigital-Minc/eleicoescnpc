@@ -12,7 +12,7 @@ jQuery(document).ready(function() { var $ = jQuery;
 				}, 'json');
 	});
 
-	$( '.js-sortable-table' ).tablesorter();
+	$( '.js-sortable-table' ).tablesorter({sortList: [[0,0], [1,0]]});
 
 	// filtro por setorial 
 	$("select#setorial").change( function() {
