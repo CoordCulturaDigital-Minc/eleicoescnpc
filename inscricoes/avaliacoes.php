@@ -77,10 +77,8 @@
 					$candidate = get_candidate( $pid );
 
 					// $number_votes = get_number_of_votes_by_project($pid);
-
+					// var_dump($candidate);
 					$number_votes = get_number_of_votes_by_project_transient($pid);
-
-					 
 		 		?>
 
 				<tr class="">
@@ -88,7 +86,7 @@
 						<?php if( current_user_can('curate') ): ?>
 							<a href="<?php echo site_url("inscricoes/".$candidate['subscription_number']);?>"><?php echo $candidate['user_name'];?> <?php echo !empty($candidate['candidate-display-name']) ? "(".$candidate['candidate-display-name'].")" :'';?></a>
 						<?php else : ?>
-							<?php echo $candidate['user_name'];?> <?php echo !empty($candidate['candidate-display-name']) ? "(".$candidate['candidate-display-name'].")" :'';?>
+							<a href="<?php echo site_url("foruns/".$candidate['UF']."-".$candidate['setorial']);?>"><?php echo $candidate['user_name'];?> <?php echo !empty($candidate['candidate-display-name']) ? "(".$candidate['candidate-display-name'].")" :'';?></a>
 						<?php endif; ?>
 					</td>
 	                <td>
@@ -98,7 +96,11 @@
 	                    <?php echo $candidate['UF'];?>
 	                </td>
 					<td>
-					 	<?php echo isset( $candidate["evaluation-status"] ) ? label_status_candidate($candidate["evaluation-status"]) : '';  ?>  
+						<?php if( isset( $candidate['elected-candidate'] ) && can_show_elected_candidates() ) :  ?>
+							<?php echo "Eleito" ?>
+						<?php else: ?>
+					 		<?php echo isset( $candidate["evaluation-status"] ) ? label_status_candidate($candidate["evaluation-status"]) : '';  ?>  
+						<?php endif; ?>
 					</td>
 					<td>
 
