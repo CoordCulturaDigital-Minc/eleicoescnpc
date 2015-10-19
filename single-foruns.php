@@ -115,7 +115,7 @@ get_header(); ?>
 										<a class="show-candidate-details" data-candidate-id="<?php the_ID(); ?>">+</a>
 
 
-										<?php if ( ( !$candidacy_removed && can_show_elected_candidates() ) || current_user_can('administrator') ): ?>
+										<?php if ( ( !$candidacy_removed && can_show_invalid_candidates() ) || current_user_can('administrator') ): ?>
 											<div class="number_votes">Votos: <span><?php echo get_number_of_votes_by_project(get_the_ID()); ?></span></div>
 										<?php endif; ?>
 									
